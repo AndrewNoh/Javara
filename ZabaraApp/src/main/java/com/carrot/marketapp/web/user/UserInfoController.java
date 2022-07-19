@@ -94,7 +94,7 @@ public class UserInfoController {
 			map.put("signup", "signup");
 			UserDTO userinfo = userService.selectOne(map);
 			String[] simpleAddr = ((String) map.get("address")).split(" ");
-			String simpleAddress = simpleAddr[0] + " " + simpleAddr[1];
+			String simpleAddress = simpleAddr[1];
 			map.put("simpleAddress", simpleAddress);
 			map.put("userno", userinfo.getUserno());
 			int authGrant = userService.grant(map);
@@ -195,6 +195,7 @@ public class UserInfoController {
 		UserDTO record = userService.selectOne(map);
 
 		// 데이타 저장]
+		model.addAttribute("userno",record.getUserno());
 		model.addAttribute("nickname", record.getNickname());
 		model.addAttribute("pwd", record.getPassword());
 		model.addAttribute("address", record.getFulladdress());
