@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div style="position: fixed;bottom: 50px; right: 30px;">
   <a href="<c:url value="/board/write.do"><c:param name="board" value="Auction"/> </c:url>"><i class="bx bx-plus-circle" title="글쓰기" style="font-size: 50px"></i></a>
@@ -72,10 +73,11 @@
 						            <p>시작가 ${LIST.base_Price}\</p>
 						            <p>현재가 ${LIST.upper_Price}\</p>						            
 						            <div class="portfolio-links">
-						            	<a href="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[loop.index][0].imageName}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bxs-photo-album"></i><span style="font-size: 18px; display: block;">사진보기</span></a>
+						            	<a href="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[loop.index][0].imageName}" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bxs-photo-album"></i><span style="font-size: 18px; display: block;">사진보기</span></a>
 						                <a href="<c:url value="/board/auctionview.do"><c:param value="${LIST.auction_no}" name="no"/></c:url>" rel="lyteframe" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bxs-detail"></i><span style="font-size: 18px; display: block;">상세보기</span></a>
-						                <a href="javascript:void(0);" data-value="${LIST.auction_no}" name="like"><i class="bx bxs-book-heart"></i><span style="font-size: 18px; display: block;">찜</span></a>
+						                <a href="javascript:void(0);" data-value="${LIST.auction_no}" name="like"><i class="bx bxs-book-heart" name="heartButton"></i><span style="font-size: 18px; display: block;">찜</span></a>
 						            </div>
+						            <p>종료예정일 ${LIST.endDate}</p>
 						    	</div>
 						    </div>
 						</div>  
@@ -140,7 +142,12 @@
 			dataType: "text",
 			data:{'${_csrf.parameterName}':'${_csrf.token}', no:$(this).data("value"), board:"경매"},
 		}).done(function(data){
-			
+			if (data != 1) {
+				like.children().css("color", "#18d26e");
+			} else {
+				console.log("좋아요 해제")
+				like.children().css("color", '');
+			}
 		});
 		
 	});
@@ -148,7 +155,7 @@
 	$(document).ready(function(){		
 		$.each(${likes}, function(index, value){
 			console.log("좋아요 : " + value);
-			// $('a[data-value="'+value+'"]').css('background-color', 'green');
+			$('a[data-value="'+value+'"]').children().css('color', '#18d26e');
 		});
 		
 		var nowpage = parseInt($('#nowpage').val());

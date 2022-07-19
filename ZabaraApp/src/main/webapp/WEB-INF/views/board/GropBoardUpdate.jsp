@@ -52,7 +52,9 @@
 						</div>
 						<div class="text-center col ">
 							<button class="col-4 m-2 btn btn-light" type="submit">수정하기</button>
-							<button class="col-4 m-2 btn btn-light"type="submit">목록</button>
+							<a class="nav-link neonText" href="<c:url value="/board/gropboard.do"/>">
+								<button class="col-4 m-2 btn btn-light" type="button">목록</button>
+							</a>
 						</div>
 	          		</div>
 	        	</div>

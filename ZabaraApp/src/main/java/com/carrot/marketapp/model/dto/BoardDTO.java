@@ -30,6 +30,7 @@ public class BoardDTO {
 	private Date postDate;
 	private String addrNo;
 	private String nickName;
+	private String endDate;
 	
 	//조회수
 	private int viewCount;

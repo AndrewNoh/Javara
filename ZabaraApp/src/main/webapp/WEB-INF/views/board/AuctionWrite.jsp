@@ -40,14 +40,27 @@ height: 100%
 	
 	          	<div class="col-lg-4 custom-form " style="margin-bottom: 15px;">
 	            	<div class="content">
-						<div class="custom-select form-group mt-3 mt-md-0">
+	            		<h6>제품 카테고리</h6>
+						<div class="custom-select form-group mt-0 mt-md-0 mb-3">
 					 		<select name="category">
-					    		<option selected value="기타">제품카테고리</option>
+					    		<option selected value="기타">기타</option>
 					    		<option value="가전">가전</option>
 					    		<option value="가구">가구</option>
 					    		<option value="생활용품">생활용품</option>
 					  		</select>
 						</div>
+						
+						<h6>경매 종료일</h6>
+						<div class="custom-select form-group mt-0 mt-md-0">							
+					 		<select name="enddate">					 			
+					    		<option selected value="1">1일(24시간)</option>
+					    		<option value="2">2일(48시간)</option>
+					    		<option value="3">3일(72시간)</option>
+					    		<option value="4">4일(96시간)</option>
+					    		<option value="5">5일(120시간)</option>
+					  		</select>
+						</div>
+						
 						<div class="my-3">
 							<p>가격</p>
 							<input type="text" class="form-control" placeholder="가격을 입력하세요" name="price">

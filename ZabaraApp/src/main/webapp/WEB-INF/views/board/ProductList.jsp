@@ -136,7 +136,12 @@
 			dataType: "text",
 			data:{'${_csrf.parameterName}':'${_csrf.token}', no:$(this).data("value"), board:"중고물품"},
 		}).done(function(data){
-			
+			if (data != 1) {
+				like.children().css("color", "#18d26e");
+			} else {
+				console.log("좋아요 해제")
+				like.children().css("color", "white");
+			}
 		});
 		
 	});
@@ -144,7 +149,7 @@
 	$(document).ready(function(){		
 		$.each(${likes}, function(index, value){
 			console.log("좋아요 : " + value);
-			// $('a[data-value="'+value+'"]').css('background-color', 'green');
+			$('a[data-value="'+value+'"]').children().css('color', 'green');
 		});
 		
 		var nowpage = parseInt($('#nowpage').val());
