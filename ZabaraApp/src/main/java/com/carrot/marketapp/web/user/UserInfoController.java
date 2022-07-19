@@ -265,15 +265,46 @@ public class UserInfoController {
 
 	// 마이페이지 판매내역
 	@GetMapping("selllist.do")
-	public String selllist(@RequestParam Map map, Model model, Authentication auth, Principal principal) {
-		map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기
-		// 서비스 호출]
-		// 그 형식에 맞는 dto만들어서 넣는 방법이 있음
-		List<BoardDTO> record = boardService.mypageSelllist(map);
-
+		public String selllist(@RequestParam Map map,Model model,Authentication auth,Principal principal) {
+			map.put("email", ((UserDetails)auth.getPrincipal()).getUsername());//이메일 가져오기
+		
+			//서비스 호출]
+			//그 형식에 맞는 dto만들어서 넣는 방법이 있음 
+			List<BoardDTO> record= boardService.mypageSelllist(map);
+			
+			System.out.println(map);
+			System.out.println("레코드"+record);
+			model.addAttribute("record", record);	
+			model.addAttribute("email", map.get("email"));
+			model.addAttribute("board", "중고물품");
+			map.put("board", "중고물품");
+			model = setModel(map, model, principal);
+			model.addAttribute("category", map.get("category"));
+			System.out.println(model);
+			System.out.println(map.get("email"));
+			
+			return "user/SellList.market";
+		}///////////////////////
+	
+	@GetMapping("purchaselist.do")
+	public String purchaselist(@RequestParam Map map, Model model, Authentication auth,Principal principal) {
+		
+		return "user/PurchaseList.market";
+	}///////////////////////
+	@GetMapping("likelist.do")
+	public String likelist(@RequestParam Map map, Model model, Authentication auth,Principal principal) {
+		//유저넘버로 프로덕트 라이크를 셀렉트 해오자 그럼 프로덕트 넘버 나옴 프로덕트 리스트로 조회 리스트 조인
+		map.put("email", ((UserDetails)auth.getPrincipal()).getUsername());//이메일 가져오기
+		UserDTO userinfo = userService.selectOne(map);
+		map.put("userno", userinfo.getUserno());
+		System.out.println(userinfo.getUserno());
+		//서비스 호출]
+		//그 형식에 맞는 dto만들어서 넣는 방법이 있음 
+		List<BoardDTO> record= boardService.mypagelikelist(map);
+		
 		System.out.println(map);
-		System.out.println("레코드" + record);
-		model.addAttribute("record", record);
+		System.out.println("레코드"+record);
+		model.addAttribute("record", record);	
 		model.addAttribute("email", map.get("email"));
 		model.addAttribute("board", "중고물품");
 		map.put("board", "중고물품");
@@ -281,15 +312,14 @@ public class UserInfoController {
 		model.addAttribute("category", map.get("category"));
 		System.out.println(model);
 		System.out.println(map.get("email"));
-
-		return "user/SellList.market";
+		return "user/LikeList.market";
 	}///////////////////////
 
 	public Model setModel(Map map, Model model, Principal principal) {
 		map = getUserInfo(map, model, principal);
 
 		if (map.get("nowpage") == null) {
-			map.put("nowpage", "1");
+			map.put("nowpage", "1");  
 		}
 
 		int page = Integer.parseInt((String) map.get("nowpage"));
@@ -324,10 +354,10 @@ public class UserInfoController {
 		model.addAttribute("imageList", imageList);
 		model.addAttribute("address", map.get("simpleAddress"));
 		model.addAttribute("LISTS", Lists);
-		System.out.println("리스트," + Lists);
+		System.out.println("리스트,"+Lists);
+
 		return model;
 	}
-
 	public Map getUserInfo(Map map, Model model, Principal principal) {
 		map.put("email", principal.getName());
 
@@ -344,11 +374,4 @@ public class UserInfoController {
 
 		return map;
 	}
-
-	@GetMapping("purchaselist.do")
-	public String purchaselist(@RequestParam Map map, Model model, Authentication auth) {
-
-		return "user/PurchaseList.market";
-	}///////////////////////
-
 }

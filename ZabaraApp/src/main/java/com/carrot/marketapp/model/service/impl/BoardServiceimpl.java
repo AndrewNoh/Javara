@@ -11,43 +11,43 @@ import com.carrot.marketapp.model.dto.BoardDTO;
 import com.carrot.marketapp.model.service.CommonService;
 
 @Service("boardService")
-public class BoardServiceimpl implements CommonService<BoardDTO>{
-	
+public class BoardServiceimpl implements CommonService<BoardDTO> {
+
 	@Autowired
 	BoardDAO boardDAO;
 
 	@Override
 	public BoardDTO selectOne(Map map) {
-		
+
 		return boardDAO.selectOne(map);
 	}
 
 	@Override
 	public int insert(Map map) {
-		
+
 		return boardDAO.insert(map);
 	}
 
 	@Override
 	public int delete(Map map) {
-		
+
 		return boardDAO.delete(map);
 	}
 
 	@Override
 	public int update(Map map) {
-		
+
 		return boardDAO.update(map);
 	}
 
 	@Override
 	public String findNameByKey(Map map) {
-		
+
 		return null;
 	}
 
 	public List<BoardDTO> selectList(Map map) {
-		
+
 		return boardDAO.selectList(map);
 	}
 
@@ -57,7 +57,7 @@ public class BoardServiceimpl implements CommonService<BoardDTO>{
 	}
 
 	public int insertImage(Map map) {
-		return boardDAO.imageInsert(map);		
+		return boardDAO.imageInsert(map);
 	}
 
 	public int updateImage(Map map) {
@@ -71,11 +71,11 @@ public class BoardServiceimpl implements CommonService<BoardDTO>{
 	}
 
 	public int insertLike(Map map) {
-		return boardDAO.insertLike(map);		
+		return boardDAO.insertLike(map);
 	}
 
 	public int deleteLike(Map map) {
-		return boardDAO.deleteLike(map);		
+		return boardDAO.deleteLike(map);
 	}
 
 	public List selectLikeList(Map map) {
@@ -84,9 +84,9 @@ public class BoardServiceimpl implements CommonService<BoardDTO>{
 	}
 
 	public int updateLike(Map map) {
-		
+
 		return boardDAO.updateLike(map);
-		
+
 	}
 
 	public int selectLikeNo(Map map) {
@@ -98,9 +98,9 @@ public class BoardServiceimpl implements CommonService<BoardDTO>{
 		// TODO Auto-generated method stub
 		return boardDAO.updatePrice(map);
 	}
-
+	
 	public List<BoardDTO> mypageSelllist(Map map) {
-		
+
 		return boardDAO.mypageSelllist(map);
 	}
 
@@ -108,7 +108,10 @@ public class BoardServiceimpl implements CommonService<BoardDTO>{
 		return boardDAO.updateStatus(map);
 		
 	}
-	
 
-	
+	public List<BoardDTO> mypagelikelist(Map map) {
+
+		return boardDAO.mypagelikelist(map);
+	}
+
 }

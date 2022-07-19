@@ -226,5 +226,9 @@ public class BoardDAO {
 		}
 	}
 
+	public List<BoardDTO> mypagelikelist(Map map) {
+		return sqlSession.selectList("mypagelikelist", map);
+	}
+
 
 }
