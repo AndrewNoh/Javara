@@ -50,9 +50,12 @@
 						</span>
 						<button id="statusChange">확인</button>
 					</div>
-					<br/>
+					<br>
+					<br>
 				</c:if>
+				
 				<div style="text-align: right;">
+				
 					<div>${list.nickName}</div>
 						<i class="bi bi-calendar3"></i> ${list.postDate}
 					</div>
@@ -360,9 +363,9 @@
 			data:{'${_csrf.parameterName}':'${_csrf.token}', auction_no:${list.auction_no}, board:"경매", status:value},
 		}).done(function(data){
 			console.log(data + " : " + value)
-			if(data == 1){
-				console.log("들어감")
-			}			
+			if(value == 'END'){
+				$('[name=status]').attr("disabled", true);
+			}
 		});
 	});
 </script>

@@ -120,7 +120,13 @@
 		    <select id="getGropNo" resultType="_int">
    				SELECT SEQ_TOWN_LIST_TOWNLIST_NO.CURRVAL FROM DUAL
 			</select>
-		<!-- TOWN -->		
+		<!-- TOWN -->
+		<!-- MYPAGE -->
+			<select id="mypageSelllist" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
+	   			SELECT * FROM PRODUCT_IMG IMG JOIN PRODUCT_LIST LIST ON IMG.PRODUCT_NO=LIST.PRODUCT_NO
+	        			JOIN MEMBERS MB ON list.userno=mb.userno WHERE mb.email= #{email}
+   			</select>
+   		<!-- MYPAGE -->
 	<!-- SELECT문 -->
 	
 	<!-- INSERT문 -->

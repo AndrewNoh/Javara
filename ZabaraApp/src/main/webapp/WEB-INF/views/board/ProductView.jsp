@@ -49,8 +49,9 @@
 						</select>
 					</span>
 					<button id="statusChange">확인</button>
-            	</div>				
-				<br/>
+            	</div>			
+				<br>
+				<br>
 			</c:if>
 			
             <div  style="text-align: right;">
@@ -276,8 +277,8 @@
 			data:{'${_csrf.parameterName}':'${_csrf.token}', product_no:${list.product_no}, board:"중고물품", status:value},
 		}).done(function(data){
 			console.log(data + " : " + value)
-			if(data == 1){
-				console.log("들어감")
+			if(value == 'END'){
+				$('[name=status]').attr("disabled", true);
 			}			
 		});
 	});

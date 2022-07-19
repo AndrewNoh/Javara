@@ -527,13 +527,9 @@ public class MainBoardController {
 	   @RequestMapping(value="/changeStatus.do",produces = "application/json;charset=UTF-8")
 	   @ResponseBody
 	   public int changeStatus(@RequestParam Map map, Model model, Principal principal) {
-		   System.out.println(map.get("status"));
-		   System.out.println(map.get("auction_no"));
-		   System.out.println(map.get("product_no"));
-		   System.out.println(map.get("board"));
 		   
 		   int aff = boardService.updateStatus(map);
-		   return 1;
+		   return aff;
 	   }
 	
 }
