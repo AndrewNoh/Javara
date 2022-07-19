@@ -16,13 +16,14 @@ i {
 		</div>
 
 		<div class="row portfolio-container" id="list">
+				<c:if test="${empty record || record==null}">
+				<h3 class="mb-3">아직 판매한 내역이 없습니다</h3>
+				</c:if>
 				<c:forEach var="record" items="${record}" varStatus="loop">
 					<div
 						class="col-lg-4 col-md-6 portfolio-item filter-${record.category}">
 						<div class="portfolio-wrap">
-							<c:if test="${empty record}">
-								
-							</c:if>
+						
 							<c:forEach var="i" begin="${loop.index}" end="${loop.index}">
 								<c:if test="${!empty imageList[i][0].imageName}" var="haveImage">
 									<img
@@ -56,7 +57,8 @@ i {
 							</div>
 						</div>
 					</div>
-				</c:forEach>
+					</c:forEach> 	
+		
 		</div>
 	</div>
 </div>
