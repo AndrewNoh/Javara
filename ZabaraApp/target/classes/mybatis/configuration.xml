@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+  <!-- 클래스 별칭 설정 :매퍼파일에서 별칭으로 사용하고자 할때 -->
+  <typeAliases>
+  	  <typeAlias type="com.carrot.marketapp.model.dto.UserDTO" alias="UserDTO"/>
+  	  <typeAlias type="com.carrot.marketapp.model.dto.ChatDTO" alias="ChatDTO"/>
+  </typeAliases>  
+  <!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->
+  <mappers>
+      <mapper resource="mybatis/mapper/users.xml"/>
+      <mapper resource="mybatis/mapper/board.xml"/>
+      <mapper resource="mybatis/mapper/chat.xml"/>
+  </mappers>
+</configuration>

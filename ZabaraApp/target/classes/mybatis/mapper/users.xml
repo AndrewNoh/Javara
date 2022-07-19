@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.users">
+
+<resultMap id="userDtoResult" type="UserDTO">
+<!-- property:자바빈(OneMemoDTO)의 속성명 column:테이블의 컬럼(조회(SELECT)결과의 컬럼명들 의미) -->
+<result column="userno" property="userno"/>
+<result column="email" property="email"/>
+<result column="phonenumber" property="phonenumber"/>
+<result column="name" property="name"/>
+<result column="password" property="password"/>
+<result column="profile_img" property="profile_img"/>
+<result column="nickname" property="nickname"/>
+<result column="fulladdress" property="fulladdress"/>
+<result column="simpleaddress" property="simpleaddress"/>
+
+<!-- 1:N관계 매핑용 column: 조인조건의 컬럼명 (ON onememo.no = linecomments.no)select: select태그의 id 속성값(쿼리문은 조인문)javaType : OneMemoDTO의 자식레코드(LineCommentDTO)를 담을 컬렉션 타입 ofType : 자식의 DTO타입아래 collection태그 사용시현재 매퍼파일에서 메모글 하나 가져올때 반드시 resultMap="memoDtoResult"을 사용하지 -->
+</resultMap>
+
+
+
+	<!-- 이메일(아이디)로 조회 -->   
+	   <select id="userselectOne" parameterType="Map" resultMap="userDtoResult">
+	      SELECT m.*,a.simpleaddress,a.fulladdress FROM members m JOIN ADDRESS_LIST a ON m.userno=a.userno WHERE email=#{email}
+	   </select>
+	<!-- 이메일로 조회 주소 미포함 -->
+	   <select id="userselectOneForSignup" parameterType="Map" resultMap="userDtoResult">
+	   	  SELECT * FROM members WHERE email=#{email}
+	   </select>
+
+	<!-- 폰번호로 조회(번호 중복 가입확인용) -->
+	   <select id="userselectOneByPhoneNumber" parameterType="Map" resultMap="userDtoResult">
+	   	  SELECT * FROM members WHERE phonenumber=#{phone}
+	   </select>
+	
+	<!-- userno로 주소검색 -->
+	   <select id="userEditAdressSelect" parameterType="Map" resultType="Map">
+	   		SELECT * FROM ADDRESS_LIST WHERE userno=#{userno}
+	   </select>
+	
+	
+   <!-- 회원가입 -->
+   <insert id="userJoin" parameterType="Map">
+      INSERT INTO MEMBERS VALUES(SEQ_MEMBERS_USERNO.NEXTVAL,#{email},#{password},#{nickname},#{phonenumber},#{profile},#{platform})
+   </insert>
+   
+   <!-- 회원가입 씨큐리티 권한 -->
+   <insert id="grantAuth" parameterType="Map">
+      INSERT INTO AUTHORITY_SECURITY VALUES(#{userno},DEFAULT,DEFAULT)
+   </insert>
+   
+   <!-- 회원가입 주소테이블 입력-->
+   <insert id="inputAddress" parameterType="Map">
+   	  INSERT INTO ADDRESS_LIST VALUES(SEQ_ADDRESS_LIST_ADDRNO.NEXTVAL,#{userno},#{simpleAddress},#{address})
+   </insert>
+   
+
+   
+   <!-- 회원정보 수정 -->
+   <update id="userEditUpdate" parameterType="Map">
+   		UPDATE members SET password=#{password},nickname=#{nickname},profile_img=#{profile} WHERE email=#{email}
+   </update>
+   
+   
+   
+   <!-- 임시비밀번호 발급용 -->
+   <update id="EditTemporaryPassword" parameterType="Map">
+   	   UPDATE MEMBERS SET password=#{temporaryPassword} WHERE email=#{email}
+   </update>
+   
+   <!-- 마이페이지 프로필변경 -->
+   <update id="simpleChangeProfile" parameterType="Map">
+   		UPDATE MEMBERS SET profile_img=#{simpleChangeProfile} WHERE email=#{email}
+   </update>
+   
+   <!-- 마이페이지 주소변경 -->
+   <update id="simpleChangeAddr" parameterType="Map">
+   		UPDATE ADDRESS_LIST SET simpleaddress=#{simpleAddr},fulladdress=#{nowAddress} WHERE userno=#{userno}
+   </update>
+   
+   
+   
+   <!-- 주소 업데이트 -->
+   <update id="userEditAdressUpdate" parameterType="Map">
+   		UPDATE ADDRESS_LIST SET simpleAddress=#{simpleAddress}, fulladdress=#{fulladdress} WHERE userno=#{userno}
+   </update>
+   
+   
+</mapper>
