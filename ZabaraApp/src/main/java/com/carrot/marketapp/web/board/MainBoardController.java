@@ -192,7 +192,9 @@ public class MainBoardController {
 		System.out.println(board);
 		map = getUserInfo(map, model, principal);
 		
-		map.put("enddate", Integer.parseInt((String) map.get("enddate")));
+		if(board.equals("경매")) {
+			map.put("enddate", Integer.parseInt((String) map.get("enddate")));
+		}		
 		int a = boardService.insert(map);
 		
 		String path=req.getSession().getServletContext().getRealPath("/resources/assets/img/product_img"); //경로
@@ -520,13 +522,18 @@ public class MainBoardController {
 			
 	      return "/board/News.market";
 	   
-	   }
+	   }	   
 	   
-	   @RequestMapping(value="/soldout.do",produces = "application/json;charset=UTF-8")
+	   @RequestMapping(value="/changeStatus.do",produces = "application/json;charset=UTF-8")
 	   @ResponseBody
-	   public int soldout(@RequestParam Map map, Model model, Principal principal) {
-		   System.out.println("경매종료");
-		   return boardService.soldout(map);
+	   public int changeStatus(@RequestParam Map map, Model model, Principal principal) {
+		   System.out.println(map.get("status"));
+		   System.out.println(map.get("auction_no"));
+		   System.out.println(map.get("product_no"));
+		   System.out.println(map.get("board"));
+		   
+		   int aff = boardService.updateStatus(map);
+		   return 1;
 	   }
 	
 }

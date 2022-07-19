@@ -41,18 +41,21 @@
 					</div>
 				</c:if>
 				<c:if test="${isWriter}">
-					<span style="float:right;">
-						<select name="status">
-							<option>낙찰</option>
-							<option>경매 진행중</option>
-						</select>
-					</span>
+					<div style="float:right;">
+						<span>
+							<select name="status">
+								<option value="END" <c:if test="${list.status == 'END'}">selected</c:if> >낙찰</option>
+								<option value="SALE" <c:if test="${list.status == 'SALE'}">selected</c:if>>경매 진행중</option>
+							</select>
+						</span>
+						<button id="statusChange">확인</button>
+					</div>
 					<br/>
 				</c:if>
 				<div style="text-align: right;">
-				<div>${list.nickName}</div>
-					<i class="bi bi-calendar3"></i> ${list.postDate}
-				</div>
+					<div>${list.nickName}</div>
+						<i class="bi bi-calendar3"></i> ${list.postDate}
+					</div>
 				<div class="mb-4">${list.category}</div>
 				<div class="mb-5">
 					<p>시작가 : ${list.base_Price}\</p>
@@ -346,25 +349,20 @@
 		}
 	});
 	
-	$('#soldout').on("click", function(){
-		if(${list.upper_Price} > ${list.base_Price}){
-			$.ajax({
-				url : '<c:url value="/board/soldout.do" />',
-				type:'POST',
-				dataType: "text",
-				data:{'${_csrf.parameterName}':'${_csrf.token}', auction_no:${list.auction_no}, board:"경매"},
-			}).done(function(data){
-				console.log(data)
-				if(data == 1){
-					window.location.href = '<c:url value="/board/auctionview.do"><c:param value="${param.no}" name="no"/></c:url>';
-				}			
-			});
-			
-		} else {
-			console.log("왜클릭해")
-		}
-	});	
 	
-	
-	
+   $('#statusChange').on("click", function(){
+		var value = $('[name=status]').val();
+		
+		$.ajax({
+			url : '<c:url value="/board/changeStatus.do" />',
+			type:'POST',
+			dataType: "text",
+			data:{'${_csrf.parameterName}':'${_csrf.token}', auction_no:${list.auction_no}, board:"경매", status:value},
+		}).done(function(data){
+			console.log(data + " : " + value)
+			if(data == 1){
+				console.log("들어감")
+			}			
+		});
+	});
 </script>

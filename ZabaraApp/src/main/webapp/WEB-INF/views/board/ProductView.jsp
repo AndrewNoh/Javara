@@ -32,13 +32,27 @@
 
           <div class="col-lg-4 portfolio-info">
             <div class="content">
-               <c:if test="${userno == list.userNo}">
+               <c:if test="${userno == list.userNo}" var="isWriter">
                <div  style="text-align: right; font-size: 20px;">
                   <a href="javascript:void(0);" id="edit"><i class="bx bxs-edit" title="수정"></i></a>
                   <a href="javascript:void(0);" id="delete"><i class="bx bxs-trash " title="삭제"></i></a>
                   <a href="<c:url value="/board/auctuonlist.do"/>"><i class="bx bxs-angry" title="신고"></i></a>
                </div>
             </c:if>
+            <c:if test="${isWriter}">
+	            <div style="float:right;">
+	            	<span>
+						<select name="status">
+							<option value="END" <c:if test="${list.status == 'END'}">selected</c:if>>판매 완료</option>
+							<option value="RESERVE" <c:if test="${list.status == 'RESERVE'}">selected</c:if>>예약</option>
+							<option value="SALE" <c:if test="${list.status == 'SALE'}">selected</c:if>>판매중</option>
+						</select>
+					</span>
+					<button id="statusChange">확인</button>
+            	</div>				
+				<br/>
+			</c:if>
+			
             <div  style="text-align: right;">
             <div>${list.nickName}</div>
                <i class="bi bi-calendar3"></i> ${list.postDate}
@@ -251,4 +265,20 @@
       $('img').remove();
       readMultipleImage(e.target);   
    });
+   
+   $('#statusChange').on("click", function(){
+		var value = $('[name=status]').val();
+		
+		$.ajax({
+			url : '<c:url value="/board/changeStatus.do" />',
+			type:'POST',
+			dataType: "text",
+			data:{'${_csrf.parameterName}':'${_csrf.token}', product_no:${list.product_no}, board:"중고물품", status:value},
+		}).done(function(data){
+			console.log(data + " : " + value)
+			if(data == 1){
+				console.log("들어감")
+			}			
+		});
+	});
 </script>

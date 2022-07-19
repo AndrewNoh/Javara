@@ -103,10 +103,12 @@ public class BoardServiceimpl implements CommonService<BoardDTO>{
 		
 		return boardDAO.mypageSelllist(map);
 	}
-	
-	public int soldout(Map map) {
-		return boardDAO.soldout(map);
+
+	public int updateStatus(Map map) {
+		return boardDAO.updateStatus(map);
+		
 	}
+	
 
 	
 }

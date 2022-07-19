@@ -217,12 +217,14 @@ public class BoardDAO {
 		return sqlSession.selectList("mypageSelllist", map);
 	}
 
-	public int soldout(Map map) {
+	public int updateStatus(Map map) {
+		// TODO Auto-generated method stub
 		if (map.get("board").equals("중고물품")) {
-			return sqlSession.update("ProductSoldout", map);
+			return sqlSession.update("updateProductStatus", map);
 		} else {
-			return sqlSession.update("AuctionSoldout", map);
+			return sqlSession.update("updateAuctionStatus", map);
 		}
 	}
+
 
 }

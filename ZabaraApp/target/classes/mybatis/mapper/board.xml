@@ -12,7 +12,7 @@
 		   			(SELECT D.*, ROWNUM AS RNUM FROM
 		   			(SELECT * FROM PRODUCT_LIST L WHERE
 		   			(SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) = #{simpleAddress}
-		   			ORDER BY PRODUCT_NO DESC) D) WHERE (RNUM BETWEEN #{startnum} AND #{endnum}) AND SOLDOUT = 'N'
+		   			ORDER BY PRODUCT_NO DESC) D) WHERE (RNUM BETWEEN #{startnum} AND #{endnum}) AND STATUS = 'SALE'
 		    </select>
 		   
 		    <select id="getProductListAll" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
@@ -20,7 +20,7 @@
 		   			(SELECT D.* FROM
 		   			(SELECT * FROM PRODUCT_LIST L WHERE
 		   			(SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) = #{simpleAddress}
-		   			ORDER BY PRODUCT_NO DESC) D)
+		   			ORDER BY PRODUCT_NO DESC) D) WHERE STATUS = 'SALE'
 		    </select>
 		    
 		    <select id="getProductNo" resultType="_int">
@@ -51,25 +51,25 @@
 		<!-- AUCTION -->
 			<select id="getAuctionList" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
 		   		SELECT * FROM
-					(SELECT AUCTION_NO, USERNO, TITLE, CONTENT, CATEGORY, LIKES, POSTDATE, SOLDOUT, ENDDATE, RNUM FROM
+					(SELECT AUCTION_NO, USERNO, TITLE, CONTENT, CATEGORY, LIKES, POSTDATE, ENDDATE, STATUS, RNUM FROM
 					(SELECT D.*, ROWNUM AS RNUM FROM
 					(SELECT * FROM AUCTION_LIST L WHERE
 					(SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) = #{simpleAddress}
 					ORDER BY AUCTION_NO DESC) D) O) T
 					INNER JOIN AUCTION_PRICE P ON P.AUCTION_NO = T.AUCTION_NO
-					WHERE (ROWNUM BETWEEN #{startnum} and #{endnum}) AND T.SOLDOUT = 'N' AND T.ENDDATE > SYSDATE
+					WHERE (ROWNUM BETWEEN #{startnum} and #{endnum}) AND T.STATUS = 'SALE'
 					ORDER BY P.AUCTION_NO DESC
 		    </select>
 		   
 		    <select id="getAuctionListAll" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
 				SELECT * FROM
-					(SELECT AUCTION_NO, USERNO, TITLE, CONTENT, CATEGORY, LIKES, POSTDATE, SOLDOUT, ENDDATE, RNUM FROM
+					(SELECT AUCTION_NO, USERNO, TITLE, CONTENT, CATEGORY, LIKES, POSTDATE, ENDDATE, RNUM FROM
 					(SELECT D.*, ROWNUM AS RNUM FROM
 					(SELECT * FROM AUCTION_LIST L WHERE
 					(SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) = #{simpleAddress}
 					ORDER BY AUCTION_NO DESC) D) O) T
 					INNER JOIN AUCTION_PRICE P ON P.AUCTION_NO = T.AUCTION_NO
-					WHERE T.SOLDOUT = 'N' AND T.ENDDATE > SYSDATE
+					WHERE T.ENDDATE > SYSDATE
 					ORDER BY P.AUCTION_NO DESC
 		    </select>
 		    
@@ -82,8 +82,8 @@
 		    </select>
 		    
 		    <select id="getAuctionListOne" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		   		SELECT L.*, p.base_price, p.upper_price, p.upper_user_no, m.nickname FROM MEMBERS M, auction_list L
-		   			LEFT OUTER JOIN AUCTION_PRICE P ON P.AUCTION_NO = L.AUCTION_NO WHERE L.AUCTION_NO = #{no}
+		   		SELECT * FROM MEMBERS M, auction_list L
+		   			LEFT OUTER JOIN AUCTION_PRICE P ON P.AUCTION_NO = L.AUCTION_NO WHERE L.AUCTION_NO = #{no} AND m.userno = l.userno
 		    </select>
 		    
 		    <select id="getAuctionImage" parameterType="Map" resultType="com.carrot.marketapp.model.dto.ImageDTO">
@@ -126,7 +126,7 @@
 	<!-- INSERT문 -->
 		<!-- PRODUCT -->
 			<insert id="writeProductList" parameterType="Map">
-		   		INSERT INTO PRODUCT_LIST VALUES(SEQ_PRODUCT_LIST_PRODUCT_NO.NEXTVAL, #{userno}, #{title}, #{content}, #{category}, #{price}, 0, DEFAULT, #{addrno}, 'N')
+		   		INSERT INTO PRODUCT_LIST VALUES(SEQ_PRODUCT_LIST_PRODUCT_NO.NEXTVAL, #{userno}, #{title}, #{content}, #{category}, #{price}, 0, DEFAULT, #{addrno}, 'N', 'SALE')
 		    </insert>
 		    
 		    <insert id="insertProductImage" parameterType="Map">
@@ -140,7 +140,7 @@
 		
 		<!-- AUCTION -->
 			<insert id="writeAuctionList" parameterType="Map">
-		   		INSERT INTO AUCTION_LIST VALUES(SEQ_AUCTION_LIST_AUCTION_NO.NEXTVAL, #{userno}, #{title}, #{content}, #{category}, 0, DEFAULT, #{addrno}, 'N', SYSDATE+#{enddate})
+		   		INSERT INTO AUCTION_LIST VALUES(SEQ_AUCTION_LIST_AUCTION_NO.NEXTVAL, #{userno}, #{title}, #{content}, #{category}, 0, DEFAULT, #{addrno}, 'N', SYSDATE+#{enddate}, 'SALE')
 		    </insert>
 		    
 		    <insert id="writeAuctionPrice" parameterType="Map">
@@ -243,8 +243,8 @@
 		    	UPDATE PRODUCT_LIST SET LIKES=#{noLike} WHERE PRODUCT_NO=#{no}
 		    </update>
 		    
-		    <update id="ProductSoldout">
-		    	UPDATE PRODUCT_LIST SET SOLDOUT = 'Y' WHERE PRODUCT_NO = #{product_no}
+		    <update id="updateProductStatus" parameterType="map">
+		    	UPDATE PRODUCT_LIST SET STATUS=#{status} WHERE PRODUCT_NO=#{product_no}
 		    </update>
 		<!-- PRODUCT -->
 		
@@ -267,8 +267,8 @@
 		   		UPDATE AUCTION_PRICE SET UPPER_PRICE = #{newprice} WHERE AUCTION_NO = #{auction_no}
 		    </update>
 		    
-		    <update id="AuctionSoldout">
-		    	UPDATE AUCTION_LIST SET SOLDOUT = 'Y' WHERE AUCTION_NO = #{auction_no}
+		    <update id="updateAuctionStatus" parameterType="map">
+		    	UPDATE AUCTION_LIST SET STATUS=#{status} WHERE AUCTION_NO=#{auction_no}
 		    </update>
 		<!-- AUCTION -->
 		
