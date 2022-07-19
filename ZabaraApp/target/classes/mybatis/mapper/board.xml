@@ -51,25 +51,25 @@
 		<!-- AUCTION -->
 			<select id="getAuctionList" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
 		   		SELECT * FROM
-					(SELECT AUCTION_NO, USERNO, TITLE, CONTENT, CATEGORY, LIKES, POSTDATE, SOLDOUT, RNUM FROM
+					(SELECT AUCTION_NO, USERNO, TITLE, CONTENT, CATEGORY, LIKES, POSTDATE, SOLDOUT, ENDDATE, RNUM FROM
 					(SELECT D.*, ROWNUM AS RNUM FROM
 					(SELECT * FROM AUCTION_LIST L WHERE
 					(SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) = #{simpleAddress}
 					ORDER BY AUCTION_NO DESC) D) O) T
 					INNER JOIN AUCTION_PRICE P ON P.AUCTION_NO = T.AUCTION_NO
-					WHERE (ROWNUM BETWEEN #{startnum} and #{endnum}) AND T.SOLDOUT = 'N'
+					WHERE (ROWNUM BETWEEN #{startnum} and #{endnum}) AND T.SOLDOUT = 'N' AND T.ENDDATE > SYSDATE
 					ORDER BY P.AUCTION_NO DESC
 		    </select>
 		   
 		    <select id="getAuctionListAll" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
 				SELECT * FROM
-					(SELECT AUCTION_NO, USERNO, TITLE, CONTENT, CATEGORY, LIKES, POSTDATE, SOLDOUT, RNUM FROM
+					(SELECT AUCTION_NO, USERNO, TITLE, CONTENT, CATEGORY, LIKES, POSTDATE, SOLDOUT, ENDDATE, RNUM FROM
 					(SELECT D.*, ROWNUM AS RNUM FROM
 					(SELECT * FROM AUCTION_LIST L WHERE
 					(SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) = #{simpleAddress}
 					ORDER BY AUCTION_NO DESC) D) O) T
 					INNER JOIN AUCTION_PRICE P ON P.AUCTION_NO = T.AUCTION_NO
-					WHERE T.SOLDOUT = 'N'
+					WHERE T.SOLDOUT = 'N' AND T.ENDDATE > SYSDATE
 					ORDER BY P.AUCTION_NO DESC
 		    </select>
 		    
@@ -82,7 +82,8 @@
 		    </select>
 		    
 		    <select id="getAuctionListOne" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		   		SELECT * FROM AUCTION_LIST L LEFT OUTER JOIN AUCTION_PRICE P ON P.AUCTION_NO = L.AUCTION_NO WHERE L.AUCTION_NO = #{no}
+		   		SELECT L.*, p.base_price, p.upper_price, p.upper_user_no, m.nickname FROM MEMBERS M, auction_list L
+		   			LEFT OUTER JOIN AUCTION_PRICE P ON P.AUCTION_NO = L.AUCTION_NO WHERE L.AUCTION_NO = #{no}
 		    </select>
 		    
 		    <select id="getAuctionImage" parameterType="Map" resultType="com.carrot.marketapp.model.dto.ImageDTO">
@@ -139,7 +140,7 @@
 		
 		<!-- AUCTION -->
 			<insert id="writeAuctionList" parameterType="Map">
-		   		INSERT INTO AUCTION_LIST VALUES(SEQ_AUCTION_LIST_AUCTION_NO.NEXTVAL, #{userno}, #{title}, #{content}, #{category}, 0, DEFAULT, #{addrno}, 'N')
+		   		INSERT INTO AUCTION_LIST VALUES(SEQ_AUCTION_LIST_AUCTION_NO.NEXTVAL, #{userno}, #{title}, #{content}, #{category}, 0, DEFAULT, #{addrno}, 'N', SYSDATE+#{enddate})
 		    </insert>
 		    
 		    <insert id="writeAuctionPrice" parameterType="Map">

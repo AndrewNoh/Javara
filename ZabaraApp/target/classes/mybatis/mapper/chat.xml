@@ -42,7 +42,7 @@
    </select>
    
    <select id="chatlist" parameterType="Map" resultMap="chatDtoResult">
-         SELECT c.*,m.nickname sendusernickname ,mb.nickname writeusernickname, m.profile_img senduserprofileimg, mb.profile_img writeuserprofileimg from CHATROOM c JOIN members m on c.userno = m.userno JOIN members mb on c.wirteuserno = mb.userno where (c.userno=#{userno} or c.wirteuserno= #{userno}) 
+         SELECT c.*,m.nickname sendusernickname ,mb.nickname writeusernickname, m.profile_img senduserprofileimg, mb.profile_img writeuserprofileimg from CHATROOM c JOIN members m on c.userno = m.userno JOIN members mb on c.writeuserno = mb.userno where (c.userno=#{userno} or c.writeuserno= #{userno}) 
    </select>
    <update id="updateChatRoomno" parameterType="Map">
          UPDATE CHATROOM SET chatcontent=#{chatcontent},  sendtime=SYSDATE WHERE room_no = #{roomno}
