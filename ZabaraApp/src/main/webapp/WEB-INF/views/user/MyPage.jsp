@@ -425,7 +425,6 @@
                             <option value="30000">30,000원</option>
                             <option value="40000">40,000원</option>
                             <option value="50000">50,000원</option>
-                         
                          </select> 
                      
                      <button type="button" class="w-btn w-btn-gray" style="border-radius:0.5em; padding:5px 20px; margin-right:30px" onclick="requestPay()">충전하기</button>
