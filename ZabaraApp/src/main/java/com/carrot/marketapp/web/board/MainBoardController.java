@@ -192,43 +192,67 @@ public class MainBoardController {
 		System.out.println(board);
 		map = getUserInfo(map, model, principal);
 		
+		int a = 0;
+		
 		if(board.equals("경매")) {
 			map.put("enddate", Integer.parseInt((String) map.get("enddate")));
+		}
+		
+		String title = map.get("title").toString().trim();
+		String content = map.get("content").toString().trim();
+		String price = map.get("price").toString().trim();
+		
+		if (title.equals("") || content.equals("") || price.equals("") || filename[0].getOriginalFilename().equals("")) {
+			switch (board) {
+			case "중고물품":
+				return "/board/ProductWrite.market";
+			case "우리동네":
+				return "/board/GropBoardWrite.market";
+			default:
+				return "/board/AuctionWrite.market";
+			}
+			
+		} else {
+			a = boardService.insert(map);
 		}		
-		int a = boardService.insert(map);
 		
 		String path=req.getSession().getServletContext().getRealPath("/resources/assets/img/product_img"); //경로
 		
-		//사진 업로드부분
-		for(int i = 0 ; i < filename.length ; i++) {
-	        
-	        String rename=FileUpDownUtils.getNewFileName(path, filename[i].getOriginalFilename());//같은 이름일때 파일제목변경
-	       
-	        
-	        File dest = new File(path+File.separator+rename);
-	        
-	        filename[i].transferTo(dest);
-	        
-	        BufferedImage original = ImageIO.read(dest);
-	        int type = original.getType() == 0? BufferedImage.TYPE_INT_ARGB : original.getType();
-	        System.out.println("높이" + original.getHeight());
-	        System.out.println("너비" + original.getWidth());
-	        
-	        BufferedImage resizeImagePng = resizeImage(original, type);
-            ImageIO.write(resizeImagePng, "png", dest);
-            BufferedImage resigeImage = ImageIO.read(dest);
-	        
-            File resize = new File(rename);
-            
-            System.out.println("높이" + resigeImage.getHeight());
-            System.out.println("너비" + resigeImage.getWidth());
-            
-            
-	        filename[i].transferTo(resize);
-	        
-	        map.put("profile", rename);
-	        int aff = boardService.insertImage(map);
+		if(a == 1 && !(filename[0].getOriginalFilename().equals(""))) {
+			//사진 업로드부분
+			System.out.println(filename[0].getOriginalFilename());
+			
+			for(int i = 0 ; i < filename.length ; i++) {
+		        
+		        String rename=FileUpDownUtils.getNewFileName(path, filename[i].getOriginalFilename());//같은 이름일때 파일제목변경
+		       
+		        
+		        File dest = new File(path+File.separator+rename);
+		        
+		        filename[i].transferTo(dest);
+		        
+		        BufferedImage original = ImageIO.read(dest);
+		        int type = original.getType() == 0? BufferedImage.TYPE_INT_ARGB : original.getType();
+		        System.out.println("높이" + original.getHeight());
+		        System.out.println("너비" + original.getWidth());
+		        
+		        BufferedImage resizeImagePng = resizeImage(original, type);
+	            ImageIO.write(resizeImagePng, "png", dest);
+	            BufferedImage resigeImage = ImageIO.read(dest);
+		        
+	            File resize = new File(rename);
+	            
+	            System.out.println("높이" + resigeImage.getHeight());
+	            System.out.println("너비" + resigeImage.getWidth());
+	            
+	            
+		        filename[i].transferTo(resize);
+		        
+		        map.put("profile", rename);
+		        int aff = boardService.insertImage(map);
+			}
 		}
+		
 		
 		switch (board) {
 		case "중고물품":

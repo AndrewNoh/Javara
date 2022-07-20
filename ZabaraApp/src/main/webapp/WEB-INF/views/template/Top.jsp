@@ -68,7 +68,36 @@
 	   	<nav id="navbar" class="navbar custom-navbar mx-5" >
 			<a href="<c:url value="/location/MainPage.do"/>"><img src="${pageContext.request.contextPath}/resources/assets/img/jabaralogo.jpg" height="80px" /></a>
 			
-			  <ul>
+			<div class="search">
+				<select id="searchBoardSelect">
+					<option value="경매">경매</option>
+					<option value="중고">중고</option>
+					<option value="동내생활">동내생활</option>
+				</select>
+				
+				<select id="searchCategorySelect">
+					<option selected value="기타">기타</option>
+					   		<option value="중고차">중고차</option>
+					   		<option value="디지털기기">디지털기기</option>
+					   		<option value="생활가전">생활가전</option>
+					  		<option value="가구/인테리어">가구/인테리어</option>
+					   		<option value="유아용품">유아용품</option>
+					   		<option value="도서">도서</option>
+					   		<option value="가공식품">가공식품</option>
+					   		<option value="스포츠/레저">스포츠/레저</option>
+					   		<option value="여성잡화">여성잡화</option>
+					   		<option value="여성의류">여성의류</option>
+					   		<option value="남성패션/잡화">남성패션/잡화</option>
+					   		<option value="게임/취미">게임/취미</option>
+					   		<option value="뷰티/미용">뷰티/미용</option>
+					<option value="반려동물용품">반려동물용품</option>
+				</select>
+				
+				<input type="text" placeholder="검색어 입력">
+				<img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+			</div>
+			
+			<ul>
 	          <li><a class="nav-link neonText" href="<c:url value="/location/MainPage.do"/>">Home</a></li>
 	          <sec:authentication property="name" var="username"/>
 	          

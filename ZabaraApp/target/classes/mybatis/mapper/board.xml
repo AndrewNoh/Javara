@@ -174,7 +174,7 @@
 	<insert id="writeProductList" parameterType="Map">
 		INSERT INTO PRODUCT_LIST VALUES(SEQ_PRODUCT_LIST_PRODUCT_NO.NEXTVAL,
 		#{userno}, #{title}, #{content}, #{category}, #{price}, 0, DEFAULT,
-		#{addrno}, 'N', 'SALE')
+		#{addrno}, 'SALE')
 	</insert>
 
 	<insert id="insertProductImage" parameterType="Map">
@@ -190,8 +190,7 @@
 	<!-- AUCTION -->
 	<insert id="writeAuctionList" parameterType="Map">
 		INSERT INTO AUCTION_LIST VALUES(SEQ_AUCTION_LIST_AUCTION_NO.NEXTVAL,
-		#{userno}, #{title}, #{content}, #{category}, 0, DEFAULT, #{addrno},
-		'N', SYSDATE+#{enddate}, 'SALE')
+		#{userno}, #{title}, #{content}, #{category}, 0, DEFAULT, #{addrno}, SYSDATE+#{enddate}, 'SALE')
 	</insert>
 
 	<insert id="writeAuctionPrice" parameterType="Map">
