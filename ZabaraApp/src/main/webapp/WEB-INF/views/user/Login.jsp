@@ -90,11 +90,13 @@
 												<div class="form-group" id="firstSignup">
 													<div class="form-group">
 														<input type="text" name="address" class="form-style" onmousedown="daumAddress()" placeholder="내 동네 이름(동,읍,면으로 검색)" id="address" autocomplete="off" readonly>
+														<input type="hidden" name="latitude" id="latitude">
+														<input type="hidden" name="longitude" id="longitude">											
 														<i class="input-icon uil uil-search"></i>
 														<div>&nbsp</div>
 													</div>	
 													<div class="form-group mt-2">
-														<p class="text-center"><a href="#0" class="link">주소검색</a></p>
+														<p class="text-center"><a href="#0" class="link" onmousedown="daumAddress()">주소검색</a></p>
 													</div>
 												</div>
 												<div class="form-group" id="secondSignup" style="display:none;">
@@ -185,6 +187,7 @@ var time=180;
 var min='';
 var sec='';
 var platform;
+var geocoder = new daum.maps.services.Geocoder();
 
 
 
@@ -619,6 +622,13 @@ function daumAddress() {
             } else { // 사용자가 지번 주소를 선택했을 경우(J)
                 addr = data.jibunAddress;
             }
+            geocoder.addressSearch(addr, function(results, status) {
+                if (status === daum.maps.services.Status.OK) {
+                   var result = results[0];
+                   $('#latitude').val(result.y);
+                   $('#longitude').val(result.x);                   
+                }
+             });
            	 document.getElementById("address").value = addr;
             $('#nextBtn').focus();
         }
@@ -659,10 +669,12 @@ var readURL = function(input) {
 	
 $("#profileimg").change(function(){
 	var fileForm = /(.*?)\.(jpg|jpeg|png)$/;
+	
 	if(!$('#profileimg').val().match(fileForm)) {
     	addMessage('jpg,jpeg,png타입만 선택 가능합니다.',$('#profileimg'));
     	$('#profileimg').val(null);
 	}
+	
 	readURL(this);
 	
 });

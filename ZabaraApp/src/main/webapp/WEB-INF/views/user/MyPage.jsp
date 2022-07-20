@@ -5,10 +5,7 @@
    uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<!-- Kakao 지도 서비스 관련 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c555a840bf745a014ceca0ca9d9dd35&libraries=services"></script>
-<!-- Daum 우편번호 서비스 관련  -->
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <!-- import 페이 서비스 관련 -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
@@ -588,14 +585,15 @@
 
          }
 
-         // 마이페이지 동네인증
+      // 마이페이지 동네인증
          function saveMarkerPosition() {
-            $
-                  .ajax({
+                  $.ajax({
                      type : 'POST',
                      url : '<c:url value="/userinfo/myPageSimpleAddressChange.do"/>',
                      data : {
                         nowAddress : nowAddress,
+                        markerlat : markerlat,
+                        markerlng : markerlng,
                         '${_csrf.parameterName}' : '${_csrf.token}'
                      },
                      dataType : "text",
@@ -624,6 +622,8 @@
 
          var lat;
          var lng;
+         var markerlat;
+         var markerlng;
          var detailAddr;
          var nowAddress = "";
          var geocoder = new daum.maps.services.Geocoder();
@@ -710,6 +710,8 @@
                         console.log('showKakaoMap:'
                               + result[0].address.address_name);
                         nowAddress = result[0].address.address_name;
+                        markerlat = lat;
+                        markerlng = lng;
                      }
                   });
 
@@ -744,6 +746,7 @@
                                              .log('click:'
                                                    + result[0].address.address_name);
                                        nowAddress = result[0].address.address_name;
+
                                     }
                                  });
                         });

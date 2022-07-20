@@ -86,14 +86,15 @@ button {
 					<div class="col-md-12 form-group">
 						<h5 class="">EMAIL</h5>
 						<input type="text" name="email" class="form-style" id="email"
-							required value="${email}">
+							required value="${email}" readonly>
 					</div>
 					<div class="col-md-12 form-group">
 						<h5 class="">ADRESS</h5>
 						<input type="text" onclick="daumAddress()" class="form-style"
 							name="fulladdress" id="fulladdress" required
 							value="${FULLADDRESS}">
-
+						<input type="hidden" name="latitude" id="latitude">
+						<input type="hidden" name="longitude" id="longitude">
 					</div>
 					<div class="col-md-5 mt-0 form-group">
 						<input type="submit" class="submit mt-3" value="완료">
@@ -107,6 +108,7 @@ button {
 </div>
 </form>
 <script>
+var geocoder = new daum.maps.services.Geocoder();
 	function daumAddress() {
 		new daum.Postcode({
 			oncomplete : function(data) {
@@ -123,6 +125,13 @@ button {
 				} else { // 사용자가 지번 주소를 선택했을 경우(J)
 					addr = data.jibunAddress;
 				}
+				geocoder.addressSearch(addr, function(results, status) {
+	                if (status === daum.maps.services.Status.OK) {
+	                   var result = results[0];
+	                   $('#latitude').val(result.y);
+	                   $('#longitude').val(result.x);                   
+	                }
+	             });
 				document.getElementById("fulladdress").value = addr;
 				$('#nextBtn').focus();
 			}

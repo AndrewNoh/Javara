@@ -68,7 +68,8 @@ public class UserInfoController {
 			@RequestParam MultipartFile profileimg, MultipartHttpServletRequest req)
 			throws IllegalStateException, IOException {
 		File dest = null;
-		
+		map.put("latitude", Double.parseDouble((String)map.get("latitude")));
+		map.put("longitude", Double.parseDouble((String)map.get("longitude")));
 		if(map.get("platform").equals("K")) {
 			String kakaoProfile = imageUrlDownload(req.getSession().getServletContext().getRealPath("/resources/assets/img/zabaraImg"),(String)map.get("kakaoProfileUrl"));
 			map.put("profile", kakaoProfile);
@@ -157,6 +158,8 @@ public class UserInfoController {
 		map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기
 		UserDTO record = userService.selectOne(map);
 		map.put("userno", record.getUserno());
+		map.put("latitude", Double.parseDouble((String)map.get("latitude")));
+		map.put("longitude", Double.parseDouble((String)map.get("longitude")));
 		File oldprofile = new File(path + File.separator + record.getProfile_img());
 		if (!profileimg.isEmpty()) {
 			String rename = FileUpDownUtils.getNewFileName(path, profileimg.getOriginalFilename());// 같은 이름일때 파일제목변경
@@ -166,7 +169,7 @@ public class UserInfoController {
 		} else
 			map.put("profile", record.getProfile_img());
 		String[] simpleAddr = ((String) map.get("fulladdress")).split(" ");
-		String simpleAddress = simpleAddr[0] + " " + simpleAddr[1];
+		String simpleAddress = simpleAddr[1];
 		map.put("simpleAddress", simpleAddress);
 
 		// 이부분 해주는 이유 : 페이지 나가도 다른 페이지에도 저장됨
@@ -254,9 +257,11 @@ public class UserInfoController {
 		map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());
 		UserDTO userinfo = userService.selectOne(map);
 		map.put("userno", userinfo.getUserno());
-
+		map.put("latitude", Double.parseDouble((String)map.get("markerlat")));
+		map.put("longitude", Double.parseDouble((String)map.get("markerlng")));
+		
 		String[] simpleAddr = ((String) map.get("nowAddress")).split(" ");
-		String simpleAddress = simpleAddr[0] + " " + simpleAddr[1];
+		String simpleAddress = simpleAddr[1];
 		map.put("simpleAddr", simpleAddress);
 
 		int affected = userService.update(map);

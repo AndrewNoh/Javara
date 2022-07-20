@@ -16,6 +16,8 @@
 <result column="nickname" property="nickname"/>
 <result column="fulladdress" property="fulladdress"/>
 <result column="simpleaddress" property="simpleaddress"/>
+<result property="latitude" column="latitude"/>
+<result property="longitude" column="longitude"/>
 
 <!-- 1:N관계 매핑용 column: 조인조건의 컬럼명 (ON onememo.no = linecomments.no)select: select태그의 id 속성값(쿼리문은 조인문)javaType : OneMemoDTO의 자식레코드(LineCommentDTO)를 담을 컬렉션 타입 ofType : 자식의 DTO타입아래 collection태그 사용시현재 매퍼파일에서 메모글 하나 가져올때 반드시 resultMap="memoDtoResult"을 사용하지 -->
 </resultMap>
@@ -54,7 +56,7 @@
    
    <!-- 회원가입 주소테이블 입력-->
    <insert id="inputAddress" parameterType="Map">
-   	  INSERT INTO ADDRESS_LIST VALUES(SEQ_ADDRESS_LIST_ADDRNO.NEXTVAL,#{userno},#{simpleAddress},#{address})
+   	  INSERT INTO ADDRESS_LIST VALUES(SEQ_ADDRESS_LIST_ADDRNO.NEXTVAL,#{userno},#{simpleAddress},#{address},#{latitude},#{longitude})
    </insert>
    
 
@@ -78,14 +80,14 @@
    
    <!-- 마이페이지 주소변경 -->
    <update id="simpleChangeAddr" parameterType="Map">
-   		UPDATE ADDRESS_LIST SET simpleaddress=#{simpleAddr},fulladdress=#{nowAddress} WHERE userno=#{userno}
+   		UPDATE ADDRESS_LIST SET simpleaddress=#{simpleAddr},fulladdress=#{nowAddress},latitude=#{latitude},longitude=#{longitude} WHERE userno=#{userno}
    </update>
    
    
    
    <!-- 주소 업데이트 -->
    <update id="userEditAdressUpdate" parameterType="Map">
-   		UPDATE ADDRESS_LIST SET simpleAddress=#{simpleAddress}, fulladdress=#{fulladdress} WHERE userno=#{userno}
+   		UPDATE ADDRESS_LIST SET simpleAddress=#{simpleAddress}, fulladdress=#{fulladdress},latitude=#{latitude},longitude=#{longitude} WHERE userno=#{userno}
    </update>
    
    

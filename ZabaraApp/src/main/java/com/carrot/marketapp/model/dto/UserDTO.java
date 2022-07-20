@@ -36,4 +36,8 @@ public class UserDTO {
 	
 	private String platform;
 	
+	private float latitude;
+	
+	private float longitude;
+	
 }
