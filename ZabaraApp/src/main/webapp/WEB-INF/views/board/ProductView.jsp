@@ -75,7 +75,7 @@
                <c:param value="${list.townlist_no == null ? 0 : list.townlist_no}" name="townlist_no"/>
                <c:param value="${list.auction_no == null ? 0 : list.auction_no}" name="auction_no"/>
                <c:param value="${list.product_no == null ? 0 : list.product_no}" name="product_no"/>
-               <c:param value="${list.userNo}" name="wirteuserno"/><c:param value="${list.nickName}" name="wirtenickName"/>
+               <c:param value="${list.userNo}" name="writeuserno"/><c:param value="${list.nickName}" name="wirtenickName"/>
                </c:url>"><i class="bx bxs-chat mx-5" title="채팅" style="font-size: 50px"></i></a>
               <a href="#"style="font-size: 50px"><i class="bx bxs-book-heart ml-3" ></i></a>
             </div>

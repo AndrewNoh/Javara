@@ -29,20 +29,23 @@
       SELECT nickname,profile_img FROM members where userno=#{userno}
    </select>
    <insert id="createChatRoomno" parameterType="Map">
-         INSERT INTO CHATROOM VALUES(SEQ_AUCTION_CHATROOM_NO.NEXTVAL,#{auction_no},#{product_no},#{town_no},#{writeuserno},#{userno}, #{chatcontent},SYSDATE)
+         INSERT INTO CHATROOM VALUES(SEQ_CHATROOM_ROOM_NO.NEXTVAL,#{auction_no},#{product_no},#{townlist_no},#{writeuserno},#{userno}, #{chatcontent},SYSDATE)
    </insert>
    <select id="findChatRoom" parameterType="Map" resultMap="chatDtoResult">
-         SELECT c.*,m.nickname sendusernickname, mb.nickname writeusernickname, m.profile_img senduserprofileimg, mb.profile_img writeuserprofileimg from CHATROOM c JOIN members m on c.writeuserno = m.userno JOIN members mb on c.userno = mb.userno where (c.userno=#{userno} or writeuserno= #{userno}) and auction_no=#{auction_no} and product_no=#{product_no} and town_no=#{town_no}
+         SELECT c.*,m.nickname sendusernickname, mb.nickname writeusernickname, m.profile_img senduserprofileimg, mb.profile_img writeuserprofileimg from CHATROOM c JOIN members m on c.writeuserno = m.userno JOIN members mb on c.userno = mb.userno where (c.userno=#{userno} or writeuserno= #{userno}) and (auction_no=#{auction_no} or product_no=#{product_no} or townlist_no=#{townlist_no})
    </select>
    <insert id="insertChatMessage" parameterType="Map">
-         INSERT INTO CHATMESSAGE VALUES(#{roomno},#{senduserno},#{unread_count},#{chatcontent},SYSDATE)
+         INSERT INTO CHAT_MESSAGE VALUES(#{roomno},#{senduserno},#{unread_count},#{chatcontent},systimestamp,null)
+   </insert>
+   <insert id="insertChatimg" parameterType="Map">
+         INSERT INTO CHAT_MESSAGE VALUES(#{roomno},#{senduserno},#{unread_count},'사진',systimestamp,#{img})
    </insert>
    <select id="viewChatMessage" parameterType="Map" resultMap="chatDtoResult">
-         SELECT * from CHATMESSAGE where room_no=#{roomno}
+         SELECT * from CHAT_MESSAGE where room_no=#{roomno}
    </select>
    
    <select id="chatlist" parameterType="Map" resultMap="chatDtoResult">
-         SELECT c.*,m.nickname sendusernickname ,mb.nickname writeusernickname, m.profile_img senduserprofileimg, mb.profile_img writeuserprofileimg from CHATROOM c JOIN members m on c.userno = m.userno JOIN members mb on c.writeuserno = mb.userno where (c.userno=#{userno} or c.writeuserno= #{userno}) 
+         SELECT c.*,m.nickname sendusernickname ,mb.nickname writeusernickname, m.profile_img senduserprofileimg, mb.profile_img writeuserprofileimg from CHATROOM c JOIN members m on c.userno = m.userno JOIN members mb on c.writeuserno = mb.userno where (c.userno=#{userno} or c.writeuserno= #{userno}) ORDER BY sendtime DESC 
    </select>
    <update id="updateChatRoomno" parameterType="Map">
          UPDATE CHATROOM SET chatcontent=#{chatcontent},  sendtime=SYSDATE WHERE room_no = #{roomno}
@@ -50,4 +53,10 @@
    <select id="findnickname" parameterType="Map" resultMap="chatDtoResult">
          SELECT m.nickname sendusernickname, mb.nickname writeusernickname from CHATROOM c JOIN members m on c.writeuserno = m.userno JOIN members mb on c.userno = mb.userno where room_no=#{roomno}
    </select>
+   <select id="unreadcount" parameterType="Map" resultMap="chatDtoResult">
+		SELECT room_no,count(case when not(senduserno=#{userno}) and unread_count=1 then 1 end) unreadcount   FROM CHAT_MESSAGE GROUP BY room_no HAVING COUNT(*) > 1
+   </select>
+   <update id="readmsg">
+   		UPDATE CHAT_MESSAGE SET unread_count=0 WHERE room_no=#{roomno} and not(senduserno=#{userno})
+   </update>
 </mapper>

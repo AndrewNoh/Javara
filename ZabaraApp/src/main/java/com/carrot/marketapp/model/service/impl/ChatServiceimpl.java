@@ -62,4 +62,17 @@ public class ChatServiceimpl {
 		return chatDAO.findnickname(map);
 	}
 	
+	public List<ChatDTO> unreadcount(Map map) {
+		return chatDAO.unreadcount(map);
+	}
+
+	public List<ChatDTO> readmsg(Map map) {
+		return chatDAO.readmsg(map);
+	}
+
+	public int insertChatimg(Map map) {
+		return chatDAO.insertChatimg(map);
+		
+	}
+	
 }

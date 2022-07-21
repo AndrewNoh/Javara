@@ -1,9 +1,12 @@
 package com.carrot.marketapp.config.websocket;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.BinaryMessage;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -44,5 +47,24 @@ public class WebSocketChatHandler extends TextWebSocketHandler {
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		clients.remove(session.getId());
 		System.out.println(session.getId()+"연결이 끊어졌어요");
+	}
+
+	@Override
+	public void handleBinaryMessage(WebSocketSession session, BinaryMessage message) {
+		//바이너리 메시지 발송
+		ByteBuffer byteBuffer = message.getPayload();
+		
+		for(WebSocketSession client:clients.values()) {
+			if(!session.getId().equals(client.getId())) {//자기가 보낸 메시지를 다시 받지 않도록
+				try {
+					client.sendMessage(new BinaryMessage(byteBuffer));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		
+		
 	}
 }

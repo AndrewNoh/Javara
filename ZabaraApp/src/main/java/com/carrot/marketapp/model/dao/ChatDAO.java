@@ -58,7 +58,18 @@ public class ChatDAO {
 	public ChatDTO findnickname(Map map) {
 		return sqlSession.selectOne("findnickname", map);
 	}
-	
+
+	public List<ChatDTO> unreadcount(Map map) {
+		return sqlSession.selectList("unreadcount", map);
+	}
+
+	public List<ChatDTO> readmsg(Map map) {
+		return sqlSession.selectList("readmsg", map);
+	}
+
+	public int insertChatimg(Map map) {
+		return sqlSession.insert("insertChatimg", map);
+	}
 	
 	
 	

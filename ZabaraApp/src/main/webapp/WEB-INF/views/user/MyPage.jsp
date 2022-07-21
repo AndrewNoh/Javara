@@ -438,7 +438,7 @@
                   <c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
                      <div class="swiper-slide">
                         <a
-                           href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.town_no}" name="town_no"/><c:param value="${chatlist.product_no}" name="product_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="wirteuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
+                           href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.product_no}" name="product_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
                            <div class="testimonial-item">
                               <p>
                                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>

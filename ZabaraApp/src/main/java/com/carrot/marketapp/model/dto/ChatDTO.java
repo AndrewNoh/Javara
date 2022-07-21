@@ -18,14 +18,16 @@ public class ChatDTO {
 	private int roomno;
 	private int auction_no;
 	private int product_no;
-	private int town_no;
-	private int wirteuserno;
+	private int townlist_no;
+	private int writeuserno;
 	private int userno;
 	private int unread_count;
+	private int unreadcount;
 	private String chatcontent;
 	private int senduserno;
 	private Date sendtime;
 	
+	private String img;
 	private String nickname;
 	private String senduserprofileimg;
 	private String writeuserprofileimg;

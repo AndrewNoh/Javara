@@ -1,17 +1,25 @@
 package com.carrot.marketapp.web.chat;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.carrot.marketapp.model.dto.BoardDTO;
@@ -29,6 +38,7 @@ import com.carrot.marketapp.model.service.impl.BoardServiceimpl;
 import com.carrot.marketapp.model.service.impl.ChatServiceimpl;
 import com.carrot.marketapp.model.service.impl.ImageServiceimpl;
 import com.carrot.marketapp.model.service.impl.UserServiceimpl;
+import com.carrot.marketapp.util.FileUpDownUtils;
 
 @Controller
 @RequestMapping("/chat")
@@ -64,7 +74,7 @@ public class ChatController {
       UserDTO userNickname =userService.selectOne(map);
       model.addAttribute("userNickname",userNickname);
       map.put("userno", userNickname.getUserno());
-      model.addAttribute("profileimage", userNickname.getProfile_image());
+      model.addAttribute("profileimage", userNickname.getProfile_img());
       model.addAttribute("userno",map.get("userno"));
       System.out.println(map.get("userno"));
       model.addAttribute("userno",map.get("userno"));
@@ -98,6 +108,7 @@ public class ChatController {
           model.addAttribute("userno",map.get("userno"));
           ChatDTO nicknames=chatService.findnickname(map);
           model.addAttribute("nicknames",nicknames);
+          List<ChatDTO> readmsg=chatService.readmsg(map);
        }else {
           System.out.println("방오픈");
           model.addAttribute("roomno",'0');
@@ -181,10 +192,33 @@ public class ChatController {
       }
       else{
          System.out.println("방번호 새로생성");
+         if(Integer.parseInt((String) map.get("auction_no"))==0) {
+        	 map.put("auction_no","");
+         }
+         if(Integer.parseInt((String) map.get("product_no"))==0) {
+        	 map.put("product_no","");
+         }
+         if(Integer.parseInt((String) map.get("townlist_no"))==0) {
+        	 map.put("townlist_no","");
+         }
+         
+         System.out.println("auction_no"+map.get("auction_no"));
          System.out.println("product_no"+map.get("product_no"));
+         System.out.println("townlist_no"+map.get("townlist_no"));
+         
          chatService.createChatRoomno(map);
          
-            chatroom=chatService.findChatRoom(map);
+         if(Integer.parseInt((String) map.get("auction_no"))==0) {
+        	 map.put("auction_no","");
+         }
+         if(Integer.parseInt((String) map.get("product_no"))==0) {
+        	 map.put("product_no","");
+         }
+         if(Integer.parseInt((String) map.get("townlist_no"))==0) {
+        	 map.put("townlist_no","");
+         }
+         
+         chatroom=chatService.findChatRoom(map);
          map.put("roomno",chatroom.getRoomno());
          map.put("chatcontent",chatroom.getChatcontent());
          map.put("senduserno", map.get("userno"));
@@ -193,10 +227,51 @@ public class ChatController {
           System.out.println(chatroom.getRoomno());
           chatService.insertChatMessage(map);
       }
-   
+      
+         
+      
       return "/chat/Chatting.market";
    }
    
+    @PostMapping(value = "/chatimg.do", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String sendimg(@RequestParam MultipartFile chatimg, HttpServletRequest req, Model model,
+			Principal principal, @RequestParam Map map) throws IllegalStateException, IOException {
+		System.out.println("사진");
+		String path = req.getSession().getServletContext().getRealPath("/resources/assets/img/chat_img");
+		String rename = FileUpDownUtils.getNewFileName(path, chatimg.getOriginalFilename());
+		File dest = new File(path + File.separator + rename);
+		chatimg.transferTo(dest);
+		map.put("chatimg", rename);
+		System.out.println(map.put("chatimg", rename));
+		map.put("email", principal.getName());
+		map.put("senduserno", map.get("userno"));
+		map.put("roomno", map.get("roomno"));
+		map.put("chatcontent", "사진");
+		map.put("unread_count", "1");
+		map.put("img", rename);
+		System.out.println("roomno:"+ map.get("roomno"));
+		var sendimg=chatService.insertChatimg(map);
+		model.addAttribute("img", sendimg);
+		chatService.updateChatRoomno(map);
+		return rename;
+	}
+    
+    @PostMapping(value = "/chattingemoji.do", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String emoji(Model model, @RequestParam Map map, Principal principal){
+    	System.out.println("이모티콘");
+    	map.put("email", principal.getName());
+    	map.put("senduserno", map.get("userno"));
+    	map.put("roomno", map.get("roomno"));
+    	map.put("unread_count", "1");
+    	map.put("chatcontent", "이모티콘");
+    	map.put("img", map.get("img"));
+    	System.out.println("roomno:"+ map.get("roomno"));
+    	var sendimg=chatService.insertChatimg(map);
+    	chatService.updateChatRoomno(map);
+    	return "/chat/Chatting.market";
+    }
    
    
    

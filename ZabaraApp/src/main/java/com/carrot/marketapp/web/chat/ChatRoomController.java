@@ -46,7 +46,10 @@ public class ChatRoomController {
 		model.addAttribute("userno",map.get("userno"));
 		List<ChatDTO>chatlist=chatService.chatlist(map);
 		model.addAttribute("chatlist",chatlist);
-		
+		map.put("unread_count", "1");
+		map.put("senduserno", userNickname.getUserno());
+		List<ChatDTO> unreadcount =chatService.unreadcount(map);
+		model.addAttribute("unreadcount",unreadcount);
 		
 		return "/chat/ChattingRoom.market";
 	}

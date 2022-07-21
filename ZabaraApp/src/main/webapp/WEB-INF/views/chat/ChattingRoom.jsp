@@ -43,7 +43,7 @@ margin:10px;
                <c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
                <div class="chat_list active_chat">
                   <div class="chat_people">
-                     <a href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.product_no}" name="product_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="wirteuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
+                     <a href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.product_no}" name="product_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
                         <div class="chat_img">
                            <c:if test="${userNickname.nickname eq chatlist.writeusernickname }"><img class="chat-header-image" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.senduserprofileimg}" alt="sunil"></c:if>
                            <c:if test="${userNickname.nickname ne chatlist.writeusernickname }"><img class="chat-header-image" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.writeuserprofileimg}" alt="sunil"></c:if>
@@ -53,6 +53,12 @@ margin:10px;
                            <c:if test="${userNickname.nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
                            <c:if test="${userNickname.nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>    
                            <span class="chat_date">${chatlist.sendtime}</span>
+                           <c:forEach var="unreadcount" items="${unreadcount}" varStatus="loop">
+								<c:if test="${chatlist.roomno eq  unreadcount.roomno}"> 
+								<c:if test="${unreadcount.unreadcount >0}">
+									<span class="badge badge-light">${unreadcount.unreadcount}</span></c:if>
+								</c:if> 
+							</c:forEach>
                            </h5>
                            <p>${chatlist.chatcontent}</p>
                         </div>
@@ -67,7 +73,25 @@ margin:10px;
 </div>
 </div>
 
+<script>
+$(function() {
 
-   
+	timer = setInterval( function () {
+
+		$.ajax({
+			url: '<c:url value="/chat/chattingroom.do"/>',
+			data: {'${_csrf.parameterName}':'${_csrf.token}'},
+			type: 'post',
+			success: function (result) {
+				console.log(result)
+			},
+			error: function () {
+				console.log('error')
+			}
+		});
+		
+	    }, 1000);
+
+	});
    
 </script>
