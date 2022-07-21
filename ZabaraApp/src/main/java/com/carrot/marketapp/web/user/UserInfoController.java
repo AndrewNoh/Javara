@@ -86,6 +86,7 @@ public class UserInfoController {
 		}
 		
 		int affected = userService.insert(map);
+		
 		if (affected == 0) {
 			if (dest != null)
 				dest.delete();
@@ -99,10 +100,14 @@ public class UserInfoController {
 			map.put("simpleAddress", simpleAddress);
 			map.put("userno", userinfo.getUserno());
 			int authGrant = userService.grant(map);
+			
 			if (authGrant == 0)
 				return "user/Login.market";
+			
+			
 		}
 
+		
 		return "MainPage.market";
 	}
 

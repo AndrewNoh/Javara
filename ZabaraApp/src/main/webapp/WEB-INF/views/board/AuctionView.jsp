@@ -61,8 +61,8 @@
 					</div>
 				<div class="mb-4">${list.category}</div>
 				<div class="mb-5">
-					<p>시작가 : ${list.base_Price}\</p>
-					<p>현재 최고가 : ${list.upper_Price}\</p>
+					<p id="startPrice">시작가 : ${list.base_Price}\</p>
+					<p id="upperPrice">현재 최고가 : ${list.upper_Price}\</p>
 				</div>
 				<div class="mb-5">
 					<p>${list.content}</p>
@@ -77,15 +77,18 @@
 				<div style="text-align: center; font-size: 20px; margin-bottom: 15px;">
 					 <a href="#"><i class="bx bxs-like ml-3" ></i>${list.likes}</a>
 				</div>
-		
-				<div class="text-center">
-				  <a href="<c:url value="/chat/chatting.do">
-				  <c:param value="${list.townlist_no == null ? 0 : list.townlist_no}" name="townlist_no"/>
-				  <c:param value="${list.auction_no == null ? 0 : list.auction_no}" name="auction_no"/>
-				  <c:param value="${list.product_no == null ? 0 : list.product_no}" name="product_no"/>
-				  <c:param value="${list.userNo}" name="wirteuserno"/><c:param value="${list.nickName}" name="wirtenickName"/></c:url>"><i class="bx bxs-chat mx-5" title="채팅" style="font-size: 50px"></i></a>
-				  <a href="#"style="font-size: 50px"><i class="bx bxs-book-heart ml-3" ></i></a>
-				</div>
+				
+				<c:if test="${list.upper_user_no == userno && list.status == 'END'}">
+					<div class="text-center">
+						<a href="<c:url value="/chat/chatting.do">
+						<c:param value="${list.townlist_no == null ? 0 : list.townlist_no}" name="townlist_no"/>
+						<c:param value="${list.auction_no == null ? 0 : list.auction_no}" name="auction_no"/>
+						<c:param value="${list.product_no == null ? 0 : list.product_no}" name="product_no"/>
+						<c:param value="${list.userNo}" name="wirteuserno"/><c:param value="${list.nickName}" name="wirtenickName"/></c:url>"><i class="bx bxs-chat mx-5" title="채팅" style="font-size: 50px"></i></a>
+						<a href="#"style="font-size: 50px"><i class="bx bxs-book-heart ml-3" ></i></a>
+					</div>
+				</c:if>
+				
 			</div>
           </div>
 
@@ -355,17 +358,23 @@
 	
    $('#statusChange').on("click", function(){
 		var value = $('[name=status]').val();
+		var start = $('#startPrice').val();
+		var upper = $('#upperPrice').val();
 		
-		$.ajax({
-			url : '<c:url value="/board/changeStatus.do" />',
-			type:'POST',
-			dataType: "text",
-			data:{'${_csrf.parameterName}':'${_csrf.token}', auction_no:${list.auction_no}, board:"경매", status:value},
-		}).done(function(data){
-			console.log(data + " : " + value)
-			if(value == 'END'){
-				$('[name=status]').attr("disabled", true);
-			}
-		});
+		if ((upper - start) > 0) {
+			$.ajax({
+				url : '<c:url value="/board/changeStatus.do" />',
+				type:'POST',
+				dataType: "text",
+				data:{'${_csrf.parameterName}':'${_csrf.token}', auction_no:${list.auction_no}, board:"경매", status:value},
+			}).done(function(data){
+				console.log(data + " : " + value)
+				if(value == 'END'){
+					$('[name=status]').attr("disabled", true);
+				}
+			});
+		} else {
+			alert("낙찰하려면 시작가격보단 최고가가 높아야함");
+		}
 	});
 </script>

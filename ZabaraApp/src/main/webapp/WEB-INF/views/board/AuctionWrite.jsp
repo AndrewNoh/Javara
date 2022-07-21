@@ -72,6 +72,14 @@ height: 100%
 					  		</select>
 						</div>
 						
+						<div class="form-group">
+							<input type="text" name="address" class="form-style" onmousedown="daumAddress()" placeholder="내 동네 이름(동,읍,면으로 검색)" id="address" autocomplete="off" readonly>
+							<input type="hidden" name="latitude" id="latitude">
+							<input type="hidden" name="longitude" id="longitude">											
+							<i class="input-icon uil uil-search"></i>
+							<div>&nbsp</div>
+						</div>
+						
 						<div class="my-3">
 							<p>가격</p>
 							<input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11" class="form-control" placeholder="가격을 입력하세요" name="price" pattern="[1-9][0-9]{0,}0" title="금액은 0으로 시작할 수 없습니다.\n금액은 최소 10원단위 입니다." required="required">
@@ -170,4 +178,33 @@ height: 100%
 	$('#goList').on("click", function(){
 		 window.location.href = "<c:url value='/board/auctionlist.do'/>";
 	});
+	
+	function daumAddress() {
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	            var addr = ''; // 주소 변수
+	            var extraAddr = ''; // 참고항목 변수
+	            
+	            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                addr = data.roadAddress;
+	            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                addr = data.jibunAddress;
+	            }
+	            geocoder.addressSearch(addr, function(results, status) {
+	                if (status === daum.maps.services.Status.OK) {
+	                   var result = results[0];
+	                   $('#latitude').val(result.y);
+	                   $('#longitude').val(result.x);                   
+	                }
+	             });
+	           	 document.getElementById("address").value = addr;
+	            $('#nextBtn').focus();
+	        }
+	    }).open();
+	}
 </script>

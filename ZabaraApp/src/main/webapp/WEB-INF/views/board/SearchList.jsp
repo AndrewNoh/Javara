@@ -116,7 +116,7 @@
 						        		
 								        <div class="portfolio-info">
 								        	<h4>${LIST.title}</h4>
-								            <p>${LIST.price}\</p>
+								            <p>가격 : ${LIST.price}\</p>
 								            <div class="portfolio-links">
 								            	<a href="${pageContext.request.contextPath}/resources/assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bxs-photo-album"></i><span style="font-size: 18px; display: block;">사진보기</span></a>
 								                <a href="<c:url value="/board/productview.do"><c:param value="${LIST.product_no}" name="no"/></c:url>" rel="lyteframe" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bxs-detail"></i><span style="font-size: 18px; display: block;">상세보기</span></a>

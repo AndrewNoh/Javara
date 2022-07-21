@@ -333,7 +333,7 @@
 	</update>
 
 	<update id="updatePrice" parameterType="Map">
-		UPDATE AUCTION_PRICE SET UPPER_PRICE = #{newprice} WHERE AUCTION_NO =
+		UPDATE AUCTION_PRICE SET UPPER_PRICE = #{newprice}, UPPER_USER_NO = #{userno} WHERE AUCTION_NO =
 		#{auction_no}
 	</update>
 

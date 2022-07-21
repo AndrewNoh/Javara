@@ -189,7 +189,6 @@ public class MainBoardController {
 			@RequestParam("filename") MultipartFile[] filename, MultipartHttpServletRequest req) throws IllegalStateException, IOException {
 		
 		String board = (String) map.get("board");
-		System.out.println(board);
 		map = getUserInfo(map, model, principal);
 		
 		int a = 0;
@@ -222,8 +221,6 @@ public class MainBoardController {
 		String path=req.getSession().getServletContext().getRealPath("/resources/assets/img/product_img"); //경로
 		
 		if(a == 1 && !(filename[0].getOriginalFilename().equals(""))) {
-			//사진 업로드부분
-			System.out.println(filename[0].getOriginalFilename());
 			
 			for(int i = 0 ; i < filename.length ; i++) {
 		        
@@ -236,17 +233,12 @@ public class MainBoardController {
 		        
 		        BufferedImage original = ImageIO.read(dest);
 		        int type = original.getType() == 0? BufferedImage.TYPE_INT_ARGB : original.getType();
-		        System.out.println("높이" + original.getHeight());
-		        System.out.println("너비" + original.getWidth());
 		        
 		        BufferedImage resizeImagePng = resizeImage(original, type);
 	            ImageIO.write(resizeImagePng, "png", dest);
 	            BufferedImage resigeImage = ImageIO.read(dest);
 		        
 	            File resize = new File(rename);
-	            
-	            System.out.println("높이" + resigeImage.getHeight());
-	            System.out.println("너비" + resigeImage.getWidth());
 	            
 	            
 		        filename[i].transferTo(resize);
@@ -443,6 +435,8 @@ public class MainBoardController {
 		int upper = Integer.parseInt((String) map.get("upperprice"));
 		int newprice = Integer.parseInt((String) map.get("newprice"));
 		
+		map = getUserInfo(map, model, principal);
+		
 		int aff = 0;
 		if(upper >= newprice) {
 			return aff;
@@ -562,9 +556,6 @@ public class MainBoardController {
 	   
 	   @PostMapping("/search.do")
 	   public String search(Model model, @RequestParam Map map, Principal principal) {
-		   System.out.println(map.get("board"));
-		   System.out.println(map.get("category"));
-		   System.out.println(map.get("title"));
 		   
 		   String board = map.get("board").toString();
 		   
