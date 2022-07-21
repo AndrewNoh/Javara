@@ -202,7 +202,10 @@ public class MainBoardController {
 		String content = map.get("content").toString().trim();
 		String price = map.get("price").toString().trim();
 		
-		if (title.equals("") || content.equals("") || price.equals("") || filename[0].getOriginalFilename().equals("")) {
+		if(board.equals("우리동네") && filename[0].getOriginalFilename().equals("")) {
+			System.out.println("잘 작동하나 테스트해봐야 합니다.");
+			
+		} else if (title.equals("") || content.equals("") || price.equals("") || filename[0].getOriginalFilename().equals("")) {
 			switch (board) {
 			case "중고물품":
 				return "/board/ProductWrite.market";
@@ -558,10 +561,59 @@ public class MainBoardController {
 	
 	   
 	   @PostMapping("/search.do")
-	   public String search(Model model, @RequestParam Map map) {
+	   public String search(Model model, @RequestParam Map map, Principal principal) {
 		   System.out.println(map.get("board"));
 		   System.out.println(map.get("category"));
 		   System.out.println(map.get("title"));
-		   return "";
+		   
+		   String board = map.get("board").toString();
+		   
+		   List<BoardDTO> searchList = new Vector<BoardDTO>();
+		   
+		   map.put("email", principal.getName());
+			
+		   UserDTO user = userService.selectOne(map);
+			
+		   map.put("userno", user.getUserno());			
+			
+		   AddressDTO address = addressService.selectOne(map);
+			
+		   String simpleAddr = address.getSimpleAddress();
+			
+		   map.put("addrno", address.getAddrNo());
+		   map.put("simpleAddress", simpleAddr);
+		   
+		   
+		   switch (board) {
+			   case "중고물품":
+				   searchList = boardService.searchProduct(map);
+				   break;
+			   case "경매":
+				   searchList = boardService.searchAuction(map);
+				   break;
+			   case "우리동네":
+				   searchList = boardService.searchGropBoard(map);
+				   break;		   		
+		   }
+		   
+		   List<List<ImageDTO>> imageList = new Vector<List<ImageDTO>>();
+			
+			for(int i = 0; i < searchList.size(); i++) {
+				map.put("product_no", searchList.get(i).getProduct_no());
+				map.put("auction_no", searchList.get(i).getAuction_no());
+				
+				List<ImageDTO> images = imageService.selectList(map);
+				imageList.add(images);
+			}
+			
+			List<Integer> likes = boardService.selectLikeList(map);
+		   
+		   model.addAttribute("LISTS", searchList);
+		   model.addAttribute("likes", likes);
+		   model.addAttribute("imageList", imageList);
+		   model.addAttribute("address", map.get("simpleAddress"));
+		   model.addAttribute("nowUser", map.get("userno"));
+			
+		   return "/board/SearchList.market";
 	   }
 }

@@ -18,7 +18,8 @@
 			    (SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) = #{simpleAddress}
 			    ORDER BY PRODUCT_NO DESC) D) O) T 
                 LEFT OUTER JOIN ADDRESS_LIST AL ON AL.ADDRNO = T.ADDRNO
-			    WHERE T.STATUS = 'SALE')
+			    WHERE T.STATUS = 'SALE'
+			    ORDER BY T.PRODUCT_NO DESC)
 			    WHERE RNUM > #{startnum} AND RNUM < #{endnum}
 		]]>
 	</select>
@@ -33,7 +34,8 @@
 			    (SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) = #{simpleAddress}
 			    ORDER BY PRODUCT_NO DESC) D) O) T 
                 LEFT OUTER JOIN ADDRESS_LIST AL ON AL.ADDRNO = T.ADDRNO
-			    WHERE T.STATUS = 'SALE')
+			    WHERE T.STATUS = 'SALE'
+			    ORDER BY T.PRODUCT_NO DESC)
 	</select>
 
 	<select id="getProductNo" resultType="_int">
@@ -365,7 +367,49 @@
 	</select>
 
 
-
+	<!-- SEARCH -->
+		
+		<!-- PRODUCT -->
+		<select id="searchProduct" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
+			<![CDATA[
+				SELECT * FROM (
+				    SELECT * FROM
+				    (SELECT ADDRNO, PRODUCT_NO, USERNO, TITLE, CONTENT, CATEGORY, PRICE, LIKES, POSTDATE, STATUS, RNUM FROM
+				    (SELECT D.*, ROWNUM AS RNUM FROM
+				    (SELECT * FROM PRODUCT_LIST L WHERE
+				    (SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) = #{simpleAddress}
+				    ORDER BY PRODUCT_NO DESC) D) O) T 
+	                LEFT OUTER JOIN ADDRESS_LIST AL ON AL.ADDRNO = T.ADDRNO
+				    WHERE T.STATUS = 'SALE') WHERE CATEGORY = #{category} AND TITLE LIKE '%'||#{title}||'%'
+			]]>
+		</select>
+		<!-- PRODUCT -->
+		
+		<!-- AUCTION -->
+		<select id="searchAuction" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
+			<![CDATA[
+			SELECT * FROM (
+				    SELECT * FROM
+				    (SELECT ADDRNO, AUCTION_NO, USERNO, TITLE, CONTENT, CATEGORY, LIKES, POSTDATE,   ENDDATE, STATUS, RNUM FROM
+				    (SELECT D.*, ROWNUM AS RNUM FROM
+				    (SELECT * FROM AUCTION_LIST L WHERE
+				    (SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) =  #{simpleAddress}
+				    ORDER BY AUCTION_NO DESC) D) O) T 
+				    INNER JOIN AUCTION_PRICE P ON P.AUCTION_NO = T.AUCTION_NO
+				    LEFT OUTER JOIN ADDRESS_LIST A ON A.ADDRNO = T.ADDRNO
+				    WHERE T.STATUS = 'SALE'
+				    ORDER BY P.AUCTION_NO DESC) WHERE CATEGORY = #{category} AND TITLE LIKE '%'||#{title}||'%'
+			]]>
+		</select>
+		<!-- AUCTION -->
+		
+		<!-- TOWN -->
+		<select id="searchGropBoard" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
+			
+		</select>
+		<!-- TOWN -->
+		
+	<!-- SEARCH -->
 
 
 

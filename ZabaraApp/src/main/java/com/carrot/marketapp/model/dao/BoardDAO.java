@@ -230,5 +230,17 @@ public class BoardDAO {
 		return sqlSession.selectList("mypagelikelist", map);
 	}
 
+	public List<BoardDTO> searchGropBoard(Map map) {
+		return sqlSession.selectList("searchGropBoard", map);
+	}
+
+	public List<BoardDTO> searchAuction(Map map) {
+		return sqlSession.selectList("searchAuction", map);
+	}
+
+	public List<BoardDTO> searchProduct(Map map) {
+		return sqlSession.selectList("searchProduct", map);
+	}
+
 
 }

@@ -72,10 +72,9 @@
 				<sec:csrfInput/>
 				<div class="search">
 					<select id="searchBoardSelect" name="board">
-						<option value="all">전체</option>
 						<option value="경매">경매</option>
-						<option value="중고">중고</option>
-						<option value="동내생활">동내생활</option>
+						<option value="중고물품">중고</option>
+						<option value="우리동네">동내생활</option>
 					</select>
 					
 					<select id="searchCategorySelect" name="category">

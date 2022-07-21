@@ -114,4 +114,17 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 		return boardDAO.mypagelikelist(map);
 	}
 
+	public List<BoardDTO> searchProduct(Map map) {
+		return boardDAO.searchProduct(map);
+	}
+
+	public List<BoardDTO> searchAuction(Map map) {
+		return boardDAO.searchAuction(map);
+	}
+
+	public List<BoardDTO> searchGropBoard(Map map) {
+		return boardDAO.searchGropBoard(map);
+		
+	}
+
 }
