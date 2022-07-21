@@ -357,8 +357,8 @@ public class MainBoardController {
 		
 		int page = Integer.parseInt((String) map.get("nowpage"));
 		
-		map.put("startnum", (30 * (page-1)) + 1);
-		map.put("endnum", 30 * (page));
+		map.put("startnum", (30 * (page-1)));
+		map.put("endnum", 30 * (page) + 1);
 		
 		if(map.get("category") == null) {
 			map.put("category", "모두");
@@ -556,4 +556,12 @@ public class MainBoardController {
 		   return aff;
 	   }
 	
+	   
+	   @PostMapping("/search.do")
+	   public String search(Model model, @RequestParam Map map) {
+		   System.out.println(map.get("board"));
+		   System.out.println(map.get("category"));
+		   System.out.println(map.get("title"));
+		   return "";
+	   }
 }
