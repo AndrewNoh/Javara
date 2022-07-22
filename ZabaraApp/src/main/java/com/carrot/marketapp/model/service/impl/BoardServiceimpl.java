@@ -132,4 +132,9 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 		return boardDAO.insertNewAddress(map);
 	}
 
+	public BoardDTO viewSelect(Map map) {
+		// TODO Auto-generated method stub
+		return boardDAO.viewSelect(map);
+	}
+
 }

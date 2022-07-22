@@ -247,5 +247,10 @@ public class BoardDAO {
 		return sqlSession.insert("insertNewAddress", map);
 	}
 
+	public BoardDTO viewSelect(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("viewSelect", map);
+	}
+
 
 }
