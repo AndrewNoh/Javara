@@ -1,5 +1,6 @@
 package com.carrot.marketapp.model.service.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,16 @@ public class AddressServiceimpl implements CommonService<AddressDTO>{
 	public String findNameByKey(Map map) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public AddressDTO getwriteAddress(Map map) {
+		// TODO Auto-generated method stub
+		return addressDAO.getwriteAddress(map);
+	}
+
+	public List<AddressDTO> getHaveAddress(Map map) {
+		// TODO Auto-generated method stub
+		return addressDAO.getHaveAddress(map);
 	}
 
 	

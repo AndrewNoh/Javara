@@ -43,8 +43,8 @@ public class BoardDAO {
 			return sqlSession.insert("writeProductList", map);			
 		} else if(map.get("board").equals("우리동네")) {			
 			return sqlSession.insert("insertBoard", map);
-		} else {			
-			sqlSession.insert("writeAuctionList", map);
+		} else {
+			sqlSession.insert("writeAuctionList", map);			
 			return sqlSession.insert("writeAuctionPrice", map);
 		}		
 	}
@@ -240,6 +240,11 @@ public class BoardDAO {
 
 	public List<BoardDTO> searchProduct(Map map) {
 		return sqlSession.selectList("searchProduct", map);
+	}
+
+	public int insertNewAddress(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("insertNewAddress", map);
 	}
 
 

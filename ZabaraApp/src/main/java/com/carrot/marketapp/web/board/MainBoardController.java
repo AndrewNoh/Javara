@@ -189,7 +189,8 @@ public class MainBoardController {
 			@RequestParam("filename") MultipartFile[] filename, MultipartHttpServletRequest req) throws IllegalStateException, IOException {
 		
 		String board = (String) map.get("board");
-		map = getUserInfo(map, model, principal);
+		
+		map = getUserInfo(map, model, principal);		
 		
 		int a = 0;
 		
@@ -215,7 +216,45 @@ public class MainBoardController {
 			}
 			
 		} else {
-			a = boardService.insert(map);
+			
+			List<AddressDTO> haveAddress = addressService.getHaveAddress(map);
+			
+			int haveAddrNo = 0;
+			
+			for(AddressDTO have : haveAddress) {
+				if(map.get("address").toString().equals(have.getFullAddress())) {
+					haveAddrNo = have.getAddrNo();
+					break;
+				}
+			}
+			
+			System.out.println(haveAddrNo);
+			
+			if(! map.get("latitude").equals("not") && haveAddrNo == 0) {
+								
+				
+				map.put("latitude", Double.parseDouble((String)map.get("latitude")));
+				map.put("longitude", Double.parseDouble((String)map.get("longitude")));
+				
+				String[] simpleAddr = ((String) map.get("address")).split(" ");
+				String simpleAddress = simpleAddr[1];
+				map.put("simpleAddress", simpleAddress);
+				
+				a = boardService.insertNewAddress(map);
+				
+				AddressDTO writeAddress = addressService.getwriteAddress(map);
+				
+				String simpleWriteAddr = writeAddress.getSimpleAddress();
+				
+				map.put("addrno", writeAddress.getAddrNo());
+				map.put("simpleAddress", simpleWriteAddr);		
+			}
+			
+			if(haveAddrNo != 0) {
+				map.put("addrno", haveAddrNo);
+			}
+			a = boardService.insert(map);	
+			
 		}		
 		
 		String path=req.getSession().getServletContext().getRealPath("/resources/assets/img/product_img"); //경로

@@ -127,4 +127,9 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 		
 	}
 
+	public int insertNewAddress(Map map) {
+		// TODO Auto-generated method stub
+		return boardDAO.insertNewAddress(map);
+	}
+
 }

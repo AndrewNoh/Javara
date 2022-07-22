@@ -363,7 +363,25 @@
 
 	<select id="getSimpleAddress" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.AddressDTO">
-		SELECT * FROM ADDRESS_LIST WHERE USERNO = #{userno}
+		SELECT L.*, ROWNUM FROM ADDRESS_LIST L
+			WHERE USERNO = #{userno}
+			AND ROWNUM = 1
+			ORDER BY ADDRNO ASC
+	</select>
+	
+	<select id="getWriteAddress" parameterType="Map"
+		resultType="com.carrot.marketapp.model.dto.AddressDTO">
+		SELECT L.*, ROWNUM FROM ADDRESS_LIST L
+			WHERE L.SIMPLEADDRESS = #{simpleAddress}
+			AND ROWNUM = 1
+			ORDER BY ADDRNO ASC
+	</select>
+	
+	<select id="getHaveAddress" parameterType="Map"
+		resultType="com.carrot.marketapp.model.dto.AddressDTO">
+		SELECT L.* FROM ADDRESS_LIST L
+			WHERE USERNO = #{userno}
+			ORDER BY ADDRNO ASC
 	</select>
 
 
@@ -412,9 +430,11 @@
 	<!-- SEARCH -->
 
 
+	
 
-
-
+	<insert id="insertNewAddress" parameterType="Map">
+		INSERT INTO ADDRESS_LIST VALUES(SEQ_ADDRESS_LIST_ADDRNO.NEXTVAL,#{userno},#{simpleAddress},#{address},#{latitude},#{longitude})
+	</insert>
 
 
 

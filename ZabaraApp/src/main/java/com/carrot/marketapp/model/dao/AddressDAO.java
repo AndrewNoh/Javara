@@ -1,5 +1,6 @@
 package com.carrot.marketapp.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -17,6 +18,16 @@ public class AddressDAO {
 
 	public AddressDTO selectOne(Map map) {
 		return sqlSession.selectOne("getSimpleAddress", map);
+	}
+
+	public AddressDTO getwriteAddress(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("getWriteAddress", map);
+	}
+
+	public List<AddressDTO> getHaveAddress(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("getHaveAddress", map);
 	}
 
 	

@@ -118,6 +118,7 @@
 													<div class="form-group">
 														<input type="text" name="email" class="form-style" placeholder="이메일 주소를 입력해주세요" id="email" autocomplete="off">
 														<i class="input-icon uil uil-at"></i>
+														<div>&nbsp</div>
 														
 													</div>
 													<div class="form-group mt-2">
@@ -488,7 +489,7 @@ function emailCheck(){
 				url :'<c:url value="/emailLink.do"/>',
 				type:'POST',
 				dataType: "text",
-				data:{email:$("#email").val(),'${_csrf.parameterName}':'${_csrf.token}'},
+				data:{emaildup:$("#email").val(),'${_csrf.parameterName}':'${_csrf.token}'},
 				
 			}).done(function(data){
 				$('#emailCheck').show();

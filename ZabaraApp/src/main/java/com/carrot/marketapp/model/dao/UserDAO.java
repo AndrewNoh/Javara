@@ -34,7 +34,7 @@ public class UserDAO {
 		if(map.get("phone")!=null) {			
 			return sqlSession.selectOne("userselectOneByPhoneNumber", map);//중복 핸드폰번호 검사용 selectOne
 		}
-		else if(map.get("signup")!=null) {
+		else if(map.get("signup")!=null || map.get("emaildup")!=null) {
 			return sqlSession.selectOne("userselectOneForSignup", map);//이메일로 셀렉트 회원가입용(주소 미포함) 
 		}
 		else {			

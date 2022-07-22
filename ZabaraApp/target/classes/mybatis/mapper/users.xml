@@ -26,11 +26,11 @@
 
 	<!-- 이메일(아이디)로 조회 -->   
 	   <select id="userselectOne" parameterType="Map" resultMap="userDtoResult">
-	      SELECT m.*,a.simpleaddress,a.fulladdress FROM members m JOIN ADDRESS_LIST a ON m.userno=a.userno WHERE email=#{email}
+	      SELECT m.*,a.simpleaddress,a.fulladdress, ROWNUM FROM members m JOIN ADDRESS_LIST a ON m.userno=a.userno WHERE email=#{email} AND ROWNUM = 1
 	   </select>
 	<!-- 이메일로 조회 주소 미포함 -->
 	   <select id="userselectOneForSignup" parameterType="Map" resultMap="userDtoResult">
-	   	  SELECT * FROM members WHERE email=#{email}
+	   	  SELECT * FROM members WHERE email=#{emaildup}
 	   </select>
 
 	<!-- 폰번호로 조회(번호 중복 가입확인용) -->

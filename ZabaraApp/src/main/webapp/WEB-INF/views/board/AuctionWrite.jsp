@@ -62,7 +62,7 @@ height: 100%
 						</div>
 						
 						<h6>경매 종료일</h6>
-						<div class="custom-select form-group mt-0 mt-md-0">							
+						<div class="custom-select form-group mt-0 mt-md-0 mb-3">							
 					 		<select name="enddate">					 			
 					    		<option selected value="1">1일(24시간)</option>
 					    		<option value="2">2일(48시간)</option>
@@ -72,10 +72,11 @@ height: 100%
 					  		</select>
 						</div>
 						
+						<h6>판매주소 선택(선택사항)</h6>
 						<div class="form-group">
 							<input type="text" name="address" class="form-style" onmousedown="daumAddress()" placeholder="내 동네 이름(동,읍,면으로 검색)" id="address" autocomplete="off" readonly>
-							<input type="hidden" name="latitude" id="latitude">
-							<input type="hidden" name="longitude" id="longitude">											
+							<input type="hidden" name="latitude" id="latitude" value="not">
+							<input type="hidden" name="longitude" id="longitude" value="not">											
 							<i class="input-icon uil uil-search"></i>
 							<div>&nbsp</div>
 						</div>
@@ -103,8 +104,10 @@ height: 100%
 
 </body>
 
+<script src="${pageContext.request.contextPath}/resources/assets/js/LSscript.js"></script>
 <script type="text/javascript">
-	
+
+var geocoder = new daum.maps.services.Geocoder();
 	
 	function readMultipleImage(input) {	
 		const previewImage = $('#previewImage');
