@@ -66,5 +66,34 @@ public class UserServiceimpl implements CommonService<UserDTO>{
 		return userDAO.editselectOne(map);
 	}
 	
+public int payCreateAmount(Map map) {
+		
+		return userDAO.payCreateAmount(map);
+	}
 	
+	public UserDTO getPayNo(Map map) {
+
+		return userDAO.getPayNo(map);
+	}
+	
+	public int payLog(Map map) {
+		
+		return userDAO.payLog(map);		
+	}
+
+	public int payDeposit(Map map) {
+		
+		return userDAO.payDeposit(map);		
+	}
+	
+	public int payWithdraw(Map map) {
+		
+		return userDAO.payWithdraw(map);		
+	}
+	
+	public UserDTO payBalance(Map map) {
+		
+		return userDAO.payBalance(map);		
+	}
+
 }

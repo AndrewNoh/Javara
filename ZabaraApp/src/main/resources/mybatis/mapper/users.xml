@@ -114,6 +114,38 @@
 		fulladdress=#{fulladdress},latitude=#{latitude},longitude=#{longitude}
 		WHERE userno=#{userno}
 	</update>
+	
+	<!-- 페이 서비스: 계좌 생성-->
+   <insert id="payCreateAmount" parameterType="Map">
+   		INSERT INTO ZABARAPAY VALUES(SEQ_ZABARAPAY_PAYNO.NEXTVAL, #{userno})
+   </insert>
+   
+   <!-- 페이 서비스: 생성된 계좌번호 조회  -->
+   <select id="payLogNo" parameterType="Map" resultMap="userDtoResult">
+   		SELECT * FROM ZABARAPAY WHERE userno = #{userno}
+   </select>
+   
+   <!-- 페이 서비스: 로그 생성 -->
+   <insert id="payLog" parameterType="Map">
+   		INSERT INTO PAYLOG VALUES(SEQ_PAYLOG_LOGNO.NEXTVAL, #{payno}, NULL, NULL, 0)
+   </insert>
+
+   <!-- 페이 서비스: 입금
+   <insert id="payDeposit" parameterMap="Map">
+   		INSERT INTO ZABARAPAY VALUES(#{userno}, #{payno})
+   </insert>
+   -->
+   
+   <!-- 페이 서비스: 출금 
+   <insert id="payWithdraw" parameterMap="Map">
+   		INSERT INTO ZABARAPAY VALUES(#{userno}, #{payno})
+   </insert>
+   -->
+ 
+   <!-- 페이 서비스: 잔액 -->
+   <select id="payBalance" parameterType="Map" resultMap="userDtoResult">
+   		SELECT * FROM PAYLOG WHERE payno=#{payno} AND ROWNUM=1 ORDER BY logno DESC
+   </select >
 
 
 </mapper>

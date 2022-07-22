@@ -51,5 +51,4 @@ public class ImageServiceimpl implements CommonService<ImageDTO>{
 		return imageDAO.selectList(map);
 	}
 
-	
 }

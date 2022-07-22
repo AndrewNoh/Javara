@@ -34,6 +34,7 @@ import com.carrot.marketapp.model.dto.BoardDTO;
 import com.carrot.marketapp.model.dto.ChatDTO;
 import com.carrot.marketapp.model.dto.ImageDTO;
 import com.carrot.marketapp.model.dto.UserDTO;
+import com.carrot.marketapp.model.service.PayService;
 import com.carrot.marketapp.model.service.impl.AddressServiceimpl;
 import com.carrot.marketapp.model.service.impl.BoardServiceimpl;
 import com.carrot.marketapp.model.service.impl.ChatServiceimpl;
@@ -59,6 +60,9 @@ public class UserInfoController {
 
 	@Autowired
 	ChatServiceimpl chatService;
+	
+	@Autowired
+	PayService payService;
 
 	// 회원가입
 	@RequestMapping("/signup.do")
@@ -101,6 +105,14 @@ public class UserInfoController {
 
 			if (authGrant == 0)
 				return "user/Login.market";
+			
+			else { // 페이 서비스
+				  int amount = payService.payCreateAmount(map); // 최초 계좌생성
+				  UserDTO logno = payService.getPayNo(map); // 계좌 번호
+				  map.put("payno", logno.getPayno());
+				  int log = payService.payLog(map); // 로그 생성
+
+				}
 
 		}
 
@@ -380,4 +392,22 @@ public class UserInfoController {
 
 		return map;
 	}
+	
+	// 페이 서비스 - 마이페이지 잔액 관련
+	@RequestMapping("/balance.do")
+	@ResponseBody
+	public int payService(Model model, Map map, Principal principal) {
+		map.put("email", principal.getName());
+		UserDTO userno = userService.selectOne(map);
+		map.put("userno", userno.getUserno());
+			
+		UserDTO payno = payService.getPayNo(map);
+		map.put("payno", payno.getPayno());
+			
+		UserDTO balance = payService.payBalance(map);
+					
+		
+		return Integer.parseInt(balance.getBalance());
+	}
+
 }

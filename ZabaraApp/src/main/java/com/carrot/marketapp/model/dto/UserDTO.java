@@ -34,5 +34,13 @@ public class UserDTO {
 	private float latitude;
 
 	private float longitude;
+	
+	// 페이 서비스
+	private int payno; // amount
+	private int paylog;
+	private UserDTO payLogNo;
+	private int deposit;
+	private int withdraw;
+	private String balance;
 
 }

@@ -30,19 +30,20 @@
    height: 50px;
    z-index: 10;
    border: none;
-   font-size: 14px;
    text-align: center;
-   background-color: #ffffff;
-   background-color: rgba(255, 255, 255, 0.5);
+
 }
 
-.category li {
+.category button {
    list-style: none;
    float: left;
-   width: 50px;
-   height: 45px;
+   width: auto;
+   height: auto;
    padding-top: 5px;
+   font-size: 18px;
+   color: #ffffff;
    cursor: pointer;
+
 }
 
 .nav-link {
@@ -56,7 +57,7 @@
    padding: 5px;
 }
 
-#jPay {
+#myPay {
    margin-left: 5px;
    border: none;
    background: transparent;
@@ -226,7 +227,7 @@
                         </div>
                      </div>
                      <div class="col-lg-4 col-md-4 mt-4 mt-md-0">
-                        <div class="icon-box" id="PayToggle">
+                        <div class="icon-box" id="PayToggle" onclick="payBalance()">
                            <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
                            <h3>자바라 페이</h3>
 
@@ -353,12 +354,9 @@
                      <div id="map" style="width: 1200px; height: 800px;"></div>
                      <div class="category">
                         <ul>
-                           <li onclick="search_map()"><span
-                              class="ico_comm ico_coffee"></span> 검색</li>
-                           <li onclick="nowGeo()"><span class="ico_comm ico_store"></span>
-                              현 위치</li>
-                           <li onclick="saveMarkerPosition()"><span
-                              class="ico_comm ico_carpark"></span> 동네 인증</li>
+                          <button onclick="search_map()" type="button" class="btn btn-success" style="margin-right:10px; width: 80px">검색</button>
+                          <button onclick="nowGeo()" type="button" class="btn btn-success" style="margin-right:10px; width: 80px">현위치</button>
+                          <button onclick="saveMarkerPosition()" type="button" class="btn btn-success" style=" width: 80px">동네 인증</button>
                         </ul>
                      </div>
                
@@ -374,9 +372,10 @@
                          </div>
                            자바라페이는 자바라마켓 내에서 선불머니를 충전하고 이용할 수 있는 간편 결제/송금 서비스입니다. 
                         </div>
-                        <input style="margin-left:30px" type="text" id="jPay">원   
+                        <input style="text-align:right; color:white; font-size: 20px" type="text" id="myPay" readonly="readonly">  
                          <select class="btn btn-outline-secondary btn-s" 
                              style="margin-left: 30px; color: #fff" data-toggle="dropdown" id="pay">
+                             
                               <option value="5000">5,000원</option>
                               <option value="10000">10,000원</option>
                               <option value="20000">20,000원</option>
@@ -386,7 +385,7 @@
                            </select>
                            <button type="button"
                               style="border-radius: 0.5em; padding: 5px 20px; background-color: #ffffff; background-color: rgba(255, 255, 255, 0.5);"
-                              onclick="jPayService()">충전하기</button>
+                              onclick="payService()">충전하기</button>
                                     
                      </div>
                      <div class="col mt-3" id="CategoryToggleDiv" style="display: none">
@@ -486,7 +485,6 @@
             $("#MapToggle").click(function() {
                $("#MapToggleDiv").toggle(1000);
                setTimeout(function() {
-
                   myAddressMap($("#myAddress").text());
                }, 1000);
 
@@ -757,67 +755,60 @@
                      callback);
             }
          }
-
-         // 자바라 페이
-         var IMP = window.IMP;
-         IMP.init('imp74932749'); // 나만의 가맹점 식별코드
-
-         function jPayService() {
-            IMP.init('imp74932749');
-            IMP.request_pay(
-                        {
-                           pg : "inicis",
-                           pay_method : "card",
-                           merchant_uid : 'merchant_'
-                                 + new Date().getTime(),
-                           name : '자바라 페이',
-                           amount : $("select[id=pay]").val(), // 결제 금액
-                           buyer_email : 'iamport@siot.do', // 구매자 이메일
-                           buyer_name : '구매자', // 구매자
-                           buyer_tel : '010-1234-5678',
-                           buyer_addr : '서울특별시 강남구 삼성동',
-                           buyer_postcode : '123-456'
-                        },
-                        function(rsp) {
-                           console.log(rsp);
-                           if (rsp.success) {
-                              var msg = '충전이 완료되었습니다.';
-                              alert(msg);
-                              location.href = "http://localhost:8080/marketapp/userinfo/mypage.do"
-                           } else {
-                              var msg = '결제 실패하였습니다.';
-                              // msg += '에러내용 : ' + rsp.error_msg;
-                              alert(msg);
-                              document.location.href = "http://localhost:8080/marketapp/userinfo/mypage.do"; // alert창 확인 후 이동할 url 설정
-                           }
-                        })
+         
+         // 자바라페이 클릭 시 잔액 보여주기 위함 
+         function payBalance(){
+       	  	console.log("클릭이벤트");
+	       	  	$.ajax({
+	       	  		type: 'POST',
+		       	 	url : '<c:url value="/userinfo/balance.do"/>',
+		       		data : {
+                      '${_csrf.parameterName}' : '${_csrf.token}'
+                  	},
+                  	dataType : "text",
+		       		success : function(result){
+		       			$('#myPay').val(result+'원')
+		       		}
+	       	  	});
+       	  
          }
 
-          /*
-          // 컨트롤러에 데이터를 전달하여 DB에 입력하는 로직
-          // 결제내역을 사용자에게 보여주기 위해 필요함.
-                     $.ajax({
-                     url : "placeorder.do",
-                     type : "get",
-                     data : purchaseVo,
-                     dataType : "text",
-                     success : function(result){
-                        if(result == "y") {
-                           alert(msg);
-                           location.href = "orderComplete.do"; 
-                        }else{
-                           alert("DB입력 실패");
-                           return false;
-                        }
-                     },
-                     error : function(a,b,c){}
-                  });
-               } else {
-                  var msg = '결제에 실패하였습니다.';
-                  msg += '에러내용 : ' + rsp.error_msg;
-               }
-            alert(msg);
-            });
-         });
-          */
+         // 자바라페이 잔액 충전하기
+         var IMP = window.IMP;
+         IMP.init('imp74932749'); 
+
+         function payService() {
+        	 
+             IMP.init('imp74932749');
+             IMP.request_pay(
+                         {
+                            pg : "inicis", // 사용 시스템
+                            pay_method : "card", // 결제 수단
+                            merchant_uid : 'merchant_'
+                                  + new Date().getTime(), // 가맹점에서 생성/관리하는 고유 주문번호
+                            name : '자바라 페이', // 주문명
+                            amount : $("select[id=pay]").val(), // 결제 금액 
+                            buyer_email : 'iamport@siot.do', // 주문자 이메일
+                            buyer_name : '구매자', // 주문자명
+                            buyer_tel : '010-1234-5678', // 주문자 연락처
+                            buyer_addr : '서울특별시 강남구 삼성동', // 주문자 주소
+                            buyer_postcode : '123-456' // 주문자 우편번호
+                         }, function(rsp) {
+                            if (rsp.success) { 
+                               var msg = '충전이 완료되었습니다.';
+                               alert(mag);
+                               $.ajax({
+                             	  type: 'POST',
+                             	  url: '',
+                             	  data: { 
+                             		  // "balance" : $("select[id=pay]").val()
+                             	  }
+                               });
+                            } else {
+                               var msg = '결제 실패하였습니다.';
+                               alert(msg);
+                               document.location.href = "http://localhost:8080/marketapp/userinfo/mypage.do"; 
+                            }
+                         })
+          				}
       </script>
