@@ -2,7 +2,7 @@ package com.carrot.marketapp.util;
 
 import java.util.Random;
 
-public class certificationRandomNumber {
+public class CertificationRandomNumber {
 
 private static int size = 20;
 	

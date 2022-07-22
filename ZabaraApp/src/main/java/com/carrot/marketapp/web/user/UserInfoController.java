@@ -20,8 +20,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -68,31 +66,31 @@ public class UserInfoController {
 			@RequestParam MultipartFile profileimg, MultipartHttpServletRequest req)
 			throws IllegalStateException, IOException {
 		File dest = null;
-		map.put("latitude", Double.parseDouble((String)map.get("latitude")));
-		map.put("longitude", Double.parseDouble((String)map.get("longitude")));
-		if(map.get("platform").equals("K")) {
-			String kakaoProfile = imageUrlDownload(req.getSession().getServletContext().getRealPath("/resources/assets/img/zabaraImg"),(String)map.get("kakaoProfileUrl"));
+		map.put("latitude", Double.parseDouble((String) map.get("latitude")));
+		map.put("longitude", Double.parseDouble((String) map.get("longitude")));
+		if (map.get("platform").equals("K")) {
+			String kakaoProfile = imageUrlDownload(
+					req.getSession().getServletContext().getRealPath("/resources/assets/img/zabaraImg"),
+					(String) map.get("kakaoProfileUrl"));
 			map.put("profile", kakaoProfile);
-		}
-		else {
+		} else {
 			if (!profileimg.isEmpty()) {
 				String path = req.getSession().getServletContext().getRealPath("/resources/assets/img/zabaraImg"); // 경로
 				String rename = FileUpDownUtils.getNewFileName(path, profileimg.getOriginalFilename());// 같은 이름일때 파일제목변경
 				dest = new File(path + File.separator + rename);
 				profileimg.transferTo(dest);// 파일 업로드
 				map.put("profile", rename);// 데이타베이스에 입력될 프로필사진 이름
-			} 
-			else map.put("profile", "zabaraDefaultProfile.png");// 프로필사진 미선택시 데이터베이스에 기본이미지 입력용
+			} else
+				map.put("profile", "zabaraDefaultProfile.png");// 프로필사진 미선택시 데이터베이스에 기본이미지 입력용
 		}
-		
+
 		int affected = userService.insert(map);
-		
+
 		if (affected == 0) {
 			if (dest != null)
 				dest.delete();
 			return "user/Login.market";
-		}
-		else {
+		} else {
 			map.put("signup", "signup");
 			UserDTO userinfo = userService.selectOne(map);
 			String[] simpleAddr = ((String) map.get("address")).split(" ");
@@ -100,34 +98,30 @@ public class UserInfoController {
 			map.put("simpleAddress", simpleAddress);
 			map.put("userno", userinfo.getUserno());
 			int authGrant = userService.grant(map);
-			
+
 			if (authGrant == 0)
 				return "user/Login.market";
-			
-			
+
 		}
 
-		
 		return "MainPage.market";
 	}
 
-	public String imageUrlDownload(String path,String url) {
-		String rename="";
+	public String imageUrlDownload(String path, String url) {
+		String rename = "";
 		try {
 			URL kakaoUrl = new URL(url);
 			ReadableByteChannel rbc = Channels.newChannel(kakaoUrl.openStream());
 			rename = FileUpDownUtils.getNewFileName(path, "kakaoProfile.jpg");// 같은 이름일때 파일제목변경
-			FileOutputStream fos = new FileOutputStream(path+"/"+rename);
+			FileOutputStream fos = new FileOutputStream(path + "/" + rename);
 			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 			fos.close();
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return rename;
 	}
-	
-	
+
 	// 회원 수정
 	@GetMapping("/editmember.do")
 	public String edit(@RequestParam Map map, Model model, Authentication auth) {
@@ -163,8 +157,8 @@ public class UserInfoController {
 		map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기
 		UserDTO record = userService.selectOne(map);
 		map.put("userno", record.getUserno());
-		map.put("latitude", Double.parseDouble((String)map.get("latitude")));
-		map.put("longitude", Double.parseDouble((String)map.get("longitude")));
+		map.put("latitude", Double.parseDouble((String) map.get("latitude")));
+		map.put("longitude", Double.parseDouble((String) map.get("longitude")));
 		File oldprofile = new File(path + File.separator + record.getProfile_img());
 		if (!profileimg.isEmpty()) {
 			String rename = FileUpDownUtils.getNewFileName(path, profileimg.getOriginalFilename());// 같은 이름일때 파일제목변경
@@ -203,14 +197,14 @@ public class UserInfoController {
 		UserDTO record = userService.selectOne(map);
 
 		// 데이타 저장]
-		model.addAttribute("userno",record.getUserno());
+		model.addAttribute("userno", record.getUserno());
 		model.addAttribute("nickname", record.getNickname());
 		model.addAttribute("pwd", record.getPassword());
 		model.addAttribute("address", record.getFulladdress());
 		model.addAttribute("email", record.getEmail());
 		model.addAttribute("phonenumber", record.getPhonenumber());
 		model.addAttribute("profileimage", record.getProfile_img());
-		model.addAttribute("platform",record.getPlatform());
+		model.addAttribute("platform", record.getPlatform());
 		// 채팅리스
 		map.put("userno", record.getUserno());
 		model.addAttribute("userno", record.getUserno());
@@ -262,9 +256,9 @@ public class UserInfoController {
 		map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());
 		UserDTO userinfo = userService.selectOne(map);
 		map.put("userno", userinfo.getUserno());
-		map.put("latitude", Double.parseDouble((String)map.get("markerlat")));
-		map.put("longitude", Double.parseDouble((String)map.get("markerlng")));
-		
+		map.put("latitude", Double.parseDouble((String) map.get("markerlat")));
+		map.put("longitude", Double.parseDouble((String) map.get("markerlng")));
+
 		String[] simpleAddr = ((String) map.get("nowAddress")).split(" ");
 		String simpleAddress = simpleAddr[1];
 		map.put("simpleAddr", simpleAddress);
@@ -275,46 +269,47 @@ public class UserInfoController {
 
 	// 마이페이지 판매내역
 	@GetMapping("selllist.do")
-		public String selllist(@RequestParam Map map,Model model,Authentication auth,Principal principal) {
-			map.put("email", ((UserDetails)auth.getPrincipal()).getUsername());//이메일 가져오기
-		
-			//서비스 호출]
-			//그 형식에 맞는 dto만들어서 넣는 방법이 있음 
-			List<BoardDTO> record= boardService.mypageSelllist(map);
-			
-			System.out.println(map);
-			System.out.println("레코드"+record);
-			model.addAttribute("record", record);	
-			model.addAttribute("email", map.get("email"));
-			model.addAttribute("board", "중고물품");
-			map.put("board", "중고물품");
-			model = setModel(map, model, principal);
-			model.addAttribute("category", map.get("category"));
-			System.out.println(model);
-			System.out.println(map.get("email"));
-			
-			return "user/SellList.market";
-		}///////////////////////
-	
+	public String selllist(@RequestParam Map map, Model model, Authentication auth, Principal principal) {
+		map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기
+
+		// 서비스 호출]
+		// 그 형식에 맞는 dto만들어서 넣는 방법이 있음
+		List<BoardDTO> record = boardService.mypageSelllist(map);
+
+		System.out.println(map);
+		System.out.println("레코드" + record);
+		model.addAttribute("record", record);
+		model.addAttribute("email", map.get("email"));
+		model.addAttribute("board", "중고물품");
+		map.put("board", "중고물품");
+		model = setModel(map, model, principal);
+		model.addAttribute("category", map.get("category"));
+		System.out.println(model);
+		System.out.println(map.get("email"));
+
+		return "user/SellList.market";
+	}///////////////////////
+
 	@GetMapping("purchaselist.do")
-	public String purchaselist(@RequestParam Map map, Model model, Authentication auth,Principal principal) {
-		
+	public String purchaselist(@RequestParam Map map, Model model, Authentication auth, Principal principal) {
+
 		return "user/PurchaseList.market";
 	}///////////////////////
+
 	@GetMapping("likelist.do")
-	public String likelist(@RequestParam Map map, Model model, Authentication auth,Principal principal) {
-		//유저넘버로 프로덕트 라이크를 셀렉트 해오자 그럼 프로덕트 넘버 나옴 프로덕트 리스트로 조회 리스트 조인
-		map.put("email", ((UserDetails)auth.getPrincipal()).getUsername());//이메일 가져오기
+	public String likelist(@RequestParam Map map, Model model, Authentication auth, Principal principal) {
+		// 유저넘버로 프로덕트 라이크를 셀렉트 해오자 그럼 프로덕트 넘버 나옴 프로덕트 리스트로 조회 리스트 조인
+		map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기
 		UserDTO userinfo = userService.selectOne(map);
 		map.put("userno", userinfo.getUserno());
 		System.out.println(userinfo.getUserno());
-		//서비스 호출]
-		//그 형식에 맞는 dto만들어서 넣는 방법이 있음 
-		List<BoardDTO> record= boardService.mypagelikelist(map);
-		
+		// 서비스 호출]
+		// 그 형식에 맞는 dto만들어서 넣는 방법이 있음
+		List<BoardDTO> record = boardService.mypagelikelist(map);
+
 		System.out.println(map);
-		System.out.println("레코드"+record);
-		model.addAttribute("record", record);	
+		System.out.println("레코드" + record);
+		model.addAttribute("record", record);
 		model.addAttribute("email", map.get("email"));
 		model.addAttribute("board", "중고물품");
 		map.put("board", "중고물품");
@@ -329,7 +324,7 @@ public class UserInfoController {
 		map = getUserInfo(map, model, principal);
 
 		if (map.get("nowpage") == null) {
-			map.put("nowpage", "1");  
+			map.put("nowpage", "1");
 		}
 
 		int page = Integer.parseInt((String) map.get("nowpage"));
@@ -364,10 +359,11 @@ public class UserInfoController {
 		model.addAttribute("imageList", imageList);
 		model.addAttribute("address", map.get("simpleAddress"));
 		model.addAttribute("LISTS", Lists);
-		System.out.println("리스트,"+Lists);
+		System.out.println("리스트," + Lists);
 
 		return model;
 	}
+
 	public Map getUserInfo(Map map, Model model, Principal principal) {
 		map.put("email", principal.getName());
 

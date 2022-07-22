@@ -8,11 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.carrot.marketapp.model.dto.AddressDTO;
-import com.carrot.marketapp.model.dto.UserDTO;
 
 @Repository("addressDAO")
 public class AddressDAO {
-	
+
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
@@ -30,5 +29,4 @@ public class AddressDAO {
 		return sqlSession.selectList("getHaveAddress", map);
 	}
 
-	
 }

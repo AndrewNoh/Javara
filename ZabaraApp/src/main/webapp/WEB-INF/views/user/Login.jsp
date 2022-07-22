@@ -489,7 +489,7 @@ function emailCheck(){
 				url :'<c:url value="/emailLink.do"/>',
 				type:'POST',
 				dataType: "text",
-				data:{emaildup:$("#email").val(),'${_csrf.parameterName}':'${_csrf.token}'},
+				data:{email:$("#email").val(),'${_csrf.parameterName}':'${_csrf.token}'},
 				
 			}).done(function(data){
 				$('#emailCheck').show();

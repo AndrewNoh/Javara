@@ -2,7 +2,6 @@ package com.carrot.marketapp.model.service;
 
 import java.util.Map;
 
-import com.carrot.marketapp.model.dto.AddressDTO;
 
 public interface CommonService<T> {
 

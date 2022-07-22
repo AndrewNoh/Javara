@@ -11,15 +11,16 @@ public class TilesConfig {
 	@Bean
 	public TilesConfigurer tilesConfigurer() {
 		final TilesConfigurer configurer = new TilesConfigurer();
-		configurer.setDefinitions(new String[]{"/WEB-INF/views/template/layouts.xml"});
-        configurer.setCheckRefresh(true);
-        return configurer;
+		configurer.setDefinitions(new String[] { "/WEB-INF/views/template/layouts.xml" });
+		configurer.setCheckRefresh(true);
+		return configurer;
 	}
-	 @Bean
-	    public TilesViewResolver tilesViewResolver() {
-	        final TilesViewResolver tilesViewResolver = new TilesViewResolver();
-	        tilesViewResolver.setViewClass(TilesView.class);
-	        tilesViewResolver.setOrder(1);
-	        return tilesViewResolver;
-	    }
+
+	@Bean
+	public TilesViewResolver tilesViewResolver() {
+		final TilesViewResolver tilesViewResolver = new TilesViewResolver();
+		tilesViewResolver.setViewClass(TilesView.class);
+		tilesViewResolver.setOrder(1);
+		return tilesViewResolver;
+	}
 }

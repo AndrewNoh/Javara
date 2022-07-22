@@ -18,41 +18,34 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 
 	@Override
 	public BoardDTO selectOne(Map map) {
-
 		return boardDAO.selectOne(map);
 	}
 
 	@Override
 	public int insert(Map map) {
-
 		return boardDAO.insert(map);
 	}
 
 	@Override
 	public int delete(Map map) {
-
 		return boardDAO.delete(map);
 	}
 
 	@Override
 	public int update(Map map) {
-
 		return boardDAO.update(map);
 	}
 
 	@Override
 	public String findNameByKey(Map map) {
-
 		return null;
 	}
 
 	public List<BoardDTO> selectList(Map map) {
-
 		return boardDAO.selectList(map);
 	}
 
 	public List<BoardDTO> selectListAll(Map map) {
-		// TODO Auto-generated method stub
 		return boardDAO.selectListAll(map);
 	}
 
@@ -61,12 +54,10 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 	}
 
 	public int updateImage(Map map) {
-		// TODO Auto-generated method stub
 		return boardDAO.imageUpdate(map);
 	}
 
 	public int selectLike(Map map) {
-		// TODO Auto-generated method stub
 		return boardDAO.selectLike(map);
 	}
 
@@ -79,38 +70,31 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 	}
 
 	public List selectLikeList(Map map) {
-		// TODO Auto-generated method stub
 		return boardDAO.selectLikeList(map);
 	}
 
 	public int updateLike(Map map) {
-
 		return boardDAO.updateLike(map);
 
 	}
 
 	public int selectLikeNo(Map map) {
-		// TODO Auto-generated method stub
 		return boardDAO.selectLikeNo(map);
 	}
 
 	public int updatePrice(Map map) {
-		// TODO Auto-generated method stub
 		return boardDAO.updatePrice(map);
 	}
-	
-	public List<BoardDTO> mypageSelllist(Map map) {
 
+	public List<BoardDTO> mypageSelllist(Map map) {
 		return boardDAO.mypageSelllist(map);
 	}
 
 	public int updateStatus(Map map) {
 		return boardDAO.updateStatus(map);
-		
 	}
 
 	public List<BoardDTO> mypagelikelist(Map map) {
-
 		return boardDAO.mypagelikelist(map);
 	}
 
@@ -124,16 +108,14 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 
 	public List<BoardDTO> searchGropBoard(Map map) {
 		return boardDAO.searchGropBoard(map);
-		
+
 	}
 
 	public int insertNewAddress(Map map) {
-		// TODO Auto-generated method stub
 		return boardDAO.insertNewAddress(map);
 	}
 
 	public BoardDTO viewSelect(Map map) {
-		// TODO Auto-generated method stub
 		return boardDAO.viewSelect(map);
 	}
 

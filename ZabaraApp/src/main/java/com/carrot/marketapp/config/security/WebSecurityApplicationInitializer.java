@@ -14,15 +14,15 @@ import org.springframework.web.multipart.support.MultipartFilter;
 
 public class WebSecurityApplicationInitializer extends AbstractSecurityWebApplicationInitializer {
 
-	   @Override
-	   protected void beforeSpringSecurityFilterChain(ServletContext servletContext) {
-	      FilterRegistration.Dynamic characterEncodingFilter = servletContext.addFilter("encodingFilter",
-	            new CharacterEncodingFilter());
-	      characterEncodingFilter.setInitParameter("encoding", "UTF-8");
-	      characterEncodingFilter.setInitParameter("forceEncoding", "true");
-	      characterEncodingFilter.addMappingForUrlPatterns(null, false, "/*");
-	      FilterRegistration.Dynamic springMultipartFilter = servletContext.addFilter("springMultipartFilter",
-	            new MultipartFilter());
-	      springMultipartFilter.addMappingForUrlPatterns(null, false, "/*");
+	@Override
+	protected void beforeSpringSecurityFilterChain(ServletContext servletContext) {
+		FilterRegistration.Dynamic characterEncodingFilter = servletContext.addFilter("encodingFilter",
+				new CharacterEncodingFilter());
+		characterEncodingFilter.setInitParameter("encoding", "UTF-8");
+		characterEncodingFilter.setInitParameter("forceEncoding", "true");
+		characterEncodingFilter.addMappingForUrlPatterns(null, false, "/*");
+		FilterRegistration.Dynamic springMultipartFilter = servletContext.addFilter("springMultipartFilter",
+				new MultipartFilter());
+		springMultipartFilter.addMappingForUrlPatterns(null, false, "/*");
 	}
 }

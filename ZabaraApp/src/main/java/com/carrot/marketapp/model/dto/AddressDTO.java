@@ -1,10 +1,5 @@
 package com.carrot.marketapp.model.dto;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,4 +20,8 @@ public class AddressDTO {
 	private String simpleAddress;
 	
 	private String fullAddress;
+	
+	private float latitude;
+	
+	private float longitude;
 }

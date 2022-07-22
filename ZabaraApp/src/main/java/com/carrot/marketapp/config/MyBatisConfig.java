@@ -13,12 +13,12 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@MapperScan(basePackages = {"com.carrot.marketapp.model.service.impl"})
+@MapperScan(basePackages = { "com.carrot.marketapp.model.service.impl" })
 public class MyBatisConfig {
 
 	@Autowired
 	HikariDataSource dataSource;
-	
+
 	@Autowired
 	ApplicationContext applicationContext;
 
@@ -39,6 +39,5 @@ public class MyBatisConfig {
 	public SqlSessionTemplate sqlSession() throws Exception {
 		return new SqlSessionTemplate(sqlSessionFactory());
 	}
-	
 
 }
