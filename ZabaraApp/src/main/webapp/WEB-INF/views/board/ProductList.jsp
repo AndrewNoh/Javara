@@ -20,7 +20,7 @@
 
 <form action="<c:url value="/board/productlist.do"/>" method="post">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-	<div id="portfolio" class="portfolio neonborder m-5">
+	<div id="portfolio" class="portfolio  m-5">
 	    <div class="container" id="container">			
 			<!-- 제목 -->
 			<div class="section-title" id="title">

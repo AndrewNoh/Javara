@@ -7,34 +7,8 @@
  display: block; 
  margin: 0px auto;
  }
- .container{
- background:rgb(0 0 0 / 90%);
- background-position: center center;
- animation: flicker 1.5s infinite alternate;
-  color: #fff;
-  
- }
- 
- @keyframes flicker {
-    
-  0%, 18%, 22%, 25%, 53%, 57%, 100% {
 
-      box-shadow:
-      0 0 1px #fff,
-      0 0 2px #fff,
-      0 0 3px #fff,
-      0 0 1px #0fa,
-      0 0 2px #0fa,
-      0 0 3px #0fa,
-      0 0 4px #0fa,
-      0 0 5px #0fa;
-  
-  }
-  
-  20%, 24%, 55% {        
-      box-shadow: none;
-  }    
-}
+ 
 
  </style>
   <!-- ======= Header ======= -->
@@ -44,7 +18,7 @@
   	<form id="logoutForm" method="post" action="<c:url value="/security/logout.do"/>">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	</form>
-    <div class="container neonborder " >
+    <div class="container " >
     <div class="m-5">
 
       <a href="<c:url value="/location/MainPage.do"/>"><img src="${pageContext.request.contextPath}/resources/assets/img/jabaramove.gif" style="text-align: center;"/></a>

@@ -70,13 +70,15 @@
 			
 			<form id="searchForm" action="<c:url value="/board/search.do"/>" method="post">
 				<sec:csrfInput/>
-				<div class="search">
+				<div class="search row" style="display: flex;">
+					<div class="custom-select col" style="width: 100px;">
 					<select id="searchBoardSelect" name="board">
 						<option value="경매">경매</option>
 						<option value="중고물품">중고</option>
 						<option value="우리동네">동내생활</option>
 					</select>
-					
+					</div>
+					<div class="custom-select col" style="width: 100px;">
 					<select id="searchCategorySelect" name="category">
 						<option selected value="기타">기타</option>
 						   		<option value="중고차">중고차</option>
@@ -94,10 +96,17 @@
 						   		<option value="뷰티/미용">뷰티/미용</option>
 						<option value="반려동물용품">반려동물용품</option>
 					</select>
+					</div>
+
 					
-					<input type="text" placeholder="검색어 입력" name="title">
-					<button type="submit"><img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png"></button>
-					
+					<div class="srch_bar" style="text-align:center;">
+		              <div class="stylish-input-group"  >
+							<input type="text" placeholder="검색어 입력" name="title" class="search-bar">
+							<span class="input-group-addon">
+			                <button type="submit" style="vertical-align:-0.3em;"><i class="bi bi-search" aria-hidden="true" style="font-size: 20px;"></i> </button>
+			                </span>
+						</div>
+					</div>
 				</div>
 			</form>
 			

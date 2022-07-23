@@ -44,7 +44,7 @@
 
 
 body {
-  font-family: "SDSwaggerTTF", sans-serif;
+  font-family: "GmarketSansMedium", sans-serif;
   background-color: #040404;
   color: #fff;
   position: relative;
@@ -54,7 +54,7 @@ body::before {
   content: "";
   position: fixed;
   background: #040404 url("../img/bg.jpg") top right no-repeat;
-  background-size: contain;
+  background-size: cover;
   left: 0;
   right: 0;
   top: 0;
@@ -69,17 +69,17 @@ body::before {
 }
 
 a {
-  color: #18d26e;
+  color: #ffc107;
   text-decoration: none;
 }
 
 a:hover {
-  color: #35e888;
+  color: #ffc107ad;
   text-decoration: none;
 }
 
 h1,h2 , h3, h4, h5, h6 {
-  font-family: "SDSwaggerTTF", sans-serif;
+  font-family: "GmarketSansMedium", sans-serif;
 }
 
 
@@ -104,7 +104,7 @@ h1,h2 , h3, h4, h5, h6 {
   padding: 0;
   line-height: 1;
   font-weight: 550;
-  font-family: "SDSwaggerTTF", sans-serif;
+  font-family: "GmarketSansMedium", sans-serif;
 }
 #header h1 a, #header h1 a:hover {
   color: #fff;
@@ -118,7 +118,7 @@ h1,h2 , h3, h4, h5, h6 {
 }
 #header h2 span {
   color: #fff;
-  border-bottom: 2px solid #18d26e;
+  border-bottom: 2px solid #ffc107;
   padding-bottom: 6px;
 }
 #header img {
@@ -143,7 +143,7 @@ h1,h2 , h3, h4, h5, h6 {
   height: 40px;
 }
 #header .social-links a:hover {
-  background: #18d26e;
+  background: #ffc107;
 }
 @media (max-width: 992px) {
   #header h1 {
@@ -223,7 +223,7 @@ h1,h2 , h3, h4, h5, h6 {
   align-items: center;
   justify-content: space-between;
   padding: 0;
-  font-family: "SDSwaggerTTF", sans-serif;
+  font-family: "GmarketSansMedium", sans-serif;
   font-size: 25px;
   font-weight: 350;
   color: rgba(255, 255, 255, 0.7);
@@ -243,7 +243,7 @@ h1,h2 , h3, h4, h5, h6 {
   height: 2px;
   bottom: -4px;
   left: 0;
-  background-color: #18d26e;
+  background-color: #ffc107;
   visibility: hidden;
   width: 0px;
   transition: all 0.3s ease-in-out 0s;
@@ -255,7 +255,7 @@ h1,h2 , h3, h4, h5, h6 {
 }
 .navbar a:hover, .navbar .active, .navbar .active:focus, .navbar li:hover > a {
   color: #fff;
-  text-shadow: 0px 0px 0px #e9ecef, 0 0 0px #616161, 0 0 0px rgb(0 0 0), 0 0 0px #0fa, 0 0 1px #0fa, 0 0 2px #0fa, 0 0 4px #0fa, 0 0 8px #0fa;
+  text-shadow: 0px 0px 0px #e9ecef, 0 0 0px #616161, 0 0 0px rgb(0 0 0), 0 0 0px #ffc107, 0 0 1px #ffc107, 0 0 2px #ffc107, 0 0 4px #ffc107, 0 0 8px #ffc107;
   
 }
 
@@ -343,7 +343,7 @@ section.section-show {
   padding-bottom: 45px;
 }
 /*section*/ .container {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgb(97 97 97 / 86%);
   padding: 30px;
   border-radius: 20px;
   }
@@ -365,14 +365,14 @@ section.section-show {
   letter-spacing: 2px;
   text-transform: uppercase;
   color: #aaaaaa;
-  font-family: "SDSwaggerTTF", sans-serif;
+  font-family: "GmarketSansMedium", sans-serif;
 }
 .section-title h2::after {
   content: "";
   width: 120px;
   height: 1px;
   display: inline-block;
-  background: #4ceb95;
+  background: #ffbf00;
   margin: 4px 10px;
 }
 .section-title p {
@@ -381,7 +381,7 @@ section.section-show {
   font-size: 36px;
   font-weight: 550;
   text-transform: uppercase;
-  font-family: "SDSwaggerTTF", sans-serif;
+  font-family: "GmarketSansMedium", sans-serif;
   color: #fff;
 }
 
@@ -391,7 +391,7 @@ section.section-show {
 .about-me .content h3 {
   font-weight: 550;
   font-size: 26px;
-  color: #18d26e;
+  color: #ffc107;
 }
 .about-me .content ul {
   list-style: none;
@@ -408,7 +408,7 @@ section.section-show {
 .about-me .content ul i {
   font-size: 16px;
   margin-right: 5px;
-  color: #18d26e;
+  color: #ffc107;
   line-height: 0;
 }
 .about-me .content p:last-child {
@@ -436,7 +436,7 @@ section.section-show {
   font-size: 24px;
   background: rgba(255, 255, 255, 0.1);
   padding: 12px;
-  color: #18d26e;
+  color: #ffc107;
   border-radius: 50px;
   line-height: 0;
 }
@@ -449,7 +449,7 @@ section.section-show {
 .counts .count-box p {
   padding: 0;
   margin: 0;
-  font-family: "SDSwaggerTTF", sans-serif;
+  font-family: "GmarketSansMedium", sans-serif;
   font-size: 14px;
 }
 
@@ -468,7 +468,7 @@ section.section-show {
   text-transform: uppercase;
   display: block;
   font-weight: 450;
-  font-family: "SDSwaggerTTF", sans-serif;
+  font-family: "GmarketSansMedium", sans-serif;
   color: #fff;
 }
 .skills .progress .skill .val {
@@ -482,7 +482,7 @@ section.section-show {
   width: 1px;
   height: 10px;
   transition: 0.9s;
-  background-color: #18d26e;
+  background-color: #ffc107;
 }
 
 /*--------------------------------------------------------------
@@ -578,7 +578,7 @@ section.section-show {
   background-color: rgba(255, 255, 255, 0.3);
 }
 .testimonials .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #18d26e;
+  background-color: #ffc107;
 }
 
 /*--------------------------------------------------------------
@@ -602,8 +602,8 @@ section.section-show {
   font-size: 18px;
   font-weight: 450;
   text-transform: uppercase;
-  font-family: "SDSwaggerTTF", sans-serif;
-  color: #18d26e;
+  font-family: "GmarketSansMedium", sans-serif;
+  color: #ffc107;
   margin-bottom: 10px;
 }
 .resume .resume-item h5 {
@@ -631,8 +631,8 @@ section.section-show {
   border-radius: 50px;
   left: -9px;
   top: 0;
-  background: #18d26e;
-  border: 2px solid #18d26e;
+  background: #ffc107;
+  border: 2px solid #ffc107;
 }
 
 /*--------------------------------------------------------------
@@ -648,7 +648,7 @@ section.section-show {
   margin: 0 auto;
   width: 64px;
   height: 64px;
-  background: #18d26e;
+  background: #ffc107;
   border-radius: 5px;
   transition: all 0.3s ease-out 0s;
   display: flex;
@@ -687,17 +687,17 @@ section.section-show {
   margin-bottom: 0;
 }
 .services .icon-box:hover {
-  background: #18d26e;
-  border-color: #18d26e;
+  background: #ffc107;
+  border-color: #ffc107;
 }
 .services .icon-box:hover .icon {
   background: #fff;
 }
 .services .icon-box:hover .icon i {
-  color: #18d26e;
+  color: #ffc107;
 }
 .services .icon-box:hover .icon::before {
-  background: #35e888;
+  background: #ffc107ad;
 }
 .services .icon-box:hover h4 a, .services .icon-box:hover p {
   color: #fff;
@@ -732,7 +732,7 @@ section.section-show {
   border-radius: 4px;
 }
 .portfolio #portfolio-flters li:hover, .portfolio #portfolio-flters li.filter-active {
-  background: #18d26e;
+  background: #ffc107;
 }
 .portfolio #portfolio-flters li:last-child {
   margin-right: 0;
@@ -900,7 +900,7 @@ section.section-show {
   background-color: rgba(255, 255, 255, 0.3);
 }
 .portfolio-details .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #18d26e;
+  background-color: #ffc107;
 }
 
 /*--------------------------------------------------------------
@@ -914,7 +914,7 @@ section.section-show {
 }
 .contact .info-box i.bx {
   font-size: 24px;
-  color: #18d26e;
+  color: #ffc107;
   border-radius: 50%;
   padding: 14px;
   float: left;
@@ -946,7 +946,7 @@ section.section-show {
   transition: 0.3s;
 }
 .contact .info-box .social-links a:hover {
-  color: #18d26e;
+  color: #ffc107;
 }
 .contact .php-email-form {
   padding: 30px;
@@ -966,7 +966,7 @@ section.section-show {
 .contact .php-email-form .sent-message {
   display: none;
   background: rgba(255, 255, 255, 0.08);
-  background: #18d26e;
+  background: #ffc107;
   text-align: center;
   padding: 15px;
   font-weight: 450;
@@ -984,7 +984,7 @@ section.section-show {
   width: 24px;
   height: 24px;
   margin: 0 10px -6px 0;
-  border: 3px solid #18d26e;
+  border: 3px solid #ffc107;
   border-top-color: #eee;
   -webkit-animation: animate-loading 1s linear infinite;
   animation: animate-loading 1s linear infinite;
@@ -1016,7 +1016,7 @@ section.section-show {
   padding: 12px 15px;
 }
 .contact .php-email-form button[type=submit] {
-  background: #18d26e;
+  background: #ffc107;
   border: 0;
   padding: 10px 30px;
   color: #fff;
@@ -1051,7 +1051,7 @@ section.section-show {
 }
 
 .contact .custom-form button[type=submit]{
-    background: #18d26e;
+    background: #ffc107;
     border: 0;
     padding: 10px 30px;
     color: #fff;
@@ -1080,7 +1080,7 @@ section.section-show {
   }
 }
 .credits a {
-  color: #18d26e;
+  color: #ffc107;
   transition: 0.3s;
 }
 .credits a:hover {
@@ -1119,7 +1119,7 @@ section.section-show {
 /*the container must be positioned relative:*/
 .custom-select {
   position: relative;
-  font-family: SDSwaggerTTF;
+  font-family: GmarketSansMedium;
 }
 
 .custom-select select {
@@ -1156,6 +1156,7 @@ section.section-show {
   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
   cursor: pointer;
   user-select: none;
+  background:rgba(0, 0, 0, 0.9)
 }
 
 /*style items (options):*/
@@ -1174,7 +1175,8 @@ section.section-show {
 }
 
 .select-items div:hover, .same-as-selected {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.9);
+   color: black;
 }
 
 
@@ -1220,16 +1222,20 @@ section.section-show {
 }
 
 
-.neonborder { 
-	border: 0.1rem solid #fff; 
-	border-radius: 2rem; 
-	padding: 0.2em; 
-	box-shadow: 0 0 .1rem #fff, 0 0 .1rem #fff, 
-	0 0 1rem #18d26e, 0 0 0.4rem #18d26e, 0 0 1.4rem #18d26e, 
-	inset 0 0 0.7rem #18d26e; }
-	
-.neonText{
-	 text-shadow: 0 0 .1rem #fff, 0 0 .1rem #fff, 
-	0 0 1rem #18d26e, 0 0 0.4rem #18d26e, 0 0 1.4rem #18d26e, 
-	inset 0 0 0.7rem #18d26e;
+
+/*검색바*/
+.srch_bar input{     
+	border: 2px solid rgb(255 255 255 / 55%);
+    border-radius: 4px;
+    width: 100%; 
+    padding:2px 0 4px 6px; 
+    background:white;}
+    
+.srch_bar .input-group-addon button {
+  background: transparent;
+  border: medium none;
+  padding: 0;
+  color: bl;
+  font-size: 18px;
 }
+.srch_bar .input-group-addon { margin: 0 0 0 -33px;}

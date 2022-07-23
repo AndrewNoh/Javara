@@ -1,6 +1,7 @@
 package com.carrot.marketapp.model.dto;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +26,7 @@ public class ChatDTO {
 	private int unreadcount;
 	private String chatcontent;
 	private int senduserno;
-	private Date sendtime;
+	private Timestamp sendtime;
 	
 	private String img;
 	private String nickname;

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c555a840bf745a014ceca0ca9d9dd35&libraries=services"></script>
 
 <style>
@@ -171,6 +172,13 @@ color: black;}
   content: "Today's Date";
 }
 
+
+.modal{
+ position: absolute;
+ top: 50%;
+}
+
+
 </style>
 <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
@@ -181,7 +189,7 @@ color: black;}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/ChatingStyle.css">
     <!-- ======= Chat Details ======= -->
-      <div class="neonborder m-5">
+      <div class=" m-5">
       <div class="container">
 	<div class="section-title">
         <h2>채팅</h2>
@@ -256,6 +264,9 @@ color: black;}
 								</div>
 							</a>
 							<c:forEach var="message" items="${message}" varStatus="loop">
+								<c:forEach var="i" begin="${loop.index}" end="${loop.index}">
+								<c:if test="${ i eq 0}"><br/><div style='text-align: center; margin-top:5px;'><fmt:formatDate value="${message.sendtime}" pattern="yyyy년 MM월 dd일"/></div></c:if>
+								</c:forEach>
 							<c:if test="${message.senduserno eq userno }" var="myuserno">
 								<div class='outgoing_msg'>
 									<div class='sent_msg'>
@@ -265,7 +276,8 @@ color: black;}
 									<c:if test="${!chatimg}" var="chatimg">
 										<img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/${message.img}"/>
 									 </c:if>
-										<span style='float: right;font-size: small; margin-top:5px;'>${message.sendtime }</span>
+									
+										<span style='float: right;font-size: small; margin-top:5px;'> <fmt:formatDate value="${message.sendtime}" pattern="HH:mm:ss"/></span>
 									</div>
 								</div>
 							</c:if>
@@ -295,7 +307,7 @@ color: black;}
 									<c:if test="${!chatimg}" var="chatimg">
 										<img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/${message.img}"/></div>
 									 </c:if>
-								 	<span style='float: left;font-size: small; margin-top:5px;'>${message.sendtime }</span>
+								 	<span style='float: left;font-size: small; margin-top:5px;'> <fmt:formatDate value="${message.sendtime}" pattern="HH:mm:ss"/></span>
 								 </div>
 							 </div>
 							 </c:if>
@@ -307,7 +319,7 @@ color: black;}
 			<div id="modal" class="modal fade">
 			    <div class="modal-dialog" role="document">
 			        <div class="modal-content">
-			            <div class="modal-header">  
+			            <div class="modal-header" style="justify-content: center;">  
 			                <h1 class="modal-title" style="color: black;">약속 잡기</h1>
 			            </div>
 			            <div class="modal-body">
@@ -343,6 +355,23 @@ color: black;}
     			<img src="#" style="width: 100px;"/>
     			<a type="button" id="sendFile" onclick="sendFile()" ><i class="bi bi bi-send-check-fill m-1" style="float: right; font-size: 35px;"></i></a> 
 			</div>
+			
+			<div id="modals" class="modal fade">
+			    <div class="modal-dialog" role="document">
+			        <div class="modal-content">
+			            <div class="modal-header" style="justify-content: center;">  
+			                <h1 class="modal-title" style="color: black;">전화번호 공유</h1>
+			            </div>
+			            <div class="modal-body">
+				            <form class="form-horizontal" role="form" method="POST" action="#" style="text-align: center;">
+				             <span>전화번호 공유를 하시겠습니까?</span>
+						     <button type="button" class="btn btn-outline-dark my-3" data-dismiss="modal" id="phon" style="margin: auto; display: block;">전화번호 공유</button>
+					        </form>
+					      </div>
+			        </div><!-- /.modal-content -->
+			    </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			
 			<div id="emojitoggleDiv"style="display:none ">
 				<div id="emoji" style="display: flex; flex-wrap:wrap;">
 	    			<a id="sendFile" ><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/개신남.png" style="width: 100px;" alt="개신남.png" class="emojis"/></a>
@@ -371,7 +400,7 @@ color: black;}
 						<a href="#"  data-toggle="modal" data-target="#modal" class="title m-b-md"><i class="bi bi-clock m-1" style="float: left; font-size: 35px;"></i></a>
 						<a type="button" id="imgtoggle" ><i class="bi bi bi-card-image m-1" style="float: left; font-size: 35px;"></i></a> 
 						<a type="button" id="emojitoggle" ><i class="bi bi bi-emoji-smile m-1" style="float: left; font-size: 35px;"></i></a> 
-						<a type="button" id="phone" ><i class="bi bi bi bi-telephone-fill m-1" style="float: left; font-size: 35px;"></i></a> 
+						<a type="button" id="phone" data-toggle="modal" data-target="#modals" class="title m-b-md"><i class="bi bi bi bi-telephone-fill m-1" style="float: left; font-size: 35px;"></i></a> 
 						<input type="file" id="file" name="file" onchange="uploadFile(this)" style="display:none"> 
 						<input type="text" class="write_msg" placeholder="메시지를 입력하세요" id="chatcontent" name="chatcontent"/>
 						<a href="javascript:void(0);" id="send" type="submit"><i class="bi bi-send" aria-hidden="true"  style="float: right; font-size: 35px;"></i></a>
@@ -439,8 +468,20 @@ function uploadFile(e) {
 	var today = new Date();   
 	
 	var wsocket;
+	var nickname;
+	<c:if test="${userNickname.nickname ne wirtenickName }" var="chatuser">
+	nickname='${wirtenickName}'
+	</c:if>
+	<c:if test="${!chatuser }">
+	nickname='${chatnickname}'
+	</c:if>
+	<c:if test="${userNickname.nickname eq nicknames.sendusernickname }" var="nickname">
+	nickname='${nicknames.writeusernickname}'
+	</c:if>
+	<c:if test="${!nickname }">
+	nickname='${nicknames.sendusernickname }'
+	</c:if>
 	//닉 네임 저장용
-	var nickname='${userNickname.nickname }';
 	//입장버튼 클릭시 ]-서버와 연결된 웹소켓 클라이언트 생성
 	//$('#toggle').one('click',function(){
 		wsocket = new WebSocket("ws://${pageContext.request.serverName}:${pageContext.request.serverPort}<c:url value='/chat-ws.do/${roomno}'/>");//192.168.219.101//192.168.0.129
@@ -458,7 +499,12 @@ function uploadFile(e) {
 	//});
 	//서버에 연결되었을때 호출되는 콜백함수
 	function open(){
-		appendMessage("<div style='text-align: center; margin-top:5px;'>"+today.toLocaleDateString()+"</div><br/>");
+		if(${roomno}!=""){
+			appendMessage("<div style='text-align: center; margin-top:5px;'>"+"여기까지 읽으셨습니다."+"</div><br/>");
+		}
+		else{
+			appendMessage("<div style='text-align: center; margin-top:5px;'>"+"대화를 시작해보세요"+"</div><br/>");
+		}
 	}
 	//서버에서 메시지를 받을때마다 호출되는 함수 
 	function receive(e){//e는 message이벤트 객체
@@ -476,6 +522,14 @@ function uploadFile(e) {
 					+"<div class='received_msg'><div class='received_withd_msg'>"+nickname+"<img src='${pageContext.request.contextPath}/resources/assets/img/chat_img/"+e.data.substring(4)+"'/></div><span style='float: left;font-size: small; margin-top:5px;'>"
 					+today.toLocaleTimeString()+"</span></div></div>");
 		}
+		else if(e.data.substring(0, 5) ==='전화번호:'){
+			appendMessage("<div class='outgoing_msg'><div class='incoming_msg_img'><c:if test='${userNickname.nickname eq chatroom.writeusernickname }'><img class='chat-header-image' src='${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatroom.senduserprofileimg}' alt='sunil'></c:if>"
+					+"<c:if test='${userNickname.nickname ne chatroom.writeusernickname }'><img class='chat-header-image' src='${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatroom.writeuserprofileimg}' alt='sunil'></c:if></div>"
+					+"<div class='received_msg'><div class='received_withd_msg'>"+nickname+"<p>"+e.data.substring(5)+"<br/></p></div><span style='float: left;font-size: small; margin-top:5px;'>"
+					+today.toLocaleTimeString()+"</span></div></div>");
+			
+		}
+
 	
 			
 	}
@@ -527,34 +581,34 @@ function uploadFile(e) {
 		$('#send').on('click',function(){
 			var form1 = $("#form").serialize();
 			if($('#chatcontent').val().length>=1){
-			$.ajax({
-				url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${product_no}" name="product_no"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
-				data: {chatcontent:$('#chatcontent').val(),
-						senduserno:${userno},
-						unread_count:'1',
-						sendtime: today.toLocaleTimeString('en-US'),
-						'${_csrf.parameterName}':'${_csrf.token}'},
-				type: 'POST',
-				dataType: 'text',
-				success: function (result) {
-					console.log(result)
-				},
-				error: function () {
-					console.log('error')
-				}
-			});
+				$.ajax({
+					url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${product_no}" name="product_no"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
+					data: {chatcontent:$('#chatcontent').val(),
+							senduserno:${userno},
+							unread_count:'1',
+							sendtime: today.toLocaleTimeString('en-US'),
+							'${_csrf.parameterName}':'${_csrf.token}'},
+					type: 'POST',
+					dataType: 'text',
+					success: function (result) {
+						console.log(result)
+					},
+					error: function () {
+						console.log('error')
+					}
+				});
 			
 			
 			
 			
-			console.log('보낸 메시지:',$('#chatcontent').val());
-			wsocket.send('서버로부터받은 메시지:'+$('#chatcontent').val());//msg:KOSMO>>안녕
-			//DIV(대화영역)에 메시지 출력
-			
-	    
-			appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p>"
-					+$('#chatcontent').val()+"<br/></p><span style='float: right;font-size: small; margin-top:5px;'>"
-					+today.toLocaleTimeString()+"</span></div></div>");
+				console.log('보낸 메시지:',$('#chatcontent').val());
+				wsocket.send('서버로부터받은 메시지:'+$('#chatcontent').val());//msg:KOSMO>>안녕
+				//DIV(대화영역)에 메시지 출력
+				
+		    
+				appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p>"
+						+$('#chatcontent').val()+"<br/></p><span style='float: right;font-size: small; margin-top:5px;'>"
+						+today.toLocaleTimeString()+"</span></div></div>");
 			}
 		
 			
@@ -592,7 +646,7 @@ function uploadFile(e) {
             
             
             $('#image').remove();
-            $('sendFile').remove();
+            $("#imgtoggleDiv").toggle();
 		
 		}
 		
@@ -620,9 +674,104 @@ function uploadFile(e) {
 							console.log('error')
 						}
 					});
+		        	$("#emojitoggleDiv").toggle();
 		            
 				}
 		}
+		
+		
+		$('#phon').on('click',function(){
+			var form1 = $("#form").serialize();
+						
+			 $.ajax({
+				url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${product_no}" name="product_no"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
+				data: {chatcontent:'<span style="text-align:center;">전화번호 공유를 요청하였습니다<br/><button class="btn btn-success m-3 agreemrnt" id="agreemrnt">동의</button><button class="btn btn-danger m-3 disagreemrnt" id="disagreemrnt">비동의</button></span>',
+						senduserno:${userno},
+						unread_count:'1',
+						sendtime: today.toLocaleTimeString('en-US'),
+						'${_csrf.parameterName}':'${_csrf.token}'},
+				type: 'POST',
+				dataType: 'text',
+				success: function (result) {
+					console.log(result)
+				},
+				error: function () {
+					console.log('error')
+				}
+			});
+			
+			console.log(result);
+			wsocket.send('서버로부터받은 메시지:'+"<span style='text-align:center;'>전화번호 공유를 요청하였습니다<br/><button class='btn btn-success m-3 agreemrnt' id='agreemrnt'>동의</button><button class='btn btn-danger m-3 disagreemrnt' id='disagreemrnt'>비동의</button></span>");
+            appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center;'>전화번호 공유를 요청하였습니다<br/><button class='btn btn-success m-3 agreemrnt' id='agreemrnt'>동의</button><button class='btn btn-danger m-3 disagreemrnt' id='disagreemrnt'>비동의</button></p>"
+            +"<span style='float: right;font-size: small; margin-top:5px;'>"
+			+today.toLocaleTimeString()+"</span></div></div>");
+			
+		});
+		var disagreemrnt = document.querySelectorAll('.disagreemrnt');
+		for(var i=0; i<disagreemrnt.length;i++){
+			disagreemrnt[i].onclick=function(e){
+				this.onclick='';
+				var form1 = $("#form").serialize();
+							
+				 $.ajax({
+					url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${product_no}" name="product_no"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
+					data: {chatcontent:'<span style="text-align:center; font-size:20px;">전화번호 공유를 거절하였습니다</span>',
+							senduserno:${userno},
+							unread_count:'1',
+							sendtime: today.toLocaleTimeString('en-US'),
+							'${_csrf.parameterName}':'${_csrf.token}'},
+					type: 'POST',
+					dataType: 'text',
+					success: function (result) {
+						console.log(result)
+					},
+					error: function () {
+						console.log('error')
+					}
+				});
+				
+				console.log(result);
+				wsocket.send('서버로부터받은 메시지:'+"<span style='text-align:center; font-size:20px;'>전화번호 공유를 거절하였습니다</span>");
+	            appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center; font-size:20px;'>전화번호 공유를 거절하였습니다</p>"
+	            +"<span style='float: right;font-size: small; margin-top:5px;'>"
+				+today.toLocaleTimeString()+"</span></div></div>");
+				
+			};
+		};
+		
+		
+		var agreemrnt = document.querySelectorAll('.agreemrnt');
+		for(var i=0; i<agreemrnt.length;i++){
+			agreemrnt[i].onclick=function(e){
+				this.onclick='';
+				var form1 = $("#form").serialize();
+							
+				 $.ajax({
+					url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${product_no}" name="product_no"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
+					data: {chatcontent:'<span style="text-align:center; font-size:20px;">${userNickname.nickname }:${userNickname.phonenumber}</span>',
+							senduserno:${userno},
+							unread_count:'1',
+							sendtime: today.toLocaleTimeString('en-US'),
+							'${_csrf.parameterName}':'${_csrf.token}'},
+					type: 'POST',
+					dataType: 'text',
+					success: function (result) {
+						console.log(result)
+					},
+					error: function () {
+						console.log('error')
+					}
+				});
+				
+				console.log(result);
+				wsocket.send('전화번호:'+"<span style='text-align:center; font-size:20px;'>${userNickname.nickname }:${userNickname.phonenumber}</span>");
+	            appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center; font-size:20px;'>${userNickname.nickname }:${userNickname.phonenumber}</p>"
+	            +"<span style='float: right;font-size: small; margin-top:5px;'>"
+				+today.toLocaleTimeString()+"</span></div></div>");
+				
+			};
+		}
+		
 		
 		
 	//퇴장버튼 클릭시

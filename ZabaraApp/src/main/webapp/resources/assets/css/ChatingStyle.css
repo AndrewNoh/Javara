@@ -36,9 +36,9 @@ img{ max-width:100%;}
 }
 .srch_bar .input-group-addon { margin: 0 0 0 -33px;}
 
-.chat_ib h5{ font-size:15px; color:#464646; margin:0 0 8px 0;}
+.chat_ib h5{ font-size:15px; color:#f9fafb; margin:0 0 8px 0;}
 .chat_ib h5 span{ font-size:13px; float:right;}
-.chat_ib p{ font-size:14px; color:#989898; margin:auto}
+.chat_ib p{ font-size:16px; color:#989898; margin:auto}
 .chat_img {
   float: left;
   width: 11%;
@@ -73,7 +73,7 @@ img{ max-width:100%;}
   background: #858585 none repeat scroll 0 0;
   border-radius: 3px;
   color: #ffffff;
-  font-size: 14px;
+  font-size: 16px;
   margin: 0;
   padding: 5px 10px 5px 12px;
   width: 100%;
@@ -94,7 +94,7 @@ img{ max-width:100%;}
  .sent_msg p {
   background: #d0d0d0  none repeat scroll 0 0;
   border-radius: 3px;
-  font-size: 14px;
+  font-size: 16px;
   margin: 0; color:#2e2e2e;
   padding: 5px 10px 5px 12px;
   width:100%;
@@ -190,7 +190,7 @@ canvas, img, picture, svg, video{
     border: 1px solid #ced4da;
     border-radius: 8px;
     padding: 10px;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 150%;
     background-color: #eaebee;
     color: #0d1e2d;
@@ -236,13 +236,13 @@ canvas, img, picture, svg, video{
 	    display: flex;
     -webkit-box-align: center;
     align-items: center;
-    padding: 0px 14px;
+    padding: 0px 16px;
     border: 1px solid #ced4da;
     box-sizing: border-box;
     border-radius: 6px;
     height: 32px;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 150%;
     letter-spacing: -0.02em;
 }
@@ -255,7 +255,7 @@ canvas, img, picture, svg, video{
     justify-content: space-between;
     height: 64px;
     padding: 0px 20px;
-    font-size: 14px;
+    font-size: 16px;
     border-bottom: 1px solid #ced4da;
 }
 

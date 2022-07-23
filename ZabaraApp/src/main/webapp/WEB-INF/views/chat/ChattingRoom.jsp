@@ -21,7 +21,7 @@ margin:10px;
 </style>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/ChatingStyle.css">
     <!-- ======= Chat Details ======= -->
-      <div class="neonborder m-5">
+      <div class=" m-5">
       <div class="container">
    <div class="section-title">
         <h2>채팅</h2>
