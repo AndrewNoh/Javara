@@ -71,7 +71,7 @@
 	<!-- 회원가입 주소테이블 입력 -->
 	<insert id="inputAddress" parameterType="Map">
 		INSERT INTO ADDRESS_LIST
-		VALUES(SEQ_ADDRESS_LIST_ADDRNO.NEXTVAL,#{userno},#{simpleAddress},#{address},#{latitude},#{longitude})
+		VALUES(SEQ_ADDRESS_LIST_ADDRNO.NEXTVAL,#{userno},#{simpleAddress},#{address},#{latitude},#{longitude}, 0)
 	</insert>
 
 

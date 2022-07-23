@@ -119,4 +119,9 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 		return boardDAO.viewSelect(map);
 	}
 
+	public BoardDTO getWriteAuctionView(Map map) {
+		return boardDAO.getWriteAuctionView(map);
+
+	}
+
 }

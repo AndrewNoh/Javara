@@ -251,4 +251,9 @@ public class BoardDAO {
 		return sqlSession.selectOne("viewSelect", map);
 	}
 
+	public BoardDTO getWriteAuctionView(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("getWriteAuctionView", map);
+	}
+
 }

@@ -24,4 +24,6 @@ public class AddressDTO {
 	private float latitude;
 	
 	private float longitude;
+	
+	private int auction_no;
 }
