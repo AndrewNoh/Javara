@@ -15,8 +15,6 @@ public class UserDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	@Autowired
-	private PayService payService;
 
 	public int insert(Map map) {
 		if (map.get("userno") != null) {
@@ -68,29 +66,5 @@ public class UserDAO {
 		return sqlSession.selectOne("mypageSelllist", map);
 	}
 	
-	// 페이 서비스
-	public int payCreateAmount(Map map) {		
-		return sqlSession.insert("payCreateAmount", map);		
-	}
-		
-	public int payLog(Map map) {
-		return sqlSession.insert("payLog", map);
-	}
-		
-	public UserDTO getPayNo(Map map) {
-		return sqlSession.selectOne("payLogNo", map);
-	}
-		
-	public UserDTO payBalance(Map map) {	
-		return sqlSession.selectOne("payBalance", map);	
-	}
-		
-	public int payDeposit(Map map) {
-		return sqlSession.insert("payDeposit", map);
-	}
-		
-	public int payWithdraw(Map map) {	
-		return sqlSession.update("payWithdraw", map);
-	}	
-
+	
 }

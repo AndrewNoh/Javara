@@ -758,10 +758,9 @@
          
          // 자바라페이 클릭 시 잔액 보여주기 위함 
          function payBalance(){
-       	  	console.log("클릭이벤트");
 	       	  	$.ajax({
 	       	  		type: 'POST',
-		       	 	url : '<c:url value="/userinfo/balance.do"/>',
+		       	 	url : '<c:url value="/pay/balance.do"/>',
 		       		data : {
                       '${_csrf.parameterName}' : '${_csrf.token}'
                   	},
@@ -769,8 +768,7 @@
 		       		success : function(result){
 		       			$('#myPay').val(result+'원')
 		       		}
-	       	  	});
-       	  
+	       	  	});       	  
          }
 
          // 자바라페이 잔액 충전하기
