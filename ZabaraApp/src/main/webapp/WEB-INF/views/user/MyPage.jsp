@@ -37,14 +37,29 @@
 .category button {
    list-style: none;
    float: left;
-   width: auto;
-   height: auto;
+   width: 50px;
+   height: 50px;
    padding-top: 5px;
-   font-size: 18px;
+   border-radius: 50%;
+   font-size: 14px;
    color: #ffffff;
    cursor: pointer;
 
 }
+
+.category button {
+   list-style: none;
+   float: left;
+   width: 50px;
+   height: 50px;
+   padding-top: 5px;
+   border-radius: 50%;
+   font-size: 14px;
+   color: #ffffff;
+   cursor: pointer;
+
+}
+
 
 .nav-link {
    color: white;
@@ -66,6 +81,7 @@
 .swal2-popup {
    font-size: 1.3rem !important;
 }
+
 </style>
 
 <!-- ======= About Me ======= -->
@@ -242,7 +258,7 @@
                   </div>
                   <div class="row">
                      <div class="col-lg-4 col-md-4 mt-4 ">
-                        <div class="icon-box">
+                        <div class="icon-box" id="LikeToggle">
                            <i class="ri-paint-brush-line" style="color: #e361ff;"></i>
                            <h3>모아보기</h3>
                         </div>
@@ -256,7 +272,7 @@
                      <div class="col-lg-4 col-md-4 mt-4">
                         <div class="icon-box" id="CategoryToggle">
                            <i class="ri-gradienter-line" style="color: #ffa76e;"></i>
-                           <h3>우리동네 카테고리</h3>
+                           <h3>관심 카테고리</h3>
                         </div>
                      </div>
                   </div>
@@ -354,7 +370,7 @@
                      <div id="map" style="width: 1200px; height: 800px;"></div>
                      <div class="category">
                         <ul>
-                          <button onclick="search_map()" type="button" class="btn btn-success" style="margin-right:10px; width: 80px">검색</button>
+                         <button onclick="search_map()" type="button" class="btn btn-success" style="margin-right:10px; width: 80px">검색</button>
                           <button onclick="nowGeo()" type="button" class="btn btn-success" style="margin-right:10px; width: 80px">현위치</button>
                           <button onclick="saveMarkerPosition()" type="button" class="btn btn-success" style=" width: 80px">동네 인증</button>
                         </ul>
@@ -371,11 +387,10 @@
                         <h2 style="margin-bottom: 30px;">자바라 페이</h2>
                          </div>
                            자바라페이는 자바라마켓 내에서 선불머니를 충전하고 이용할 수 있는 간편 결제/송금 서비스입니다. 
-                        </div>
+                        <br/><br/>
                         <input style="text-align:right; color:white; font-size: 20px" type="text" id="myPay" readonly="readonly">  
                          <select class="btn btn-outline-secondary btn-s" 
-                             style="margin-left: 30px; color: #fff" data-toggle="dropdown" id="pay">
-                             
+                             style="margin-left: 650px; color: #fff" data-toggle="dropdown" id="pay">
                               <option value="5000">5,000원</option>
                               <option value="10000">10,000원</option>
                               <option value="20000">20,000원</option>
@@ -383,11 +398,11 @@
                               <option value="40000">40,000원</option>
                               <option value="50000">50,000원</option>
                            </select>
-                           <button type="button"
-                              style="border-radius: 0.5em; padding: 5px 20px; background-color: #ffffff; background-color: rgba(255, 255, 255, 0.5);"
-                              onclick="payService()">충전하기</button>
-                                    
+                           <button onclick="payService()" type="button" class="btn btn-success" style="margin-left:10px; width: 110px; border-radius:50%">충전하기</button>
+                         
+                        </div>            
                      </div>
+
                      <div class="col mt-3" id="CategoryToggleDiv" style="display: none">
                      <form id="simpleChangeAddr" method="post"
                         action="#">
@@ -397,28 +412,27 @@
                      <div class="interests container">
                         <div class="section-title">
                             <div class="section-title">
-                                 <h2 style="margin-bottom: 30px;">우리동네 카테고리</h2>
+                                 <h2 style="margin-bottom: 30px;">관심 카테고리</h2>
                               </div>
-                           우리동네 판매 물품을 카테고리별로 나누어보았습니다. <br /> 
-                           가까운 곳에서 원하는 물품을 구매해 보세요. <br /><br/>
-                           <div id="mapwrap">
-                              <div id="map" style="width: 1200px; height: 800px;"></div>
-                              <div class="category">
-                                 <ul>
-                                    <li onclick="category_1()"><span
-                                       class="ico_comm ico_coffee"></span> 검색</li>
-                                    <li onclick="category_2()"><span class="ico_comm ico_store"></span>
-                                       현 위치</li>
-                                    <li onclick="category_3()"><span
-                                       class="ico_comm ico_carpark"></span> 동네 인증</li>
-                                 </ul>
-                              </div>
-                        
-                           </div>
                      </div>
                     </div>
                    </div>
-               <!--카테고리 지도-->
+               <!--카테고리-->
+               <div class="col mt-3" id="LikeToggleDiv" style="display: none">
+                     <form id="" method="post"
+                        action="#">
+                        <sec:csrfInput />
+                        <input id="" name="" type="hidden" value="">
+                     </form>
+                     <div class="interests container">
+                        <div class="section-title">
+                            <div class="section-title">
+                                 <h2 style="margin-bottom: 30px;">모아보기</h2>
+                              </div>
+                     </div>
+                    </div>
+                   </div>
+               <!--카테고리-->
             </div>
          </div>
          <!-- End Counts -->
@@ -495,6 +509,9 @@
             $('#CategoryToggle').click(function() {
                $("#CategoryToggleDiv").toggle(1000);
             });
+            $('#LikeToggle').click(function() {
+                $("#LikeToggleDiv").toggle(1000);
+             });
          });
 
          var readURL = function(input) {

@@ -14,8 +14,8 @@
     <div class="container">
 
       <div class="section-title">
-        <h2>동내생활</h2>
-        <p>동내사람들과 이모저모</p>
+        <h2>동네생활</h2>
+        <p>동네사람들과 이모저모</p>
       </div>
 
       <div class="row mt-2">

@@ -26,22 +26,21 @@
     <div class="container">
 
       <div class="section-title">
-        <h2>Q&A</h2>
-        <p>ZABARA 자주 묻는 질문</p>
+        <h2>자주묻는 질문</h2>
+        
       </div>
 
       <div class="row mt-2">
 
         <div class="row mb-4 align-items-center">
           <div class="col-md-6 mb-5" data-aos="fade-up">
-            <h2>Q&A게시판</h2>
-            <p>고객지원</p>
+            <h2>무엇이든 물어보세요!</h2>
+            
           </div>
         </div>
       </div>
       
       <!-- q&a board -->
-      
       <div id="accordion">
 	  <!-- 	
 	  <div class="card">

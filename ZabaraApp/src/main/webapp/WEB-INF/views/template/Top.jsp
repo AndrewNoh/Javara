@@ -8,13 +8,13 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Personal Bootstrap Template</title>
+  <title>자바라</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   
   <!-- Favicons -->
-  <link href="${pageContext.request.contextPath}/resources/assets/img/favicon.png" rel="icon">
+  <link href="${pageContext.request.contextPath}/resources/assets/img/#" rel="icon">
   <link href="${pageContext.request.contextPath}/resources/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -66,7 +66,7 @@
 	          		<sec:csrfInput/>
 				</form> 
 	   	<nav id="navbar" class="navbar custom-navbar mx-5" >
-			<a href="<c:url value="/location/MainPage.do"/>"><img src="${pageContext.request.contextPath}/resources/assets/img/jabaralogo.jpg" height="80px" /></a>
+			<a href="<c:url value="/location/MainPage.do"/>"><img src="${pageContext.request.contextPath}/resources/assets/img/sub_banner.png" height="80px" /></a>
 			
 			<form id="searchForm" action="<c:url value="/board/search.do"/>" method="post">
 				<sec:csrfInput/>
@@ -111,20 +111,20 @@
 			</form>
 			
 			<ul>
-	          <li><a class="nav-link neonText" href="<c:url value="/location/MainPage.do"/>">Home</a></li>
+	          <li><a class="nav-link neonText" href="<c:url value="/location/MainPage.do"/>">홈</a></li>
 	          <sec:authentication property="name" var="username"/>
 	          
 	          <c:if test="${username == 'anonymousUser'}" var="isLogin">
-		          <li><a class="nav-link neonText" href="<c:url value="/location/login.do"/>">로그인 & 회원가입</a></li>
+		          <li><a class="nav-link neonText" href="<c:url value="/location/login.do"/>">로그인</a></li>
 	          </c:if>
 	          <c:if test="${not isLogin }">  
 		          <li><a class="nav-link neonText" href="javascript:logout()">로그아웃</a></li>
-		          <li><a class="nav-link neonText" href="<c:url value="/userinfo/mypage.do"/>">My Page</a></li>
+		          <li><a class="nav-link neonText" href="<c:url value="/userinfo/mypage.do"/>">마이페이지</a></li>
 	          </c:if>
-	          <li><a class="nav-link neonText" href="<c:url value="/board/auctionlist.do"/>">경매</a></li>
-	          <li><a class="nav-link neonText" href="<c:url value="/board/productlist.do"/>">중고거래</a></li>
-	          <li><a class="nav-link neonText" href="<c:url value="/board/gropboard.do"/>">동내생활</a></li>
-	          <li><a class="nav-link neonText" href="<c:url value="/board/qna.do"/>">Q&A</a></li>
+	          <li><a class="nav-link neonText" href="<c:url value="/board/auctionlist.do"/>">자바라경매</a></li>
+	          <li><a class="nav-link neonText" href="<c:url value="/board/productlist.do"/>">자바라중고</a></li>
+	          <li><a class="nav-link neonText" href="<c:url value="/board/gropboard.do"/>">동네생활</a></li>
+	          <li><a class="nav-link neonText" href="<c:url value="/board/qna.do"/>">자주묻는 질문</a></li>
 	          <li><a class="nav-link" href="<c:url value="/chat/chattingroom.do"/>">채팅</a></li>
 	        </ul>
 			  <i class="bi bi-list mobile-nav-toggle"></i>

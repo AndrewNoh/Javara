@@ -53,7 +53,7 @@ body {
 body::before {
   content: "";
   position: fixed;
-  background: #040404 url("../img/bg.jpg") top right no-repeat;
+  background: #040404 url("../img/main_background.jpg") top right no-repeat;
   background-size: cover;
   left: 0;
   right: 0;
@@ -347,6 +347,14 @@ section.section-show {
   padding: 30px;
   border-radius: 20px;
   }
+  
+  .main_container {
+  background:  #fff transparent ;
+  margin-left: 600px;
+  padding: 30px;
+  border-radius: 20px;
+  }
+  
 @media (max-width: 768px) {
   section {
     top: 120px;
