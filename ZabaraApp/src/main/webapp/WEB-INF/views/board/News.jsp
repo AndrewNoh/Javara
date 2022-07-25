@@ -28,7 +28,7 @@ td
    {
    border-collapse: separate;
    border-spacing: 1px;
-   border: 3px solid #ccc;
+   border: 3px solid #ffe4e4;
    width: 60%;
    align: center;
    height: 60px;
@@ -39,17 +39,22 @@ h3{
    
 }
 .newsTitle{
-   font-size:40px;
+   font-size:47px;
 }
 a{
-   color:#81DAF5;
+   color:#000000;
+}
+img{
+	float:right;
 }
 </style>
 
-<div class="mt-5" >
-
-   <img src="${pageContext.request.contextPath}/resources/assets/img/${info}" style="object-fit: contain; width:400px; height:400px">
-   <div style="font-size: 27px">${simpleAddress}의 날씨 </br> ${temperate}</div> ${slash}
+<div class="mt-5" style="display:flex">
+	<div style="flex:3">
+	   <img src="${pageContext.request.contextPath}/resources/assets/img/${info}" class="ml-5" style="object-fit: contain; width:400px; height:400px">
+	
+	</div>
+   <div style="font-size: 32px; flex:2; text-align:left;" class="mt-5"><strong>${simpleAddress}의 날씨 </br> ${temperate}</strong></div> ${slash}
 </div>
 
    <table class="big">
@@ -62,7 +67,7 @@ a{
                <c:forEach var="url" items="${urls}" varStatus="status" begin="1" end="${titles.size()}">
                   <c:if test="${titles[status.index]!=''}">
                      <tr class="text-center"> 
-                        <td><a href="${url}">${titles[status.index]}</a></td>
+                        <td style="font-weight: bold;"><a href="${url}">${titles[status.index]}</a></td>
                      </tr>
                   </c:if>
                </c:forEach>

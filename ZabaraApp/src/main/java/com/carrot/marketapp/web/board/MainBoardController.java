@@ -617,6 +617,8 @@ public class MainBoardController {
 
 		return "/board/SearchList.market";
 	}
+	
+	//이미지 분석 
 	@RequestMapping(value = "/image.do", produces = "application/json;charset=UTF-8")
 	public String image(@RequestParam Map map, Model model, Principal principal) {
 
