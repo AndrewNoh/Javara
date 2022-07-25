@@ -155,11 +155,13 @@ h1,h2 , h3, h4, h5, h6 {
   }
   #header .social-links {
     margin-top: 15px;
+
   }
   #header .container {
     display: flex;
     flex-direction: column;
     align-items: center;
+
   }
 }
 
@@ -224,9 +226,10 @@ h1,h2 , h3, h4, h5, h6 {
   justify-content: space-between;
   padding: 0;
   font-family: "GmarketSansMedium", sans-serif;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 350;
-  color: rgba(255, 255, 255, 0.7);
+  font-style: bold;
+  color: rgb(0, 0, 0);
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -956,6 +959,7 @@ section.section-show {
 .contact .info-box .social-links a:hover {
   color: #ffc107;
 }
+
 .contact .php-email-form {
   padding: 30px;
   background: rgba(255, 255, 255, 0.08);
@@ -1055,7 +1059,7 @@ section.section-show {
 
 .contact .custom-form{
     padding: 30px;
-    background: rgba(255, 255, 255, 0.08);	
+    background: rgba(255, 255, 255, 0.08);   
 }
 
 .contact .custom-form button[type=submit]{
@@ -1233,7 +1237,7 @@ section.section-show {
 
 /*검색바*/
 .srch_bar input{     
-	border: 2px solid rgb(255 255 255 / 55%);
+   border: 2px solid rgb(255 255 255 / 55%);
     border-radius: 4px;
     width: 100%; 
     padding:2px 0 4px 6px; 

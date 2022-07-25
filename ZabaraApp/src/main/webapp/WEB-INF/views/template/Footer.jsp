@@ -5,8 +5,9 @@
     <!-- You can delete the links only if you purchased the pro version. -->
     <!-- Licensing information: https://bootstrapmade.com/license/ -->
     <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/personal-free-resume-bootstrap-template/ -->
-    <h5 style="color: #000">한국소프트웨어인재개발원 <a href="https://bootstrapmade.com/">KOSMO 3팀</a></h5>
-  </div>
+     <h6 style="color: #fff; text-align: left; font-size: 11px; font-weight: bold; margin-top: 3px">한국소프트웨어 인재개발원 KOSMO 3팀</h6>
+    <h6 style="color: #000; text-align: left; font-size: 12px">노인수·이호담·나영식·염연준·강지혜·김성민·조혜지·이안나</h6> 
+ </div>
 
   <!-- Vendor JS Files -->
   <script src="${pageContext.request.contextPath}/resources/assets/vendor/purecounter/purecounter.js"></script>
