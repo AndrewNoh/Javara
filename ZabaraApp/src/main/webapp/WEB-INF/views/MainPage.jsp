@@ -42,6 +42,7 @@
 	          <li><a class="nav-link" href="<c:url value="/board/gropboard.do"/>">동네생활</a></li>
 	          <li><a class="nav-link" href="<c:url value="/board/news.do"/>">실시간뉴스</a></li>
 	          <li><a class="nav-link" href="<c:url value="/board/qna.do"/>">자주묻는 질문</a></li>
+	          <li><a class="nav-link" href="<c:url value="/board/image.do"/>">이미지분석</a></li>
 	          <li><a class="nav-link" href="<c:url value="/chat/chattingroom.do"/>">채팅</a></li>
 	        </ul>
 			  <i class="bi bi-list mobile-nav-toggle"></i>

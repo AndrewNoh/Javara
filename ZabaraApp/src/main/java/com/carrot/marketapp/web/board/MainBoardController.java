@@ -617,4 +617,11 @@ public class MainBoardController {
 
 		return "/board/SearchList.market";
 	}
+	@RequestMapping(value = "/image.do", produces = "application/json;charset=UTF-8")
+	public String image(@RequestParam Map map, Model model, Principal principal) {
+
+		
+		return "/board/ImageAnalysis.market";
+
+	}
 }
