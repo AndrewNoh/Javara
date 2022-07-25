@@ -2,16 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <!-- ======= 동내 Section ======= -->
- 
+ <style>
+.form-group{
+background:  rgb(0 0 0 / 13%);
+border-radius: 10px;
+}
+</style> 
 <div style="position: fixed;bottom: 50px; right: 30px;">
   <a href="<c:url value="/board/write.do"><c:param name="board" value="GropBoard"/></c:url>"><i class="bx bx-plus-circle" title="글쓰기" style="font-size: 50px"></i></a>
   </div>
   <div style="position: fixed;bottom: 110px; right: 30px;">
   <a href="#portfolio"><i class="bx bxs-caret-up-circle" title="위로가기" style="font-size: 50px"></i></a>
 </div>
- 
-  <div id="board" class="contact">
-    <div class="container">
+  <div id="board" class="container mt-5">
 
       <div class="section-title">
         <h2>동네생활</h2>
@@ -22,19 +25,20 @@
 
       <form action="forms/contact.php" method="post" role="form" class="php-email-form mt-4">
       <c:forEach var="LIST" items="${LISTS}" varStatus="loop">
+      <div class="container">
       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        <div class="row">
-          <div class="col-md-6 form-group" >
-           <div style=" background-color: rgba(255, 255, 255, 0.08); padding: 10px 15px;">${LIST.nickName} ?</div>
+        <div class="row mx-1" style="display: flex; align-items: center; justify-content: space-between;">
+          <div class="col-md-5 form-group mr-1" >
+           <div style="padding: 10px 15px;">${LIST.nickName} ?</div>
           </div>
-          <div class="col-md-6 form-group mt-3 mt-md-0" >
-            <div style=" background-color: rgba(255, 255, 255, 0.08); padding: 10px 15px;">${LIST.category }</div>
+          <div class="col-md-5 form-group ml-1" >
+            <div style="padding: 10px 15px;">${LIST.category }</div>
           </div>
         </div>
-        <div class="form-group mt-3" style=" background-color: rgba(255, 255, 255, 0.08); padding: 10px 15px;">
+        <div class="form-group mt-3" style="padding: 10px 15px;">
           <div>${LIST.title}</div>
         </div>
-        <div class="form-group mt-3" style=" background-color: rgba(255, 255, 255, 0.08); padding: 10px 30px;">
+        <div class="form-group mt-3" style=" padding: 10px 30px;">
           <div>${LIST.content}</div>
           <c:forEach var="i" begin="${loop.index}" end="${loop.index}">
 			<c:if test="${!empty imageList[i][0].imageName}" var="haveImage">
@@ -43,14 +47,11 @@
 			<c:if test="${! haveImage}">
 				<img src="${pageContext.request.contextPath}/resources/assets/img/zabara.png" style="width: 40%; height:40%;" class="img-fluid" alt="">
 			</c:if>
+			</div>
+			</div>
 		</c:forEach>
         </div>
         
-        <div class="my-3">
-          <div class="loading">Loading</div>
-          <div class="error-message"></div>
-          <div class="sent-message">Your message has been sent. Thank you!</div>
-        </div>
         <div class="text-center mt-3 pd-4">
         	<c:set var="session_id"><sec:authentication property="principal.username"/></c:set>
         	<c:if test="${userno ==LIST.userNo }">
@@ -73,6 +74,6 @@
         <br/>
         </c:forEach>
       </form>
-
+	 
     </div>
   </div><!-- End 동내 Section -->

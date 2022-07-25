@@ -110,7 +110,6 @@
          </form>
          
          <ul>
-             <li><a class="nav-link neonText" href="<c:url value="/location/MainPage.do"/>">홈</a></li>
              <sec:authentication property="name" var="username"/>
              
              <c:if test="${username == 'anonymousUser'}" var="isLogin">
@@ -121,7 +120,15 @@
                 <li><a class="nav-link neonText" href="<c:url value="/userinfo/mypage.do"/>">나의 자바라</a></li>
              </c:if>
              <li><a class="nav-link neonText" href="<c:url value="/board/auctionlist.do"/>">자바라경매</a></li>
-             <li><a class="nav-link neonText" href="<c:url value="/board/gropboard.do"/>">동네생활</a></li>
+             <li class="nav-item dropdown">
+			      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+			        동네생활
+			      </a>
+			      <div class="dropdown-menu">
+			        <a class="dropdown-item" href="<c:url value="/board/gropboard.do"/>">동네생활</a>
+			        <a class="dropdown-item" href="<c:url value="/board/news.do"/>">실시간뉴스</a>
+			      </div>
+			    </li>
              <li><a class="nav-link neonText" href="<c:url value="/board/qna.do"/>">자주묻는 질문</a></li>
              <li><a class="nav-link" href="<c:url value="/chat/chattingroom.do"/>">채팅</a></li>
            </ul>

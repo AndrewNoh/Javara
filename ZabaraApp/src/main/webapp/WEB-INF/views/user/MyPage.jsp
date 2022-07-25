@@ -60,9 +60,8 @@
 
 }
 
-
 .nav-link {
-   color: white;
+   color: #f9fafb;
 }
 
 .bAddr {
@@ -82,6 +81,17 @@
    font-size: 1.3rem !important;
 }
 
+.bi::before, [class^="bi-"]::before, [class*=" bi-"]::before{
+color:#ffc107
+}
+
+.col-lg-5{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
 </style>
 
 <!-- ======= About Me ======= -->
@@ -89,19 +99,16 @@
    <div class="about-me container">
 
       <div class="section-title">
-         <h2>About</h2>
-
+         <h2>나의 자바라</h2>
       </div>
 
       <div class="row">
-         <div class="col-lg-4 box" data-aos="fade-right">
-            <div class="loading"></div>
-            <div class="error-message"></div>
+         <div class="col-lg-5 box" data-aos="fade-right">
             <div>
                <img
                   src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${profileimage}"
                   class="img-fluid profile-photo" alt=""
-                  style="object-fit: contain; width: 300px; height: 300px"> <input
+                  style="object-fit: cover; width:400px; max-height: 400px; border-radius: 50%"> <input
                   class="file-upload" type="file" accept=".jpg, .png, .jpeg"
                   name="profileimg" id="profileimg" style="display: none;" />
             </div>
@@ -123,7 +130,7 @@
                         <strong>${nickname}</strong>
                      </h3>
                   </div>
-                  <div class="col-10 ml-6" style="padding: 0%;">
+                  <div class="col-7 ml-6" style="padding: 0%;">
                      <a href="<c:url value="/userinfo/editmember.do"/>"
                         class="setting"> <i class="bi bi-gear"
                         style="color: white; font-size: 1.3rem;"></i></a>
@@ -131,7 +138,7 @@
                </div>
             </div>
             <div class="row">
-               <div class="col-lg-6">
+               <div class="col-lg-7">
                   <p>
                      <strong>Email:</strong> <span>${email}</span>
                   </p>
@@ -186,46 +193,39 @@
       </div>
 
       <!-- End Skills -->
-      <div class="row">
-         <div class="skills container col-5">
-
-            <div class="section-title">
-
-               <h2>Skills</h2>
-            </div>
-
-            <div class="row skills-content">
-
-               <div class="col-12">
-
-                  <div class="progress">
-                     <span class="skill">온도 <i class="val">100%</i></span>
-                     <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="100"
-                           aria-valuemin="0" aria-valuemax="100"></div>
-                     </div>
-                  </div>
-
-                  <div class="progress">
-                     <span class="skill">재거래 희망률<i class="val">90%</i></span>
-                     <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="90"
-                           aria-valuemin="0" aria-valuemax="100"></div>
-                     </div>
-                  </div>
-
-                  <div class="progress">
-                     <span class="skill">응답률 <i class="val">75%</i></span>
-                     <div class="progress-bar-wrap">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="75"
-                           aria-valuemin="0" aria-valuemax="100"></div>
-                     </div>
-                  </div>
-               </div>
-
-            </div>
-
-         </div>
+ <div class="row">
+	      <div class="col-5">
+	         <div class="skills container ">
+	            <div class="section-title">
+	               <h2>Skills</h2>
+	            </div>
+	            <div class="row skills-content">
+	               <div class="col-12">
+	                  <div class="progress">
+	                     <span class="skill">온도 <i class="val">100%</i></span>
+	                     <div class="progress-bar-wrap">
+	                        <div class="progress-bar" role="progressbar" aria-valuenow="100"
+	                           aria-valuemin="0" aria-valuemax="100"></div>
+	                     </div>
+	                  </div>
+	                  <div class="progress">
+	                     <span class="skill">재거래 희망률<i class="val">90%</i></span>
+	                     <div class="progress-bar-wrap">
+	                        <div class="progress-bar" role="progressbar" aria-valuenow="90"
+	                           aria-valuemin="0" aria-valuemax="100"></div>
+	                     </div>
+	                  </div>
+	                  <div class="progress">
+	                     <span class="skill">응답률 <i class="val">75%</i></span>
+	                     <div class="progress-bar-wrap">
+	                        <div class="progress-bar" role="progressbar" aria-valuenow="75"
+	                           aria-valuemin="0" aria-valuemax="100"></div>
+	                     </div>
+	                  </div>
+	               </div>
+	            </div>
+			</div>
+	      </div>
          <!-- ======= Skills  ======= -->
          <div class="col-7">
             <div class="interests container">
@@ -278,9 +278,9 @@
                   </div>
 
                </div>
-
             </div>
          </div>
+      </div>
          <!--동네인증하기-->
          <div class="col mt-3" id="KeyToggleDiv" style="display: none">
             <div class="interests container">
@@ -352,7 +352,6 @@
             </div>
          </div>
          <!--가계부-->
-
          <div class="col mt-3" id="MapToggleDiv" style="display: none">
             <form id="simpleChangeAddr" method="post"
                action="<c:url value="/userinfo/simpleChangeAddr.do"/>">
@@ -375,9 +374,8 @@
                           <button onclick="saveMarkerPosition()" type="button" class="btn btn-success" style=" width: 80px">동네 인증</button>
                         </ul>
                      </div>
-               
                   </div>
-            </div>
+            	</div>
                </div>
              </div>
                <!--지도-->
@@ -399,10 +397,7 @@
                               <option value="50000">50,000원</option>
                            </select>
                            <button onclick="payService()" type="button" class="btn btn-success" style="margin-left:10px; width: 110px; border-radius:50%">충전하기</button>
-                         
                         </div>            
-                     </div>
-
                      <div class="col mt-3" id="CategoryToggleDiv" style="display: none">
                      <form id="simpleChangeAddr" method="post"
                         action="#">
@@ -416,6 +411,7 @@
                               </div>
                      </div>
                     </div>
+                   </div>
                    </div>
                <!--카테고리-->
                <div class="col mt-3" id="LikeToggleDiv" style="display: none">
@@ -433,55 +429,46 @@
                     </div>
                    </div>
                <!--카테고리-->
-            </div>
-         </div>
+           
          <!-- End Counts -->
          <!-- End Interests -->
          <!-- ======= Testimonials ======= -->
-         <div class="testimonials container">
-
-            <div class="section-title">
-               <h2>CHAT</h2>
-
-            </div>
-
-            <div class="testimonials-slider swiper" data-aos="fade-up"
-               data-aos-delay="100">
-               <div class="swiper-wrapper">
-                  <c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
-                     <div class="swiper-slide">
-                        <a
-                           href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.product_no}" name="product_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
-                           <div class="testimonial-item">
-                              <p>
-                                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                 ${chatlist.chatcontent} <i
-                                    class="bx bxs-quote-alt-right quote-icon-right"></i>
-                              </p>
-                              <img
-                                 src="${pageContext.request.contextPath}/resources/assets/img/profile/"
-                                 class="testimonial-img" alt="">
-                              <h3>
-                                 <c:if
-                                    test="${userNickname.nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
-                                 <c:if
-                                    test="${userNickname.nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>
-                              </h3>
-                              <h4>${chatlist.sendtime}</h4>
-                           </div>
-                        </a>
-                     </div>
-                  </c:forEach>
-                  <!-- End testimonial item -->
-
-
-               </div>
-               <div class="swiper-pagination"></div>
-            </div>
-
-            <div class="owl-carousel testimonials-carousel"></div>
-         </div>
-      </div>
+        <div class="testimonials container mt-3">
+	      <div class="section-title">
+	        <h2>CHAT</h2>
+	      </div>
+	      <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+	        <div class="swiper-wrapper">
+	          <c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
+	          <div class="swiper-slide">
+	          <a href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.product_no}" name="product_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
+	            <div class="testimonial-item">
+	              <p style="height: 200px;">
+                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                     ${chatlist.chatcontent} <i
+                        class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  </p>
+                  <img
+                     src="${pageContext.request.contextPath}/resources/assets/img/profile/"
+                     class="testimonial-img" alt="">
+                  <h3>
+                     <c:if
+                        test="${userNickname.nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
+                     <c:if
+                        test="${userNickname.nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>
+                  </h3>
+                  <h4>${chatlist.sendtime}</h4>
+	            </div>
+	            </a>
+	          </div><!-- End testimonial item -->
+	            </c:forEach>
+	        </div>
+	        <div class="swiper-pagination"></div>
+	      </div>
+	      <div class="owl-carousel testimonials-carousel"></div>
+	    </div><!-- End Testimonials  -->
+	</div>
+</div>
       <!-- End Testimonials  -->
 
       <script type="text/javascript">

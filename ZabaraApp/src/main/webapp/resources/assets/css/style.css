@@ -69,7 +69,7 @@ body::before {
 }
 
 a {
-  color: #ffc107;
+  color: #f9fafb;
   text-decoration: none;
 }
 
@@ -225,7 +225,7 @@ h1,h2 , h3, h4, h5, h6 {
   align-items: center;
   justify-content: space-between;
   padding: 0;
-  font-family: "GmarketSansMedium", sans-serif;
+  font-family: "SDSwaggerTTF", sans-serif;
   font-size: 20px;
   font-weight: 350;
   font-style: bold;
@@ -376,7 +376,7 @@ section.section-show {
   letter-spacing: 2px;
   text-transform: uppercase;
   color: #aaaaaa;
-  font-family: "GmarketSansMedium", sans-serif;
+  font-family: "SDSwaggerTTF", sans-serif;
 }
 .section-title h2::after {
   content: "";
@@ -392,9 +392,19 @@ section.section-show {
   font-size: 36px;
   font-weight: 550;
   text-transform: uppercase;
-  font-family: "GmarketSansMedium", sans-serif;
+  font-family: "SDSwaggerTTF", sans-serif;
   color: #fff;
 }
+
+.dropdown-menu {
+    border: none;
+    background: none;
+ }
+ 
+ .dropdown-item:focus, .dropdown-item:hover{
+    background: none;
+ }
+
 
 /*--------------------------------------------------------------
 # About
@@ -460,7 +470,7 @@ section.section-show {
 .counts .count-box p {
   padding: 0;
   margin: 0;
-  font-family: "GmarketSansMedium", sans-serif;
+  font-family: "SDSwaggerTTF", sans-serif;
   font-size: 14px;
 }
 
@@ -479,7 +489,7 @@ section.section-show {
   text-transform: uppercase;
   display: block;
   font-weight: 450;
-  font-family: "GmarketSansMedium", sans-serif;
+  font-family: "SDSwaggerTTF", sans-serif;
   color: #fff;
 }
 .skills .progress .skill .val {
@@ -613,7 +623,7 @@ section.section-show {
   font-size: 18px;
   font-weight: 450;
   text-transform: uppercase;
-  font-family: "GmarketSansMedium", sans-serif;
+  font-family: "SDSwaggerTTF", sans-serif;
   color: #ffc107;
   margin-bottom: 10px;
 }
@@ -1131,7 +1141,7 @@ section.section-show {
 /*the container must be positioned relative:*/
 .custom-select {
   position: relative;
-  font-family: GmarketSansMedium;
+  font-family: SDSwaggerTTF;
 }
 
 .custom-select select {
@@ -1150,35 +1160,37 @@ section.section-show {
   right: 25px;
   width: 0;
   height: 0;
-  border: 6px solid transparent;
+  border-radius: 10px;
   border-color: #fff transparent transparent transparent;
 }
 
 /*point the arrow upwards when the select box is open (active):*/
 .select-selected.select-arrow-active:after {
-  border-color: transparent transparent #fff transparent;
+  border-color: transparent transparent #fff parent;
   top: 7px;
 }
 
 /*style the items (options), including the selected item:*/
 .select-items div,.select-selected {
-  color: #ffffff;
+  color: #000000;
   padding: 8px 16px;
-  border: 1px solid transparent;
-  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  border-radius: 10px;
   cursor: pointer;
   user-select: none;
-  background:rgba(0, 0, 0, 0.9)
+  border-radius: 10px;
+  background:rgb(246 218 197 / 90%)
 }
 
 /*style items (options):*/
 .select-items {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgb(246 218 197 / 70%);
+  border-radius: 10px;
   top: 100%;
   left: 0;
   right: 0;
   z-index: 99;
+  margin: 8px;
 }
 
 /*hide the items when the select box is closed:*/
@@ -1187,7 +1199,7 @@ section.section-show {
 }
 
 .select-items div:hover, .same-as-selected {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255);
    color: black;
 }
 

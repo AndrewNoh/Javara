@@ -28,7 +28,7 @@ td
    {
    border-collapse: separate;
    border-spacing: 1px;
-   border: 3px solid #ffe4e4;
+   border-bottom: 3px solid #f9fafb61;
    width: 60%;
    align: center;
    height: 60px;
@@ -42,37 +42,45 @@ h3{
    font-size:47px;
 }
 a{
-   color:#000000;
+   color:#f9fafb;
 }
 img{
 	float:right;
 }
 </style>
-
-<div class="mt-5" style="display:flex">
-	<div style="flex:3">
-	   <img src="${pageContext.request.contextPath}/resources/assets/img/${info}" class="ml-5" style="object-fit: contain; width:400px; height:400px">
-	
+<div class="container mt-5" >
+	<div class="mt-5" >
+		<div class="container" >
+			<div class="section-title" style="text-align: left;">
+	         <h2>우리동네 날씨</h2>
+	        </div>
+			<div class="mt-5" style="display:flex; align-items: center; justify-content: center;">
+				<div style="flex:3">
+				   <img src="${pageContext.request.contextPath}/resources/assets/img/${info}" class="mr-5" style="object-fit: contain; width:400px; height:400px">
+				</div>
+			   <div style="font-size: 32px; flex:2; text-align:left;" class="m-5"><strong>${simpleAddress}의 날씨 </br> ${temperate}</strong></div> ${slash}
+			</div>
+		</div>
 	</div>
-   <div style="font-size: 32px; flex:2; text-align:left;" class="mt-5"><strong>${simpleAddress}의 날씨 </br> ${temperate}</strong></div> ${slash}
+	<div class="container mt-3" >
+		<div class="section-title" style="text-align: left;">
+         <h2>우리동네 뉴스</h2>
+        </div>		
+		   <table class="big">
+		      <tr class="title">
+		         <th colspan="2" class="newsTitle">${simpleAddress} 뉴스</th>
+		      </tr>
+		      <tbody>
+		         <tr>
+	               <c:forEach var="url" items="${urls}" varStatus="status" begin="1" end="${titles.size()}">
+	                  <c:if test="${titles[status.index]!=''}">
+	                     <tr class="text-center"> 
+	                        <td style="font-weight: bold;"><a href="${url}">${titles[status.index]}</a></td>
+	                     </tr>
+	                  </c:if>
+	               </c:forEach>
+		         </tr>
+		      </tbody>
+		   </table>
+      </div>
 </div>
-
-   <table class="big">
-   
-      <tr class="title">
-         <th colspan="2" class="newsTitle">${simpleAddress} 뉴스</th>
-      </tr>
-      <tbody>
-         <tr>
-               <c:forEach var="url" items="${urls}" varStatus="status" begin="1" end="${titles.size()}">
-                  <c:if test="${titles[status.index]!=''}">
-                     <tr class="text-center"> 
-                        <td style="font-weight: bold;"><a href="${url}">${titles[status.index]}</a></td>
-                     </tr>
-                  </c:if>
-               </c:forEach>
-      
-         
-         </tr>
-      </tbody>
-   </table>

@@ -7,8 +7,9 @@
 .contact .php-email-form{
     background: rgb(255 255 255 / 0%);
 }
-
-
+.select-items div, .select-selected{
+background: #dee2e6
+}
 </style>
     <div id="portfolio-details" class="portfolio-details contact">
       <div class="container">
@@ -17,7 +18,6 @@
 
           <div class="col-lg-8">
             <h2 class="portfolio-title">${list.title}</h2>
-
             <div class="portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center">
               	<c:forEach var="image" items="${images}" varStatus="loop">
@@ -41,14 +41,14 @@
 					</div>
 				</c:if>
 				<c:if test="${isWriter}">
-					<div style="float:right;">
+					<div style=""class="custom-select m-3">
 						<span>
 							<select name="status">
 								<option value="END" <c:if test="${list.status == 'END'}">selected</c:if> >낙찰</option>
 								<option value="SALE" <c:if test="${list.status == 'SALE'}">selected</c:if>>경매 진행중</option>
 							</select>
 						</span>
-						<button id="statusChange">확인</button>
+						<button id="statusChange" style="float: right;" class="btn">확인</button>
 					</div>
 					<br>
 					<br>
@@ -60,9 +60,9 @@
 						<i class="bi bi-calendar3"></i> ${list.postDate}
 					</div>
 				<div class="mb-4">${list.category}</div>
-				<div class="mb-5">
-					<p id="startPrice">시작가 : ${list.base_Price}\</p>
-					<p id="upperPrice">현재 최고가 : ${list.upper_Price}\</p>
+				<div class="mb-5" style="font-size: 20px;">
+					<p id="startPrice">시작가 : <strong style="font-size: 30px;">${list.base_Price}\</strong></p>
+					<p id="upperPrice">현재 최고가 : <strong style="color: #0fff90; font-size: 35px;">${list.upper_Price}\</strong></p>
 				</div>
 				<div class="mb-5">
 					<p>${list.content}</p>
