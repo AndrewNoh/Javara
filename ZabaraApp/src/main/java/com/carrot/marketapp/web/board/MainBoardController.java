@@ -214,7 +214,7 @@ public class MainBoardController {
 		} else {
 			a = boardService.insert(map);
 
-			if (!map.get("latitude").equals("not")) {
+			if (!map.get("latitude").equals("not") && a == 1) {
 
 				map.put("latitude", Double.parseDouble((String) map.get("latitude")));
 				map.put("longitude", Double.parseDouble((String) map.get("longitude")));
@@ -223,16 +223,17 @@ public class MainBoardController {
 				String simpleAddress = simpleAddr[1];
 				map.put("simpleAddress", simpleAddress);
 
-				boardService.getWriteAuctionView(map);
-
+				BoardDTO auction_no = boardService.getWriteAuctionView(map);
+				map.put("auction_no", auction_no.getAuction_no());
+				
 				a = boardService.insertNewAddress(map);
-
-				AddressDTO writeAddress = addressService.getwriteAddress(map);
-
-				String simpleWriteAddr = writeAddress.getSimpleAddress();
-
-				map.put("addrno", writeAddress.getAddrNo());
-				map.put("simpleAddress", simpleWriteAddr);
+				
+				if (a == 1) {
+					AddressDTO updateAddress = boardService.getUpdateAddress(map);
+					map.put("addrno", updateAddress.getAddrNo());
+					
+					a = boardService.UpdateAddress(map);
+				}
 			}
 
 		}

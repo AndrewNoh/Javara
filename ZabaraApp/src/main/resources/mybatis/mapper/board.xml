@@ -6,76 +6,6 @@
 <mapper namespace="mybatis.mapper.board">
 
 	<!-- SELECT문 -->
-	<!-- PRODUCT -->
-	<select id="getProductList" parameterType="Map"
-		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		<![CDATA[
-			SELECT * FROM (
-			    SELECT * FROM
-			    (SELECT ADDRNO, PRODUCT_NO, USERNO, TITLE, CONTENT, CATEGORY, PRICE, LIKES, POSTDATE, STATUS, RNUM FROM
-			    (SELECT D.*, ROWNUM AS RNUM FROM
-			    (SELECT * FROM PRODUCT_LIST L WHERE
-			    (SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) = #{simpleAddress}
-			    ORDER BY PRODUCT_NO DESC) D) O) T 
-                LEFT OUTER JOIN ADDRESS_LIST AL ON AL.ADDRNO = T.ADDRNO
-			    WHERE T.STATUS = 'SALE'
-			    ORDER BY T.PRODUCT_NO DESC)
-			    WHERE RNUM > #{startnum} AND RNUM < #{endnum}
-		]]>
-	</select>
-
-	<select id="getProductListAll" parameterType="Map"
-		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		SELECT * FROM (
-		SELECT * FROM
-		(SELECT ADDRNO, PRODUCT_NO, USERNO, TITLE, CONTENT, CATEGORY, PRICE, LIKES,
-		POSTDATE, STATUS, RNUM FROM
-		(SELECT D.*, ROWNUM AS RNUM FROM
-		(SELECT * FROM PRODUCT_LIST L WHERE
-		(SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) =
-		#{simpleAddress}
-		ORDER BY PRODUCT_NO DESC) D) O) T
-		LEFT OUTER JOIN ADDRESS_LIST AL ON AL.ADDRNO = T.ADDRNO
-		WHERE T.STATUS = 'SALE'
-		ORDER BY T.PRODUCT_NO DESC)
-	</select>
-
-	<select id="getProductNo" resultType="_int">
-		SELECT
-		SEQ_PRODUCT_LIST_PRODUCT_NO.CURRVAL FROM DUAL
-	</select>
-
-	<select id="getProductImage" parameterType="Map"
-		resultType="com.carrot.marketapp.model.dto.ImageDTO">
-		SELECT * FROM PRODUCT_IMG WHERE PRODUCT_NO = #{product_no}
-	</select>
-
-	<select id="getProductListOne" parameterType="Map"
-		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		SELECT * FROM PRODUCT_LIST L LEFT OUTER JOIN MEMBERS M ON
-		L.USERNO =
-		M.USERNO WHERE PRODUCT_NO = #{no}
-	</select>
-
-	<select id="selectProductLike" resultType="_int"
-		parameterType="Map">
-		SELECT COUNT(*) FROM PRODUCT_LIKE WHERE PRODUCT_NO =
-		#{no} AND USERNO =
-		#{userno}
-	</select>
-
-	<select id="selectProductLikeList" parameterType="Map"
-		resultType="Integer">
-		SELECT PRODUCT_NO FROM PRODUCT_LIKE WHERE USERNO =
-		${userno} ORDER BY
-		PRODUCT_NO DESC
-	</select>
-
-	<select id="selectProductLikeNo" resultType="_int">
-		SELECT COUNT(*) FROM
-		PRODUCT_LIKE WHERE PRODUCT_NO = #{no}
-	</select>
-	<!-- PRODUCT -->
 
 	<!-- AUCTION -->
 	<select id="getAuctionList" parameterType="Map"
@@ -204,28 +134,7 @@
 	<!-- SELECT문 -->
 
 	<!-- INSERT문 -->
-	<!-- PRODUCT -->
-	<insert id="writeProductList" parameterType="Map">
-		INSERT INTO
-		PRODUCT_LIST VALUES(SEQ_PRODUCT_LIST_PRODUCT_NO.NEXTVAL,
-		#{userno},
-		#{title}, #{content}, #{category}, #{price}, 0, DEFAULT,
-		#{addrno},
-		'SALE')
-	</insert>
-
-	<insert id="insertProductImage" parameterType="Map">
-		INSERT INTO
-		PRODUCT_IMG VALUES(SEQ_PRODUCT_IMG_IMAGENO.NEXTVAL, #{profile},
-		#{product_no})
-	</insert>
-
-	<insert id="insertProductLike" parameterType="Map">
-		INSERT INTO
-		PRODUCT_LIKE VALUES(#{userno}, #{no})
-	</insert>
-	<!-- PRODUCT -->
-
+	
 	<!-- AUCTION -->
 	<insert id="writeAuctionList" parameterType="Map">
 		INSERT INTO
@@ -274,28 +183,7 @@
 	<!-- INSERT문 -->
 
 	<!-- DELETE문 -->
-	<!-- PRODUCT -->
-	<delete id="deleteProductImg" parameterType="Map">
-		DELETE FROM
-		PRODUCT_IMG WHERE PRODUCT_NO = #{product_no}
-	</delete>
-
-	<delete id="deleteProductLike" parameterType="Map">
-		DELETE FROM
-		PRODUCT_LIKE WHERE USERNO = #{userno} AND PRODUCT_NO = #{no}
-	</delete>
-
-	<delete id="deleteProductLikeNo" parameterType="Map">
-		DELETE FROM
-		PRODUCT_LIKE WHERE PRODUCT_NO = #{product_no}
-	</delete>
-
-	<delete id="deleteProduct" parameterType="Map">
-		DELETE FROM
-		PRODUCT_LIST WHERE PRODUCT_NO = #{product_no}
-	</delete>
-	<!-- PRODUCT -->
-
+	
 	<!-- AUCTION -->
 	<delete id="deleteAuction" parameterType="Map">
 		DELETE FROM
@@ -347,28 +235,7 @@
 	<!-- DELETE문 -->
 
 	<!-- UPDATE문 -->
-	<!-- PRODUCT -->
-	<update id="updateProductList" parameterType="Map">
-		UPDATE PRODUCT_LIST
-		SET TITLE=#{title}, CONTENT=#{content},
-		CATEGORY=#{category},
-		PRICE=#{price}, LIKES=0, POSTDATE=SYSDATE,
-		ADDRNO=#{addrno}
-		WHERE
-		PRODUCT_NO = #{no}
-	</update>
-
-	<update id="updateProductLike" parameterType="map">
-		UPDATE PRODUCT_LIST
-		SET LIKES=#{noLike} WHERE PRODUCT_NO=#{no}
-	</update>
-
-	<update id="updateProductStatus" parameterType="map">
-		UPDATE
-		PRODUCT_LIST SET STATUS=#{status} WHERE PRODUCT_NO=#{product_no}
-	</update>
-	<!-- PRODUCT -->
-
+	
 	<!-- AUCTION -->
 	<update id="updateAuctionList" parameterType="Map">
 		UPDATE AUCTION_LIST
@@ -435,12 +302,6 @@
 		ORDER BY ADDRNO ASC
 	</select>
 
-	<select id="getWriteAddress" parameterType="Map"
-		resultType="com.carrot.marketapp.model.dto.AddressDTO">
-		SELECT L.*, ROWNUM FROM ADDRESS_LIST L
-		WHERE L.FULLADDRESS = #{address}
-	</select>
-
 	<insert id="insertNewAddress" parameterType="Map">
 		INSERT INTO
 		ADDRESS_LIST
@@ -449,27 +310,19 @@
 	
 	<select id="getWriteAuctionView" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		SELECT * FROM AUCTION_LIST WHERE ROWNUM = 1 ORDER BY AUCTION_NO DESC
+		SELECT * FROM (SELECT * FROM AUCTION_LIST WHERE USERNO = #{userno} ORDER BY AUCTION_NO DESC) WHERE ROWNUM = 1
 	</select>
+	
+	<select id="getUpdateAddress" parameterType="Map" resultType="com.carrot.marketapp.model.dto.AddressDTO">
+		SELECT * FROM ADDRESS_LIST
+		WHERE AUCTION_NO = #{auction_no}
+	</select>
+	
+	<update id="updateAddress" parameterType="Map">
+		UPDATE AUCTION_LIST SET ADDRNO = #{addrno} WHERE AUCTION_NO = #{auction_no}
+	</update>
 
 	<!-- SEARCH -->
-
-	<!-- PRODUCT -->
-	<select id="searchProduct" parameterType="Map"
-		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-			<![CDATA[
-				SELECT * FROM (
-				    SELECT * FROM
-				    (SELECT ADDRNO, PRODUCT_NO, USERNO, TITLE, CONTENT, CATEGORY, PRICE, LIKES, POSTDATE, STATUS, RNUM FROM
-				    (SELECT D.*, ROWNUM AS RNUM FROM
-				    (SELECT * FROM PRODUCT_LIST L WHERE
-				    (SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) = #{simpleAddress}
-				    ORDER BY PRODUCT_NO DESC) D) O) T 
-	                LEFT OUTER JOIN ADDRESS_LIST AL ON AL.ADDRNO = T.ADDRNO
-				    WHERE T.STATUS = 'SALE') WHERE CATEGORY = #{category} AND TITLE LIKE '%'||#{title}||'%'
-			]]>
-	</select>
-	<!-- PRODUCT -->
 
 	<!-- AUCTION -->
 	<select id="searchAuction" parameterType="Map"

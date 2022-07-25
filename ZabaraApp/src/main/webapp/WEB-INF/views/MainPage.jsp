@@ -39,7 +39,6 @@
 		          <li><a class="nav-link" href="<c:url value="/userinfo/mypage.do"/>">마이페이지</a></li>
 	          </c:if>
 	          <li><a class="nav-link" href="<c:url value="/board/auctionlist.do"/>">자바라경매</a></li>
-	          <li><a class="nav-link" href="<c:url value="/board/productlist.do"/>">자바라중고</a></li>
 	          <li><a class="nav-link" href="<c:url value="/board/gropboard.do"/>">동네생활</a></li>
 	          <li><a class="nav-link" href="<c:url value="/board/news.do"/>">실시간뉴스</a></li>
 	          <li><a class="nav-link" href="<c:url value="/board/qna.do"/>">자주묻는 질문</a></li>

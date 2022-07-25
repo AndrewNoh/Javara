@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.carrot.marketapp.model.dao.BoardDAO;
+import com.carrot.marketapp.model.dto.AddressDTO;
 import com.carrot.marketapp.model.dto.BoardDTO;
 import com.carrot.marketapp.model.service.CommonService;
 
@@ -115,13 +116,19 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 		return boardDAO.insertNewAddress(map);
 	}
 
-	public BoardDTO viewSelect(Map map) {
-		return boardDAO.viewSelect(map);
-	}
-
 	public BoardDTO getWriteAuctionView(Map map) {
 		return boardDAO.getWriteAuctionView(map);
 
+	}
+
+	public AddressDTO getUpdateAddress(Map map) {
+		// TODO Auto-generated method stub
+		return boardDAO.getUpdateAddress(map);
+	}
+
+	public int UpdateAddress(Map map) {
+		// TODO Auto-generated method stub
+		return boardDAO.updateAddress(map);
 	}
 
 }

@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.carrot.marketapp.model.dto.AddressDTO;
 import com.carrot.marketapp.model.dto.BoardDTO;
 
 @Repository("boardDAO")
@@ -246,14 +247,19 @@ public class BoardDAO {
 		return sqlSession.insert("insertNewAddress", map);
 	}
 
-	public BoardDTO viewSelect(Map map) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("viewSelect", map);
-	}
-
 	public BoardDTO getWriteAuctionView(Map map) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("getWriteAuctionView", map);
+	}
+
+	public AddressDTO getUpdateAddress(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("getUpdateAddress", map);
+	}
+
+	public int updateAddress(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("updateAddress", map);
 	}
 
 }

@@ -74,7 +74,6 @@
 					<div class="custom-select col" style="width: 100px;">
 					<select id="searchBoardSelect" name="board">
 						<option value="경매">경매</option>
-						<option value="중고물품">중고</option>
 						<option value="우리동네">동내생활</option>
 					</select>
 					</div>
@@ -122,7 +121,6 @@
 		          <li><a class="nav-link neonText" href="<c:url value="/userinfo/mypage.do"/>">마이페이지</a></li>
 	          </c:if>
 	          <li><a class="nav-link neonText" href="<c:url value="/board/auctionlist.do"/>">자바라경매</a></li>
-	          <li><a class="nav-link neonText" href="<c:url value="/board/productlist.do"/>">자바라중고</a></li>
 	          <li><a class="nav-link neonText" href="<c:url value="/board/gropboard.do"/>">동네생활</a></li>
 	          <li><a class="nav-link neonText" href="<c:url value="/board/qna.do"/>">자주묻는 질문</a></li>
 	          <li><a class="nav-link" href="<c:url value="/chat/chattingroom.do"/>">채팅</a></li>
