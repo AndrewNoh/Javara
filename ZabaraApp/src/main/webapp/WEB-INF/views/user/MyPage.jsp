@@ -72,9 +72,10 @@
 }
 
 #myPay {
-   margin-left: 5px;
+   margin-left: 5px;  
    border: none;
    background: transparent;
+
 }
 
 .swal2-popup {
@@ -194,38 +195,27 @@ color:#ffc107
 
       <!-- End Skills -->
  <div class="row">
-	      <div class="col-5">
-	         <div class="skills container ">
-	            <div class="section-title">
-	               <h2>Skills</h2>
-	            </div>
-	            <div class="row skills-content">
-	               <div class="col-12">
-	                  <div class="progress">
-	                     <span class="skill">온도 <i class="val">100%</i></span>
-	                     <div class="progress-bar-wrap">
-	                        <div class="progress-bar" role="progressbar" aria-valuenow="100"
-	                           aria-valuemin="0" aria-valuemax="100"></div>
-	                     </div>
-	                  </div>
-	                  <div class="progress">
-	                     <span class="skill">재거래 희망률<i class="val">90%</i></span>
-	                     <div class="progress-bar-wrap">
-	                        <div class="progress-bar" role="progressbar" aria-valuenow="90"
-	                           aria-valuemin="0" aria-valuemax="100"></div>
-	                     </div>
-	                  </div>
-	                  <div class="progress">
-	                     <span class="skill">응답률 <i class="val">75%</i></span>
-	                     <div class="progress-bar-wrap">
-	                        <div class="progress-bar" role="progressbar" aria-valuenow="75"
-	                           aria-valuemin="0" aria-valuemax="100"></div>
-	                     </div>
-	                  </div>
-	               </div>
-	            </div>
-			</div>
-	      </div>
+         <div class="col-5">
+            <div class="pay container ">
+               <div class="section-title">
+                  <h2>자바라 페이</h2>
+               </div>
+               <img src="${pageContext.request.contextPath}/resources/assets/img/pay_logo.png" style="height: 40px"/>
+          		<input style="color:white; font-size: 30px; margin-top: 10px" type="text" id="myPay" readonly="readonly">  
+          		
+          		<button onclick="payService()" type="button" class="btn btn-success" style="width: 110px; float: right; margin-left:10px ">충전하기</button>
+                <br/>
+                <select class="btn btn-outline-secondary btn-s "  
+                        style="color: #fff; data-toggle=dropdown; float: right;" id="pay">
+                    <option value="5000">5,000원</option>
+                    <option value="10000">10,000원</option>
+                    <option value="20000">20,000원</option>
+                    <option value="30000">30,000원</option>
+                    <option value="40000">40,000원</option>
+                    <option value="50000">50,000원</option>
+                </select>		   
+         	</div>
+         </div>
          <!-- ======= Skills  ======= -->
          <div class="col-7">
             <div class="interests container">
@@ -243,9 +233,9 @@ color:#ffc107
                         </div>
                      </div>
                      <div class="col-lg-4 col-md-4 mt-4 mt-md-0">
-                        <div class="icon-box" id="PayToggle" onclick="payBalance()">
+                        <div class="icon-box" id="ChatToggle" >
                            <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
-                           <h3>자바라 페이</h3>
+                           <h3>나의 채팅</h3>
 
                         </div>
                      </div>
@@ -375,28 +365,18 @@ color:#ffc107
                         </ul>
                      </div>
                   </div>
-            	</div>
+               </div>
                </div>
              </div>
                <!--지도-->
-               <div class="col mt-3" id="PayToggleDiv" style="display: none">
+               <div class="col mt-3" id="ChatToggleDiv" style="display: none">
                   <div class="interests container">
                      <div class="section-title">
-                        <h2 style="margin-bottom: 30px;">자바라 페이</h2>
+                        <h2 style="margin-bottom: 30px;">나의 채팅</h2>
                          </div>
-                           자바라페이는 자바라마켓 내에서 선불머니를 충전하고 이용할 수 있는 간편 결제/송금 서비스입니다. 
-                        <br/><br/>
-                        <input style="text-align:right; color:white; font-size: 20px" type="text" id="myPay" readonly="readonly">  
-                         <select class="btn btn-outline-secondary btn-s" 
-                             style="margin-left: 650px; color: #fff" data-toggle="dropdown" id="pay">
-                              <option value="5000">5,000원</option>
-                              <option value="10000">10,000원</option>
-                              <option value="20000">20,000원</option>
-                              <option value="30000">30,000원</option>
-                              <option value="40000">40,000원</option>
-                              <option value="50000">50,000원</option>
-                           </select>
-                           <button onclick="payService()" type="button" class="btn btn-success" style="margin-left:10px; width: 110px; border-radius:50%">충전하기</button>
+                           
+                       
+                        
                         </div>            
                      <div class="col mt-3" id="CategoryToggleDiv" style="display: none">
                      <form id="simpleChangeAddr" method="post"
@@ -434,16 +414,16 @@ color:#ffc107
          <!-- End Interests -->
          <!-- ======= Testimonials ======= -->
         <div class="testimonials container mt-3">
-	      <div class="section-title">
-	        <h2>CHAT</h2>
-	      </div>
-	      <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-	        <div class="swiper-wrapper">
-	          <c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
-	          <div class="swiper-slide">
-	          <a href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.product_no}" name="product_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
-	            <div class="testimonial-item">
-	              <p style="height: 200px;">
+         <div class="section-title">
+           <h2>CHAT</h2>
+         </div>
+         <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+           <div class="swiper-wrapper">
+             <c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
+             <div class="swiper-slide">
+             <a href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.product_no}" name="product_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
+               <div class="testimonial-item">
+                 <p style="height: 200px;">
                      <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                      ${chatlist.chatcontent} <i
                         class="bx bxs-quote-alt-right quote-icon-right"></i>
@@ -458,16 +438,16 @@ color:#ffc107
                         test="${userNickname.nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>
                   </h3>
                   <h4>${chatlist.sendtime}</h4>
-	            </div>
-	            </a>
-	          </div><!-- End testimonial item -->
-	            </c:forEach>
-	        </div>
-	        <div class="swiper-pagination"></div>
-	      </div>
-	      <div class="owl-carousel testimonials-carousel"></div>
-	    </div><!-- End Testimonials  -->
-	</div>
+               </div>
+               </a>
+             </div><!-- End testimonial item -->
+               </c:forEach>
+           </div>
+           <div class="swiper-pagination"></div>
+         </div>
+         <div class="owl-carousel testimonials-carousel"></div>
+       </div><!-- End Testimonials  -->
+   </div>
 </div>
       <!-- End Testimonials  -->
 
@@ -490,8 +470,8 @@ color:#ffc107
                }, 1000);
 
             });
-            $("#PayToggle").click(function() {
-               $("#PayToggleDiv").toggle(1000);
+            $("#ChatToggle").click(function() {
+               $("#ChatToggleDiv").toggle(1000);
             });
             $('#CategoryToggle').click(function() {
                $("#CategoryToggleDiv").toggle(1000);
@@ -760,27 +740,30 @@ color:#ffc107
             }
          }
          
-         // 자바라페이 클릭 시 잔액 보여주기 위함 
-         function payBalance(){
-	       	  	$.ajax({
-	       	  		type: 'POST',
-		       	 	url : '<c:url value="/pay/balance.do"/>',
-		       		data : {
-                      '${_csrf.parameterName}' : '${_csrf.token}'
+
+         // 자바라페이 잔액 
+         $.ajax({
+	       	  type: 'POST',
+		      url : '<c:url value="/pay/balance.do"/>',
+		      data : {
+		       		'deposit' : 0,
+                 	'${_csrf.parameterName}' : '${_csrf.token}'
                   	},
-                  	dataType : "text",
-		       		success : function(result){
-		       			$('#myPay').val(result+'원')
+              dataType : "text",
+		      success : function(result){
+		       		$('#myPay').val(result+'원')
 		       		}
 	       	  	});       	  
-         }
+         
 
          // 자바라페이 잔액 충전하기
          var IMP = window.IMP;
          IMP.init('imp74932749'); 
 
          function payService() {
-        	 
+        	 var amount = $('#pay option:selected').val();
+        	 console.log(amount);
+        	
              IMP.init('imp74932749');
              IMP.request_pay(
                          {
@@ -789,7 +772,7 @@ color:#ffc107
                             merchant_uid : 'merchant_'
                                   + new Date().getTime(), // 가맹점에서 생성/관리하는 고유 주문번호
                             name : '자바라 페이', // 주문명
-                            amount : $("select[id=pay]").val(), // 결제 금액 
+                            amount : amount, // 결제 금액 
                             buyer_email : 'iamport@siot.do', // 주문자 이메일
                             buyer_name : '구매자', // 주문자명
                             buyer_tel : '010-1234-5678', // 주문자 연락처
@@ -798,19 +781,29 @@ color:#ffc107
                          }, function(rsp) {
                             if (rsp.success) { 
                                var msg = '충전이 완료되었습니다.';
-                               alert(mag);
+                               alert(msg);
+                               console.log(amount);
                                $.ajax({
-                             	  type: 'POST',
-                             	  url: '',
-                             	  data: { 
-                             		  // "balance" : $("select[id=pay]").val()
-                             	  }
-                               });
+               	       	  		type: 'POST',
+               		       	 	url : '<c:url value="/pay/balance.do"/>',
+               		       		data : {
+               		       		      'deposit' : amount,
+                                      '${_csrf.parameterName}' : '${_csrf.token}'
+                                 	},
+                                 	dataType : "text",
+               		       		success : function(result){
+               		       		console.log(result);
+               		       			$('#myPay').val(result+'원')
+               		       			console.log(result);
+               		       		}
+               	       	  	});   
+                               
+                               
                             } else {
                                var msg = '결제 실패하였습니다.';
                                alert(msg);
                                document.location.href = "http://localhost:8080/marketapp/userinfo/mypage.do"; 
                             }
                          })
-          				}
+          			}
       </script>
