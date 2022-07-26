@@ -50,6 +50,17 @@ public class PayController {
 			balance = payService.payBalance(map);	
 			
 		}
+		
+		int withdraw = Integer.parseInt((String) map.get("withdraw"));
+		if(!(withdraw == 0)) {
+			int withdrawBalance = Integer.parseInt(balance.getBalance())-withdraw;
+			map.put("balance", withdrawBalance);
+			
+			withdraw = payService.payWithdraw(map);
+			balance = payService.payBalance(map);
+			
+		}
+		
 		return Integer.parseInt(balance.getBalance());
 	}
 	

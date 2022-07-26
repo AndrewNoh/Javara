@@ -200,21 +200,24 @@ color:#ffc107
                <div class="section-title">
                   <h2>자바라 페이</h2>
                </div>
-               <img src="${pageContext.request.contextPath}/resources/assets/img/pay_logo.png" style="height: 40px"/>
-          		<input style="color:white; font-size: 30px; margin-top: 10px" type="text" id="myPay" readonly="readonly">  
-          		
-          		<button onclick="payService()" type="button" class="btn btn-success" style="width: 110px; float: right; margin-left:10px ">충전하기</button>
-                <br/>
-                <select class="btn btn-outline-secondary btn-s "  
-                        style="color: #fff; data-toggle=dropdown; float: right;" id="pay">
-                    <option value="5000">5,000원</option>
-                    <option value="10000">10,000원</option>
-                    <option value="20000">20,000원</option>
-                    <option value="30000">30,000원</option>
-                    <option value="40000">40,000원</option>
-                    <option value="50000">50,000원</option>
-                </select>		   
-         	</div>
+               <div class="mb-5 mt-4">
+                  <img src="${pageContext.request.contextPath}/resources/assets/img/pay_logo.png" style="height: 70px"/>
+                   <input style="color:white; font-size: 30px; margin-top: 10px" type="text" id="myPay" readonly="readonly">  
+                   <div style="float: right;">
+                      <select class="btn btn-outline-secondary btn-s my-2"  
+                              style="color: #fff; margin-top: 10px" data-toggle="dropdown;" id="pay" >
+                          <option value="5000">5,000원</option>
+                          <option value="10000">10,000원</option>
+                          <option value="20000">20,000원</option>
+                          <option value="30000">30,000원</option>
+                          <option value="40000">40,000원</option>
+                          <option value="50000">50,000원</option>
+                      </select>                     
+                      <button onclick="payService()" type="button" class="btn btn-success my-2" style="width: 110px;  margin-left:10px ">충전하기</button>
+                      <button onclick="payWithdraw()" type="button" class="btn btn-success my-2" style="width: 110px;  margin-left:10px ">출금하기</button>
+                   </div>
+                </div>      
+            </div>
          </div>
          <!-- ======= Skills  ======= -->
          <div class="col-7">
@@ -747,21 +750,47 @@ color:#ffc107
 		      url : '<c:url value="/pay/balance.do"/>',
 		      data : {
 		       		'deposit' : 0,
+		       		'withdraw' : 0,
                  	'${_csrf.parameterName}' : '${_csrf.token}'
                   	},
               dataType : "text",
 		      success : function(result){
 		       		$('#myPay').val(result+'원')
 		       		}
-	       	  	});       	  
+	       	  	});      
+         
+         // 자바라페이 출금
+         function payWithdraw() {
+        	  var amount = $('#pay option:selected').val();
+        	  $.ajax({
+ 	       	  		type: 'POST',
+ 		       	 	url : '<c:url value="/pay/balance.do"/>',
+ 		       		data : {
+ 		       		      'deposit' : 0,
+ 		       		      'withdraw' : amount,
+                        '${_csrf.parameterName}' : '${_csrf.token}'
+                   	},
+                   	dataType : "text",
+ 		       		success : function(result){
+ 		       		console.log(result);
+ 		       			$('#myPay').val(result+'원')
+ 		       			console.log(result);
+ 		       		}
+ 	       	  	});   
+         }
          
 
-         // 자바라페이 잔액 충전하기
+         // 자바라페이 잔액 충전
          var IMP = window.IMP;
          IMP.init('imp74932749'); 
 
          function payService() {
         	 var amount = $('#pay option:selected').val();
+        	 var email = '${email}';
+        	 var nickname = '${nickname}';
+        	 var address = '${address}';
+        	 var phonenumber = '${phonenumber}';
+        	 
         	 console.log(amount);
         	
              IMP.init('imp74932749');
@@ -773,11 +802,10 @@ color:#ffc107
                                   + new Date().getTime(), // 가맹점에서 생성/관리하는 고유 주문번호
                             name : '자바라 페이', // 주문명
                             amount : amount, // 결제 금액 
-                            buyer_email : 'iamport@siot.do', // 주문자 이메일
-                            buyer_name : '구매자', // 주문자명
-                            buyer_tel : '010-1234-5678', // 주문자 연락처
-                            buyer_addr : '서울특별시 강남구 삼성동', // 주문자 주소
-                            buyer_postcode : '123-456' // 주문자 우편번호
+                            buyer_email : email, // 주문자 이메일
+                            buyer_name : nickname, // 주문자명
+                            buyer_tel : phonenumber, // 주문자 연락처
+                            buyer_addr : address, // 주문자 주소
                          }, function(rsp) {
                             if (rsp.success) { 
                                var msg = '충전이 완료되었습니다.';
@@ -788,6 +816,7 @@ color:#ffc107
                		       	 	url : '<c:url value="/pay/balance.do"/>',
                		       		data : {
                		       		      'deposit' : amount,
+               		       		      'withdraw' : 0,
                                       '${_csrf.parameterName}' : '${_csrf.token}'
                                  	},
                                  	dataType : "text",
