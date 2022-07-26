@@ -2,13 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- ======= About Me ======= -->
+<link href="${pageContext.request.contextPath}/resources/assets/css/LSstyle.css" rel="stylesheet">
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 input {
-	font-family: "CookieRunOTF-Bold", sans-serif;
+	font-family: "GmarketSansMedium", sans-serif;
 	width: 250px;
 	text-align: center;
+	
 }
 
 .interests, .skills, .counts, .form-control {
@@ -29,28 +31,43 @@ button {
 }
 
 .container {
+
 	width: 70%;
 	height: 80%;
+	margin-top: 60px;
 }
 
 .profile-pic {
 	width: 250px;
 	max-height: 250px;
 	display: inline-block;
+	margin-left:20px;
+	margin-top:30px
 }
 
 .file-upload {
 	display: none;
 }
 
-.submit {
-	width: 50px;
+.btn {
+	width: 35px;
+	border-radius: 10px;
+	margin-left: 52px;
+	font-size:20px;
+}
+
+.form-style {
+	padding-left: 15px;
+	font-size: 21px;
+	border-radius: 10px;
+	
 }
 </style>
 <div class="about-me container d-flex justify-content-center">
 
 
-	<h4>About</h4>
+	<h3 class="mr-2">EDIT</h3>
+
 
 
 
@@ -70,34 +87,34 @@ button {
 								src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${profileimage}">
 							<input class="file-upload" type="file" accept=".jpg, .png, .jpeg"
 								name="profileimg" id="profileimg"/>
-							<div>&nbsp</div>
+							<div class="mb-4">&nbsp</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<h5 class="">NICKNAME</h5>
-						<input type="text" class="form-style" name="nickname"
+						<h5 class="mt-3">NICKNAME</h5>
+						<input type="text" class="form-style mt-3" name="nickname"
 							id="nickname" value="${nickname}">
 					</div>
 					<div class="col-md-12 form-group">
-						<h5 class="">PASSWORD</h5>
-						<input type="password" name="password" class="form-style" id="password"
+						<h5 class="mt-3">PASSWORD</h5>
+						<input type="password" name="password" class="form-style mt-3" id="password"
 							required value="${password}">
 					</div>
 					<div class="col-md-12 form-group">
-						<h5 class="">EMAIL</h5>
-						<input type="text" name="email" class="form-style" id="email"
+						<h5 class="mt-3">EMAIL</h5>
+						<input type="text" name="email" class="form-style mt-3" id="email"
 							required value="${email}" readonly>
 					</div>
 					<div class="col-md-12 form-group">
-						<h5 class="">ADRESS</h5>
-						<input type="text" onclick="daumAddress()" class="form-style"
+						<h5 class="mt-3">ADRESS</h5>
+						<input type="text" onclick="daumAddress()" class="form-style mt-3"
 							name="fulladdress" id="fulladdress" required
 							value="${FULLADDRESS}">
 						<input type="hidden" name="latitude" id="latitude">
 						<input type="hidden" name="longitude" id="longitude">
 					</div>
-					<div class="col-md-5 mt-0 form-group">
-						<input type="submit" class="submit mt-3" value="완료">
+					<div class="col-md-5 mt-0 form-group" style="justify-content: center;">
+						<input type="submit" class="btn mt-3" value="완료">
 					</div>
 				</div>
 			</div>

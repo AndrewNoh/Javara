@@ -159,7 +159,7 @@ public class UserInfoController {
 		model.addAttribute("profileimage", record.getProfile_img());
 
 		// 뷰정보 반환]
-		return "/user/edit2.market";
+		return "/user/edit.market";
 	}///////////////////////
 
 	@PostMapping("/editmember.do")
