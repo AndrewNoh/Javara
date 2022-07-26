@@ -21,10 +21,10 @@
 
 <div id="contact" class="contact">
 	<div class="section">
-		<div class="container">
+		<div class="container mt-5">
 				<div class="col-12 text-center align-self-center py-5">
 					<div class="section pb-5 pt-5 pt-sm-2 text-center">
-						<h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+						<h6 class="mb-0 pb-3"><span>로그인 </span><span>회원가입</span></h6>
 						<input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
 						<label for="reg-log"></label>
 						<div class="card-3d-wrap mx-auto">
@@ -32,7 +32,7 @@
 								<div class="card-front">
 									<div class="center-wrap">
 										<div class="section text-center">
-											<h4 class="mb-4 pb-3">Log In</h4>
+											<h4 class="mb-4 pb-3">로그인</h4>
 											<c:if test="${not empty param.error}">
 												<p>로그인에 실패하였습니다.</p>
 												<p>아이디와 비밀번호를 확인해주세요.</p>
@@ -41,18 +41,19 @@
 												<form action="<c:url value="/security/login.do"/>" method="post" role="form" class="custom-form mt-4" id="loginform">
 													<sec:csrfInput/>
 													<div class="form-group">
-														<input type="email" name="id" class="form-style" placeholder="Your Email" id="id" autocomplete="off">
+														<input type="email" name="id" class="form-style" placeholder="이메일을 입력하세요." id="id" autocomplete="off">
 														<i class="input-icon uil uil-at"></i>
 													</div>
 													<div class="form-group mt-2">
-														<input type="password" name="pwd" class="form-style" placeholder="Your Password" id="pwd" autocomplete="off">
+														<input type="password" name="pwd" class="form-style" placeholder="비밀번호를 입력하세요." id="pwd" autocomplete="off">
 														<i class="input-icon uil uil-lock-alt"></i>
 													</div>
-													<a href="#" class="btn mt-4" id="loginBtn">submit</a>
-													<p class="mb-0 mt-4 text-center"><a href="#0" class="link" id="forgotpwd">Forgot your password?</a></p>
+													<a href="#" class="btn mt-4" id="loginBtn">OK</a>
+													<p class="mb-0 mt-4 text-center"><a href="#0" class="link" id="forgotpwd" >비밀번호를 잊으셨습니까?</a></p>
 													<div class="row" style="padding: 0%;">
 													<div class="col" style="margin-left: 110px; padding: 0%;">
 														<a href="javascript:kakaoLogin()"> <img
+															style="margin-top: 10px;"
 															src="${pageContext.request.contextPath}/resources/assets/img/kakaoButton.png"
 															width="40" alt="카카오 버튼" />
 														</a>
@@ -60,7 +61,7 @@
 													<div id="naver_id_login" class="col"
 														style="margin-right: 110px; padding: 0%;">
 														<a id="naverIdLogin_loginButton" href="javascript:void(0)">
-															<img
+															<img style="margin-top: 10px;"
 															src="${pageContext.request.contextPath}/resources/assets/img/naverButton.png"
 															width="40" alt="네이버 버튼" />
 														</a>
@@ -157,9 +158,9 @@
 											             <input type="hidden" id="kakaoProfileUrl" name="kakaoProfileUrl" value="">
 													</div>
 												</div>
-												<a href="#" id="prevBtn" class="btn mt-4" style="display:none;">prev</a>
-												<a href="#" id="nextBtn" class="btn mt-4">next</a>
-												<a href="#" id="submitBtn" class="btn mt-4" style="display:none;">submit</a>
+												<a href="#" id="prevBtn" class="btn mt-4" style="display:none;">이전</a>
+												<a href="#" id="nextBtn" class="btn mt-4">다음</a>
+												<a href="#" id="submitBtn" class="btn mt-4" style="display:none;">확인</a>
 											</form>
 					      				</div>
 			      					</div>

@@ -224,7 +224,7 @@ color:#ffc107
             <div class="interests container">
 
                <div class="section-title">
-                  <h2 style="margin-bottom: 30px;">Interests</h2>
+                  <h2 style="margin-bottom: 30px;">나의 활동</h2>
                </div>
 
                <div class="row">
@@ -232,13 +232,13 @@ color:#ffc107
                      <div class="col-lg-4 col-md-4 ">
                         <div class="icon-box" id="MapToggle">
                            <i class="ri-store-line" style="color: #ffbb2c;"></i>
-                           <h3>내 동네 설정</h3>
+                           <h3>동네 설정</h3>
                         </div>
                      </div>
                      <div class="col-lg-4 col-md-4 mt-4 mt-md-0">
                         <div class="icon-box" id="ChatToggle" >
                            <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
-                           <h3>나의 채팅</h3>
+                           <h3>채팅</h3>
 
                         </div>
                      </div>
@@ -418,7 +418,7 @@ color:#ffc107
          <!-- ======= Testimonials ======= -->
         <div class="testimonials container mt-3">
          <div class="section-title">
-           <h2>CHAT</h2>
+           <h2>채팅</h2>
          </div>
          <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
            <div class="swiper-wrapper">

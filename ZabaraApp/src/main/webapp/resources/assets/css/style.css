@@ -55,7 +55,6 @@ body::before {
   position: fixed;
   background: #040404 url("../img/main_background.jpg") top right no-repeat;
   background-size: cover;
-  background-attachment: fixed;
   left: 0;
   right: 0;
   top: 0;
@@ -384,7 +383,7 @@ section.section-show {
   width: 120px;
   height: 1px;
   display: inline-block;
-  background: #0fff90;
+  background: #FFC107;
   margin: 4px 10px;
 }
 .section-title p {

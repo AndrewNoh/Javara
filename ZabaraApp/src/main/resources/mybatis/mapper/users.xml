@@ -115,7 +115,7 @@
 		WHERE userno=#{userno}
 	</update>
 	
-	<!-- 페이 서비스: 계좌 생성-->
+   <!-- 페이 서비스: 계좌 생성-->
    <insert id="payCreateAmount" parameterType="Map">
    		INSERT INTO ZABARAPAY VALUES(SEQ_ZABARAPAY_PAYNO.NEXTVAL, #{userno})
    </insert>
@@ -134,20 +134,16 @@
    <insert id="payDeposit" parameterType="Map">
    		INSERT INTO PAYLOG VALUES(SEQ_PAYLOG_LOGNO.NEXTVAL, #{payno}, #{deposit}, NULL, #{balance})
    </insert>
-   
-   
+     
    <!-- 페이 서비스: 출금 -->
    <insert id="payWithdraw" parameterType="Map">
    		INSERT INTO PAYLOG VALUES(SEQ_PAYLOG_LOGNO.NEXTVAL, #{payno}, NULL, #{withdraw}, #{balance})
    </insert>
- 
- 
+  
    <!-- 페이 서비스: 잔액 -->
    <select id="payBalance" parameterType="Map" resultType="PayDTO">
    		SELECT * FROM (SELECT * FROM PAYLOG WHERE payno=#{payno} ORDER BY logno DESC) WHERE ROWNUM=1
    </select >
-
-
 
 
 </mapper>
