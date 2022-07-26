@@ -57,11 +57,7 @@
 </head>
 <body>
 
-  <!-- ======= Header ======= -->
-  <c:set var="URI" value="${requestScope['javax.servlet.forward.request_uri']}" />
-   <c:set var="mainURI" value="/marketapp/"/>
-   <c:set var="mainURI2" value="/marketapp/location/MainPage.do" />
-   <c:if test="${URI != mainURI && URI != mainURI2}">
+  
           <form id="logoutForm" method="post" action="<c:url value="/security/logout.do"/>">
                    <sec:csrfInput/>
             </form> 
@@ -135,9 +131,7 @@
              <li><a class="nav-link" href="<c:url value="/chat/chattingroom.do"/>">채팅</a></li>
            </ul>
            <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
- 
-  </c:if>   
+      </nav><!-- .navbar --> 
    
 <script>
 $(function() {
