@@ -762,21 +762,38 @@ color:#ffc107
          // 자바라페이 출금
          function payWithdraw() {
         	  var amount = $('#pay option:selected').val();
-        	  $.ajax({
- 	       	  		type: 'POST',
- 		       	 	url : '<c:url value="/pay/balance.do"/>',
- 		       		data : {
- 		       		      'deposit' : 0,
- 		       		      'withdraw' : amount,
-                        '${_csrf.parameterName}' : '${_csrf.token}'
-                   	},
-                   	dataType : "text",
- 		       		success : function(result){
- 		       		console.log(result);
- 		       			$('#myPay').val(result+'원')
- 		       			console.log(result);
- 		       		}
- 	       	  	});   
+        	  if($('#myPay').val() < amount) {
+        		  const Toast = Swal.mixin({
+                      toast : true,
+                      position : 'center-center',
+                      showConfirmButton : false,
+                      timer : 3000,
+                      timerProgressBar : true,
+                   })
+
+                   Toast.fire({
+                      icon : 'error',
+                      title : '출금 금액이 잔액보다 많습니다.'
+                   })
+        	  }
+        	  else{
+	        	  $.ajax({
+	 	       	  		type: 'POST',
+	 		       	 	url : '<c:url value="/pay/balance.do"/>',
+	 		       		data : {
+	 		       		      'deposit' : 0,
+	 		       		      'withdraw' : amount,
+	                        '${_csrf.parameterName}' : '${_csrf.token}'
+	                   	},
+	                   	dataType : "text",
+	 		       		success : function(result){
+	 		       		console.log(result);
+	 		       			$('#myPay').val(result+'원')
+	 		       			console.log(result);
+	 		       		}
+	                   	
+	 	       	  	});  
+        	  }
          }
          
 
@@ -808,8 +825,19 @@ color:#ffc107
                             buyer_addr : address, // 주문자 주소
                          }, function(rsp) {
                             if (rsp.success) { 
-                               var msg = '충전이 완료되었습니다.';
-                               alert(msg);
+                            	const Toast = Swal.mixin({
+                                    toast : true,
+                                    position : 'center-center',
+                                    showConfirmButton : false,
+                                    timer : 1800,
+                                    timerProgressBar : true,
+
+                                 })
+
+                                 Toast.fire({
+                                    icon : 'success',
+                                    title : '충전이 완료되었습니다.'
+                                 })
                                console.log(amount);
                                $.ajax({
                	       	  		type: 'POST',
@@ -829,9 +857,19 @@ color:#ffc107
                                
                                
                             } else {
-                               var msg = '결제 실패하였습니다.';
-                               alert(msg);
-                               document.location.href = "http://localhost:8080/marketapp/userinfo/mypage.do"; 
+                            	const Toast = Swal.mixin({
+                                    toast : true,
+                                    position : 'center-center',
+                                    showConfirmButton : false,
+                                    timer : 3000,
+                                    timerProgressBar : true,
+                                 })
+
+                                 Toast.fire({
+                                    icon : 'error',
+                                    title : '결제 실패하였습니다.'
+                                 })
+                               
                             }
                          })
           			}
