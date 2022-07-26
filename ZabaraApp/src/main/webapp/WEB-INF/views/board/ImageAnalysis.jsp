@@ -18,7 +18,7 @@ div{
 <button type="button" onclick="init()">Start</button>
 -->
 <div class="container">
-	<h2>이미지 분석 테스트중 입니당</h2>
+	<h2>이미지 분석 테스트중 입니다</h2>
 	<!-- Button to Open the Modal -->
 	<button type="button" class="btn btn-primary" data-toggle="modal"
 		data-target="#myModal">Open modal</button>
@@ -38,7 +38,7 @@ div{
 					<button onclick="predict()">이미지 분석 하기</button>
 					<input type="file" id="test_image" accept=".png,.jpg,.jpeg" />
 					<!-- 선택한 이미지를 미리보기 위한 추가 -->
-					<img id="preview_image" />
+					<img id="preview_image" style="width: 100%;height: 90%;"/>
 
 					<!-- 웹캠으로 캡처한 이미지 표시 영역(영상소스) -->
 					<div id="webcam-container"></div>
@@ -56,7 +56,7 @@ div{
 
 </div>
 <!--데이타 소스를 웹캠이 아니라 이미지 파일로 변경시 아래 태그(button,input)추가 -->
-
+<!-- 마지막 카테고리가 반복되는거 막기 (마지막 카테고리가 0%이면 자르기) -->
 
 
 
@@ -72,11 +72,12 @@ div{
 		const modelURL = URL + "model.json";
 		const metadataURL = URL + "metadata.json";
 
+		model = await tmImage.load(modelURL, metadataURL);
 		maxPredictions = model.getTotalClasses();
 		console.log('카테고리(클래스) 수:',maxPredictions);
 
 		labelContainer = document.getElementById("label-container");
-		for (let i = 0; i < 5; i++) { // and class labels
+		for (let i = 0; i < 3; i++) { // and class labels
 			labelContainer.appendChild(document.createElement("div"));
 		}
 	}
@@ -91,10 +92,19 @@ div{
 		var resultArray=[];
 		var className=[];
 		for (var i = 0; i < maxPredictions; i++) {
-			console.log(prediction[i].probability.toFixed(2)*100);
+			console.log("resultArray"+prediction[i].probability.toFixed(2)*100);
 		         resultArray.push(prediction[i].probability.toFixed(2)*100);
 		  }
 
+		
+	
+	
+		for(var i = 0; i < maxPredictions; i++) {
+			var classPrediction = prediction[i].className + ": "
+					+ prediction[i].probability.toFixed(2)*100;
+			className.push(classPrediction);
+		}
+		
 		for (var i = 0; i < resultArray.length-1; i++) {
 		    for(var k=i+1; k < resultArray.length;k++){
 		    if(resultArray[i] < resultArray[k]){
@@ -102,28 +112,24 @@ div{
 		       var temp = resultArray[i];
 		       resultArray[i] = resultArray[k];
 		       resultArray[k] = temp;
+		       var tempname = className[i];
+		       className[i] = className[k];
+		       className[k] = tempname;
 		      }
-		    
 		   }
 		}
-	
-	
-	for(var i = 0; i < maxPredictions; i++) {
-		const classPrediction = prediction[i].className + ": "
-				+ prediction[i].probability.toFixed(2)*100+"%";
-		className.push(classPrediction);
-	}
-	
-	
-	var plus=[];
-	for(var i=0; i < 5; i++){
-		for(var k=0; k < className.length; k++){
-			if(className[k].indexOf(resultArray[i]) !== -1){
-				labelContainer.childNodes[i].innerHTML=className[k];
+		for(var k=0; k < 3; k++){
+			labelContainer.childNodes[k].innerHTML="";
+		}
+		
+		for(var k=0; k < 3; k++){
+			if(className[k].indexOf(": 0") !=-1){//className[k]!=className[k+1]
+				break;
 			}
+			labelContainer.childNodes[k].innerHTML=className[k];
 		 }
-	  }
-	}
+	} 
+	
 	
 
 	init();
@@ -137,7 +143,6 @@ div{
 		if(input.files && input.files[0]){
 			console.log('input.files:',input.files);//FileList객체
 			console.log('input.files[0]:',input.files[0]);//File객체
-			
 			var reader = new FileReader();
 			
 			reader.readAsDataURL(input.files[0]);//이미지파일을 URL로 읽기.(BASE64로 인코딩 된 문자열)
@@ -148,7 +153,7 @@ div{
 				document.querySelector("#preview_image").setAttribute('src',e.target.result); 
 			};
 		}
-	}////////////////////
+	}//////////////////
 	
 </script>
 
