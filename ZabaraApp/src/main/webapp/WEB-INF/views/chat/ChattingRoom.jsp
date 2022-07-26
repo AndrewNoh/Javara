@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style>
 #chatMessage{
     flex-direction: column;
@@ -52,15 +53,16 @@ margin:10px;
                            <h5>
                            <c:if test="${userNickname.nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
                            <c:if test="${userNickname.nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>    
-                           <span class="chat_date">${chatlist.sendtime}</span>
+                           <span class="chat_date"><fmt:formatDate value="${chatlist.sendtime}" pattern="yyyy년 MM월 dd일"/></span>
+                           
+                           </h5>
+                           <p>${chatlist.chatcontent}</p>
                            <c:forEach var="unreadcount" items="${unreadcount}" varStatus="loop">
 								<c:if test="${chatlist.roomno eq  unreadcount.roomno}"> 
 								<c:if test="${unreadcount.unreadcount >0}">
-									<span class="badge badge-light">${unreadcount.unreadcount}</span></c:if>
+									<span class="badge badge-light" style="float: right;">${unreadcount.unreadcount}</span></c:if>
 								</c:if> 
 							</c:forEach>
-                           </h5>
-                           <p>${chatlist.chatcontent}</p>
                         </div>
                      </a>
                   </div>

@@ -44,6 +44,7 @@ background: #dee2e6
 					<div style=""class="custom-select m-3">
 						<span>
 							<select name="status">
+								<option value=""></option>
 								<option value="END" <c:if test="${list.status == 'END'}">selected</c:if> >낙찰</option>
 								<option value="SALE" <c:if test="${list.status == 'SALE'}">selected</c:if>>경매 진행중</option>
 							</select>

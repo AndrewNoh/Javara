@@ -7,176 +7,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c555a840bf745a014ceca0ca9d9dd35&libraries=services"></script>
 
 <style>
-#chatMessage{
-    flex-direction: column;
-    overflow-y: auto;
-    height: 520px;
-}
-#message{
-margin:10px;
-}
-.chat-header-image{
-	    margin-right: 12px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-}
 
-.modal-content{
-color: black;}
-
-
-.input-group-addon {
-  cursor: pointer;
-}
-
-.input-group.date {
-  text-transform: uppercase;
-}
-
-.form-control {
-  border: 1px solid #ccc;
-  box-shadow: none;
-}
-.form-control:hover, .form-control:focus, .form-control:active {
-  box-shadow: none;
-}
-.form-control:focus {
-  border: 1px solid #34495e;
-}
-
-.bootstrap-datetimepicker-widget.dropdown-menu {
-  border: 1px solid #34495e;
-  border-radius: 0;
-  box-shadow: none;
-  margin: 10px 0 0 0;
-  padding: 0;
-  min-width: 300px;
-  max-width: 100%;
-  width: auto;
-  color:black;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu.bottom:before, .bootstrap-datetimepicker-widget.dropdown-menu.bottom:after {
-  display: none;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu table td,
-.bootstrap-datetimepicker-widget.dropdown-menu table th {
-  border-radius: 0;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu table td.old, .bootstrap-datetimepicker-widget.dropdown-menu table td.new {
-  color: #bbb;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu table td.today:before {
-  border-bottom-color: #0095ff;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu table td.active,
-.bootstrap-datetimepicker-widget.dropdown-menu table td.active:hover,
-.bootstrap-datetimepicker-widget.dropdown-menu table td span.active {
-  background-color: #0095ff;
-  text-shadow: none;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu table td.active.today:before,
-.bootstrap-datetimepicker-widget.dropdown-menu table td.active:hover.today:before,
-.bootstrap-datetimepicker-widget.dropdown-menu table td span.active.today:before {
-  border-bottom-color: #fff;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu table th {
-  height: 40px;
-  padding: 0;
-  width: 40px;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu table th.picker-switch {
-  width: auto;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu table tr:first-of-type th {
-  border-bottom: 1px solid #34495e;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu table td.day {
-  height: 32px;
-  line-height: 32px;
-  padding: 0;
-  width: auto;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu table td span {
-  border-radius: 0;
-  height: 77px;
-  line-height: 77px;
-  margin: 0;
-  width: 25%;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu .datepicker-months tbody tr td,
-.bootstrap-datetimepicker-widget.dropdown-menu .datepicker-years tbody tr td,
-.bootstrap-datetimepicker-widget.dropdown-menu .datepicker-decades tbody tr td {
-  padding: 0;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu .datepicker-decades tbody tr td {
-  height: 27px;
-  line-height: 27px;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu .datepicker-decades tbody tr td span {
-  display: block;
-  float: left;
-  width: 50%;
-  height: 46px;
-  line-height: 46px !important;
-  padding: 0;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu .datepicker-decades tbody tr td span:not(.decade) {
-  display: none;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td {
-  padding: 0;
-  width: 30%;
-  height: 20px;
-  line-height: 20px;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td:nth-child(2) {
-  width: 10%;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td a,
-.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td span,
-.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td button {
-  border: none;
-  border-radius: 0;
-  height: 56px;
-  line-height: 56px;
-  padding: 0;
-  width: 100%;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td span {
-  color: #333;
-  margin-top: -1px;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td button {
-  background-color: #fff;
-  color: #333;
-  font-weight: bold;
-  font-size: 1.2em;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td button:hover {
-  background-color: #eee;
-}
-
-.bootstrap-datetimepicker-widget.dropdown-menu .picker-switch table td {
-  border-top: 1px solid #34495e;
-}
-.bootstrap-datetimepicker-widget.dropdown-menu .picker-switch table td a, .bootstrap-datetimepicker-widget.dropdown-menu .picker-switch table td span {
-  display: block;
-  height: 40px;
-  line-height: 40px;
-  padding: 0;
-  width: 100%;
-}
-
-.todayText:before {
-  content: "Today's Date";
-}
-
-
-.modal{
- position: absolute;
- top: 50%;
-}
 
 
 </style>
@@ -251,16 +82,16 @@ color: black;}
 										</div>
 							</div>
 							 <c:if test="${list.auction_no>0}"><a href="<c:url value="/board/auctionview.do"><c:param value="${list.auction_no}" name="no"/></c:url>" rel="lyteframe" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"></c:if>
-							 <c:if test="${list.product_no>0}"><a href="<c:url value="/board/productview.do"><c:param value="${list.product_no}" name="no"/></c:url>" rel="lyteframe" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"></c:if>
 								<div class="reserved-wrapper common-bg-hover" >
 									<c:forEach var="image" items="${images}" varStatus="loop">
 										<img src="${pageContext.request.contextPath}/resources/assets/img/product_img/${image.imageName}" style="width: 70px;">
 									</c:forEach>
 									<div class="reserved-main">
 									<div>${list.title}</div>
-									<div class="reserved-price">가격 : ${list.price}</div>
+									<div class="reserved-price">가격 : ${list.upper_Price}</div>
 									</div>
-									<div><span class="reserve-button closed">거래완료</span></div>
+									<div><c:if test="${list.status == 'END'}">낙찰</c:if>
+									 <c:if test="${list.status == 'SALE'}">경매 진행중</c:if></div>
 								</div>
 							</a>
 							<c:forEach var="message" items="${message}" varStatus="loop">
@@ -356,7 +187,7 @@ color: black;}
     			<a type="button" id="sendFile" onclick="sendFile()" ><i class="bi bi bi-send-check-fill m-1" style="float: right; font-size: 35px;"></i></a> 
 			</div>
 			
-			<div id="modals" class="modal fade">
+			<div id="modalPhon" class="modal fade">
 			    <div class="modal-dialog" role="document">
 			        <div class="modal-content">
 			            <div class="modal-header" style="justify-content: center;">  
@@ -366,6 +197,21 @@ color: black;}
 				            <form class="form-horizontal" role="form" method="POST" action="#" style="text-align: center;">
 				             <span>전화번호 공유를 하시겠습니까?</span>
 						     <button type="button" class="btn btn-outline-dark my-3" data-dismiss="modal" id="phon" style="margin: auto; display: block;">전화번호 공유</button>
+					        </form>
+					      </div>
+			        </div><!-- /.modal-content -->
+			    </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			<div id="modalJpay" class="modal fade">
+			    <div class="modal-dialog" role="document">
+			        <div class="modal-content">
+			            <div class="modal-header" style="justify-content: center;">  
+			                <h1 class="modal-title" style="color: black;"> 낙찰금액 : ${list.upper_Price}</h1>
+			            </div>
+			            <div class="modal-body">
+				            <form class="form-horizontal" role="form" method="POST" action="#" style="text-align: center;">
+				             <span>낙찰을 진행 하시겠습니까?</span>
+						     <button type="button" class="btn btn-outline-dark my-3" data-dismiss="modal" id="jpay" style="margin: auto; display: block;">낙찰</button>
 					        </form>
 					      </div>
 			        </div><!-- /.modal-content -->
@@ -394,13 +240,14 @@ color: black;}
 	    			<a type="button" id="" onclick="sendemoji()" ><i class="bi bi bi-send-check-fill m-1" style="float: right; font-size: 35px;"></i></a> 
     			</div>
 			</div>
-				<div  class="type_msg" id="form" method="post" action="<c:url value="/chat/chatting.do"><c:param value="${product_no}" name="product_no"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>">
+				<div  class="type_msg" id="form" method="post" action="<c:url value="/chat/chatting.do"><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					<div class="input_msg_write d-flex ">
 						<a href="#"  data-toggle="modal" data-target="#modal" class="title m-b-md"><i class="bi bi-clock m-1" style="float: left; font-size: 35px;"></i></a>
 						<a type="button" id="imgtoggle" ><i class="bi bi bi-card-image m-1" style="float: left; font-size: 35px;"></i></a> 
 						<a type="button" id="emojitoggle" ><i class="bi bi bi-emoji-smile m-1" style="float: left; font-size: 35px;"></i></a> 
-						<a type="button" id="phone" data-toggle="modal" data-target="#modals" class="title m-b-md"><i class="bi bi bi bi-telephone-fill m-1" style="float: left; font-size: 35px;"></i></a> 
+						<a type="button" id="phone" data-toggle="modal" data-target="#modalPhon" class="title m-b-md"><i class="bi bi bi bi-telephone-fill m-1" style="float: left; font-size: 35px;"></i></a> 
+						<a type="button" id="jpays" data-toggle="modal" data-target="#modalJpay" class="title m-b-md"><i class="bi bi-credit-card-2-back m-1" style="float: left; font-size: 35px;"></i></a> 
 						<input type="file" id="file" name="file" onchange="uploadFile(this)" style="display:none"> 
 						<input type="text" class="write_msg" placeholder="메시지를 입력하세요" id="chatcontent" name="chatcontent"/>
 						<a href="javascript:void(0);" id="send" type="submit"><i class="bi bi-send" aria-hidden="true"  style="float: right; font-size: 35px;"></i></a>
@@ -411,14 +258,16 @@ color: black;}
 	</div>
 </div>
 </div>
+
 <script>
+
 
 /* $(function() {
 
 	timer = setInterval( function () {
 
 		$.ajax({
-			url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${product_no}" name="product_no"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
+			url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
 			type: 'get',
 			dataType: 'text',
 			success: function (result) {
@@ -528,9 +377,32 @@ function uploadFile(e) {
 					+"<div class='received_msg'><div class='received_withd_msg'>"+nickname+"<p>"+e.data.substring(5)+"<br/></p></div><span style='float: left;font-size: small; margin-top:5px;'>"
 					+today.toLocaleTimeString()+"</span></div></div>");
 			
+			$.ajax({
+				url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
+				data: {chatcontent:'<span style="text-align:center; font-size:20px;">${userNickname.nickname }:${userNickname.phonenumber}</span>',
+						senduserno:${userno},
+						unread_count:'1',
+						sendtime: today.toLocaleTimeString('en-US'),
+						'${_csrf.parameterName}':'${_csrf.token}'},
+				type: 'POST',
+				dataType: 'text',
+				success: function (result) {
+					console.log(result)
+				},
+				error: function () {
+					console.log('error')
+				}
+			});
+			wsocket.send('전화번호2:'+"<span style='text-align:center; font-size:20px;'>${userNickname.nickname }:${userNickname.phonenumber}</span>");
+            appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center; font-size:20px;'>${userNickname.nickname }:${userNickname.phonenumber}</p>"
+            +"<span style='float: right;font-size: small; margin-top:5px;'>"
+			+today.toLocaleTimeString()+"</span></div></div>");
+		}else if(e.data.substring(0, 6) ==='전화번호2:'){
+			appendMessage("<div class='outgoing_msg'><div class='incoming_msg_img'><c:if test='${userNickname.nickname eq chatroom.writeusernickname }'><img class='chat-header-image' src='${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatroom.senduserprofileimg}' alt='sunil'></c:if>"
+					+"<c:if test='${userNickname.nickname ne chatroom.writeusernickname }'><img class='chat-header-image' src='${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatroom.writeuserprofileimg}' alt='sunil'></c:if></div>"
+					+"<div class='received_msg'><div class='received_withd_msg'>"+nickname+"<p>"+e.data.substring(5)+"<br/></p></div><span style='float: left;font-size: small; margin-top:5px;'>"
+					+today.toLocaleTimeString()+"</span></div></div>");
 		}
-
-	
 			
 	}
 	function appendMessage(msg){
@@ -549,7 +421,7 @@ function uploadFile(e) {
 	$('#appointed').on('click',function(e){
 		var form1 = $("#form").serialize();
 		$.ajax({
-			url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${product_no}" name="product_no"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
+			url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
 			data: {chatcontent:"약속</br>"+$('#date').val()+" "+$('#time').val()+"</br>장소</br>"+$("#adrress").text(),
 					senduserno:${userno},
 					unread_count:'1',
@@ -582,7 +454,7 @@ function uploadFile(e) {
 			var form1 = $("#form").serialize();
 			if($('#chatcontent').val().length>=1){
 				$.ajax({
-					url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${product_no}" name="product_no"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
+					url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
 					data: {chatcontent:$('#chatcontent').val(),
 							senduserno:${userno},
 							unread_count:'1',
@@ -684,8 +556,8 @@ function uploadFile(e) {
 			var form1 = $("#form").serialize();
 						
 			 $.ajax({
-				url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${product_no}" name="product_no"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
-				data: {chatcontent:'<span style="text-align:center;">전화번호 공유를 요청하였습니다<br/><button class="btn btn-success m-3 agreemrnt" id="agreemrnt">동의</button><button class="btn btn-danger m-3 disagreemrnt" id="disagreemrnt">비동의</button></span>',
+				url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
+				data: {chatcontent:'<span style="text-align:center;">전화번호 공유를 요청하였습니다<br/><button class="btn btn-success m-3 agreemrnt" id="agreemrnt">동의</button><button class="btn btn-danger m-3 disagreemrnt" id="disagreemrnt">비동의</button></span><input type="hidden" name="${phonnumber}" value="${userNickname.nickname }:${userNickname.phonenumber}"/>',
 						senduserno:${userno},
 						unread_count:'1',
 						sendtime: today.toLocaleTimeString('en-US'),
@@ -710,11 +582,11 @@ function uploadFile(e) {
 		var disagreemrnt = document.querySelectorAll('.disagreemrnt');
 		for(var i=0; i<disagreemrnt.length;i++){
 			disagreemrnt[i].onclick=function(e){
-				this.onclick='';
+				this.onclick='null';
 				var form1 = $("#form").serialize();
 							
 				 $.ajax({
-					url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${product_no}" name="product_no"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
+					url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
 					data: {chatcontent:'<span style="text-align:center; font-size:20px;">전화번호 공유를 거절하였습니다</span>',
 							senduserno:${userno},
 							unread_count:'1',
@@ -743,11 +615,11 @@ function uploadFile(e) {
 		var agreemrnt = document.querySelectorAll('.agreemrnt');
 		for(var i=0; i<agreemrnt.length;i++){
 			agreemrnt[i].onclick=function(e){
-				this.onclick='';
+				this.onclick='null';
 				var form1 = $("#form").serialize();
 							
 				 $.ajax({
-					url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${product_no}" name="product_no"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
+					url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
 					data: {chatcontent:'<span style="text-align:center; font-size:20px;">${userNickname.nickname }:${userNickname.phonenumber}</span>',
 							senduserno:${userno},
 							unread_count:'1',
@@ -766,6 +638,101 @@ function uploadFile(e) {
 				console.log(result);
 				wsocket.send('전화번호:'+"<span style='text-align:center; font-size:20px;'>${userNickname.nickname }:${userNickname.phonenumber}</span>");
 	            appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center; font-size:20px;'>${userNickname.nickname }:${userNickname.phonenumber}</p>"
+	            +"<span style='float: right;font-size: small; margin-top:5px;'>"
+				+today.toLocaleTimeString()+"</span></div></div>");
+				
+			};
+		}
+		
+		$('#jpay').on('click',function(){
+			var form1 = $("#form").serialize();
+						
+			 $.ajax({
+				url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
+				data: {chatcontent:'<span style="text-align:center;">낙찰금액 : ${list.upper_Price}</br>낙찰 받으시겠습니까?<br/>낙찰과 동시에 결제가 진행됩니다.<br/><button class="btn btn-success m-3 success" id="success">낙찰</button><button class="btn btn-danger m-3 fail" id="fail">거부</button></span>',
+						senduserno:${userno},
+						unread_count:'1',
+						sendtime: today.toLocaleTimeString('en-US'),
+						'${_csrf.parameterName}':'${_csrf.token}'},
+				type: 'POST',
+				dataType: 'text',
+				success: function (result) {
+					console.log(result)
+				},
+				error: function () {
+					console.log('error')
+				}
+			});
+			
+			console.log(result);
+			wsocket.send('서버로부터받은 메시지:'+"<span style='text-align:center;'>낙찰금액 : ${list.upper_Price}</br>낙찰 받으시겠습니까?<br/> 낙찰과 동시에 결제가 진행됩니다.<br/><button class='btn btn-success m-3 success' id='success'>낙찰</button><button class='btn btn-danger m-3 fail' id='fail'>거부</button></span>");
+            appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center;'>낙찰금액 : ${list.upper_Price}</br>낙찰 받으시겠습니까?<br/>낙찰과 동시에 결제가 진행됩니다.<br/><button class='btn btn-success m-3 success' id='success'>낙찰</button><button class='btn btn-danger m-3 fail' id='fail'>거부</button></p>"
+            +"<span style='float: right;font-size: small; margin-top:5px;'>"
+			+today.toLocaleTimeString()+"</span></div></div>");
+			
+		});
+		
+		
+		
+		var fail = document.querySelectorAll('.fail');
+		for(var i=0; i<fail.length;i++){
+			fail[i].onclick=function(e){
+				this.onclick='null';
+				var form1 = $("#form").serialize();
+							
+				 $.ajax({
+					url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
+					data: {chatcontent:'<span style="text-align:center; font-size:20px;">낙찰을 거부하셨습니다.</span>',
+							senduserno:${userno},
+							unread_count:'1',
+							sendtime: today.toLocaleTimeString('en-US'),
+							'${_csrf.parameterName}':'${_csrf.token}'},
+					type: 'POST',
+					dataType: 'text',
+					success: function (result) {
+						console.log(result)
+					},
+					error: function () {
+						console.log('error')
+					}
+				});
+				
+				console.log(result);
+				wsocket.send('낙찰:'+"<span style='text-align:center; font-size:20px;'>낙찰을 거부하셨습니다.</span>");
+	            appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center; font-size:20px;'>낙찰을 거부하셨습니다.</p>"
+	            +"<span style='float: right;font-size: small; margin-top:5px;'>"
+				+today.toLocaleTimeString()+"</span></div></div>");
+				
+			};
+		};
+		
+		
+		var success = document.querySelectorAll('.success');
+		for(var i=0; i<success.length;i++){
+			success[i].onclick=function(e){
+				this.onclick='null';
+				var form1 = $("#form").serialize();
+							
+				 $.ajax({
+					url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
+					data: {chatcontent:'<span style="text-align:center; font-size:20px;"><strong>축하합니다. </br></strong>${list.upper_Price}원에 낙찰이 되었습니다.</br></span>',
+							senduserno:${userno},
+							unread_count:'1',
+							sendtime: today.toLocaleTimeString('en-US'),
+							'${_csrf.parameterName}':'${_csrf.token}'},
+					type: 'POST',
+					dataType: 'text',
+					success: function (result) {
+						console.log(result)
+					},
+					error: function () {
+						console.log('error')
+					}
+				});
+				
+				console.log(result);
+				wsocket.send('낙찰:'+"<span style='text-align:center; font-size:20px;'><strong>축하합니다. </br></strong>${list.upper_Price}원에 낙찰이 되었습니다.</br></span>");
+	            appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center; font-size:20px;'><strong>축하합니다. </br></strong>${list.upper_Price}원에 낙찰이 되었습니다.</br></p>"
 	            +"<span style='float: right;font-size: small; margin-top:5px;'>"
 				+today.toLocaleTimeString()+"</span></div></div>");
 				

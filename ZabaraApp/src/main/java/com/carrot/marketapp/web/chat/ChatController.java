@@ -48,7 +48,6 @@ public class ChatController {
 		model.addAttribute("wirtenickName", map.get("wirtenickName"));
 
 		model.addAttribute("auction_no", map.get("auction_no"));
-		model.addAttribute("product_no", map.get("product_no"));
 		model.addAttribute("townlist_no", map.get("townlist_no"));
 
 		model.addAttribute("wirteuserno", map.get("wirteuserno"));
@@ -63,13 +62,11 @@ public class ChatController {
 		model.addAttribute("userno", map.get("userno"));
 
 		System.out.println("auction_no" + map.get("auction_no"));
-		System.out.println("product_no" + map.get("product_no"));
 		System.out.println("townlist_no" + map.get("townlist_no"));
 
 		System.out.println("GET");
 		ChatDTO chatroom = chatService.findChatRoom(map);
 		model.addAttribute("auction_no", map.get("auction_no"));
-		model.addAttribute("product_no", map.get("product_no"));
 		model.addAttribute("townlist_no", map.get("townlist_no"));
 		model.addAttribute("chatroom", chatroom);
 
@@ -103,17 +100,6 @@ public class ChatController {
 			List<ImageDTO> image = imageService.selectList(map);
 			model.addAttribute("images", image);
 			model.addAttribute("list", list);
-		} else if (Integer.parseInt((String) map.get("product_no")) > 0) {
-			int no = Integer.parseInt((String) map.get("product_no"));
-			map.put("no", map.get("product_no"));
-			map.put("board", "중고물품");
-			list = boardService.selectOne(map);
-			model.addAttribute("product_no", no);
-			map.put("product_no", map.get("product_no"));
-			List<ImageDTO> image = imageService.selectList(map);
-
-			model.addAttribute("images", image);
-			model.addAttribute("list", list);
 		} else {
 			int no = Integer.parseInt((String) map.get("townlist_no"));
 			map.put("no", map.get("townlist_no"));
@@ -144,7 +130,6 @@ public class ChatController {
 		map.put("wirteuserno", map.get("wirteuserno"));
 		System.out.println("userno: " + map.get("userno"));
 		System.out.println("auction_no: " + map.get("auction_no"));
-		System.out.println("product_no" + map.get("product_no"));
 		System.out.println("townlist_no" + map.get("townlist_no"));
 		System.out.println("wirteuserno: " + map.get("wirteuserno"));
 		System.out.println("chatcontent: " + map.get("chatcontent"));
@@ -169,24 +154,17 @@ public class ChatController {
 			if (Integer.parseInt((String) map.get("auction_no")) == 0) {
 				map.put("auction_no", "");
 			}
-			if (Integer.parseInt((String) map.get("product_no")) == 0) {
-				map.put("product_no", "");
-			}
 			if (Integer.parseInt((String) map.get("townlist_no")) == 0) {
 				map.put("townlist_no", "");
 			}
 
 			System.out.println("auction_no" + map.get("auction_no"));
-			System.out.println("product_no" + map.get("product_no"));
 			System.out.println("townlist_no" + map.get("townlist_no"));
 
 			chatService.createChatRoomno(map);
 
 			if (Integer.parseInt((String) map.get("auction_no")) == 0) {
 				map.put("auction_no", "");
-			}
-			if (Integer.parseInt((String) map.get("product_no")) == 0) {
-				map.put("product_no", "");
 			}
 			if (Integer.parseInt((String) map.get("townlist_no")) == 0) {
 				map.put("townlist_no", "");

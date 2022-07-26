@@ -71,14 +71,16 @@
          <form id="searchForm" action="<c:url value="/board/search.do"/>" method="post">
             <sec:csrfInput/>
             <div class="search row" style="display: flex;">
-               <div class="custom-select col" style="width: 100px;">
+               <div class="custom-select col mb-2" style="width: 100px;">
                <select id="searchBoardSelect" name="board">
+                  <option selected value="경매">경매</option>
                   <option value="경매">경매</option>
                   <option value="우리동네">동내생활</option>
                </select>
                </div>
-               <div class="custom-select col" style="width: 100px;">
+               <div class="custom-select col mb-2" style="width: 100px;">
                <select id="searchCategorySelect" name="category">
+                  <option  value=""></option>
                   <option selected value="기타">기타</option>
                            <option value="중고차">중고차</option>
                            <option value="디지털기기">디지털기기</option>
