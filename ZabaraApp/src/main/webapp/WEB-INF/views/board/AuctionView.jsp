@@ -41,16 +41,7 @@ background: #dee2e6
 					</div>
 				</c:if>
 				<c:if test="${isWriter}">
-					<div style=""class="custom-select m-3">
-						<span>
-							<select name="status">
-								<option value=""></option>
-								<option value="END" <c:if test="${list.status == 'END'}">selected</c:if> >낙찰</option>
-								<option value="SALE" <c:if test="${list.status == 'SALE'}">selected</c:if>>경매 진행중</option>
-							</select>
-						</span>
-						<button id="statusChange" style="float: right;" class="btn">확인</button>
-					</div>
+					<button id="statusChange" style="float: right;" class="btn btn-warning" title="${list.status == 'END' ? 'SALE' : 'END'}">${list.status == 'END' ? '낙찰취소' : '낙찰하기'}</button>
 					<br>
 					<br>
 				</c:if>
@@ -62,8 +53,8 @@ background: #dee2e6
 					</div>
 				<div class="mb-4">${list.category}</div>
 				<div class="mb-5" style="font-size: 20px;">
-					<p id="startPrice">시작가 : <strong style="font-size: 30px;">${list.base_Price}\</strong></p>
-					<p id="upperPrice">현재 최고가 : <strong style="color: #0fff90; font-size: 35px;">${list.upper_Price}\</strong></p>
+					<p id="startPrice" title="${list.base_Price}">시작가 : <strong style="font-size: 30px;">${list.base_Price}\</strong></p>
+					<p id="upperPrice" title="${list.upper_Price}">현재 최고가 : <strong style="color: #0fff90; font-size: 35px;">${list.upper_Price}\</strong></p>
 				</div>
 				<div class="mb-5">
 					<p>${list.content}</p>
@@ -358,9 +349,12 @@ background: #dee2e6
 	
 	
    $('#statusChange').on("click", function(){
-		var value = $('[name=status]').val();
-		var start = $('#startPrice').val();
-		var upper = $('#upperPrice').val();
+		var value = $('#statusChange').attr("title");
+		var start = $('#startPrice').attr("title");
+		var upper = $('#upperPrice').attr("title");
+		
+		console.log(start);
+		console.log(upper);
 		
 		if ((upper - start) > 0) {
 			$.ajax({
@@ -370,12 +364,13 @@ background: #dee2e6
 				data:{'${_csrf.parameterName}':'${_csrf.token}', auction_no:${list.auction_no}, board:"경매", status:value},
 			}).done(function(data){
 				console.log(data + " : " + value)
-				if(value == 'END'){
-					$('[name=status]').attr("disabled", true);
-				}
+				var text = value == 'END' ? '낙찰취소' : '낙찰하기';
+				$('#statusChange').text(text);
+				$('#statusChange').attr("title", "SALE");
+				alert(value == 'END' ? "낙찰완료" : "낙찰취소");
 			});
 		} else {
-			alert("낙찰하려면 시작가격보단 최고가가 높아야함");
+			alert("낙찰하려면 시작가격보단 최고가가 높아야합니다.");
 		}
 	});
 </script>

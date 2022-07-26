@@ -16,9 +16,7 @@ public class ImageDAO {
 	private SqlSessionTemplate sqlSession;
 
 	public List<ImageDTO> selectList(Map map) {
-		if (map.get("board").equals("중고물품")) {
-			return sqlSession.selectList("getProductImage", map);
-		} else if(map.get("board").equals("우리동네")) {		
+		if(map.get("board").equals("우리동네")) {		
 			System.out.println(map.get("townlist_no"));
 			return sqlSession.selectList("getTownImage", map);
 		} else {			
