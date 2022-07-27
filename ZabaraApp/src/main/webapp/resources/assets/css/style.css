@@ -55,6 +55,7 @@ body::before {
   position: fixed;
   background: #040404 url("../img/main_background.jpg") top right no-repeat;
   background-size: cover;
+  background-attachment: fixed;
   left: 0;
   right: 0;
   top: 0;
