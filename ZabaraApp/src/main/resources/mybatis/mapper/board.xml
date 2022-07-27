@@ -42,6 +42,28 @@
 		WHERE T.STATUS = 'SALE'
 		ORDER BY P.AUCTION_NO DESC)
 	</select>
+		
+	<select id="mainPageListNoAddr" parameterType="Map"
+		resultType="com.carrot.marketapp.model.dto.BoardDTO">
+		<![CDATA[
+			SELECT * FROM
+				(SELECT * FROM AUCTION_LIST
+					WHERE STATUS='SALE' AND LIKES > 0
+						ORDER BY dbms_random.value DESC) L
+							WHERE ROWNUM <= 4
+		]]>
+	</select>
+	
+	<select id="mainPageListYesAddr" parameterType="Map"
+		resultType="com.carrot.marketapp.model.dto.BoardDTO">
+		<![CDATA[
+			SELECT * FROM
+				(SELECT * FROM AUCTION_LIST L
+					WHERE STATUS='SALE' AND LIKES > 0 AND (SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) = #{simpleAddress}
+						ORDER BY dbms_random.value DESC) D
+							WHERE ROWNUM <= 4
+		]]>
+	</select>
 
 	<select id="getAuctionNo" resultType="_int">
 		SELECT AUCTION_NO FROM

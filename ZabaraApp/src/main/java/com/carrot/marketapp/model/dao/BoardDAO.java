@@ -216,5 +216,15 @@ public class BoardDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.update("updateAddress", map);
 	}
+	
+	public List<BoardDTO> mainPageListNoAddr(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("mainPageListNoAddr", map);
+	}
+
+	public List<BoardDTO> mainPageListYesAddr(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("mainPageListYesAddr", map);
+	}
 
 }
