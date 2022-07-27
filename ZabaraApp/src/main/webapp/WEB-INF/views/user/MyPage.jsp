@@ -464,12 +464,18 @@ color:#ffc107
                   $("#AccountBookToggleDiv").toggle(1000);
             });
             $("#MapToggle").click(function() {
-               $("#MapToggleDiv").toggle(1000);
-               setTimeout(function() {
-                  myAddressMap($("#myAddress").text());
-               }, 1000);
-
-            });
+                $("#MapToggleDiv").toggle(1000);
+                setTimeout(function() {
+             	   map.relayout();            	  
+                   myAddressMap($("#myAddress").text());                  
+                }, 1000);   
+                setTimeout(function(){
+                	console.log(addresslat);
+                	console.log(addresslng);
+               	   panTo(addresslat,addresslng);
+                  },1200);
+                
+             });
             $("#ChatToggle").click(function() {
                $("#ChatToggleDiv").toggle(1000);
             });
@@ -492,253 +498,275 @@ color:#ffc107
             }
          }
 
-         var nowProfile = $(".profile-photo").attr('src');
+         var readURL = function(input) {
+             if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-         $("#profileimg").change(function() {
-            var fileForm = /(.*?)\.(jpg|jpeg|png)$/;
-            if (!$('#profileimg').val().match(fileForm)) {
-               $('#profileimg').val(null);
-               const Toast = Swal.mixin({
-                  toast : true,
-                  position : 'center-center',
-                  showConfirmButton : false,
-                  timer : 1000,
-                  timerProgressBar : true,
-               })
+                reader.onload = function(e) {
+                   $('.profile-photo').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+             }
+          }
 
-               Toast.fire({
-                  icon : 'error',
-                  title : 'jpg,jpeg,png타입으로만 설정 가능합니다.'
-               })
-               $("#changeProfileBtn").hide();
-            } else
-               $("#changeProfileBtn").show();
-            readURL(this);
-         });
+          var nowProfile = $(".profile-photo").attr('src');
 
-         $(".profile-photo").click(function() {
-            $("#profileimg").click();
+          $("#profileimg").change(function() {
+             var fileForm = /(.*?)\.(jpg|jpeg|png)$/;
+             if (!$('#profileimg').val().match(fileForm)) {
+                $('#profileimg').val(null);
+                const Toast = Swal.mixin({
+                   toast : true,
+                   position : 'center-center',
+                   showConfirmButton : false,
+                   timer : 3000,
+                   timerProgressBar : true,
+                })
 
-         });
+                Toast.fire({
+                   icon : 'error',
+                   title : 'jpg,jpeg,png타입으로만 설정 가능합니다.'
+                })
+                $("#changeProfileBtn").hide();
+             } else
+                $("#changeProfileBtn").show();
+             readURL(this);
+          });
 
-         // 취소 클릭 시 원래 프로필사진으로 변경후 버튼 숨기기
-         $('#cancelBtn').click(function() {
-            $('.profile-photo').attr('src', nowProfile);
-            $("#changeProfileBtn").hide();
-         });
+          $(".profile-photo").click(function() {
+             $("#profileimg").click();
 
-         $('#saveBtn').click(function() {
-            $("#changeProfileBtn").hide();
-         })
+          });
 
-         function saveChangedProfile() {
-            var profileimg = new FormData();
-            profileimg.append("profileimg", $("#profileimg")[0].files[0]);
-            profileimg.append("${_csrf.parameterName}", "${_csrf.token}");
+          // 취소 클릭 시 원래 프로필사진으로 변경후 버튼 숨기기
+          $('#cancelBtn').click(function() {
+             $('.profile-photo').attr('src', nowProfile);
+             $("#changeProfileBtn").hide();
+          });
 
-            $.ajax({
-               url : '<c:url value="/userinfo/changeProfilePic.do"/>',
-               type : "POST",
-               processData : false,
-               contentType : false,
-               data : profileimg,
-               dataType : "text",
-               success : function(result) {
-                  if (result == "success") {
-                     $("#changeProfileBtn").hide();
-                     nowProfile = $(".profile-photo").attr('src')
-                     const Toast = Swal.mixin({
-                        toast : true,
-                        position : 'center-center',
-                        showConfirmButton : false,
-                        timer : 1000,
-                        timerProgressBar : true,
+          $('#saveBtn').click(function() {
+             $("#changeProfileBtn").hide();
+          })
 
-                     })
+          function saveChangedProfile() {
+             var profileimg = new FormData();
+             profileimg.append("profileimg", $("#profileimg")[0].files[0]);
+             profileimg.append("${_csrf.parameterName}", "${_csrf.token}");
 
-                     Toast.fire({
-                        icon : 'success',
-                        title : '프로필이 변경되었습니다.'
-                     })
-                  }
-               }
+             $.ajax({
+                url : '<c:url value="/userinfo/changeProfilePic.do"/>',
+                type : "POST",
+                processData : false,
+                contentType : false,
+                data : profileimg,
+                dataType : "text",
+                success : function(result) {
+                   if (result == "success") {
+                      $("#changeProfileBtn").hide();
+                      nowProfile = $(".profile-photo").attr('src')
+                      const Toast = Swal.mixin({
+                         toast : true,
+                         position : 'center-center',
+                         showConfirmButton : false,
+                         timer : 1800,
+                         timerProgressBar : true,
 
-            });
+                      })
 
-         }
+                      Toast.fire({
+                         icon : 'success',
+                         title : '프로필이 변경되었습니다.'
+                      })
+                   }
+                }
 
-      // 마이페이지 동네인증
-         function saveMarkerPosition() {
-                  $.ajax({
-                     type : 'POST',
-                     url : '<c:url value="/userinfo/myPageSimpleAddressChange.do"/>',
-                     data : {
-                        nowAddress : nowAddress,
-                        markerlat : markerlat,
-                        markerlng : markerlng,
-                        '${_csrf.parameterName}' : '${_csrf.token}'
-                     },
-                     dataType : "text",
-                     success : function(result) {
-                        if (result == 1) {
-                           const Toast = Swal.mixin({
-                              toast : true,
-                              position : 'center-center',
-                              showConfirmButton : false,
-                              timer : 1000,
-                              timerProgressBar : true,
+             });
 
-                           })
+          }
 
-                           Toast.fire({
-                              icon : 'success',
-                              title : '주소가 변경되었습니다.'
-                           })
-                           $('#myAddress').text(nowAddress);
-                        }
+       // 마이페이지 동네인증
+          function saveMarkerPosition() {
+                   $.ajax({
+                      type : 'POST',
+                      url : '<c:url value="/userinfo/myPageSimpleAddressChange.do"/>',
+                      data : {
+                         nowAddress : nowAddress,
+                         markerlat : markerlat,
+                         markerlng : markerlng,
+                         '${_csrf.parameterName}' : '${_csrf.token}'
+                      },
+                      dataType : "text",
+                      success : function(result) {
+                         if (result == 1) {
+                            const Toast = Swal.mixin({
+                               toast : true,
+                               position : 'center-center',
+                               showConfirmButton : false,
+                               timer : 1800,
+                               timerProgressBar : true,
+                            })
 
-                     }
-                  });
+                            Toast.fire({
+                               icon : 'success',
+                               title : '주소가 변경되었습니다.'
+                            })
+                            addresslat=markerlat;
+                            addresslng=markerlng;
+                            $('#myAddress').text(nowAddress);
+                         }
 
-         }
+                      }
+                   });
 
-         var lat;
-         var lng;
-         var markerlat;
-         var markerlng;
-         var detailAddr;
-         var nowAddress = "";
-         var geocoder = new daum.maps.services.Geocoder();
+          }
 
-         // 내 위치로 이동
-         function nowGeo() {
-            if (navigator.geolocation) { // 브라우저의 Geolocation 지원 여부 판단
-               // 현재 위치 정보를 한 번만 얻기
-               navigator.geolocation
-                     .getCurrentPosition(function(position) {
-                        lat = position.coords.latitude;
-                        lng = position.coords.longitude;
-                        showKakaoMap(lat, lng);
-                     });
+          var addresslat=${latitude};
+          var addresslng=${longitude};
+          var markerlat;
+          var markerlng;
+          var detailAddr;
+          var nowAddress = "";
+          var geocoder = new daum.maps.services.Geocoder();
+          var container = document.getElementById('map'); // 지도를 담을 영역의 DOM 레퍼런스
+          var options = { 
+             center : new kakao.maps.LatLng(${latitude}, ${longitude}), // 지도의 중심좌표
+             level : 3         
+          };
+          var kakaomarker = new daum.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
+          infowindow = new daum.maps.InfoWindow({zindex : 1});
+              
+          var map = new daum.maps.Map(container, options);
+          
+
+          // 내 위치로 이동
+          function nowGeo() {
+             if (navigator.geolocation) { // 브라우저의 Geolocation 지원 여부 판단
+                // 현재 위치 정보를 한 번만 얻기
+                navigator.geolocation
+                      .getCurrentPosition(function(position) {
+                   	   markerlat=37.478745014709745;
+                   	   markerlng=126.8787909892446;
+                   	   setCenter(37.478745014709745, 126.8787909892446);
+                         showKakaoMap(37.478745014709745, 126.8787909892446);
+                         
+                      });
+             }
+          }
+
+          // 마이페이지 내 주소로 지도열기
+          function myAddressMap(addr) {
+             geocoder.addressSearch(addr, function(results, status) {
+                if (status === daum.maps.services.Status.OK) {
+                   var result = results[0];                  
+                   showKakaoMap(result.y, result.x);
+                }
+             });
+          }
+
+          // 주소 검색
+          function search_map() {
+             new daum.Postcode({
+                oncomplete : function(data) {
+                   var addr = data.address; // 최종 주소 변수
+                   console.log(addr);
+                   // 주소 정보를 해당 필드에 넣는다.
+                   document.getElementById("myPageAddr").value = addr;
+                   // 주소로 상세 정보를 검색
+                   geocoder.addressSearch(data.address, function(results,
+                         status) {
+                      // 정상적으로 검색이 완료됐으면
+                      if (status === daum.maps.services.Status.OK) {
+                         var result = results[0]; // 첫번 째 결과의 값을 활용
+                         // 지도를 보여준다 
+                         setCenter(result.y, result.x);
+                         showKakaoMap(result.y, result.x);
+                      }
+                   });
+                }
+             }).open();
+          }
+
+          // 카카오 지도
+          function showKakaoMap(lat, lng) {
+                        
+             var coords = new daum.maps.LatLng(lat, lng);
+             searchDetailAddrFromCoords(coords,
+                   function(result, status) {
+                      if (status === daum.maps.services.Status.OK) {
+                         detailAddr = '<div>지번 주소 : '
+                               + result[0].address.address_name
+                               + '</div>';
+                         content = '<div class="bAddr">' + detailAddr
+                               + '</div>';
+
+                         // 불러온 지도에 중심에 마커표시 
+                         kakaomarker.setPosition(coords);
+                         kakaomarker.setMap(map);
+
+                         // 인포윈도우에 이동한 마커위치에 주소정보를 표시
+                         infowindow.setContent(content);
+                         infowindow.open(map, kakaomarker);
+                         console.log('showKakaoMap:'
+                               + result[0].address.address_name);
+                         nowAddress = result[0].address.address_name;                        
+                      }
+                   });
+
+             // 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
+             daum.maps.event
+                   .addListener(
+                         map,
+                         'click',
+                         function(mouseEvent) {
+                            searchDetailAddrFromCoords(
+                                  mouseEvent.latLng,
+                                  function(result, status) {
+                                     if (status === daum.maps.services.Status.OK) {
+                                        detailAddr = '<div>지번 주소 : '
+                                              + result[0].address.address_name
+                                              + '</div>';
+                                        content = '<div class="bAddr">'
+                                              + detailAddr
+                                              + '</div>';
+
+                                        // 마커를 클릭한 위치에 표시합니다 
+                                        kakaomarker
+                                              .setPosition(mouseEvent.latLng);
+                                        kakaomarker.setMap(map);
+   									   panTo(mouseEvent.latLng.getLat(),mouseEvent.latLng.getLng());
+                                        // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+                                        infowindow
+                                              .setContent(content);
+                                        infowindow
+                                              .open(map, kakaomarker);
+                                        console
+                                              .log('click:'
+                                                    + result[0].address.address_name);
+                                        nowAddress = result[0].address.address_name;
+                                        markerlat = mouseEvent.latLng.getLat();
+                                        markerlng = mouseEvent.latLng.getLng();
+                                     }
+                                  });
+                         });
+
+             function searchDetailAddrFromCoords(coords, callback) {
+                // 좌표로 법정동 상세 주소 정보를 요청합니다
+                geocoder.coord2Address(coords.getLng(), coords.getLat(),
+                      callback);
+             }
+          }
+
+          //지도 이동
+          function setCenter(latitude,longitude) {                    	     
+         	    var moveLatLon = new kakao.maps.LatLng(latitude, longitude);        	            	    
+         	    map.setCenter(moveLatLon);
+         	}
+
+          //지도 이동 가까운거리 애니메이션 효과
+       	 function panTo(latitude,longitude) {
+       	     var moveLatLon = new kakao.maps.LatLng(latitude, longitude);        	            	    
+       	     map.panTo(moveLatLon);            
             }
-         }
-
-         // 마이페이지 내 주소로 지도열기
-         function myAddressMap(addr) {
-            geocoder.addressSearch(addr, function(results, status) {
-               if (status === daum.maps.services.Status.OK) {
-                  var result = results[0];
-                  showKakaoMap(result.y, result.x);
-               }
-            });
-         }
-
-         // 주소 검색
-         function search_map() {
-            new daum.Postcode({
-               oncomplete : function(data) {
-                  var addr = data.address; // 최종 주소 변수
-                  console.log(addr);
-                  // 주소 정보를 해당 필드에 넣는다.
-                  document.getElementById("myPageAddr").value = addr;
-                  // 주소로 상세 정보를 검색
-                  geocoder.addressSearch(data.address, function(results,
-                        status) {
-                     // 정상적으로 검색이 완료됐으면
-                     if (status === daum.maps.services.Status.OK) {
-                        var result = results[0]; // 첫번 째 결과의 값을 활용
-                        // 지도를 보여준다 
-                        showKakaoMap(result.y, result.x);
-                     }
-                  });
-               }
-            }).open();
-         }
-
-         // 카카오 지도
-         function showKakaoMap(lat, lng) {
-            var container = document.getElementById('map'); // 지도를 담을 영역의 DOM 레퍼런스
-            var options = { // 지도를 생성할 때 필요한 기본 옵션
-               center : new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
-               level : 3
-            // 지도의 레벨(확대, 축소 정도)
-            };
-
-            // 지도를 생성합니다    
-            var map = new daum.maps.Map(container, options);
-
-            var marker = new daum.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
-            infowindow = new daum.maps.InfoWindow({
-               zindex : 1
-            }); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
-
-            var coords = new daum.maps.LatLng(lat, lng);
-            searchDetailAddrFromCoords(coords,
-                  function(result, status) {
-                     if (status === daum.maps.services.Status.OK) {
-                        detailAddr = '<div>지번 주소 : '
-                              + result[0].address.address_name
-                              + '</div>';
-                        content = '<div class="bAddr">' + detailAddr
-                              + '</div>';
-
-                        // 불러온 지도에 중심에 마커표시 
-                        marker.setPosition(coords);
-                        marker.setMap(map);
-
-                        // 인포윈도우에 이동한 마커위치에 주소정보를 표시
-                        infowindow.setContent(content);
-                        infowindow.open(map, marker);
-                        console.log('showKakaoMap:'
-                              + result[0].address.address_name);
-                        nowAddress = result[0].address.address_name;
-                        markerlat = lat;
-                        markerlng = lng;
-                     }
-                  });
-
-            // 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
-            daum.maps.event
-                  .addListener(
-                        map,
-                        'click',
-                        function(mouseEvent) {
-                           searchDetailAddrFromCoords(
-                                 mouseEvent.latLng,
-                                 function(result, status) {
-                                    if (status === daum.maps.services.Status.OK) {
-                                       detailAddr = '<div>지번 주소 : '
-                                             + result[0].address.address_name
-                                             + '</div>';
-                                       content = '<div class="bAddr">'
-                                             + detailAddr
-                                             + '</div>';
-
-                                       // 마커를 클릭한 위치에 표시합니다 
-                                       marker
-                                             .setPosition(mouseEvent.latLng);
-                                       marker.setMap(map);
-
-                                       // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-                                       infowindow
-                                             .setContent(content);
-                                       infowindow
-                                             .open(map, marker);
-                                       console
-                                             .log('click:'
-                                                   + result[0].address.address_name);
-                                       nowAddress = result[0].address.address_name;
-
-                                    }
-                                 });
-                        });
-
-            function searchDetailAddrFromCoords(coords, callback) {
-               // 좌표로 법정동 상세 주소 정보를 요청합니다
-               geocoder.coord2Address(coords.getLng(), coords.getLat(),
-                     callback);
-            }
-         }
          
 
          // 자바라페이 잔액 

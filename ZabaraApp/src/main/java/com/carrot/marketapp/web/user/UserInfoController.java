@@ -157,6 +157,8 @@ public class UserInfoController {
 		model.addAttribute("email", record.getEmail());
 		model.addAttribute("phonenumber", record.getPhonenumber());
 		model.addAttribute("profileimage", record.getProfile_img());
+		model.addAttribute("latitude",record.getLatitude());
+		model.addAttribute("longitude",record.getLongitude());
 
 		// 뷰정보 반환]
 		return "/user/edit.market";
@@ -218,6 +220,8 @@ public class UserInfoController {
 		model.addAttribute("phonenumber", record.getPhonenumber());
 		model.addAttribute("profileimage", record.getProfile_img());
 		model.addAttribute("platform", record.getPlatform());
+		model.addAttribute("latitude",record.getLatitude());
+		model.addAttribute("longitude",record.getLongitude());
 		// 채팅리스
 		map.put("userno", record.getUserno());
 		model.addAttribute("userno", record.getUserno());
@@ -392,6 +396,19 @@ public class UserInfoController {
 		map.put("simpleAddress", simpleAddr);
 
 		return map;
+	}
+		
+	
+	@RequestMapping("/category.do")
+	public String category(Model model, Principal principal) {
+		Map map = new HashMap<>();
+		map.put("email", principal.getName());
+		UserDTO record = userService.selectOne(map);
+		model.addAttribute("latitude",record.getLatitude());
+		model.addAttribute("longitude",record.getLongitude());
+		model.addAttribute("address",record.getFulladdress());		
+		
+		return "user/category.market";
 	}
 	
 

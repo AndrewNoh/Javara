@@ -30,7 +30,7 @@
 	<!-- 이메일(아이디)로 조회 -->
 	<select id="userselectOne" parameterType="Map"
 		resultMap="userDtoResult">
-		SELECT m.*,a.simpleaddress,a.fulladdress, ROWNUM FROM
+		SELECT m.*,a.simpleaddress,a.fulladdress,a.latitude,a.longitude, ROWNUM FROM
 		members m JOIN
 		ADDRESS_LIST a ON m.userno=a.userno WHERE email=#{email}
 		AND ROWNUM =

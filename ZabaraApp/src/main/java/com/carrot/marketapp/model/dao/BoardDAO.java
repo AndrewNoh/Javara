@@ -61,6 +61,8 @@ public class BoardDAO {
 	public List<BoardDTO> selectListAll(Map map) {
 		if (map.get("board").equals("우리동네")) {
 			return sqlSession.selectList("getGropListAll", map);
+		}else if(map.get("board").equals("동네아이템가져오기")) {
+			return sqlSession.selectList("getAuctionListAddressItems",map);
 		} else {
 			return sqlSession.selectList("getAuctionListAll", map);
 		}

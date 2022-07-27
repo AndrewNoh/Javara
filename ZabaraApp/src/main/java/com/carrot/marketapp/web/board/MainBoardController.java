@@ -42,6 +42,8 @@ import com.carrot.marketapp.model.service.impl.BoardServiceimpl;
 import com.carrot.marketapp.model.service.impl.ImageServiceimpl;
 import com.carrot.marketapp.model.service.impl.UserServiceimpl;
 import com.carrot.marketapp.util.FileUpDownUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 @RequestMapping("/board")
@@ -62,6 +64,9 @@ public class MainBoardController {
 	@Autowired
 	ImageServiceimpl imageService;
 
+	@Autowired
+	ObjectMapper objectMapper;
+	
 	// 리스트 불러오기(시작)
 	@RequestMapping("/productlist.do")
 	public String goProductList(@RequestParam Map map, Model model, Principal principal) {
@@ -626,4 +631,18 @@ public class MainBoardController {
 		return "/board/ImageAnalysis.market";
 
 	}
+	
+	
+	//카테고리아이템용
+		@RequestMapping(value="/myAddressItemList.do",produces = "application/json;charset=UTF-8")
+		@ResponseBody
+		public String myAddressItemList(@RequestParam Map map,Model model) throws JsonProcessingException {
+			System.out.println(map.get("nowAddress"));
+			String[] simpleAddr = map.get("nowAddress").toString().split(" ");
+			map.put("simpleAddress", simpleAddr[1]);
+			map.put("board", "동네아이템가져오기");
+			List<BoardDTO>itemlist = boardService.selectListAll(map);
+			return objectMapper.writeValueAsString(itemlist);
+		}
+	
 }

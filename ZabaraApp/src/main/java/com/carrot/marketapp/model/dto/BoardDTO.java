@@ -32,6 +32,10 @@ public class BoardDTO {
 	private String nickName;
 	private String endDate;
 	private String status;
+	private String imagename;
+	private double latitude;
+	private double longitude; 
+	
 	
 	//조회수
 	private int viewCount;
