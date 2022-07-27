@@ -369,30 +369,44 @@ color:#ffc107
                </div>
              </div>
                <!--지도-->
-               <div class="col mt-3" id="ChatToggleDiv" style="display: none">
-                  <div class="interests container">
+               <div style="float: right; display: flex"> - 206
+
+				<div class="col mt-3" id="ChatToggleDiv" style="display: none">
+                  <div class="testimonials container mt-3">
                      <div class="section-title">
                         <h2 style="margin-bottom: 30px;">나의 채팅</h2>
-                         </div>
-                           
-                       
-                        
-                        </div>            
-                     <div class="col mt-3" id="CategoryToggleDiv" style="display: none">
-                     <form id="simpleChangeAddr" method="post"
-                        action="#">
-                        <sec:csrfInput />
-                        <input id="myPageAddr" name="myPageAddr" type="hidden" value="">
-                     </form>
-                     <div class="interests container">
-                        <div class="section-title">
-                            <div class="section-title">
-                                 <h2 style="margin-bottom: 30px;">관심 카테고리</h2>
-                              </div>
-                     </div>
-                    </div>
-                   </div>
-                   </div>
+			         </div>
+			         <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+			           <div class="swiper-wrapper">
+			             <c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
+			             <div class="swiper-slide">
+			             <a href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.product_no}" name="product_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
+			               <div class="testimonial-item">
+			                 <p style="height: 200px;">
+			                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+			                     ${chatlist.chatcontent} <i
+			                        class="bx bxs-quote-alt-right quote-icon-right"></i>
+			                  </p>
+			                  <img
+			                     src="${pageContext.request.contextPath}/resources/assets/img/profile/"
+			                     class="testimonial-img" alt="">
+			                  <h3>
+			                     <c:if
+			                        test="${userNickname.nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
+			                     <c:if
+			                        test="${userNickname.nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>
+			                  </h3>
+			                  <h4>${chatlist.sendtime}</h4>
+			               </div>
+			               </a>
+			             </div><!-- End testimonial item -->
+			               </c:forEach>
+			           </div>
+			           <div class="swiper-pagination"></div>
+			         </div>
+			         <div class="owl-carousel testimonials-carousel"></div>
+			       </div><!-- End Testimonials  -->
+                  </div>
                <!--카테고리-->
                <div class="col mt-3" id="LikeToggleDiv" style="display: none">
                      <form id="" method="post"
@@ -413,40 +427,6 @@ color:#ffc107
          <!-- End Counts -->
          <!-- End Interests -->
          <!-- ======= Testimonials ======= -->
-        <div class="testimonials container mt-3">
-         <div class="section-title">
-           <h2>채팅</h2>
-         </div>
-         <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-           <div class="swiper-wrapper">
-             <c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
-             <div class="swiper-slide">
-             <a href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.product_no}" name="product_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
-               <div class="testimonial-item">
-                 <p style="height: 200px;">
-                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                     ${chatlist.chatcontent} <i
-                        class="bx bxs-quote-alt-right quote-icon-right"></i>
-                  </p>
-                  <img
-                     src="${pageContext.request.contextPath}/resources/assets/img/profile/"
-                     class="testimonial-img" alt="">
-                  <h3>
-                     <c:if
-                        test="${userNickname.nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
-                     <c:if
-                        test="${userNickname.nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>
-                  </h3>
-                  <h4>${chatlist.sendtime}</h4>
-               </div>
-               </a>
-             </div><!-- End testimonial item -->
-               </c:forEach>
-           </div>
-           <div class="swiper-pagination"></div>
-         </div>
-         <div class="owl-carousel testimonials-carousel"></div>
-       </div><!-- End Testimonials  -->
    </div>
 </div>
       <!-- End Testimonials  -->

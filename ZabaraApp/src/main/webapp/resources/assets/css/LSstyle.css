@@ -23,7 +23,7 @@ a:hover {
   color: #484949;
 }
 .link:hover {
-  color: #ffeba7;
+  color: #ff9e07;
 }
 p {
   font-weight: 500;
@@ -163,7 +163,7 @@ h6 span{
   line-height: 22px;
   letter-spacing: 0.5px;
   outline: none;
-  color: #c4c3ca;
+  color: #212529;
   border: none;
   -webkit-transition: all 200ms linear;
   transition: all 200ms linear;
@@ -189,25 +189,25 @@ h6 span{
 }
 
 .form-group input:-ms-input-placeholder  {
-  color: #c4c3ca;
+  color: #212529;
   opacity: 0.7;
   -webkit-transition: all 200ms linear;
     transition: all 200ms linear;
 }
 .form-group input::-moz-placeholder  {
-  color: #c4c3ca;
+  color: #212529;
   opacity: 0.7;
   -webkit-transition: all 200ms linear;
     transition: all 200ms linear;
 }
 .form-group input:-moz-placeholder  {
-  color: #c4c3ca;
+  color: #212529;
   opacity: 0.7;
   -webkit-transition: all 200ms linear;
     transition: all 200ms linear;
 }
 .form-group input::-webkit-input-placeholder  {
-  color: #c4c3ca;
+  color: #212529;
   opacity: 0.7;
   -webkit-transition: all 200ms linear;
     transition: all 200ms linear;

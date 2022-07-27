@@ -21,6 +21,18 @@
    height: 60px;
    padding: 5px;
 }
+
+.dropdown-menu {
+    border: none;
+    background: white;
+ }
+ 
+ .dropdown-item:focus, .dropdown-item:hover{
+    background: white;
+ }
+ a{
+  color:#198754
+ }
 </style>
       <div class=" m-5"> 
       <div class="container">
@@ -30,18 +42,17 @@
    <div class="messaging ">
       <div class="inbox_msg">
          <div class="inbox_people">
-         <div class="css-1r0o66s">
-            <div class="chat-header-profile">
-                     <img class="chat-header-image" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${profileimage}" alt="대화상대아이디">
-                     <div class="main-title" >
-                     <input type="hidden" id="nickname" name="nickname" value="${userNickname.nickname }"/>
-                             ${userNickname.nickname }
-                     <span class="temperature">37.6°C</span>
-                     </div>
-                     </div>
-                     </div>
-         </div>
-         
+	         <div class="css-1r0o66s">
+	            <div class="chat-header-profile">
+		            <img class="chat-header-image" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${profileimage}" alt="대화상대아이디">
+		            <div class="main-title" >
+			            <input type="hidden" id="nickname" name="nickname" value="${userNickname.nickname }"/>
+			                    ${userNickname.nickname }
+			            <span class="temperature">37.6°C</span>
+		            </div>
+	            </div>
+	         </div>
+	      </div>
          
          <div class="mesgs">
             <div class="msg_history">
@@ -68,20 +79,15 @@
                            </div>
                         </div>
                         <div class="css-1idbtsb" >
-                                  <div class="more-button-wrapper common-bg-hover"id="chatmenutoggle">
-                                    <svg width="4" height="16" viewBox="0 0 4 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.0002 3.19998C2.7152 3.19998 3.3002 2.61498 3.3002 1.89998C3.3002 1.18498 2.7152 0.599976 2.0002 0.599976C1.2852 0.599976 0.700195 1.18498 0.700195 1.89998C0.700195 2.61498 1.2852 3.19998 2.0002 3.19998Z" fill="currentColor"></path>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.0002 6.70001C1.2852 6.70001 0.700195 7.28501 0.700195 8.00001C0.700195 8.71501 1.2852 9.30001 2.0002 9.30001C2.7152 9.30001 3.3002 8.71501 3.3002 8.00001C3.3002 7.28501 2.7152 6.70001 2.0002 6.70001Z" fill="currentColor"></path>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.0002 12.8C1.2852 12.8 0.700195 13.385 0.700195 14.1C0.700195 14.815 1.2852 15.4 2.0002 15.4C2.7152 15.4 3.3002 14.815 3.3002 14.1C3.3002 13.385 2.7152 12.8 2.0002 12.8Z" fill="currentColor"></path>
-                                    </svg>
-                                 </div>
-                                 <div class="option-container" id="chatmenuToggleDiv" style="display:none">
-                                    <div type="button" id="chatOff">돌아가기</div>
-                                    <div class="option-item common-bg-hover">알림음 끄기</div>
-                                    <div class="option-item common-bg-hover">대화상대 차단하기</div>
-                                    <div class="option-item common-bg-hover">채팅방 나가기</div>
-                                 </div>
-                              </div>
+                             <div class="more-button-wrapper common-bg-hover"id="chatmenutoggle">
+								<i class="bi bi-three-dots-vertical m-1" style="left 30px; font-size: 35px;"></i>
+							</div>
+							<div class="option-container" id="chatmenuToggleDiv" style="display:none">
+								<div class="option-item common-bg-hover">알림음 끄기</div>
+								<div class="option-item common-bg-hover">대화상대 차단하기</div>
+								<div class="option-item common-bg-hover">채팅방 나가기</div>
+							</div>
+						</div>
                      </div>
                       <c:if test="${list.auction_no>0}"><a href="<c:url value="/board/auctionview.do"><c:param value="${list.auction_no}" name="no"/></c:url>" rel="lyteframe" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"></c:if>
                         <div class="reserved-wrapper common-bg-hover" >
@@ -122,30 +128,30 @@
                          </div>
                          <div class='received_msg'>
                             <div class='received_withd_msg'>
-                            <c:if test="${userNickname.nickname ne wirtenickName }" var="chatuser">
-                              <span>${wirtenickName}</span>
-                           </c:if>
-                           <c:if test="${!chatuser }">
-                              <span>${chatnickname}</span>
-                           </c:if>
-                           <c:if test="${userNickname.nickname eq nicknames.sendusernickname }" var="nickname">
-                              <span>${nicknames.writeusernickname}</span>
-                           </c:if>
-                           <c:if test="${!nickname }">
-                              <span>${nicknames.sendusernickname }</span>
-                           </c:if>
-                           <c:if test="${message.img eq null }" var="chatimg">
-                              <p>${message.chatcontent }<br/></p></div>
-                            </c:if>
-                           <c:if test="${!chatimg}" var="chatimg">
-                              <img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/${message.img}"/></div>
-                            </c:if>
+	                            <c:if test="${userNickname.nickname ne wirtenickName }" var="chatuser">
+	                              <span>${wirtenickName}</span>
+	                           </c:if>
+	                           <c:if test="${!chatuser }">
+	                              <span>${chatnickname}</span>
+	                           </c:if>
+	                           <c:if test="${userNickname.nickname eq nicknames.sendusernickname }" var="nickname">
+	                              <span>${nicknames.writeusernickname}</span>
+	                           </c:if>
+	                           <c:if test="${!nickname }">
+	                              <span>${nicknames.sendusernickname }</span>
+	                           </c:if>
+	                           <c:if test="${message.img eq null }" var="chatimg">
+	                              <p>${message.chatcontent }<br/></p>
+	                            </c:if>
+	                           <c:if test="${!chatimg}" var="chatimg">
+	                              <img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/${message.img}"/>
+	                            </c:if>
+                            </div>
                             <span style='float: left;font-size: small; margin-top:5px;'> <fmt:formatDate value="${message.sendtime}" pattern="HH:mm:ss"/></span>
                          </div>
                       </div>
                       </c:if>
                      </c:forEach>
-                     
                </div>
             </div>
          </div>
@@ -424,36 +430,36 @@ function uploadFile(e) {
       }
    });
    $('#appointed').on('click',function(e){
-      var form1 = $("#form").serialize();
-      $.ajax({
-         url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
-         data: {chatcontent:"약속</br>"+$('#date').val()+" "+$('#time').val()+"</br>장소</br>"+$("#adrress").text(),
-               senduserno:${userno},
-               unread_count:'1',
-               sendtime: today.toLocaleTimeString('en-US'),
-               '${_csrf.parameterName}':'${_csrf.token}'},
-         type: 'POST',
-         dataType: 'text',
-         success: function (result) {
-            console.log(result)
-         },
-         error: function () {
-            console.log('error')
-         }
-      });
-      
-      
-      console.log('보낸 메시지:',"약속</br>"+$('#date').val()+" "+$('#time').val()+"</br>장소</br>"+$("#adrress").text());
-      wsocket.send('서버로부터받은 메시지:'+"약속</br>"+$('#date').val()+" "+$('#time').val()+"</br>장소</br>"+$("#adrress").text());//msg:KOSMO>>안녕
-      //DIV(대화영역)에 메시지 출력
-      
-    
-      appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p>"
-            +"약속</br>"+$('#date').val()+" "+$('#time').val()+"</br>장소</br>"+$("#adrress").text()+"<br/></p><span style='float: right;font-size: small; margin-top:5px;'>"
-            +today.toLocaleTimeString()+"</span></div></div>");
-      //기존 메시지 클리어      
-      $('#chatcontent').val("");
-   });
+		var form1 = $("#form").serialize();
+		$.ajax({
+			url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
+			data: {chatcontent:"약속</br>"+$('#date').val()+" "+$('#time').val()+"</br>장소</br>"+$("#adrress").text()+"</br><a href='https://map.kakao.com/link/search/"+$('#adrress').text()+"'>지도로 보기</a>",
+					senduserno:${userno},
+					unread_count:'1',
+					sendtime: today.toLocaleTimeString('en-US'),
+					'${_csrf.parameterName}':'${_csrf.token}'},
+			type: 'POST',
+			dataType: 'text',
+			success: function (result) {
+				console.log(result)
+			},
+			error: function () {
+				console.log('error')
+			}
+		});
+		
+		
+		console.log('보낸 메시지:',"약속</br>"+$('#date').val()+" "+$('#time').val()+"</br>장소</br>"+$("#adrress").text()+"</br><a href='https://map.kakao.com/link/search/"+$('#adrress').text()+"'>지도로 보기</a>");
+		wsocket.send('서버로부터받은 메시지:'+"약속</br>"+$('#date').val()+" "+$('#time').val()+"</br>장소</br>"+$("#adrress").text()+"</br><a href='https://map.kakao.com/link/search/"+$('#adrress').text()+"'>지도로 보기</a>");//msg:KOSMO>>안녕
+		//DIV(대화영역)에 메시지 출력
+		
+   
+		appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p>"
+				+"약속</br>"+$('#date').val()+" "+$('#time').val()+"</br>장소</br>"+$("#adrress").text()+"</br><a href='https://map.kakao.com/link/search/"+$('#adrress').text()+"'>지도로 보기</a>"+"<br/></p><span style='float: right;font-size: small; margin-top:5px;'>"
+				+today.toLocaleTimeString()+"</span></div></div>");
+		//기존 메시지 클리어		
+		$('#chatcontent').val("");
+	});
    
       $('#send').on('click',function(){
          var form1 = $("#form").serialize();
