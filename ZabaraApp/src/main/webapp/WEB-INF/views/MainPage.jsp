@@ -50,8 +50,9 @@ width: 70%;
    </form>
     <div class="main_container " >
 	    <div class="m-5">
-	
-	      <a href="<c:url value="/location/MainPage.do"/>"><img src="${pageContext.request.contextPath}/resources/assets/img/sub_banner.png" style="text-align: center;"/></a>
+	      <a href="<c:url value="/location/MainPage.do"/>">
+	      	<img src="${pageContext.request.contextPath}/resources/assets/img/sub_banner.png" style="text-align: center;"/>
+	      </a>
 	      <!-- Uncomment below if you prefer to use an image logo -->
 	      <!-- <a href="index.html" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
 	

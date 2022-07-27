@@ -11,7 +11,7 @@
   <title>우리동네 좋은 물건 자바라</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
+	
   
   <!-- Favicons -->
   <link href="${pageContext.request.contextPath}/resources/assets/img/web_banner.png" rel="icon">
@@ -59,6 +59,7 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
+
 <body>
 
 
@@ -66,7 +67,8 @@
                    <sec:csrfInput/>
             </form> 
          <nav id="navbar" class="navbar custom-navbar mx-5" >
-         <a href="<c:url value="/location/MainPage.do"/>"><img src="${pageContext.request.contextPath}/resources/assets/img/logo.png" height="60px" /><img src="${pageContext.request.contextPath}/resources/assets/img/sub_banner.png" height="80px" /></a>
+	         <a href="<c:url value="/location/MainPage.do"/>">
+	         <img src="${pageContext.request.contextPath}/resources/assets/img/sub_banner.png" height="80px" /></a>
          <form id="searchForm" action="<c:url value="/board/search.do"/>" method="post">
             <sec:csrfInput/>
             <div class="row">
@@ -119,14 +121,7 @@
                   <option value="반려동물용품">반려동물용품</option>
                </select>
                </div>
-               <div class="srch_bar" style="text-align:center; float: right;">
-                    <div class="stylish-input-group"  >
-                     <input type="text" placeholder="검색어를 입력해주세요" name="title" class="search-bar">
-                     <span class="input-group-addon">
-                         <button type="submit" style="vertical-align:-0.3em;"><i class="bi bi-search" aria-hidden="true" style="font-size: 20px;"></i> </button>
-                         </span>
-                  </div>
-               </div>
+              
             </div>
          </form>
             <!-- <div class="search row" id="imgsrchDiv" style="float: right;">

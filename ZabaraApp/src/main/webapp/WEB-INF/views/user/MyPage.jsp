@@ -4,6 +4,7 @@
 <%@ taglib prefix="sec"
    uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <style>
@@ -105,7 +106,7 @@ color:#ffc107
             <div>
                <img
                   src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${profileimage}"
-                  class="img-fluid profile-photo" alt=""
+                  class="img-fluid profile-photo" alt="이미지"
                   style="object-fit: cover; width:400px; max-height: 400px; border-radius: 50%"> <input
                   class="file-upload" type="file" accept=".jpg, .png, .jpeg"
                   name="profileimg" id="profileimg" style="display: none;" />
@@ -201,8 +202,8 @@ color:#ffc107
                   <img src="${pageContext.request.contextPath}/resources/assets/img/pay_logo.png" style="height: 70px"/>
                    <input style="color:white; font-size: 30px; margin-top: 10px" type="text" id="myPay" readonly="readonly">  
                    <div style="float: right;">
-                      <select class="btn btn-outline-dark btn-s my-2"  
-                              style="font-size: 12px; font-weight: bold; color: #000; margin-top: 10px" data-toggle="dropdown;" id="pay" >
+                      <select class="btn btn-dark btn-s my-2"  
+                              style="font-size: 12px; font-weight: bold; color: #fff; margin-top: 10px" data-toggle="dropdown;" id="pay" >
                           <option value="5000">5,000 원</option>
                           <option value="10000">10,000 원</option>
                           <option value="20000">20,000 원</option>
@@ -235,7 +236,7 @@ color:#ffc107
                      <div class="col-lg-4 col-md-4 mt-4 mt-md-0">
                         <div class="icon-box" id="ChatToggle" >
                            <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
-                           <h3>채팅</h3>
+                           <h3>자바라 채팅</h3>
 
                         </div>
                      </div>
@@ -256,7 +257,7 @@ color:#ffc107
                      <div class="col-lg-4 col-md-4 mt-4">
                         <div class="icon-box" id="AccountBookToggle">
                            <i class="ri-database-2-line" style="color: #47aeff;"></i>
-                           <h3>당근가계부</h3>
+                           <h3>자바라 가계부</h3>
                         </div>
                      </div>
                      <div class="col-lg-4 col-md-4 mt-4">
@@ -369,44 +370,41 @@ color:#ffc107
                </div>
              </div>
                <!--지도-->
-               <div style="float: right; display: flex"> - 206
-
-				<div class="col mt-3" id="ChatToggleDiv" style="display: none">
+            <div class="col mt-3" id="ChatToggleDiv" style="display: none">
                   <div class="testimonials container mt-3">
                      <div class="section-title">
                         <h2 style="margin-bottom: 30px;">나의 채팅</h2>
-			         </div>
-			         <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-			           <div class="swiper-wrapper">
-			             <c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
-			             <div class="swiper-slide">
-			             <a href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.product_no}" name="product_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
-			               <div class="testimonial-item">
-			                 <p style="height: 200px;">
-			                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-			                     ${chatlist.chatcontent} <i
-			                        class="bx bxs-quote-alt-right quote-icon-right"></i>
-			                  </p>
-			                  <img
-			                     src="${pageContext.request.contextPath}/resources/assets/img/profile/"
-			                     class="testimonial-img" alt="">
-			                  <h3>
-			                     <c:if
-			                        test="${userNickname.nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
-			                     <c:if
-			                        test="${userNickname.nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>
-			                  </h3>
-			                  <h4>${chatlist.sendtime}</h4>
-			               </div>
-			               </a>
-			             </div><!-- End testimonial item -->
-			               </c:forEach>
-			           </div>
-			           <div class="swiper-pagination"></div>
-			         </div>
-			         <div class="owl-carousel testimonials-carousel"></div>
-			       </div><!-- End Testimonials  -->
                   </div>
+                  <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+                    <div class="swiper-wrapper">
+                      <c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
+                      <div class="swiper-slide">
+                      <a href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.product_no}" name="product_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
+                        <div class="testimonial-item">
+                          <p style="height: 200px;  display: flex; align-items: center; justify-content: center;">
+                              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                              ${chatlist.chatcontent} <i
+                                 class="bx bxs-quote-alt-right quote-icon-right"></i>
+                           </p>
+                           <c:if test="${nickname eq chatlist.writeusernickname }"><img class="testimonial-img" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.senduserprofileimg}" alt="sunil"></c:if>
+                                <c:if test="${nickname ne chatlist.writeusernickname }"><img class="testimonial-img" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.writeuserprofileimg}" alt="sunil"></c:if>
+                           <h3>
+                              <c:if
+                                 test="${nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
+                              <c:if
+                                 test="${nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>
+                           </h3>
+                           <h4><fmt:formatDate value="${chatlist.sendtime}" pattern="yyyy년 MM월 dd일"/></h4>
+                        </div>
+                        </a>
+                      </div><!-- End testimonial item -->
+                        </c:forEach>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                  </div>
+                  <div class="owl-carousel testimonials-carousel"></div>
+                </div><!-- End Testimonials  -->
+                </div>
                <!--카테고리-->
                <div class="col mt-3" id="LikeToggleDiv" style="display: none">
                      <form id="" method="post"
@@ -446,13 +444,13 @@ color:#ffc107
             $("#MapToggle").click(function() {
                 $("#MapToggleDiv").toggle(1000);
                 setTimeout(function() {
-             	   map.relayout();            	  
+                   map.relayout();                 
                    myAddressMap($("#myAddress").text());                  
                 }, 1000);   
                 setTimeout(function(){
-                	console.log(addresslat);
-                	console.log(addresslng);
-               	   panTo(addresslat,addresslng);
+                   console.log(addresslat);
+                   console.log(addresslng);
+                     panTo(addresslat,addresslng);
                   },1200);
                 
              });
@@ -624,9 +622,9 @@ color:#ffc107
                 // 현재 위치 정보를 한 번만 얻기
                 navigator.geolocation
                       .getCurrentPosition(function(position) {
-                   	   markerlat=37.478745014709745;
-                   	   markerlng=126.8787909892446;
-                   	   setCenter(37.478745014709745, 126.8787909892446);
+                         markerlat=37.478745014709745;
+                         markerlng=126.8787909892446;
+                         setCenter(37.478745014709745, 126.8787909892446);
                          showKakaoMap(37.478745014709745, 126.8787909892446);
                          
                       });
@@ -713,7 +711,7 @@ color:#ffc107
                                         kakaomarker
                                               .setPosition(mouseEvent.latLng);
                                         kakaomarker.setMap(map);
-   									   panTo(mouseEvent.latLng.getLat(),mouseEvent.latLng.getLng());
+                                 panTo(mouseEvent.latLng.getLat(),mouseEvent.latLng.getLng());
                                         // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
                                         infowindow
                                               .setContent(content);
@@ -725,8 +723,11 @@ color:#ffc107
                                         nowAddress = result[0].address.address_name;
                                         markerlat = mouseEvent.latLng.getLat();
                                         markerlng = mouseEvent.latLng.getLng();
+                                        // console.log(marketlat);
+                                        // console.log(markerlng);
                                      }
                                   });
+                           
                          });
 
              function searchDetailAddrFromCoords(coords, callback) {
@@ -737,38 +738,38 @@ color:#ffc107
           }
 
           //지도 이동
-          function setCenter(latitude,longitude) {                    	     
-         	    var moveLatLon = new kakao.maps.LatLng(latitude, longitude);        	            	    
-         	    map.setCenter(moveLatLon);
-         	}
+          function setCenter(latitude,longitude) {                            
+                var moveLatLon = new kakao.maps.LatLng(latitude, longitude);                              
+                map.setCenter(moveLatLon);
+            }
 
           //지도 이동 가까운거리 애니메이션 효과
-       	 function panTo(latitude,longitude) {
-       	     var moveLatLon = new kakao.maps.LatLng(latitude, longitude);        	            	    
-       	     map.panTo(moveLatLon);            
+           function panTo(latitude,longitude) {
+               var moveLatLon = new kakao.maps.LatLng(latitude, longitude);                              
+               map.panTo(moveLatLon);            
             }
          
 
          // 자바라페이 잔액 
          $.ajax({
-	       	  type: 'POST',
-		      url : '<c:url value="/pay/balance.do"/>',
-		      data : {
-		       		'deposit' : 0,
-		       		'withdraw' : 0,
-                 	'${_csrf.parameterName}' : '${_csrf.token}'
-                  	},
+               type: 'POST',
+            url : '<c:url value="/pay/balance.do"/>',
+            data : {
+                   'deposit' : 0,
+                   'withdraw' : 0,
+                    '${_csrf.parameterName}' : '${_csrf.token}'
+                     },
               dataType : "text",
-		      success : function(result){
-		       		$('#myPay').val(result+'원')
-		       		}
-	       	  	});      
+            success : function(result){
+                   $('#myPay').val(result+'원')
+                   }
+                  });      
          
          // 자바라페이 출금
          function payWithdraw() {
-        	  var amount = $('#pay option:selected').val();
-        	  if($('#myPay').val() < amount) {
-        		  const Toast = Swal.mixin({
+             var amount = $('#pay option:selected').val();
+             if($('#myPay').val() < amount) {
+                const Toast = Swal.mixin({
                       toast : true,
                       position : 'center-center',
                       showConfirmButton : false,
@@ -780,25 +781,25 @@ color:#ffc107
                       icon : 'error',
                       title : '출금 금액이 잔액보다 많습니다.'
                    })
-        	  }
-        	  else{
-	        	  $.ajax({
-	 	       	  		type: 'POST',
-	 		       	 	url : '<c:url value="/pay/balance.do"/>',
-	 		       		data : {
-	 		       		      'deposit' : 0,
-	 		       		      'withdraw' : amount,
-	                        '${_csrf.parameterName}' : '${_csrf.token}'
-	                   	},
-	                   	dataType : "text",
-	 		       		success : function(result){
-	 		       		console.log(result);
-	 		       			$('#myPay').val(result+'원')
-	 		       			console.log(result);
-	 		       		}
-	                   	
-	 	       	  	});  
-        	  }
+             }
+             else{
+                $.ajax({
+                         type: 'POST',
+                        url : '<c:url value="/pay/balance.do"/>',
+                       data : {
+                             'deposit' : 0,
+                             'withdraw' : amount,
+                           '${_csrf.parameterName}' : '${_csrf.token}'
+                         },
+                         dataType : "text",
+                       success : function(result){
+                       console.log(result);
+                          $('#myPay').val(result+'원')
+                          console.log(result);
+                       }
+                         
+                      });  
+             }
          }
          
 
@@ -807,14 +808,14 @@ color:#ffc107
          IMP.init('imp74932749'); 
 
          function payService() {
-        	 var amount = $('#pay option:selected').val();
-        	 var email = '${email}';
-        	 var nickname = '${nickname}';
-        	 var address = '${address}';
-        	 var phonenumber = '${phonenumber}';
-        	 
-        	 console.log(amount);
-        	
+            var amount = $('#pay option:selected').val();
+            var email = '${email}';
+            var nickname = '${nickname}';
+            var address = '${address}';
+            var phonenumber = '${phonenumber}';
+            
+            console.log(amount);
+           
              IMP.init('imp74932749');
              IMP.request_pay(
                          {
@@ -830,7 +831,7 @@ color:#ffc107
                             buyer_addr : address, // 주문자 주소
                          }, function(rsp) {
                             if (rsp.success) { 
-                            	const Toast = Swal.mixin({
+                               const Toast = Swal.mixin({
                                     toast : true,
                                     position : 'center-center',
                                     showConfirmButton : false,
@@ -845,24 +846,24 @@ color:#ffc107
                                  })
                                console.log(amount);
                                $.ajax({
-               	       	  		type: 'POST',
-               		       	 	url : '<c:url value="/pay/balance.do"/>',
-               		       		data : {
-               		       		      'deposit' : amount,
-               		       		      'withdraw' : 0,
+                                    type: 'POST',
+                                   url : '<c:url value="/pay/balance.do"/>',
+                                  data : {
+                                        'deposit' : amount,
+                                        'withdraw' : 0,
                                       '${_csrf.parameterName}' : '${_csrf.token}'
-                                 	},
-                                 	dataType : "text",
-               		       		success : function(result){
-               		       		console.log(result);
-               		       			$('#myPay').val(result+'원')
-               		       			console.log(result);
-               		       		}
-               	       	  	});   
+                                    },
+                                    dataType : "text",
+                                  success : function(result){
+                                  console.log(result);
+                                     $('#myPay').val(result+'원')
+                                     console.log(result);
+                                  }
+                                 });   
                                
                                
                             } else {
-                            	const Toast = Swal.mixin({
+                               const Toast = Swal.mixin({
                                     toast : true,
                                     position : 'center-center',
                                     showConfirmButton : false,
@@ -877,5 +878,5 @@ color:#ffc107
                                
                             }
                          })
-          			}
+                   }
       </script>

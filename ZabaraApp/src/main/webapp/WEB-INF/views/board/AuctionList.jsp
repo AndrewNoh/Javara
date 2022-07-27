@@ -29,7 +29,7 @@
 	    <div class="container" id="container">
 			<!-- 제목 -->
 			<div class="section-title" id="title">
-			   	<h2>경매</h2>
+			   	<h2>자바라 경매</h2>
 			   	<p>${address}의 경매게시판 입니다.</p>
 			</div>
 			<!-- 선택 메뉴 -->

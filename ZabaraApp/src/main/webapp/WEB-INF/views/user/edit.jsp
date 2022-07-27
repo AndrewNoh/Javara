@@ -66,7 +66,7 @@ button {
 <div class="about-me container d-flex justify-content-center">
 
 
-	<h3 class="mr-2">EDIT</h3>
+	<h3 class="mr-2">정보 수정</h3>
 
 
 
@@ -91,22 +91,22 @@ button {
 						</div>
 					</div>
 					<div class="form-group">
-						<h5 class="mt-3">NICKNAME</h5>
+						<h5 class="mt-3">닉네임</h5>
 						<input type="text" class="form-style mt-3" name="nickname"
 							id="nickname" value="${nickname}">
 					</div>
 					<div class="col-md-12 form-group">
-						<h5 class="mt-3">PASSWORD</h5>
+						<h5 class="mt-3">비밀번호</h5>
 						<input type="password" name="password" class="form-style mt-3" id="password"
 							required value="${password}">
 					</div>
 					<div class="col-md-12 form-group">
-						<h5 class="mt-3">EMAIL</h5>
+						<h5 class="mt-3">이메일</h5>
 						<input type="text" name="email" class="form-style mt-3" id="email"
 							required value="${email}" readonly>
 					</div>
 					<div class="col-md-12 form-group">
-						<h5 class="mt-3">ADRESS</h5>
+						<h5 class="mt-3">주소</h5>
 						<input type="text" onclick="daumAddress()" class="form-style mt-3"
 							name="fulladdress" id="fulladdress" required
 							value="${FULLADDRESS}">
