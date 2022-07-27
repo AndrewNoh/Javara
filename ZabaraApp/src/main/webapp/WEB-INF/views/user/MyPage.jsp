@@ -6,9 +6,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
-<!-- import 페이 서비스 관련 -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <style>
 #mapwrap {
    position: relative;
@@ -204,17 +201,17 @@ color:#ffc107
                   <img src="${pageContext.request.contextPath}/resources/assets/img/pay_logo.png" style="height: 70px"/>
                    <input style="color:white; font-size: 30px; margin-top: 10px" type="text" id="myPay" readonly="readonly">  
                    <div style="float: right;">
-                      <select class="btn btn-outline-secondary btn-s my-2"  
-                              style="color: #fff; margin-top: 10px" data-toggle="dropdown;" id="pay" >
-                          <option value="5000">5,000원</option>
-                          <option value="10000">10,000원</option>
-                          <option value="20000">20,000원</option>
-                          <option value="30000">30,000원</option>
-                          <option value="40000">40,000원</option>
-                          <option value="50000">50,000원</option>
+                      <select class="btn btn-outline-dark btn-s my-2"  
+                              style="font-size: 12px; font-weight: bold; color: #000; margin-top: 10px" data-toggle="dropdown;" id="pay" >
+                          <option value="5000">5,000 원</option>
+                          <option value="10000">10,000 원</option>
+                          <option value="20000">20,000 원</option>
+                          <option value="30000">30,000 원</option>
+                          <option value="40000">40,000 원</option>
+                          <option value="50000">50,000 원</option>
                       </select>                     
-                      <button onclick="payService()" type="button" class="btn btn-success my-2" style="width: 110px;  margin-left:10px ">충전하기</button>
-                      <button onclick="payWithdraw()" type="button" class="btn btn-success my-2" style="width: 110px;  margin-left:10px ">출금하기</button>
+                      <button onclick="payService()" type="button" class="btn btn-dark my-2" style="width: auto;  margin-left:10px; font-size: 12px">충전하기</button>
+                      <button onclick="payWithdraw()" type="button" class="btn btn-dark my-2" style="width: auto;  margin-left:10px; font-size: 12px">출금하기</button>
                    </div>
                 </div>      
             </div>
@@ -362,9 +359,9 @@ color:#ffc107
                      <div id="map" style="width: 1200px; height: 800px;"></div>
                      <div class="category">
                         <ul>
-                         <button onclick="search_map()" type="button" class="btn btn-success" style="margin-right:10px; width: 80px">검색</button>
-                          <button onclick="nowGeo()" type="button" class="btn btn-success" style="margin-right:10px; width: 80px">현위치</button>
-                          <button onclick="saveMarkerPosition()" type="button" class="btn btn-success" style=" width: 80px">동네 인증</button>
+                         <button onclick="search_map()" type="button" class="btn btn-dark" style="margin-right:10px; width: 80px">검색</button>
+                          <button onclick="nowGeo()" type="button" class="btn btn-dark" style="margin-right:10px; width: 80px">현위치</button>
+                          <button onclick="saveMarkerPosition()" type="button" class="btn btn-dark" style=" width: 80px">동네 인증</button>
                         </ul>
                      </div>
                   </div>
@@ -505,7 +502,7 @@ color:#ffc107
                   toast : true,
                   position : 'center-center',
                   showConfirmButton : false,
-                  timer : 3000,
+                  timer : 1000,
                   timerProgressBar : true,
                })
 
@@ -554,7 +551,7 @@ color:#ffc107
                         toast : true,
                         position : 'center-center',
                         showConfirmButton : false,
-                        timer : 1800,
+                        timer : 1000,
                         timerProgressBar : true,
 
                      })
@@ -588,7 +585,7 @@ color:#ffc107
                               toast : true,
                               position : 'center-center',
                               showConfirmButton : false,
-                              timer : 1800,
+                              timer : 1000,
                               timerProgressBar : true,
 
                            })
@@ -767,7 +764,7 @@ color:#ffc107
                       toast : true,
                       position : 'center-center',
                       showConfirmButton : false,
-                      timer : 3000,
+                      timer : 1000,
                       timerProgressBar : true,
                    })
 
@@ -829,7 +826,7 @@ color:#ffc107
                                     toast : true,
                                     position : 'center-center',
                                     showConfirmButton : false,
-                                    timer : 1800,
+                                    timer : 1000,
                                     timerProgressBar : true,
 
                                  })
@@ -861,7 +858,7 @@ color:#ffc107
                                     toast : true,
                                     position : 'center-center',
                                     showConfirmButton : false,
-                                    timer : 3000,
+                                    timer : 1000,
                                     timerProgressBar : true,
                                  })
 

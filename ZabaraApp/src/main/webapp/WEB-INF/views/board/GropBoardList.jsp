@@ -9,10 +9,13 @@ border-radius: 10px;
 }
 </style> 
 <div style="position: fixed;bottom: 50px; right: 30px;">
-  <a href="<c:url value="/board/write.do"><c:param name="board" value="GropBoard"/></c:url>"><i class="bx bx-plus-circle" title="글쓰기" style="font-size: 50px"></i></a>
+   <a href="<c:url value="/board/write.do"><c:param name="board" value="Auction"/> </c:url>">
+  <img src="${pageContext.request.contextPath}/resources/assets/img/write_btn.png" 
+       title="글쓰기" style="width: 80px; height: 80px"></a>
   </div>
-  <div style="position: fixed;bottom: 110px; right: 30px;">
-  <a href="#portfolio"><i class="bx bxs-caret-up-circle" title="위로가기" style="font-size: 50px"></i></a>
+<div style="position: fixed;bottom: 110px; right: 30px;">
+   <a href="#portfolio"><img src="${pageContext.request.contextPath}/resources/assets/img/scrollbar_btn.png" 
+       title="위로가기" style="width: 80px; height: 80px"></a>
 </div>
   <div id="board" class="container mt-5">
 

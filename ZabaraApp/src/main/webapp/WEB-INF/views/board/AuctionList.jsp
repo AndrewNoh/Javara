@@ -6,10 +6,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div style="position: fixed;bottom: 50px; right: 30px;">
-  <a href="<c:url value="/board/write.do"><c:param name="board" value="Auction"/> </c:url>"><i class="bx bx-plus-circle" title="글쓰기" style="font-size: 50px"></i></a>
+ <a href="<c:url value="/board/write.do"><c:param name="board" value="Auction"/> </c:url>">
+  <img src="${pageContext.request.contextPath}/resources/assets/img/write_btn.png" 
+       title="글쓰기" style="width: 80px; height: 80px"></a>
   </div>
   <div style="position: fixed;bottom: 110px; right: 30px;">
-  <a href="#portfolio"><i class="bx bxs-caret-up-circle" title="위로가기" style="font-size: 50px"></i></a>
+   <a href="#portfolio"><img src="${pageContext.request.contextPath}/resources/assets/img/scrollbar_btn.png" 
+       title="위로가기" style="width: 80px; height: 80px"></a>
 </div>
 
 <button type="button" id="prev" style="position: absolute; font-size: 70px; left: 0px; top:50%; z-index: 5; background-color:transparent; color: white; border: 0px">
@@ -31,15 +34,27 @@
 			</div>
 			<!-- 선택 메뉴 -->
 			<div class="row">
-	        	<div class="col-lg-12 d-flex justify-content-center">
-	          		<ul id="portfolio-flters">
-			            <li data-filter="*" <c:if test="${category == '모두'}"> class="filter-active" </c:if>>모두</li>
-			            <li data-filter=".filter-가전" <c:if test="${category == '가전'}"> class="filter-active" </c:if>>가전</li>
-			            <li data-filter=".filter-가구" <c:if test="${category == '가구'}"> class="filter-active" </c:if>>가구</li>
-	            		<li data-filter=".filter-생활용품" <c:if test="${category == '생활용품'}"> class="filter-active" </c:if>>생활용품</li>
-	          		</ul>
-	        	</div>
-	      	</div>
+              <div class="col-lg-12 d-flex justify-content-center">
+                   <ul id="portfolio-flters">
+                     <li data-filter="*" <c:if test="${category == '모두'}"> class="filter-active" </c:if>>모두</li>
+                     <li data-filter=".filter-생활가전" <c:if test="${category == '생활가전'}"> class="filter-active" </c:if>>생활가전</li>
+                     <li data-filter=".filter-가구|인테리어" <c:if test="${category == '가구인테리어'}"> class="filter-active" </c:if>>가구/인테리어</li>
+                     <li data-filter=".filter-디지털기기" <c:if test="${category == '디지털기기'}"> class="filter-active" </c:if>>디지털기기</li>
+                     <li data-filter=".filter-유아용품" <c:if test="${category == '유아용품'}"> class="filter-active" </c:if>>유아용품</li>
+                     <li data-filter=".filter-도서|티켓" <c:if test="${category == '도서티켓'}"> class="filter-active" </c:if>>도서/티켓</li>
+                     <li data-filter=".filter-가공식품" <c:if test="${category == '가공식품'}"> class="filter-active" </c:if>>가공식품</li>
+                     <br/>
+                     <li data-filter=".filter-스포츠|레저" <c:if test="${category == '스포츠레저'}"> class="filter-active" </c:if>>스포츠/레저</li>                     
+                     <li data-filter=".filter-여성잡화" <c:if test="${category == '여성잡화'}"> class="filter-active" </c:if>>여성잡화</li>
+                     <li data-filter=".filter-여성의류" <c:if test="${category == '여성의류'}"> class="filter-active" </c:if>>여성의류</li>
+                     <li data-filter=".filter-남성패션|잡화" <c:if test="${category == '남성패션잡화'}"> class="filter-active" </c:if>>남성패션/잡화</li>
+                     <li data-filter=".filter-게임|취미" <c:if test="${category == '게임취미'}"> class="filter-active" </c:if>>게임/취미</li>
+                     <li data-filter=".filter-뷰티|미용" <c:if test="${category == '뷰티미용'}"> class="filter-active" </c:if>>뷰티/미용</li>
+                     <li data-filter=".filter-반려동물용품" <c:if test="${category == '반려동물용품'}"> class="filter-active" </c:if>>반려동물용품</li>
+                   </ul>
+              </div>
+            </div>
+
 		
 			<c:if test="${empty LISTS}" var="LIST">
 				<!-- 게시글들 -->
