@@ -21,7 +21,7 @@ public class MailHandler {
 	}
 
 	public void setFrom() throws MessagingException {
-		messageHelper.setFrom("notho0@naver.com");
+		messageHelper.setFrom("javara_@naver.com");
 	}
 
 	public void setTo(String email) throws MessagingException {
