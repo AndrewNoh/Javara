@@ -193,17 +193,18 @@ color:#ffc107
       </div>
 
       <!-- End Skills -->
- <div class="row">
+ <!-- 자바라 페이 -->
+ 	<div class="row">
          <div class="col-5">
             <div class="pay container ">
                <div class="section-title">
                   <h2>자바라 페이</h2>
                </div>
                <div class="mb-5 mt-4">
-                  <img src="${pageContext.request.contextPath}/resources/assets/img/pay_logo.png" style="height: 70px"/>
-                   <input style="color:white; font-size: 30px; margin-top: 10px" type="text" id="myPay" readonly="readonly">  
-                   <div style="float: right;">
-                      <select class="btn btn-dark btn-s my-2"  
+                  <img src="${pageContext.request.contextPath}/resources/assets/img/pay_logo.png" style="height: 60px; margin-right: 10px"/>
+                   <span id="myPay" style="color:#fff; font-size: 35px; vertical-align: bottom" ></span>
+                   <div style="float: right; margin-top: 20px">
+                      <select class="btn btn-outline-warning btn-s my-2"  
                               style="font-size: 12px; font-weight: bold; color: #fff; margin-top: 10px" data-toggle="dropdown;" id="pay" >
                           <option value="5000">5,000 원</option>
                           <option value="10000">10,000 원</option>
@@ -218,7 +219,8 @@ color:#ffc107
                 </div>      
             </div>
          </div>
-         <!-- ======= Skills  ======= -->
+         <!-- 자바라 페이 -->
+         
          <div class="col-7">
             <div class="interests container">
 
@@ -361,7 +363,7 @@ color:#ffc107
                      <div id="map" style="width: 1200px; height: 800px;"></div>
                      <div class="category">
                         <ul>
-                         <button onclick="search_map()" type="button" class="btn btn-dark" style="margin-right:10px; width: 80px">검색</button>
+                          <button onclick="search_map()" type="button" class="btn btn-dark" style="margin-right:10px; width: 80px">검색</button>
                           <button onclick="nowGeo()" type="button" class="btn btn-dark" style="margin-right:10px; width: 80px">현위치</button>
                           <button onclick="saveMarkerPosition()" type="button" class="btn btn-dark" style=" width: 80px">동네 인증</button>
                         </ul>
@@ -736,133 +738,137 @@ color:#ffc107
             }
          
 
-         // 자바라페이 잔액 
-         $.ajax({
-               type: 'POST',
-            url : '<c:url value="/pay/balance.do"/>',
-            data : {
-                   'deposit' : 0,
-                   'withdraw' : 0,
-                    '${_csrf.parameterName}' : '${_csrf.token}'
-                     },
-              dataType : "text",
-            success : function(result){
-                   $('#myPay').val(result+'원')
-                   }
-                  });      
-         
-         // 자바라페이 출금
-         function payWithdraw() {
-             var amount = $('#pay option:selected').val();
-             if($('#myPay').val() < amount) {
-                const Toast = Swal.mixin({
-                      toast : true,
-                      position : 'center-center',
-                      showConfirmButton : false,
-                      timer : 1000,
-                      timerProgressBar : true,
-                   })
-
-                   Toast.fire({
-                      icon : 'error',
-                      title : '출금 금액이 잔액보다 많습니다.'
-                   })
-             }
-             else{
-                $.ajax({
-                         type: 'POST',
-                        url : '<c:url value="/pay/balance.do"/>',
-                       data : {
-                             'deposit' : 0,
-                             'withdraw' : amount,
-                           '${_csrf.parameterName}' : '${_csrf.token}'
-                         },
-                         dataType : "text",
-                       success : function(result){
-                       console.log(result);
-                          $('#myPay').val(result+'원')
-                          console.log(result);
-                       }
-                         
-                      });  
-             }
-         }
-         
-
-         // 자바라페이 잔액 충전
-         var IMP = window.IMP;
-         IMP.init('imp74932749'); 
-
-         function payService() {
-            var amount = $('#pay option:selected').val();
-            var email = '${email}';
-            var nickname = '${nickname}';
-            var address = '${address}';
-            var phonenumber = '${phonenumber}';
-            
-            console.log(amount);
+           // 자바라페이 잔액 
+           $.ajax({
+                 type: 'POST',
+              url : '<c:url value="/pay/balance.do"/>',
+              data : {
+                     'deposit' : 0,
+                     'withdraw' : 0,
+                      '${_csrf.parameterName}' : '${_csrf.token}'
+                       },
+                dataType : "text",
+              success : function(result){
+              	$('#myPay').text(result
+                  		.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                  		+'원')
+                     }
+                    });      
            
-             IMP.init('imp74932749');
-             IMP.request_pay(
-                         {
-                            pg : "inicis", // 사용 시스템
-                            pay_method : "card", // 결제 수단
-                            merchant_uid : 'merchant_'
-                                  + new Date().getTime(), // 가맹점에서 생성/관리하는 고유 주문번호
-                            name : '자바라 페이', // 주문명
-                            amount : amount, // 결제 금액 
-                            buyer_email : email, // 주문자 이메일
-                            buyer_name : nickname, // 주문자명
-                            buyer_tel : phonenumber, // 주문자 연락처
-                            buyer_addr : address, // 주문자 주소
-                         }, function(rsp) {
-                            if (rsp.success) { 
-                               const Toast = Swal.mixin({
-                                    toast : true,
-                                    position : 'center-center',
-                                    showConfirmButton : false,
-                                    timer : 1000,
-                                    timerProgressBar : true,
+           // 자바라페이 출금
+           function payWithdraw() {
+               var amount = $('#pay option:selected').val();
+               if($('#myPay').val() < amount) {
+                  const Toast = Swal.mixin({
+                        toast : true,
+                        position : 'center-center',
+                        showConfirmButton : false,
+                        timer : 1000,
+                        timerProgressBar : true,
+                     })
 
-                                 })
+                     Toast.fire({
+                        icon : 'error',
+                        title : '출금 금액이 잔액보다 많습니다.'
+                     })
+               }
+               else{
+                  $.ajax({
+                           type: 'POST',
+                          url : '<c:url value="/pay/balance.do"/>',
+                         data : {
+                               'deposit' : 0,
+                               'withdraw' : amount,
+                             '${_csrf.parameterName}' : '${_csrf.token}'
+                           },
+                           dataType : "text",
+                         success : function(result){
+                         console.log(result);
+                            $('#myPay').text(result
+                            		.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                          		+'원')
+                         }
+                           
+                        });  
+               }
+           }
+           
 
-                                 Toast.fire({
-                                    icon : 'success',
-                                    title : '충전이 완료되었습니다.'
-                                 })
-                               console.log(amount);
-                               $.ajax({
-                                    type: 'POST',
-                                   url : '<c:url value="/pay/balance.do"/>',
-                                  data : {
-                                        'deposit' : amount,
-                                        'withdraw' : 0,
-                                      '${_csrf.parameterName}' : '${_csrf.token}'
-                                    },
-                                    dataType : "text",
-                                  success : function(result){
-                                  console.log(result);
-                                     $('#myPay').val(result+'원')
-                                     console.log(result);
-                                  }
-                                 });   
-                               
-                               
-                            } else {
-                               const Toast = Swal.mixin({
-                                    toast : true,
-                                    position : 'center-center',
-                                    showConfirmButton : false,
-                                    timer : 1000,
-                                    timerProgressBar : true,
-                                 })
+           // 자바라페이 잔액 충전
+           var IMP = window.IMP;
+           IMP.init('imp74932749'); 
 
-                                 Toast.fire({
-                                    icon : 'error',
-                                    title : '결제 실패하였습니다.'
-                                 })
-                               
-                            }
-                         })
-                   }
+           function payService() {
+               var amount = $('#pay option:selected').val();
+               var email = '${email}';
+               var nickname = '${nickname}';
+               var address = '${address}';
+               var phonenumber = '${phonenumber}';
+              
+               console.log(amount);
+             
+               IMP.init('imp74932749');
+               IMP.request_pay(
+                           {
+                              pg : "inicis", // 사용 시스템
+                              pay_method : "card", // 결제 수단
+                              merchant_uid : 'merchant_'
+                                    + new Date().getTime(), // 가맹점에서 생성/관리하는 고유 주문번호
+                              name : '자바라 페이', // 주문명
+                              amount : amount, // 결제 금액 
+                              buyer_email : email, // 주문자 이메일
+                              buyer_name : nickname, // 주문자명
+                              buyer_tel : phonenumber, // 주문자 연락처
+                              buyer_addr : address, // 주문자 주소
+                           }, function(rsp) {
+                              if (rsp.success) { 
+                                 const Toast = Swal.mixin({
+                                      toast : true,
+                                      position : 'center-center',
+                                      showConfirmButton : false,
+                                      timer : 1000,
+                                      timerProgressBar : true,
+
+                                   })
+
+                                   Toast.fire({
+                                      icon : 'success',
+                                      title : '충전이 완료되었습니다.'
+                                   })
+                                 console.log(amount);
+                                 $.ajax({
+                                      type: 'POST',
+                                     url : '<c:url value="/pay/balance.do"/>',
+                                    data : {
+                                          'deposit' : amount,
+                                          'withdraw' : 0,
+                                        '${_csrf.parameterName}' : '${_csrf.token}'
+                                      },
+                                      dataType : "text",
+                                    success : function(result){
+                                    console.log(result);
+                                       $('#myPay').text(result
+                                       		.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                      		+'원')
+                                    }
+                                   });   
+                                 
+                                 
+                              } else {
+                                 const Toast = Swal.mixin({
+                                      toast : true,
+                                      position : 'center-center',
+                                      showConfirmButton : false,
+                                      timer : 1000,
+                                      timerProgressBar : true,
+                                   })
+
+                                   Toast.fire({
+                                      icon : 'error',
+                                      title : '결제 실패하였습니다.'
+                                   })
+                                 
+                              }
+                           })
+                     }
       </script>

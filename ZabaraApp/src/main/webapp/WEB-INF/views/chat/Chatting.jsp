@@ -780,9 +780,11 @@ function uploadFile(e) {
             +today.toLocaleTimeString()+"</span></div></div>");
             
       });
-      // 자바라페이 잔액 
+
+    
+      // 페이 잔액 
       $.ajax({
-            type: 'POST',
+         type: 'POST',
          url : '<c:url value="/pay/balance.do"/>',
          data : {
                 'deposit' : 0,
@@ -791,20 +793,80 @@ function uploadFile(e) {
                   },
            dataType : "text",
          success : function(result){
-                $('#myPay').text(result+'원')
+                $('#myPay').text(result
+                		.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                		+'원')
                 }
                });   
         
       
-        // 송금하기 
+        // 페이 - 송금 하기    
         function payRemit(){
          // console.log('클릭 이벤트');
-         /*
-         $.ajax({
-            
-         });
-         */
-        };
+    		var remit = $('#pay').val();
+    		console.log(remit);
+	         $.ajax({
+	        	 type: 'POST',
+	             url : '<c:url value="/pay/balance.do"/>',
+	             data : {
+	                     'deposit' : 0,
+	                     'withdraw' : remit,	                     
+	                     '${_csrf.parameterName}' : '${_csrf.token}'
+	                      },
+	               dataType : "text",
+	               
+	               success : function(result){
+					
+	                    $('#myPay').text(result
+	                    		.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+	                    		+'원')
+	                     		const Toast = Swal.mixin({
+                                      toast : true,
+                                      position : 'center-center',
+                                      showConfirmButton : false,
+                                      timer : 1000,
+                                      timerProgressBar : true,
+                                   })
+
+                                   Toast.fire({
+                                      icon : 'success',
+                                      title : '송금 완료하였습니다'
+                                   })
+	               		}
+	               
+	                    
+	         });      
+       	 };
+       	 
+       	 
+       	 // 페이 - 송금 받기
+       	 function payCharge(){
+       		 // console.log('클릭 이벤트');
+       		 var remit = document.querySelector('#payval').dataset.money;
+       		 console.log(remit);
+	       		 $.ajax({
+	                 type: 'POST',
+	                url : '<c:url value="/pay/balance.do"/>',
+	               data : {
+	                     'deposit' : remit,
+	                     'withdraw' : 0,
+	                   '${_csrf.parameterName}' : '${_csrf.token}'
+	                 },
+	                 dataType : "text",
+	               success : function(result){
+	               
+	                  $('#myPay').text(result
+	                  		.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+	                		+'원')
+	               }
+	                 
+	              });
+	       		 
+	       		  		 
+       	 }
+    
+      
+      /*
       $('#jpay').on('click',function(){
          var form1 = $("#form").serialize();
                   
@@ -832,7 +894,7 @@ function uploadFile(e) {
          +today.toLocaleTimeString()+"</span></div></div>");
          
       });
-      
+      */
       
       
       var fail = $('button[name=fail]');
@@ -865,42 +927,43 @@ function uploadFile(e) {
             
       });
       
-      
       var success = $('button[name=success]');
-         $(document).on("click", '.success', function(e){
-            this.onclick='null';
-            var form1 = $("#form").serialize();
-                     
-             $.ajax({
-               url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
-               data: {chatcontent:'<span style="text-align:center; font-size:20px;"><strong>축하합니다. </br></strong>${list.upper_Price}원에 낙찰이 되었습니다.</br></span>',
-                     senduserno:${userno},
-                     unread_count:'1',
-                     sendtime: today.toLocaleTimeString('en-US'),
-                     '${_csrf.parameterName}':'${_csrf.token}'},
-               type: 'POST',
-               dataType: 'text',
-               success: function (result) {
-                  console.log(result)
-               },
-               error: function () {
-                  console.log('error')
-               }
-            });
-            
-            console.log(result);
-            wsocket.send('낙찰:'+"<span style='text-align:center; font-size:20px;'><strong>축하합니다. </br></strong>${list.upper_Price}원에 낙찰이 되었습니다.</br></span>");
-               appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center; font-size:20px;'><strong>축하합니다. </br></strong>${list.upper_Price}원에 낙찰이 되었습니다.</br></p>"
-               +"<span style='float: right;font-size: small; margin-top:5px;'>"
-            +today.toLocaleTimeString()+"</span></div></div>");
-            
-        });
+      $(document).on("click", '.success', function(e){
+         this.onclick='null';
+         var form1 = $("#form").serialize();
+                  
+          $.ajax({
+            url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
+            data: {chatcontent:'<span style="text-align:center; font-size:20px;"><strong>거래 금액이 입급되었습니다.</strong></br></span>',
+                  senduserno:${userno},
+                  unread_count:'1',
+                  sendtime: today.toLocaleTimeString('en-US'),
+                  '${_csrf.parameterName}':'${_csrf.token}'},
+            type: 'POST',
+            dataType: 'text',
+            success: function (result) {
+               console.log(result)
+            },
+            error: function () {
+               console.log('error')
+            }
+         });
+         
+         console.log(result);
+         wsocket.send('서버로부터받은 메시지:'+"<span style='text-align:center; font-size:20px;'><strong>${userNickname.nickname }님이 원을 받으셨습니다.</br></span>");
+            appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center; font-size:20px;'><strong>거래 금액이 입급되었습니다.</strong></p>"
+            +"<span style='float: right;font-size: small; margin-top:5px;'>"
+         +today.toLocaleTimeString()+"</span></div></div>");
+         
+     });
+
+
       
       
       
       $('#payRemit').on('click',function(){
           var form1 = $("#form").serialize();
-                   
+          
            $.ajax({
              url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
              data: {chatcontent:$("#pay").val(),
@@ -912,7 +975,7 @@ function uploadFile(e) {
              dataType: 'text',
              success: function (result) {
             	 console.log(result);
-                 wsocket.send('서버로부터받은 메시지:'+"<span style='text-align:center;'>"+$("#pay").val()+"원이 송금 되었습니다.<br/><button class='btn btn-outline-warning m-3 success' id='success'>받기</button></span>");
+                 wsocket.send('서버로부터받은 메시지:'+"<span id='payval' data-money='"+$("#pay").val()+"' style='text-align:center;'>"+$("#pay").val()+"원이 송금 되었습니다.<br/><button class='btn btn-outline-warning m-3 success' id='success' onclick='payCharge()'>받기</button></span>");
                     appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center;'>"+$("#pay").val()+"원이 송금 되었습니다.<br/></p>"
                     +"<span style='float: right;font-size: small; margin-top:5px;'>"
                  +today.toLocaleTimeString()+"</span></div></div>");
@@ -928,6 +991,7 @@ function uploadFile(e) {
           
           
        }); 
+      
       
       
    //퇴장버튼 클릭시
@@ -1099,8 +1163,3 @@ function uploadFile(e) {
         }
    });
 </script>
-
-
-
-
-chatting,jsp

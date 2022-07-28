@@ -61,8 +61,29 @@ public class PayController {
 			
 		}
 		
+		int remit = Integer.parseInt((String) map.get("withdraw"));
+		if(!(remit == 0)) {
+			int remitBalance = Integer.parseInt(balance.getBalance())-remit;
+			map.put("balance", remitBalance);
+		
+			// withdraw = payService.payWithdraw(map);
+			balance = payService.payBalance(map);
+		}
+		
+		
+		int charge = Integer.parseInt((String) map.get("deposit"));
+		System.out.println(charge);
+		if(!(charge == 0)) {
+			int chargeBalance = Integer.parseInt(balance.getBalance())+charge;
+			map.put("balance", chargeBalance);
+			System.out.println(chargeBalance);
+			
+			// deposit = payService.payDeposit(map);
+			balance = payService.payBalance(map);	
+		}
+		
 		return Integer.parseInt(balance.getBalance());
 	}
-	
-	
 }
+	
+
