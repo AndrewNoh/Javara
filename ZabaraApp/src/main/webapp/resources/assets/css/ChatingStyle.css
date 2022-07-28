@@ -59,7 +59,7 @@ img{ max-width:100%;}
  }
 .received_withd_msg p {
   background: #f9fafb none repeat scroll 0 0;
-  border-radius: 3px;
+  border-radius: 15px;
   color: #2e2e2e;
   font-size: 16px;
   margin: 0;
@@ -81,7 +81,7 @@ img{ max-width:100%;}
 
 .sent_msg p {
   background: #f9fafb  none repeat scroll 0 0;
-  border-radius: 3px;
+  border-radius: 15px;
   font-size: 16px;
   margin: 0; color:#2e2e2e;
   padding: 5px 10px 5px 12px;
@@ -146,10 +146,22 @@ color:#e9ecef;
     padding: 0px 20px;
     }
 .css-1r0o66s .chat-header-image{
-	    margin-right: 12px;
+	margin-right: 12px;
     width: 40px;
     height: 40px;
     border-radius: 50%;
+}
+
+.reserved-wrapper{
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    height: 64px;
+    padding: 0px 20px;
+    font-size: 16px;
+    border-bottom: 1px solid #ced4da;
 }
 canvas, img, picture, svg, video{
 	    display: block;
@@ -415,7 +427,7 @@ color: black;}
 
 .modal{
  position: absolute;
- top: 50%;
+ top: 40%;
 }
 
 

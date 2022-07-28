@@ -89,6 +89,7 @@ color:#ffc107
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 </style>
@@ -111,14 +112,14 @@ color:#ffc107
                   class="file-upload" type="file" accept=".jpg, .png, .jpeg"
                   name="profileimg" id="profileimg" style="display: none;" />
             </div>
-            <div id="changeProfileBtn" class="text-center"
-               style="display: none;">
-               <button class="w-btn w-btn-gray"
+            <div id="changeProfileBtn" class="text-center m-2"
+               style="display: none; ">
+               <a class="btn btn-light"
                   style="border-radius: 0.5em; padding: 5px 20px;"
-                  saveBtn" onclick="saveChangedProfile()">저장</button>
-               <button class="w-btn w-btn-gray"
+                  saveBtn" onclick="saveChangedProfile()">저장</a>
+               <a class="btn btn-light"
                   style="border-radius: 0.5em; padding: 5px 20px;"
-                  reset" id="cancelBtn">취소</button>
+                  reset" id="cancelBtn">취소</a>
             </div>
          </div>
          <div class="col mb-3">
@@ -374,52 +375,37 @@ color:#ffc107
                   <div class="testimonials container mt-3">
                      <div class="section-title">
                         <h2 style="margin-bottom: 30px;">나의 채팅</h2>
-                  </div>
-                  <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-                    <div class="swiper-wrapper">
-                      <c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
-                      <div class="swiper-slide">
-                      <a href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.product_no}" name="product_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
-                        <div class="testimonial-item">
-                          <p style="height: 200px;  display: flex; align-items: center; justify-content: center;">
-                              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                              ${chatlist.chatcontent} <i
-                                 class="bx bxs-quote-alt-right quote-icon-right"></i>
-                           </p>
-                           <c:if test="${nickname eq chatlist.writeusernickname }"><img class="testimonial-img" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.senduserprofileimg}" alt="sunil"></c:if>
-                                <c:if test="${nickname ne chatlist.writeusernickname }"><img class="testimonial-img" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.writeuserprofileimg}" alt="sunil"></c:if>
-                           <h3>
-                              <c:if
-                                 test="${nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
-                              <c:if
-                                 test="${nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>
-                           </h3>
-                           <h4><fmt:formatDate value="${chatlist.sendtime}" pattern="yyyy년 MM월 dd일"/></h4>
-                        </div>
-                        </a>
-                      </div><!-- End testimonial item -->
-                        </c:forEach>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                  </div>
-                  <div class="owl-carousel testimonials-carousel"></div>
-                </div><!-- End Testimonials  -->
-                </div>
-               <!--카테고리-->
-               <div class="col mt-3" id="LikeToggleDiv" style="display: none">
-                     <form id="" method="post"
-                        action="#">
-                        <sec:csrfInput />
-                        <input id="" name="" type="hidden" value="">
-                     </form>
-                     <div class="interests container">
-                        <div class="section-title">
-                            <div class="section-title">
-                                 <h2 style="margin-bottom: 30px;">모아보기</h2>
-                              </div>
-                     </div>
-                    </div>
-                   </div>
+			         </div>
+			         <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+			           <div class="swiper-wrapper">
+			             <c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
+			             <div class="swiper-slide">
+			             <a href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.product_no}" name="product_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
+			               <div class="testimonial-item">
+			                 <p style="height: 200px;  display: flex; align-items: center; justify-content: center;">
+			                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+			                     ${chatlist.chatcontent} <i
+			                        class="bx bxs-quote-alt-right quote-icon-right"></i>
+			                  </p>
+			                  <c:if test="${nickname eq chatlist.writeusernickname }"><img class="testimonial-img" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.senduserprofileimg}" alt="sunil"></c:if>
+                           	  <c:if test="${nickname ne chatlist.writeusernickname }"><img class="testimonial-img" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.writeuserprofileimg}" alt="sunil"></c:if>
+			                  <h3>
+			                     <c:if
+			                        test="${nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
+			                     <c:if
+			                        test="${nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>
+			                  </h3>
+			                  <h4><fmt:formatDate value="${chatlist.sendtime}" pattern="yyyy년 MM월 dd일"/></h4>
+			               </div>
+			               </a>
+			             </div><!-- End testimonial item -->
+			               </c:forEach>
+			           </div>
+			           <div class="swiper-pagination"></div>
+			         </div>
+			         <div class="owl-carousel testimonials-carousel"></div>
+			       </div><!-- End Testimonials  -->
+			       </div>
                <!--카테고리-->
            
          <!-- End Counts -->

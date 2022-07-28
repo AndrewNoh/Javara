@@ -19,6 +19,24 @@ margin:10px;
     height: 40px;
     border-radius: 50%;
 }
+
+.chatContainer{
+    background: rgb(20 19 17 / 50%);
+    padding: 10px;
+    border-radius: 10px;
+}
+.testimonials .testimonial-item p {
+margin: none;
+}
+.col-lg-4{
+width: 30%;
+}
+.chatroom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap
+    }
 </style>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/ChatingStyle.css">
     <!-- ======= Chat Details ======= -->
@@ -29,18 +47,50 @@ margin:10px;
       </div>
    <div class="messaging ">
       <div class="inbox_msg">
-         <div class="inbox_people">
-         <div class="css-1r0o66s">
+         <div class="inbox_people" style=" width: 100%; justify-content: center;">
+         <div class="css-1r0o66s" style="justify-content: center;">
             <div class="chat-header-profile">
-                     <img class="chat-header-image" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${profileimage}" >
-                     <div class="main-title" >
-                     <input type="hidden" id="nickname" name="nickname" value="${userNickname.nickname }"/>
-                             ${userNickname.nickname }
-                     <span class="temperature">37.6°C</span>
-                     </div>
-                     </div>
-                     </div>
-            <div class="inbox_chat">
+	            <img class="chat-header-image" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${profileimage}" >
+	            <div class="main-title" >
+		            <input type="hidden" id="nickname" name="nickname" value="${userNickname.nickname }"/>
+		                     ${userNickname.nickname }
+		            <span class="temperature">37.6°C</span>
+	            </div>
+            </div>
+       	</div>
+       	<div class="chatroom">
+       	
+			             <c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
+                  <div class="testimonials chatContainer col-lg-4 col-md-6 my-2 mx-2">
+			         <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+			             <div class="swiper-slide">
+			             <a href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.product_no}" name="product_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
+			               <div class="testimonial-item">
+			                 <p style="height: 200px; display: flex; align-items: center; justify-content: center;">
+			                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+			                     ${chatlist.chatcontent} <i
+			                        class="bx bxs-quote-alt-right quote-icon-right"></i>
+			                  </p>
+			                  <c:if test="${nickname eq chatlist.writeusernickname }"><img class="testimonial-img" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.senduserprofileimg}" alt="sunil"></c:if>
+                           	  <c:if test="${nickname ne chatlist.writeusernickname }"><img class="testimonial-img" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.writeuserprofileimg}" alt="sunil"></c:if>
+			                  <h3>
+			                     <c:if
+			                        test="${nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
+			                     <c:if
+			                        test="${nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>
+			                  </h3>
+			                  <h4><fmt:formatDate value="${chatlist.sendtime}" pattern="yyyy년 MM월 dd일"/></h4>
+			               </div>
+			               </a>
+			             </div><!-- End testimonial item -->
+			         </div>
+			       </div><!-- End Testimonials  -->
+			               </c:forEach>
+       	
+       	
+       	
+       	</div>
+            <!-- <div class="inbox_chat">
                <c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
                <div class="chat_list active_chat">
                   <div class="chat_people">
@@ -68,7 +118,7 @@ margin:10px;
                   </div>
                </div>
                </c:forEach>
-            </div>
+            </div> -->
          </div>
       </div>
    </div>

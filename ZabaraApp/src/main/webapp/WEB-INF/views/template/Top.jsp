@@ -59,7 +59,11 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
-
+<style>
+.navbar a[id=top_banner]:before {
+  background-color: rgb(255 255 255 / 0%);
+}
+</style>
 <body>
 
 
@@ -67,32 +71,10 @@
                    <sec:csrfInput/>
             </form> 
          <nav id="navbar" class="navbar custom-navbar mx-5" >
-	         <a href="<c:url value="/location/MainPage.do"/>">
+	         <a href="<c:url value="/location/MainPage.do"/>"id="top_banner">
 	         <img src="${pageContext.request.contextPath}/resources/assets/img/sub_banner.png" height="80px" /></a>
          <form id="searchForm" action="<c:url value="/board/search.do"/>" method="post">
             <sec:csrfInput/>
-            <div class="row">
-	            <div class="search col mr-3" id="srch" style="float: left;">
-	               <div class="srch_bar" style="text-align:center;">
-	                    <div class="stylish-input-group"  >
-	                     <input type="text" placeholder="검색어를 입력하세요" name="title" class="search-bar">
-	                     <span class="input-group-addon">
-	                         <button type="submit" style="vertical-align:-0.3em;"><i class="bi bi-images" aria-hidden="true" style="font-size: 20px; color: #ffc107;"></i> </button>
-	                     </span>
-	                  </div>
-	               </div>
-	            </div>
-	            <div class="search col" id="imgsrch" style="float: right;">
-	               <div class="srch_bar" style="text-align:center;" id="imgsrchDiv">
-	                    <div class="stylish-input-group"  >
-	                     <input type="text" placeholder="이미지를 넣어주세요" name="title" class="search-bar">
-	                     <span class="input-group-addon">
-	                         <button type="submit" style="vertical-align:-0.3em;"><i class="bi bi-images" aria-hidden="true" style="font-size: 20px;color: #ffc107;"></i> </button>
-	                     </span>
-	                  </div>
-	               </div>
-	            </div>
-            </div>
             <div class="search row" id="srchDiv" style="display: none;">
                <div class="custom-select col mb-2" style="width: 100px;">
                <select id="searchBoardSelect" name="board">
@@ -122,18 +104,18 @@
                </select>
                </div>
               
-            </div>
-         </form>
-            <!-- <div class="search row" id="imgsrchDiv" style="float: right;">
+             <div class="search row" id="imgsrchDiv" style="float: right;">
                <div class="srch_bar" style="text-align:center;">
                     <div class="stylish-input-group"  >
-                     <input type="text" placeholder="이미지를 넣어주세요" name="title" class="search-bar">
+                     <input type="text" placeholder="검색어를 입력해주세요" name="title" class="search-bar">
                      <span class="input-group-addon">
                          <button type="submit" style="vertical-align:-0.3em;"><i class="bi bi-images" aria-hidden="true" style="font-size: 20px;"></i> </button>
                      </span>
                   </div>
                </div>
-            </div> -->
+            </div>
+            </div>
+         </form>
              <!-- <button class="btn" id="srch">검색</button> <button class="btn" id="imgsrch">이미지 검색</button> -->
          
          <ul>
@@ -159,6 +141,29 @@
              <!--<li><a class="nav-link" href="<c:url value="/board/image.do"/>">이미지분석</a></li>-->
              <li><a class="nav-link" href="<c:url value="/chat/chattingroom.do"/>">자바라채팅</a></li>
            </ul>
+           <div class="row">
+	            <div class="search col mr-3" id="srch" style="float: left;">
+	               <div class="srch_bar" style="text-align:center;">
+	                    <div class="stylish-input-group"  >
+	                     <input type="text" placeholder="검색어를 입력해주세요" name="title" class="search-bar">
+	                     <span class="input-group-addon">
+	                         <button type="submit" style="vertical-align:-0.3em;"><i class="bi bi-images" aria-hidden="true" style="font-size: 20px; color: #ffc107;"></i> </button>
+	                     </span>
+	                  </div>
+	               </div>
+	            </div>
+	            <div class="search col" id="imgsrch" style="float: right;">
+	               <div class="srch_bar" style="text-align:center;" id="imgsrchDiv">
+	                    <div class="stylish-input-group"  >
+	                     <input type="text" placeholder="이미지를 넣어주세요" name="title" class="search-bar">
+	                     <span class="input-group-addon">
+	                         <button type="submit" style="vertical-align:-0.3em;"><i class="bi bi-images" aria-hidden="true" style="font-size: 20px;color: #ffc107;"></i> </button>
+	                     </span>
+	                  </div>
+	               </div>
+	            </div>
+            </div>
+           
            <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
  

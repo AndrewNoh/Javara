@@ -377,7 +377,7 @@ section.section-show {
   margin: 0 0 20px 0;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #aaaaaa;
+  color: #f9fafb;
   font-family: "SDSwaggerTTF", sans-serif;
 }
 .section-title h2::after {
@@ -513,10 +513,11 @@ section.section-show {
 }
 .testimonials .testimonial-item {
   box-sizing: content-box;
-  min-height: 320px;
+  height: 320px;
 }
 .testimonials .testimonial-item .testimonial-img {
   width: 90px;
+  height: 90px;
   border-radius: 50%;
   margin: -40px 0 0 40px;
   position: relative;
@@ -524,15 +525,17 @@ section.section-show {
   border: 6px solid rgba(255, 255, 255, 0.12);
 }
 .testimonials .testimonial-item h3 {
+  float: right;
   font-size: 18px;
   font-weight: bold;
-  margin: 10px 0 5px 45px;
+  margin: 10px 20px 5px 20px;
   color: #fff;
 }
 .testimonials .testimonial-item h4 {
   font-size: 14px;
   color: #999;
-  margin: 0 0 0 45px;
+  margin: 0 20px 0 40px;
+  float: right;
 }
 .testimonials .testimonial-item .quote-icon-left, .testimonials .testimonial-item .quote-icon-right {
   color: rgba(255, 255, 255, 0.25);
@@ -1040,7 +1043,8 @@ section.section-show {
 
 .contact .custom-form{
     padding: 30px;
-    background: rgba(255, 255, 255, 0.08);   
+    background: #ffffff36;  
+    border-radius: 15px; 
 }
 
 .contact .custom-form button[type=submit]{
@@ -1222,7 +1226,7 @@ section.section-show {
 .srch_bar input{     
    border: 2px solid rgb(255 255 255 / 55%);
     border-radius: 4px;
-    width: 100%; 
+    width: 90%; 
     padding:2px 0 4px 6px; 
     background:white;}
     

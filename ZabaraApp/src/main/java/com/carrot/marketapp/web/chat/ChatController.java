@@ -40,10 +40,6 @@ public class ChatController {
 
    @GetMapping("/chatting.do")
    public String chatting(Model model, @RequestParam Map map, Principal principal) {
-      System.out.println("GET");
-      System.out.println(map.get("auction_no"));
-      System.out.println(map.get("writeuserno"));
-      System.out.println(map.get("wirtenickName"));
 
       model.addAttribute("wirtenickName", map.get("wirtenickName"));
 
@@ -58,13 +54,8 @@ public class ChatController {
       map.put("userno", userNickname.getUserno());
       model.addAttribute("profileimage", userNickname.getProfile_img());
       model.addAttribute("userno", map.get("userno"));
-      System.out.println(map.get("userno"));
       model.addAttribute("userno", map.get("userno"));
 
-      System.out.println("auction_no" + map.get("auction_no"));
-      System.out.println("townlist_no" + map.get("townlist_no"));
-
-      System.out.println("GET");
       ChatDTO chatroom = chatService.findChatRoom(map);
       model.addAttribute("auction_no", map.get("auction_no"));
       model.addAttribute("townlist_no", map.get("townlist_no"));
@@ -85,7 +76,6 @@ public class ChatController {
          model.addAttribute("nicknames", nicknames);
          List<ChatDTO> readmsg = chatService.readmsg(map);
       } else {
-         System.out.println("방오픈");
          model.addAttribute("roomno", '0');
       }
 
@@ -120,22 +110,11 @@ public class ChatController {
    @ResponseBody
    public String sendChatting(Model model, @RequestParam Map map, Principal principal) {
 
-      System.out.println("post");
-      System.out.println(map.get("auction_no"));
-      System.out.println(map.get("writeuserno"));
-
       map.put("email", principal.getName());
       UserDTO user = userService.selectOne(map);
       map.put("userno", user.getUserno());
       map.put("writeuserno", map.get("writeuserno"));
-      System.out.println("userno: " + map.get("userno"));
-      System.out.println("auction_no: " + map.get("auction_no"));
-      System.out.println("townlist_no" + map.get("townlist_no"));
-      System.out.println("writeuserno: " + map.get("writeuserno"));
-      System.out.println("chatcontent: " + map.get("chatcontent"));
-      System.out.println("chatcontent: " + map.get("auction_no") != "");
 
-      System.out.println("POST");
       ChatDTO chatroom = chatService.findChatRoom(map);
 
       if (chatroom != null) {
@@ -145,12 +124,10 @@ public class ChatController {
          map.put("senduserno", map.get("userno"));
          map.put("unread_count", '1');
          map.put("sendtime", map.get("sendtime"));
-         System.out.println(chatroom.getRoomno());
-         System.out.println(map.get("sendtime"));
+         
          chatService.insertChatMessage(map);
          chatService.updateChatRoomno(map);
       } else {
-         System.out.println("방번호 새로생성");
          if (Integer.parseInt((String) map.get("auction_no")) == 0) {
             map.put("auction_no", "");
          }
@@ -158,25 +135,17 @@ public class ChatController {
             map.put("townlist_no", "");
          }
 
-         System.out.println("auction_no" + map.get("auction_no"));
-         System.out.println("townlist_no" + map.get("townlist_no"));
 
          chatService.createChatRoomno(map);
-
-         if (Integer.parseInt((String) map.get("auction_no")) == 0) {
-            map.put("auction_no", "");
-         }
-         if (Integer.parseInt((String) map.get("townlist_no")) == 0) {
-            map.put("townlist_no", "");
-         }
-
+        
+         
          chatroom = chatService.findChatRoom(map);
-         map.put("roomno", chatroom.getRoomno());
+         map.put("roomno",chatroom.getRoomno());
          map.put("chatcontent", chatroom.getChatcontent());
          map.put("senduserno", map.get("userno"));
          map.put("unread_count", '1');
          map.put("sendtime", map.get("sendtime"));
-         System.out.println(chatroom.getRoomno());
+
          chatService.insertChatMessage(map);
       }
 
@@ -193,14 +162,12 @@ public class ChatController {
       File dest = new File(path + File.separator + rename);
       chatimg.transferTo(dest);
       map.put("chatimg", rename);
-      System.out.println(map.put("chatimg", rename));
       map.put("email", principal.getName());
       map.put("senduserno", map.get("userno"));
       map.put("roomno", map.get("roomno"));
       map.put("chatcontent", "사진");
       map.put("unread_count", "1");
       map.put("img", rename);
-      System.out.println("roomno:" + map.get("roomno"));
       var sendimg = chatService.insertChatimg(map);
       model.addAttribute("img", sendimg);
       chatService.updateChatRoomno(map);
@@ -210,14 +177,12 @@ public class ChatController {
    @PostMapping(value = "/chattingemoji.do", produces = "application/json;charset=UTF-8")
    @ResponseBody
    public String emoji(Model model, @RequestParam Map map, Principal principal) {
-      System.out.println("이모티콘");
       map.put("email", principal.getName());
       map.put("senduserno", map.get("userno"));
       map.put("roomno", map.get("roomno"));
       map.put("unread_count", "1");
       map.put("chatcontent", "이모티콘");
       map.put("img", map.get("img"));
-      System.out.println("roomno:" + map.get("roomno"));
       var sendimg = chatService.insertChatimg(map);
       chatService.updateChatRoomno(map);
       return "/chat/Chatting.market";

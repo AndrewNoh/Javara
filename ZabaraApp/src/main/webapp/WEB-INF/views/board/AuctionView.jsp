@@ -10,6 +10,17 @@
 .select-items div, .select-selected{
 background: #dee2e6
 }
+
+#previewImage > img{
+height: 100%
+}
+#images > img{
+height: 100%
+}
+.contents{
+background-color: #ffffff21;
+border-radius: 15px;
+}
 </style>
     <div id="portfolio-details" class="portfolio-details contact">
       <div class="container">
@@ -95,12 +106,12 @@ background: #dee2e6
 				<div class="row">
 		        	<h2 class="portfolio-title"><input type="text" class="form-control" placeholder="제목을 입력하세요" name="title"></h2>
 		        	<div class="col-lg-8 pb-3">
-		        		<div class="portfolio-details-slider swiper" style="background-color: #ffffff21; text-align: center;">
+		        		<div class="portfolio-details-slider swiper contents" style=" text-align: center;">
 							
-							<div style="height: 400px; line-height: 400px;" id="previewImage">
+							<div style="height: 400px; line-height: 400px;" id="previewImage" class="contents mb-5">
 								<p id="p">사진을 넣어주세요.</p>
 							</div>
-							<div style="height: 200px; line-height: 200px;" id="images">
+							<div style="height: 200px; line-height: 200px;" id="images" class="contents mb-5">
 								
 							</div>
 							
