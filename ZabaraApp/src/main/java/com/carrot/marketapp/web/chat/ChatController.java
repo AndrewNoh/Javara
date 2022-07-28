@@ -187,5 +187,16 @@ public class ChatController {
       chatService.updateChatRoomno(map);
       return "/chat/Chatting.market";
    }
+   
+   @PostMapping(value = "/deletchtroom.do", produces = "application/json;charset=UTF-8")
+   @ResponseBody
+   public String deletchtroom(Model model, @RequestParam Map map, Principal principal) {
+	   map.put("email", principal.getName());
+	   map.put("senduserno", map.get("userno"));
+	   map.put("roomno", map.get("roomno"));
+	   chatService.deleteChatMsg(map);
+	   chatService.deleteChatRoom(map);
+	   return "/chat/ChattingRoom.market";
+   }
 
 }

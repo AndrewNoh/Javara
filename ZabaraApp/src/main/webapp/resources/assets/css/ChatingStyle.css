@@ -184,8 +184,8 @@ canvas, img, picture, svg, video{
 }
 .option-container{
 	position: absolute;
-    right: 195px;
-    top: 210px;
+    left: 30%;
+    top: 30%;
     width: 200px;
     border: 1px solid #ced4da;
     border-radius: 8px;
@@ -427,7 +427,7 @@ color: black;}
 
 .modal{
  position: absolute;
- top: 40%;
+ top: 25%;
 }
 
 

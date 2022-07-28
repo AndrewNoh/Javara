@@ -478,7 +478,7 @@ color:#ffc107
           var nowProfile = $(".profile-photo").attr('src');
 
           $("#profileimg").change(function() {
-             var fileForm = /(.*?)\.(jpg|jpeg|png)$/;
+             var fileForm = /(.*?)\.(jpg|jpeg|png|JPG|JPEG|PNG])$/;
              if (!$('#profileimg').val().match(fileForm)) {
                 $('#profileimg').val(null);
                 const Toast = Swal.mixin({

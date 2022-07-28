@@ -71,15 +71,19 @@ width: 30%;
 			                     ${chatlist.chatcontent} <i
 			                        class="bx bxs-quote-alt-right quote-icon-right"></i>
 			                  </p>
-			                  <c:if test="${nickname eq chatlist.writeusernickname }"><img class="testimonial-img" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.senduserprofileimg}" alt="sunil"></c:if>
-                           	  <c:if test="${nickname ne chatlist.writeusernickname }"><img class="testimonial-img" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.writeuserprofileimg}" alt="sunil"></c:if>
-			                  <h3>
-			                     <c:if
-			                        test="${nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
-			                     <c:if
-			                        test="${nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>
-			                  </h3>
+			                  <c:if test="${userNickname.nickname eq chatlist.writeusernickname }"><img class="chat-header-image" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.senduserprofileimg}" alt="sunil"></c:if>
+                           	  <c:if test="${userNickname.nickname ne chatlist.writeusernickname }"><img class="chat-header-image" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.writeuserprofileimg}" alt="sunil"></c:if>
+			                  <c:forEach var="unreadcount" items="${unreadcount}" varStatus="loop">
+								<c:if test="${chatlist.roomno eq  unreadcount.roomno}"> 
+								<c:if test="${unreadcount.unreadcount >0}">
+									<span class="badge badge-light" style="float: right; border-radius:70%; background-color: red; text-align: center;" >${unreadcount.unreadcount}</span></c:if>
+								</c:if> 
+							</c:forEach>
 			                  <h4><fmt:formatDate value="${chatlist.sendtime}" pattern="yyyy년 MM월 dd일"/></h4>
+			                  <h3>
+			                     <c:if test="${userNickname.nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
+                           		 <c:if test="${userNickname.nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>   
+			                  </h3>
 			               </div>
 			               </a>
 			             </div><!-- End testimonial item -->
@@ -133,7 +137,7 @@ $(function() {
 		$.ajax({
 			url: '<c:url value="/chat/chattingroom.do"/>',
 			data: {'${_csrf.parameterName}':'${_csrf.token}'},
-			type: 'post',
+			type: 'get',
 			success: function (result) {
 				console.log(result)
 			},

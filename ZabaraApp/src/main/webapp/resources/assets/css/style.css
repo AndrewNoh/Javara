@@ -296,7 +296,7 @@ h1,h2 , h3, h4, h5, h6 {
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: #f6dac5e8;
   transition: 0.3s;
   z-index: 999;
   margin-top: 0;
@@ -307,16 +307,19 @@ h1,h2 , h3, h4, h5, h6 {
   right: 15px;
 }
 .navbar-mobile ul {
-  display: block;
-  position: absolute;
-  top: 55px;
-  right: 15px;
-  bottom: 45px;
-  left: 15px;
-  padding: 10px 0;
-  overflow-y: auto;
-  transition: 0.3s;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+     display: flex;
+    position: absolute;
+    top: 55px;
+    right: 15px;
+    bottom: 45px;
+    left: 15px;
+    padding: 10px 0;
+    overflow-y: auto;
+    transition: 0.3s;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: flex-end;
 }
 .navbar-mobile li {
   padding: 12px 20px;

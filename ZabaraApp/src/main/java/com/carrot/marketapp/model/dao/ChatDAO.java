@@ -68,4 +68,13 @@ public class ChatDAO {
 		return sqlSession.insert("insertChatimg", map);
 	}
 
+	public int deleteChatRoom(Map map) {
+		return sqlSession.delete("deleteChatRoom", map);
+	}
+	
+	public int deleteChatMsg(Map map) {
+		return sqlSession.delete("deleteChatMsg", map);
+	}
+
+
 }

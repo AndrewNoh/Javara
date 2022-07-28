@@ -74,5 +74,15 @@ public class ChatServiceimpl {
 		return chatDAO.insertChatimg(map);
 		
 	}
+
+	public int deleteChatRoom(Map map) {
+		return chatDAO.deleteChatRoom(map);		
+	}
+	
+	
+	public int deleteChatMsg(Map map) {
+		return chatDAO.deleteChatMsg(map);		
+	}
+
 	
 }

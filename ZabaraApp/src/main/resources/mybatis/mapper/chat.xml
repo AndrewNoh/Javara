@@ -86,4 +86,10 @@
 		UPDATE CHAT_MESSAGE SET unread_count=0 WHERE room_no=#{roomno} and
 		not(senduserno=#{userno})
 	</update>
+	<delete id="deleteChatRoom">
+		DELETE FROM CHATROOM WHERE room_no =#{roomno}
+	</delete>
+	<delete id="deleteChatMsg">
+		DELETE FROM CHAT_MESSAGE WHERE room_no =#{roomno}
+	</delete>
 </mapper>

@@ -73,7 +73,42 @@
          <nav id="navbar" class="navbar custom-navbar mx-5" >
 	         <a href="<c:url value="/location/MainPage.do"/>"id="top_banner">
 	         <img src="${pageContext.request.contextPath}/resources/assets/img/sub_banner.png" height="80px" /></a>
-         <form id="searchForm" action="<c:url value="/board/search.do"/>" method="post">
+         
+             <!-- <button class="btn" id="srch">검색</button> <button class="btn" id="imgsrch">이미지 검색</button> -->
+         
+         <ul>
+             <sec:authentication property="name" var="username"/>
+             <c:if test="${username == 'anonymousUser'}" var="isLogin">
+                <li><a class="nav-link " href="<c:url value="/location/login.do"/>">로그인</a></li>
+             </c:if>
+             <c:if test="${not isLogin }">  
+                <li><a class="nav-link " href="javascript:logout()">로그아웃</a></li>
+                <li><a class="nav-link " href="<c:url value="/userinfo/mypage.do"/>">나의 자바라</a></li>
+             </c:if>
+             <li><a class="nav-link " href="<c:url value="/board/auctionlist.do"/>">자바라경매</a></li>
+             <li class="nav-item dropdown">
+			      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+			        동네생활
+			      </a>
+			      <div class="dropdown-menu">
+			        <a class="dropdown-item" href="<c:url value="/board/gropboard.do"/>">동네생활</a>
+			        <a class="dropdown-item" href="<c:url value="/board/news.do"/>">실시간뉴스</a>
+			      </div>
+			    </li>
+             <li><a class="nav-link " href="<c:url value="/board/qna.do"/>">자주묻는 질문</a></li>
+             <!--<li><a class="nav-link" href="<c:url value="/board/image.do"/>">이미지분석</a></li>-->
+             <li><a class="nav-link" href="<c:url value="/chat/chattingroom.do"/>">자바라채팅</a></li>
+             <li><div class="search col mr-3" id="srch" style="float: left;">
+	               <div class="srch_bar" style="text-align:center;">
+	                    <div class="stylish-input-group"  >
+	                     <input type="text" placeholder="검색어를 입력해주세요" name="title" class="search-bar">
+	                     <span class="input-group-addon">
+	                         <button type="submit" style="vertical-align:-0.3em;"><i class="bi bi-images" aria-hidden="true" style="font-size: 20px; color: #ffc107;"></i> </button>
+	                     </span>
+	                  </div>
+	               </div>
+	            </div>
+	            <form id="searchForm" action="<c:url value="/board/search.do"/>" method="post">
             <sec:csrfInput/>
             <div class="search row" id="srchDiv" style="display: none;">
                <div class="custom-select col mb-2" style="width: 100px;">
@@ -116,43 +151,8 @@
             </div>
             </div>
          </form>
-             <!-- <button class="btn" id="srch">검색</button> <button class="btn" id="imgsrch">이미지 검색</button> -->
-         
-         <ul>
-             <sec:authentication property="name" var="username"/>
-             <c:if test="${username == 'anonymousUser'}" var="isLogin">
-                <li><a class="nav-link " href="<c:url value="/location/login.do"/>">로그인</a></li>
-             </c:if>
-             <c:if test="${not isLogin }">  
-                <li><a class="nav-link " href="javascript:logout()">로그아웃</a></li>
-                <li><a class="nav-link " href="<c:url value="/userinfo/mypage.do"/>">나의 자바라</a></li>
-             </c:if>
-             <li><a class="nav-link " href="<c:url value="/board/auctionlist.do"/>">자바라경매</a></li>
-             <li class="nav-item dropdown">
-			      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-			        동네생활
-			      </a>
-			      <div class="dropdown-menu">
-			        <a class="dropdown-item" href="<c:url value="/board/gropboard.do"/>">동네생활</a>
-			        <a class="dropdown-item" href="<c:url value="/board/news.do"/>">실시간뉴스</a>
-			      </div>
-			    </li>
-             <li><a class="nav-link " href="<c:url value="/board/qna.do"/>">자주묻는 질문</a></li>
-             <!--<li><a class="nav-link" href="<c:url value="/board/image.do"/>">이미지분석</a></li>-->
-             <li><a class="nav-link" href="<c:url value="/chat/chattingroom.do"/>">자바라채팅</a></li>
-           </ul>
-           <div class="row">
-	            <div class="search col mr-3" id="srch" style="float: left;">
-	               <div class="srch_bar" style="text-align:center;">
-	                    <div class="stylish-input-group"  >
-	                     <input type="text" placeholder="검색어를 입력해주세요" name="title" class="search-bar">
-	                     <span class="input-group-addon">
-	                         <button type="submit" style="vertical-align:-0.3em;"><i class="bi bi-images" aria-hidden="true" style="font-size: 20px; color: #ffc107;"></i> </button>
-	                     </span>
-	                  </div>
-	               </div>
-	            </div>
-	            <div class="search col" id="imgsrch" style="float: right;">
+	         </li>
+             <li><div class="search col" id="imgsrch" style="float: right;">
 	               <div class="srch_bar" style="text-align:center;" id="imgsrchDiv">
 	                    <div class="stylish-input-group"  >
 	                     <input type="text" placeholder="이미지를 넣어주세요" name="title" class="search-bar">
@@ -162,6 +162,9 @@
 	                  </div>
 	               </div>
 	            </div>
+            </li>
+           </ul>
+           <div class="row">
             </div>
            
            <i class="bi bi-list mobile-nav-toggle"></i>
@@ -212,10 +215,10 @@ function kakaoLogout() {
       $("#srch").click(function (){
            $("#srchDiv").toggle();
            $("#srch").toggle();
-           $("#imgsrch").toggle();
         });
       $("#imgsrch").click(function (){
-           $("#srch").toggle();
+           $("#srchDiv").hide();
+           $("#srch").show();
         });
    
    });
