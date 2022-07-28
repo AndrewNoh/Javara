@@ -691,7 +691,7 @@ function uploadFile(e) {
                   
           $.ajax({
             url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
-            data: {chatcontent:'<span style="text-align:center;">낙찰금액 : ${list.upper_Price}</br>낙찰 받으시겠습니까?<br/><button class="btn btn-success m-3 success" id="success">낙찰</button><button class="btn btn-danger m-3 fail" id="fail">거부</button></span>',
+            data: {chatcontent:'<span style="text-align:center;">낙찰금액 : ${list.upper_Price}</br>낙찰 받으시겠습니까?<br/><button class="btn btn-success m-3 success" name="success">낙찰</button><button class="btn btn-danger m-3 fail" id="fail">거부</button></span>',
                   senduserno:${userno},
                   unread_count:'1',
                   sendtime: today.toLocaleTimeString('en-US'),
@@ -749,9 +749,8 @@ function uploadFile(e) {
       };
       
       
-      var success = document.querySelectorAll('.success');
-      for(var i=0; i<success.length;i++){
-         success[i].onclick=function(e){
+      var success = $('button[name=success]');
+         $(document).on("click", '.success', function(e){
             this.onclick='null';
             var form1 = $("#form").serialize();
                      
@@ -778,8 +777,7 @@ function uploadFile(e) {
                +"<span style='float: right;font-size: small; margin-top:5px;'>"
             +today.toLocaleTimeString()+"</span></div></div>");
             
-         };
-      }
+         });
       
       
       
