@@ -56,7 +56,7 @@
       <div class=" m-5"> 
       <div class="container">
      <div class="section-title">
-        <h2>채팅</h2>
+        <h2>자바라 채팅</h2>
       </div>
    <div class="messaging ">
       <div class="inbox_msg">
@@ -223,17 +223,22 @@
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
                      <div class="modal-header" style="justify-content: center;">  
-                         <h1 class="modal-title" style="color: black;">전화번호 공유</h1>
-                     </div>
+                         <h1 class="modal-title" style="color: black; font-size: 20px; font-weight: bold; ">연락처 공유</h1>
+                     </div>                    
                      <div class="modal-body">
                         <form class="form-horizontal" role="form" method="POST" action="#" style="text-align: center;">
-                         <span>전화번호 공유를 하시겠습니까?</span>
-                       <button type="button" class="btn btn-outline-dark my-3" data-dismiss="modal" id="phon" style="margin: auto; display: block;">전화번호 공유</button>
+                         <span>연락처 공유를 요청하시겠습니까?</span>
+                   
                        </form>
+                     </div>
+                     <div class="modal-footer">
+                     <button type="button" class="btn btn-dark my-3" data-dismiss="modal" id="phon" style="margin: auto; display: block; float:right">요청 보내기</button>
                      </div>
                  </div><!-- /.modal-content -->
              </div><!-- /.modal-dialog -->
          </div><!-- /.modal -->
+         
+         <!-- 
          <div id="modalJpay" class="modal fade">
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
@@ -246,9 +251,10 @@
                        <button type="button" class="btn btn-outline-dark my-3" data-dismiss="modal" id="jpay" style="margin: auto; display: block;">낙찰</button>
                        </form>
                      </div>
-                 </div><!-- /.modal-content -->
-             </div><!-- /.modal-dialog -->
-         </div><!-- /.modal -->
+                 </div>
+             </div>
+         </div>
+         -->
          
          
            <div id="modalpayment" class="modal fade">
@@ -260,6 +266,8 @@
                        <div class="modal-body">
                         <form class="form-horizontal" role="form" method="POST" action="#" style="text-align: center;">
                           <input id="pay" class="input" type="text" > 원 <br/>
+                          <h1 style="font-size: 14px; color: #FFC107; font-weight: bold; text-align:center;margin-top: 10px">페이 잔액
+                          <span style="font-size: 14px; color: #000" id="myPay"></span> </h1>
                           
                           <h1 style="font-size: 12px; font-weight: bold; text-align:left; margin-top: 30px; ">자바라페이로 보낸다고 알려 주셨나요?</h1>
                           <h1 style="font-size: 10px; text-align:left">- 이미 송금이 완료되었다면 수취인의 동의 없이 취솰 수 없어요.</h1>
@@ -267,9 +275,9 @@
                           
                           <span class="underline"></span>
                         </form>
-						</div>
+                  </div>
                      <div class="modal-footer">
-                       <button type="button" class="btn btn-dark" style="color:#fff" data-dismiss="modal" id="jpay">보내기</button>
+                       <button type="button" class="btn btn-dark" style="color:#fff" data-dismiss="modal" onclick="payRemit()">보내기</button>
                      </div>
                  </div><!-- /.modal-content -->
              </div><!-- /.modal-dialog -->
@@ -308,7 +316,9 @@
                   <a type="button" id="emojitoggle" ><i class="bi bi bi-emoji-smile m-1" style="float: left; font-size: 35px;"></i></a> 
                   <a type="button" id="phone" data-toggle="modal" data-target="#modalPhon" class="title m-b-md"><i class="bi bi bi bi-telephone-fill m-1" style="float: left; font-size: 35px;"></i></a> 
                   <c:if test="${userno eq writeuserno}">
-                  <a type="button" id="jpays" data-toggle="modal" data-target="#modalJpay" class="title m-b-md"><i class="bi bi-credit-card-2-back m-1" style="float: left; font-size: 35px;"></i></a> 
+                  <!-- 
+                  <a type="button" id="jpays" data-toggle="modal" data-target="#modalJpay" class="title m-b-md"><i class="bi bi-credit-card-2-back m-1" style="float: left; font-size: 35px;"></i></a>
+                  -->
                   <a type="button" id="pay"  data-toggle="modal" data-target="#modalpayment" class="title m-b-md"><i class="bi bi-credit-card-2-back-fill m-1" style="float: left; font-size: 35px;"></i></a></c:if>
                   <input type="file" id="file" name="file" onchange="uploadFile(this)" style="display:none"> 
                   <input type="text" class="write_msg" placeholder="메시지를 입력하세요" id="chatcontent" name="chatcontent"/>
@@ -686,6 +696,34 @@ function uploadFile(e) {
          };
       }
       
+      
+      // 자바라페이 잔액 
+      $.ajax({
+            type: 'POST',
+         url : '<c:url value="/pay/balance.do"/>',
+         data : {
+                'deposit' : 0,
+                'withdraw' : 0,
+                 '${_csrf.parameterName}' : '${_csrf.token}'
+                  },
+           dataType : "text",
+         success : function(result){
+                $('#myPay').text(result+'원')
+                }
+               });   
+        
+      
+        // 송금하기 
+        function payRemit(){
+         // console.log('클릭 이벤트');
+         /*
+         $.ajax({
+            
+         });
+         */
+        };
+      
+    
       $('#jpay').on('click',function(){
          var form1 = $("#form").serialize();
                   

@@ -54,7 +54,7 @@
 						<div class="text-center col">
 							<button class="col-4 m-2 btn btn-light" type="submit">글쓰기</button>
 							<a class="nav-link neonText" href="<c:url value="/board/gropboard.do"/>">
-								<button class="col-4 m-2 btn btn-light" type="button">목록</button>
+								<button class="col-4 m-2 btn btn-dark" type="button">목록</button>
 							</a>
 						</div>
 	          		</div>

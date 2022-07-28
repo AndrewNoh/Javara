@@ -91,7 +91,7 @@ height: 100%
 						</div>
 						<div class="text-center col ">
 							<button class="col-4 m-2 btn btn-outline" type="submit">글쓰기</button>
-							<button class="col-4 m-2 btn btn-outline" id="goList" style="background: #18d26e; border: 0; padding: 10px 30px; color: #fff; transition: 0.4s; border-radius: 4px;" type="button">목록</button>
+							<button class="col-4 m-2 btn btn-dark" id="goList" style="border: 0; padding: 10px 30px; color: #fff; transition: 0.4s; border-radius: 4px;" type="button">목록</button>
 						</div>
 	          		</div>
 	        	</div>
