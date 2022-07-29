@@ -66,17 +66,6 @@ public class MainBoardController {
 
 	@Autowired
 	ObjectMapper objectMapper;
-	
-	// 리스트 불러오기(시작)
-	@RequestMapping("/productlist.do")
-	public String goProductList(@RequestParam Map map, Model model, Principal principal) {
-		model.addAttribute("board", "중고물품");
-		map.put("board", "중고물품");
-		model = setModel(map, model, principal);
-		model.addAttribute("category", map.get("category"));
-
-		return "/board/ProductList.market";
-	}
 
 	@RequestMapping("/gropboard.do")
 	public String gropboard(Map map, Model model, Principal principal) {
@@ -133,25 +122,6 @@ public class MainBoardController {
 	// 리스트 불러오기(끝)
 
 	// 리스트 크게보기(시작)
-	@RequestMapping("/productview.do")
-	public String productview(Model model, @RequestParam Map map, Principal principal) {
-		map.put("board", "중고물품");
-
-		BoardDTO list = boardService.selectOne(map);
-		int no = Integer.parseInt((String) map.get("no"));
-		map = getUserInfo(map, model, principal);
-		map.put("product_no", no);
-		List<ImageDTO> image = imageService.selectList(map);
-
-		model.addAttribute("images", image);
-		model.addAttribute("userno", map.get("userno"));
-		model.addAttribute("list", list);
-
-		return "/board/ProductView.market";
-	}
-	// 리스트 크게보기(끝)
-
-	// 리스트 크게보기(시작)
 	@RequestMapping("/auctionview.do")
 	public String auctionview(Model model, @RequestParam Map map, Principal principal) {
 		map.put("board", "경매");
@@ -200,16 +170,16 @@ public class MainBoardController {
 
 		String title = map.get("title").toString().trim();
 		String content = map.get("content").toString().trim();
-		String price = map.get("price").toString().trim();
+		String price = "0";
+		if(!board.equals("우리동네"))	price = map.get("price").toString().trim();
 
 		if (board.equals("우리동네") && filename[0].getOriginalFilename().equals("")) {
 			System.out.println("잘 작동하나 테스트해봐야 합니다.");
+			a = boardService.insert(map);
 
 		} else if (title.equals("") || content.equals("") || price.equals("")
 				|| filename[0].getOriginalFilename().equals("")) {
 			switch (board) {
-			case "중고물품":
-				return "/board/ProductWrite.market";
 			case "우리동네":
 				return "/board/GropBoardWrite.market";
 			default:
@@ -238,10 +208,11 @@ public class MainBoardController {
 					map.put("addrno", updateAddress.getAddrNo());
 					
 					a = boardService.UpdateAddress(map);
-				}
-			}
+				}///////if
+				
+			}///////if
 
-		}
+		}//////////else
 
 		String path = req.getSession().getServletContext().getRealPath("/resources/assets/img/product_img"); // 경로
 
@@ -273,8 +244,6 @@ public class MainBoardController {
 		}
 
 		switch (board) {
-		case "중고물품":
-			return "redirect:/board/productlist.do";
 		case "우리동네":
 			return "redirect:/board/gropboard.do";
 		default:
@@ -307,9 +276,7 @@ public class MainBoardController {
 		map = getUserInfo(map, model, principal);
 
 		switch (board) {
-		case "중고물품":
-			map.put("product_no", map.get("no"));
-			break;
+		
 		case "우리동네":
 			map.put("townlist_no", map.get("no"));
 			break;
@@ -387,7 +354,6 @@ public class MainBoardController {
 		List<List<ImageDTO>> imageList = new Vector<List<ImageDTO>>();
 
 		for (int i = 0; i < Lists.size(); i++) {
-			map.put("product_no", Lists.get(i).getProduct_no());
 			map.put("auction_no", Lists.get(i).getAuction_no());
 
 			List<ImageDTO> images = imageService.selectList(map);
@@ -591,9 +557,6 @@ public class MainBoardController {
 		map.put("simpleAddress", simpleAddr);
 
 		switch (board) {
-		case "중고물품":
-			searchList = boardService.searchProduct(map);
-			break;
 		case "경매":
 			searchList = boardService.searchAuction(map);
 			break;
@@ -605,7 +568,6 @@ public class MainBoardController {
 		List<List<ImageDTO>> imageList = new Vector<List<ImageDTO>>();
 
 		for (int i = 0; i < searchList.size(); i++) {
-			map.put("product_no", searchList.get(i).getProduct_no());
 			map.put("auction_no", searchList.get(i).getAuction_no());
 
 			List<ImageDTO> images = imageService.selectList(map);

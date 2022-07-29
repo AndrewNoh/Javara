@@ -108,10 +108,9 @@
 	<!-- TOWN -->
 	<select id="getGropList" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		SELECT * FROM TOWN_LIST L WHERE
-		(SELECT SIMPLEADDRESS FROM
-		ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) =
-		#{simpleAddress}
+		SELECT * FROM TOWN_LIST L 
+		LEFT OUTER JOIN MEMBERS M ON L.USERNO = M.USERNO
+		WHERE (SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) = #{simpleAddress}
 	</select>
 
 	<select id="getListOne" parameterType="Map"

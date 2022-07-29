@@ -15,7 +15,9 @@
       <div class="row mt-2">
 
       <form action="<c:url value="/board/write.do"><c:param name="board" value="우리동네"/></c:url>" enctype="multipart/form-data" method="post" role="form" class="mt-4">
-      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+      	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+      	<input type="hidden" name="latitude" id="latitude" value="not">
+	  	<input type="hidden" name="longitude" id="longitude" value="not">	
 			<div class="row">
 	        	<h2 class="portfolio-title"><input type="text" class="form-control" placeholder="제목을 입력하세요" name="title"></h2>
 	        	<div class="col-lg-8 pb-3">

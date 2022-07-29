@@ -101,51 +101,46 @@ width: 70%;
   
   </header><!-- End Header -->
   
-<div style="width:100%; position:relative; background-color:rgb(97 97 97 / 60%);" id="mainUnder">
-	<c:forEach var="list" items="${lists}" varStatus="i">
-		<div
-			<c:choose>
-				<c:when test="${i.count == 1}">style="position:absolute; width:40%; height:40%; left:7%; top:10%;"</c:when>
-				<c:when test="${i.count == 2}">style="position:absolute; width:40%; height:40%; right:7%; top:10%;"</c:when>
-				<c:when test="${i.count == 3}">style="position:absolute; width:40%; height:40%; left:7%; bottom:10%;"</c:when>
-				<c:otherwise>style="position:absolute; width:40%; height:40%; right:7%; bottom:10%;"</c:otherwise>
-			</c:choose>		
-		>			
-			<div class="container">	
-		        <div class="row">		
-		        	<div class="col-lg-8">
-		        		<h2 class="portfolio-title">${list.title}</h2>
-		        		<div class="portfolio-details-slider swiper">
-		            		<div class="swiper-wrapper align-items-center">
-								<c:forEach var="in" begin="0" end="${fn:length(imageList[i.index])-1}">
-									<div class="swiper-slide">
-										<img src="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[i.index][in].imageName}">
+<div style="width:100%; background-color:rgb(97 97 97 / 60%);" id="mainUnder">
+	<div style="width:90%; height:969px; margin:auto" class="row">
+		<c:forEach var="list" items="${lists}" varStatus="i">
+			<div style="margin:auto;" class="col-lg-5">
+				<div class="container">	
+			        <div class="row">		
+			        	<div class="col-lg-8">
+			        		<h2 class="portfolio-title">${list.title}</h2>
+			        		<div class="portfolio-details-slider swiper">
+			            		<div class="swiper-wrapper align-items-center">
+									<c:forEach var="in" begin="0" end="${fn:length(imageList[i.index])-1}">
+										<div class="swiper-slide">
+											<img src="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[i.index][in].imageName}">
+										</div>
+									</c:forEach>
+			            		</div>
+			            	</div>
+			          	</div>
+			
+			        	<div class="col-lg-4 portfolio-info">
+			            	<div class="content">						
+								<div style="text-align: right;">					
+									<div>${list.nickName}</div>
+										<i class="bi bi-calendar3"></i> ${list.postDate}
 									</div>
-								</c:forEach>
-		            		</div>
-		            	</div>
-		          	</div>
-		
-		        	<div class="col-lg-4 portfolio-info">
-		            	<div class="content">						
-							<div style="text-align: right;">					
-								<div>${list.nickName}</div>
-									<i class="bi bi-calendar3"></i> ${list.postDate}
-								</div>
-						
-								<div class="mb-4">${list.category}</div>
-								<div class="mb-5">
-									<p>${list.content}</p>
-								</div>
-								<div class="mb-5">
-									<p>${list.endDate}</p>
-								</div>		
-						</div>
-		          	</div>
-	        	</div>	
-	    	</div>
-		</div><!-- End Portfolio Details -->
-	</c:forEach>
+							
+									<div class="mb-4">${list.category}</div>
+									<div class="mb-5">
+										<p>${list.content}</p>
+									</div>
+									<div class="mb-5">
+										<p>${list.endDate}</p>
+									</div>		
+							</div>
+			          	</div>
+		        	</div>	
+		    	</div>
+			</div><!-- End Portfolio Details -->
+		</c:forEach>		
+	</div>
 </div>
 
 	

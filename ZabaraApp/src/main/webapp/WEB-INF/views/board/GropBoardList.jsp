@@ -9,7 +9,7 @@ border-radius: 10px;
 }
 </style> 
 <div style="position: fixed;bottom: 50px; right: 30px;">
-   <a href="<c:url value="/board/write.do"><c:param name="board" value="Auction"/> </c:url>">
+   <a href="<c:url value="/board/write.do"><c:param name="board" value="GropBoard"/> </c:url>">
   <img src="${pageContext.request.contextPath}/resources/assets/img/write_btn.png" 
        title="글쓰기" style="width: 80px; height: 80px"></a>
   </div>
@@ -32,10 +32,10 @@ border-radius: 10px;
       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="row mx-1" style="display: flex; align-items: center; justify-content: space-between;">
           <div class="col-md-5 form-group mr-1" >
-           <div style="padding: 10px 15px;">${LIST.nickName} ?</div>
+           <div style="padding: 10px 15px;">${LIST.nickName}</div>
           </div>
           <div class="col-md-5 form-group ml-1" >
-            <div style="padding: 10px 15px;">${LIST.category }</div>
+            <div style="padding: 10px 15px;">${LIST.category}</div>
           </div>
         </div>
         <div class="form-group mt-3" style="padding: 10px 15px;">

@@ -145,5 +145,20 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 
 		return boardDAO.mypagepurchaselist(map);
 	}
+	
+	public int getLikeCount(Map map) {
+		// TODO Auto-generated method stub
+		return boardDAO.getLikeCount(map);
+	}
+
+	public int getSellCount(Map map) {
+		// TODO Auto-generated method stub
+		return boardDAO.getSellCount(map);
+	}
+
+	public int getBuyCount(Map map) {
+		// TODO Auto-generated method stub
+		return boardDAO.getBuyCount(map);
+	}
 
 }

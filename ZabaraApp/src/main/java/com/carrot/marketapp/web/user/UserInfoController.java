@@ -227,6 +227,21 @@ public class UserInfoController {
 		model.addAttribute("userno", record.getUserno());
 		List<ChatDTO> chatlist = chatService.chatlist(map);
 		model.addAttribute("chatlist", chatlist);
+		
+		// 판매/구매내역 & 관심목록 갯수
+		int likeCount = boardService.getLikeCount(map);
+		System.out.println("조아용"+likeCount);
+		
+		int sellCount = boardService.getSellCount(map);
+		System.out.println("판매용"+sellCount);
+			
+		int buyCount = boardService.getBuyCount(map);
+		System.out.println("구매용"+buyCount);
+				
+		model.addAttribute("likeCount", likeCount);
+		model.addAttribute("sellCount", sellCount);
+		model.addAttribute("buyCount", buyCount);
+				
 		// 뷰정보 반환]
 		return "/user/MyPage.market";
 	}///////////////////////

@@ -230,5 +230,17 @@ public class BoardDAO {
 	public List<BoardDTO> mypagepurchaselist(Map map) {
 		return sqlSession.selectList("mypagepurchaselist", map);
 	}
+	
+	public int getLikeCount(Map map) {
+		return sqlSession.selectOne("getLikeCount", map);
+	}
+
+	public int getSellCount(Map map) {
+		return sqlSession.selectOne("getSellCount", map);
+	}
+
+	public int getBuyCount(Map map) {
+		return sqlSession.selectOne("getBuyCount", map);
+	}
 
 }
