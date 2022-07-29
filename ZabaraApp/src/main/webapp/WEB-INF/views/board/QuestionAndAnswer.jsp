@@ -25,8 +25,9 @@
 
       <div class="section-title">
         <h2>자주묻는 질문</h2>
+        <p >🤷🏾‍♀ 사람들이 자주 묻는 질문을 확인해보세요 </p>
+              
       </div>
-
       <div class="row mt-2">
         <div class="row mb-4 align-items-center">
           <div class="col-md-6 mb-5" data-aos="fade-up">

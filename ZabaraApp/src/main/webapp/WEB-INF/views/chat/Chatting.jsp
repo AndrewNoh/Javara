@@ -864,83 +864,83 @@ function uploadFile(e) {
      
         // 페이 - 송금 하기    
         function payRemit(){
-         // console.log('클릭 이벤트');
+          // console.log('클릭 이벤트');
           var remit = $('#pay').val(); // 송금액
-          console.log('typeof remit',typeof remit);
-          console.log('remit',remit);
+          // console.log('typeof remit',typeof remit);
+          // console.log('remit',remit);
           var amount =  parseInt($('#myPay').attr('title'));// 잔액
-          console.log('typeof amount',typeof amount);
-           console.log(amount);
-          if(remit > amount){
-              const Toast = Swal.mixin({
-                     toast : true,
-                     position : 'center-center',
-                     showConfirmButton : false,
-                     timer : 1000,
-                     timerProgressBar : true,
-                  })
-
-                  Toast.fire({
-                     icon : 'error',
-                     title : '페이 잔액이 부족합니다'
-                  })
-          }
-          else{
-               $.ajax({
-                  type: 'POST',
-                   url : '<c:url value="/pay/balance.do"/>',
-                   data : {
-                           'deposit' : 0,
-                           'withdraw' : remit,                        
-                           '${_csrf.parameterName}' : '${_csrf.token}'
-                            },
-                     dataType : "text",
-                     
-                     success : function(result){
-                    	 
-                    	 console.log(result);
-    	                 wsocket.send('서버로부터받은 메시지${roomno}:'+"<span id='payval' data-money='"+$("#pay").val()+"' style='text-align:center;'><strong>"+$("#pay").val()+"원</strong>이 송금 되었습니다.<br/><button class='btn btn-outline-warning m-3 success' id='success' onclick='payCharge()'>받기</button>");
-    	                    appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center;'><strong>"+$("#pay").val()+"원</strong>이 송금 되었습니다.<br/></p>"
-    	                    +"<span style='float: right;font-size: small; margin-top:5px;'>"
-    	                 +today.toLocaleTimeString()+"</span></div></div>");
-                  
-                          $('#myPay').text(result
-                                .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                                +'원')
-                                $('#myPay').attr('title', result)   
-                                 const Toast = Swal.mixin({
-                                         toast : true,
-                                         position : 'center-center',
-                                         showConfirmButton : false,
-                                         timer : 1000,
-                                         timerProgressBar : true,
-                                      })
-   
-                                      Toast.fire({
-                                         icon : 'success',
-                                         title : '송금 완료하였습니다'
-                                      })
-                                      
-                                      $.ajax({
-                         	             url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
-                         	             data: {chatcontent:"<strong>"+$("#pay").val()+"원</strong>이 송금 되었습니다."
-                         	            	 +'<input type="hidden" value="송금메세지"/>',
-                         	                   senduserno:${userno},
-                         	                   unread_count:'1',
-                         	                   sendtime: today.toLocaleTimeString('en-US'),
-                         	                   '${_csrf.parameterName}':'${_csrf.token}'},
-                         	             type: 'POST',
-                         	             dataType: 'text',
-                         	             success: function (result) {
-                         	            	 
-                         	             }
-                         	          });
-                           }
-                     
-                       
-                    });     
-               } 
-           };
+          // console.log('typeof amount',typeof amount);
+          // console.log(amount);
+	          if(remit > amount){
+	              const Toast = Swal.mixin({
+	                     toast : true,
+	                     position : 'center-center',
+	                     showConfirmButton : false,
+	                     timer : 1000,
+	                     timerProgressBar : true,
+	                  })
+	
+	                  Toast.fire({
+	                     icon : 'error',
+	                     title : '페이 잔액이 부족합니다'
+	                  })
+	          }
+	          else{
+	               $.ajax({
+	                  type: 'POST',
+	                   url : '<c:url value="/pay/balance.do"/>',
+	                   data : {
+	                           'deposit' : 0,
+	                           'withdraw' : remit,                        
+	                           '${_csrf.parameterName}' : '${_csrf.token}'
+	                            },
+	                     dataType : "text",
+	                     
+	                     success : function(result){
+	                    	 
+	                    	 console.log(result);
+	    	                 wsocket.send('서버로부터받은 메시지${roomno}:'+"<span id='payval' data-money='"+$("#pay").val()+"' style='text-align:center;'><strong>"+$("#pay").val()+"원</strong>이 송금 되었습니다.<br/><button class='btn btn-outline-warning m-3 success' id='success' onclick='payCharge()'>받기</button>");
+	    	                    appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center;'><strong>"+$("#pay").val()+"원</strong>이 송금 되었습니다.<br/></p>"
+	    	                    +"<span style='float: right;font-size: small; margin-top:5px;'>"
+	    	                 +today.toLocaleTimeString()+"</span></div></div>");
+	                  
+	                          $('#myPay').text(result
+	                                .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+	                                +'원')
+	                                $('#myPay').attr('title', result)   
+	                                 const Toast = Swal.mixin({
+	                                         toast : true,
+	                                         position : 'center-center',
+	                                         showConfirmButton : false,
+	                                         timer : 1000,
+	                                         timerProgressBar : true,
+	                                      })
+	   
+	                                      Toast.fire({
+	                                         icon : 'success',
+	                                         title : '송금 완료하였습니다'
+	                                      })
+	                                      
+	                                      $.ajax({
+	                         	             url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
+	                         	             data: {chatcontent:"<strong>"+$("#pay").val()+"원</strong>이 송금 되었습니다."
+	                         	            	 +'<input type="hidden" value="송금메세지"/>',
+	                         	                   senduserno:${userno},
+	                         	                   unread_count:'1',
+	                         	                   sendtime: today.toLocaleTimeString('en-US'),
+	                         	                   '${_csrf.parameterName}':'${_csrf.token}'},
+	                         	             type: 'POST',
+	                         	             dataType: 'text',
+	                         	             success: function (result) {
+	                         	            	 
+	                         	             }
+	                         	          });
+	                           }
+	                     
+	                       
+	                    });     
+	               } 
+           	};
            
            
            // 페이 - 송금 받기
@@ -962,15 +962,15 @@ function uploadFile(e) {
                      $('#myPay').text(result
                            .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                          +'원')
+                         $('#myPay').attr('title', result)  
                   }
                     
                  });
-                 
-                         
+                                      
            }
     
       
-//송금확인
+	  // 송금확인
       var success = $('button[name=success]');
       $(document).one("click", '.success', function(e){
          var form1 = $("#form").serialize();
@@ -984,29 +984,21 @@ function uploadFile(e) {
                   '${_csrf.parameterName}':'${_csrf.token}'},
             type: 'POST',
             dataType: 'text',
-            success: function (result) {
-               console.log(result)
-            },
-            error: function () {
-               console.log('error')
-            }
-         });
+            success: function (result) { console.log(result) },
+            error: function () { console.log('error') }
+         	});
          
          console.log(result);
          wsocket.send('서버로부터받은 메시지${roomno}:'+"<strong>${userNickname.nickname }님이 <strong>"+remit+"원</strong>을 받으셨습니다.");
             appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center;'><strong>"+remit+"원이 입급되었습니다.</strong></p>"
             +"<span style='float: right;font-size: small; margin-top:5px;'>"
          +today.toLocaleTimeString()+"</span></div></div>");
-         
-     });
+     	 });
 
 
-      //송금하기
+      // 송금하기
       $('#payRemit').on('click',function(){
-          var form1 = $("#form").serialize();
-          
-           
-          
+          var form1 = $("#form").serialize(); 
        }); 
  
       

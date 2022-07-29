@@ -40,8 +40,8 @@ public class PayController {
 		
 		PayDTO balance = payService.payBalance(map);
 		
+		// 입금/충전
 		int deposit = Integer.parseInt((String) map.get("deposit"));
-		
 		if(!(deposit == 0)) {
 			int depositBalance = Integer.parseInt(balance.getBalance())+deposit;
 			map.put("balance", depositBalance);
@@ -51,6 +51,7 @@ public class PayController {
 			
 		}
 		
+		// 출금
 		int withdraw = Integer.parseInt((String) map.get("withdraw"));
 		if(!(withdraw == 0)) {
 			int withdrawBalance = Integer.parseInt(balance.getBalance())-withdraw;
@@ -61,6 +62,7 @@ public class PayController {
 			
 		}
 		
+		// 송금 
 		int remit = Integer.parseInt((String) map.get("withdraw"));
 		if(!(remit == 0)) {
 			int remitBalance = Integer.parseInt(balance.getBalance())-remit;
@@ -70,7 +72,7 @@ public class PayController {
 			balance = payService.payBalance(map);
 		}
 		
-		
+		// 송금 받기
 		int charge = Integer.parseInt((String) map.get("deposit"));
 		System.out.println(charge);
 		if(!(charge == 0)) {

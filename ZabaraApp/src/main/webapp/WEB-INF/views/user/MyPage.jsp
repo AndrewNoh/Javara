@@ -740,68 +740,71 @@ color:#ffc107
 
            // 자바라페이 잔액 
            $.ajax({
-                 type: 'POST',
+              type: 'POST',
               url : '<c:url value="/pay/balance.do"/>',
               data : {
                      'deposit' : 0,
                      'withdraw' : 0,
                       '${_csrf.parameterName}' : '${_csrf.token}'
                        },
-                dataType : "text",
+              dataType : "text",
               success : function(result){
                  $('#myPay').text(result
                         .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                         +'원')
                         $('#myPay').attr('title', result)      
-                        
+                    
                      }
-                    });      
+                    }); 
+             
            
-           // 자바라페이 출금
-           function payWithdraw() {
-              var amount =  parseInt($('#myPay').attr('title'));
-              console.log('amount',amount);
-              var selected = $('#pay option:selected').val();          
-               console.log('selected', selected);
-               console.log('amount < selected',amount < selected);
-               console.log(typeof amount);
-               console.log(typeof selected);
-               
-               if(amount < selected) {
-                  const Toast = Swal.mixin({
-                        toast : true,
-                        position : 'center-center',
-                        showConfirmButton : false,
-                        timer : 1000,
-                        timerProgressBar : true,
-                     })
-
-                     Toast.fire({
-                        icon : 'error',
-                        title : '출금 금액이 잔액보다 많습니다.'
-                     })
-               }
-               else{
-                  $.ajax({
-                           type: 'POST',
-                          url : '<c:url value="/pay/balance.do"/>',
-                         data : {
-                               'deposit' : 0,
-                               'withdraw' : selected,
-                             '${_csrf.parameterName}' : '${_csrf.token}'
-                           },
-                           dataType : "text",
-                         success : function(result){
-                         console.log(result);
-                            $('#myPay').text(result
-                                  .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                                +'원')
-                                $('#myPay').attr('title', result)   
-                         }
-                           
-                        });  
-               }
-           }
+             
+            // 자바라페이 출금
+            function payWithdraw() { 
+               var amount =  parseInt($('#myPay').attr('title')); // 잔액
+               // console.log('amount',amount);
+               var selected = $('#pay option:selected').val(); // 출금액
+               // console.log('selected', selected);
+               // console.log('amount < selected',amount < selected);
+               // console.log(typeof amount);
+               // console.log(typeof selected);
+	               
+	               if(amount < selected) { // 출금액이 잔액보다 클 경우 출금 정지
+	                  const Toast = Swal.mixin({
+	                        toast : true,
+	                        position : 'center-center',
+	                        showConfirmButton : false,
+	                        timer : 1000,
+	                        timerProgressBar : true,
+	                     })
+	
+	                     Toast.fire({
+	                        icon : 'error',
+	                        title : '출금 금액이 잔액보다 많습니다.'
+	                     })
+	               }
+	               else{
+	                  $.ajax({
+	                           type: 'POST',
+	                          url : '<c:url value="/pay/balance.do"/>',
+	                         data : {
+	                               'deposit' : 0,
+	                               'withdraw' : selected,
+	                             '${_csrf.parameterName}' : '${_csrf.token}'
+	                           },
+	                           dataType : "text",
+	                         success : function(result){
+	                         console.log(result);
+	                            $('#myPay').text(result
+	                                  .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+	                                +'원')
+	                                $('#myPay').attr('title', result)   
+	                         }
+	                           
+	                        });  
+	               }
+           	}
+           
            
 
            // 자바라페이 잔액 충전
@@ -860,6 +863,7 @@ color:#ffc107
                                        $('#myPay').text(result
                                              .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                                             +'원')
+                                       $('#myPay').attr('title', result)  
                                     }
                                    });   
                                  
@@ -881,4 +885,5 @@ color:#ffc107
                               }
                            })
                      }
+           			
 </script>
