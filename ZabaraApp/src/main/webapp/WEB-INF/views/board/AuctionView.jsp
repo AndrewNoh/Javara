@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
   <!-- ======= Portfolio Details ======= -->
   
 <style>
@@ -104,15 +105,24 @@ border-radius: 15px;
 			<form action="" id="editForm" method="post" role="form" class="mt-4" enctype="multipart/form-data">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				<div class="row">
-		        	<h2 class="portfolio-title"><input type="text" class="form-control" placeholder="제목을 입력하세요" name="title"></h2>
+		        	<h2 class="portfolio-title"><input type="text" class="form-control" placeholder="제목을 입력하세요" name="title" value="${list.title}"></h2>
 		        	<div class="col-lg-8 pb-3">
 		        		<div class="portfolio-details-slider swiper contents" style=" text-align: center;">
 							
 							<div style="height: 400px; line-height: 400px;" id="previewImage" class="contents mb-5">
-								<p id="p">사진을 넣어주세요.</p>
+								<c:forEach var="image" items="${images}" varStatus="editimgloop">
+									<c:if test="${fn:length(images)-1 eq editimgloop.index}" var="eqIndex">
+										<img id="${editimgloop.index}" src="${pageContext.request.contextPath}/resources/assets/img/product_img/${image.imageName}" style="width: auto; height: 100%;">
+									</c:if>
+									<c:if test="${!eqIndex}">
+									<img id="${editimgloop.index}" src="${pageContext.request.contextPath}/resources/assets/img/product_img/${image.imageName}" style="width: auto; height: 100%; display: none;">
+									</c:if>
+								</c:forEach>
 							</div>
 							<div style="height: 200px; line-height: 200px;" id="images" class="contents mb-5">
-								
+								<c:forEach var="image" items="${images}" varStatus="editloop">
+									<img id="${editloop.index}" src="${pageContext.request.contextPath}/resources/assets/img/product_img/${image.imageName}" style="height: auto; width: 20%;">				
+								</c:forEach>
 							</div>
 							
 							<div class="custom-file mb-3">
@@ -135,11 +145,11 @@ border-radius: 15px;
 							</div>
 							<div class="my-3">
 								<p>가격</p>
-								<input type="text" class="form-control" placeholder="가격을 입력하세요" name="price">
+								<input type="text" class="form-control" placeholder="가격을 입력하세요" name="price" value="${list.base_Price}">
 							</div>
 							<div class="mt-3 mb-5">
 								<p>내용</p>
-								<textarea class="form-control" rows="5" name="content"></textarea>
+								<textarea class="form-control" rows="5" name="content">${list.content}</textarea>
 							</div>
 							<div class="text-center col ">
 								<button class="col-4 m-2 btn btn-outline" type="button" id="submit">수정</button>

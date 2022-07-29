@@ -40,18 +40,18 @@
                    <ul id="portfolio-flters">
                      <li data-filter="*" <c:if test="${category == '모두'}"> class="filter-active" </c:if>>모두</li>
                      <li data-filter=".filter-생활가전" <c:if test="${category == '생활가전'}"> class="filter-active" </c:if>>생활가전</li>
-                     <li data-filter=".filter-가구|인테리어" <c:if test="${category == '가구인테리어'}"> class="filter-active" </c:if>>가구/인테리어</li>
+                     <li data-filter=".filter-가구인테리어" <c:if test="${category == '가구인테리어'}"> class="filter-active" </c:if>>가구/인테리어</li>
                      <li data-filter=".filter-디지털기기" <c:if test="${category == '디지털기기'}"> class="filter-active" </c:if>>디지털기기</li>
                      <li data-filter=".filter-유아용품" <c:if test="${category == '유아용품'}"> class="filter-active" </c:if>>유아용품</li>
-                     <li data-filter=".filter-도서|티켓" <c:if test="${category == '도서티켓'}"> class="filter-active" </c:if>>도서/티켓</li>
+                     <li data-filter=".filter-도서티켓" <c:if test="${category == '도서티켓'}"> class="filter-active" </c:if>>도서/티켓</li>
                      <li data-filter=".filter-가공식품" <c:if test="${category == '가공식품'}"> class="filter-active" </c:if>>가공식품</li>
                      <br/>
                      <li data-filter=".filter-스포츠|레저" <c:if test="${category == '스포츠레저'}"> class="filter-active" </c:if>>스포츠/레저</li>                     
                      <li data-filter=".filter-여성잡화" <c:if test="${category == '여성잡화'}"> class="filter-active" </c:if>>여성잡화</li>
                      <li data-filter=".filter-여성의류" <c:if test="${category == '여성의류'}"> class="filter-active" </c:if>>여성의류</li>
-                     <li data-filter=".filter-남성패션|잡화" <c:if test="${category == '남성패션잡화'}"> class="filter-active" </c:if>>남성패션/잡화</li>
-                     <li data-filter=".filter-게임|취미" <c:if test="${category == '게임취미'}"> class="filter-active" </c:if>>게임/취미</li>
-                     <li data-filter=".filter-뷰티|미용" <c:if test="${category == '뷰티미용'}"> class="filter-active" </c:if>>뷰티/미용</li>
+                     <li data-filter=".filter-남성패션잡화" <c:if test="${category == '남성패션잡화'}"> class="filter-active" </c:if>>남성패션/잡화</li>
+                     <li data-filter=".filter-게임취미" <c:if test="${category == '게임취미'}"> class="filter-active" </c:if>>게임/취미</li>
+                     <li data-filter=".filter-뷰티미용" <c:if test="${category == '뷰티미용'}"> class="filter-active" </c:if>>뷰티/미용</li>
                      <li data-filter=".filter-반려동물용품" <c:if test="${category == '반려동물용품'}"> class="filter-active" </c:if>>반려동물용품</li>
                    </ul>
               </div>
