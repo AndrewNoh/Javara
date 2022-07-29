@@ -7,8 +7,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.carrot.marketapp.model.dto.ChatDTO;
 import com.carrot.marketapp.model.dto.UserDTO;
@@ -24,7 +27,7 @@ public class ChatRoomController {
 	@Autowired
 	UserServiceimpl userService;
 
-	@RequestMapping("/chattingroom.do")
+	@GetMapping("/chattingroom.do")
 	public String chattingroom(Model model, @RequestParam Map map, Principal principal) {
 		map.put("email", principal.getName());
 		UserDTO userNickname = userService.selectOne(map);
@@ -41,5 +44,6 @@ public class ChatRoomController {
 
 		return "/chat/ChattingRoom.market";
 	}
+	
 
 }

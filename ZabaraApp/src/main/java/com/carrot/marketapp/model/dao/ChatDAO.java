@@ -76,5 +76,9 @@ public class ChatDAO {
 		return sqlSession.delete("deleteChatMsg", map);
 	}
 
+	public int updateChatMsg(Map map) {
+		return sqlSession.update("updateChatMsg", map);
+	}
+
 
 }

@@ -92,4 +92,8 @@
 	<delete id="deleteChatMsg">
 		DELETE FROM CHAT_MESSAGE WHERE room_no =#{roomno}
 	</delete>
+	<update id="updateChatMsg" parameterType="Map">
+		UPDATE CHAT_MESSAGE SET chatcontent=#{chatcontent} WHERE
+		room_no = #{roomno}
+	</update>
 </mapper>

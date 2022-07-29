@@ -71,14 +71,14 @@ width: 30%;
 			                     ${chatlist.chatcontent} <i
 			                        class="bx bxs-quote-alt-right quote-icon-right"></i>
 			                  </p>
-			                  <c:if test="${userNickname.nickname eq chatlist.writeusernickname }"><img class="chat-header-image" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.senduserprofileimg}" alt="sunil"></c:if>
-                           	  <c:if test="${userNickname.nickname ne chatlist.writeusernickname }"><img class="chat-header-image" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.writeuserprofileimg}" alt="sunil"></c:if>
 			                  <c:forEach var="unreadcount" items="${unreadcount}" varStatus="loop">
 								<c:if test="${chatlist.roomno eq  unreadcount.roomno}"> 
 								<c:if test="${unreadcount.unreadcount >0}">
-									<span class="badge badge-light" style="float: right; border-radius:70%; background-color: red; text-align: center;" >${unreadcount.unreadcount}</span></c:if>
+									<span class="badge badge-light" style="float: right; border-radius:20%; background-color: red; text-align: center; margin: 10px 20px;" >${unreadcount.unreadcount}</span></c:if>
 								</c:if> 
 							</c:forEach>
+			                  <c:if test="${userNickname.nickname eq chatlist.writeusernickname }"><img class="testimonial-img" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.senduserprofileimg}" alt="sunil"></c:if>
+                           	  <c:if test="${userNickname.nickname ne chatlist.writeusernickname }"><img class="testimonial-img" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.writeuserprofileimg}" alt="sunil"></c:if>
 			                  <h4><fmt:formatDate value="${chatlist.sendtime}" pattern="yyyy년 MM월 dd일"/></h4>
 			                  <h3>
 			                     <c:if test="${userNickname.nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
@@ -130,14 +130,16 @@ width: 30%;
 </div>
 
 <script>
-$(function() {
+
+/* $(function() {
 
 	timer = setInterval( function () {
 
 		$.ajax({
-			url: '<c:url value="/chat/chattingroom.do"/>',
+			url: '<c:url value="/chat/chattingroom.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
 			data: {'${_csrf.parameterName}':'${_csrf.token}'},
-			type: 'get',
+			type: 'POST',
+			dataType: 'text',
 			success: function (result) {
 				console.log(result)
 			},
@@ -148,6 +150,5 @@ $(function() {
 		
 	    }, 1000);
 
-	});
-   
+	}); */
 </script>

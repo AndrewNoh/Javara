@@ -84,5 +84,9 @@ public class ChatServiceimpl {
 		return chatDAO.deleteChatMsg(map);		
 	}
 
+	public int updateChatMsg(Map map) {
+		return chatDAO.updateChatMsg(map);			
+	}
+
 	
 }

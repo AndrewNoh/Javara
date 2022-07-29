@@ -126,7 +126,12 @@ public class ChatController {
          map.put("sendtime", map.get("sendtime"));
          
          chatService.insertChatMessage(map);
+         /*if(((String) map.get("chatcontent")).contains("&lt;strong&gt;전화번호 공유&lt;/strong&gt;")) {
+        	 map.put("chatcontent", "&lt;strong&gt;전화번호 공유를 요청하였습니다&lt;/strong&gt;&lt;input type=\"hidden\" value=\"전화번호공유메세지완료\"/&gt;");
+        	 chatService.updateChatMsg(map);
+         }*/
          chatService.updateChatRoomno(map);
+         
       } else {
          if (Integer.parseInt((String) map.get("auction_no")) == 0) {
             map.put("auction_no", "");
@@ -135,9 +140,7 @@ public class ChatController {
             map.put("townlist_no", "");
          }
 
-
          chatService.createChatRoomno(map);
-        
          
          chatroom = chatService.findChatRoom(map);
          map.put("roomno",chatroom.getRoomno());
@@ -147,6 +150,7 @@ public class ChatController {
          map.put("sendtime", map.get("sendtime"));
 
          chatService.insertChatMessage(map);
+         
       }
 
       return "/chat/Chatting.market";
