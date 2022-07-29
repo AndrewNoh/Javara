@@ -165,6 +165,20 @@
 		#{userno}
 	</select>
 	
+	<select id="getLikeCount" resultType="_int">
+		SELECT COUNT(*) FROM AUCTION_LIKE WHERE USERNO = #{userno}
+	</select>	
+	
+	<select id="getSellCount" resultType="_int">
+		SELECT COUNT(*) FROM AUCTION_LIST WHERE USERNO = #{userno} AND STATUS = 'SALE'
+	</select>	
+	
+	<select id="getBuyCount" resultType="_int">
+		SELECT COUNT(*) FROM AUCTION_LIST L
+		LEFT OUTER JOIN AUCTION_PRICE P ON L.AUCTION_NO = P.AUCTION_NO
+		WHERE L.STATUS = 'END' AND P.UPPER_USER_NO = #{userno}
+	</select>
+	
 	<select resultType="com.carrot.marketapp.model.dto.BoardDTO" parameterType="Map" id="getAuctionListAddressItems">
 		SELECT * FROM 
 		(SELECT * FROM

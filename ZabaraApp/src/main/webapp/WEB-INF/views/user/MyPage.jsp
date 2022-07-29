@@ -158,7 +158,7 @@ color:#ffc107
                      <a class="nav-link" href="<c:url value="/userinfo/selllist.do"/>">
                         <div class="count-box" style="padding: 10px 0;">
                            <i class="bi bi-emoji-smile"></i> <span
-                              data-purecounter-start="0" data-purecounter-end="12"
+                              data-purecounter-start="0" data-purecounter-end="${sellCount}"
                               data-purecounter-duration="1" class="purecounter"></span>
                            <p>판매내역</p>
                         </div>
@@ -170,7 +170,7 @@ color:#ffc107
                         href="<c:url value="/userinfo/purchaselist.do"/>">
                         <div class="count-box" style="padding: 10px 0;">
                            <i class="bi bi-journal-richtext"></i> <span
-                              data-purecounter-start="0" data-purecounter-end="29"
+                              data-purecounter-start="0" data-purecounter-end="${buyCount}"
                               data-purecounter-duration="1" class="purecounter"></span>
                            <p>구매내역</p>
                         </div>
@@ -181,7 +181,7 @@ color:#ffc107
                      <a class="nav-link" href="<c:url value="/userinfo/selllist.do"/>">
                         <div class="count-box" style="padding: 10px 0;">
                            <i class="bi bi-heart"></i> <span data-purecounter-start="0"
-                              data-purecounter-end="12" data-purecounter-duration="1"
+                              data-purecounter-end="${likeCount}" data-purecounter-duration="1"
                               class="purecounter"></span>
                            <p>관심목록</p>
                         </div>
