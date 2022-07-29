@@ -126,10 +126,6 @@ public class ChatController {
          map.put("sendtime", map.get("sendtime"));
          
          chatService.insertChatMessage(map);
-         /*if(((String) map.get("chatcontent")).contains("&lt;strong&gt;전화번호 공유&lt;/strong&gt;")) {
-        	 map.put("chatcontent", "&lt;strong&gt;전화번호 공유를 요청하였습니다&lt;/strong&gt;&lt;input type=\"hidden\" value=\"전화번호공유메세지완료\"/&gt;");
-        	 chatService.updateChatMsg(map);
-         }*/
          chatService.updateChatRoomno(map);
          
       } else {
@@ -165,30 +161,93 @@ public class ChatController {
       String rename = FileUpDownUtils.getNewFileName(path, chatimg.getOriginalFilename());
       File dest = new File(path + File.separator + rename);
       chatimg.transferTo(dest);
-      map.put("chatimg", rename);
+      
+      
       map.put("email", principal.getName());
-      map.put("senduserno", map.get("userno"));
-      map.put("roomno", map.get("roomno"));
-      map.put("chatcontent", "사진");
-      map.put("unread_count", "1");
-      map.put("img", rename);
-      var sendimg = chatService.insertChatimg(map);
-      model.addAttribute("img", sendimg);
-      chatService.updateChatRoomno(map);
+      UserDTO user = userService.selectOne(map);
+      map.put("userno", user.getUserno());
+      map.put("writeuserno", map.get("writeuserno"));
+
+      ChatDTO chatroom = chatService.findChatRoom(map);
+
+      if (chatroom != null) {
+         System.out.println("방번호 중복");
+         map.put("chatimg", rename);
+         map.put("senduserno", map.get("userno"));
+         map.put("roomno", chatroom.getRoomno());
+         map.put("chatcontent", "사진");
+         map.put("unread_count", "1");
+         map.put("img", rename);
+         var sendimg = chatService.insertChatimg(map);
+         model.addAttribute("img", sendimg);
+         chatService.updateChatRoomno(map);
+         
+      } else {
+         if (Integer.parseInt((String) map.get("auction_no")) == 0) {
+            map.put("auction_no", "");
+         }
+         if (Integer.parseInt((String) map.get("townlist_no")) == 0) {
+            map.put("townlist_no", "");
+         }
+
+         chatService.createChatRoomno(map);
+         
+         chatroom = chatService.findChatRoom(map);
+         map.put("chatimg", rename);
+         map.put("senduserno", map.get("userno"));
+         map.put("roomno", chatroom.getRoomno());
+         map.put("chatcontent", "사진");
+         map.put("unread_count", "1");
+         map.put("img", rename);
+         var sendimg = chatService.insertChatimg(map);
+         model.addAttribute("img", sendimg);
+         chatService.updateChatRoomno(map);
+         
+      }
+      
       return rename;
    }
 
    @PostMapping(value = "/chattingemoji.do", produces = "application/json;charset=UTF-8")
    @ResponseBody
    public String emoji(Model model, @RequestParam Map map, Principal principal) {
-      map.put("email", principal.getName());
-      map.put("senduserno", map.get("userno"));
-      map.put("roomno", map.get("roomno"));
-      map.put("unread_count", "1");
-      map.put("chatcontent", "이모티콘");
-      map.put("img", map.get("img"));
-      var sendimg = chatService.insertChatimg(map);
-      chatService.updateChatRoomno(map);
+	   map.put("email", principal.getName());
+	      UserDTO user = userService.selectOne(map);
+	      map.put("userno", user.getUserno());
+	      map.put("writeuserno", map.get("writeuserno"));
+
+	      ChatDTO chatroom = chatService.findChatRoom(map);
+
+	      if (chatroom != null) {
+	         System.out.println("방번호 중복");
+	         map.put("senduserno", map.get("userno"));
+	         map.put("roomno",chatroom.getRoomno());
+	         map.put("unread_count", "1");
+	         map.put("img",  map.get("img"));
+	         var sendimg = chatService.insertChatimg(map);
+	         model.addAttribute("img", sendimg);
+	         chatService.updateChatRoomno(map);
+	         
+	      } else {
+	         if (Integer.parseInt((String) map.get("auction_no")) == 0) {
+	            map.put("auction_no", "");
+	         }
+	         if (Integer.parseInt((String) map.get("townlist_no")) == 0) {
+	            map.put("townlist_no", "");
+	         }
+
+	         chatService.createChatRoomno(map);
+	         
+	         chatroom = chatService.findChatRoom(map);
+	         map.put("senduserno", map.get("userno"));
+	         map.put("roomno",chatroom.getRoomno());
+	         map.put("unread_count", "1");
+	         map.put("img",  map.get("img"));
+	         var sendimg = chatService.insertChatimg(map);
+	         model.addAttribute("img", sendimg);
+	         chatService.updateChatRoomno(map);
+	         
+	      }
       return "/chat/Chatting.market";
    }
    

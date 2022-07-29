@@ -502,6 +502,7 @@ function uploadFile(e) {
       
    //서버에 연결되었을때 호출되는 콜백함수
    function open(){
+	   
       if(${roomno}!=""){
          appendMessage("<div style='text-align: center; margin-top:5px;'>"+"여기까지 읽으셨습니다."+"</div><br/>");
       }
@@ -640,13 +641,9 @@ function uploadFile(e) {
    
    
    ///약속잡기
-   var appointed = $('button[id=appointed]');
-      $(document).on("click", 'appointed', function(e){});
-   var appointed = $('button[name=appointed]');
+    var appointed = $('button[name=appointed]');
       $(document).on("click", '.appointed', function(e){
 		var form1 = $("#form").serialize();
-		
-		
 		
 		$.ajax({
 			url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
@@ -685,7 +682,7 @@ function uploadFile(e) {
         chatimg.append("${_csrf.parameterName}", "${_csrf.token}");
         
         $.ajax({
-	        url: '<c:url value="/chat/chatimg.do"><c:param value="${userno}" name="userno"/><c:param value="${userno}" name="userno"/><c:param value="${roomno}" name="roomno"/></c:url>',
+	        url: '<c:url value="/chat/chatimg.do"><c:param value="사진" name="chatcontent"/><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
 	        data: chatimg,
 	        type: 'POST',
 	        dataType : "text",
@@ -722,8 +719,9 @@ function uploadFile(e) {
                +today.toLocaleTimeString()+"</span></div></div>");
                   
                   $.ajax({
-                  url: '<c:url value="/chat/chattingemoji.do"><c:param value="${userno}" name="userno"/><c:param value="${userno}" name="userno"/><c:param value="${roomno}" name="roomno"/></c:url>',
+                  url: '<c:url value="/chat/chattingemoji.do"><c:param value="${userno}" name="userno"/><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
                   data: {img:result,
+                	  chatcontent:'이모티콘',
                         '${_csrf.parameterName}':'${_csrf.token}'},
                   type: 'POST',
                   dataType: 'text',
@@ -860,11 +858,9 @@ function uploadFile(e) {
                });   
         
       
-        
-     
-        // 페이 - 송금 하기    
-        function payRemit(){
-          // console.log('클릭 이벤트');
+      // 송금하기
+      $('#payRemit').on('click',function(){
+          var form1 = $("#form").serialize(); 
           var remit = $('#pay').val(); // 송금액
           // console.log('typeof remit',typeof remit);
           // console.log('remit',remit);
@@ -940,32 +936,13 @@ function uploadFile(e) {
 	                       
 	                    });     
 	               } 
-           	};
+       }); 
            
            
            // 페이 - 송금 받기
            function payCharge(){
               // console.log('클릭 이벤트');
-              var remit = document.querySelector('#payval').dataset.money;
-              console.log(remit);
-                 $.ajax({
-                    type: 'POST',
-                   url : '<c:url value="/pay/balance.do"/>',
-                  data : {
-                        'deposit' : remit,
-                        'withdraw' : 0,
-                      '${_csrf.parameterName}' : '${_csrf.token}'
-                    },
-                    dataType : "text",
-                  success : function(result){
-                  
-                     $('#myPay').text(result
-                           .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                         +'원')
-                         $('#myPay').attr('title', result)  
-                  }
-                    
-                 });
+              
                                       
            }
     
@@ -984,22 +961,21 @@ function uploadFile(e) {
                   '${_csrf.parameterName}':'${_csrf.token}'},
             type: 'POST',
             dataType: 'text',
-            success: function (result) { console.log(result) },
+            success: function (result) { console.log(result) 
+            	 console.log(result);
+            wsocket.send('서버로부터받은 메시지${roomno}:'+"<strong>${userNickname.nickname }님이 <strong>"+remit+"원</strong>을 받으셨습니다.");
+               appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center;'><strong>"+remit+"원이 입급되었습니다.</strong></p>"
+               +"<span style='float: right;font-size: small; margin-top:5px;'>"
+            +today.toLocaleTimeString()+"</span></div></div>");	
+            },
             error: function () { console.log('error') }
          	});
          
-         console.log(result);
-         wsocket.send('서버로부터받은 메시지${roomno}:'+"<strong>${userNickname.nickname }님이 <strong>"+remit+"원</strong>을 받으셨습니다.");
-            appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center;'><strong>"+remit+"원이 입급되었습니다.</strong></p>"
-            +"<span style='float: right;font-size: small; margin-top:5px;'>"
-         +today.toLocaleTimeString()+"</span></div></div>");
+        
      	 });
 
 
-      // 송금하기
-      $('#payRemit').on('click',function(){
-          var form1 = $("#form").serialize(); 
-       }); 
+     
  
       
       /////채팅방 나가기
