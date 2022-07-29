@@ -39,6 +39,11 @@
   <!-- import 페이 서비스 관련 -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+	<!-- 이미지 분석 서비스 관련 -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
 
   <!-- Vendor CSS Files -->
   <link href="${pageContext.request.contextPath}/resources/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -153,23 +158,62 @@
             </div>
          </form>
 	         </li>
-             <li><div class="search col" id="imgsrch" style="float: right;">
-	               <div class="srch_bar" style="text-align:center;" id="imgsrchDiv">
-	                    <div class="stylish-input-group"  >
-	                     <input type="text" placeholder="이미지를 넣어주세요" name="title" class="search-bar">
-	                     <span class="input-group-addon">
-	                         <button type="submit" style="vertical-align:-0.3em;"><i class="bi bi-images" aria-hidden="true" style="font-size: 20px;color: #ffc107;"></i> </button>
-	                     </span>
-	                  </div>
-	               </div>
-	            </div>
-            </li>
-           </ul>
-           <div class="row">
-            </div>
-           
-           <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+             <li><div class="">
+					<div class="search col" id="imgsrch" style="float: right;">
+						<div class="srch_bar" style="text-align: center;" id="imgsrchDiv">
+							<div class="stylish-input-group">
+								<input type="text" placeholder="이미지를 넣어주세요" name="title"
+									class="search-bar"> <span class="input-group-addon">
+
+									<button id="modal-open" data-toggle="modal" data-target="#myModal"
+										type="button" style="vertical-align: -0.3em;">
+										<i class="bi bi-images" aria-hidden="true"
+											style="font-size: 20px; color: #ffc107;"></i>
+									</button>
+									<div class="modal" id="myModal">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<!-- Modal Header -->
+												<div class="modal-header" style="background-color: #efc958;">
+													<button>이미지 분석</button>
+													<button type="button" id="modal-close" class="close" data-dismiss="modal">&times;</button>
+												</div>
+
+												<!-- Modal body -->
+												<div class="modal-body">
+													<div class="body-content">
+														<!-- 선택한 이미지를 미리보기 위한 추가 -->
+														<img id="preview_image" style="width: 100%; height: 90%;" />
+
+														<!-- 웹캠으로 캡처한 이미지 표시 영역(영상소스) -->
+														<div id="webcam-container"></div>
+														<!-- 예측결과 표시 영역 -->
+														<div id="label-container" style="color: black;"></div>
+													</div>
+												</div>
+												<!-- Modal footer -->
+												<div class="modal-footer" >
+													<button class="pop-btn" onclick="predict()"
+														style="color: black;">
+														이미지 분석<i class="bi bi-search"></i>
+													</button>
+													<input type="file" id="test_image" accept=".png,.jpg,.jpeg" />
+												</div>
+											</div>
+										</div>
+									</div>
+							</div>
+							</span>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<div class="row"></div>
+
+		<i class="bi bi-list mobile-nav-toggle"></i>
+	</nav>
+	<!-- .navbar -->
  
 <script>
 $(function() {
@@ -223,4 +267,111 @@ function kakaoLogout() {
         });
    
    });
+  
+  //이미지 분석 코드
+  
+  $(function(){
+	    $("#modal-open").click(function(){$("#popup").css('display','flex').hide().fadeIn();
+	    });
+	    
+	    $("#modal-close").click(function(){
+	        modalClose();
+	    });
+	    function modalClose(){
+	      $("#popup").fadeOut();
+	    }
+	});
+  
+	const URL = "../my_model/";
+
+	let model //메모리에 로드한 모델 저장용
+		, labelContainer//예측 결과를 보여줄 div요소 저장용
+		, maxPredictions;//클래스(분류) 갯수 저장용
+ 
+	async function init() {
+		const modelURL = URL + "model.json";
+		const metadataURL = URL + "metadata.json";
+
+		model = await tmImage.load(modelURL, metadataURL);
+		maxPredictions = model.getTotalClasses();
+		console.log('카테고리(클래스) 수:',maxPredictions);
+
+		labelContainer = document.getElementById("label-container");
+		for (let i = 0; i < 3; i++) { // and class labels
+			labelContainer.appendChild(document.createElement("div"));
+		}
+	}
+
+	async function predict() {
+
+		var image =document.querySelector("#preview_image");
+
+       const prediction = await model.predict(image,false);
+		console.log('prediction:',prediction);
+
+		var resultArray=[];
+		var className=[];
+		for (var i = 0; i < maxPredictions; i++) {
+			console.log("resultArray"+prediction[i].probability.toFixed(2)*100);
+		         resultArray.push(prediction[i].probability.toFixed(2)*100);
+		  }
+
+		
+	
+	
+		for(var i = 0; i < maxPredictions; i++) {
+			var classPrediction = prediction[i].className + ": "
+					+ prediction[i].probability.toFixed(2)*100;
+			className.push(classPrediction);
+		}
+		
+		for (var i = 0; i < resultArray.length-1; i++) {
+		    for(var k=i+1; k < resultArray.length;k++){
+		    if(resultArray[i] < resultArray[k]){
+		       console.log(resultArray[i])
+		       var temp = resultArray[i];
+		       resultArray[i] = resultArray[k];
+		       resultArray[k] = temp;
+		       var tempname = className[i];
+		       className[i] = className[k];
+		       className[k] = tempname;
+		      }
+		   }
+		}
+		for(var k=0; k < 3; k++){
+			labelContainer.childNodes[k].innerHTML="";
+		}
+		
+		for(var k=0; k < 3; k++){
+			if(className[k].indexOf(": 0") !=-1){//className[k]!=className[k+1]
+				break;
+			}
+			labelContainer.childNodes[k].innerHTML=className[k];
+		 }
+	} 
+	
+	
+
+	init();
+	
+
+	document.querySelector('#test_image').onchange=function(){
+		previewImage(this);
+	};
+
+	function previewImage(input){//input는 <input type="file" ~/>객체
+		if(input.files && input.files[0]){
+			console.log('input.files:',input.files);//FileList객체
+			console.log('input.files[0]:',input.files[0]);//File객체
+			var reader = new FileReader();
+			
+			reader.readAsDataURL(input.files[0]);//이미지파일을 URL로 읽기.(BASE64로 인코딩 된 문자열)
+
+			reader.onload=function(e){
+				console.log("e.target:",e.target);//FileReader객체
+				console.log("e.target.result:",e.target.result);//파일 컨텐츠
+				document.querySelector("#preview_image").setAttribute('src',e.target.result); 
+			};
+		}
+	}//////////////////
 </script>
