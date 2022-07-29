@@ -58,7 +58,7 @@
    
 }
 
-.map_category li:hover {background: #000; }
+.map_category li:hover {background: #0059ac; }
 .map_category, .map_category * {
    margin: 0;
    padding: 0;
@@ -77,8 +77,11 @@
    border: none;
    font-size: 12px;
    text-align: center;
-   background-color: #000;
+   background-color: #006a94;
+   background-color: rgba(17, 174, 226);
+   
   
+
 }
 
 .map_category li {
@@ -92,9 +95,6 @@
    
 }
 
-
-
-
 .ui-slider-range { background: #ffce08f3; }
 input.form-text {
         border: 1px solid #bcbcbc;
@@ -102,6 +102,103 @@ input.form-text {
         width: 260px;
         height: 28px;
       }
+     
+.overlayContainer{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+.overlayContainer .card{
+  max-width:100%;
+  width:350px;
+  height:370px;
+  background:#fff;
+  border-radius:5px;
+  position:relative;
+  transition:all .2s ease;
+}
+.overlayContainer .card:hover{
+  box-shadow:2px 2px 3px rgba(0,0,0,.1);
+  cursor:pointer;
+  transform:translateY(-10px);
+}
+.overlayContainer .card:hover .btn{
+  visibility:visible;
+}
+.overlayContainer .card:hover img{
+  filter:brightness(1);
+}
+.card .card-img{
+  background:gray;
+  width:350px;
+  height:270px;
+  z-index:990;
+  border-radius:5px 5px 0 0;
+}
+.card-img img{
+  width:100%;
+  height:100%;
+  filter:brightness(.7);
+  border-radius:inherit;
+  transition:.2s ease-in-out;
+}
+.card .card-action{
+  padding: 10px;
+  margin:25px 0 0 20px;
+  display:flex;
+  position:relative;
+  flext-direction:column;
+  justify-content:space-between;
+}
+
+.card .card-img .circle {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  position: absolute;
+  bottom: 80px;
+  left: 15px;
+  border: 1px solid #ff0;
+  border-radius:50%;
+  box-shadow:0 6px 10px rgba(0,0,0,.3);
+/*   z-index: 999; */
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.card .card-img .circle img{
+  width:60%;
+  position:abolute;
+  user-select:none;
+}
+.card .card-action .title{
+  font-size: 22px;
+  letter-spacing:2px;
+  font-style:bold;
+}
+.card .card-action span{
+  font-size:12px;
+  color:gray;
+  letter-spacing:2px;
+}
+
+.btn-download .btn{
+  padding:10px;
+  border:none;
+  visibility:hidden;
+  border-radius:5px;
+  background: #41d9c2;
+  color:#fff;
+  cursor:pointer;
+  outline:none;
+  box-shadow: 2px 2px 4px rgba(0,0,0,.1);
+  transition:all .2s ease-in-out;
+}
+.btn-download .btn:hover{
+  background: #29d654;
+}
+
      
 </style>
 <div class="row" style="margin:30px;">  
@@ -121,7 +218,7 @@ input.form-text {
 			              </p>              
 			              <div id="slider-range" style="width: 300px; "></div>
 			              <br/>
-			              <button type="button" class="btn btn-dark" style="width: 150px; margin-left: 150px;">검색</button>
+			              <button type="button" class="btn btn-primary" style="width: 150px; margin-left: 150px;">검색</button>
 			
 			        </ul>
 			    </div>		    	
@@ -173,7 +270,8 @@ var container = document.getElementById('map');
 var categoryArray=[];
 var categoryInfoArray=[];
 var categoryDetailInfoArray=[];
-var itemData=[];
+var overlayLatLng=[];
+
 var imageSize = new kakao.maps.Size(60, 65);
 var addressContent= '<div id="addressbox">'+
 					'<div class="bAddr">'+ nowAddress + '</div>' +
@@ -182,7 +280,11 @@ var options = {
       center : new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
       level : 3       
    };
-var detailInfo = new daum.maps.InfoWindow({zindex : 2});
+   
+var customOverlay = new kakao.maps.CustomOverlay({    
+    xAnchor: 0.3,
+    yAnchor: 0.91
+});
 var map = new daum.maps.Map(container, options);
 var addressMarker = new daum.maps.Marker(),addressinfowindow = new daum.maps.InfoWindow({zindex : 1});
 
@@ -269,19 +371,31 @@ function categoryItemList(){
                 			  '<div class="bAddr">' + result[i].title + '</div>' +		                    			  		                    			  
                 			  '</div>';
 
-            	    var detailcontent = '<div>'+
-						  				  '<div>'+result[i].title+'</div>'+
-						  				  '<div>시작가: ₩'+result[i].base_Price+'</div>'+
-						  				  '<div>최고가: ₩'+result[i].upper_Price+'</div>'+
-						  				  '<div>조회수:'+result[i].viewCount+'</div>'+
-						  			      '<div>마감일:'+result[i].endDate+'</div>'+
-						  			    '</div>';			        
+            	    var detailcontent = '<div id="app" class="overlayContainer">'+
+	  		  		  '<div class="card">'+
+	  		          '<div class="card-img">'+
+	  		          '<img src="${pageContext.request.contextPath}/resources/assets/img/product_img/'+result[i].imagename+'">'+
+	  		          '<div class="circle"><img src="https://s.svgbox.net/files.svg?ic=sketch&fill=000" width="25" height="25"></div>'+
+	  		       '</div>'+
+		  		    '<div class="card-action">'+
+		  		      '<div>'+
+			  		        '<div class="title">'+result[i].title+'</div>'+
+			  		      	'<span>현재 입찰가: ₩'+result[i].upper_Price+'</span>'+			  		        
+		  		      '</div>'+
+		  		      '<div class="btn-download">'+		  		        
+		  		      '<a href="/marketapp/board/auctionview.do?no='+result[i].auction_no+'" rel="lyteframe" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><span style="font-size: 18px; display: block;"><button class="btn">입찰하러가기</button></span></a>'+
+		  		      '</div>'      
+		  		    '</div>'+
+		  		  '</div>'+
+		  		'</div>';
 			        categoryDetailInfoArray.push(detailcontent);			        
+			        overlayLatLng.push(new kakao.maps.LatLng(result[i].latitude, result[i].longitude));
+			        
 			        
                     categoryInfo.setContent(content);
                     categoryInfoArray.push(categoryInfo);
                     categoryArray.push(categorymarker);
-                    itemData.push(result[i]);
+                    
                     createListTag(result[i]);
                 	}///for                	
                 	openCategoryList();
@@ -311,13 +425,14 @@ function closeCategoryList(){
 		}
 		categoryArray=[];
 		categoryInfoArray=[];
-		detailInfo.close();
+		overlayLatLng=[];
+		customOverlay.setMap(null);
 		categoryDetailInfoArray=[];
 	}
 }
 
 //카테고리 선택시 마커표시 및 인포윈도우 아이템리스트 뿌려주기
-$('#categorySelector').click(function(e){	
+$('#categorySelector').click(function(e){		
 	panTo(latitude,longitude);
 	if(e.target.nodeName=='LI'){
 		closeCategoryList();
@@ -326,10 +441,11 @@ $('#categorySelector').click(function(e){
 		categoryItemList();
 		
 		for(let i=0;i<categoryDetailInfoArray.length;i++){		
-			kakao.maps.event.addListener(categoryArray[i], 'click', function() {
-				detailInfo.setContent(categoryDetailInfoArray[i]);				
-				detailInfo.open(map, categoryArray[i]);
-	    	    
+			kakao.maps.event.addListener(categoryArray[i], 'click', function() {				
+				customOverlay.setContent(categoryDetailInfoArray[i]);
+				customOverlay.setPosition(overlayLatLng[i]);
+				customOverlay.setMap(map);
+				panTo(overlayLatLng[i].getLat(),overlayLatLng[i].getLng());
 	    	});
 		}
 	}	

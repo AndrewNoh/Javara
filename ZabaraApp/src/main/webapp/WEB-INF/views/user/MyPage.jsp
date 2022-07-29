@@ -646,6 +646,8 @@ color:#ffc107
                          // 지도를 보여준다 
                          setCenter(result.y, result.x);
                          showKakaoMap(result.y, result.x);
+                         markerlat=result.y;
+                         markerlng=result.x;
                       }
                    });
                 }
