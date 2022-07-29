@@ -78,7 +78,7 @@ img{
 	                  <c:if test="${titles[status.index]!=''}">
 	                     <tr class="text-center" style="width:200px"> 
 	                        <td style="font-weight: bold;"><a href="${url}">${titles[status.index]}</a></td>
-	                     	<td><img src="${img[status.index]}" style="width:230px; max-height: 220px;"></td>
+	                     	<td><img src="${img[status.index]}" style="width:200px; height: 180px;"></td>
 	                     </tr>
 	                  </c:if>
 	               </c:forEach>
