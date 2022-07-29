@@ -749,16 +749,25 @@ color:#ffc107
                        },
                 dataType : "text",
               success : function(result){
-              	$('#myPay').text(result
-                  		.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                  		+'원')
+                 $('#myPay').text(result
+                        .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                        +'원')
+                        $('#myPay').attr('title', result)      
+                        
                      }
                     });      
            
            // 자바라페이 출금
            function payWithdraw() {
-               var amount = $('#pay option:selected').val();
-               if($('#myPay').val() < amount) {
+              var amount =  parseInt($('#myPay').attr('title'));
+              console.log('amount',amount);
+              var selected = $('#pay option:selected').val();          
+               console.log('selected', selected);
+               console.log('amount < selected',amount < selected);
+               console.log(typeof amount);
+               console.log(typeof selected);
+               
+               if(amount < selected) {
                   const Toast = Swal.mixin({
                         toast : true,
                         position : 'center-center',
@@ -778,15 +787,16 @@ color:#ffc107
                           url : '<c:url value="/pay/balance.do"/>',
                          data : {
                                'deposit' : 0,
-                               'withdraw' : amount,
+                               'withdraw' : selected,
                              '${_csrf.parameterName}' : '${_csrf.token}'
                            },
                            dataType : "text",
                          success : function(result){
                          console.log(result);
                             $('#myPay').text(result
-                            		.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                          		+'원')
+                                  .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                +'원')
+                                $('#myPay').attr('title', result)   
                          }
                            
                         });  
@@ -848,8 +858,8 @@ color:#ffc107
                                     success : function(result){
                                     console.log(result);
                                        $('#myPay').text(result
-                                       		.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                                      		+'원')
+                                             .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                            +'원')
                                     }
                                    });   
                                  
@@ -871,4 +881,4 @@ color:#ffc107
                               }
                            })
                      }
-      </script>
+</script>

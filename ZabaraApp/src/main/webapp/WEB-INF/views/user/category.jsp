@@ -58,7 +58,7 @@
    
 }
 
-.map_category li:hover {background: #0059ac; }
+.map_category li:hover {background: #000; }
 .map_category, .map_category * {
    margin: 0;
    padding: 0;
@@ -77,11 +77,8 @@
    border: none;
    font-size: 12px;
    text-align: center;
-   background-color: #006a94;
-   background-color: rgba(17, 174, 226);
-   
+   background-color: #000;
   
-
 }
 
 .map_category li {
@@ -124,7 +121,7 @@ input.form-text {
 			              </p>              
 			              <div id="slider-range" style="width: 300px; "></div>
 			              <br/>
-			              <button type="button" class="btn btn-primary" style="width: 150px; margin-left: 150px;">검색</button>
+			              <button type="button" class="btn btn-dark" style="width: 150px; margin-left: 150px;">검색</button>
 			
 			        </ul>
 			    </div>		    	
@@ -325,7 +322,7 @@ $('#categorySelector').click(function(e){
 	if(e.target.nodeName=='LI'){
 		closeCategoryList();
 		$('.addressItem').remove();
-		category=e.target.textContent;
+		category=e.target.textContent.trim();
 		categoryItemList();
 		
 		for(let i=0;i<categoryDetailInfoArray.length;i++){		

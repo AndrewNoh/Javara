@@ -847,70 +847,113 @@ function uploadFile(e) {
                });   
         
       
+      // 페이 잔액 
+      $.ajax({
+         type: 'POST',
+         url : '<c:url value="/pay/balance.do"/>',
+         data : {
+                'deposit' : 0,
+                'withdraw' : 0,
+                 '${_csrf.parameterName}' : '${_csrf.token}'
+                  },
+           dataType : "text",
+         success : function(result){
+                $('#myPay').text(result
+                      .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                      +'원')
+                 $('#myPay').attr('title', result)      
+                
+                }
+               });   
+        
+      
+        
+     
         // 페이 - 송금 하기    
         function payRemit(){
          // console.log('클릭 이벤트');
-    		var remit = $('#pay').val();
-    		console.log(remit);
-	         $.ajax({
-	        	 type: 'POST',
-	             url : '<c:url value="/pay/balance.do"/>',
-	             data : {
-	                     'deposit' : 0,
-	                     'withdraw' : remit,	                     
-	                     '${_csrf.parameterName}' : '${_csrf.token}'
-	                      },
-	               dataType : "text",
-	               
-	               success : function(result){
-					
-	                    $('#myPay').text(result
-	                    		.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-	                    		+'원')
-	                     		const Toast = Swal.mixin({
-                                      toast : true,
-                                      position : 'center-center',
-                                      showConfirmButton : false,
-                                      timer : 1000,
-                                      timerProgressBar : true,
-                                   })
+          var remit = $('#pay').val(); // 송금액
+          console.log('typeof remit',typeof remit);
+          console.log('remit',remit);
+          var amount =  parseInt($('#myPay').attr('title'));// 잔액
+          console.log('typeof amount',typeof amount);
+           console.log(amount);
+          if(remit > amount){
+              const Toast = Swal.mixin({
+                     toast : true,
+                     position : 'center-center',
+                     showConfirmButton : false,
+                     timer : 1000,
+                     timerProgressBar : true,
+                  })
 
-                                   Toast.fire({
-                                      icon : 'success',
-                                      title : '송금 완료하였습니다'
-                                   })
-	               		}
-	               
-	                    
-	         });      
-       	 };
-       	 
-       	 
-       	 // 페이 - 송금 받기
-       	 function payCharge(){
-       		 // console.log('클릭 이벤트');
-       		 var remit = document.querySelector('#payval').dataset.money;
-       		 console.log(remit);
-	       		 $.ajax({
-	                 type: 'POST',
-	                url : '<c:url value="/pay/balance.do"/>',
-	               data : {
-	                     'deposit' : remit,
-	                     'withdraw' : 0,
-	                   '${_csrf.parameterName}' : '${_csrf.token}'
-	                 },
-	                 dataType : "text",
-	               success : function(result){
-	               
-	                  $('#myPay').text(result
-	                  		.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-	                		+'원')
-	               }
-	                 
-	              });
-	       		 
-	       		  		 
-       	 }
+                  Toast.fire({
+                     icon : 'error',
+                     title : '페이 잔액이 부족합니다'
+                  })
+          }
+          else{
+               $.ajax({
+                  type: 'POST',
+                   url : '<c:url value="/pay/balance.do"/>',
+                   data : {
+                           'deposit' : 0,
+                           'withdraw' : remit,                        
+                           '${_csrf.parameterName}' : '${_csrf.token}'
+                            },
+                     dataType : "text",
+                     
+                     success : function(result){
+                  
+                          $('#myPay').text(result
+                                .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                +'원')
+                                $('#myPay').attr('title', result)   
+                                 const Toast = Swal.mixin({
+                                         toast : true,
+                                         position : 'center-center',
+                                         showConfirmButton : false,
+                                         timer : 1000,
+                                         timerProgressBar : true,
+                                      })
+   
+                                      Toast.fire({
+                                         icon : 'success',
+                                         title : '송금 완료하였습니다'
+                                      })
+                           }
+                     
+                       
+                    });     
+               } 
+           };
+           
+           
+           // 페이 - 송금 받기
+           function payCharge(){
+              // console.log('클릭 이벤트');
+              var remit = document.querySelector('#payval').dataset.money;
+              console.log(remit);
+                 $.ajax({
+                    type: 'POST',
+                   url : '<c:url value="/pay/balance.do"/>',
+                  data : {
+                        'deposit' : remit,
+                        'withdraw' : 0,
+                      '${_csrf.parameterName}' : '${_csrf.token}'
+                    },
+                    dataType : "text",
+                  success : function(result){
+                  
+                     $('#myPay').text(result
+                           .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                         +'원')
+                  }
+                    
+                 });
+                 
+                         
+           }
     
       
       /*

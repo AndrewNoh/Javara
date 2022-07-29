@@ -11,7 +11,7 @@ i {
 	<div class="container">
 
 		<div class="section-title">
-			<h2>Zabara</h2>
+			<h2>나의 활동</h2>
 			<p>구매내역</p>
 		</div>
 
