@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -435,98 +436,123 @@ public class MainBoardController {
 	public static HashMap<String, String> map;
 
 	@GetMapping("/news.do")
-	public String startCrawl(Authentication auth, Model model) throws IOException {
-		System.out.println("****크롤링 컨트롤러 입니다****");
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd", Locale.KOREA);//
-		Date currentTime = new Date();
-		Map map = new HashMap();
-		String e_date = formatter.format(currentTime);// 원하는 형식대로 dTime에 스트링으로 날짜 넣어주긔
-		// String e_date = dTime; //이거 왜 해주는지 모르겠어서 일단 뺌
+    public String startCrawl(Authentication auth, Model model) throws IOException {
+       System.out.println("****크롤링 컨트롤러 입니다****");
+       SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd", Locale.KOREA);//
+       Date currentTime = new Date();
+       Map map = new HashMap();
+       String e_date = formatter.format(currentTime);// 원하는 형식대로 dTime에 스트링으로 날짜 넣어주긔
+       // String e_date = dTime; //이거 왜 해주는지 모르겠어서 일단 뺌
 
-		currentTime.setDate(currentTime.getDate() - 1);
+       currentTime.setDate(currentTime.getDate() - 1);
 
-		String s_date = formatter.format(currentTime);
+       String s_date = formatter.format(currentTime);
 
-		map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기
-		UserDTO record = userService.selectOne(map);
-		map.put("userno", record.getUserno());
-		Map addr = userService.editselectOne(map);
-		model.addAttribute("simpleAddress", addr.get("SIMPLEADDRESS"));
-		String query = (String) addr.get("SIMPLEADDRESS");// simpleAdress넣어주몀ㄴ되ㅏㅁ~!~
-		String s_from = s_date.replace(".", "");
-		String e_to = e_date.replace(".", "");
-		int page = 1;
-		ArrayList<String> al1 = new ArrayList<>();
-		ArrayList<String> al2 = new ArrayList<>();
+       map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기
+       UserDTO record = userService.selectOne(map);
+       map.put("userno", record.getUserno());
+       Map addr = userService.editselectOne(map);
+       model.addAttribute("simpleAddress", addr.get("SIMPLEADDRESS"));
+       String query = (String) addr.get("SIMPLEADDRESS");// simpleAdress넣어주몀ㄴ되ㅏㅁ~!~
+       int page = 0;
+       ArrayList<String> al1 = new ArrayList<>();
+       ArrayList<String> al2 = new ArrayList<>();
+       ArrayList<String> al3 = new ArrayList<>();
 
-		while (page < 20) {
-			String address = "https://search.naver.com/search.naver?where=news&query=" + query + "&sort=1&ds=" + s_date
-					+ "&de=" + e_date + "&nso=so%3Ar%2Cp%3Afrom" + s_from + "to" + e_to + "%2Ca%3A&start="
-					+ Integer.toString(page);
-			Document rawData = Jsoup.connect(address).timeout(5000).get();
+       while (page < 20) {
+          String address = "https://search.naver.com/search.naver?where=news&query=" + query + "&sort=1&ds=" + Integer.toString(page);
+          Document rawData = Jsoup.connect(address).timeout(5000).get();
+          Elements blogOption = rawData.select("a[title!='']");
+          Elements imgOption = rawData.select(".dsc_thumb > img");
+          System.out.println(imgOption);
+          
+          String realURL = "";
+          String realTITLE = "";
+          String realIMG = "";
+          String imagesrc= "";
+          System.out.println("blogOption 전체 보기"+blogOption);
+          for (Element option : blogOption) {
+          
+             realURL = option.select("a").attr("href");
+             realTITLE = option.select("a").attr("title");
+             
+             
+             al1.add(realURL);
+             al2.add(realTITLE);
+          }
+          
+          for(Element thumbnail : imgOption) {
+             realIMG = thumbnail.select("img").attr("src");
+             
+             String[] imagearr = realIMG.split("src=");
+                
+                
+             //System.out.println("길이:"+imagearr.length);
+             if(imagearr.length==2)imagesrc=URLDecoder.decode(imagearr[1].split("&type")[0], "UTF-8");
+             System.out.println(imagesrc);
+             al3.add(imagesrc);
+          }
+          
+          page += 20;
+          //System.out.println("사이즈1 : " + al1.size());
+          //System.out.println("사이즈2 : " + al2.size());
+           //System.out.println("사이즈3 : " + al3.size());
+       }
+       
+       //System.out.println(al1);
+       //System.out.println(al2);
+       //System.out.println(al3);
+       
+       model.addAttribute("urls", al1);
+       model.addAttribute("titles", al2);
+       model.addAttribute("img", al3);
 
-			Elements blogOption = rawData.select("a");
+    String station = (String) addr.get("SIMPLEADDRESS");
+    String url = "https://m.search.naver.com/search.naver?sm=mtp_hty.top&where=m&query=" + station + "날씨";
+    Document doc = null;
+    try {
+       doc = Jsoup.connect(url).get();
+    } catch (IOException e) {
+       e.printStackTrace();
+    }
+    try {
+       String temperate = doc.select("div.temperature_text").first().text();
+       String weather = doc.select("p.summary span.weather.before_slash").first().text();
+       model.addAttribute("temperate", temperate);// 온도
+       model.addAttribute("weather", weather);// 맑음
+       String info = "";
+       switch (weather) {
+       case "맑음":
+          info = "맑음.png";
+          break;
+       case "구름조금":
+          info = "구름조금.png";
+          break;
+       case "구름많음":
+          info = "구름많음.png";
+          break;
+       case "흐림":
+          info = "흐림.png";
+          break;
+       case "비":
+          info = "비.png";
+          break;
+       case "한때 비":
+       case "소나기":
+          info = "한때비.png";
+          break;
+       case "천둥번개":
+          info = "천둥번개.png";
+          break;
+       }
+       model.addAttribute("info", info);
+    } catch (Exception e) {
+       System.out.println("오류 났음..");
+    }
 
-			String realURL = "";
-			String realTITLE = "";
+    return "/board/News.market";
 
-			for (Element option : blogOption) {
-				realURL = option.select("a").attr("href");
-				realTITLE = option.select("a").attr("title");
-				al1.add(realURL);
-				al2.add(realTITLE);
-			}
-			page += 10;
-		}
-		model.addAttribute("urls", al1);
-		model.addAttribute("titles", al2);
-
-		String station = (String) addr.get("SIMPLEADDRESS");
-		String url = "https://m.search.naver.com/search.naver?sm=mtp_hty.top&where=m&query=" + station + "날씨";
-		Document doc = null;
-		try {
-			doc = Jsoup.connect(url).get();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			String temperate = doc.select("div.temperature_text").first().text();
-			String weather = doc.select("p.summary span.weather.before_slash").first().text();
-			model.addAttribute("temperate", temperate);// 온도
-			model.addAttribute("weather", weather);// 맑음
-			String info = "";
-			switch (weather) {
-			case "맑음":
-				info = "맑음.png";
-				break;
-			case "구름조금":
-				info = "구름조금.png";
-				break;
-			case "구름많음":
-				info = "구름많음.png";
-				break;
-			case "흐림":
-				info = "흐림.png";
-				break;
-			case "비":
-				info = "비.png";
-				break;
-			case "한때 비":
-			case "소나기":
-				info = "한때비.png";
-				break;
-			case "천둥번개":
-				info = "천둥번개.png";
-				break;
-			}
-			model.addAttribute("info", info);
-		} catch (Exception e) {
-			System.out.println("오류 났음..");
-		}
-
-		return "/board/News.market";
-
-	}
+ }
 
 	@RequestMapping(value = "/changeStatus.do", produces = "application/json;charset=UTF-8")
 	@ResponseBody

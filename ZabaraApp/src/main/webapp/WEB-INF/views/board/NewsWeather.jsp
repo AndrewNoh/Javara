@@ -8,15 +8,13 @@
 .title {
    font-size: 20pt;
    height: 60px;
-   width:70%;
    margin-bottom: 10px;
 }
 table tr {
    text-align: center;
-   width: 70%;
 }
 .big {
-   width: 60%;
+   width: 50%;
    margin: auto;
    align: center;
    margin-top: 20px;
@@ -31,7 +29,7 @@ td
    border-collapse: separate;
    border-spacing: 1px;
    border-bottom: 3px solid #f9fafb61;
-   width: 70%;
+   width: 60%;
    align: center;
    height: 60px;
    text-align: center;
@@ -52,7 +50,7 @@ img{
 </style>
 <div class="container mt-5" >
 	<div class="mt-5" >
-		<div class="container" >
+		<div class="container">
 			<div class="section-title" style="text-align: left;">
 	         <h2>우리동네 날씨</h2>
 	        </div>
@@ -76,9 +74,8 @@ img{
 		         <tr>
 	               <c:forEach var="url" items="${urls}" varStatus="status" begin="1" end="${titles.size()}">
 	                  <c:if test="${titles[status.index]!=''}">
-	                     <tr class="text-center" style="width:200px"> 
+	                     <tr class="text-center"> 
 	                        <td style="font-weight: bold;"><a href="${url}">${titles[status.index]}</a></td>
-	                     	<td><img src="${img[status.index]}" style="width:230px; max-height: 220px;"></td>
 	                     </tr>
 	                  </c:if>
 	               </c:forEach>
@@ -87,10 +84,3 @@ img{
 		   </table>
       </div>
 </div>
-<script>
-var length = $('.text-center').length;
-
-console.log(length);
-
-
-</script>
