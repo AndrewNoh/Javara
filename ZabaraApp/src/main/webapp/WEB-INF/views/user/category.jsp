@@ -20,6 +20,10 @@
    font-weight: bold;
 }
 
+.addressItem{
+	cursor: pointer;	
+}
+
 #infobox {
     display: block;
     background: #50627F;
@@ -125,12 +129,12 @@ input.form-text {
 			        </ul>
 			    </div>		    	
 		 	</div>
-		 	<div class="row">
+		 	<div id="addressItemListDiv" class="row">
 		 		<ul id="addressitemlist" style="width:370px; height: 615px; margin-top: 120px;">
-			        <li style="text-align:center; margin-top:10px;"><h3>아이템 목록</h3></li>
-			        <hr>
-			        
-			    </ul>
+			        <li id="addressItemListTitle" style="text-align:center; margin-top:10px;"><h3>아이템 목록</h3></li>
+			        <hr/>	
+			              
+			    </ul>			   
 			</div>
 		</div>
 	 </div>
@@ -171,6 +175,8 @@ var geocoder = new daum.maps.services.Geocoder();
 var container = document.getElementById('map');
 var categoryArray=[];
 var categoryInfoArray=[];
+var categoryDetailInfoArray=[];
+var itemData=[];
 var imageSize = new kakao.maps.Size(60, 65);
 var addressContent= '<div id="addressbox">'+
 					'<div class="bAddr">'+ nowAddress + '</div>' +
@@ -179,6 +185,7 @@ var options = {
       center : new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
       level : 3       
    };
+var detailInfo = new daum.maps.InfoWindow({zindex : 2});
 var map = new daum.maps.Map(container, options);
 var addressMarker = new daum.maps.Marker(),addressinfowindow = new daum.maps.InfoWindow({zindex : 1});
 
@@ -212,10 +219,11 @@ function categoryItemList(){
         type : 'POST',
         url : '<c:url value="/board/myAddressItemList.do"/>',
         data : {nowAddress : nowAddress,category : category,'${_csrf.parameterName}' : '${_csrf.token}'},
+        async: false,
         success : function(result) {
         	if(result!=null){        		
                 for(var i=0; i<result.length;i++){
-                	console.log(result[i]);                                	
+                	console.log(result[i]);
                 	switch(result[i].category){
 	                    	case "디지털기기": categoryimage="category_digital.png";
 	                    		break;
@@ -263,13 +271,25 @@ function categoryItemList(){
                 	content = '<div id="infobox">' +
                 			  '<div class="bAddr">' + result[i].title + '</div>' +		                    			  		                    			  
                 			  '</div>';
+
+            	    var detailcontent = '<div>'+
+						  				  '<div>'+result[i].title+'</div>'+
+						  				  '<div>시작가: ₩'+result[i].base_Price+'</div>'+
+						  				  '<div>최고가: ₩'+result[i].upper_Price+'</div>'+
+						  				  '<div>조회수:'+result[i].viewCount+'</div>'+
+						  			      '<div>마감일:'+result[i].endDate+'</div>'+
+						  			    '</div>';			        
+			        categoryDetailInfoArray.push(detailcontent);			        
+			        
                     categoryInfo.setContent(content);
                     categoryInfoArray.push(categoryInfo);
-                    categoryArray.push(categorymarker);	
-                	}///for
-                	closeCategoryList();
+                    categoryArray.push(categorymarker);
+                    itemData.push(result[i]);
+                    createListTag(result[i]);
+                	}///for                	
                 	openCategoryList();
                 	panTo(latitude,longitude);
+                	
             	 }////if
         }////success
      });
@@ -288,19 +308,42 @@ function openCategoryList(){
 //카테고리마커 및 인포윈도우 끄기
 function closeCategoryList(){
 	if(categoryArray!=null){
-		for(var i=0;i<categoryArray.length;i++){
-			categoryArray[i].setMap(null);
+		for(var i=0;i<categoryArray.length;i++){			
 			categoryInfoArray[i].close(map,categoryArray[i]);
-		}		
+			categoryArray[i].setMap(null);
+		}
+		categoryArray=[];
+		categoryInfoArray=[];
+		detailInfo.close();
+		categoryDetailInfoArray=[];
 	}
 }
 
 //카테고리 선택시 마커표시 및 인포윈도우 아이템리스트 뿌려주기
 $('#categorySelector').click(function(e){	
+	panTo(latitude,longitude);
 	if(e.target.nodeName=='LI'){
+		closeCategoryList();
+		$('.addressItem').remove();
 		category=e.target.textContent;
-		categoryItemList();		
+		categoryItemList();
+		
+		for(let i=0;i<categoryDetailInfoArray.length;i++){		
+			kakao.maps.event.addListener(categoryArray[i], 'click', function() {
+				detailInfo.setContent(categoryDetailInfoArray[i]);				
+				detailInfo.open(map, categoryArray[i]);
+	    	    
+	    	});
+		}
 	}	
+	
+});
+
+
+$(document).on("click",'.addressItem',function(e){	
+	 var callLatitude =$(this).find('input:eq(0)').val();
+	 var callLongitude=$(this).find('input:eq(1)').val();	 
+	 panTo(callLatitude,callLongitude);
 });
 
 
@@ -322,6 +365,35 @@ function infoboxcss(selector){
 }
 
 
+
+
+
+function createListTag(object){
+		
+	var ul = $('#addressitemlist');
+	var li = '<li style="border:1px solid; margin:2px;" class="addressItem">'+
+					'<div class="row">'+
+						'<div class="col-5">'+
+							'<img style="width:100%;height:100%;" src="${pageContext.request.contextPath}/resources/assets/img/product_img/'+object["imagename"]+'">'+
+						'</div>'+
+						'<div class="col">'+
+							'<div style="text-align:center; font-weight:bold;">'+object["title"]+'</div>'+
+							'<hr/>'+
+							'<div>시작가: ₩'+object["base_Price"]+'</div>'+
+							'<div>최고가: ₩'+object["upper_Price"]+'</div>'+
+							'<div>조회수:'+object["viewCount"]+'</div>'+
+							'<div>마감일:'+object["endDate"]+'</div>'+
+							'<input type="hidden" name="latitude" value="'+object["latitude"]+'"/>'+
+							'<input type="hidden" name="longitude" value="'+object["longitude"]+'"/>'+
+						'</div>'+
+					'</div>'+
+			'</li>';	
+	ul.append(li);	
+	ul.attr('style','overflow-y: scroll;width:370px; height: 615px; margin-top: 120px;');
+	}
+
+
+
 //주소 검색
 function search_map() {
    new daum.Postcode({
@@ -336,13 +408,16 @@ function search_map() {
             // 정상적으로 검색이 완료됐으면
             if (status === daum.maps.services.Status.OK) {
                var result = results[0]; // 첫번 째 결과의 값을 활용
-               // 지도를 보여준다 
-               setCenter(result.y, result.x);
+               // 지도를 보여준다                
                addressMarker.setPosition(new kakao.maps.LatLng(result.y, result.x));
                addressContent='<div class="bAddr">'+ addr + '</div>';
                addressinfowindow.setContent(addressContent);
-               addressMarker.setMap(map);
+               addressMarker.setMap(map);               
                addressinfowindow.open(map,addressMarker);
+               setCenter(result.y, result.x);
+               latitude=result.y;
+               longitude=result.x;
+               nowAddress=addr;               
             }
          });
       }
@@ -368,4 +443,3 @@ function panTo(latitude,longitude) {
 
 
 </script>
-  

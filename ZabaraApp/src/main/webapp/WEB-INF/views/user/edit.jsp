@@ -110,8 +110,8 @@ button {
 						<input type="text" onclick="daumAddress()" class="form-style mt-3"
 							name="fulladdress" id="fulladdress" required
 							value="${FULLADDRESS}">
-						<input type="hidden" name="latitude" id="latitude">
-						<input type="hidden" name="longitude" id="longitude">
+						<input type="hidden" name="latitude" id="latitude" value="${latitude}">
+						<input type="hidden" name="longitude" id="longitude" value="${longitude}">
 					</div>
 					<div class="col-md-5 mt-0 form-group" style="justify-content: center;">
 						<input type="submit" class="btn mt-3" value="완료">
