@@ -284,119 +284,151 @@ public class UserInfoController {
 		return affected;
 	}
 
-	// 마이페이지 판매내역
-	@GetMapping("selllist.do")
-	public String selllist(@RequestParam Map map, Model model, Authentication auth, Principal principal) {
-		map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기
+	 // 마이페이지 판매내역
+	   @GetMapping("selllist.do")
+	   public String selllist(@RequestParam Map map, Model model, Authentication auth, Principal principal) {
+	      map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기
 
-		// 서비스 호출]
-		// 그 형식에 맞는 dto만들어서 넣는 방법이 있음
-		List<BoardDTO> record = boardService.mypageSelllist(map);
+	      // 서비스 호출]
+	      // 그 형식에 맞는 dto만들어서 넣는 방법이 있음
+	      List<BoardDTO> record = boardService.mypageSelllist(map);
+	      
+	      System.out.println(map);
+	      System.out.println("레코드" + record);
+	      model.addAttribute("record", record);
+	      model.addAttribute("email", map.get("email"));
+	      model.addAttribute("board", "경매");
+	      map.put("board", "경매");
+	      map.put("where", "sell");
+	      model = setModel(map, model, principal);
+	      model.addAttribute("category", map.get("category"));
+	      System.out.println(model);
+	      System.out.println(map.get("email"));
 
-		System.out.println(map);
-		System.out.println("레코드" + record);
-		model.addAttribute("record", record);
-		model.addAttribute("email", map.get("email"));
-		model.addAttribute("board", "중고물품");
-		map.put("board", "중고물품");
-		model = setModel(map, model, principal);
-		model.addAttribute("category", map.get("category"));
-		System.out.println(model);
-		System.out.println(map.get("email"));
+	      return "user/SellList.market";
+	   }///////////////////////
 
-		return "user/SellList.market";
-	}///////////////////////
+	   @GetMapping("/purchaselist.do")
+	   public String purchaselist(@RequestParam Map map, Model model, Authentication auth, Principal principal) {
+	      map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기
+	      UserDTO userinfo = userService.selectOne(map);
+	      map.put("userno", userinfo.getUserno());
+	      // 서비스 호출]
+	      // 그 형식에 맞는 dto만들어서 넣는 방법이 있음
+	      List<BoardDTO> record = boardService.mypagepurchaselist(map);
+	      
+	      System.out.println("map =="+map);
+	      System.out.println("레코드 ==" + record);
+	      model.addAttribute("record", record);
+	      model.addAttribute("email", map.get("email"));
+	      model.addAttribute("board", "경매");
+	      map.put("board", "경매");
+	      map.put("where", "purchase");
+	      model = setModel(map, model, principal);
+	      model.addAttribute("category", map.get("category"));
+	      System.out.println(model);
+	      return "user/PurchaseList.market";
+	   }///////////////////////
 
-	@GetMapping("purchaselist.do")
-	public String purchaselist(@RequestParam Map map, Model model, Authentication auth, Principal principal) {
 
-		return "user/PurchaseList.market";
-	}///////////////////////
+	   @GetMapping("likelist.do")
+	   public String likelist(@RequestParam Map map, Model model, Authentication auth, Principal principal) {
+	      // 유저넘버로 프로덕트 라이크를 셀렉트 해오자 그럼 프로덕트 넘버 나옴 프로덕트 리스트로 조회 리스트 조인
+	      map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기
+	      UserDTO userinfo = userService.selectOne(map);
+	      map.put("userno", userinfo.getUserno());
+	      
+	      // 서비스 호출]
+	      // 그 형식에 맞는 dto만들어서 넣는 방법이 있음
+	      List<BoardDTO> record = boardService.mypagelikelist(map);
 
-	@GetMapping("likelist.do")
-	public String likelist(@RequestParam Map map, Model model, Authentication auth, Principal principal) {
-		// 유저넘버로 프로덕트 라이크를 셀렉트 해오자 그럼 프로덕트 넘버 나옴 프로덕트 리스트로 조회 리스트 조인
-		map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기
-		UserDTO userinfo = userService.selectOne(map);
-		map.put("userno", userinfo.getUserno());
-		System.out.println(userinfo.getUserno());
-		// 서비스 호출]
-		// 그 형식에 맞는 dto만들어서 넣는 방법이 있음
-		List<BoardDTO> record = boardService.mypagelikelist(map);
+	      System.out.println(map);
+	      System.out.println("레코드" + record);
+	      System.out.println("레코드" + record.size());
+	      model.addAttribute("record", record);
+	      model.addAttribute("email", map.get("email"));
+	      model.addAttribute("board", "경매");
+	      map.put("board", "경매");
+	      map.put("where", "like");
+	      model = setModel(map, model, principal);
+	      model.addAttribute("category", map.get("category"));
+	      System.out.println(model);
+	      System.out.println(map.get("email"));
+	      return "user/LikeList.market";
+	   }///////////////////////
 
-		System.out.println(map);
-		System.out.println("레코드" + record);
-		model.addAttribute("record", record);
-		model.addAttribute("email", map.get("email"));
-		model.addAttribute("board", "중고물품");
-		map.put("board", "중고물품");
-		model = setModel(map, model, principal);
-		model.addAttribute("category", map.get("category"));
-		System.out.println(model);
-		System.out.println(map.get("email"));
-		return "user/LikeList.market";
-	}///////////////////////
+	   public Model setModel(Map map, Model model, Principal principal) {
+	      
+	      map = getUserInfo(map, model, principal);
 
-	public Model setModel(Map map, Model model, Principal principal) {
-		map = getUserInfo(map, model, principal);
+	      if (map.get("nowpage") == null) {
+	         map.put("nowpage", "1");
+	      }
 
-		if (map.get("nowpage") == null) {
-			map.put("nowpage", "1");
-		}
+	      int page = Integer.parseInt((String) map.get("nowpage"));
 
-		int page = Integer.parseInt((String) map.get("nowpage"));
+	      map.put("startnum", (30 * (page - 1)) + 1);
+	      map.put("endnum", 30 * (page));
 
-		map.put("startnum", (30 * (page - 1)) + 1);
-		map.put("endnum", 30 * (page));
+	      if (map.get("category") == null) {
+	         map.put("category", "모두");
+	      }
 
-		if (map.get("category") == null) {
-			map.put("category", "모두");
-		}
+	      // 리스트 받아오기
+	      List<BoardDTO> allLists = boardService.selectListAll(map);
+	      model.addAttribute("nowpage", page);
+	      model.addAttribute("endpage", allLists.size() / 30 == 0 ? 1 : allLists.size() / 30);
 
-		// 리스트 받아오기
-		List<BoardDTO> allLists = boardService.selectListAll(map);
-		model.addAttribute("nowpage", page);
-		model.addAttribute("endpage", allLists.size() / 30 == 0 ? 1 : allLists.size() / 30);
+	      List<BoardDTO> Lists = null;
+	      if (map.get("where").toString().equals("like")) {
+	         Lists = boardService.mypagelikelist(map);
+	      } 
+	      else if(map.get("where").toString().equals("purchase")){
+	    	  Lists = boardService.mypagepurchaselist(map);
+	      }
+	      else {
+	         Lists = boardService.mypageSelllist(map);
+	      }      
 
-		List<BoardDTO> Lists = boardService.selectList(map);
+	      List<List<ImageDTO>> imageList = new Vector<List<ImageDTO>>();
 
-		List<List<ImageDTO>> imageList = new Vector<List<ImageDTO>>();
+	      for (int i = 0; i < Lists.size(); i++) {
+	         map.put("product_no", Lists.get(i).getProduct_no());
+	         map.put("auction_no", Lists.get(i).getAuction_no());
 
-		for (int i = 0; i < Lists.size(); i++) {
-			map.put("product_no", Lists.get(i).getProduct_no());
-			map.put("auction_no", Lists.get(i).getAuction_no());
+	         List<ImageDTO> images = imageService.selectList(map);
+	         imageList.add(images);
+	      }
 
-			List<ImageDTO> images = imageService.selectList(map);
-			imageList.add(images);
-		}
+	      List<Integer> likes = boardService.selectLikeList(map);
 
-		List<Integer> likes = boardService.selectLikeList(map);
+	      model.addAttribute("likes", likes);
+	      model.addAttribute("imageList", imageList);
+	      model.addAttribute("address", map.get("simpleAddress"));
+	      model.addAttribute("LISTS", Lists);
+	      System.out.println("리스트," + Lists);
 
-		model.addAttribute("likes", likes);
-		model.addAttribute("imageList", imageList);
-		model.addAttribute("address", map.get("simpleAddress"));
-		model.addAttribute("LISTS", Lists);
-		System.out.println("리스트," + Lists);
+	      return model;
+	   }
 
-		return model;
-	}
+	   public Map getUserInfo(Map map, Model model, Principal principal) {
+	      
+	      System.out.println("getUserInfo들어옴");
+	      map.put("email", principal.getName());
 
-	public Map getUserInfo(Map map, Model model, Principal principal) {
-		map.put("email", principal.getName());
+	      UserDTO user = userService.selectOne(map);
 
-		UserDTO user = userService.selectOne(map);
+	      map.put("userno", user.getUserno());
 
-		map.put("userno", user.getUserno());
+	      AddressDTO address = addressService.selectOne(map);
 
-		AddressDTO address = addressService.selectOne(map);
+	      String simpleAddr = address.getSimpleAddress();
 
-		String simpleAddr = address.getSimpleAddress();
+	      map.put("addrno", address.getAddrNo());
+	      map.put("simpleAddress", simpleAddr);
 
-		map.put("addrno", address.getAddrNo());
-		map.put("simpleAddress", simpleAddr);
-
-		return map;
-	}
+	      return map;
+	   }
 		
 	
 	@RequestMapping("/category.do")

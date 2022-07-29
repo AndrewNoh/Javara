@@ -138,19 +138,32 @@
 	<!-- MYPAGE -->
 	<select id="mypageSelllist" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		SELECT * FROM PRODUCT_IMG IMG JOIN PRODUCT_LIST LIST ON
-		IMG.PRODUCT_NO=LIST.PRODUCT_NO
+		SELECT * FROM AUCTION_IMG IMG JOIN AUCTION_LIST LIST ON
+		IMG.AUCTION_NO=LIST.AUCTION_NO JOIN auction_price P ON
+		list.auction_no=p.auction_no
 		JOIN MEMBERS MB ON list.userno=mb.userno
-		WHERE mb.email= #{email}
+		WHERE mb.email= #{email} ORDER BY LIST.POSTDATE DESC
 	</select>
 	<select id="mypagelikelist" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		SELECT * FROM PRODUCT_IMG IMG JOIN PRODUCT_LIST LIST ON
-		IMG.PRODUCT_NO=LIST.PRODUCT_NO
-		join product_like li on
-		list.product_no=li.product_no WHERE
-		li.userno=#{userno} ORDER BY
-		LIST.POSTDATE DESC
+		SELECT * FROM AUCTION_IMG IMG JOIN AUCTION_LIST LIST ON
+		IMG.AUCTION_NO=LIST.AUCTION_NO JOIN auction_price P ON
+		list.auction_no=p.auction_no
+		JOIN MEMBERS MB ON LIST.userno=mb.userno
+		WHERE mb.email= #{email} ORDER BY LIST.POSTDATE DESC
+
+	</select>
+	<select id="mypagepurchaselist" parameterType="Map"
+		resultType="com.carrot.marketapp.model.dto.BoardDTO">
+		SELECT L.*, P.UPPER_PRICE, p.base_price,
+		p.upper_user_no,IMG.* FROM
+		AUCTION_LIST L
+		LEFT OUTER JOIN AUCTION_PRICE
+		P ON L.AUCTION_NO = P.AUCTION_NO join
+		AUCTION_IMG IMG on
+		L.AUCTION_NO=IMG.AUCTION_NO
+		WHERE STATUS = 'END' AND P.UPPER_USER_NO=
+		#{userno}
 	</select>
 	
 	<select resultType="com.carrot.marketapp.model.dto.BoardDTO" parameterType="Map" id="getAuctionListAddressItems">

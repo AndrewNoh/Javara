@@ -12,7 +12,7 @@ i {
 
 		<div class="section-title">
 			<h2>Zabara</h2>
-			<p>판매내역</p>
+			<p>좋아요 내역</p>
 		</div>
 
 	

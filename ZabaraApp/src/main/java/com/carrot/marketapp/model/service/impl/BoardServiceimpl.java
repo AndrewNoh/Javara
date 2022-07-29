@@ -130,7 +130,7 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 		// TODO Auto-generated method stub
 		return boardDAO.updateAddress(map);
 	}
-	
+
 	public List<BoardDTO> mainPageListNoAddr(Map map) {
 		// TODO Auto-generated method stub
 		return boardDAO.mainPageListNoAddr(map);
@@ -141,5 +141,9 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 		return boardDAO.mainPageListYesAddr(map);
 	}
 
+	public List<BoardDTO> mypagepurchaselist(Map map) {
+
+		return boardDAO.mypagepurchaselist(map);
+	}
 
 }

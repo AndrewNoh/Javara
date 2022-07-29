@@ -227,4 +227,8 @@ public class BoardDAO {
 		return sqlSession.selectList("mainPageListYesAddr", map);
 	}
 
+	public List<BoardDTO> mypagepurchaselist(Map map) {
+		return sqlSession.selectList("mypagepurchaselist", map);
+	}
+
 }
