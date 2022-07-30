@@ -631,16 +631,21 @@ public class MainBoardController {
 
 	}
 
-	// 카테고리아이템용
-	@RequestMapping(value = "/myAddressItemList.do", produces = "application/json;charset=UTF-8")
+	//카테고리아이템용
+	@RequestMapping(value="/myAddressItemList.do",produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String myAddressItemList(@RequestParam Map map, Model model) throws JsonProcessingException {
-		System.out.println(map.get("nowAddress"));
-		String[] simpleAddr = map.get("nowAddress").toString().split(" ");
-		map.put("simpleAddress", simpleAddr[1]);
-		map.put("board", "동네아이템가져오기");
-		List<BoardDTO> itemlist = boardService.selectListAll(map);
-		return objectMapper.writeValueAsString(itemlist);
+	public String myAddressItemList(@RequestParam Map map,Model model,Principal principal) throws JsonProcessingException {
+			map.put("email", principal.getName());
+			UserDTO record = userService.selectOne(map);
+			map.put("userno", record.getUserno());
+			System.out.println(map.get("nowAddress"));
+			String[] simpleAddr = map.get("nowAddress").toString().split(" ");
+			map.put("simpleAddress", simpleAddr[1]);
+			map.put("board", "동네아이템가져오기");
+			List<BoardDTO>itemlist = boardService.selectListAll(map);
+			return objectMapper.writeValueAsString(itemlist);
 	}
+	
+	
 
 }

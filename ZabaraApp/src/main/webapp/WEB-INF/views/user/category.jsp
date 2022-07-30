@@ -464,25 +464,25 @@ function infoboxcss(selector){
 function createListTag(object){
 		
 	var ul = $('#addressitemlist');
-	var li = '<li style="border:1px solid; margin:2px;" class="addressItem">'+
+	var li = '<li style="border:2px solid;border-radius: 10px;  margin:2px;" class="addressItem">'+
 					'<div class="row">'+
 						'<div class="col-5">'+
-							'<img style="width:100%;height:100%;" src="${pageContext.request.contextPath}/resources/assets/img/product_img/'+object["imagename"]+'">'+
+							'<img style="width:100%;height:100%; border-radius: 7px;" src="${pageContext.request.contextPath}/resources/assets/img/product_img/'+object["imagename"]+'">'+
 						'</div>'+
 						'<div class="col">'+
-							'<div style="text-align:center; font-weight:bold;">'+object["title"]+'</div>'+
+							'<div class="title" style="text-align:center; margin-top:15px;"><h5 style="font-family: "GmarketSansMedium"">'+object["title"]+'</h5></div>'+
 							'<hr/>'+
-							'<div>시작가: ₩'+object["base_Price"]+'</div>'+
-							'<div>최고가: ₩'+object["upper_Price"]+'</div>'+
-							'<div>조회수:'+object["viewCount"]+'</div>'+
-							'<div>마감일:'+object["endDate"]+'</div>'+
+							'<div><h6>시작가: ₩'+object["base_Price"]+'</h6></div>'+
+							'<div><h6>최고가: ₩'+object["upper_Price"]+'</h6></div>'+
+							'<div><h6>조회수: '+object["viewCount"]+'</h6></div>'+
+							'<div><h6>마감일: '+object["endDate"].split(" ")[0]+'</h6></div>'+
 							'<input type="hidden" name="latitude" value="'+object["latitude"]+'"/>'+
 							'<input type="hidden" name="longitude" value="'+object["longitude"]+'"/>'+
 						'</div>'+
 					'</div>'+
-			'</li>';	
+			'</li>';
 	ul.append(li);	
-	ul.attr('style','overflow-y: scroll;width:370px; height: 615px; margin-top: 120px;');
+	ul.attr('style','overflow-y: scroll;width:350px; height: 990px; margin-top: -110px; ');
 	}
 
 
