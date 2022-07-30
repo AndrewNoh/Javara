@@ -101,6 +101,7 @@
 .navbar a[id=top_banner]:before {
 	background-color: rgb(255 255 255/ 0%);
 }
+
 </style>
 <body>
 
@@ -143,14 +144,14 @@
 					질문</a></li>
 			<!--<li><a class="nav-link" href="<c:url value="/board/image.do"/>">이미지분석</a></li>-->
 			<li><a class="nav-link"
-				href="<c:url value="/chat/chattingroom.do"/>">자바라채팅</a></li>
+				href="<c:url value="/chat/chattingroom.do"/>">채팅</a></li>
 			<li><a class="nav-link"
-				href="<c:url value="/userinfo/category.do"/>">카테고리 아이템</a></li>
+				href="<c:url value="/userinfo/category.do"/>">우리동네 카테고리</a></li>
 			<li><div class="search col mr-3" id="srch" style="float: left;">
 					<div class="srch_bar" style="text-align: center;">
 						<div class="stylish-input-group">
 							<input type="text" placeholder="검색어를 입력해주세요" name="title"
-								class="search-bar"> <span class="input-group-addon">
+								 class="search-bar"> <span class="input-group-addon">
 								<button type="submit" style="vertical-align: -0.3em;">
 									<i class="bi bi-search" aria-hidden="true"
 										style="font-size: 20px; color: #ffc107;"></i>

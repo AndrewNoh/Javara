@@ -132,8 +132,8 @@ color:#ffc107
                   </div>
                   <div class="col-7 ml-6" style="padding: 0%;">
                      <a href="<c:url value="/userinfo/editmember.do"/>"
-                        class="setting"> <i class="bi bi-gear"
-                        style="color: white; font-size: 1.3rem;"></i></a>
+                        class="setting"> <i class="bi bi-gear" 
+                        style="color: white; font-size: 1.3rem; "></i></a>
                   </div>
                </div>
             </div>
@@ -239,7 +239,7 @@ color:#ffc107
                      <div class="col-lg-4 col-md-4 mt-4 mt-md-0">
                         <div class="icon-box" id="ChatToggle" >
                            <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
-                           <h3>자바라 채팅</h3>
+                           <h3>채팅</h3>
 
                         </div>
                      </div>
@@ -260,7 +260,7 @@ color:#ffc107
                      <div class="col-lg-4 col-md-4 mt-4">
                         <div class="icon-box" id="AccountBookToggle">
                            <i class="ri-database-2-line" style="color: #47aeff;"></i>
-                           <h3>자바라 가계부</h3>
+                           <h3>가계부</h3>
                         </div>
                      </div>
                      <div class="col-lg-4 col-md-4 mt-4">

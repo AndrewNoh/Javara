@@ -10,14 +10,14 @@
 
 <style>
 .bAddr {
-   color: #ffc107;
-   background: #616161DB;
-   width: 100%;
-   height: 100%;
+   color: #fff;
+   background: #006600;
+   width: auto;
+   height: auto;
    margin: 8px;
-   border-radius:4px;
+   border-radius:6px;
    text-align: center;
-   font-weight: bold;
+   font-family: 'GmarketSansLight';
 }
 
 .addressItem{
@@ -47,23 +47,27 @@
 	z-index: 2;
 }
 .map_wrap, .map_wrap * { 
-  margin:0; padding:0;font-family:'Malgun Gothic',dotum,'맑은 고딕',sans-serif;font-size:14px;
+  margin:0; padding:0; font-size:14px;
   font-weight: bold; 
+ 
 }
-.map_wrap {position:relative;width:auto;height:350px; }
+.map_wrap {position:relative;width:auto;height:350px;  }
 #filter {position:absolute;top:10px;left:10px;border-radius: 5px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);background: #fff;overflow: hidden;z-index: 2;}
 #mapwrap_category {
    position: relative;
    overflow: hidden;
-   
+ 
 }
 
-.map_category li:hover {background: #0059ac; }
+
+.map_category li:hover {background: #fff; }
+
+
 .map_category, .map_category * {
    margin: 0;
    padding: 0;
    color: #000;
-   
+
 }
 
 .map_category {
@@ -77,16 +81,13 @@
    border: none;
    font-size: 12px;
    text-align: center;
-   background-color: #006a94;
-   background-color: rgba(17, 174, 226);
-   
-  
+   background-color: #212529;
 
 }
 
 .map_category li {
    list-style: none;
-   float: left;
+   float: right;
    width: 89px;
    height: auto;
    padding-top: 5px;
@@ -203,37 +204,17 @@ input.form-text {
 </style>
 <div class="row" style="margin:30px;">  
 	<div class="col-lg-3" id="searchTab">
-		<div class="map_menu">
-			<div id="map_wrap" class="row">		    
-			    <div class="map_menu">
-			        <ul id="filter" style="height: 235px; margin-top: 120px;">
-			          <label style="font-weight:bold; margin-top: 20px;">주소 검색</label>
-			          <br/>
-			          <input style="margin-top: 10px; width: 275px;" onclick="search_map()" placeholder="주소를 검색하세요.";>
-			            
-			            <button class="btn btn-outline" onclick="search_map()" type="button">검색</button>
-			              <p>
-			                <label for="amount" style="font-weight:bold; margin-top: 10px;">가격 범위</label>
-			                <input type="text" id="amount" readonly style="border:0; color:#7a7a7a; font-weight:bold;">
-			              </p>              
-			              <div id="slider-range" style="width: 300px; "></div>
-			              <br/>
-			              <button type="button" class="btn btn-primary" style="width: 150px; margin-left: 150px;">검색</button>
-			
-			        </ul>
-			    </div>		    	
-		 	</div>
+		
 		 	<div id="addressItemListDiv" class="row">
-		 		<ul id="addressitemlist" style="width:370px; height: 615px; margin-top: 120px;">
-			        <li id="addressItemListTitle" style="text-align:center; margin-top:10px;"><h3>아이템 목록</h3></li>
-			        <hr/>	
-			              
+		 		<ul id="addressitemlist" style="width:350px; height: 990px; margin-top: -110px; ">
+			        <li id="addressItemListTitle" style="text-align:center; margin-top:15px;">
+			        	<h3 style="font-size: 20px; font-weight: bold;">판매 리스트</h3></li>
+					<hr/>
 			    </ul>			   
 			</div>
-		</div>
-	 </div>
-	 <div class="col container" id="viewMap" style="margin-right">
-		 <div class="map_category" style="border-radius: 20px;" id="categorySelector">
+		 </div>
+	 <div id="viewMap" style="margin-right: 20px">
+		 <div class="map_category" style="margin-left: 630px; font-family: 'GmarketSansMedium';" id="categorySelector">
 		     <ul>
 		        <li style="color: #fff;">유아동</li>
 		        <li style="color: #fff;">유아도서</li>
@@ -254,11 +235,10 @@ input.form-text {
 		      <li style="color: #fff;">반려동물용품</li>
 		      <li style="color: #fff;">식물</li>
 		      <li style="color: #fff;">스포츠/레저</li>
-		      <li style="color: #fff;">인기매물</li>
-		
+		      <li style="color: #fff;">인기매물</li>	
 		     </ul>
 	     </div>
-		 <div id="map" style="height: 800px;" value="${address}"></div>
+		 <div id="map" style="border-radius: 20px; height: 1000px; margin-left: 325px" value="${address}"></div>
 	 </div>
  </div>
 <script>

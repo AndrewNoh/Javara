@@ -68,7 +68,6 @@ public class PayController {
 			int remitBalance = Integer.parseInt(balance.getBalance())-remit;
 			map.put("balance", remitBalance);
 		
-			// withdraw = payService.payWithdraw(map);
 			balance = payService.payBalance(map);
 		}
 		
@@ -80,7 +79,6 @@ public class PayController {
 			map.put("balance", chargeBalance);
 			System.out.println(chargeBalance);
 			
-			// deposit = payService.payDeposit(map);
 			balance = payService.payBalance(map);	
 		}
 		
