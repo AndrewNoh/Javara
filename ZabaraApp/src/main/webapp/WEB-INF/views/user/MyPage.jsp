@@ -140,13 +140,13 @@ color:#ffc107
             <div class="row">
                <div class="col-lg-7">
                   <p>
-                     <strong>Email:</strong> <span>${email}</span>
+                     <strong style="font-size: 16px; color: #000; margin-right: 7px">이메일</strong> <span>${email}</span>
                   </p>
                   <p>
-                     <strong>Phone:</strong> <span>${phonenumber}</span>
+                     <strong style="font-size: 16px; color: #000; margin-right: 7px">연락처</strong> <span>${phonenumber}</span>
                   </p>
                   <p>
-                     <strong>Address</strong> <span id="myAddress">${address}</span>
+                     <strong style="font-size: 16px; color: #000; margin-right: 7px">주소</strong> <span id="myAddress">${address}</span>
                   </p>
                </div>
             </div>
@@ -193,7 +193,7 @@ color:#ffc107
       </div>
 
       <!-- End Skills -->
- <!-- 자바라 페이 -->
+ 	<!-- 자바라 페이 -->
  	<div class="row">
          <div class="col-5">
             <div class="pay container ">
@@ -220,14 +220,15 @@ color:#ffc107
             </div>
          </div>
          <!-- 자바라 페이 -->
+      
          
+         
+         <!-- 나의 활동 -->
          <div class="col-7">
             <div class="interests container">
-
                <div class="section-title">
                   <h2 style="margin-bottom: 30px;">나의 활동</h2>
                </div>
-
                <div class="row">
                   <div class="row">
                      <div class="col-lg-4 col-md-4 ">
@@ -240,7 +241,6 @@ color:#ffc107
                         <div class="icon-box" id="ChatToggle" >
                            <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
                            <h3>채팅</h3>
-
                         </div>
                      </div>
                      <div class="col-lg-4 col-md-4 mt-4 mt-md-0">
@@ -270,19 +270,17 @@ color:#ffc107
                         </div>
                      </div>
                   </div>
-
                </div>
             </div>
          </div>
-      </div>
-         <!--동네인증하기-->
+         <!-- 나의 활동 -->
+      </div><!-- row -->
+         
          <div class="col mt-3" id="KeyToggleDiv" style="display: none">
             <div class="interests container">
-
                <div class="section-title">
                   <h2 style="margin-bottom: 30px;">키워드 자바라</h2>
                </div>
-
                <div class="row">
                   <div class="col-lg-12 col-md-6 mt-4">
                      <div class="icon-box">
@@ -310,19 +308,16 @@ color:#ffc107
                         </div>
                      </div>
                   </div>
-
                </div>
-
             </div>
          </div>
-         <!--키워드알림-->
+         
+         
          <div class="col mt-3" id="AccountBookToggleDiv" style="display: none">
             <div class="interests container">
-
                <div class="section-title">
                   <h2 style="margin-bottom: 30px;">가계부 자바라</h2>
                </div>
-
                <div class="row">
                   <div class="row">
                      <div class="col-lg-12 col-md-6 mt-4 ">
@@ -340,12 +335,10 @@ color:#ffc107
                         </div>
                      </div>
                   </div>
-
                </div>
-
             </div>
          </div>
-         <!--가계부-->
+         
          <div class="col mt-3" id="MapToggleDiv" style="display: none">
             <form id="simpleChangeAddr" method="post"
                action="<c:url value="/userinfo/simpleChangeAddr.do"/>">
@@ -370,9 +363,10 @@ color:#ffc107
                      </div>
                   </div>
                </div>
-               </div>
              </div>
-               <!--지도-->
+          </div>
+               
+               
             <div class="col mt-3" id="ChatToggleDiv" style="display: none">
                   <div class="testimonials container mt-3">
                      <div class="section-title">
@@ -400,23 +394,20 @@ color:#ffc107
 			                  <h4><fmt:formatDate value="${chatlist.sendtime}" pattern="yyyy년 MM월 dd일"/></h4>
 			               </div>
 			               </a>
-			             </div><!-- End testimonial item -->
+			             </div>
 			               </c:forEach>
 			           </div>
 			           <div class="swiper-pagination"></div>
 			         </div>
 			         <div class="owl-carousel testimonials-carousel"></div>
-			       </div><!-- End Testimonials  -->
 			       </div>
-               <!--카테고리-->
-           
-         <!-- End Counts -->
-         <!-- End Interests -->
-         <!-- ======= Testimonials ======= -->
-   </div>
-</div>
-      <!-- End Testimonials  -->
-
+			      </div>
+  			 </div>
+		</div>
+      
+      
+      
+	  <!-- 토글 클릭 이벤트 -->
       <script type="text/javascript">
          $(function() {
             $("#AccountBookToggle").click(function() {
@@ -439,8 +430,7 @@ color:#ffc107
                    console.log(addresslat);
                    console.log(addresslng);
                      panTo(addresslat,addresslng);
-                  },1200);
-                
+                  },1200);             
              });
             $("#ChatToggle").click(function() {
                $("#ChatToggleDiv").toggle(1000);
@@ -451,7 +441,9 @@ color:#ffc107
             $('#LikeToggle').click(function() {
                 $("#LikeToggleDiv").toggle(1000);
              });
+            
          });
+         <!-- 토글 클릭 이벤트 -->
 
          var readURL = function(input) {
             if (input.files && input.files[0]) {
@@ -550,7 +542,7 @@ color:#ffc107
 
           }
 
-       // 마이페이지 동네인증
+       	  // 마이페이지 동네인증
           function saveMarkerPosition() {
                    $.ajax({
                       type : 'POST',
@@ -787,16 +779,16 @@ color:#ffc107
 	               }
 	               else{
 	                  $.ajax({
-	                           type: 'POST',
-	                          url : '<c:url value="/pay/balance.do"/>',
+	                         type: 'POST',
+	                         url : '<c:url value="/pay/balance.do"/>',
 	                         data : {
 	                               'deposit' : 0,
 	                               'withdraw' : selected,
 	                             '${_csrf.parameterName}' : '${_csrf.token}'
 	                           },
-	                           dataType : "text",
+	                         dataType : "text",
 	                         success : function(result){
-	                         console.log(result);
+	                         // console.log(result);
 	                            $('#myPay').text(result
 	                                  .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 	                                +'원')
@@ -820,7 +812,7 @@ color:#ffc107
                var address = '${address}';
                var phonenumber = '${phonenumber}';
               
-               console.log(amount);
+               // console.log(amount);
              
                IMP.init('imp74932749');
                IMP.request_pay(
