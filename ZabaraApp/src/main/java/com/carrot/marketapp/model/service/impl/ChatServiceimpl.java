@@ -22,12 +22,12 @@ public class ChatServiceimpl {
 	UserDAO userDAO;
 	
 	public ChatDTO userlist(Map map) {
-		return chatDAO.userList(map);
+		return chatDAO.userlist(map);
 	}
 	
-	public UserDTO userselectOne(Map map) {
+	/*public UserDTO userselectOne(Map map) {
 		return userDAO.selectOne(map);
-	}
+	}*/
 	
 	public ChatDTO findChatRoom(Map map){
 		return chatDAO.findChatRoom(map);

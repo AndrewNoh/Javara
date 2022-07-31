@@ -54,7 +54,8 @@ public class ChatController {
       map.put("userno", userNickname.getUserno());
       model.addAttribute("profileimage", userNickname.getProfile_img());
       model.addAttribute("userno", map.get("userno"));
-      model.addAttribute("userno", map.get("userno"));
+      
+     
 
       ChatDTO chatroom = chatService.findChatRoom(map);
       model.addAttribute("auction_no", map.get("auction_no"));
@@ -77,6 +78,11 @@ public class ChatController {
          List<ChatDTO> readmsg = chatService.readmsg(map);
       } else {
          model.addAttribute("roomno", '0');
+         
+         map.put("userno", map.get("writeuserno"));
+         ChatDTO finduser=chatService.userlist(map);
+         model.addAttribute("finduser", finduser);
+         
       }
 
       BoardDTO list;

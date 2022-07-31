@@ -16,13 +16,13 @@ public class ChatDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ChatDTO userList(Map map) {
+	public ChatDTO userlist(Map map) {
 		return sqlSession.selectOne("userList", map);
 	}
 
-	public UserDTO userselectOne(Map map) {
+	/*public UserDTO userselectOne(Map map) {
 		return sqlSession.selectOne("userselectOne", map);
-	}
+	}*/
 
 	public ChatDTO findChatRoom(Map map) {
 		return sqlSession.selectOne("findChatRoom", map);
@@ -79,6 +79,10 @@ public class ChatDAO {
 	public int updateChatMsg(Map map) {
 		return sqlSession.update("updateChatMsg", map);
 	}
+
+	
+
+
 
 
 

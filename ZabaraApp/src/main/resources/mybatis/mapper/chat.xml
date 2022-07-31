@@ -55,7 +55,7 @@
 	</insert>
 	<select id="viewChatMessage" parameterType="Map"
 		resultMap="chatDtoResult">
-		SELECT * from CHAT_MESSAGE where room_no=#{roomno}
+		SELECT * from CHAT_MESSAGE where room_no=#{roomno} ORDER BY sendtime 
 	</select>
 
 	<select id="chatlist" parameterType="Map"

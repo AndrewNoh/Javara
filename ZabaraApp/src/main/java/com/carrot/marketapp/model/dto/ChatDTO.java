@@ -33,6 +33,7 @@ public class ChatDTO {
 	private String senduserprofileimg;
 	private String writeuserprofileimg;
 	private String profileimage;
+	private String profile_img;
 	private String sendusernickname;
 	private String writeusernickname;
 	
