@@ -87,7 +87,7 @@
 	         <div class="css-1r0o66s">
                         <div class="chat-header-profile">
                            <c:if test="${userNickname.nickname eq chatroom.writeusernickname }"><img class="chat-header-image" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatroom.senduserprofileimg}" alt="sunil"></c:if>
-                           <c:if test="${userNickname.nickname ne chatroom.writeusernickname }"><img class="chat-header-image" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatroom.writeuserprofileimg}" alt="sunil"></c:if>
+                           <c:if test="${userNickname.nickname ne chatroom.writeusernickname and (empty finduser.profile_img)}"><img class="chat-header-image" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatroom.writeuserprofileimg}" alt="sunil"></c:if>
                             <c:if test="${userNickname.nickname ne finduser.nickname and (empty chatroom.writeuserprofileimg)}"><img class="chat-header-image" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${finduser.profile_img}" alt="sunil"></c:if>
                            <div class="main-title" id="usernicname">
                            <c:if test="${userNickname.nickname ne wirtenickName }" var="chatuser">
@@ -284,6 +284,25 @@
          </div>
          -->
          
+         <!-- 낙찰 전 -->
+         <div id="modalsale" class="modal fade">
+             <div class="modal-dialog" role="document">
+                 <div class="modal-content">
+                     <div class="modal-header" style="justify-content: center;">  
+                         <h1 class="modal-title" style="color: black;"> 주의</h1>
+                     </div>
+                     <div class="modal-body">
+                        <form class="form-horizontal" role="form" method="POST" action="#" style="text-align: center;">
+                         <div>낙찰이 결정되지 않았습니다. 송금을 하시겠습니까?</br>
+                         송금을 진행하시려면 '계속' 종료하시려면 '종료' 버튼을 눌러주세요</div>
+                       <a type="button" data-toggle="modal" data-target="#modalpayment" class="title m-b-md btn btn-dark"  data-dismiss="modal">계속</a>
+                       <button type="button" class="btn btn-dark" style="color:#fff" data-dismiss="modal"  style="margin: auto; display: block;">종료</button>
+                       </form>
+                     </div>
+                 </div><!-- /.modal-content -->
+             </div><!-- /.modal-dialog -->
+         </div><!-- /.modal -->
+         
            <!-- 송금하기모달 -->      
            <div id="modalpayment" class="modal fade">
              <div class="modal-dialog" role="document">
@@ -391,8 +410,11 @@
 	                <a type="button" id="phone" data-toggle="modal" data-target="#modalPhon" class="title m-b-md"><i class="bi bi bi bi-telephone-fill m-1" style="float: left; font-size: 35px;"></i></a> 
 	                <c:if test="${userno ne writeuserno}">
 	                <!--<a type="button" id="jpays" data-toggle="modal" data-target="#modalJpay" class="title m-b-md"><i class="bi bi-credit-card-2-back m-1" style="float: left; font-size: 35px;"></i></a> --></c:if>
-	                <a type="button" id="pay"  data-toggle="modal" data-target="#modalpayment" class="title m-b-md"><i class="bi bi-credit-card-2-back-fill m-1" style="float: left; font-size: 35px;"></i></a>
-	                <input type="file" id="file" name="file" onchange="uploadFile(this)" style="display:none"> 
+	                <c:if test="${list.status == 'SALE'}">
+	                <a type="button" id="sale"  data-toggle="modal" data-target="#modalsale" class="title m-b-md"><i class="bi bi-credit-card-2-back-fill m-1" style="float: left; font-size: 35px;"></i></a></c:if>
+	                <c:if test="${list.status == 'END'}">
+	                <a type="button" data-toggle="modal" data-target="#modalpayment" class="title m-b-md"><i class="bi bi-credit-card-2-back-fill m-1" style="float: left; font-size: 35px;"></i></a></c:if>
+	                <input type="file" id="file" name="file" onchange="uploadFile(this)" style="display:none">
 	         </div>
                <div class="input_msg_write d-flex ">
                   <a type="button" id="plus"  class="title m-b-md"><i class="bi bi-plus-square m-1" style="float: left; font-size: 35px;"></i></a>
@@ -405,7 +427,6 @@
    </div>
 </div>
 </div>
-
 <script>
 
 //웹소켓 데이터 
@@ -641,8 +662,6 @@ function uploadFile(e) {
    
    
    ///약속잡기
-   var appointed = $('button[id=appointed]');
-      $(document).on("click", 'appointed', function(e){});
    var appointed = $('button[name=appointed]');
       $(document).on("click", '.appointed', function(e){
 		var form1 = $("#form").serialize();
@@ -675,6 +694,8 @@ function uploadFile(e) {
 				+today.toLocaleTimeString()+"</span></div></div>");
 		//기존 메시지 클리어		
 		$('#chatcontent').val("");
+		$('#chatcontent').focus();
+        $('#chatMessage').get(0).scrollTop = $('#chatMessage').get(0).scrollHeight;
 		
 		
 	});
@@ -686,7 +707,7 @@ function uploadFile(e) {
         chatimg.append("${_csrf.parameterName}", "${_csrf.token}");
         
         $.ajax({
-	        url: '<c:url value="/chat/chatimg.do"><c:param value="${userno}" name="userno"/><c:param value="${userno}" name="userno"/><c:param value="${roomno}" name="roomno"/></c:url>',
+	        url: '<c:url value="/chat/chatimg.do"><c:param value="사진" name="chatcontent"/><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
 	        data: chatimg,
 	        type: 'POST',
 	        dataType : "text",
@@ -706,6 +727,8 @@ function uploadFile(e) {
          });
         
         $('#image').remove();
+        $('#chatcontent').focus();
+        $('#chatMessage').get(0).scrollTop = $('#chatMessage').get(0).scrollHeight;
       
       }
       
@@ -723,8 +746,9 @@ function uploadFile(e) {
                +today.toLocaleTimeString()+"</span></div></div>");
                   
                   $.ajax({
-                  url: '<c:url value="/chat/chattingemoji.do"><c:param value="${userno}" name="userno"/><c:param value="${userno}" name="userno"/><c:param value="${roomno}" name="roomno"/></c:url>',
+                  url: '<c:url value="/chat/chattingemoji.do"><c:param value="${userno}" name="userno"/><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
                   data: {img:result,
+                	  chatcontent:'이모티콘',
                         '${_csrf.parameterName}':'${_csrf.token}'},
                   type: 'POST',
                   dataType: 'text',
@@ -738,6 +762,8 @@ function uploadFile(e) {
                  //$("#emojitoggleDiv").toggle();
                  
             }
+            $('#chatcontent').focus();
+            $('#chatMessage').get(0).scrollTop = $('#chatMessage').get(0).scrollHeight;
       }
       
       //전화번호보내기
@@ -802,7 +828,9 @@ function uploadFile(e) {
                   console.log('error')
                }
             });
-            
+             $('.disagreemrnt').attr('disabled',true);
+             $(".agreemrnt").attr("disabled",true);
+             
             
       });
       
@@ -836,7 +864,8 @@ function uploadFile(e) {
                }
             });
             
-            
+             $(".agreemrnt").attr("disabled",true);
+             $('.disagreemrnt').attr('disabled',true);
       });
       
      
@@ -959,11 +988,8 @@ function uploadFile(e) {
     
       
 //송금확인
-      var success = document.querySelectorAll('.success');
-      for(var i=0; i<success.length;i++){
-    	  success = success[i].value;     
-      }
-      $(document).one("click", '.success', function(e){
+      var success = $('button[name=success]');
+      $(document).on("click", '.success', function(e){
          var form1 = $("#form").serialize();
 	     var payval = document.querySelectorAll('.payval');
          for(var i=0; i<payval.length;i++){
@@ -1014,7 +1040,8 @@ function uploadFile(e) {
             appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center;'><strong>"+remit+"원이 입급되었습니다.</strong></p>"
             +"<span style='float: right;font-size: small; margin-top:5px;'>"
          +today.toLocaleTimeString()+"</span></div></div>");
-         
+            
+         $('.success').attr('disabled',true);
      });
 
 

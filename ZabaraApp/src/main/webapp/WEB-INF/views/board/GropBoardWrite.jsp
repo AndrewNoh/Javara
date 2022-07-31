@@ -2,7 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
+<style>
+#previewImage > img{
+height: 100%
+}
+#images > img{
+height: 100%
+}
+.contents{
+background-color: #ffffff21;
+border-radius: 15px;
+}
+</style>
  <!-- ======= 동내 Section ======= -->
   <div id="board" class="contact">
     <div class="container">
@@ -21,12 +32,12 @@
 			<div class="row">
 	        	<h2 class="portfolio-title"><input type="text" class="form-control" placeholder="제목을 입력하세요" name="title"></h2>
 	        	<div class="col-lg-8 pb-3">
-	        		<div class="portfolio-details-slider swiper" style="background-color: #ffffff21; text-align: center;">
+	        		<div class="portfolio-details-slider swiper contents" style="text-align: center; ">
 						
-						<div style="height: 400px; line-height: 400px;" id="previewImage">
+						<div style="height: 400px; line-height: 400px; border-radius: 15px;" id="previewImage" class="contents mb-5">
 							<p id="p">사진을 넣어주세요.</p>
 						</div>
-						<div style="height: 200px; line-height: 200px;" id="images">
+						<div style="height: 200px; line-height: 200px; border-radius: 15px;" id="images" class="contents my-3">
 							
 						</div>
 						
@@ -38,7 +49,7 @@
 	            	</div>
 	          	</div>
 	
-	          	<div class="col-lg-4 portfolio-info ">
+	          	<div class="col-lg-4 custom-form " style="margin-bottom: 15px;">
 	            	<div class="content">
 						<div class="custom-select form-group mt-3 mt-md-0">
 					 		<select id="category" name="category">
