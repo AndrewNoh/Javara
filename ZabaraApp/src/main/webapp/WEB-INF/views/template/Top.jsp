@@ -101,7 +101,6 @@
 .navbar a[id=top_banner]:before {
 	background-color: rgb(255 255 255/ 0%);
 }
-
 </style>
 <body>
 
@@ -151,7 +150,7 @@
 					<div class="srch_bar" style="text-align: center;">
 						<div class="stylish-input-group">
 							<input type="text" placeholder="검색어를 입력해주세요" name="title"
-								 class="search-bar"> <span class="input-group-addon">
+								class="search-bar"> <span class="input-group-addon">
 								<button type="submit" style="vertical-align: -0.3em;">
 									<i class="bi bi-search" aria-hidden="true"
 										style="font-size: 20px; color: #ffc107;"></i>
@@ -191,7 +190,6 @@
 								<option value="반려동물용품">반려동물용품</option>
 							</select>
 						</div>
-
 						<div class="search row" id="imgsrchDiv" style="float: right;">
 							<div class="srch_bar" style="text-align: center;">
 								<div class="stylish-input-group">
@@ -199,15 +197,16 @@
 										class="search-bar"> <span class="input-group-addon">
 										<button id="modal-open" data-toggle="modal"
 											data-target="#myModal" type="button"
-											style="margin-left:-30px;vertical-align: -0.3em;">
+											style="margin-left: -30px; vertical-align: -0.3em;">
 											<i class="bi bi-images" aria-hidden="false"
-												style="font-size: 20px; color: #ffc107;"></i>
+												style="font-size: 20px; color: cornflowerblue;"></i>
 										</button>
-										<button type="submit" style="margin-left:5px;vertical-align: -0.3em;">
+										<button type="submit"
+											style="margin-left: 5px; vertical-align: -0.3em;">
 											<i id="bi-search" class="bi bi-search" aria-hidden="false"
 												style="font-size: 20px;"></i>
 										</button>
-										
+
 									</span>
 								</div>
 
@@ -222,34 +221,27 @@
 				<div class="modal-content">
 					<!-- Modal Header -->
 					<div class="modal-header" style="background-color: #efc958;">
-							<h5 style="font-family: "SDSwaggerTTF", sans-serif;"><strong>이미지분석</strong></h5>
-							<i id="modal-close"
-							data-dismiss="modal" class="close bi bi-x" style="font-size: 1.5rem;"></i>
+						<h5 style="margin-top: 15px; font-family:"SDSwaggerTTF", sans-serif;">
+							<strong>이미지분석</strong>
+						</h5>
+						<i id="modal-close" data-dismiss="modal" class="close bi bi-x"
+							style="font-size: 1.5rem; color: black;"></i>
 					</div>
-
-					<!-- Modal body -->
 					<div class="modal-body">
 						<div class="body-content">
-							<!-- 선택한 이미지를 미리보기 위한 추가 -->
-							<img id="preview_image" style="width: 100%; height: 90%;"/>
-
-							<!-- 웹캠으로 캡처한 이미지 표시 영역(영상소스) -->
-							<div id="webcam-container"></div>
-							<!-- 예측결과 표시 영역 -->
+							<img id="preview_image" style="width: 100%; height: 90%;" />
 							<div id="label-container" style="color: black;"></div>
 						</div>
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
+						<i id="fakeTag" class="bi bi-card-image"
+							style="font-size: 2rem; color: cornflowerblue;"></i> <input
+							type="file" class="ImageAnalysis" id="test_image"
+							accept=".png,.jpg,.jpeg" style="display: none;" /> <i
+							style="font-size: 1.5rem; color: black;" class="bi bi-search"
+							onclick="predict()"></i>
 
-					
-							<i id="fakeTag" class="bi bi-card-image"
-								style="font-size: 2rem; color: cornflowerblue;"></i>
-					
-						<input type="file" class="ImageAnalysis" id="test_image"
-							accept=".png,.jpg,.jpeg" style="display: none;" />
-							<i style="font-size: 1.5rem;" class="bi bi-search" onclick="predict()"></i>
-				
 					</div>
 				</div>
 			</div>
@@ -259,7 +251,6 @@
 		<i class="bi bi-list mobile-nav-toggle"></i>
 	</nav>
 	<!-- .navbar -->
-
 	<script>
 		$(function() {
 			Kakao.init('3b4e896dc0a59e1644573c8f5af25f9a');
@@ -351,50 +342,53 @@
 
 		
 		async function predict() {
+			if($('#test_image').val()!=""){
+				var image = document.querySelector("#preview_image");
 
-			var image = document.querySelector("#preview_image");
+				const prediction = await
+				model.predict(image, false);
+				console.log('prediction:', prediction);
 
-			const prediction = await
-			model.predict(image, false);
-			console.log('prediction:', prediction);
+				var resultArray = [];
+				var className = [];
+				for (var i = 0; i < maxPredictions; i++) {
+					console.log("resultArray"
+							+ prediction[i].probability.toFixed(2) * 100);
+					resultArray.push(prediction[i].probability.toFixed(2) * 100);
+				}
 
-			var resultArray = [];
-			var className = [];
-			for (var i = 0; i < maxPredictions; i++) {
-				console.log("resultArray"
-						+ prediction[i].probability.toFixed(2) * 100);
-				resultArray.push(prediction[i].probability.toFixed(2) * 100);
-			}
+				for (var i = 0; i < maxPredictions; i++) {
+					var classPrediction = prediction[i].className + ": "
+							+ prediction[i].probability.toFixed(2) * 100+"%";
+					className.push(classPrediction);
+				}
 
-			for (var i = 0; i < maxPredictions; i++) {
-				var classPrediction = prediction[i].className + ": "
-						+ prediction[i].probability.toFixed(2) * 100;
-				className.push(classPrediction);
-			}
-
-			for (var i = 0; i < resultArray.length - 1; i++) {
-				for (var k = i + 1; k < resultArray.length; k++) {
-					if (resultArray[i] < resultArray[k]) {
-						console.log(resultArray[i])
-						var temp = resultArray[i];
-						resultArray[i] = resultArray[k];
-						resultArray[k] = temp;
-						var tempname = className[i];
-						className[i] = className[k];
-						className[k] = tempname;
+				for (var i = 0; i < resultArray.length - 1; i++) {
+					for (var k = i + 1; k < resultArray.length; k++) {
+						if (resultArray[i] < resultArray[k]) {
+							console.log(resultArray[i])
+							var temp = resultArray[i];
+							resultArray[i] = resultArray[k];
+							resultArray[k] = temp;
+							var tempname = className[i];
+							className[i] = className[k];
+							className[k] = tempname;
+						}
 					}
 				}
-			}
-			for (var k = 0; k < 3; k++) {
-				labelContainer.childNodes[k].innerHTML = "";
+				for (var k = 0; k < 3; k++) {
+					labelContainer.childNodes[k].innerHTML = "";
+				}
+
+				for (var k = 0; k < 3; k++) {
+					if (className[k].indexOf(": 0") != -1) {//className[k]!=className[k+1]
+						break;
+					}
+					labelContainer.childNodes[k].innerHTML = className[k];
+				}
 			}
 
-			for (var k = 0; k < 3; k++) {
-				if (className[k].indexOf(": 0") != -1) {//className[k]!=className[k+1]
-					break;
-				}
-				labelContainer.childNodes[k].innerHTML = className[k];
-			}
+			
 		}
 
 		init();
