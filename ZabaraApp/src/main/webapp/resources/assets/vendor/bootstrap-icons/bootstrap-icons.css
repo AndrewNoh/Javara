@@ -578,7 +578,7 @@ url("./fonts/bootstrap-icons.woff?a74547b2f0863226942ff8ded57db345") format("wof
 .bi-envelope-fill::before { content: "\f32c"; }
 .bi-envelope-open-fill::before { content: "\f32d"; }
 .bi-envelope-open::before { content: "\f32e"; }
-.bi-envelope::before { content: "\f32f"; }
+.bi-envelope::before { content: "\f32f"; style:"font-weight:bold";}
 .bi-eraser-fill::before { content: "\f330"; }
 .bi-eraser::before { content: "\f331"; }
 .bi-exclamation-circle-fill::before { content: "\f332"; }
@@ -760,7 +760,7 @@ url("./fonts/bootstrap-icons.woff?a74547b2f0863226942ff8ded57db345") format("wof
 .bi-gear-fill::before { content: "\f3e2"; }
 .bi-gear-wide-connected::before { content: "\f3e3"; }
 .bi-gear-wide::before { content: "\f3e4"; }
-.bi-gear::before { content: "\f3e5"; }
+.bi-gear::before { content: "\f3e5"; margin-top: 10px;}
 .bi-gem::before { content: "\f3e6"; }
 .bi-geo-alt-fill::before { content: "\f3e7"; }
 .bi-geo-alt::before { content: "\f3e8"; }

@@ -81,7 +81,7 @@
 }
 
 .bi::before, [class^="bi-"]::before, [class*=" bi-"]::before{
-color:#ffc107
+
 }
 
 .col-lg-5{
@@ -91,6 +91,7 @@ color:#ffc107
     align-items: center;
     flex-direction: column;
 }
+
 
 </style>
 
@@ -123,30 +124,29 @@ color:#ffc107
             </div>
          </div>
          <div class="col mb-3">
-            <div class="col-lg-8 pt-3 pt-lg-0 content" data-aos="fade-left">
+            <div class="col-lg-12 pt-3 pt-lg-0 content" data-aos="fade-left">
                <div class="row m-2">
                   <div class="col" style="padding: 0%;">
-                     <h3 class="mt-2" style="margin-left: 15px;">
+                     <h3 class="mt-2" style="font-size: 30px;">
                         <strong>${nickname}</strong>
                      </h3>
                   </div>
-                  <div class="col-7 ml-6" style="padding: 0%;">
+                  <div class="col-8" style="padding: 0%;">
                      <a href="<c:url value="/userinfo/editmember.do"/>"
-                        class="setting"> <i class="bi bi-gear" 
-                        style="color: white; font-size: 1.3rem; "></i></a>
+                        class="setting"><i class="bi bi-gear" style="font-size: 1.4rem; magrin-right:40px;"></i></a>
                   </div>
                </div>
             </div>
             <div class="row">
                <div class="col-lg-7">
-                  <p>
-                     <strong style="font-size: 16px; color: #000; margin-right: 7px">이메일</strong> <span>${email}</span>
+                  <p style="font-weight:bold;">
+                     <i class="bi bi-envelope" style="font-size: 16px;  margin-left: 10px;"></i> &nbsp; <span>${email}</span>
                   </p>
                   <p>
-                     <strong style="font-size: 16px; color: #000; margin-right: 7px">연락처</strong> <span>${phonenumber}</span>
+                     <i class="bi bi-telephone" style="font-size: 16px;  margin-left: 10px"></i> &nbsp; <span>${phonenumber}</span>
                   </p>
                   <p>
-                     <strong style="font-size: 16px; color: #000; margin-right: 7px">주소</strong> <span id="myAddress">${address}</span>
+                     <i class="bi bi-house" style="font-size: 16px;  margin-left: 10px"></i> &nbsp; <span id="myAddress">${address}</span>
                   </p>
                </div>
             </div>
@@ -157,7 +157,7 @@ color:#ffc107
                   <div class="col-lg-4 col-md-1">
                      <a class="nav-link" href="<c:url value="/userinfo/selllist.do"/>">
                         <div class="count-box" style="padding: 10px 0;">
-                           <i class="bi bi-emoji-smile"></i> <span
+                           <i class="bi bi-emoji-smile" style="color: #ffedb8;"></i> <span
                               data-purecounter-start="0" data-purecounter-end="${sellCount}"
                               data-purecounter-duration="1" class="purecounter"></span>
                            <p>판매내역</p>
@@ -169,7 +169,7 @@ color:#ffc107
                      <a class="nav-link"
                         href="<c:url value="/userinfo/purchaselist.do"/>">
                         <div class="count-box" style="padding: 10px 0;">
-                           <i class="bi bi-journal-richtext"></i> <span
+                           <i class="bi bi-journal-richtext" style="color: #86bcf6;"></i> <span
                               data-purecounter-start="0" data-purecounter-end="${buyCount}"
                               data-purecounter-duration="1" class="purecounter"></span>
                            <p>구매내역</p>
@@ -180,7 +180,7 @@ color:#ffc107
                   <div class="col-lg-4 col-md-1">
                      <a class="nav-link" href="<c:url value="/userinfo/selllist.do"/>">
                         <div class="count-box" style="padding: 10px 0;">
-                           <i class="bi bi-heart"></i> <span data-purecounter-start="0"
+                           <i class="bi bi-heart" style="color: #ff4141;"></i> <span data-purecounter-start="0"
                               data-purecounter-end="${likeCount}" data-purecounter-duration="1"
                               class="purecounter"></span>
                            <p>관심목록</p>
@@ -246,7 +246,7 @@ color:#ffc107
 
                      <div class="col-lg-4 col-md-4 mt-4 mt-md-1">
                         <div class="icon-box" id="AccountBookToggle">
-                           <i class="ri-database-2-line" style="color: #47aeff;"></i>
+                           <i class="ri-database-2-line" style="color: #de83d3;"></i>
                            <h3>가계부</h3>
                         </div>
                      </div>
