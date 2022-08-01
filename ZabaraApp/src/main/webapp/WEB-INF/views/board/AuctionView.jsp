@@ -439,6 +439,7 @@ border-radius: 15px;
 				        icon : 'success',
 				        title : '낙찰하였습니다.'
 				    });
+					
 				} else {
 					const Toast = Swal.mixin({
 				    	toast : true,
@@ -452,6 +453,7 @@ border-radius: 15px;
 				        icon : 'success',
 				        title : '낙찰을 취소했습니다.'
 				    });
+					
 				}
 			});
 		} else {
