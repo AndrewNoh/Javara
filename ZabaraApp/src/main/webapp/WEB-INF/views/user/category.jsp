@@ -305,7 +305,7 @@ function categoryItemList(){
         data : {nowAddress : nowAddress,category : category,'${_csrf.parameterName}' : '${_csrf.token}'},
         async: false,
         success : function(result) {
-           if(result!=null){              
+           if(result!=""){              
                 for(var i=0; i<result.length;i++){
                    console.log(result[i]);
                    switch(result[i].category){
@@ -387,6 +387,11 @@ function categoryItemList(){
                    panTo(latitude,longitude);
                    
                 }////if
+                else{                   
+                    var noitem="<h4 id='noitemtext' style='text-align:center;'>검색된 아이템이 없습니다.</h4>";
+                    $('#addressitemlist').append(noitem);
+                    $('#addressitemlist').attr('style','overflow-y: scroll;width:350px; height: 990px; margin-top: -110px; ');
+                 }///////////else
         }////success
      });
    
@@ -411,6 +416,7 @@ function closeCategoryList(){
       categoryArray=[];
       categoryInfoArray=[];
       overlayLatLng=[];
+      $('#noitemtext').remove();
       customOverlay.setMap(null);
       categoryDetailInfoArray=[];
    }

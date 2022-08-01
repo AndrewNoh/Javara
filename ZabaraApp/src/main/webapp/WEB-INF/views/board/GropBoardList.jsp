@@ -54,9 +54,6 @@ border-radius: 10px;
 			<c:if test="${!empty imageList[i][0].imageName}" var="haveImage">
 				<img src="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[i][0].imageName}" style="width: 40%; height:40%;" class="img-fluid" alt="">
 			</c:if>
-			<c:if test="${! haveImage}">
-				<img src="${pageContext.request.contextPath}/resources/assets/img/zabara.png" style="width: 40%; height:40%;" class="img-fluid" alt="">
-			</c:if>
 			</div>
 			</div>
 		</c:forEach>
