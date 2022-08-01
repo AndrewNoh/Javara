@@ -133,20 +133,20 @@
                   </div>
                   <div class="col-8" style="padding: 0%;">
                      <a href="<c:url value="/userinfo/editmember.do"/>"
-                        class="setting"><i class="bi bi-gear" style="font-size: 1.4rem; magrin-right:40px;"></i></a>
+                        class="setting"><i class="bi bi-gear" style="font-size: 1.4rem; magrin-right:40px; color: #ffc107;"></i></a>
                   </div>
                </div>
             </div>
             <div class="row">
                <div class="col-lg-7">
                   <p style="font-weight:bold;">
-                     <i class="bi bi-envelope" style="font-size: 16px;  margin-left: 10px;"></i> &nbsp; <span>${email}</span>
+                     <i class="bi bi-envelope" style="font-size: 16px;  margin-left: 10px; color: #ffc107;"></i> &nbsp; <span>${email}</span>
                   </p>
                   <p>
-                     <i class="bi bi-telephone" style="font-size: 16px;  margin-left: 10px"></i> &nbsp; <span>${phonenumber}</span>
+                     <i class="bi bi-telephone" style="font-size: 16px;  margin-left: 10px; color: #ffc107;"></i> &nbsp; <span>${phonenumber}</span>
                   </p>
                   <p>
-                     <i class="bi bi-house" style="font-size: 16px;  margin-left: 10px"></i> &nbsp; <span id="myAddress">${address}</span>
+                     <i class="bi bi-house" style="font-size: 16px;  margin-left: 10px; color: #ffc107;"></i> &nbsp; <span id="myAddress">${address}</span>
                   </p>
                </div>
             </div>
