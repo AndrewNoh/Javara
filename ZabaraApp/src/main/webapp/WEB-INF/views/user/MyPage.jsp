@@ -178,7 +178,7 @@
                   </div>
 
                   <div class="col-lg-4 col-md-1">
-                     <a class="nav-link" href="<c:url value="/userinfo/selllist.do"/>">
+                     <a class="nav-link" href="<c:url value="/userinfo/likelist.do"/>">
                         <div class="count-box" style="padding: 10px 0;">
                            <i class="bi bi-heart" style="color: #ff4141;"></i> <span data-purecounter-start="0"
                               data-purecounter-end="${likeCount}" data-purecounter-duration="1"
