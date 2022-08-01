@@ -21,7 +21,7 @@
 }
 
 .addressItem{
-	cursor: pointer;	
+   cursor: pointer;   
 }
 
 #infobox {
@@ -38,13 +38,13 @@
    margin-top: 10px;
 }
 #addressitemlist{
-	position:absolute;
-	top:250px;left:10px;	
-	border-radius: 5px;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
-	background: #fff;
-	overflow: hidden;
-	z-index: 2;
+   position:absolute;
+   top:250px;left:10px;   
+   border-radius: 5px;
+   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+   background: #fff;
+   overflow: hidden;
+   z-index: 2;
 }
 .map_wrap, .map_wrap * { 
   margin:0; padding:0; font-size:14px;
@@ -60,17 +60,18 @@
 }
 
 
-.map_category li:hover {background: #fff; }
+.map_category li:hover {background: #fff; color: black;border-radius:15px;}
 
 
 .map_category, .map_category * {
    margin: 0;
    padding: 0;
-   color: #000;
+   color: #fff;
 
 }
 
 .map_category {
+   border-radius:15px;
    position: absolute;
    overflow: hidden;
    top: 10px;
@@ -200,46 +201,47 @@ input.form-text {
   background: #29d654;
 }
 
+ 
      
 </style>
 <div class="row" style="margin:30px;">  
-	<div class="col-lg-3" id="searchTab">
-		
-		 	<div id="addressItemListDiv" class="row">
-		 		<ul id="addressitemlist" style="width:350px; height: 990px; margin-top: -110px; ">
-			        <li id="addressItemListTitle" style="text-align:center; margin-top:15px;">
-			        	<h3 style="font-size: 20px; font-weight: bold;">판매 리스트</h3></li>
-					<hr/>
-			    </ul>			   
-			</div>
-		 </div>
-	 <div id="viewMap" style="margin-right: 20px">
-		 <div class="map_category" style="margin-left: 630px; font-family: 'GmarketSansMedium';" id="categorySelector">
-		     <ul>
-		        <li style="color: #fff;">유아동</li>
-		        <li style="color: #fff;">유아도서</li>
-		        <li style="color: #fff;">여성잡화</li>
-		        <li style="color: #fff;">여성의류</li>
-		        <li style="color: #fff;">뷰티/미용</li>
-		        <li style="color: #fff;">도서/티켓/음반</li>
-		        <li style="color: #fff;">중고차</li>
-		        <li style="color: #fff;">디지털기기</li>
-		        <li style="color: #fff;">가구/인테리어</li>
-		     </ul>
-		     <ul>
-		      <li style="color: #fff;">기타중고물품</li>
-		      <li style="color: #fff;">게임/취미</li>
-		      <li style="color: #fff;"> 생활가전</li>
-		      <li style="color: #fff;">생활/가공식품</li>
-		      <li style="color: #fff;">남성패션/잡화</li>
-		      <li style="color: #fff;">반려동물용품</li>
-		      <li style="color: #fff;">식물</li>
-		      <li style="color: #fff;">스포츠/레저</li>
-		      <li style="color: #fff;">인기매물</li>	
-		     </ul>
-	     </div>
-		 <div id="map" style="border-radius: 20px; height: 1000px; margin-left: 325px" value="${address}"></div>
-	 </div>
+   <div class="col-lg-3" id="searchTab">
+      
+          <div id="addressItemListDiv" class="row">
+             <ul id="addressitemlist" style="width:350px; height: 990px; margin-top: -110px; ">
+                 <li id="addressItemListTitle" style="text-align:center; margin-top:15px;">
+                    <h3 style="font-size: 20px; font-weight: bold;">판매 리스트</h3></li>
+               <hr/>
+             </ul>            
+         </div>
+       </div>
+    <div id="viewMap" style="margin-right: 20px">
+       <div class="map_category" style="margin-left: 35%; font-family: 'GmarketSansMedium';" id="categorySelector">
+           <ul>
+              <li >유아동</li>
+              <li >유아도서</li>
+              <li >여성잡화</li>
+              <li >여성의류</li>
+              <li >뷰티/미용</li>
+              <li >도서/티켓/음반</li>
+              <li >중고차</li>
+              <li >디지털기기</li>
+              <li >가구/인테리어</li>
+           </ul>
+           <ul>
+            <li >기타중고물품</li>
+            <li >게임/취미</li>
+            <li > 생활가전</li>
+            <li >생활/가공식품</li>
+            <li >남성패션/잡화</li>
+            <li >반려동물용품</li>
+            <li >식물</li>
+            <li >스포츠/레저</li>
+            <li >인기매물</li>   
+           </ul>
+        </div>
+       <div id="map" style="border-radius: 20px; height: 1000px; margin-left: 325px" value="${address}"></div>
+    </div>
  </div>
 <script>
 var latitude = ${latitude};
@@ -254,8 +256,8 @@ var overlayLatLng=[];
 
 var imageSize = new kakao.maps.Size(60, 65);
 var addressContent= '<div id="addressbox">'+
-					'<div class="bAddr">'+ nowAddress + '</div>' +
-					'</div>';
+               '<div class="bAddr">'+ nowAddress + '</div>' +
+               '</div>';
 var options = { 
       center : new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
       level : 3       
@@ -277,184 +279,184 @@ addressinfowindow.open(map,addressMarker);
 
 
 $(function(){
-	$( "#slider-range" ).slider({
-	  range: true,
-	  min: 0,
-	  max: 500,
-	  values: [ 75, 300 ],
-	  slide: function( event, ui ) {
-	    $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-	  }
-	});
-	$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-	  " - $" + $( "#slider-range" ).slider( "values", 1 ) );
-	infoboxcss('#addressbox');
+   $( "#slider-range" ).slider({
+     range: true,
+     min: 0,
+     max: 500,
+     values: [ 75, 300 ],
+     slide: function( event, ui ) {
+       $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+     }
+   });
+   $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+     " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+   infoboxcss('#addressbox');
 });
 
 
 function categoryItemList(){
-	var categoryimage;
-	$.ajax({
+   var categoryimage;
+   $.ajax({
         type : 'POST',
         url : '<c:url value="/board/myAddressItemList.do"/>',
         data : {nowAddress : nowAddress,category : category,'${_csrf.parameterName}' : '${_csrf.token}'},
         async: false,
         success : function(result) {
-        	if(result!=null){        		
+           if(result!=null){              
                 for(var i=0; i<result.length;i++){
-                	console.log(result[i]);
-                	switch(result[i].category){
-	                    	case "디지털기기": categoryimage="category_digital.png";
-	                    		break;
-	                    	case "중고차": categoryimage="category_car.png";
-	                    		break;
-	                    	case "생활가전": categoryimage="category_life.png";
-	                    		break;
-	                    	case "가구/인테리어": categoryimage="category_furniture.png";
-	                    		break;
-	                    	case "유아동": categoryimage="category_baby.png";
-	                    		break;
-	                    	case "유아도서": categoryimage="category_baby_book.png";
-	                    		break;
-	                    	case "생활/가공식품": categoryimage="category_life_style.png";
-	                    		break;
-	                    	case "스포츠/레저": categoryimage="category_sports.png";
-	                    		break;
-	                    	case "여성잡화": categoryimage="category_bag.png";
-	                    		break;
-	                    	case "여성의류": categoryimage="category_women.png";
-	                    		break;
-	                    	case "남성패션/잡화": categoryimage="category_man.png";
-	                    		break;
-	                    	case "게임/취미": categoryimage="category_hobby.png";
-	                    		break;
-	                    	case "뷰티/미용": categoryimage="category_beatuty.png";
-	                    		break;
-	                    	case "반려동물용품": categoryimage="category_pet.png";
-	                    		break;
-	                    	case "도서/티켓/음반": categoryimage="category_book.png";
-	                    		break;
-	                    	case "식물": categoryimage="category_plant.png";
-	                    		break;
-	                    	case "기타중고물품": categoryimage="category_etc.png";
-	                    		break;                		
-                	}////switch                	
-                	var categorymarker = new kakao.maps.Marker({		                            
-                        position: new kakao.maps.LatLng(result[i].latitude, result[i].longitude), // 마커를 표시할 위치	                            
+                   console.log(result[i]);
+                   switch(result[i].category){
+                          case "디지털기기": categoryimage="category_digital.png";
+                             break;
+                          case "중고차": categoryimage="category_car.png";
+                             break;
+                          case "생활가전": categoryimage="category_life.png";
+                             break;
+                          case "가구/인테리어": categoryimage="category_furniture.png";
+                             break;
+                          case "유아동": categoryimage="category_baby.png";
+                             break;
+                          case "유아도서": categoryimage="category_baby_book.png";
+                             break;
+                          case "생활/가공식품": categoryimage="category_life_style.png";
+                             break;
+                          case "스포츠/레저": categoryimage="category_sports.png";
+                             break;
+                          case "여성잡화": categoryimage="category_bag.png";
+                             break;
+                          case "여성의류": categoryimage="category_women.png";
+                             break;
+                          case "남성패션/잡화": categoryimage="category_man.png";
+                             break;
+                          case "게임/취미": categoryimage="category_hobby.png";
+                             break;
+                          case "뷰티/미용": categoryimage="category_beatuty.png";
+                             break;
+                          case "반려동물용품": categoryimage="category_pet.png";
+                             break;
+                          case "도서/티켓/음반": categoryimage="category_book.png";
+                             break;
+                          case "식물": categoryimage="category_plant.png";
+                             break;
+                          case "기타중고물품": categoryimage="category_etc.png";
+                             break;                      
+                   }////switch                   
+                   var categorymarker = new kakao.maps.Marker({                                  
+                        position: new kakao.maps.LatLng(result[i].latitude, result[i].longitude), // 마커를 표시할 위치                               
                         image : new kakao.maps.MarkerImage('/marketapp/resources/assets/img/categorymarker/'+categoryimage, imageSize) // 마커 이미지 
                     });
-                	var categoryInfo = new daum.maps.InfoWindow({
-                		zindex : 1,
-                		position : new kakao.maps.LatLng(result[i].latitude, result[i].longitude)
-                		});
-                	content = '<div id="infobox">' +
-                			  '<div class="bAddr">' + result[i].title + '</div>' +		                    			  		                    			  
-                			  '</div>';
+                   var categoryInfo = new daum.maps.InfoWindow({
+                      zindex : 1,
+                      position : new kakao.maps.LatLng(result[i].latitude, result[i].longitude)
+                      });
+                   content = '<div id="infobox">' +
+                           '<div class="bAddr">' + result[i].title + '</div>' +                                                                          
+                           '</div>';
 
-            	    var detailcontent = '<div id="app" class="overlayContainer">'+
-	  		  		  '<div class="card">'+
-	  		          '<div class="card-img">'+
-	  		          '<img src="${pageContext.request.contextPath}/resources/assets/img/product_img/'+result[i].imagename+'">'+
-	  		          '<div class="circle"><img src="https://s.svgbox.net/files.svg?ic=sketch&fill=000" width="25" height="25"></div>'+
-	  		       '</div>'+
-		  		    '<div class="card-action">'+
-		  		      '<div>'+
-			  		        '<div class="title">'+result[i].title+'</div>'+
-			  		      	'<span>현재 입찰가: ₩'+result[i].upper_Price+'</span>'+			  		        
-		  		      '</div>'+
-		  		      '<div class="btn-download">'+		  		        
-		  		      '<a href="/marketapp/board/auctionview.do?no='+result[i].auction_no+'" rel="lyteframe" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><span style="font-size: 18px; display: block;"><button class="btn">입찰하러가기</button></span></a>'+
-		  		      '</div>'      
-		  		    '</div>'+
-		  		  '</div>'+
-		  		'</div>';
-			        categoryDetailInfoArray.push(detailcontent);			        
-			        overlayLatLng.push(new kakao.maps.LatLng(result[i].latitude, result[i].longitude));
-			        
-			        
+                   var detailcontent = '<div id="app" class="overlayContainer">'+
+                     '<div class="card">'+
+                     '<div class="card-img">'+
+                     '<img src="${pageContext.request.contextPath}/resources/assets/img/product_img/'+result[i].imagename+'">'+
+                     '<div class="circle"><img src="https://s.svgbox.net/files.svg?ic=sketch&fill=000" width="25" height="25"></div>'+
+                  '</div>'+
+                  '<div class="card-action">'+
+                    '<div>'+
+                         '<div class="title">'+result[i].title+'</div>'+
+                          '<span>현재 입찰가: ₩'+result[i].upper_Price+'</span>'+                         
+                    '</div>'+
+                    '<div class="btn-download">'+                      
+                    '<a href="/marketapp/board/auctionview.do?no='+result[i].auction_no+'" rel="lyteframe" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><span style="font-size: 18px; display: block;"><button class="btn">입찰하러가기</button></span></a>'+
+                    '</div>'      
+                  '</div>'+
+                '</div>'+
+              '</div>';
+                 categoryDetailInfoArray.push(detailcontent);                 
+                 overlayLatLng.push(new kakao.maps.LatLng(result[i].latitude, result[i].longitude));
+                 
+                 
                     categoryInfo.setContent(content);
                     categoryInfoArray.push(categoryInfo);
                     categoryArray.push(categorymarker);
                     
                     createListTag(result[i]);
-                	}///for                	
-                	openCategoryList();
-                	panTo(latitude,longitude);
-                	
-            	 }////if
+                   }///for                   
+                   openCategoryList();
+                   panTo(latitude,longitude);
+                   
+                }////if
         }////success
      });
-	
+   
 }
 
 //카테고리마커 및 인포윈도우 켜기
-function openCategoryList(){		
-	for(var i=0;i<categoryArray.length;i++){
-		categoryArray[i].setMap(map);
-		categoryInfoArray[i].open(map,categoryArray[i]);
-	}
-	infoboxcss('#infobox');
+function openCategoryList(){      
+   for(var i=0;i<categoryArray.length;i++){
+      categoryArray[i].setMap(map);
+      categoryInfoArray[i].open(map,categoryArray[i]);
+   }
+   infoboxcss('#infobox');
 }
 
 //카테고리마커 및 인포윈도우 끄기
 function closeCategoryList(){
-	if(categoryArray!=null){
-		for(var i=0;i<categoryArray.length;i++){			
-			categoryInfoArray[i].close(map,categoryArray[i]);
-			categoryArray[i].setMap(null);
-		}
-		categoryArray=[];
-		categoryInfoArray=[];
-		overlayLatLng=[];
-		customOverlay.setMap(null);
-		categoryDetailInfoArray=[];
-	}
+   if(categoryArray!=null){
+      for(var i=0;i<categoryArray.length;i++){         
+         categoryInfoArray[i].close(map,categoryArray[i]);
+         categoryArray[i].setMap(null);
+      }
+      categoryArray=[];
+      categoryInfoArray=[];
+      overlayLatLng=[];
+      customOverlay.setMap(null);
+      categoryDetailInfoArray=[];
+   }
 }
 
 //카테고리 선택시 마커표시 및 인포윈도우 아이템리스트 뿌려주기
-$('#categorySelector').click(function(e){		
-	panTo(latitude,longitude);
-	if(e.target.nodeName=='LI'){
-		closeCategoryList();
-		$('.addressItem').remove();
-		category=e.target.textContent.trim();
-		categoryItemList();
-		
-		for(let i=0;i<categoryDetailInfoArray.length;i++){		
-			kakao.maps.event.addListener(categoryArray[i], 'click', function() {				
-				customOverlay.setContent(categoryDetailInfoArray[i]);
-				customOverlay.setPosition(overlayLatLng[i]);
-				customOverlay.setMap(map);
-				panTo(overlayLatLng[i].getLat(),overlayLatLng[i].getLng());
-	    	});
-		}
-	}	
-	
+$('#categorySelector').click(function(e){      
+   panTo(latitude,longitude);
+   if(e.target.nodeName=='LI'){
+      closeCategoryList();
+      $('.addressItem').remove();
+      category=e.target.textContent.trim();
+      categoryItemList();
+      
+      for(let i=0;i<categoryDetailInfoArray.length;i++){      
+         kakao.maps.event.addListener(categoryArray[i], 'click', function() {            
+            customOverlay.setContent(categoryDetailInfoArray[i]);
+            customOverlay.setPosition(overlayLatLng[i]);
+            customOverlay.setMap(map);
+            panTo(overlayLatLng[i].getLat(),overlayLatLng[i].getLng());
+          });
+      }
+   }   
+   
 });
 
 
-$(document).on("click",'.addressItem',function(e){	
-	 var callLatitude =$(this).find('input:eq(0)').val();
-	 var callLongitude=$(this).find('input:eq(1)').val();	 
-	 panTo(callLatitude,callLongitude);
+$(document).on("click",'.addressItem',function(e){   
+    var callLatitude =$(this).find('input:eq(0)').val();
+    var callLongitude=$(this).find('input:eq(1)').val();    
+    panTo(callLatitude,callLongitude);
 });
 
 
 
 //infobox 디자인 변경
 function infoboxcss(selector){
-	var infoboxselector= document.querySelectorAll(selector);
-	infoboxselector.forEach(function(e) {
-	    var w = e.offsetWidth + 10;
-	    var ml = w/2;
-	    e.parentElement.style.top = "15px";
-	    e.parentElement.style.left = "50%";
-	    e.parentElement.style.marginLeft = -ml+"px";
-	    e.parentElement.style.width = w+"px";
-	    e.parentElement.previousSibling.style.display = "none";
-	    e.parentElement.parentElement.style.border = "0px";
-	    e.parentElement.parentElement.style.background = "unset";
-	});
+   var infoboxselector= document.querySelectorAll(selector);
+   infoboxselector.forEach(function(e) {
+       var w = e.offsetWidth + 10;
+       var ml = w/2;
+       e.parentElement.style.top = "15px";
+       e.parentElement.style.left = "50%";
+       e.parentElement.style.marginLeft = -ml+"px";
+       e.parentElement.style.width = w+"px";
+       e.parentElement.previousSibling.style.display = "none";
+       e.parentElement.parentElement.style.border = "0px";
+       e.parentElement.parentElement.style.background = "unset";
+   });
 }
 
 
@@ -462,28 +464,28 @@ function infoboxcss(selector){
 
 
 function createListTag(object){
-		
-	var ul = $('#addressitemlist');
-	var li = '<li style="border:2px solid;border-radius: 10px;  margin:2px;" class="addressItem">'+
-					'<div class="row">'+
-						'<div class="col-5">'+
-							'<img style="width:100%;height:100%; border-radius: 7px;" src="${pageContext.request.contextPath}/resources/assets/img/product_img/'+object["imagename"]+'">'+
-						'</div>'+
-						'<div class="col">'+
-							'<div class="title" style="text-align:center; margin-top:15px;"><h5 style="font-family: "GmarketSansMedium"">'+object["title"]+'</h5></div>'+
-							'<hr/>'+
-							'<div><h6>시작가: ₩'+object["base_Price"]+'</h6></div>'+
-							'<div><h6>최고가: ₩'+object["upper_Price"]+'</h6></div>'+
-							'<div><h6>조회수: '+object["viewCount"]+'</h6></div>'+
-							'<div><h6>마감일: '+object["endDate"].split(" ")[0]+'</h6></div>'+
-							'<input type="hidden" name="latitude" value="'+object["latitude"]+'"/>'+
-							'<input type="hidden" name="longitude" value="'+object["longitude"]+'"/>'+
-						'</div>'+
-					'</div>'+
-			'</li>';
-	ul.append(li);	
-	ul.attr('style','overflow-y: scroll;width:350px; height: 990px; margin-top: -110px; ');
-	}
+      
+   var ul = $('#addressitemlist');
+   var li = '<li style="border:2px solid;border-radius: 10px;  margin:2px;" class="addressItem">'+
+               '<div class="row">'+
+                  '<div class="col-5">'+
+                     '<img style="width:100%;height:100%; border-radius: 7px;" src="${pageContext.request.contextPath}/resources/assets/img/product_img/'+object["imagename"]+'">'+
+                  '</div>'+
+                  '<div class="col">'+
+                     '<div class="title" style="text-align:center; margin-top:15px;"><h5 style="font-family: "GmarketSansMedium"">'+object["title"]+'</h5></div>'+
+                     '<hr/>'+
+                     '<div><h6>시작가: ₩'+object["base_Price"]+'</h6></div>'+
+                     '<div><h6>최고가: ₩'+object["upper_Price"]+'</h6></div>'+
+                     '<div><h6>조회수: '+object["viewCount"]+'</h6></div>'+
+                     '<div><h6>마감일: '+object["endDate"].split(" ")[0]+'</h6></div>'+
+                     '<input type="hidden" name="latitude" value="'+object["latitude"]+'"/>'+
+                     '<input type="hidden" name="longitude" value="'+object["longitude"]+'"/>'+
+                  '</div>'+
+               '</div>'+
+         '</li>';
+   ul.append(li);   
+   ul.attr('style','overflow-y: scroll;width:350px; height: 990px; margin-top: -110px; ');
+   }
 
 
 
@@ -520,15 +522,15 @@ function search_map() {
 
 
 //지도 이동
-function setCenter(latitude,longitude) {                    	     
-	    var moveLatLon = new kakao.maps.LatLng(latitude, longitude);        	            	    
-	    map.setCenter(moveLatLon);
-	}
+function setCenter(latitude,longitude) {                            
+       var moveLatLon = new kakao.maps.LatLng(latitude, longitude);                              
+       map.setCenter(moveLatLon);
+   }
 
 //지도 이동 가까운거리 애니메이션 효과
-function panTo(latitude,longitude) {        	    
-	     var moveLatLon = new kakao.maps.LatLng(latitude, longitude);        	            	    
-	     map.panTo(moveLatLon);            
+function panTo(latitude,longitude) {               
+        var moveLatLon = new kakao.maps.LatLng(latitude, longitude);                              
+        map.panTo(moveLatLon);            
    }
 
 

@@ -229,52 +229,33 @@ color:#ffc107
                <div class="section-title">
                   <h2 style="margin-bottom: 30px;">나의 활동</h2>
                </div>
-               <div class="row">
+            <div class="row">
                   <div class="row">
-                     <div class="col-lg-4 col-md-4 ">
+                     <div class="col-lg-4 col-md-4 mt-4 mt-md-1">
                         <div class="icon-box" id="MapToggle">
                            <i class="ri-store-line" style="color: #ffbb2c;"></i>
                            <h3>동네 설정</h3>
                         </div>
                      </div>
-                     <div class="col-lg-4 col-md-4 mt-4 mt-md-0">
+                     <div class="col-lg-4 col-md-4 mt-4 mt-md-1">
                         <div class="icon-box" id="ChatToggle" >
                            <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
-                           <h3>채팅</h3>
+                           <h3>알림</h3>
                         </div>
                      </div>
-                     <div class="col-lg-4 col-md-4 mt-4 mt-md-0">
-                        <div class="icon-box" id="KeyToggle">
-                           <i class="ri-calendar-todo-line" style="color: #e80368;"></i>
-                           <h3>키워드 알림</h3>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-4 col-md-4 mt-4 ">
-                        <div class="icon-box" id="LikeToggle">
-                           <i class="ri-paint-brush-line" style="color: #e361ff;"></i>
-                           <h3>모아보기</h3>
-                        </div>
-                     </div>
-                     <div class="col-lg-4 col-md-4 mt-4">
+
+                     <div class="col-lg-4 col-md-4 mt-4 mt-md-1">
                         <div class="icon-box" id="AccountBookToggle">
                            <i class="ri-database-2-line" style="color: #47aeff;"></i>
                            <h3>가계부</h3>
                         </div>
                      </div>
-                     <div class="col-lg-4 col-md-4 mt-4">
-                        <div class="icon-box" id="CategoryToggle">
-                           <i class="ri-gradienter-line" style="color: #ffa76e;"></i>
-                           <h3>관심 카테고리</h3>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+                     <span style="margin-bottom: 32px;"></span>
+                  </div> 
+            </div>
             </div>
          </div>
          <!-- 나의 활동 -->
-      </div><!-- row -->
          
          <div class="col mt-3" id="KeyToggleDiv" style="display: none">
             <div class="interests container">
