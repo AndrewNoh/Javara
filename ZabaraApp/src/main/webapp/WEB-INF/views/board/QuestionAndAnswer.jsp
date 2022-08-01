@@ -4,7 +4,7 @@
 
 <style>
 .card-header {  
-  background-color: rgb(72, 75, 75);  
+  background-color: #212529;  
 }
 
 .card {
@@ -28,13 +28,11 @@
         <p >🙋🏻‍♀️ 사람들이 자주 묻는 질문을 확인해보세요 </p>
               
       </div>
-      <div class="row mt-2">
-        <div class="row mb-4 align-items-center">
+
           <div class="col-md-6 mb-5" data-aos="fade-up">
             <h5>사용자들이 자주 묻는 질문을 확인해보세요.</h5>      
           </div>
-        </div>
-      </div>
+
       
       <!-- q&a board -->
       <div id="accordion">

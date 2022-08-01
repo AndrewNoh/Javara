@@ -61,14 +61,12 @@ border-radius: 15px;
 							</select>
 						</div>
 						<div class="mt-3 mb-5">
-							<p>내용</p>
-							<textarea class="form-control" rows="5" name="content" placeholder="내용을 입력하세요"></textarea>
+							<p style="font-weight: bold; color:#000; margin-bottom: 7px;">내용</p>
+							<textarea class="form-control" rows="10" name="content" placeholder="내용을 입력하세요"></textarea>
 						</div>
 						<div class="text-center col">
 							<button class="col-4 m-2 btn btn-light" type="submit">글쓰기</button>
-							<a class="nav-link neonText" href="<c:url value="/board/gropboard.do"/>">
-								<button class="col-4 m-2 btn btn-dark" type="button">목록</button>
-							</a>
+							<button class="col-4 m-2 btn btn-dark" style="border: 0; padding: 10px 30px;" type="button" onclick="moveToBoardList()">목록</button>
 						</div>
 	          		</div>
 	        	</div>
@@ -78,8 +76,12 @@ border-radius: 15px;
 </div>
 <!-- End #main -->
  <script type="text/javascript">
-	
-	
+	// 목록 이동
+	function moveToBoardList(){
+		location.href = "http://localhost:8080/marketapp/board/gropboard.do";
+	}
+ 
+				
 	function readMultipleImage(input) {	
 		const previewImage = $('#previewImage');
 		const images = document.getElementById('images');

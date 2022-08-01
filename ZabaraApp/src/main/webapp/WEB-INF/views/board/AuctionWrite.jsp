@@ -43,7 +43,7 @@ border-radius: 15px;
 	
 	          	<div class="col-lg-4 custom-form " style="margin-bottom: 15px;">
 	            	<div class="content">
-	            		<h6>제품 카테고리</h6>
+	            		<h6 style="font-weight: bold; color:#000">카테고리</h6>
 						<div class="custom-select form-group mt-0 mt-md-0 mb-3">
 					 		<select name="category">
 					    		<option selected value="기타">기타</option>
@@ -66,7 +66,7 @@ border-radius: 15px;
 					  		</select>
 						</div>
 						
-						<h6>경매 종료일</h6>
+						<h6 style="font-weight: bold; color:#000">경매 종료일</h6>
 						<div class="custom-select form-group mt-0 mt-md-0 mb-3">							
 					 		<select name="enddate">					 			
 					    		<option selected value="1">1일(24시간)</option>
@@ -77,22 +77,23 @@ border-radius: 15px;
 					  		</select>
 						</div>
 						
-						<h6>판매주소 선택(선택사항)</h6>
+						<h6 style="font-weight: bold; color:#000">판매주소 선택(선택사항)</h6>
 						<div class="form-group">
-							<input type="text" name="address" class="form-style" onmousedown="daumAddress()" placeholder="내 동네 이름(동,읍,면으로 검색)" id="address" autocomplete="off" readonly>
+							<input type="text" name="address" class="form-style" style="border:none; solid: 1px gray; padding: 10px; width: 360px"
+									onmousedown="daumAddress()" placeholder="내 동네 이름(동,읍,면으로 검색)" id="address" autocomplete="off" readonly>
 							<input type="hidden" name="latitude" id="latitude" value="not">
 							<input type="hidden" name="longitude" id="longitude" value="not">											
-							<i class="input-icon uil uil-search"></i>
-							<div>&nbsp</div>
 						</div>
 						
 						<div class="my-3">
-							<p>가격</p>
-							<input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11" class="form-control" placeholder="가격을 입력하세요" name="price" pattern="[1-9][0-9]{0,}0" title="금액은 0으로 시작할 수 없습니다.\n금액은 최소 10원단위 입니다." required="required">
+							<p style="font-weight: bold; margin-bottom: 7px; color:#000">가격</p>
+							<input type="text" style="margin-bottom: 10px"
+								oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
+								maxlength="11" class="form-control" placeholder="가격을 입력하세요" name="price" pattern="[1-9][0-9]{0,}0" title="금액은 0으로 시작할 수 없습니다.\n금액은 최소 10원단위 입니다." required="required">
 						</div>
 						<div class="mt-3 mb-5">
-							<p>내용</p>
-							<textarea class="form-control" rows="5" name="content" required="required"></textarea>
+							<p style="font-weight: bold; margin-bottom: 7px; color:#000">내용</p>
+							<textarea class="form-control" rows="10" name="content" required="required" placeholder="내용을 입력하세요"></textarea>
 						</div>
 						<div class="text-center col ">
 							<button class="col-4 m-2 btn btn-outline" type="submit">글쓰기</button>

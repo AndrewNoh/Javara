@@ -69,7 +69,7 @@
       <div class=" m-5"> 
       <div class="container">
      <div class="section-title">
-        <h2>자바라 채팅</h2>
+        <h2>채팅</h2>
       </div>
    <div class="messaging ">
       <div class="inbox_msg">
@@ -254,19 +254,19 @@
                      </div>                    
                      <div class="modal-body">
                         <form class="form-horizontal" role="form" method="POST" action="#" style="text-align: center;">
-                         <span>연락처 공유를 요청하시겠습니까?</span>
-                   
+                         <span style="margin-top: 20px;">연락처 공유를 요청하시겠습니까?</span>
                        </form>
                      </div>
                      <div class="modal-footer">
-                     <button type="button" class="btn btn-dark my-3" data-dismiss="modal" id="phon" style="margin: auto; display: block; float:right">요청 보내기</button>
+                     <button type="button" class="btn btn-dark my-3" data-dismiss="modal" id="phon" style="display: block;">요청 보내기</button>
                      </div>
                  </div><!-- /.modal-content -->
              </div><!-- /.modal-dialog -->
          </div><!-- /.modal -->
+        
          
          
-           <!-- 
+        <!-- 
          <div id="modalJpay" class="modal fade">
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
@@ -284,25 +284,27 @@
          </div>
          -->
          
-         <!-- 낙찰 전 -->
+        <!-- 낙찰 전 -->
          <div id="modalsale" class="modal fade">
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
                      <div class="modal-header" style="justify-content: center;">  
-                         <h1 class="modal-title" style="color: black;"> 주의</h1>
+                         <h1 class="modal-title" style="color: black; font-size: 20px; font-weight: bold;"> 주의</h1>
                      </div>
                      <div class="modal-body">
-                        <form class="form-horizontal" role="form" method="POST" action="#" style="text-align: center;">
-                         <div>낙찰이 결정되지 않았습니다. 송금을 하시겠습니까?</br>
-                         송금을 진행하시려면 '계속' 종료하시려면 '종료' 버튼을 눌러주세요</div>
+                       <form class="form-horizontal" role="form" method="POST" action="#" style="text-align: center;"> 
+                          <h1 style="font-size: 16px; font-weight: bold; ">낙찰이 결정되지 않았습니다.<br/>
+                          송금을 계속 진행하시겠습니까?</h1>
+                       </div>
+                       <div class="modal-footer">
                        <a type="button" data-toggle="modal" data-target="#modalpayment" class="title m-b-md btn btn-dark"  data-dismiss="modal">계속</a>
                        <button type="button" class="btn btn-dark" style="color:#fff" data-dismiss="modal"  style="margin: auto; display: block;">종료</button>
                        </form>
-                     </div>
+                     </div>   
                  </div><!-- /.modal-content -->
              </div><!-- /.modal-dialog -->
          </div><!-- /.modal -->
-         
+
            <!-- 송금하기모달 -->      
            <div id="modalpayment" class="modal fade">
              <div class="modal-dialog" role="document">
@@ -330,28 +332,31 @@
              </div><!-- /.modal-dialog -->
          </div><!-- /.modal -->
          
-         <!-- 사진모달 -->
+        <!-- 사진모달 -->
          <div id="modalImg" class="modal fade">
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
                      <div class="modal-header" style="justify-content: center;">  
-                         <h1 class="modal-title" style="color: black;"> 사진 전송</h1>
+                         <h1 class="modal-title" style="font-size: 20px; font-weight: bold;"> 사진 전송</h1>
                      </div>
                      <div class="modal-body">
-                        <form class="form-horizontal" role="form" method="POST" action="#" style="text-align: center;">
+                        <form class="form-horizontal" role="form" method="POST" action="#" style="text-align: center;" />
                          <div id="imgtoggleDiv" style=" display: flex; justify-content: center; align-items: center;">
-				             <img id="imge" src="#" style="width: 180px; display: none;"/>
-				         </div>
-				         <div>
-				         <a type="button" id="imgtoggle" ><i class="bi bi bi-card-image m-1" style="font-size: 180px;"></i></a> 
-				         </div>
-                         <span>사진을 전송하시겠습니까?</span>
-                       <button type="button" class="btn btn-dark" style="color:#fff" data-dismiss="modal" onclick="sendFile()" style="margin: auto; display: block;">보내기</button>
-                       </form>
+                         <img id="imge" src="#" style="width: 180px; display: none;"/>
                      </div>
+                     <div>
+                     	<a type="button" id="imgtoggle" ><i class="bi bi bi-card-image m-1" style="font-size: 180px;"></i></a> 
+                     </div>
+                     </div>
+                     <div class="modal-footer">
+                         <!-- <span style="font-size: 12px; margin-top: 30px; margin-left: 230px;">사진을 전송하시겠습니까?</span> -->
+                       <button type="button" class="btn btn-dark" data-dismiss="modal" onclick="sendFile()" style="display: block; color: #fff; ">보내기</button>
+                       
+					</div>
                  </div><!-- /.modal-content -->
              </div><!-- /.modal-dialog -->
          </div><!-- /.modal -->
+
          
          
          <!-- 이모티콘 -->

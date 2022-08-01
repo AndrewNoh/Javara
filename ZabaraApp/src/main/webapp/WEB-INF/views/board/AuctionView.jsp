@@ -55,7 +55,7 @@ border-radius: 15px;
 					</div>
 				</c:if>
 				<c:if test="${isWriter}">
-					<button id="statusChange" style="float: right; font-size: 16px; color: #fff" class="btn btn-outline-danger" title="${list.status == 'END' ? 'SALE' : 'END'}">${list.status == 'END' ? '낙찰취소' : '낙찰하기'}</button>
+					<button id="statusChange" style="float: right; font-size: 16px; color: #000" class="btn btn-warning" title="${list.status == 'END' ? 'SALE' : 'END'}">${list.status == 'END' ? '낙찰취소' : '낙찰하기'}</button>
 					<br>
 					<br>
 				</c:if>

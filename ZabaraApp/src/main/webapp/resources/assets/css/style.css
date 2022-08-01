@@ -724,13 +724,16 @@ section.section-show {
   line-height: 1;
   text-transform: uppercase;
   color: #fff;
-  background: rgba(255, 255, 255, 0.1);
+  background: #212529;
   margin: 0 3px 10px 3px;
   transition: all 0.3s ease-in-out;
   border-radius: 4px;
+  
+  
 }
 .portfolio #portfolio-flters li:hover, .portfolio #portfolio-flters li.filter-active {
-  background: #ffc107;
+  background: #fff; 
+  color: black;
 }
 .portfolio #portfolio-flters li:last-child {
   margin-right: 0;
