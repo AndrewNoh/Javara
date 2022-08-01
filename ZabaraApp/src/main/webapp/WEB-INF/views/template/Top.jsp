@@ -173,7 +173,8 @@
 						<div class="custom-select col mb-2" style="width: 100px;">
 							<select id="searchCategorySelect" name="category">
 								<option value=""></option>
-								<option selected value="기타">기타</option>
+								<option selected value="all">전체</option>
+								<option value="기타">기타</option>
 								<option value="중고차">중고차</option>
 								<option value="디지털기기">디지털기기</option>
 								<option value="생활가전">생활가전</option>

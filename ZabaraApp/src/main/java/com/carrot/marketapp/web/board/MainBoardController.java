@@ -161,6 +161,8 @@ public class MainBoardController {
 
 		String board = (String) map.get("board");
 
+		System.out.println(map.get("content"));
+		
 		map = getUserInfo(map, model, principal);
 
 		int a = 0;
@@ -476,13 +478,13 @@ public class MainBoardController {
 			String imgLink = "";
 
 			for (Element option : blogOption) {
-				System.out.println(option);
 				realURL = option.select("a").attr("href");
 				realTITLE = option.select("a").attr("title");
 
 				al1.add(realURL);
 				al2.add(realTITLE);
 			}
+			
 			int k = 0;
 			for (int i = 0; i < blogOption.size(); i++) {
 				Element thumbnail = imgOption.get(k);
@@ -510,10 +512,6 @@ public class MainBoardController {
 			System.out.println("사이즈2 : " + al2.size());
 			System.out.println("사이즈3 : " + al3.size());
 		}
-
-		System.out.println(al1);
-		System.out.println(al2);
-		System.out.println(al3);
 
 		model.addAttribute("urls", al1);
 		model.addAttribute("titles", al2);
@@ -638,7 +636,6 @@ public class MainBoardController {
 			map.put("email", principal.getName());
 			UserDTO record = userService.selectOne(map);
 			map.put("userno", record.getUserno());
-			System.out.println(map.get("nowAddress"));
 			String[] simpleAddr = map.get("nowAddress").toString().split(" ");
 			map.put("simpleAddress", simpleAddr[1]);
 			map.put("board", "동네아이템가져오기");

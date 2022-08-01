@@ -24,6 +24,9 @@
    cursor: pointer;   
 }
 
+body{
+ font-family: GmarketSansMedium;}
+
 #infobox {
     display: block;
     background: #50627F;

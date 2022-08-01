@@ -388,7 +388,8 @@
 	<!-- AUCTION -->
 	<select id="searchAuction" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-			<![CDATA[
+		
+			
 			SELECT * FROM (
 				    SELECT * FROM
 				    (SELECT ADDRNO, AUCTION_NO, USERNO, TITLE, CONTENT, CATEGORY, LIKES, POSTDATE,   ENDDATE, STATUS, RNUM FROM
@@ -399,8 +400,14 @@
 				    INNER JOIN AUCTION_PRICE P ON P.AUCTION_NO = T.AUCTION_NO
 				    LEFT OUTER JOIN ADDRESS_LIST A ON A.ADDRNO = T.ADDRNO
 				    WHERE T.STATUS = 'SALE'
-				    ORDER BY P.AUCTION_NO DESC) WHERE CATEGORY = #{category} AND TITLE LIKE '%'||#{title}||'%'
-			]]>
+				    ORDER BY P.AUCTION_NO DESC)
+				    WHERE
+					<if test='category != "all"'>
+						CATEGORY = #{category} AND
+ 					</if>
+					<![CDATA[	    
+				    TITLE LIKE '%'||#{title}||'%'
+					]]>
 	</select>
 	<!-- AUCTION -->
 
