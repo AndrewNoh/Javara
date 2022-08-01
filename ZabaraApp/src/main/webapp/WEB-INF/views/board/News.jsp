@@ -102,7 +102,6 @@ img {
 									style="width: 200px; height: 180px;"></td>
 							</c:if>
 						</tr>
-
 					</c:forEach>
 				</tr>
 			</tbody>
