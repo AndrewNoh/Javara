@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <% pageContext.setAttribute("replaceChar", "\n"); %>
   <!-- ======= Portfolio Details ======= -->
   
@@ -48,13 +49,13 @@ border-radius: 15px;
             <div class="content">
             	<c:if test="${userno == list.userNo}" var="isWriter">
 					<div  style="text-align: right; font-size: 20px;">
-						<a href="javascript:void(0);" id="edit"><i class="bx bxs-edit" title="수정"></i></a>
-						<a href="javascript:void(0);" id="delete"><i class="bx bxs-trash " title="삭제"></i></a>
-						<a href="javascript:void(0);" id="report" title="0"><i class="bx bxs-angry" title="신고"></i></a>
+						<a href="javascript:void(0);" id="edit"><i class="bx bxs-edit" style="font-size: 30px" title="수정"></i></a>
+						<a href="javascript:void(0);" id="delete"><i class="bx bxs-trash " style="font-size: 30px" title="삭제"></i></a>
+						<a href="javascript:void(0);" id="report" title="0"><i class="bx bxs-angry" style="font-size: 30px" title="신고"></i></a>
 					</div>
 				</c:if>
 				<c:if test="${isWriter}">
-					<button id="statusChange" style="float: right;" class="btn btn-warning" title="${list.status == 'END' ? 'SALE' : 'END'}">${list.status == 'END' ? '낙찰취소' : '낙찰하기'}</button>
+					<button id="statusChange" style="float: right; font-size: 16px; color: #fff" class="btn btn-outline-danger" title="${list.status == 'END' ? 'SALE' : 'END'}">${list.status == 'END' ? '낙찰취소' : '낙찰하기'}</button>
 					<br>
 					<br>
 				</c:if>
@@ -66,8 +67,9 @@ border-radius: 15px;
 					</div>
 				<div class="mb-4">${list.category}</div>
 				<div class="mb-5" style="font-size: 20px;">
-					<p id="startPrice" title="${list.base_Price}">시작가 : <strong style="font-size: 30px;">${list.base_Price}\</strong></p>
-					<p id="upperPrice" title="${list.upper_Price}">현재 최고가 : <strong style="color: #0fff90; font-size: 35px;">${list.upper_Price}\</strong></p>
+			
+					<p id="startPrice">시작가 <strong style="font-size: 30px; margin-left: 10px"><fmt:formatNumber value="${list.base_Price}" pattern="#,###" />원</strong></p>
+					<p id="upperPrice">현재 최고가 <strong style="color: #FFC107; margin-left: 10px; font-size: 35px;"><fmt:formatNumber value="${list.upper_Price}" pattern="#,###" />원</strong></p>
 				</div>
 				<div class="mb-5">
 					<p>${fn:replace(list.content, replaceChar, "<br/>")}</p>
@@ -79,8 +81,8 @@ border-radius: 15px;
 					</div>
 				</c:if>
 				
-				<div style="text-align: center; font-size: 20px; margin-bottom: 15px;">
-					 <a href="#"><i class="bx bxs-like ml-3" ></i>${list.likes}</a>
+				<div style="text-align: center; font-size: 20px; margin-bottom: 20px; ">
+					 <a href="#" ><i class="bx bxs-like ml-3" ></i>${list.likes}</a>
 				</div>
 				
 				<c:if test="${!isWriter}">

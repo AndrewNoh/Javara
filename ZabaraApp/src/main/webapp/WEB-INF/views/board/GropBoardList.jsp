@@ -62,19 +62,19 @@ border-radius: 10px;
         <div class="text-center mt-3 pd-4">
         	<c:set var="session_id"><sec:authentication property="principal.username"/></c:set>
         	<c:if test="${userno ==LIST.userNo }">
-        	<button>
+        	
         	<a href="<c:url value="/board/update.do">
-        		<c:param name="townlist_no" value="${LIST.townlist_no }"/></c:url>" class="btn btn-white">수정
+        		<c:param name="townlist_no" value="${LIST.townlist_no }"/></c:url>" class="btn btn-warning" style="color: #fff">수정
         	</a>
-        	</button>
-        	<button>
+        	
+        
         	<a href="<c:url value="/board/deleteTown.do">
         		<c:param name="townlist_no" value="${LIST.townlist_no }"/>
         		<c:param name="auction_no" value="0"/>
         		<c:param name="product_no" value="0"/>
-        		</c:url>" class="btn btn-white">삭제
+        		</c:url>" class="btn btn-dark" style="color: #fff">삭제
         	</a>
-        	</button>
+        
         	</c:if>
         </div>
         

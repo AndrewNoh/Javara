@@ -91,12 +91,12 @@
 								</c:forEach>
 						        <div class="portfolio-info">
 						        	<h4>${LIST.title}</h4>
-						            <p>시작가 ${LIST.base_Price}\</p>
-						            <p>현재가 ${LIST.upper_Price}\</p>						            
+						            <p>시작가 <fmt:formatNumber value="${LIST.base_Price}" pattern="#,###"/>원</p>
+						            <p>현재가 <fmt:formatNumber value="${LIST.upper_Price}" pattern="#,###"/>원</p>						            
 						            <div class="portfolio-links">
-						            	<a href="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[loop.index][0].imageName}" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bxs-photo-album"></i><span style="font-size: 18px; display: block;">사진보기</span></a>
-						                <a href="<c:url value="/board/auctionview.do"><c:param value="${LIST.auction_no}" name="no"/></c:url>" rel="lyteframe" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bxs-detail"></i><span style="font-size: 18px; display: block;">상세보기</span></a>
-						                <a href="javascript:void(0);" data-value="${LIST.auction_no}" name="like"><i class="bx bxs-book-heart" name="heartButton"></i><span style="font-size: 18px; display: block;">찜</span></a>
+						            	<a href="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[loop.index][0].imageName}" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bxs-photo-album"></i><span style="font-size: 12px; display: block;">사진</span></a>
+						                <a href="<c:url value="/board/auctionview.do"><c:param value="${LIST.auction_no}" name="no"/></c:url>" rel="lyteframe" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bxs-detail"></i><span style="font-size: 12px; display: block;">상세보기</span></a>
+						                <a href="javascript:void(0);" data-value="${LIST.auction_no}" name="like"><i class="bx bxs-book-heart" name="heartButton"></i><span style="font-size: 12px; display: block;">찜</span></a>
 						            </div>
 						            <p>종료예정일 ${LIST.endDate}</p>
 						    	</div>

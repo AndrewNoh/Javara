@@ -819,7 +819,7 @@ section.section-show {
   transition: 0.3s;
 }
 .portfolio .portfolio-wrap .portfolio-links a:hover {
-  color: #63eda3;
+  color: rgb(0, 0, 0);
 }
 .portfolio .portfolio-wrap:hover::before {
   top: 0;
