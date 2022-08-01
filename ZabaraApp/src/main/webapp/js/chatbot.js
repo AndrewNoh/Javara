@@ -3,7 +3,7 @@ function sendMessage(message,session_id) {
         
         $.ajax(
         {
-            url:"http://192.168.0.223:9999/message",
+            url:"http://192.168.0.223:9999/message",// http옆에있는곳(192.168.0.223)에 자기 ip를 넣어야해요
             //json으로 보낼때
             data:JSON.stringify({"message": message,"session_id":session_id}),
             contentType:'application/json',            
