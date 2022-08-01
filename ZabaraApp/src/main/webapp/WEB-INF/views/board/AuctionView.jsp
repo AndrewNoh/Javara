@@ -437,7 +437,7 @@ border-radius: 15px;
 
 				    Toast.fire({
 				        icon : 'success',
-				        title : '낙찰을 취소했습니다.'
+				        title : '낙찰하였습니다.'
 				    });
 				} else {
 					const Toast = Swal.mixin({
@@ -450,7 +450,7 @@ border-radius: 15px;
 
 				    Toast.fire({
 				        icon : 'success',
-				        title : '낙찰하였습니다.'
+				        title : '낙찰을 취소했습니다.'
 				    });
 				}
 			});
