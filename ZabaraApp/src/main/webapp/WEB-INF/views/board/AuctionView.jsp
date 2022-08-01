@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<% pageContext.setAttribute("replaceChar", "\n"); %>
   <!-- ======= Portfolio Details ======= -->
   
 <style>
@@ -49,7 +50,7 @@ border-radius: 15px;
 					<div  style="text-align: right; font-size: 20px;">
 						<a href="javascript:void(0);" id="edit"><i class="bx bxs-edit" title="수정"></i></a>
 						<a href="javascript:void(0);" id="delete"><i class="bx bxs-trash " title="삭제"></i></a>
-						<a href="<c:url value="/board/report.do"/>"><i class="bx bxs-angry" title="신고"></i></a>
+						<a href="javascript:void(0);" id="report" title="0"><i class="bx bxs-angry" title="신고"></i></a>
 					</div>
 				</c:if>
 				<c:if test="${isWriter}">
@@ -58,7 +59,7 @@ border-radius: 15px;
 					<br>
 				</c:if>
 				
-				<div style="text-align: right;">
+				<div style="text-align: right;">				
 				
 					<div>${list.nickName}</div>
 						<i class="bi bi-calendar3"></i> ${list.postDate}
@@ -69,7 +70,7 @@ border-radius: 15px;
 					<p id="upperPrice" title="${list.upper_Price}">현재 최고가 : <strong style="color: #0fff90; font-size: 35px;">${list.upper_Price}\</strong></p>
 				</div>
 				<div class="mb-5">
-					<p>${list.content}</p>
+					<p>${fn:replace(list.content, replaceChar, "<br/>")}</p>
 				</div>		
 				
 				<c:if test="${!isWriter}">
@@ -135,12 +136,26 @@ border-radius: 15px;
 		
 		          	<div class="col-lg-4 portfolio-info ">
 		            	<div class="content">
-							<div class="custom-select form-group mt-3 mt-md-0">
+		            		<h6>제품 카테고리</h6>
+							<div class="custom-select form-group mt-0 mt-md-0 mb-3">
 						 		<select name="category">
-						    		<option selected value="기타">제품카테고리</option>
-						    		<option value="가전">가전</option>
-						    		<option value="가구">가구</option>
-						    		<option value="생활용품">생활용품</option>
+						    		<option selected value="기타">기타</option>
+						    		<option value="중고차">중고차</option>
+						    		<option value="디지털기기">디지털기기</option>
+						    		<option value="생활가전">생활가전</option>
+						    		<option value="가구인테리어">가구/인테리어</option>
+						    		<option value="유아동">유아동</option>
+						    		<option value="유아도서">유아도서</option>
+						    		<option value="가공식품">가공식품</option>
+						    		<option value="스포츠레저">스포츠/레저</option>
+						    		<option value="여성잡화">여성잡화</option>
+						    		<option value="여성의류">여성의류</option>
+						    		<option value="남성패션잡화">남성패션/잡화</option>
+						    		<option value="게임취미">게임/취미</option>
+						    		<option value="뷰티미용">뷰티/미용</option>
+						    		<option value="반려동물용품">반려동물용품</option>
+						    		<option value="도서티켓음반">도서티켓음반</option>
+						    		<option value="식물">식물</option>
 						  		</select>
 							</div>
 							<div class="my-3">
@@ -289,7 +304,19 @@ border-radius: 15px;
 	    	var i = $('#previewImage > img').length;
 	    	
 	    	if(fileArr.length > 5){
-	    		alert("이미지는 5장까지만 등록 가능합니다.");
+	    		const Toast = Swal.mixin({
+			    	toast : true,
+			        position : 'center-center',
+			        showConfirmButton : false,
+			        timer : 1000,
+			        timerProgressBar : true,
+			    })
+
+			    Toast.fire({
+			        icon : 'error',
+			        title : '이미지는 5장까지만 등록이 가능합니다.'
+			    });
+	    		
 	    		return;
 	    	}	    	
 	    	
@@ -351,7 +378,18 @@ border-radius: 15px;
 		console.log(upperprice - newprice)
 		
 		if(upperprice - newprice >= 0) {
-			alert('입찰가격은 현재 최고가보다 높아야합니다.');
+			const Toast = Swal.mixin({
+		    	toast : true,
+		        position : 'center-center',
+		        showConfirmButton : false,
+		        timer : 1000,
+		        timerProgressBar : true,
+		    })
+
+		    Toast.fire({
+		        icon : 'error',
+		        title : '입찰 가격은 현재 최고가보다 높아야합니다.'
+		    });
 		} else {
 			$.ajax({
 				url :'<c:url value="/board/newUpperPrice.do"/>',
@@ -387,10 +425,123 @@ border-radius: 15px;
 				var text = value == 'END' ? '낙찰취소' : '낙찰하기';
 				$('#statusChange').text(text);
 				$('#statusChange').attr("title", "SALE");
-				alert(value == 'END' ? "낙찰완료" : "낙찰취소");
+
+				if(value == 'END'){
+					const Toast = Swal.mixin({
+				    	toast : true,
+				        position : 'center-center',
+				        showConfirmButton : false,
+				        timer : 1000,
+				        timerProgressBar : true,
+				    })
+
+				    Toast.fire({
+				        icon : 'success',
+				        title : '낙찰을 취소했습니다.'
+				    });
+				} else {
+					const Toast = Swal.mixin({
+				    	toast : true,
+				        position : 'center-center',
+				        showConfirmButton : false,
+				        timer : 1000,
+				        timerProgressBar : true,
+				    })
+
+				    Toast.fire({
+				        icon : 'success',
+				        title : '낙찰하였습니다.'
+				    });
+				}
 			});
 		} else {
-			alert("낙찰하려면 시작가격보단 최고가가 높아야합니다.");
+			const Toast = Swal.mixin({
+		    	toast : true,
+		        position : 'center-center',
+		        showConfirmButton : false,
+		        timer : 1000,
+		        timerProgressBar : true,
+		    })
+
+		    Toast.fire({
+		        icon : 'error',
+		        title : '낙찰하려면 시작가보다 최고가가 높아야합니다.'
+		    });
 		}
 	});
+
+   
+   $('#report').on("click", function(){
+	   /*
+	   $.ajax({
+			url : '<c:url value="/board/report.do" />',
+			type:'POST',
+			dataType: "text",
+			data:{'${_csrf.parameterName}':'${_csrf.token}', auction_no:${list.auction_no}},
+		}).done(function(data){
+			if(data == 1){
+				const Toast = Swal.mixin({
+			    	toast : true,
+			        position : 'center-center',
+			        showConfirmButton : false,
+			        timer : 1000,
+			        timerProgressBar : true,
+			    })
+
+			    Toast.fire({
+			        icon : 'success',
+			        title : '신고되었습니다.'
+			    }); 
+			} else {
+				const Toast = Swal.mixin({
+			    	toast : true,
+			        position : 'center-center',
+			        showConfirmButton : false,
+			        timer : 1000,
+			        timerProgressBar : true,
+			    })
+
+			    Toast.fire({
+			        icon : 'error',
+			        title : '신고는 1회만 가능합니다.'
+			    });
+			}
+		});
+	   
+	   */
+	   var isreport = $(this).attr("title");
+	   
+	   console.log(isreport)
+	   if(isreport == 0){
+		   const Toast = Swal.mixin({
+		    	toast : true,
+		        position : 'center-center',
+		        showConfirmButton : false,
+		        timer : 1000,
+		        timerProgressBar : true,
+		    })
+
+		    Toast.fire({
+		        icon : 'success',
+		        title : '신고되었습니다.'
+		    });
+		   
+		   $(this).attr("title", 1);
+		   
+	   } else {
+		   const Toast = Swal.mixin({
+		    	toast : true,
+		        position : 'center-center',
+		        showConfirmButton : false,
+		        timer : 1000,
+		        timerProgressBar : true,
+		    })
+
+		    Toast.fire({
+		        icon : 'error',
+		        title : '신고는 1회만 가능합니다.'
+		    });
+	   }
+
+   });
 </script>
