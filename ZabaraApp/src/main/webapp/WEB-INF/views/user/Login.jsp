@@ -205,7 +205,7 @@ $('#submitBtn').click(function(){
 //비밀번호 찾기 폼
 $('#forgotpwd').click(function(){
    $('.loginErrorMessage').hide();
-   $('.logintitle').text("임시 비밀번호 발급");
+   $('.logintitle').text("이메일을 입력해주세요.");
    $('#firstLogin').hide();
    $('#secondLogin').fadeIn(600);
    $('#sendPassword').fadeIn(600);
