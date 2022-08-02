@@ -103,7 +103,11 @@
 }
 </style>
 <body>
-
+<div style="position: fixed;bottom: 25%; right: 5%; z-index: 1;" id="chatbot">
+ <a >
+  <img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/binemoji.png" 
+       title="챗봇" style="width: 80px; height: 80px"></a>
+</div>
 
 	<form id="logoutForm" method="post"
 		action="<c:url value="/security/logout.do"/>">
@@ -207,7 +211,6 @@
 											<i id="bi-search" class="bi bi-search" aria-hidden="false"
 												style="font-size: 20px;"></i>
 										</button>
-
 									</span>
 								</div>
 
@@ -226,23 +229,22 @@
 							<strong>이미지분석</strong>
 						</h5>
 						<i id="modal-close" data-dismiss="modal" class="close bi bi-x"
-							style="font-size: 1.5rem; color: black;"></i>
+							style="font-size: 1.5rem; color: black; cursor: pointer;"></i>
 					</div>
 					<div class="modal-body">
 						<div class="body-content">
-							<img id="preview_image" style="width: 100%; height: 90%;" />
-							<div id="label-container" style="color: black;"></div>
+							<img id="preview_image" style="width: 100%; height: 90%;"/>
+							<div id="label-container" style="color: black; cursor: pointer;"></div>
 						</div>
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer">
 						<i id="fakeTag" class="bi bi-card-image"
-							style="font-size: 2rem; color: cornflowerblue;"></i> <input
+							style="cursor: pointer; font-size: 2rem; color: cornflowerblue; "></i> <input
 							type="file" class="ImageAnalysis" id="test_image"
 							accept=".png,.jpg,.jpeg" style="display: none;" /> <i
-							style="font-size: 1.5rem; color: black;" class="bi bi-search"
+							style="cursor: pointer; font-size: 1.5rem; color: black;" class="bi bi-search"
 							onclick="predict()"></i>
-
 					</div>
 				</div>
 			</div>
@@ -251,6 +253,37 @@
 
 		<i class="bi bi-list mobile-nav-toggle"></i>
 	</nav>
+	
+	
+	<div class="chat" style="display: none;position: fixed">
+  <div class="chat-title">
+    <h1>자바라 챗봇</h1>
+    <h2>무엇이든 물어보세요</h2>
+    <figure class="avatar">
+      <img src="http://algom.x10host.com/chat/img/icon-oracle.gif" /></figure>
+      
+	  <div  class="r-nav"> 
+     <ul>
+		  <li> <a>X</a></li>
+		  
+		  <li> <a><img src="" width="26px" /></a></li>
+    	
+     	
+     </ul>
+     
+     </div>
+      
+      
+  </div>
+  <div class="messages">
+    <div class="messages-content"></div>
+  </div>
+  <div class="message-box">
+    <textarea type="text" class="message-input" placeholder="무엇이 궁금하신가요?"></textarea>
+    <button type="submit" class="message-submit sound-on-click">Send</button>
+  </div>
+
+</div>
 	<!-- .navbar -->
 	<script>
 		$(function() {
@@ -301,6 +334,9 @@
 				$("#srchDiv").hide();
 				$("#srch").show();
 			});
+			$("#chatbot").click(function() {
+				$(".chat").toggle();
+			});
 
 		});
 
@@ -337,11 +373,16 @@
 
 			labelContainer = document.getElementById("label-container");
 			for (let i = 0; i < 3; i++) { // and class labels
-				labelContainer.appendChild(document.createElement("div"));
+				var ch= document.createElement("div");
+				ch.addEventListener('click', function(){
+					searchDiv(i);
+				} );
+				labelContainer.appendChild(ch);
 			}
 		}
 
-		
+	
+		var k=0;
 		async function predict() {
 			if($('#test_image').val()!=""){
 				var image = document.querySelector("#preview_image");
@@ -365,7 +406,7 @@
 				}
 
 				for (var i = 0; i < resultArray.length - 1; i++) {
-					for (var k = i + 1; k < resultArray.length; k++) {
+					for (k = i + 1; k < resultArray.length; k++) {
 						if (resultArray[i] < resultArray[k]) {
 							console.log(resultArray[i])
 							var temp = resultArray[i];
@@ -377,20 +418,29 @@
 						}
 					}
 				}
-				for (var k = 0; k < 3; k++) {
+				for (k = 0; k < 3; k++) {
 					labelContainer.childNodes[k].innerHTML = "";
 				}
 
-				for (var k = 0; k < 3; k++) {
-					if (className[k].indexOf(": 0") != -1) {//className[k]!=className[k+1]
+				for (k = 0; k < 3; k++) {
+					if (className[k].indexOf(": 0") != -1) {
 						break;
 					}
 					labelContainer.childNodes[k].innerHTML = className[k];
+					console.log(labelContainer.childNodes[k].innerHTML)
 				}
 			}
 
 			
 		}
+		
+		function searchDiv(i){
+			//$('.search-bar').val(labelContainer.childNodes[i].innerHTML);
+			var searchbar = labelContainer.childNodes[i].innerHTML;
+			searchbar = searchbar.split(':');
+			$('.search-bar').val(searchbar[0]);
+			$('#bi-search').trigger('click'); 
+		};
 
 		init();
 
@@ -420,6 +470,8 @@
 			$(".ImageAnalysis").click();
 
 		});
+		
+		
 		
 
 		

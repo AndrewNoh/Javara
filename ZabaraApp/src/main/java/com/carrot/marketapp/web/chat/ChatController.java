@@ -63,7 +63,7 @@ public class ChatController {
       model.addAttribute("chatroom", chatroom);
 
       if (chatroom != null) {
-         System.out.println("GET방식 방번호 중복");
+         //System.out.println("GET방식 방번호 중복");
 
          map.put("roomno", chatroom.getRoomno());
          model.addAttribute("sendusernickname", chatroom.getSendusernickname());
@@ -124,7 +124,7 @@ public class ChatController {
       ChatDTO chatroom = chatService.findChatRoom(map);
 
       if (chatroom != null) {
-         System.out.println("방번호 중복");
+         // tem.out.println("방번호 중복");
          map.put("roomno", chatroom.getRoomno());
          map.put("chatcontent", map.get("chatcontent"));
          map.put("senduserno", map.get("userno"));
@@ -162,7 +162,7 @@ public class ChatController {
    @ResponseBody
    public String sendimg(@RequestParam MultipartFile chatimg, HttpServletRequest req, Model model, Principal principal,
          @RequestParam Map map) throws IllegalStateException, IOException {
-      System.out.println("사진");
+      //System.out.println("사진");
       String path = req.getSession().getServletContext().getRealPath("/resources/assets/img/chat_img");
       String rename = FileUpDownUtils.getNewFileName(path, chatimg.getOriginalFilename());
       File dest = new File(path + File.separator + rename);
@@ -177,7 +177,7 @@ public class ChatController {
       ChatDTO chatroom = chatService.findChatRoom(map);
 
       if (chatroom != null) {
-         System.out.println("방번호 중복");
+         //System.out.println("방번호 중복");
          map.put("chatimg", rename);
          map.put("senduserno", map.get("userno"));
          map.put("roomno", chatroom.getRoomno());
@@ -225,7 +225,7 @@ public class ChatController {
 	      ChatDTO chatroom = chatService.findChatRoom(map);
 
 	      if (chatroom != null) {
-	         System.out.println("방번호 중복");
+	         //System.out.println("방번호 중복");
 	         map.put("senduserno", map.get("userno"));
 	         map.put("roomno",chatroom.getRoomno());
 	         map.put("unread_count", "1");
