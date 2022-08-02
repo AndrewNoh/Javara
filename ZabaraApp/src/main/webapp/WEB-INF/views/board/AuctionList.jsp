@@ -94,8 +94,8 @@
 						            <p>시작가 <fmt:formatNumber value="${LIST.base_Price}" pattern="#,###"/>원</p>
 						            <p style="color:#FFC107">현재가 <fmt:formatNumber value="${LIST.upper_Price}" pattern="#,###"/>원</p>						            
 						            <div class="portfolio-links">
-						            	<a href="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[loop.index][0].imageName}" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bxs-photo-album"></i><span style="font-size: 12px; display: block;">사진</span></a>
-						                <a href="<c:url value="/board/auctionview.do"><c:param value="${LIST.auction_no}" name="no"/></c:url>" rel="lyteframe" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bxs-detail"></i><span style="font-size: 12px; display: block;">상세보기</span></a>
+						            	<a href="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[loop.index][0].imageName}?no=${loop.count}" data-gallery="portfolioGallery" class="portfolio-lightbox" id="img${loop.count}"><i class="bx bxs-photo-album"></i><span style="font-size: 12px; display: block;">사진</span></a>
+						                <a href="<c:url value="/board/auctionview.do"><c:param value="${LIST.auction_no}" name="no"/></c:url>" rel="lyteframe" data-gallery="portfolioDetailsGallery" id="view${loop.count}" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bxs-detail"></i><span style="font-size: 12px; display: block;">상세보기</span></a>
 						                <a href="javascript:void(0);" data-value="${LIST.auction_no}" name="like"><i class="bx bxs-book-heart" name="heartButton"></i><span style="font-size: 12px; display: block;">찜</span></a>
 						            </div>
 						            <p>종료예정일 ${LIST.endDate}</p>
@@ -192,4 +192,21 @@
 		
 	});
 	
+	$(document).on("click", ".portfolio-lightbox", function(){
+		$(".goverlay").css("background", "black").css("opacity","0.9");
+	});
+	
+	$(document).on("click", ".portfolio-details-lightbox", function(){
+		$(".goverlay").css("background", "black").css("opacity","1");
+	});
+	
+	$(document).on("click", "#glightbox-slider > div.gslide.loaded.current > div > div > div > img", function(){
+		console.log("클릭됨");
+		console.log($(this).attr("src").split("=")[1]);
+		var no = $(this).attr("src").split("=")[1];
+		$("#glightbox-slider").trigger("click");
+		console.log($("#glightbox-slider"));
+		setTimeout(function(){$("#view"+no).get(0).click();}, 500);
+		
+	});
 </script>
