@@ -206,7 +206,7 @@
 		var no = $(this).attr("src").split("=")[1];
 		$("#glightbox-slider").trigger("click");
 		console.log($("#glightbox-slider"));
-		setTimeout(function(){$("#view"+no).get(0).click();}, 500);
+		setTimeout(function(){$("#view"+no).get(0).click();}, 700);
 		
 	});
 </script>
