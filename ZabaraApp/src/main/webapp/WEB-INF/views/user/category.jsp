@@ -366,7 +366,7 @@ function categoryItemList(){
                   '<div class="card-action">'+
                     '<div style="margin-top: -10px">'+
                          '<div class="title" style="width:190px; font-family: GmarketSansMedium; margin-bottom: -5px;">'+result[i].title+'</div>'+
-                          '<span style="font-weight: bold;  font-family: GmarketSansMedium, sans-serif; margin-bottom: 10px;">현재 입찰가 '+result[i].upper_Price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원'+'</span>'+                         
+                          '<span style="font-weight: bold;  font-family: GmarketSansMedium, sans-serif; margin-bottom: 10px; color: #85adad">현재 입찰가 '+result[i].upper_Price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원'+'</span>'+                         
                     '</div>'+
                     '<div class="btn-download">'+                      
                     '<a href="/marketapp/board/auctionview.do?no='+result[i].auction_no+'" rel="lyteframe" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><span style="font-size: 18px; display: block;"><button class="btn">입찰하러가기</button></span></a>'+

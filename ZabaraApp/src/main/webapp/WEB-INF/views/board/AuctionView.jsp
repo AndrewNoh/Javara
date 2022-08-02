@@ -24,6 +24,23 @@ height: 100%
 background-color: #ffffff21;
 border-radius: 15px;
 }
+.input[id=inputBidPrice]{
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #CCC;
+  color: #555;
+  box-sizing: border-box;
+  font-family: 'Arvo';
+  font-size: 18px;
+  height: 50px;
+  margin: -25px 0 0 -100px;
+  padding: 10px 0px;
+  position: relative;
+  top: 50%;
+  margin-left: 20px;
+  text-align: center;
+  width: 150px;
+ }
 </style>
     <div id="portfolio-details" class="portfolio-details contact">
       <div class="container">
@@ -31,7 +48,7 @@ border-radius: 15px;
         <div class="row">
 
           <div class="col-lg-8">
-            <h2 class="portfolio-title">${list.title}</h2>
+            <h2 class="portfolio-title" style="font-family: GmarketSansBold">${list.title}</h2>
             <div class="portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center">
               	<c:forEach var="image" items="${images}" varStatus="loop">
@@ -55,7 +72,7 @@ border-radius: 15px;
 					</div>
 				</c:if>
 				<c:if test="${isWriter}">
-					<button id="statusChange" style="float: right; font-size: 16px; color: #000" class="btn btn-warning" title="${list.status == 'END' ? 'SALE' : 'END'}">${list.status == 'END' ? '낙찰취소' : '낙찰하기'}</button>
+					<button id="statusChange" style="float: right; font-size: 16px; color: #fff; background-color: #85adad" class="btn" title="${list.status == 'END' ? 'SALE' : 'END'}">${list.status == 'END' ? '낙찰취소' : '낙찰하기'}</button>
 					<br>
 					<br>
 				</c:if>
@@ -65,19 +82,19 @@ border-radius: 15px;
 					<div>${list.nickName}</div>
 						<i class="bi bi-calendar3"></i> ${list.postDate}
 					</div>
-				<div class="mb-4">${list.category}</div>
+				<div class="mb-4" style="color: #85adad">${list.category}</div>
 				<div class="mb-5" style="font-size: 20px;">
 			
 					<p id="startPrice">시작가 <strong style="font-size: 30px; margin-left: 10px"><fmt:formatNumber value="${list.base_Price}" pattern="#,###" />원</strong></p>
-					<p id="upperPrice">현재 최고가 <strong style="color: #FFC107; margin-left: 10px; font-size: 35px;"><fmt:formatNumber value="${list.upper_Price}" pattern="#,###" />원</strong></p>
+					<p id="upperPrice">현재 최고가 <strong style="color: #85adad; margin-left: 10px; font-size: 35px;"><fmt:formatNumber value="${list.upper_Price}" pattern="#,###" />원</strong></p>
 				</div>
 				<div class="mb-5">
-					<p>${fn:replace(list.content, replaceChar, "<br/>")}</p>
+					<p style="font-size: 20px">${fn:replace(list.content, replaceChar, "<br/>")}</p>
 				</div>		
 				
 				<c:if test="${!isWriter}">
 					<div style="text-align: center; font-size: 20px; margin-bottom: 15px;">
-						 <button class="btn btn-success btn-block" data-toggle="modal" data-target="#bidUI">입찰하기</button>
+						 <button class="btn" style="background-color: #85adad; color: #fff" data-toggle="modal" data-target="#bidUI">입찰하기</button>
 					</div>
 				</c:if>
 				
@@ -185,40 +202,33 @@ border-radius: 15px;
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">입찰</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>        
-			</div>
+				<h5 class="modal-title" id="exampleModalLabel" style="color: black; font-size: 20px; font-weight: bold; ">입찰</h5>
+			</div>	
 			<div class="modal-body">
-				<div>
-					<p id="upperPriceBid" title="${list.upper_Price}">현재 최고가 : ${list.upper_Price}\</p>					
-				</div>
-				
-				
-				<div>
-					<label>입찰 가격 입력</label>
-					<input type="text" id="inputBidPrice"/>
-					
-					<button type="button" id="doBid">입찰</button>
+			<div class="modal-body">
+				<p style="text-align: center; font-weight: bold; color: #85adad; margin-top: 10px" id="upperPriceBid" title="${list.upper_Price}">현재 최고가는  <fmt:formatNumber value="${list.upper_Price}" pattern="#,###" />원 입니다</p>					
+			</div>				
+			<div style="margin-bottom: 20px">
+				<h1 style="font-size: 14px; font-weight: bold; text-align:center; ">입찰하기
+				<input type="text" id="inputBidPrice" class="input" style="margin-left: 3px"/> 원</h1>
+			</div>		
+			<div class="modal-footer">
+					<button type="button" class="btn" style="background-color: #85adad; color: #fff; margin-bottom: -30px; margin-left: 10px" id="doBid">등록</button>
 				</div>
 				<br/>
-				<!-- 
-				<div>
-					
+				<!--<div>
 					<button type="button" id="minus100">-100</button>
 					<button type="button" id="minus1000">-1000</button>
 					<button type="button" id="minus10000">-10000</button>
 					<button type="button" id="plus10000">+10000</button>
 					<button type="button" id="plus1000">+1000</button>
-					<button type="button" id="plus100">+100</button>
-					
-				</div>
-				 -->
+					<button type="button" id="plus100">+100</button>					
+				</div> -->
 			</div>
 		</div>
 	</div>
-</div>
+
+
     
 <script type="text/javascript">
 	$('#delete').on("click", function(){
