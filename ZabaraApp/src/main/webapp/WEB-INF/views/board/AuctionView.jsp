@@ -85,8 +85,8 @@ border-radius: 15px;
 				<div class="mb-4" style="color: #85adad">${list.category}</div>
 				<div class="mb-5" style="font-size: 20px;">
 			
-					<p id="startPrice">시작가 <strong style="font-size: 30px; margin-left: 10px"><fmt:formatNumber value="${list.base_Price}" pattern="#,###" />원</strong></p>
-					<p id="upperPrice">현재 최고가 <strong style="color: #85adad; margin-left: 10px; font-size: 35px;"><fmt:formatNumber value="${list.upper_Price}" pattern="#,###" />원</strong></p>
+					<p id="startPrice" title="${list.base_Price}">시작가 <strong style="font-size: 30px; margin-left: 10px"><fmt:formatNumber value="${list.base_Price}" pattern="#,###" />원</strong></p>
+					<p id="upperPrice" title="${list.upper_Price}">현재 최고가 <strong style="color: #85adad; margin-left: 10px; font-size: 35px;"><fmt:formatNumber value="${list.upper_Price}" pattern="#,###" />원</strong></p>
 				</div>
 				<div class="mb-5">
 					<p style="font-size: 20px">${fn:replace(list.content, replaceChar, "<br/>")}</p>

@@ -134,35 +134,61 @@
 		SEQ_TOWN_LIST_TOWNLIST_NO.CURRVAL FROM DUAL
 	</select>
 	<!-- TOWN -->
+	
 	<!-- MYPAGE -->
 	<select id="mypageSelllist" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		SELECT * FROM AUCTION_IMG IMG JOIN AUCTION_LIST LIST ON
-		IMG.AUCTION_NO=LIST.AUCTION_NO JOIN auction_price P ON
-		list.auction_no=p.auction_no
-		JOIN MEMBERS MB ON list.userno=mb.userno
-		WHERE mb.email= #{email} ORDER BY LIST.POSTDATE DESC
+		SELECT * FROM (SELECT AL.AUCTION_NO, AL.TITLE, AP.UPPER_PRICE, AP.BASE_PRICE, I.IMAGENAME, AL.USERNO, AL.ENDDATE FROM
+			(SELECT IMG.* FROM (SELECT ROW_NUMBER() OVER(PARTITION BY AUCTION_NO ORDER BY IMAGENO ASC) AS RNUM, AUCTION_IMG.* FROM AUCTION_IMG ) IMG WHERE RNUM = 1) I
+			LEFT OUTER JOIN AUCTION_LIST AL ON AL.AUCTION_NO = I.AUCTION_NO
+			LEFT OUTER JOIN AUCTION_PRICE AP ON AP.AUCTION_NO = AL.AUCTION_NO ORDER BY AL.POSTDATE DESC) WHERE USERNO = #{userno}
 	</select>
 	<select id="mypagelikelist" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		SELECT * FROM AUCTION_IMG IMG JOIN AUCTION_LIST LIST ON
-		IMG.AUCTION_NO=LIST.AUCTION_NO JOIN auction_price P ON
-		list.auction_no=p.auction_no
-		JOIN MEMBERS MB ON LIST.userno=mb.userno
-		WHERE mb.email= #{email} ORDER BY LIST.POSTDATE DESC
+		SELECT list.auction_no, list.title, list.likes,
+	      list.status,
+	      p.upper_price, img.imagename, addr.simpleaddress,
+	      list.postdate, list.enddate FROM
+	      (SELECT IMG.* FROM(SELECT ROW_NUMBER()
+	      OVER(PARTITION BY AUCTION_NO
+	      ORDER BY IMAGENO ASC) AS RNUM,
+	      AUCTION_IMG.* FROM AUCTION_IMG ) IMG
+	      WHERE RNUM = 1) IMG
+	      JOIN
+	      AUCTION_LIST LIST ON
+	      IMG.AUCTION_NO=LIST.AUCTION_NO
+	      JOIN auction_price P
+	      ON
+	      list.auction_no=p.auction_no
+	      JOIN address_list addr ON
+	      list.auction_no
+	      = addr.auction_no
+	      JOIN auction_like ALS ON
+	      ALS.auction_no =
+	      list.auction_no
+	      WHERE als.userno = #{userno}
+	      ORDER BY
+	      LIST.POSTDATE DESC
 
 	</select>
 	<select id="mypagepurchaselist" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		SELECT L.*, P.UPPER_PRICE, p.base_price,
-		p.upper_user_no,IMG.* FROM
-		AUCTION_LIST L
-		LEFT OUTER JOIN AUCTION_PRICE
-		P ON L.AUCTION_NO = P.AUCTION_NO join
-		AUCTION_IMG IMG on
-		L.AUCTION_NO=IMG.AUCTION_NO
-		WHERE STATUS = 'END' AND P.UPPER_USER_NO=
-		#{userno}
+		   SELECT L.auction_no, L.title,
+	      p.base_price, p.upper_price, img.imagename,  L.postdate, L.enddate FROM
+	      AUCTION_LIST L
+	      LEFT OUTER JOIN AUCTION_PRICE
+	      P ON L.AUCTION_NO =
+	      P.AUCTION_NO join
+	      (SELECT IMG.* FROM(SELECT ROW_NUMBER() OVER(PARTITION
+	      BY AUCTION_NO
+	      ORDER BY IMAGENO ASC) AS RNUM, AUCTION_IMG.* FROM
+	      AUCTION_IMG ) IMG
+	      WHERE RNUM = 1) IMG on
+	      L.AUCTION_NO=IMG.AUCTION_NO
+	      WHERE
+	      P.UPPER_USER_NO = #{userno} AND L.USERNO != #{userno}
+	      ORDER BY
+	      L.POSTDATE DESC
 	</select>
 	
 	<select id="getLikeCount" resultType="_int">
@@ -170,13 +196,13 @@
 	</select>	
 	
 	<select id="getSellCount" resultType="_int">
-		SELECT COUNT(*) FROM AUCTION_LIST WHERE USERNO = #{userno} AND STATUS = 'SALE'
+		SELECT COUNT(*) FROM AUCTION_LIST WHERE USERNO = #{userno}
 	</select>	
 	
 	<select id="getBuyCount" resultType="_int">
-		SELECT COUNT(*) FROM AUCTION_LIST L
-		LEFT OUTER JOIN AUCTION_PRICE P ON L.AUCTION_NO = P.AUCTION_NO
-		WHERE L.STATUS = 'END' AND P.UPPER_USER_NO = #{userno}
+		SELECT COUNT(*) FROM AUCTION_PRICE P
+		LEFT OUTER JOIN AUCTION_LIST L ON L.AUCTION_NO = P.AUCTION_NO
+		WHERE L.USERNO != #{userno} AND UPPER_USER_NO = #{userno} AND STATUS='END'
 	</select>
 	
 	<select resultType="com.carrot.marketapp.model.dto.BoardDTO" parameterType="Map" id="getAuctionListAddressItems">

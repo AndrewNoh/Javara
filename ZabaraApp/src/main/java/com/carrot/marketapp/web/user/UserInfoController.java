@@ -302,8 +302,10 @@ public class UserInfoController {
 	 // 마이페이지 판매내역
 	   @GetMapping("selllist.do")
 	   public String selllist(@RequestParam Map map, Model model, Authentication auth, Principal principal) {
-	      map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기
-
+		  map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기
+		  UserDTO userinfo = userService.selectOne(map);
+		  map.put("userno", userinfo.getUserno());
+		  
 	      // 서비스 호출]
 	      // 그 형식에 맞는 dto만들어서 넣는 방법이 있음
 	      List<BoardDTO> record = boardService.mypageSelllist(map);

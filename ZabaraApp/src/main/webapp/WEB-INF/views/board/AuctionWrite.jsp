@@ -77,10 +77,11 @@ border-radius: 15px;
 					  		</select>
 						</div>
 						
-						<h6 style="font-weight: bold; color:#000">판매주소 선택(선택사항)</h6>
+						<h6 style="font-weight: bold; color:#000">판매주소 선택</h6>
 						<div class="form-group">
 							<input type="text" name="address" class="form-style" style="border:none; solid: 1px gray; padding: 10px; width: 360px"
 									onmousedown="daumAddress()" placeholder="내 동네 이름(동,읍,면으로 검색)" id="address" autocomplete="off" readonly>
+							
 							<input type="hidden" name="latitude" id="latitude" value="not">
 							<input type="hidden" name="longitude" id="longitude" value="not">											
 						</div>
@@ -216,4 +217,6 @@ var geocoder = new daum.maps.services.Geocoder();
 	        }
 	    }).open();
 	}
+	
+	
 </script>
