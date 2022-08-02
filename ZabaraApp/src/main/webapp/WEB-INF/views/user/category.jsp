@@ -61,13 +61,13 @@
 }
 
 
-.map_category li:hover {background: #fff; }
+.map_category li:hover {background: #fff; color: black;border-radius:15px;}
 
 
 .map_category, .map_category * {
    margin: 0;
    padding: 0;
-   color: #000;
+   color: #fff;
 
 }
 
@@ -223,26 +223,26 @@ input.form-text {
     <div id="viewMap" style="margin-right: 20px">
        <div class="map_category" style="margin-left: 630px; font-family: 'GmarketSansMedium';" id="categorySelector">
            <ul>
-              <li style="color: #fff;">유아동</li>
-              <li style="color: #fff;">유아도서</li>
-              <li style="color: #fff;">여성잡화</li>
-              <li style="color: #fff;">여성의류</li>
-              <li style="color: #fff;">뷰티/미용</li>
-              <li style="color: #fff;">도서/티켓/음반</li>
-              <li style="color: #fff;">중고차</li>
-              <li style="color: #fff;">디지털기기</li>
-              <li style="color: #fff;">가구/인테리어</li>
+              <li >유아동</li>
+              <li >유아도서</li>
+              <li >여성잡화</li>
+              <li >여성의류</li>
+              <li >뷰티/미용</li>
+              <li >도서/티켓/음반</li>
+              <li >중고차</li>
+              <li >디지털기기</li>
+              <li >가구/인테리어</li>
            </ul>
            <ul>
-            <li style="color: #fff;">기타중고물품</li>
-            <li style="color: #fff;">게임/취미</li>
-            <li style="color: #fff;"> 생활가전</li>
-            <li style="color: #fff;">생활/가공식품</li>
-            <li style="color: #fff;">남성패션/잡화</li>
-            <li style="color: #fff;">반려동물용품</li>
-            <li style="color: #fff;">식물</li>
-            <li style="color: #fff;">스포츠/레저</li>
-            <li style="color: #fff;">인기매물</li>   
+            <li >기타중고물품</li>
+            <li >게임/취미</li>
+            <li > 생활가전</li>
+            <li >생활/가공식품</li>
+            <li >남성패션/잡화</li>
+            <li >반려동물용품</li>
+            <li >식물</li>
+            <li >스포츠/레저</li>
+            <li >인기매물</li>   
            </ul>
         </div>
        <div id="map" style="border-radius: 20px; height: 1000px; margin-left: 325px" value="${address}"></div>

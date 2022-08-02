@@ -1364,8 +1364,8 @@ input[type="range"]::-webkit-slider-thumb {
 
 .chat {
   position: absolute;
-  top: 50%;
-  left: 78%;
+  top: 360px;
+  left: 80%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   width: 400px;
