@@ -15,7 +15,7 @@ public class CHANGE_UTIL {
 		return decimalFormat.format(Integer.parseInt(data)) + "원";
 	}
 	
-	//숫자에 ,만 붙임
+	//숫자에 ,만 붙임	
     public static String intToComma(String data){
         return  decimalFormat.format(Long.valueOf(data.replaceAll(",","")));
     }
