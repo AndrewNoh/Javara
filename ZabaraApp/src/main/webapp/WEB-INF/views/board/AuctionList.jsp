@@ -5,14 +5,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<div style="position: fixed;bottom: 15%; right: 5%;">
+<div style="position: fixed;bottom: 12%; right: 3%;">
  <a href="<c:url value="/board/write.do"><c:param name="board" value="Auction"/> </c:url>">
   <img src="${pageContext.request.contextPath}/resources/assets/img/write_btn.png" 
        title="글쓰기" style="width: 80px; height: 80px"></a>
-  </div>
-  <div style="position: fixed;bottom: 5%; right: 5%;">
+</div>
+<div style="position: fixed;bottom: 5%; right: 3%;">
    <a href="#portfolio"><img src="${pageContext.request.contextPath}/resources/assets/img/scrollbar_btn.png" 
-       title="위로가기" style="width: 80px; height: 80px"></a>
+      title="위로가기" style="width: 80px; height: 80px"></a>
 </div>
 
 <button type="button" id="prev" style="position: absolute; font-size: 70px; left: 0px; top:50%; z-index: 5; background-color:transparent; color: white; border: 0px">
@@ -92,7 +92,7 @@
 						        <div class="portfolio-info">
 						        	<h4>${LIST.title}</h4>
 						            <p>시작가 <fmt:formatNumber value="${LIST.base_Price}" pattern="#,###"/>원</p>
-						            <p style="color:#FFC107">현재가 <fmt:formatNumber value="${LIST.upper_Price}" pattern="#,###"/>원</p>						            
+						            <p style="color:#85adad">현재가 <fmt:formatNumber value="${LIST.upper_Price}" pattern="#,###"/>원</p>						            
 						            <div class="portfolio-links">
 						            	<a href="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[loop.index][0].imageName}?no=${loop.count}" data-gallery="portfolioGallery" class="portfolio-lightbox" id="img${loop.count}"><i class="bx bxs-photo-album"></i><span style="font-size: 12px; display: block;">사진</span></a>
 						                <a href="<c:url value="/board/auctionview.do"><c:param value="${LIST.auction_no}" name="no"/></c:url>" rel="lyteframe" data-gallery="portfolioDetailsGallery" id="view${loop.count}" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bxs-detail"></i><span style="font-size: 12px; display: block;">상세보기</span></a>
@@ -164,7 +164,7 @@
 			data:{'${_csrf.parameterName}':'${_csrf.token}', no:$(this).data("value"), board:"경매"},
 		}).done(function(data){
 			if (data != 1) {
-				like.children().css("color", "#18d26e");
+				like.children().css("color", "#85adad");
 			} else {
 				console.log("좋아요 해제")
 				like.children().css("color", '');
@@ -176,7 +176,7 @@
 	$(document).ready(function(){		
 		$.each(${likes}, function(index, value){
 			console.log("좋아요 : " + value);
-			$('a[data-value="'+value+'"]').children().css('color', '#18d26e');
+			$('a[data-value="'+value+'"]').children().css('color', '#85adad');
 		});
 		
 		var nowpage = parseInt($('#nowpage').val());

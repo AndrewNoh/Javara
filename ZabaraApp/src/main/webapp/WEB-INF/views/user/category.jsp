@@ -2,6 +2,7 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="<c:url value="https://code.jquery.com/jquery-3.6.0.js"/>"></script>
 <script src="<c:url value="https://code.jquery.com/ui/1.13.2/jquery-ui.js"/>"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
@@ -11,7 +12,7 @@
 <style>
 .bAddr {
    color: #fff;
-   background: #006600;
+   background: #85adad;
    width: auto;
    height: auto;
    margin: 8px;
@@ -71,19 +72,18 @@
 }
 
 .map_category {
-   position: absolute;
-   overflow: hidden;
-   top: 10px;
-   left: 10px;
-   width: auto;
-   height: 50px;
-   z-index: 10;
-   border: none;
-   font-size: 12px;
-   text-align: center;
-   background-color: #212529;
-
-}
+	border-radius: 15px;
+    position: absolute;
+    overflow: hidden;
+    top: 10px;
+    left: 10px;
+    width: auto;
+    height: 50px;
+    z-index: 10;
+    border: none;
+    font-size: 12px;
+    text-align: center;
+    background-color: #212529; }
 
 .map_category li {
    list-style: none;
@@ -362,12 +362,11 @@ function categoryItemList(){
                      '<div class="card-img">'+
                      '<img src="${pageContext.request.contextPath}/resources/assets/img/product_img/'+result[i].imagename+'">'+   
                      ' <i  id="overlayClose" onclick="closeOverlay()" class="bi bi-x-circle-fill" style="font-size: 1.5rem; color: black;position: absolute;top: -17px;left:335px;"></i>'+
-                     '<div class="circle"><img src="https://s.svgbox.net/files.svg?ic=sketch&fill=000" width="25" height="25"></div>'+
-                  '</div>'+
+                     
                   '<div class="card-action">'+
-                    '<div>'+
-                         '<div class="title" style="width:190px;">'+result[i].title+'</div>'+
-                          '<span>현재 입찰가: ₩'+result[i].upper_Price+'</span>'+                         
+                    '<div style="margin-top: -10px">'+
+                         '<div class="title" style="width:190px; font-family: GmarketSansMedium; margin-bottom: -5px;">'+result[i].title+'</div>'+
+                          '<span style="font-weight: bold;  font-family: GmarketSansMedium, sans-serif; margin-bottom: 10px;">현재 입찰가 '+result[i].upper_Price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원'+'</span>'+                         
                     '</div>'+
                     '<div class="btn-download">'+                      
                     '<a href="/marketapp/board/auctionview.do?no='+result[i].auction_no+'" rel="lyteframe" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><span style="font-size: 18px; display: block;"><button class="btn">입찰하러가기</button></span></a>'+
@@ -485,18 +484,18 @@ function infoboxcss(selector){
 function createListTag(object){
       
    var ul = $('#addressitemlist');
-   var li = '<li style="border:2px solid;border-radius: 10px;  margin:2px;" class="addressItem">'+
+   var li = '<li style="border:1px solid transparent; border-radius: 10px;  margin:2px; background-color: #85adad" class="addressItem">'+
                '<div class="row">'+
                   '<div class="col-5">'+
                      '<img style="width:100%;height:100%; border-radius: 7px;" src="${pageContext.request.contextPath}/resources/assets/img/product_img/'+object["imagename"]+'">'+
                   '</div>'+
                   '<div class="col">'+
-                     '<div class="title" style="text-align:center; margin-top:15px; width:175px;"><h5 style="font-family: "GmarketSansMedium"">'+object["title"]+'</h5></div>'+
+                     '<div class="title" style="text-align:center; margin-top:15px; width:175px; "><h5 style="font-family: GmarketSansMedium; font-size: 18px; margin-top: 10px; color: #fff">'+object["title"]+'</h5></div>'+
                      '<hr/>'+
-                     '<div><h6>시작가: ₩'+object["base_Price"]+'</h6></div>'+
-                     '<div><h6>최고가: ₩'+object["upper_Price"]+'</h6></div>'+
-                     '<div><h6>조회수: '+object["viewCount"]+'</h6></div>'+
-                     '<div><h6>마감일: '+object["endDate"].split(" ")[0]+'</h6></div>'+
+                     '<div><h6 style="color: #fff">시작가 '+object["base_Price"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원'+'</h6></div>'+
+                     '<div><h6 style="color: #fff">최고가 '+object["upper_Price"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원'+'</h6></div>'+
+                     '<div><h6 style="color: #fff">조회수 '+object["viewCount"]+'회'+'</h6></div>'+
+                     '<div><h6 style="color: #fff">마감일 '+object["endDate"].split(" ")[0]+'</h6></div>'+
                      '<input type="hidden" name="latitude" value="'+object["latitude"]+'"/>'+
                      '<input type="hidden" name="longitude" value="'+object["longitude"]+'"/>'+
                   '</div>'+
