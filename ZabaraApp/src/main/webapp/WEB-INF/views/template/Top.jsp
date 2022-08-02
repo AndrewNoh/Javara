@@ -103,7 +103,11 @@
 }
 </style>
 <body>
-
+<div style="position: fixed;bottom: 25%; right: 5%; z-index: 1;" id="chatbot">
+ <a >
+  <img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/binemoji.png" 
+       title="챗봇" style="width: 80px; height: 80px"></a>
+</div>
 
 	<form id="logoutForm" method="post"
 		action="<c:url value="/security/logout.do"/>">

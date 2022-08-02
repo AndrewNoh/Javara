@@ -131,24 +131,25 @@ width: 30%;
 
 <script>
 
-/* $(function() {
+ $(function() {
 
 	timer = setInterval( function () {
 
 		$.ajax({
 			url: '<c:url value="/chat/chattingroom.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
 			data: {'${_csrf.parameterName}':'${_csrf.token}'},
-			type: 'POST',
+			type: 'get',
 			dataType: 'text',
+			async:false, 
 			success: function (result) {
-				console.log(result)
+				//console.log(result)
 			},
 			error: function () {
-				console.log('error')
+				//console.log('error')
 			}
 		});
 		
 	    }, 1000);
 
-	}); */
+	}); 
 </script>
