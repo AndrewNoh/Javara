@@ -5,12 +5,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<div style="position: fixed;bottom: 50px; right: 30px;">
+<div style="position: fixed;bottom: 15%; right: 5%;">
  <a href="<c:url value="/board/write.do"><c:param name="board" value="Auction"/> </c:url>">
   <img src="${pageContext.request.contextPath}/resources/assets/img/write_btn.png" 
        title="글쓰기" style="width: 80px; height: 80px"></a>
   </div>
-  <div style="position: fixed;bottom: 110px; right: 30px;">
+  <div style="position: fixed;bottom: 5%; right: 5%;">
    <a href="#portfolio"><img src="${pageContext.request.contextPath}/resources/assets/img/scrollbar_btn.png" 
        title="위로가기" style="width: 80px; height: 80px"></a>
 </div>

@@ -253,6 +253,37 @@
 
 		<i class="bi bi-list mobile-nav-toggle"></i>
 	</nav>
+	
+	
+	<div class="chat" style="display: none;position: fixed">
+  <div class="chat-title">
+    <h1>자바라 챗봇</h1>
+    <h2>무엇이든 물어보세요</h2>
+    <figure class="avatar">
+      <img src="http://algom.x10host.com/chat/img/icon-oracle.gif" /></figure>
+      
+	  <div  class="r-nav"> 
+     <ul>
+		  <li> <a>X</a></li>
+		  
+		  <li> <a><img src="" width="26px" /></a></li>
+    	
+     	
+     </ul>
+     
+     </div>
+      
+      
+  </div>
+  <div class="messages">
+    <div class="messages-content"></div>
+  </div>
+  <div class="message-box">
+    <textarea type="text" class="message-input" placeholder="무엇이 궁금하신가요?"></textarea>
+    <button type="submit" class="message-submit sound-on-click">Send</button>
+  </div>
+
+</div>
 	<!-- .navbar -->
 	<script>
 		$(function() {
@@ -302,6 +333,9 @@
 			$("#imgsrch").click(function() {
 				$("#srchDiv").hide();
 				$("#srch").show();
+			});
+			$("#chatbot").click(function() {
+				$(".chat").toggle();
 			});
 
 		});
