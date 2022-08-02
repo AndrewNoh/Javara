@@ -24,9 +24,6 @@
    cursor: pointer;   
 }
 
-body{
- font-family: GmarketSansMedium;}
-
 #infobox {
     display: block;
     background: #50627F;
@@ -63,18 +60,17 @@ body{
 }
 
 
-.map_category li:hover {background: #fff; color: black;border-radius:15px;}
+.map_category li:hover {background: #fff; }
 
 
 .map_category, .map_category * {
    margin: 0;
    padding: 0;
-   color: #fff;
+   color: #000;
 
 }
 
 .map_category {
-   border-radius:15px;
    position: absolute;
    overflow: hidden;
    top: 10px;
@@ -204,8 +200,14 @@ input.form-text {
   background: #29d654;
 }
 
- 
      
+.title{
+   display:block;
+   white-space:nowrap;
+   overflow:hidden;
+   text-overflow:ellipsis;
+}     
+
 </style>
 <div class="row" style="margin:30px;">  
    <div class="col-lg-3" id="searchTab">
@@ -219,28 +221,28 @@ input.form-text {
          </div>
        </div>
     <div id="viewMap" style="margin-right: 20px">
-       <div class="map_category" style="margin-left: 35%; font-family: 'GmarketSansMedium';" id="categorySelector">
+       <div class="map_category" style="margin-left: 630px; font-family: 'GmarketSansMedium';" id="categorySelector">
            <ul>
-              <li >유아동</li>
-              <li >유아도서</li>
-              <li >여성잡화</li>
-              <li >여성의류</li>
-              <li >뷰티/미용</li>
-              <li >도서/티켓/음반</li>
-              <li >중고차</li>
-              <li >디지털기기</li>
-              <li >가구/인테리어</li>
+              <li style="color: #fff;">유아동</li>
+              <li style="color: #fff;">유아도서</li>
+              <li style="color: #fff;">여성잡화</li>
+              <li style="color: #fff;">여성의류</li>
+              <li style="color: #fff;">뷰티/미용</li>
+              <li style="color: #fff;">도서/티켓/음반</li>
+              <li style="color: #fff;">중고차</li>
+              <li style="color: #fff;">디지털기기</li>
+              <li style="color: #fff;">가구/인테리어</li>
            </ul>
            <ul>
-            <li >기타중고물품</li>
-            <li >게임/취미</li>
-            <li > 생활가전</li>
-            <li >생활/가공식품</li>
-            <li >남성패션/잡화</li>
-            <li >반려동물용품</li>
-            <li >식물</li>
-            <li >스포츠/레저</li>
-            <li >인기매물</li>   
+            <li style="color: #fff;">기타중고물품</li>
+            <li style="color: #fff;">게임/취미</li>
+            <li style="color: #fff;"> 생활가전</li>
+            <li style="color: #fff;">생활/가공식품</li>
+            <li style="color: #fff;">남성패션/잡화</li>
+            <li style="color: #fff;">반려동물용품</li>
+            <li style="color: #fff;">식물</li>
+            <li style="color: #fff;">스포츠/레저</li>
+            <li style="color: #fff;">인기매물</li>   
            </ul>
         </div>
        <div id="map" style="border-radius: 20px; height: 1000px; margin-left: 325px" value="${address}"></div>
@@ -306,8 +308,7 @@ function categoryItemList(){
         async: false,
         success : function(result) {
            if(result!=""){              
-                for(var i=0; i<result.length;i++){
-                   console.log(result[i]);
+                for(var i=0; i<result.length;i++){                   
                    switch(result[i].category){
                           case "디지털기기": categoryimage="category_digital.png";
                              break;
@@ -353,18 +354,19 @@ function categoryItemList(){
                       position : new kakao.maps.LatLng(result[i].latitude, result[i].longitude)
                       });
                    content = '<div id="infobox">' +
-                           '<div class="bAddr">' + result[i].title + '</div>' +                                                                          
+                           '<div class="bAddr title" style="width:150px;">' + result[i].title + '</div>' +                                                                          
                            '</div>';
 
                    var detailcontent = '<div id="app" class="overlayContainer">'+
                      '<div class="card">'+
                      '<div class="card-img">'+
-                     '<img src="${pageContext.request.contextPath}/resources/assets/img/product_img/'+result[i].imagename+'">'+
+                     '<img src="${pageContext.request.contextPath}/resources/assets/img/product_img/'+result[i].imagename+'">'+   
+                     ' <i  id="overlayClose" onclick="closeOverlay()" class="bi bi-x-circle-fill" style="font-size: 1.5rem; color: black;position: absolute;top: -17px;left:335px;"></i>'+
                      '<div class="circle"><img src="https://s.svgbox.net/files.svg?ic=sketch&fill=000" width="25" height="25"></div>'+
                   '</div>'+
                   '<div class="card-action">'+
                     '<div>'+
-                         '<div class="title">'+result[i].title+'</div>'+
+                         '<div class="title" style="width:190px;">'+result[i].title+'</div>'+
                           '<span>현재 입찰가: ₩'+result[i].upper_Price+'</span>'+                         
                     '</div>'+
                     '<div class="btn-download">'+                      
@@ -388,10 +390,10 @@ function categoryItemList(){
                    
                 }////if
                 else{                   
-                    var noitem="<h4 id='noitemtext' style='text-align:center;'>검색된 아이템이 없습니다.</h4>";
-                    $('#addressitemlist').append(noitem);
-                    $('#addressitemlist').attr('style','overflow-y: scroll;width:350px; height: 990px; margin-top: -110px; ');
-                 }///////////else
+                   var noitem="<h4 id='noitemtext' style='text-align:center;'>검색된 아이템이 없습니다.</h4>";
+                   $('#addressitemlist').append(noitem);
+                   $('#addressitemlist').attr('style','overflow-y: scroll;width:350px; height: 990px; margin-top: -110px; ');
+                }
         }////success
      });
    
@@ -422,6 +424,10 @@ function closeCategoryList(){
    }
 }
 
+function closeOverlay() {
+   customOverlay.setMap(null);     
+}
+
 //카테고리 선택시 마커표시 및 인포윈도우 아이템리스트 뿌려주기
 $('#categorySelector').click(function(e){      
    panTo(latitude,longitude);
@@ -442,13 +448,17 @@ $('#categorySelector').click(function(e){
    }   
    
 });
++
 
-
+//아이템목록 클릭시 마커위치로 이동
 $(document).on("click",'.addressItem',function(e){   
     var callLatitude =$(this).find('input:eq(0)').val();
     var callLongitude=$(this).find('input:eq(1)').val();    
     panTo(callLatitude,callLongitude);
 });
+
+
+
 
 
 
@@ -481,7 +491,7 @@ function createListTag(object){
                      '<img style="width:100%;height:100%; border-radius: 7px;" src="${pageContext.request.contextPath}/resources/assets/img/product_img/'+object["imagename"]+'">'+
                   '</div>'+
                   '<div class="col">'+
-                     '<div class="title" style="text-align:center; margin-top:15px;"><h5 style="font-family: "GmarketSansMedium"">'+object["title"]+'</h5></div>'+
+                     '<div class="title" style="text-align:center; margin-top:15px; width:175px;"><h5 style="font-family: "GmarketSansMedium"">'+object["title"]+'</h5></div>'+
                      '<hr/>'+
                      '<div><h6>시작가: ₩'+object["base_Price"]+'</h6></div>'+
                      '<div><h6>최고가: ₩'+object["upper_Price"]+'</h6></div>'+
