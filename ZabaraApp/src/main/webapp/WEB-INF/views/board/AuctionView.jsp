@@ -162,20 +162,21 @@ border-radius: 15px;
 						    		<option value="중고차">중고차</option>
 						    		<option value="디지털기기">디지털기기</option>
 						    		<option value="생활가전">생활가전</option>
-						    		<option value="가구인테리어">가구/인테리어</option>
+						    		<option value="가구/인테리어">가구/인테리어</option>
 						    		<option value="유아동">유아동</option>
 						    		<option value="유아도서">유아도서</option>
-						    		<option value="가공식품">가공식품</option>
-						    		<option value="스포츠레저">스포츠/레저</option>
+						    		<option value="생활/가공식품">생활/가공식품</option>
+						    		<option value="스포츠/레저">스포츠/레저</option>
 						    		<option value="여성잡화">여성잡화</option>
 						    		<option value="여성의류">여성의류</option>
-						    		<option value="남성패션잡화">남성패션/잡화</option>
-						    		<option value="게임취미">게임/취미</option>
-						    		<option value="뷰티미용">뷰티/미용</option>
+						    		<option value="남성패션/잡화">남성패션/잡화</option>
+						    		<option value="게임/취미">게임/취미</option>
+						    		<option value="뷰티/미용">뷰티/미용</option>
 						    		<option value="반려동물용품">반려동물용품</option>
-						    		<option value="도서티켓음반">도서티켓음반</option>
+						    		<option value="도서/티켓/음반">도서티켓음반</option>
 						    		<option value="식물">식물</option>
 						  		</select>
+						  		
 							</div>
 							<div class="my-3">
 								<p>가격</p>
