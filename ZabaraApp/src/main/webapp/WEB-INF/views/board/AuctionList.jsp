@@ -59,9 +59,7 @@
                      <li data-filter=".filter-기타" <c:if test="${category == '기타'}"> class="filter-active" </c:if>>기타</li>
                    </ul>
               </div>
-            </div>
-
-		
+            </div>		
 			<c:if test="${empty LISTS}" var="LIST">
 				<!-- 게시글들 -->
 			  	<div class="row portfolio-container">			
@@ -71,10 +69,8 @@
 				        </div>
 				    </div>
 			    </div>
-			</c:if>
-					
-			<c:if test="${!LIST}">
-				
+			</c:if>					
+			<c:if test="${!LIST}">				
 				<div class="row portfolio-container" id="list">
 				
 					<!-- 게시글 한블럭 -->
@@ -106,23 +102,17 @@
 					</c:forEach>
 					
 				</div>			        
-				<!-- 게시글 한블럭 -->
-				
-				
+				<!-- 게시글 한블럭 -->			
 				<div class="row" id="more">
 					<input type="hidden" value="모두" id="category"/>
 					<input type="hidden" value="${nowpage}" id="nowpage" name="nowpage"/>
 					<input type="hidden" value="${endpage}" id="endpage" name="nowpage"/>
-				</div>
-				
-			 </c:if>
-		     
-		     
-		        
-		</div>
-		      
+				</div>				
+			 </c:if>        
+		</div>		      
 	</div>
 </form>
+
 
 <script type="text/javascript">
 	$('#portfolio-flters > li').on("click", function(){
@@ -209,4 +199,7 @@
 		setTimeout(function(){$("#view"+no).get(0).click();}, 700);
 		
 	});
+	
+	
+
 </script>

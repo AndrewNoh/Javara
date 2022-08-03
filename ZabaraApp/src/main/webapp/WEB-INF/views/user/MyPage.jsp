@@ -183,7 +183,7 @@
                            <i class="bi bi-heart" style="color: #ff4141;"></i> <span data-purecounter-start="0"
                               data-purecounter-end="${likeCount}" data-purecounter-duration="1"
                               class="purecounter"></span>
-                           <p>관심목록</p>
+                           <p>찜목록</p>
                         </div>
                      </a>
                   </div>

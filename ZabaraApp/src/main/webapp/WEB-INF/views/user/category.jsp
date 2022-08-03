@@ -221,7 +221,7 @@ input.form-text {
          </div>
        </div>
     <div id="viewMap" style="margin-right: 20px">
-       <div class="map_category" style="margin-left: 630px; font-family: 'GmarketSansMedium';" id="categorySelector">
+       <div class="map_category" style="margin-left: 630px; font-family: 'GmarketSansMedium'; y-index: 0" id="categorySelector">
            <ul>
               <li >유아동</li>
               <li >유아도서</li>

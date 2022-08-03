@@ -103,11 +103,11 @@
 }
 </style>
 <body>
-<div style="position: fixed;top: 40px; right: 5%; z-index: 1;" id="chatbot">
- <a >
-  <img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/binemoji.png" 
-       title="챗봇" style="width: 80px; height: 80px;"></a>
+<div style="position: fixed;top: 30px; right: 3%; z-index: 1;" id="chatbot">
+ <a ><img src="${pageContext.request.contextPath}/resources/assets/img/chatbot_icon.png" 
+       title="챗봇" style="width: 100px; height: 100px;"></a>
 </div>
+
 
 	<form id="logoutForm" method="post"
 		action="<c:url value="/security/logout.do"/>">
@@ -254,38 +254,31 @@
 		<i class="bi bi-list mobile-nav-toggle"></i>
 	</nav>
 	
-	
-	<div class="chat" style="display: none;position: fixed">
-  <div class="chat-title">
-    <h1>자바라 챗봇</h1>
-    <h2>무엇이든 물어보세요</h2>
-    <figure class="avatar">
-      <img src="http://algom.x10host.com/chat/img/icon-oracle.gif" /></figure>
-      
-	  <div  class="r-nav"> 
-     <ul>
-		  <li> <a>X</a></li>
-		  
-		  <li> <a><img src="" width="26px" /></a></li>
-    	
-     	
-     </ul>
-     
-     </div>
-      
-      
-  </div>
-  <div class="messages">
-    <div class="messages-content"></div>
-  </div>
-  <div class="message-box">
-    <textarea type="text" class="message-input" placeholder="무엇이 궁금하신가요?"></textarea>
-    <button type="submit" class="message-submit sound-on-click">Send</button>
-  </div>
 
-</div>
-	<!-- .navbar -->
-	<script>
+<div class="chat" style="display: none;position: flex; y-index: 1;">
+  <div class="chat-title">
+    <h1 style="font-size: 15px; color: #000; font-family: GmarketSansBold">자바라 챗봇</h1>
+    
+    <figure class="avatar">
+      <img src="${pageContext.request.contextPath}/resources/assets/img/web_banner.png"   /></figure>     
+	<div  class="r-nav"> 
+     <ul>
+		  <li> <a>X</a></li>	  
+		  <li> <a><img src="" width="26px" /></a></li>   	
+     </ul>     
+	</div><!--r-nav -->   
+	</div><!--chat-title -->
+	<div class="messages">
+	    <div class="messages-content">
+	    </div>
+	</div><!-- messages -->
+	<div class="message-box">
+		<!-- <textarea type="text" class="message-input" placeholder="무엇이 궁금하신가요?"></textarea> -->
+		<button type="submit" class="btn btn-dark" style="float: right;">전송</button>
+	</div><!-- message-box -->
+</div><!-- chat -->
+
+<script>
 		$(function() {
 			Kakao.init('3b4e896dc0a59e1644573c8f5af25f9a');
 			console.log(Kakao.isInitialized());
@@ -337,7 +330,6 @@
 			$("#chatbot").click(function() {
 				$(".chat").toggle();
 			});
-
 		});
 
 		//이미지 분석 코드

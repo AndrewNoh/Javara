@@ -107,6 +107,10 @@ width: 70%;
   </header><!-- End Header -->
   
 <div style="width:100%; background-color:rgb(97 97 97 / 60%);" id="mainUnder">
+	<br>
+	<br>
+	<br>
+	<img src="${pageContext.request.contextPath}/resources/assets/img/main_scroll_banner.png" style="width: 500px; display: block; margin: 0 auto; "/>
 	<div style="width:90%; height:969px; margin:auto" class="row">
 		<c:forEach var="list" items="${lists}" varStatus="i">
 			<div style="margin:auto;" class="col-lg-5">
