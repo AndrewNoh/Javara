@@ -44,6 +44,7 @@ import com.carrot.marketapp.model.service.impl.ImageServiceimpl;
 import com.carrot.marketapp.model.service.impl.PayServiceimpl;
 import com.carrot.marketapp.model.service.impl.UserServiceimpl;
 import com.carrot.marketapp.util.FileUpDownUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 @RequestMapping("/userinfo")
@@ -66,6 +67,9 @@ public class UserInfoController {
 	
 	@Autowired
 	PayServiceimpl payService;
+	
+	@Autowired
+	ObjectMapper objectMapper;
 	
 
 	// 회원가입
@@ -460,5 +464,22 @@ public class UserInfoController {
 		return "user/category.market";
 	}
 	
+	@RequestMapping(value = "/accountbook.do")
+	   @ResponseBody
+	   public String accountbook(@RequestParam Map map, Model model, Authentication auth) throws Exception {
+		  Map result = new HashMap<>();
+		  map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기	     
+		  UserDTO userinfo = userService.selectOne(map);
+	      map.put("userno", userinfo.getUserno());
+	      List<BoardDTO> record = boardService.mypageaccountbook(map);
+	      int sum = 0;
+	         for(BoardDTO item:record) {
+	            sum +=Integer.parseInt(item.getUpper_Price());
+	         }
+	 		result.put("items",record.size());
+			result.put("total", sum);
+
+			return objectMapper.writeValueAsString(result);
+	   }
 
 }

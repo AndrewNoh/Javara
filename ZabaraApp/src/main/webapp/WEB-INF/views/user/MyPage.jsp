@@ -233,20 +233,20 @@
                   <div class="row">
                      <div class="col-lg-4 col-md-4 mt-4 mt-md-1">
                         <div class="icon-box" id="MapToggle">
-                           <i class="ri-store-line" style="color: #ffbb2c;"></i>
+                           <i class="ri-store-line" style="color: #5578ff;"></i>
                            <h3>동네 설정</h3>
                         </div>
                      </div>
                      <div class="col-lg-4 col-md-4 mt-4 mt-md-1">
                         <div class="icon-box" id="ChatToggle" >
-                           <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
+                           <i class="bi bi-bell-fill" style="color: #ffbb2c;"></i>
                            <h3>알림</h3>
                         </div>
                      </div>
 
                      <div class="col-lg-4 col-md-4 mt-4 mt-md-1">
                         <div class="icon-box" id="AccountBookToggle">
-                           <i class="ri-database-2-line" style="color: #de83d3;"></i>
+                           <i class="bi bi-calculator-fill" style="color: #de83d3;"></i>
                            <h3>가계부</h3>
                         </div>
                      </div>
@@ -294,7 +294,8 @@
          </div>
          
          
-         <div class="col mt-3" id="AccountBookToggleDiv" style="display: none">
+          <!-- 가계부 시작 -->
+         <div class="col mt-3" id="AccountBookToggleDiv" style="display: none" >
             <div class="interests container">
                <div class="section-title">
                   <h2 style="margin-bottom: 30px;">가계부 자바라</h2>
@@ -302,23 +303,25 @@
                <div class="row">
                   <div class="row">
                      <div class="col-lg-12 col-md-6 mt-4 ">
-                        <div class="icon-box">
-                           <i class="ri-store-line" style="color: #ffbb2c;"></i>
-                           <h3>판매건수</h3>
-                           <h2>&nbsp;&nbsp;12건</h2>
+                        <div class="accountBook" style="display: flex; justify-content:start;">
+                           <span><i class="bi bi-graph-up-arrow" style="color: #d77566; font-size:3rem;"></i></span>&nbsp;&nbsp;
+                           <span style="font-size:25px;">판매건수</span>&nbsp;&nbsp;&nbsp;
+                           <div class="items" style="font-size:25px;"></div>
                         </div>
                      </div>
+                     <h2 style="width: 460px;height: 1px;display: inline-block;background: #e2e2e2;margin: 4px 10px;"></h2>
                      <div class="col-lg-12 col-md-6 mt-4">
-                        <div class="icon-box">
-                           <i class="ri-store-line" style="color: #ffbb2c;"></i>
-                           <h3>판매 금액</h3>
-                           <h2>&nbsp;&nbsp;134800원</h2>
+                        <div class="accountBook" style="display: flex; justify-content:start;">
+                           <span><i class="bi bi-currency-dollar" style="color: #ffd500; font-size:3rem;"></i></span>&nbsp;&nbsp;
+                           <span style="font-size:25px;">판매금액</span>&nbsp;&nbsp;&nbsp;
+                           <div class="total" style="font-size:25px;"></div>
                         </div>
                      </div>
                   </div>
                </div>
             </div>
          </div>
+          <!-- 가계부 끝 -->
          
          <div class="col mt-3" id="MapToggleDiv" style="display: none">
             <form id="simpleChangeAddr" method="post"
@@ -390,12 +393,26 @@
       
 	  <!-- 토글 클릭 이벤트 -->
       <script type="text/javascript">
-         $(function() {
-            $("#AccountBookToggle").click(function() {
-               $("#AccountBookToggleDiv").toggle(1000);
-               if ($("#KeyToggleDiv").style === '')
-                  $("#KeyToggleDiv").toggle(1000);
-            });
+      $(function() {
+          $("#AccountBookToggle").click(function() {
+             $("#AccountBookToggleDiv").toggle(1000);
+             if ($("#KeyToggleDiv").style === '')
+                $("#KeyToggleDiv").toggle(1000);
+             $.ajax(
+                     {
+                        type : "POST",
+                        url: '<c:url value="/userinfo/accountbook.do"/>',
+                        data:{'${_csrf.parameterName}' : "${_csrf.token}"},
+                        success: function(result){
+                        	var re = JSON.parse(result);
+                        	console.log(re.items);
+                        	console.log(re.total);
+                        		$('.items').html(re.items+"건");
+                        		$('.total').html(re.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원");
+                        }
+                     }
+                  )
+          });
             $("#KeyToggle").click(function() {
                $("#KeyToggleDiv").toggle(1000);
                if ($("#AccountBookToggleDiv").style === '')
