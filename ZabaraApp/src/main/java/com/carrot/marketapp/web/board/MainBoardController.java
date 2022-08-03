@@ -21,7 +21,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.jsoup.select.Evaluator.IsEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -147,28 +146,6 @@ public class MainBoardController {
 		return "/board/AuctionView.market";
 	}
 	// 리스트 크게보기(끝)
-	
-	@RequestMapping("/shareView.do")
-	public String auctionviewAndroid(Model model, @RequestParam Map map, Principal principal) {
-		map.put("board", "경매");
-
-		BoardDTO list = boardService.selectOne(map);
-
-		int no = Integer.parseInt((String) map.get("no"));
-		map.put("auction_no", no);
-		List<ImageDTO> image = imageService.selectList(map);
-
-		model.addAttribute("images", image);
-		model.addAttribute("userno", 0);
-		model.addAttribute("list", list);
-		model.addAttribute("goChat", map.getOrDefault("goChat", 'N'));
-
-		if (map.getOrDefault("isupdate", 0).equals(1)) {
-			model.addAttribute("update", 1);
-		}
-
-		return "/board/AuctionView.market";
-	}
 
 	// 글쓰기
 	@GetMapping("/write.do")
@@ -293,48 +270,86 @@ public class MainBoardController {
 	// 글수정
 	@PostMapping("/edit.do")
 	@ResponseBody
-	public int edit(@RequestParam Map map, Model model, Principal principal, MultipartHttpServletRequest req)
+	public int edit(@RequestParam Map map, Model model, Principal principal, MultipartHttpServletRequest req, @RequestParam("filename") MultipartFile[] filename)
 			throws IllegalStateException, IOException {
 
-		List<MultipartFile> fileList = req.getFiles("filename");
-
 		String board = (String) map.get("board");
-
+		System.out.println(map.get("auction_no"));
+		
 		map = getUserInfo(map, model, principal);
 
-		switch (board) {
+		int a = 0;
 
-		case "우리동네":
-			map.put("townlist_no", map.get("no"));
-			break;
-		default:
-			map.put("auction_no", map.get("no"));
+		if (board.equals("경매")) {
+			System.out.println("종료일");
+			map.put("enddate", Integer.parseInt((String) map.get("enddate")));
 		}
 
-		int aff = boardService.update(map);
+		//경매면 금액 들어가야함
+		String price = "0";
+		if (!board.equals("우리동네")) {
+			System.out.println("가격입력");
+			price = map.get("price").toString().trim();
+		}
 
+		//경매가아님 & 사진이 없음
+		if (board.equals("우리동네") && filename[0].getOriginalFilename().equals("")) {
+			System.out.println("잘 작동하나 테스트해봐야 합니다.");
+			a = boardService.update(map);
+
+		} else if(board.equals("우리동네")){
+			//이미지를 포함해서 동네글 수정해야함
+			map.put("profile", "have");
+			a = boardService.update(map);
+		} else if(board.equals("경매") && filename[0].getOriginalFilename().equals("")) {
+			System.out.println("글만 수정");
+			a = boardService.update(map);
+		} else {
+			System.out.println("사진도 수정");
+			map.put("profile", "have");
+			a = boardService.update(map);
+		}
+		
 		String path = req.getSession().getServletContext().getRealPath("/resources/assets/img/product_img"); // 경로
+		
+		System.out.println("A의 값 : " + a);
 
-		if (aff == 1) {
-			// 사진 업로드부분
-			for (MultipartFile file : fileList) {
+		if (a == 1 && !(filename[0].getOriginalFilename().equals(""))) {
+			System.out.println("그럼 이프문 들어온거잖아");
+			for (int i = 0; i < filename.length; i++) {
 
-				String rename = FileUpDownUtils.getNewFileName(path, file.getOriginalFilename());// 같은 이름일때 파일제목변경
-
+				String rename = FileUpDownUtils.getNewFileName(path, filename[i].getOriginalFilename());// 같은 이름일때
+																										// 파일제목변경
+				System.out.println(rename);
+				
 				File dest = new File(path + File.separator + rename);
 
-				file.transferTo(dest);
+				System.out.println(dest);
+				
+				filename[i].transferTo(dest);
+
+				BufferedImage original = ImageIO.read(dest);
+				int type = original.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : original.getType();
+
+				BufferedImage resizeImagePng = resizeImage(original, type);
+				ImageIO.write(resizeImagePng, "png", dest);
+				BufferedImage resigeImage = ImageIO.read(dest);
+
+				File resize = new File(rename);
+
+				filename[i].transferTo(resize);
 
 				map.put("profile", rename);
-				aff = boardService.updateImage(map);
-
-				if (aff == 0) {
-					break;
-				}
+				System.out.println(map.get("profile"));
+				
+				int aff = boardService.insertImage(map);
+				System.out.println("업로드 성공 : " + aff);
+				a=aff;
+				
 			}
 		}
-
-		return aff;
+		
+		return a;
 
 	}
 

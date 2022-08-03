@@ -50,8 +50,11 @@ public class BoardDAO {
 			return sqlSession.insert("insertTownListImage", map);
 
 		} else {
-			int auctionNo = sqlSession.selectOne("getAuctionNo");
-			map.put("auction_no", auctionNo);
+			if(map.get("auction_no") == null) {
+				int auctionNo = sqlSession.selectOne("getAuctionNo");
+				map.put("auction_no", auctionNo);
+			}
+			
 			return sqlSession.insert("insertAuctionImage", map);
 
 		}
@@ -83,8 +86,10 @@ public class BoardDAO {
 
 	public int update(Map map) {
 		if (map.get("board").equals("우리동네")) {
-
-			int aff = sqlSession.delete("deleteGropImg", map);
+			int aff = 1;
+			if(map.get("profile") != null) {
+				aff = sqlSession.delete("deleteGropImg", map);
+			}			
 
 			sqlSession.delete("deleteTownLikeNo", map);
 
@@ -95,13 +100,23 @@ public class BoardDAO {
 			return 0;
 
 		} else {
-			int aff = sqlSession.delete("deleteAuctionImg", map);
-
+			int aff = 1;
+			System.out.println("aff : "+aff);
+			if(map.get("profile") != null) {
+				System.out.println("이미지 삭제 할거야 : true");
+				aff = sqlSession.delete("deleteAuctionImg", map);
+				System.out.println(aff);
+			}
+			
+			System.out.println("좋아요 삭제할그양");
 			sqlSession.delete("deleteAuctionLikeNo", map);
 			if (aff == 1) {
+				System.out.println("가격 재설정");
 				aff = sqlSession.update("updateAuctionPrice", map);
+				System.out.println(aff);
 			}
 			if (aff == 1) {
+				System.out.println("글 재설정");
 				return sqlSession.update("updateAuctionList", map);
 			}
 

@@ -328,7 +328,8 @@
 		UPDATE AUCTION_LIST
 		SET TITLE=#{title}, CONTENT=#{content},
 		CATEGORY=#{category}, LIKES=0,
-		POSTDATE=SYSDATE, ADDRNO=#{addrno}
+		POSTDATE=SYSDATE, ADDRNO=#{addrno},
+		ENDDATE=SYSDATE+#{enddate}
 		WHERE AUCTION_NO = #{auction_no}
 	</update>
 
