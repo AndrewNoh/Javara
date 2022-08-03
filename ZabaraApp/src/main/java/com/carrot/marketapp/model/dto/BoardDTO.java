@@ -21,6 +21,8 @@ public class BoardDTO {
 	private String auction_no;
 	private String townlist_no;
 	
+	
+		
 	//대부분의 공통사항
 	private String userNo;
 	private String title;

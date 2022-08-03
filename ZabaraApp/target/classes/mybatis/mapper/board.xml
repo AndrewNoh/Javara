@@ -118,11 +118,24 @@
 		SELECT * FROM TOWN_LIST WHERE townlist_no = #{townlist_no}
 	</select>
 
+	<select id="selectTownLikeNo" resultType="_int">
+		SELECT COUNT(*) FROM
+		TOWN_LIKE WHERE TOWNLIST_NO = #{no}
+	</select>
+
 	<select id="selectTownLike" resultType="_int"
 		parameterType="Map">
-		SELECT COUNT(*)FROM TOWN_LIKE WHERE TOWN_NO = #{no} AND
+		SELECT COUNT(*)FROM TOWN_LIKE WHERE TOWNLIST_NO = #{no} AND
 		USERNO = #{userno}
 	</select>
+
+	<select id="selectTownLikeList" parameterType="Map"
+		resultType="Integer">
+		SELECT TOWNLIST_NO FROM TOWN_LIKE WHERE USERNO =
+		${userno} ORDER BY
+		TOWNLIST_NO DESC
+	</select>
+
 
 	<select id="getTownImage" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.ImageDTO">
@@ -258,7 +271,7 @@
 	<insert id="insertBoard" parameterType="Map">
 		INSERT INTO TOWN_LIST
 		VALUES
-		(SEQ_TOWN_LIST_TOWNLIST_NO.NEXTVAL,#{userno},#{title},#{content},0,DEFAULT,#{category},#{addrno})
+		(SEQ_TOWN_LIST_TOWNLIST_NO.NEXTVAL,#{userno},#{title},#{content},0,DEFAULT,#{category},#{addrno},0)
 	</insert>
 
 	<insert id="insertTownListImage" parameterType="Map">
@@ -301,12 +314,12 @@
 	<!-- TOWN -->
 	<delete id="deleteTownImg" parameterType="Map">
 		DELETE FROM TOWN_IMG
-		WHERE TOWN_NO = #{town_no}
+		WHERE TOWNLIST_NO = #{townlist_no}
 	</delete>
 
 	<delete id="deleteTownLike" parameterType="Map">
 		DELETE FROM TOWN_LIKE
-		WHERE USERNO = #{userno} AND TOWN_NO = #{no}
+		WHERE USERNO = #{userno} AND TOWNLIST_NO = #{no}
 	</delete>
 
 	<delete id="deleteBoard" parameterType="Map">
@@ -367,6 +380,11 @@
 		LIKES=0, POSTDATE=SYSDATE,
 		ENDDATE=SYSDATE+1, ADDRNO=#{addrno}
 		WHERE AUCTION_NO = #{no}
+	</update>
+	
+	<update id="updateTownLike" parameterType="map">
+		UPDATE TOWN_LIST
+		SET LIKES=#{noLike} WHERE TOWNLIST_NO=#{no}
 	</update>
 
 	<update id="updateTownListImage" parameterType="Map">

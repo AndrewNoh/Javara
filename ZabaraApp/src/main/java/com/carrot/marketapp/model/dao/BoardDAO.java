@@ -213,32 +213,26 @@ public class BoardDAO {
 	}
 
 	public int insertNewAddress(Map map) {
-		// TODO Auto-generated method stub
 		return sqlSession.insert("insertNewAddress", map);
 	}
 
 	public BoardDTO getWriteAuctionView(Map map) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("getWriteAuctionView", map);
 	}
 
 	public AddressDTO getUpdateAddress(Map map) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("getUpdateAddress", map);
 	}
 
 	public int updateAddress(Map map) {
-		// TODO Auto-generated method stub
 		return sqlSession.update("updateAddress", map);
 	}
 	
 	public List<BoardDTO> mainPageListNoAddr(Map map) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("mainPageListNoAddr", map);
 	}
 
 	public List<BoardDTO> mainPageListYesAddr(Map map) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectList("mainPageListYesAddr", map);
 	}
 
@@ -257,5 +251,10 @@ public class BoardDAO {
 	public int getBuyCount(Map map) {
 		return sqlSession.selectOne("getBuyCount", map);
 	}
+
+	public int selectLiveLike(Map map) {
+		return sqlSession.selectOne("selectLiveLike", map);
+	}
+	
 
 }

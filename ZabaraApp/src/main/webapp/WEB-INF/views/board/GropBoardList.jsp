@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  <!-- ======= 동내 Section ======= -->
  <style>
 .form-group{
@@ -41,6 +42,11 @@ border-radius: 10px;
 }
 .comment_info_date{
 	float: right;}
+	
+a:hover {
+  color: #fff;
+  text-decoration: none;
+}
 </style> 
 <div style="position: fixed;bottom: 12%; right: 3%;">
    <a href="<c:url value="/board/write.do"><c:param name="board" value="GropBoard"/> </c:url>">
@@ -75,7 +81,7 @@ border-radius: 10px;
 						value="${_csrf.token}" />
 					<div class="row mx-1"style="display: flex; justify-content: space-between; align-items:flex-end; border-bottom: 0.5px solid #ffffff80;">
 						<div class="col-md-5 form-group mb-3" style="display: flex; align-items:center;">
-							<img style="border-radius: 50%; width: 50px; height: 50px;" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/zabaraDefaultProfile.png"/>
+							<img style="border-radius: 50%; width: 50px; height: 50px;" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${profileimage}"/>
 							<div style="padding: 10px 15px;" >${LIST.nickName}</div>
 						</div>
 						<c:set var="session_id">
@@ -97,7 +103,7 @@ border-radius: 10px;
 						</div>
 					</div>
 					<div class="form-group mb-3" style="padding: 10px 15px;">
-						<div style="font-size: 23px;font-weight: bold;">${LIST.title}</div>
+						<div style="font-size: 23px;font-weight: bold; color: #85adad">${LIST.title}</div>
 					</div>
 					
 					<div class="form-group mt-2" >
@@ -112,18 +118,21 @@ border-radius: 10px;
 								</div>
 							</c:if>
 						</c:forEach>
-					<div class="text-center mt-3" style="display: flex; justify-content:flex-end; align-items:center; border-top:0.5px solid #ffffff80;">
+						
+						<div class="text-center mt-3" style="display: flex; justify-content:flex-end; align-items:center; border-top:.1px solid #ffffff80;">
+						<i class="bi bi-heart-fill" style="color: #cc0000; font-size: 20px; margin-right: 1100px; margin-top: 10px;">${LIST.likes}</i>
+						
 						<div  style="margin-right:30px;margin-top: 10px">
-							<a class=""><i class="bx bi-heart mx-3" style="font-size: 38px; text-align: center;"></i>좋아요</a>
-							<a class="comment" ><i class="bi bi-card-text mx-3" style="font-size: 40px; text-align: center;" ></i>댓글</a>
+							<a class="like" style="font-size: 16px" data-value="${LIST.townlist_no}" ><i class="bi bi-heart-fill" style="font-size: 20px; text-align: center; "data-value="${LIST.townlist_no}"></i></a>
+							<a class="comment" style="margin-left: 10px; font-size: 16px"><i class="bi bi-chat-left-dots" style="font-size: 20px; text-align: center;" ></i></a>
 						</div>	
 					</div>
 					<div class="search row comments" style="display: none;" >
-							<h5 class="comment_title">댓글</h5>
+							<span class="p-2" style="background: #85adad;border-radius: 20px; width: 70px; margin-left: 30px; text-align: center; margin-top: 10px">댓글</span>
 						<div class="comment_box">
 									<div class="comment_nick_box mb-4">
-										<img src="https://ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?type=c77_77"
-											alt="프로필 사진" width="30" height="30"> 
+										<img src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${profileimage}"
+											width="30" height="30"> 
 											<a id="" class="comment_nickname">아이디1</a>
 									</div>
 									<div class="comment_text_box m-2" style="display: flex; justify-content: space-between;">
@@ -134,27 +143,23 @@ border-radius: 10px;
 									</div>
 						</div>
 							<div class="write_cmt" style="text-align: center;">
-								<div class="stylish-input-group">
-									<input type="text" placeholder="댓글을 입력해보세요" name="title"
-										class="search-bar"> <span class="input-group-addon">
-										<button id="modal-open" data-toggle="modal"
-											data-target="#myModal" type="button"
-											style="margin-left: -10px; vertical-align: -0.3em;">
-											<i class="bi bi-card-text" aria-hidden="false"
-												style="font-size: 25px; color: white;"></i>
-										</button>
-									</span>
-								</div>
-							</div>
+		                        <div class="stylish-input-group">
+		                           <input type="text" placeholder="댓글을 입력해보세요" name="title"
+		                              class="search-bar" style="border:none"> <span class="input-group-addon">
+		                              <button>
+		                                 <i class="bi bi-check2-circle" aria-hidden="false"
+		                                    style="font-size: 25px; color: white;"></i>
+		                              </button>
+		                           </span>
+		                        </div>
+                    		 </div>
 						</div>
-				</div>
-
-	<br />
-	</c:forEach>
-	</form>
+					</div>
+				<br/>
+			</c:forEach>
+		</form>
 	</div>
-	 
-  </div><!-- End 동내 Section -->
+  </div>
   <script>
   var comment = $('a[name=comment]');
   $(document).on("click", '.comment', function(e){
@@ -162,9 +167,58 @@ border-radius: 10px;
 	  var comment = document.querySelectorAll('.comment');
       for(var i=0; i<comments.length;i++){
     	  if(this===comment[i]){
-    	 	 console.log(comment[i]);
+    	 	 // console.log(comment[i]);
 	           $(comments[i]).toggle();
     	  }
       }
   });
+  
+  
+  var like = $('a[name=like]');
+  $(document).on("click", '.like', function(e){
+	   // console.log('클릭이벤트');
+	   var like = $(this);
+		$.ajax({
+			url :'<c:url value="/board/likeUp.do"/>',
+			type:'POST',
+			dataType: "text",
+			data:{'${_csrf.parameterName}':'${_csrf.token}', no:$(this).data("value"), board:"우리동네"},
+		}).done(function(data){
+			if (data != 1) {
+				// console.log('좋아요');
+				like.children().css("color", "#cc0000");
+			} else {
+				// console.log("좋아요 해제");
+				like.children().css("color", '');
+			}
+			
+			// 좋아요 실시간 반영
+			/*
+			$.ajax({
+			url :'<c:url value="/board/liveLikeUp.do"/>',
+			type:'POST',
+			dataType: "text",
+			data:{'${_csrf.parameterName}':'${_csrf.token}', no:$(this).data("value"), board:"우리동네"},
+				}).done(function(data){
+					
+					
+			});
+			*/
+			// select likes from townlist where townlist_no equalno
+			/*
+				// 쿼리
+				// 반환값 int
+				// 가져오는 값 likes
+			*/
+  		});
+  });
+  
+  	$(document).ready(function(){		
+		$.each(${likes}, function(index, value){
+			// console.log("좋아요 : " + value);
+			$('a[data-value="'+value+'"]').children().css('color', '#cc0000');
+		});
+		
+  	});
+
   </script>

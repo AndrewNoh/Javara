@@ -122,43 +122,39 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 	}
 
 	public AddressDTO getUpdateAddress(Map map) {
-		// TODO Auto-generated method stub
 		return boardDAO.getUpdateAddress(map);
 	}
 
 	public int UpdateAddress(Map map) {
-		// TODO Auto-generated method stub
 		return boardDAO.updateAddress(map);
 	}
 
 	public List<BoardDTO> mainPageListNoAddr(Map map) {
-		// TODO Auto-generated method stub
 		return boardDAO.mainPageListNoAddr(map);
 	}
 
 	public List<BoardDTO> mainPageListYesAddr(Map map) {
-		// TODO Auto-generated method stub
 		return boardDAO.mainPageListYesAddr(map);
 	}
 
 	public List<BoardDTO> mypagepurchaselist(Map map) {
-
 		return boardDAO.mypagepurchaselist(map);
 	}
 	
 	public int getLikeCount(Map map) {
-		// TODO Auto-generated method stub
 		return boardDAO.getLikeCount(map);
 	}
 
 	public int getSellCount(Map map) {
-		// TODO Auto-generated method stub
 		return boardDAO.getSellCount(map);
 	}
 
 	public int getBuyCount(Map map) {
-		// TODO Auto-generated method stub
 		return boardDAO.getBuyCount(map);
+	}
+
+	public int selectLiveLike(Map map) { // 좋아요 - 실시간 반영
+		return boardDAO.selectLiveLike(map);
 	}
 
 }
