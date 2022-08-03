@@ -116,7 +116,7 @@ width: 70%;
 			        		<h2 class="portfolio-title">${list.title}</h2>
 			        		<div class="portfolio-details-slider swiper">
 			            		<div class="swiper-wrapper align-items-center">
-									<c:forEach var="in" begin="0" end="${fn:length(imageList[i.index])-1}">
+									<c:forEach var="in" begin="0" end="${fn:length(imageList[i.index]) eq 0 ? 0 : fn:length(imageList[i.index])-1}">
 										<div class="swiper-slide">
 											<img src="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[i.index][in].imageName}">
 										</div>

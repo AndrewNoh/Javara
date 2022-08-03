@@ -125,9 +125,9 @@ border-radius: 15px;
 			<form action="" id="editForm" method="post" role="form" class="mt-4" enctype="multipart/form-data">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				<div class="row">
-		        	<h2 class="portfolio-title"><input type="text" class="form-control" placeholder="제목을 입력하세요" name="title" value="${list.title}"></h2>
+		        	<h2 class="portfolio-title"><input type="text" value="${list.title}" class="form-control" placeholder="제목을 입력하세요" name="title" required="required"></h2>
 		        	<div class="col-lg-8 pb-3">
-		        		<div class="portfolio-details-slider swiper contents" style=" text-align: center;">
+		        		<div class="portfolio-details-slider swiper contents" style="text-align: center; ">
 							
 							<div style="height: 400px; line-height: 400px;" id="previewImage" class="contents mb-5">
 								<c:forEach var="image" items="${images}" varStatus="editimgloop">
@@ -153,9 +153,9 @@ border-radius: 15px;
 		            	</div>
 		          	</div>
 		
-		          	<div class="col-lg-4 portfolio-info ">
+		          	<div class="col-lg-4 custom-form " style="margin-bottom: 15px;">
 		            	<div class="content">
-		            		<h6>제품 카테고리</h6>
+		            		<h6 style="font-weight: bold; color:#000">카테고리</h6>
 							<div class="custom-select form-group mt-0 mt-md-0 mb-3">
 						 		<select name="category">
 						    		<option selected value="기타">기타</option>
@@ -177,20 +177,41 @@ border-radius: 15px;
 						    		<option value="식물">식물</option>
 						  		</select>
 							</div>
+							
+							<h6 style="font-weight: bold; color:#000">경매 종료일</h6>
+							<div class="custom-select form-group mt-0 mt-md-0 mb-3">							
+						 		<select name="enddate">					 			
+						    		<option selected value="1">1일(24시간)</option>
+						    		<option value="2">2일(48시간)</option>
+						    		<option value="3">3일(72시간)</option>
+						    		<option value="4">4일(96시간)</option>
+						    		<option value="5">5일(120시간)</option>
+						  		</select>
+							</div>
+							
+							<h6 style="font-weight: bold; color:#000">판매주소 선택</h6>
+							<div class="form-group">
+								<input type="text" name="address" class="form-style" style="border:none; solid: 1px gray; padding: 10px; width: 360px"
+										onmousedown="daumAddress()" placeholder="내 동네 이름(동,읍,면으로 검색)" id="address" autocomplete="off" readonly>
+								
+								<input type="hidden" name="latitude" id="latitude" value="not">
+								<input type="hidden" name="longitude" id="longitude" value="not">											
+							</div>
+							
 							<div class="my-3">
-								<p>가격</p>
-								<input type="text" class="form-control" placeholder="가격을 입력하세요" name="price" value="${list.base_Price}">
+								<p style="font-weight: bold; margin-bottom: 7px; color:#000">가격</p>
+								<input type="text" style="margin-bottom: 10px"
+									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
+									maxlength="11" class="form-control" placeholder="가격을 입력하세요" name="price" pattern="[1-9][0-9]{0,}0" title="금액은 0으로 시작할 수 없습니다.\n금액은 최소 10원단위 입니다." required="required">
 							</div>
 							<div class="mt-3 mb-5">
-								<p>내용</p>
-								<textarea class="form-control" rows="5" name="content">${list.content}</textarea>
+								<p style="font-weight: bold; margin-bottom: 7px; color:#000">내용</p>
+								<textarea class="form-control" rows="10" name="content" required="required" placeholder="내용을 입력하세요"></textarea>
 							</div>
 							<div class="text-center col ">
-								<button class="col-4 m-2 btn btn-outline" type="button" id="submit">수정</button>
-								<button class="col-4 m-2 btn btn-outline" type="button" id="cancle">취소</button>
+								<button class="col-4 m-2 btn btn-outline" type="submit">글쓰기</button>
+								<button class="col-4 m-2 btn btn-dark" id="goList" style="border: 0; padding: 10px 30px; color: #fff; transition: 0.4s; border-radius: 4px;" type="button">목록</button>
 							</div>
-							<input type="hidden" name="board" value="경매"/>
-							<input type="hidden" name="no" value="${param.no}"/>
 		          		</div>
 		        	</div>
 		      	</div>
