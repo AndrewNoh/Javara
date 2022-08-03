@@ -93,9 +93,16 @@ border-radius: 15px;
 				</div>		
 				
 				<c:if test="${!isWriter}">
-					<div style="text-align: center; font-size: 20px; margin-bottom: 15px;">
-						 <button class="btn" style="background-color: #85adad; color: #fff" data-toggle="modal" data-target="#bidUI">입찰하기</button>
-					</div>
+					<c:if test="${userno == 0 }" var="isZero">
+						<div style="text-align: center; font-size: 20px; margin-bottom: 15px;">
+							 <a href="<c:url value="/chat/chatting.do"/>"><button class="btn" style="background-color: #85adad; color: #fff" data-toggle="modal" data-target="#bidUI">로그인하기</button></a>
+						</div>
+					</c:if>	
+					<c:if test="${!isZero}">
+						<div style="text-align: center; font-size: 20px; margin-bottom: 15px;">
+							 <button class="btn" style="background-color: #85adad; color: #fff" data-toggle="modal" data-target="#bidUI">입찰하기</button>
+						</div>
+					</c:if>
 				</c:if>
 				
 				<div style="text-align: center; font-size: 20px; margin-bottom: 20px; ">

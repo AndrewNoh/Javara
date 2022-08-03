@@ -21,6 +21,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.jsoup.select.Evaluator.IsEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -146,6 +147,28 @@ public class MainBoardController {
 		return "/board/AuctionView.market";
 	}
 	// 리스트 크게보기(끝)
+	
+	@RequestMapping("/shareView.do")
+	public String auctionviewAndroid(Model model, @RequestParam Map map, Principal principal) {
+		map.put("board", "경매");
+
+		BoardDTO list = boardService.selectOne(map);
+
+		int no = Integer.parseInt((String) map.get("no"));
+		map.put("auction_no", no);
+		List<ImageDTO> image = imageService.selectList(map);
+
+		model.addAttribute("images", image);
+		model.addAttribute("userno", 0);
+		model.addAttribute("list", list);
+		model.addAttribute("goChat", map.getOrDefault("goChat", 'N'));
+
+		if (map.getOrDefault("isupdate", 0).equals(1)) {
+			model.addAttribute("update", 1);
+		}
+
+		return "/board/AuctionView.market";
+	}
 
 	// 글쓰기
 	@GetMapping("/write.do")

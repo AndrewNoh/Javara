@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override // 리소스 보안 부분
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests() // 요청에 의한 보안검사 시작
+				.antMatchers("/board/shareView.do").permitAll()
 				.antMatchers("/board/**", "/auction/**", "/chat/**").hasAnyRole("USER").antMatchers("/", "/main")
 				.permitAll().anyRequest().permitAll() // 어떤 요청에도 보안검사를 한다.
 
