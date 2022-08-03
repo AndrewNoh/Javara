@@ -464,7 +464,84 @@
 		});
 		
 		
-		
+		<sec:authentication property="name" var="username" />
+			<c:if test="${username != 'anonymousUser'}" var="isLogin">
+			wsocket = new WebSocket("ws://${pageContext.request.serverName}:${pageContext.request.serverPort}<c:url value='/chat-ws.do/0'/>");//192.168.219.101//192.168.0.129
+			 //console.log('wsocket:',wsocket);
+			 //서버와 연결된 웹 소켓에 이벤트 등록
+			 if(opener==null){ 
+				 wsocket.onopen;;
+			}else{ 
+				 wsocket.close();
+			}	
+			
+			 wsocket.onclose=function(){
+				 //console.log("연결이 끊어 졌어요");
+			 };
+			 wsocket.onmessage=receive;
+			 wsocket.onerror=function(e){
+			    //console.log('에러발생:',e)
+			 }
+			 
+			//서버에 연결되었을때 호출되는 콜백함수
+			</c:if>
+			 function receive(e){//e는 message이벤트 객체
+			     //서버로부터 받은 데이타는 이벤트객체(e).data속성에 저장되어 있다
+			     
+			     //일반 메세지
+			     console.log("내번호",${userno});
+			     console.log("내이메일",'${username}');
+			     console.log("내채팅",${roomno});
+			     console.log(e.data);
+			     
+			     if(e.data.includes('RoomNo')){
+			    	 var start = e.data.indexOf(",");
+			    	 if(e.data.substring(0,start)==='RoomNo:${roomno}'){
+			    		 console.log('같은방');
+			    	 }
+			    	 else if(e.data.includes('senduserno:${userno}') || e.data.includes('writeuserno:${userno}')){
+			    		 if(!e.data.includes('${username}')){
+				    		 alert('채팅이 도착했어요');
+				    	 }
+			    	 }
+			     }
+			     else if(e.data.includes('경매')){
+			     var start1 = e.data.indexOf(",");
+			     var start2 = e.data.indexOf(":");
+			     console.log(e.data.substring(0,start1));
+	    		 console.log('auction_no${list.auction_no}');
+	    		 console.log('userNo${list.userNo}');
+			    	 if( e.data.includes('userNo${userno}')){
+			    		 console.log(e.data.substring(0,start1));
+			    		 console.log('auction_no${list.auction_no}');
+			    		 alert(e.data.substring(start2+1));
+				     }
+			 	}
+			     else if(e.data.includes('동네')){
+			    	 if(e.data.includes('townlist_no:${townlist_no}')){
+				    	 if(!e.data.includes('${username}')){
+				    		 alert('동네생활 댓글이 달렸어요');
+				    	 }
+				     }
+			     }
+			 }
+			 
+			 /* $(document).ready(function(){
+				 $.ajax({
+						url: '<c:url value="/template/top.do"></c:url>',
+						data: {userno:${userno},'${_csrf.parameterName}':'${_csrf.token}'},
+						type: 'get',
+						dataType: 'text',
+						success: function (result) {
+							console.log(result)
+						},
+						error: function () {
+							console.log('error')
+						}
+					});
+				});	 */
+
+
 
 		
 	</script>

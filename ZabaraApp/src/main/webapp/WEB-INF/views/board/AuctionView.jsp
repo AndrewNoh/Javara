@@ -415,6 +415,8 @@ border-radius: 15px;
 					window.location.href = '<c:url value="/board/auctionview.do"><c:param value="${param.no}" name="no"/></c:url>';
 				}
 			});
+			wsocket.send('경매 auction_no${list.auction_no},userNo${list.userNo},email${email}:'+"${list.title}의 최고가가 갱신되었어요");
+			console.log('경매 auction_no${list.auction_no},userNo${list.userNo},email${email}:'+"${list.title}의 최고가가 갱신되었어요");
 		}
 	});
 	
