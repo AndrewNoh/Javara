@@ -207,7 +207,8 @@ input.form-text {
    overflow:hidden;
    text-overflow:ellipsis;
 }     
-
+ body{
+ font-family: GmarketSansMedium;}
 </style>
 <div class="row" style="margin:30px;">  
    <div class="col-lg-3" id="searchTab">

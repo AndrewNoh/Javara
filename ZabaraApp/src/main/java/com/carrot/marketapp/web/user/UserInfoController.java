@@ -456,6 +456,8 @@ public class UserInfoController {
 	public String category(Model model, Principal principal) {
 		Map map = new HashMap<>();
 		map.put("email", principal.getName());
+		UserDTO userinfo = userService.selectOne(map);
+	    model.addAttribute("userno", userinfo.getUserno());
 		UserDTO record = userService.selectOne(map);
 		model.addAttribute("latitude",record.getLatitude());
 		model.addAttribute("longitude",record.getLongitude());

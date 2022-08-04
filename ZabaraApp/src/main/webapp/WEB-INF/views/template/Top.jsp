@@ -101,6 +101,49 @@
 .navbar a[id=top_banner]:before {
 	background-color: rgb(255 255 255/ 0%);
 }
+
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #85adad;
+  color: #fff;
+  text-align: center;
+  border-radius: 20px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 90%;
+  top: 30px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {top: 0; opacity: 0;} 
+  to {top: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {top: 0; opacity: 0;}
+  to {top: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {top: 30px; opacity: 1;} 
+  to {top: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {top: 30px; opacity: 1;}
+  to {top: 0; opacity: 0;}
+}
+
 </style>
 <body>
 <div style="position: fixed;top: 30px; right: 3%; z-index: 1;" id="chatbot">
@@ -277,7 +320,9 @@
 		<input id="message" type="text"><button type="submit" class="btn btn-dark" style="float: right;">전송</button>
 	</div><!-- message-box -->
 </div><!-- chat -->
-<script src="<c:url value="/js/chatbot.js"/>"></script>
+
+<div id="snackbar"></div>
+
 <script>
 
 
@@ -510,21 +555,26 @@
 			</c:if>
 			 function receive(e){//e는 message이벤트 객체
 			     //서버로부터 받은 데이타는 이벤트객체(e).data속성에 저장되어 있다
-			     
+			      const element = document.getElementById('snackbar');
 			     //일반 메세지
 			     console.log("내번호",${userno});
 			     console.log("내이메일",'${username}');
-			     console.log("내채팅",${roomno});
+			     //console.log("내채팅",${roomno});
+			     console.log("글버노",${auction_no});
 			     console.log(e.data);
 			     
 			     if(e.data.includes('RoomNo')){
 			    	 var start = e.data.indexOf(",");
 			    	 if(e.data.substring(0,start)==='RoomNo:${roomno}'){
-			    		 console.log('같은방');
+			    		 //console.log('같은방');
 			    	 }
-			    	 else if(e.data.includes('senduserno:${userno}') || e.data.includes('writeuserno:${userno}')){
+			    	 else if(e.data.includes('senduserno:${userno},') || e.data.includes('writeuserno:${userno}')){
 			    		 if(!e.data.includes('${username}')){
-				    		 alert('채팅이 도착했어요');
+				    		 element.innerHTML = '';
+				    		 element.innerHTML += '채팅이 도착했어요';
+				    		 var x = document.getElementById("snackbar");
+							  x.className = "show";
+							  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
 				    	 }
 			    	 }
 			     }
@@ -534,16 +584,32 @@
 			     console.log(e.data.substring(0,start1));
 	    		 console.log('auction_no${list.auction_no}');
 	    		 console.log('userNo${list.userNo}');
-			    	 if( e.data.includes('userNo${userno}')){
+			    	 if( e.data.includes('userNo${userno},')){
 			    		 console.log(e.data.substring(0,start1));
 			    		 console.log('auction_no${list.auction_no}');
-			    		 alert(e.data.substring(start2+1));
+						  element.innerHTML = '';
+			    		 element.innerHTML += e.data.substring(start2+1);
+			    		 var x = document.getElementById("snackbar");
+						  x.className = "show";
+						  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+				     }
+			    	 if( e.data.includes('upperuserno${userno},')){
+			    		 console.log(e.data.substring(0,start1));
+						  element.innerHTML = '';
+			    		 element.innerHTML += e.data.substring(start2+1);
+			    		 var x = document.getElementById("snackbar");
+						  x.className = "show";
+						  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
 				     }
 			 	}
 			     else if(e.data.includes('동네')){
 			    	 if(e.data.includes('townlist_no:${townlist_no}')){
 				    	 if(!e.data.includes('${username}')){
-				    		 alert('동네생활 댓글이 달렸어요');
+							  element.innerHTML = '';
+				    		 element.innerHTML += '동네생활 댓글이 달렸어요';
+				    		 var x = document.getElementById("snackbar");
+							  x.className = "show";
+							  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
 				    	 }
 				     }
 			     }
@@ -563,8 +629,6 @@
 						}
 					});
 				});	 */
-
-
 
 		
 	</script>

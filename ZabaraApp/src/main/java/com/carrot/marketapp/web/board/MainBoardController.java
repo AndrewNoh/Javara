@@ -509,6 +509,7 @@ public class MainBoardController {
 		map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기
 		UserDTO record = userService.selectOne(map);
 		map.put("userno", record.getUserno());
+		model.addAttribute("userno", record.getUserno());
 		Map addr = userService.editselectOne(map);
 		model.addAttribute("simpleAddress", addr.get("SIMPLEADDRESS"));
 		String query = (String) addr.get("SIMPLEADDRESS");// simpleAdress넣어주몀ㄴ되ㅏㅁ~!~

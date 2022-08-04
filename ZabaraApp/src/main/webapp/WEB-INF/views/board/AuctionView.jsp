@@ -426,6 +426,8 @@ border-radius: 15px;
 		        title : '입찰 가격은 현재 최고가보다 높아야합니다.'
 		    });
 		} else {
+			wsocket.send('경매 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}의 최고가가 갱신되었어요");
+			console.log('경매 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}의 최고가가 갱신되었어요");
 			$.ajax({
 				url :'<c:url value="/board/newUpperPrice.do"/>',
 				type:'POST',
@@ -437,6 +439,7 @@ border-radius: 15px;
 					window.location.href = '<c:url value="/board/auctionview.do"><c:param value="${param.no}" name="no"/></c:url>';
 				}
 			});
+			
 		}
 	});
 	
@@ -474,6 +477,46 @@ border-radius: 15px;
 				        icon : 'success',
 				        title : '낙찰하였습니다.'
 				    });
+					/* wsocket.send('낙찰 auction_no${list.auction_no},userNo${list.userNo},email${email}:'+"${list.title}가 낙찰되었어요");
+					console.log('낙찰 auction_no${list.auction_no},userNo${list.userNo},email${email}:'+"${list.title}가 낙찰되었어요"); */
+					 var today = new Date();
+					 if('${roomno}'===""){
+						   $.ajax({
+					           url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="0" name="townlist_no"/><c:param value="${list.auction_no}" name="auction_no"/><c:param value="${userno}" name="writeuserno"/></c:url>',
+					           data: {chatcontent:'축하합니다.낙찰되셨습니다.',
+					        	   	 img:'낙찰되셨습니다.png',
+					                 senduserno:'${userno}',
+					                 unread_count:'1',
+					                 sendtime: today.toLocaleTimeString('en-US'),
+					                 '${_csrf.parameterName}':'${_csrf.token}'},
+					           type: 'get',
+					           dataType: 'text',
+					           success: function (result) {
+					        	   console.log('get낙찰채팅')
+					           },
+					           error: function () {
+					        	   console.log('get낙찰채팅x')
+					           }
+					        });
+					   }
+						   
+					   $.ajax({
+				           url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="0" name="townlist_no"/><c:param value="${list.auction_no}" name="auction_no"/><c:param value="${userno}" name="writeuserno"/></c:url>',
+				           data: {chatcontent:'축하합니다.낙찰되셨습니다.',
+				        	   	 img:'낙찰되셨습니다.png',
+				                 senduserno:'${userno}',
+				                 unread_count:'1',
+				                 sendtime: today.toLocaleTimeString('en-US'),
+				                 '${_csrf.parameterName}':'${_csrf.token}'},
+				           type: 'POST',
+				           dataType: 'text',
+				           success: function (result) {
+				        	   console.log('post낙찰채팅')
+				           },
+				           error: function () {
+				        	   console.log('post낙찰채팅x')
+				           }
+				        });
 					
 				} else {
 					const Toast = Swal.mixin({
