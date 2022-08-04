@@ -161,6 +161,7 @@ a:hover {
 	</div>
   </div>
   <script>
+  // 댓글: 댓글창 오픈
   var comment = $('a[name=comment]');
   $(document).on("click", '.comment', function(e){
 	  var comments = document.querySelectorAll('.comments');
@@ -173,7 +174,15 @@ a:hover {
       }
   });
   
+  // 댓글: 댓글 달기
+  $('#send').click(function(){
+	console.log('클릭이벤트 발생');  
+	
+	
+  });
   
+  
+  // 좋아요
   var like = $('a[name=like]');
   $(document).on("click", '.like', function(e){
 	   // console.log('클릭이벤트');
@@ -185,7 +194,7 @@ a:hover {
 			data:{'${_csrf.parameterName}':'${_csrf.token}', no:$(this).data("value"), board:"우리동네"},
 		}).done(function(data){
 			if (data != 1) {
-				// console.log('좋아요');
+			 	// console.log('좋아요');
 				like.children().css("color", "#cc0000");
 			} else {
 				// console.log("좋아요 해제");
@@ -195,7 +204,7 @@ a:hover {
 			// console.log(like.data("value"))
 			
 			
-			// 좋아요 실시간 반영
+			   // 좋아요: 실시간 반영
 				$.ajax({	
 					url :'<c:url value="/board/liveLikeUp.do"/>',
 					type:'POST',
@@ -217,8 +226,12 @@ a:hover {
 		});
 		
   	});
+  	
+  	// 동네생활: 알림
+  	/*
   	$('#send').on('click',function(){
 		 wsocket.send('동네:townlist_no:${LIST.townlist_no},UserNO:${userno}');
 		 console.log('동네:townlist_no:${LIST.townlist_no},UserNO:${userno}');
 	})
+	*/
   </script>

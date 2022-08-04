@@ -473,9 +473,30 @@
 	<!-- TOWN -->
 	<select id="searchGropBoard" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-
+		<!-- 호담아 시간 남으면 구현해 -->
 	</select>
 	<!-- TOWN -->
+	
+	<!-- TOWN: comment -->
+	<select id="commentSelectList" parameterType="Map" resultType="commentDto">
+		SELECT * FROM TOWN_COMMENT WHERE TOWNLIST_NO = #{townlist_no} ORDER BY COMMENT_NO
+	</select>
+	
+	<insert id="commentInsert" parameterType="Map">
+		INSERT INTO TOWN_COMMENTS(
+		SEQ_TOWN_COMMENTS_COMMENT_NO.NEXTVAL,SEQ_TOWN_LIST_TOWNLIST_NO.NEXTVAL,
+		#{comment_content},#{comment_userno},SYSDATE,#{comment_level})
+	</insert>
+	
+	<update id="commentUpdate" parameterType="Map">
+		UPDATE TOWN_COMMENTS SET COMMENT_CONTENT = #{comment_content}, COMMENT_POSTDATE = SYSDATE
+		WHERE TOWNLIST_NO = #{townlist_no}
+	</update>
+	
+	
+	<delete id="commentDelete" parameterType="Map">
+		DELETE TOWN_COMMENTS WHERE COMMENT_NO = #{comment_no}
+	</delete>
 
 	<!-- SEARCH -->
 
