@@ -257,7 +257,7 @@
 
 <div class="chat" style="display: none;position: flex; y-index: 1;">
   <div class="chat-title">
-    <h1 style="font-size: 15px; color: #000; font-family: GmarketSansBold">자바라 챗봇</h1>
+    <h1 style="font-size: 15px; color: black; font-family: GmarketSansBold">자바라 챗봇</h1>
     
     <figure class="avatar">
       <img src="${pageContext.request.contextPath}/resources/assets/img/web_banner.png"   /></figure>     
@@ -269,16 +269,39 @@
 	</div><!--r-nav -->   
 	</div><!--chat-title -->
 	<div class="messages">
-	    <div class="messages-content">
+	    <div class="messages-content bg-white">
 	    </div>
 	</div><!-- messages -->
 	<div class="message-box">
-		<!-- <textarea type="text" class="message-input" placeholder="무엇이 궁금하신가요?"></textarea> -->
-		<button type="submit" class="btn btn-dark" style="float: right;">전송</button>
+		<!--<textarea type="text" class="message-input mt-2" id="message" placeholder="무엇이 궁금하신가요?"></textarea>-->
+		<input id="message" type="text"><button type="submit" class="btn btn-dark" style="float: right;">전송</button>
 	</div><!-- message-box -->
 </div><!-- chat -->
-
+<script src="<c:url value="/js/chatbot.js"/>"></script>
 <script>
+
+
+	$("#message").on('keypress',function(e) {
+		if (e.keyCode == 13){
+	        //e.preventDefault();
+	        var message = $(this).val()
+	        console.log(message)
+	        if (!message) {//텍스트를 입력하지 않는 경우
+	          return
+	        }
+	        //messages-content에 사용자의 응답 추가
+	        $('.messages-content').append('<div style="color:black;" class="col-md-11 offset-md-11 human-message">'+message+'</div>')
+	        // 입력창 클리어
+	        $('#message').val('')
+	        //스크롤바 아래로
+	        $(".messages").scrollTop($(".messages")[0].scrollHeight);
+	        $('.messages-content').focus();
+	        //메시지 전송
+	        sendMessage(message,'<%=session.getId()%>');
+	    }
+	});
+
+
 		$(function() {
 			Kakao.init('3b4e896dc0a59e1644573c8f5af25f9a');
 			console.log(Kakao.isInitialized());

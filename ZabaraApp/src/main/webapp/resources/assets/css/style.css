@@ -1374,7 +1374,7 @@ input[type="range"]::-webkit-slider-thumb {
   z-index: 2;
   overflow: hidden;
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
-  background: #f3d7c3;
+  background: #fff;
   border-radius: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1452,6 +1452,7 @@ Messages
   height: 101%;
   width: 100%;
   background: #fff;
+  overflow: auto;
 }
 .messages .message {
   clear: both;
