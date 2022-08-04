@@ -49,6 +49,7 @@ public class ChatController {
       model.addAttribute("writeuserno", map.get("writeuserno"));
 
       map.put("email", principal.getName());
+      model.addAttribute("email", principal.getName());
       UserDTO userNickname = userService.selectOne(map);
       model.addAttribute("userNickname", userNickname);
       map.put("userno", userNickname.getUserno());
@@ -66,8 +67,11 @@ public class ChatController {
          //System.out.println("GET방식 방번호 중복");
 
          map.put("roomno", chatroom.getRoomno());
+         map.put("senduserno", chatroom.getSenduserno());
          model.addAttribute("sendusernickname", chatroom.getSendusernickname());
+         model.addAttribute("senduserno", chatroom.getUserno());
          model.addAttribute("writeusernickname", chatroom.getWriteusernickname());
+         model.addAttribute("writeuserno", chatroom.getWriteuserno());
 
          model.addAttribute("roomno", chatroom.getRoomno());
          List<ChatDTO> msg = chatService.viewChatMessage(map);

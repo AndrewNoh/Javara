@@ -255,6 +255,10 @@ public class BoardDAO {
 	public int selectLiveLike(Map map) {
 		return sqlSession.selectOne("selectLiveLike", map);
 	}
+
+	public List<BoardDTO> mypageaccountbook(Map map) {
+		return sqlSession.selectList("mypageaccountbook", map);
+	}
 	
 
 }

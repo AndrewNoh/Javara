@@ -72,6 +72,7 @@ public class MainBoardController {
 	public String gropboard(Map map, Model model, Principal principal) {
 		model.addAttribute("board", "우리동네");
 		map.put("email", principal.getName());
+		model.addAttribute("email", principal.getName());
 
 		UserDTO user = userService.selectOne(map);
 
@@ -131,7 +132,7 @@ public class MainBoardController {
 		map.put("board", "경매");
 
 		BoardDTO list = boardService.selectOne(map);
-
+		model.addAttribute("email", principal.getName());
 		int no = Integer.parseInt((String) map.get("no"));
 		map = getUserInfo(map, model, principal);
 		map.put("auction_no", no);

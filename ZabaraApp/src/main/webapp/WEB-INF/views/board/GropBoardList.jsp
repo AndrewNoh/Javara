@@ -146,7 +146,7 @@ a:hover {
 		                        <div class="stylish-input-group">
 		                           <input type="text" placeholder="댓글을 입력해보세요" name="title"
 		                              class="search-bar" style="border:none"> <span class="input-group-addon">
-		                              <button>
+		                              <button id="send">
 		                                 <i class="bi bi-check2-circle" aria-hidden="false"
 		                                    style="font-size: 25px; color: white;"></i>
 		                              </button>
@@ -220,5 +220,8 @@ a:hover {
 		});
 		
   	});
-
+  	$('#send').on('click',function(){
+		 wsocket.send('동네:townlist_no:${LIST.townlist_no},UserNO:${userno}');
+		 console.log('동네:townlist_no:${LIST.townlist_no},UserNO:${userno}');
+	})
   </script>

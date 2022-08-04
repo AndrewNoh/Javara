@@ -123,81 +123,103 @@ border-radius: 15px;
     <div id="editDiv" class="contact" style="display:none;">    
 		<div class="container">	
 			<form action="" id="editForm" method="post" role="form" class="mt-4" enctype="multipart/form-data">
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				<div class="row">
-		        	<h2 class="portfolio-title"><input type="text" class="form-control" placeholder="제목을 입력하세요" name="title" value="${list.title}"></h2>
-		        	<div class="col-lg-8 pb-3">
-		        		<div class="portfolio-details-slider swiper contents" style=" text-align: center;">
-							
-							<div style="height: 400px; line-height: 400px;" id="previewImage" class="contents mb-5">
-								<c:forEach var="image" items="${images}" varStatus="editimgloop">
-									<c:if test="${fn:length(images)-1 eq editimgloop.index}" var="eqIndex">
-										<img id="${editimgloop.index}" src="${pageContext.request.contextPath}/resources/assets/img/product_img/${image.imageName}" style="width: auto; height: 100%;">
-									</c:if>
-									<c:if test="${!eqIndex}">
-									<img id="${editimgloop.index}" src="${pageContext.request.contextPath}/resources/assets/img/product_img/${image.imageName}" style="width: auto; height: 100%; display: none;">
-									</c:if>
-								</c:forEach>
-							</div>
-							<div style="height: 200px; line-height: 200px;" id="images" class="contents mb-5">
-								<c:forEach var="image" items="${images}" varStatus="editloop">
-									<img id="${editloop.index}" src="${pageContext.request.contextPath}/resources/assets/img/product_img/${image.imageName}" style="height: auto; width: 20%;">				
-								</c:forEach>
-							</div>
-							
-							<div class="custom-file mb-3">
-								<input type="file" multiple="multiple" class="custom-file-input" id="customFile" name="filename"> 
-								<label class="custom-file-label" for="customFile">파일 선택</label>
-							</div>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			<div class="row">
+	        	<h2 class="portfolio-title"><input type="text" class="form-control" placeholder="제목을 입력하세요" name="title" required="required" value="${list.title}"></h2>
+	        	<div class="col-lg-8 pb-3">
+	        		<div class="portfolio-details-slider swiper contents" style="text-align: center; ">
+						
+						<div style="height: 400px; line-height: 400px;" id="previewImage" class="contents mb-5">
+							<c:forEach var="image" items="${images}" varStatus="editimgloop">
+								<c:if test="${fn:length(images)-1 eq editimgloop.index}" var="eqIndex">
+									<img id="${editimgloop.index}" src="${pageContext.request.contextPath}/resources/assets/img/product_img/${image.imageName}" style="width: auto; height: 100%;">
+								</c:if>
+								<c:if test="${!eqIndex}">
+								<img id="${editimgloop.index}" src="${pageContext.request.contextPath}/resources/assets/img/product_img/${image.imageName}" style="width: auto; height: 100%; display: none;">
+								</c:if>
+							</c:forEach>
+						</div>
+						<div style="height: 200px; line-height: 200px;" id="images" class="contents mb-5">
+							<c:forEach var="image" items="${images}" varStatus="editloop">
+								<img id="${editloop.index}" src="${pageContext.request.contextPath}/resources/assets/img/product_img/${image.imageName}" style="height: auto; width: 20%;">				
+							</c:forEach>
+						</div>
+						
+						<div class="custom-file mb-3">
+							<input type="file" multiple="multiple" class="custom-file-input" id="customFile" name="filename"> 
+							<label class="custom-file-label" for="customFile">파일 선택</label>
+						</div>
+
+	            	</div>
+	          	</div>
 	
-		            	</div>
+	          	<div class="col-lg-4 custom-form " style="margin-bottom: 15px;">
+	            	<div class="content">
+	            		<h6>제품 카테고리</h6>
+						<div class="custom-select form-group mt-0 mt-md-0 mb-3">
+							<select name="category">
+						   		<option selected value="기타">기타</option>
+						   		<option value="중고차">중고차</option>
+						   		<option value="디지털기기">디지털기기</option>
+						   		<option value="생활가전">생활가전</option>
+						   		<option value="가구인테리어">가구/인테리어</option>
+						   		<option value="유아동">유아동</option>
+						   		<option value="유아도서">유아도서</option>
+						   		<option value="가공식품">가공식품</option>
+						   		<option value="스포츠레저">스포츠/레저</option>
+						   		<option value="여성잡화">여성잡화</option>
+						   		<option value="여성의류">여성의류</option>
+						   		<option value="남성패션잡화">남성패션/잡화</option>
+						   		<option value="게임취미">게임/취미</option>
+						   		<option value="뷰티미용">뷰티/미용</option>
+						   		<option value="반려동물용품">반려동물용품</option>
+						   		<option value="도서티켓음반">도서티켓음반</option>
+						   		<option value="식물">식물</option>
+							</select>
+						</div>
+						
+						<h6 style="font-weight: bold; color:#000">경매 종료일</h6>
+						<div class="custom-select form-group mt-0 mt-md-0 mb-3">							
+					 		<select name="enddate">					 			
+					    		<option selected value="1">1일(24시간)</option>
+					    		<option value="2">2일(48시간)</option>
+					    		<option value="3">3일(72시간)</option>
+					    		<option value="4">4일(96시간)</option>
+					    		<option value="5">5일(120시간)</option>
+					  		</select>
+						</div>
+						
+						<h6 style="font-weight: bold; color:#000">판매주소 선택</h6>
+						<div class="form-group">
+							<input type="text" name="address" class="form-style" style="border:none; solid: 1px gray; padding: 10px; width: 360px"
+									onmousedown="daumAddress()" placeholder="내 동네 이름(동,읍,면으로 검색)" id="address" autocomplete="off" readonly>
+							
+							<input type="hidden" name="latitude" id="latitude" value="not">
+							<input type="hidden" name="longitude" id="longitude" value="not">											
+						</div>
+						
+						<div class="my-3">
+							<p style="font-weight: bold; margin-bottom: 7px; color:#000">가격</p>
+							<input type="text" style="margin-bottom: 10px"
+								oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
+								maxlength="11" class="form-control" placeholder="가격을 입력하세요" value="${list.base_Price}" name="price" pattern="[1-9][0-9]{0,}0" title="금액은 0으로 시작할 수 없습니다.\n금액은 최소 10원단위 입니다." required="required">
+						</div>
+						<div class="mt-3 mb-5">
+							<p style="font-weight: bold; margin-bottom: 7px; color:#000">내용</p>
+							<textarea class="form-control" rows="10" name="content" required="required" placeholder="내용을 입력하세요">${list.content}</textarea>
+						</div>
+						<div class="text-center col ">
+							<button class="col-4 m-2 btn btn-outline" type="button" id="submit">수정</button>
+							<button class="col-4 m-2 btn btn-outline" type="button" id="cancle">취소</button>
+						</div>
+						<input type="hidden" name="board" value="경매"/>
+						<input type="hidden" name="auction_no" value="${param.no}"/>
 		          	</div>
-		
-		          	<div class="col-lg-4 portfolio-info ">
-		            	<div class="content">
-		            		<h6>제품 카테고리</h6>
-							<div class="custom-select form-group mt-0 mt-md-0 mb-3">
-						 		<select name="category">
-						    		<option selected value="기타">기타</option>
-						    		<option value="중고차">중고차</option>
-						    		<option value="디지털기기">디지털기기</option>
-						    		<option value="생활가전">생활가전</option>
-						    		<option value="가구/인테리어">가구/인테리어</option>
-						    		<option value="유아동">유아동</option>
-						    		<option value="유아도서">유아도서</option>
-						    		<option value="생활/가공식품">생활/가공식품</option>
-						    		<option value="스포츠/레저">스포츠/레저</option>
-						    		<option value="여성잡화">여성잡화</option>
-						    		<option value="여성의류">여성의류</option>
-						    		<option value="남성패션/잡화">남성패션/잡화</option>
-						    		<option value="게임/취미">게임/취미</option>
-						    		<option value="뷰티/미용">뷰티/미용</option>
-						    		<option value="반려동물용품">반려동물용품</option>
-						    		<option value="도서/티켓/음반">도서티켓음반</option>
-						    		<option value="식물">식물</option>
-						  		</select>
-						  		
-							</div>
-							<div class="my-3">
-								<p>가격</p>
-								<input type="text" class="form-control" placeholder="가격을 입력하세요" name="price" value="${list.base_Price}">
-							</div>
-							<div class="mt-3 mb-5">
-								<p>내용</p>
-								<textarea class="form-control" rows="5" name="content">${list.content}</textarea>
-							</div>
-							<div class="text-center col ">
-								<button class="col-4 m-2 btn btn-outline" type="button" id="submit">수정</button>
-								<button class="col-4 m-2 btn btn-outline" type="button" id="cancle">취소</button>
-							</div>
-							<input type="hidden" name="board" value="경매"/>
-							<input type="hidden" name="no" value="${param.no}"/>
-		          		</div>
-		        	</div>
-		      	</div>
+		        </div>
+		    </div>
 			</form>
-		</div>
 	</div>
+</div>
 	
 <div class="modal fade" id="bidUI" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="position: fixed; top:25%; color:black">
 	<div class="modal-dialog" role="document">

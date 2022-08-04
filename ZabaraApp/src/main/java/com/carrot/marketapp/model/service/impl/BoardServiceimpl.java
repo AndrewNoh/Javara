@@ -157,4 +157,7 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 		return boardDAO.selectLiveLike(map);
 	}
 
+	public List<BoardDTO> mypageaccountbook(Map map) {
+		return boardDAO.mypageaccountbook(map);
+	}
 }

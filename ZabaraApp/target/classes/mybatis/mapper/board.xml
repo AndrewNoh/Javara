@@ -203,7 +203,11 @@
 	      ORDER BY
 	      L.POSTDATE DESC
 	</select>
-	
+	<select id="mypageaccountbook" parameterType="Map"
+		resultType="com.carrot.marketapp.model.dto.BoardDTO">
+		SELECT L.*,P.* FROM AUCTION_LIST L JOIN AUCTION_PRICE P ON L.AUCTION_NO =
+		P.AUCTION_NO WHERE STATUS = 'END' AND L.userno=#{userno}
+	</select>
 	<select id="getLikeCount" resultType="_int">
 		SELECT COUNT(*) FROM AUCTION_LIKE WHERE USERNO = #{userno}
 	</select>	
