@@ -32,6 +32,6 @@ public class CommentDAO {
 	    return sqlSession.delete("commentDelete", map);
 	}
 	   
-
+	
    
 }

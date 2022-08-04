@@ -136,6 +136,12 @@
 		TOWNLIST_NO DESC
 	</select>
 
+	
+	<!--좋아요 실시간 반영-->
+	<select id="selectLiveLike" resultType="_int" parameterType="Map">
+		SELECT LIKES FROM TOWN_LIST WHERE TOWNLIST_NO = #{no} 
+	</select>
+		
 
 	<select id="getTownImage" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.ImageDTO">

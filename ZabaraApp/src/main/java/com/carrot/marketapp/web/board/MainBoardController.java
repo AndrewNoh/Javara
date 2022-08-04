@@ -457,20 +457,20 @@ public class MainBoardController {
 		return aff;
 
 	}
-	/*
+	
 	// 좋아요 - 실시간 반영
 	@RequestMapping(value = "/liveLikeUp.do", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public int liveLikeUp(@RequestParam Map map, Model model, Principal principal) {
 		map = getUserInfo(map, model, principal);
-	
-		int likes = boardService.selectLiveLike(map);
 		
-		model.addAttribute("likes", likes);
+		int likes = boardService.selectLiveLike(map);
+		model.addAttribute("likes",likes);
+		// System.out.println("likes"+likes);
 
 		return likes;
 	}
-	*/
+	
 	@RequestMapping(value = "/newUpperPrice.do", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public int updateUpperPrice(@RequestParam Map map, Model model, Principal principal) {

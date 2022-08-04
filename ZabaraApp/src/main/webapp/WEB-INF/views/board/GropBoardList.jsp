@@ -120,7 +120,7 @@ a:hover {
 						</c:forEach>
 						
 						<div class="text-center mt-3" style="display: flex; justify-content:flex-end; align-items:center; border-top:.1px solid #ffffff80;">
-						<i class="bi bi-heart-fill" style="color: #cc0000; font-size: 20px; margin-right: 1100px; margin-top: 10px;">${LIST.likes}</i>
+						<i class="bi bi-heart-fill" id="likeval${LIST.townlist_no }" style="color: #cc0000; font-size: 20px; margin-right: 1100px; margin-top: 10px;">${LIST.likes}</i>
 						
 						<div  style="margin-right:30px;margin-top: 10px">
 							<a class="like" style="font-size: 16px" data-value="${LIST.townlist_no}" ><i class="bi bi-heart-fill" style="font-size: 20px; text-align: center; "data-value="${LIST.townlist_no}"></i></a>
@@ -192,27 +192,24 @@ a:hover {
 				like.children().css("color", '');
 			}
 			
+			// console.log(like.data("value"))
+			
+			
 			// 좋아요 실시간 반영
-			/*
-			$.ajax({
-			url :'<c:url value="/board/liveLikeUp.do"/>',
-			type:'POST',
-			dataType: "text",
-			data:{'${_csrf.parameterName}':'${_csrf.token}', no:$(this).data("value"), board:"우리동네"},
-				}).done(function(data){
-					
-					
-			});
-			*/
-			// select likes from townlist where townlist_no equalno
-			/*
-				// 쿼리
-				// 반환값 int
-				// 가져오는 값 likes
-			*/
-  		});
-  });
-  
+				$.ajax({	
+					url :'<c:url value="/board/liveLikeUp.do"/>',
+					type:'POST',
+					dataType: "text",
+					data:{
+						'${_csrf.parameterName}':'${_csrf.token}', 
+						 no: like.data("value")
+					}
+					}).done(function(data){
+						$('#likeval'+like.data("value")).text(data);
+						
+		  			});//////
+	  			});//////
+	  });
   	$(document).ready(function(){		
 		$.each(${likes}, function(index, value){
 			// console.log("좋아요 : " + value);
