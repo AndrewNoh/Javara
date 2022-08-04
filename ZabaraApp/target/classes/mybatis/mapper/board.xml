@@ -332,6 +332,10 @@
 		WHERE USERNO = #{userno} AND TOWNLIST_NO = #{no}
 	</delete>
 
+	<delete id="deleteTownLikeNo" parameterType="Map">
+		DELETE FROM TOWN_LIKE WHERE TOWNLIST_NO=#{townlist_no}
+	</delete>	
+
 	<delete id="deleteBoard" parameterType="Map">
 		DELETE TOWN_LIST WHERE
 		TOWNLIST_NO=#{townlist_no}

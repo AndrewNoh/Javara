@@ -74,6 +74,8 @@ public class BoardDAO {
 	public int delete(Map map) {
 		if (Integer.parseInt((String) map.get("townlist_no")) != 0) {
 			sqlSession.delete("deleteGropImg", map);
+			sqlSession.delete("deleteTownLikeNo", map);
+		// 댓글 삭제 추가 예정
 			return sqlSession.delete("deleteBoard", map);
 		} else {
 			sqlSession.delete("deleteAuctionImg", map);
@@ -84,13 +86,14 @@ public class BoardDAO {
 
 	}
 
+
 	public int update(Map map) {
 		if (map.get("board").equals("우리동네")) {
 			int aff = 1;
 			if(map.get("profile") != null) {
 				aff = sqlSession.delete("deleteGropImg", map);
 			}			
-
+			
 			sqlSession.delete("deleteTownLikeNo", map);
 
 			if (aff == 1) {

@@ -8,7 +8,7 @@
 
       <div class="section-title">
         <h2>동네생활</h2>
-        <p>동네글 수정하기</p>
+        <p>수정</p>
       </div>
 
       <div class="row mt-2">
@@ -51,10 +51,8 @@
 							<textarea class="form-control" rows="5" name="content" placeholder="내용을 입력하세요"></textarea>
 						</div>
 						<div class="text-center col ">
-							<button class="col-4 m-2 btn btn-light" type="submit">수정하기</button>
-							<a class="nav-link neonText" href="<c:url value="/board/gropboard.do"/>">
-								<button class="col-4 m-2 btn btn-light" type="button">목록</button>
-							</a>
+							<button class="col-4 m-2 btn" style="background-color: #FFC107; color: #fff" type="submit">글쓰기</button>
+							<button class="col-4 m-2 btn btn-dark" id="goList" style="border: 0; padding: 10px 30px; color: #fff; transition: 0.4s; border-radius: 4px;" type="button">목록</button>
 						</div>
 	          		</div>
 	        	</div>

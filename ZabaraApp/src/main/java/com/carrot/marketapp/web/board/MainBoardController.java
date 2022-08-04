@@ -417,13 +417,34 @@ public class MainBoardController {
 		return model;
 	}
 
+
 	@RequestMapping(value = "/delete.do", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public int delete(@RequestParam Map map, Model model, Principal principal) {
 		return boardService.delete(map);
 
 	}
-
+	
+	// 동네생활: 글 수정 
+	// 링크 이동
+	@GetMapping(value="/update.do", produces = "application/json;charset=UTF-8")
+	public String updateTown(@RequestParam Map map, Model model, Principal principal) {
+		model.addAttribute("townlist_no", map.get("townlist_no"));
+		
+		return "/board/GropBoardUpdate.market";
+	}
+	
+	// 동네생활: 글 수정
+	// 데이터 변경
+	@PostMapping(value="/update.do", produces = "application/json;charset=UTF-8")
+	public String updateToTown(@RequestParam Map map, Model model, Principal principal) {
+		model.addAttribute("townlist_no", map.get("townlist_no"));
+		
+		
+		return "/board/GropBoardUpdate.market";
+	}
+	
+	// 동네생활: 글 삭제
 	@RequestMapping("deleteTown.do")
 	public String deleteTown(@RequestParam Map map, Model model, Principal principal) {
 		boardService.delete(map);
@@ -432,6 +453,7 @@ public class MainBoardController {
 
 	}
 
+	// 동네생활: 좋아요 
 	@RequestMapping(value = "/likeUp.do", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public int like(@RequestParam Map map, Model model, Principal principal) {
@@ -458,7 +480,7 @@ public class MainBoardController {
 
 	}
 	
-	// 좋아요 - 실시간 반영
+	// 동네생활: 좋아요 - 실시간 반영
 	@RequestMapping(value = "/liveLikeUp.do", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public int liveLikeUp(@RequestParam Map map, Model model, Principal principal) {
