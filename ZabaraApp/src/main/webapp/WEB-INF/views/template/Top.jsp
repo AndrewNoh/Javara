@@ -269,7 +269,7 @@
 	</div><!--r-nav -->   
 	</div><!--chat-title -->
 	<div class="messages">
-	    <div class="messages-content bg-white">
+	    <div class="messages-content bg-white mt-2">
 	    </div>
 	</div><!-- messages -->
 	<div class="message-box">
@@ -290,7 +290,7 @@
 	          return
 	        }
 	        //messages-content에 사용자의 응답 추가
-	        $('.messages-content').append('<div style="color:black;" class="col-md-11 offset-md-11 human-message">'+message+'</div>')
+	        $('.messages-content').append('<div style="color:white; padding:7px; display: flex;justify-content: flex-end;" class="human-message"><span style="border-radius:10px; padding:5px; background-color:black; ">'+message+'</span></div>')
 	        // 입력창 클리어
 	        $('#message').val('')
 	        //스크롤바 아래로

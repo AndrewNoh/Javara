@@ -18,7 +18,7 @@ function sendMessage(message,session_id) {
            console.log('받은 메시지:',data)
           $('.messages-content').append(`
           	<div class="bot-message">
-                <div style="color:blue;" class=" col-md-5 bot-message">
+                <div style="color:blue;" class="bot-message">
                     ${data.message}
                 </div>
             </div>                
