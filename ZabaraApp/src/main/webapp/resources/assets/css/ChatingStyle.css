@@ -67,7 +67,7 @@ img{ max-width:100%;}
   font-size: 16px;
   margin: 0;
   padding: 5px 10px 5px 12px;
-  width: 100%;
+  
 }
 .time_date {
   color: #747474;
@@ -75,7 +75,12 @@ img{ max-width:100%;}
   font-size: 12px;
   margin: 8px 0 0;
 }
-.received_withd_msg { width: auto;}
+.received_withd_msg { 
+	    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+	}
 .mesgs {
   float: left;
   padding: 0px 5px 0 15px;

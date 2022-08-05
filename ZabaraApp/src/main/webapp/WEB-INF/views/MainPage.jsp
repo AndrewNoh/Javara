@@ -106,7 +106,7 @@ width: 70%;
   
   </header><!-- End Header -->
   
-<div style="width:100%; background-color:rgb(97 97 97 / 60%);" id="mainUnder">
+<div style="width:100%; background-color:#f9fafb5c; color:black" id="mainUnder">
 	<br>
 	<br>
 	<br>
@@ -114,7 +114,7 @@ width: 70%;
 	<div style="width:90%; height:969px; margin:auto" class="row">
 		<c:forEach var="list" items="${lists}" varStatus="i">
 			<div style="margin:auto;" class="col-lg-5">
-				<div class="container">	
+				<div class="container" style="background: #d7ebff;">	
 			        <div class="row">		
 			        	<div class="col-lg-8">
 			        		<h2 class="portfolio-title">${list.title}</h2>
@@ -159,7 +159,8 @@ width: 70%;
     	$('#logoutForm').submit();//스프링 씨큐리티 사용- csrf를 활성화 시킬때
     }
    
-    $(document).ready(function(){		
+    $(document).ready(function(){	
+    	$('#chatbot').hide();
 		$('#navbar').hide();
 		$(window).scrollTop(0);
 		$('#header').height("1000");

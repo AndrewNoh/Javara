@@ -42,7 +42,7 @@ public class ChatController {
    public String chatting(Model model, @RequestParam Map map, Principal principal) {
 
       model.addAttribute("wirtenickName", map.get("wirtenickName"));
-
+    
       model.addAttribute("auction_no", map.get("auction_no"));
       model.addAttribute("townlist_no", map.get("townlist_no"));
 
@@ -54,9 +54,18 @@ public class ChatController {
       model.addAttribute("userNickname", userNickname);
       map.put("userno", userNickname.getUserno());
       model.addAttribute("profileimage", userNickname.getProfile_img());
-      model.addAttribute("userno", map.get("userno"));
-      
-     
+      Object userno;
+      if(map.get("upperuserno")!=null) {
+    	   userno=map.get("upperuserno");
+    	   map.put("userno", userno);
+      }else {
+    	   userno=model.addAttribute("userno", map.get("userno"));
+      }
+      System.out.println(map.get("wirtenickName"));
+      System.out.println(map.get("auction_no"));
+      System.out.println(map.get("writeuserno"));
+      System.out.println(map.get("upperuserno"));
+      System.out.println("userno"+userno);
 
       ChatDTO chatroom = chatService.findChatRoom(map);
       model.addAttribute("auction_no", map.get("auction_no"));
@@ -64,7 +73,7 @@ public class ChatController {
       model.addAttribute("chatroom", chatroom);
 
       if (chatroom != null) {
-         //System.out.println("GET방식 방번호 중복");
+         System.out.println("GET방식 방번호 중복");
 
          map.put("roomno", chatroom.getRoomno());
          map.put("senduserno", chatroom.getSenduserno());
@@ -82,7 +91,7 @@ public class ChatController {
          List<ChatDTO> readmsg = chatService.readmsg(map);
       } else {
          model.addAttribute("roomno", '0');
-         
+         System.out.println("GET방식 방생성");
          map.put("userno", map.get("writeuserno"));
          ChatDTO finduser=chatService.userlist(map);
          model.addAttribute("finduser", finduser);
@@ -144,6 +153,11 @@ public class ChatController {
          }
          if (Integer.parseInt((String) map.get("townlist_no")) == 0) {
             map.put("townlist_no", "");
+         }
+         Object userno;
+         if(map.get("upperuserno")!=null) {
+       	   userno=map.get("upperuserno");
+       	   map.put("userno", userno);
          }
 
          chatService.createChatRoomno(map);

@@ -477,14 +477,14 @@ border-radius: 15px;
 				        icon : 'success',
 				        title : '낙찰하였습니다.'
 				    });
-					/* wsocket.send('낙찰 auction_no${list.auction_no},userNo${list.userNo},email${email}:'+"${list.title}가 낙찰되었어요");
-					console.log('낙찰 auction_no${list.auction_no},userNo${list.userNo},email${email}:'+"${list.title}가 낙찰되었어요"); */
+					wsocket.send('낙찰 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}가 낙찰되었어요");
+					console.log('낙찰 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}가 낙찰되었어요"); 
 					 var today = new Date();
 					 if('${roomno}'===""){
 						   $.ajax({
-					           url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="0" name="townlist_no"/><c:param value="${list.auction_no}" name="auction_no"/><c:param value="${userno}" name="writeuserno"/></c:url>',
+					           url: '<c:url value="/chat/chatting.do"><c:param value="${list.upper_user_no}" name="upperuserno"/><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="0" name="townlist_no"/><c:param value="${list.auction_no}" name="auction_no"/><c:param value="${userno}" name="writeuserno"/></c:url>',
 					           data: {chatcontent:'축하합니다.낙찰되셨습니다.',
-					        	   	 img:'낙찰되셨습니다.png',
+					        	   img:'낙찰되셨습니다.png',
 					                 senduserno:'${userno}',
 					                 unread_count:'1',
 					                 sendtime: today.toLocaleTimeString('en-US'),
@@ -499,9 +499,8 @@ border-radius: 15px;
 					           }
 					        });
 					   }
-						   
-					   $.ajax({
-				           url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="0" name="townlist_no"/><c:param value="${list.auction_no}" name="auction_no"/><c:param value="${userno}" name="writeuserno"/></c:url>',
+					 $.ajax({
+				           url: '<c:url value="/chat/chatting.do"><c:param value="${list.upper_user_no}" name="upperuserno"/><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="0" name="townlist_no"/><c:param value="${list.auction_no}" name="auction_no"/><c:param value="${userno}" name="writeuserno"/></c:url>',
 				           data: {chatcontent:'축하합니다.낙찰되셨습니다.',
 				        	   	 img:'낙찰되셨습니다.png',
 				                 senduserno:'${userno}',
@@ -517,6 +516,8 @@ border-radius: 15px;
 				        	   console.log('post낙찰채팅x')
 				           }
 				        });
+						   
+					   
 					
 				} else {
 					const Toast = Swal.mixin({

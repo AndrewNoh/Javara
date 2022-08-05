@@ -209,6 +209,7 @@
 		                           <c:if test="${message.img eq null }" var="chatimg">
 	                               	  <c:if test="${fn:contains(message.chatcontent, '전화번호 공유를 요청하였습니다.')}" var="phon"><p style='text-align: center;'><strong>전화번호 공유를 요청하였습니다</strong><br/><button class="btn btn-outline-warning m-3 agreemrnt" id="agreemrnt" >동의</button><button class="btn btn-outline-dark m-3 disagreemrnt" id="disagreemrnt" >비동의</button></p></c:if>
 	                               	  <c:if test="${fn:contains(message.chatcontent, '송금 되었습니다')}" var="transfer"><p style='text-align: center;'><strong>${message.chatcontent }</strong><br/><button class='btn btn-outline-warning m-3 success' id='success' onclick='payCharge()'>받기</button></p></c:if>
+	                               	  <c:if test="${fn:contains(message.chatcontent, '축하합니다.낙찰되셨습니다.')}" var="successful"><img style="border-radius: 15px; width: 50%; float:left;" src="${pageContext.request.contextPath}/resources/assets/img/chat_img/낙찰되셨습니다.gif"/></br><p style='text-align: center;'><strong>축하합니다.낙찰되셨습니다.</strong></p></c:if>
 	                               	  <c:if test="${fn:contains(message.chatcontent, '입급되었습니다')}" var="payment"><p style='text-align: center;'>
 	                               	  <strong>${message.chatcontent }</strong></br>거래가 종료되었다면 </br>'후기작성'</br> 버튼을 눌러 후기를 작성해주세요.</br><button class='btn btn-outline-warning m-3 complete' id='complete'>후기작성</button></p></c:if>
 	                               	  <c:if test="${fn:contains(message.chatcontent, '약속')}" var="appointed">
@@ -222,7 +223,7 @@
 		                               	  시간: </strong>${fn:split(message.chatcontent,':')[2]}:${fn:substring(string, 0, length-2)}</br>
 		                               	  <strong>장소</strong></br>
 		                               	  ${fn:split(message.chatcontent,':')[4]}</br><a target='_blank' href='https://map.kakao.com/link/search/${fn:split(message.chatcontent,":")[4]}' id='appointedmap'  rel='lyteframe' data-gallery='portfolioDetailsGallery' data-glightbox='type: external' class='portfolio-details-lightbox' title='Portfolio Details''>지도로 보기</a></p></c:if>
-									  <c:if test="${!phon and !appointed and !transfer and !payment}"><p style="text-align: center;">${message.chatcontent }</p></span></c:if>	                               	  
+									  <c:if test="${!phon and !appointed and !transfer and !payment and !successful}"><p style="text-align: center;">${message.chatcontent }</p></span></c:if>	                               	  
 		                           </c:if>
 		                           <c:if test="${!chatimg}" var="chatimg">
 		                              <img style="border-radius: 15px; width: 50%; float:left;" src="${pageContext.request.contextPath}/resources/assets/img/chat_img/${message.img}"/>
@@ -601,7 +602,7 @@ function uploadFile(e) {
                  }
               });
 	         wsocket.send('전화번호2${roomno}:'+"<strong>전화번호 공유</strong></br>${userNickname.nickname }:${userNickname.phonenumber}");
-	         wsocket.send('RoomNo:${roomno},SendUserNO:${userno},email:${email}');
+	         wsocket.send('RoomNo${roomno},senduserno${senduserno},writeuserno${writeuserno},email${email}: ${userNickname.nickname }');
 	            appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center;'><strong>전화번호 공유</strong></br>${userNickname.nickname }:${userNickname.phonenumber} </p>"
 	            +"<span style='float: right;font-size: small; margin-top:5px;'>"+today.toLocaleTimeString()+"</span></div></div>");
 	            
@@ -712,11 +713,11 @@ function uploadFile(e) {
          
          
             //console.log('보낸 메시지${roomno}:',$('#chatcontent').val());
-            //console.log('RoomNo:${roomno},SendUserNO:${userno},email:${email}');
+            //console.log('RoomNo${roomno},senduserno${senduserno},writeuserno${writeuserno},email${email}: ${userNickname.nickname }');
             
            
             wsocket.send('서버로부터받은 메시지${roomno}:'+$('#chatcontent').val());//msg:KOSMO>>안녕
-            wsocket.send('RoomNo:${roomno},senduserno:${senduserno},writeuserno:${writeuserno},email:${email}');
+            wsocket.send('RoomNo${roomno},senduserno${senduserno},writeuserno${writeuserno},email${email}: ${userNickname.nickname }');
             //DIV(대화영역)에 메시지 출력
             
             appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align: center;'>"
@@ -760,7 +761,7 @@ function uploadFile(e) {
 		});
 		
 	    	wsocket.send('서버로부터받은 메시지${roomno}:'+"<strong>약속</strong></br><strong>날짜: </strong>"+$('#date').val()+"<strong></br>시간: </strong>"+$('#time').val()+"</br><strong>장소</strong></br>"+$("#adrress").text()+"</br><a target='_blank' href='https://map.kakao.com/link/search/"+$('#adrress').text()+"' id='appointedmap' rel='lyteframe' data-gallery='portfolioDetailsGallery' data-glightbox='type: external' class='portfolio-details-lightbox' title='Portfolio Details''>지도로 보기</a>");//msg:KOSMO>>안녕
-	  		wsocket.send('RoomNo:${roomno},SendUserNO:${userno},email:${email}');
+	  		wsocket.send('RoomNo${roomno},senduserno${senduserno},writeuserno${writeuserno},email${email}: ${userNickname.nickname }');
 	     
 	  		appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center;'>"
 	  				+"<strong>약속</strong></br><strong>날짜: </strong>"+$('#date').val()+"<strong></br>시간: </strong>"+$('#time').val()+"</br><strong>장소</strong></br>"+$("#adrress").text()+"</br><a target='_blank' href='https://map.kakao.com/link/search/"+$('#adrress').text()+"' id='appointedmap' rel='lyteframe' data-gallery='portfolioDetailsGallery' data-glightbox='type: external' class='portfolio-details-lightbox' title='Portfolio Details''>지도로 보기</a>"+"<br/></p><span style='float: right;font-size: small; margin-top:5px;'>"
@@ -793,7 +794,7 @@ function uploadFile(e) {
 		     success: function (result) {
 		        //console.log(result)
 		        wsocket.send('img${roomno}:'+result);
-		        wsocket.send('RoomNo:${roomno},SendUserNO:${userno},email:${email}');
+		        wsocket.send('RoomNo${roomno},senduserno${senduserno},writeuserno${writeuserno},email${email}: ${userNickname.nickname }');
 		           appendMessage("<div class='outgoing_msg'><div class='sent_msg'><img style='border-radius: 15px; width: 50%; float:right;' src='${pageContext.request.contextPath}/resources/assets/img/chat_img/"+result+"'/>"
 		           +"<br/><span style='float: right;font-size: small; margin-top:5px;'>"
 		              +today.toLocaleTimeString()+"</span></div></div>");
@@ -819,7 +820,7 @@ function uploadFile(e) {
                var today = new Date(); 
                //console.log(result)
                wsocket.send('img${roomno}:'+result);
-               wsocket.send('RoomNo:${roomno},SendUserNO:${userno},email:${email}');
+               wsocket.send('RoomNo${roomno},senduserno${senduserno},writeuserno${writeuserno},email${email}: ${userNickname.nickname }');
                   appendMessage("<div class='outgoing_msg'><div class='sent_msg'><img  style='border-radius: 15px; width: 50%; float:right;' src='${pageContext.request.contextPath}/resources/assets/img/chat_img/"+result+"'/>"
                   +"<br/><span style='float: right;font-size: small; margin-top:5px;'>"
                +today.toLocaleTimeString()+"</span></div></div>");
@@ -868,7 +869,7 @@ function uploadFile(e) {
          
          //console.log(result);
          wsocket.send('서버로부터받은 메시지${roomno}:'+"<strong>전화번호 공유를 요청하였습니다</strong><br/><button class='btn btn-outline-warning m-3 agreemrnt' id='agreemrnt'>동의</button><button class='btn btn-outline-dark m-3 disagreemrnt' id='disagreemrnt'>비동의</button><input type='hidden' name='sendusrno' value='${userNickname.userno}'/><input type='hidden' name='phonnumber' value='${userNickname.nickname }:${userNickname.phonenumber}'/>");
-         wsocket.send('RoomNo:${roomno},SendUserNO:${userno},email:${email}');
+         wsocket.send('RoomNo${roomno},senduserno${senduserno},writeuserno${writeuserno},email${email}: ${userNickname.nickname }');
          appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center;'><strong>전화번호 공유를 요청하였습니다</strong></p>"
          +"<span style='float: right;font-size: small; margin-top:5px;'>"
          +today.toLocaleTimeString()+"</span></div></div>");
@@ -895,7 +896,7 @@ function uploadFile(e) {
                success: function (result) {
 		            //console.log(result);
 		            wsocket.send('전화번호${roomno}:'+"<strong>전화번호 공유</strong></br>${userNickname.nickname }:${userNickname.phonenumber} ");
-		            wsocket.send('RoomNo:${roomno},SendUserNO:${userno},email:${email}');
+		            wsocket.send('RoomNo${roomno},senduserno${senduserno},writeuserno${writeuserno},email${email}: ${userNickname.nickname }');
 		            appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center;'><strong>전화번호 공유</strong></br>${userNickname.nickname }:${userNickname.phonenumber} </p>"
 	                +"<span style='float: right;font-size: small; margin-top:5px;'>"
 		            +today.toLocaleTimeString()+"</span></div></div>");
@@ -931,7 +932,7 @@ function uploadFile(e) {
                success: function (result) {
 		            //console.log(result);
 		            wsocket.send('서버로부터받은 메시지${roomno}:'+"<strong>전화번호 공유를 거절하였습니다</strong>");
-		            wsocket.send('RoomNo:${roomno},SendUserNO:${userno},email:${email}');
+		            wsocket.send('RoomNo${roomno},senduserno${senduserno},writeuserno${writeuserno},email${email}: ${userNickname.nickname }');
 		            appendMessage("<div class='outgoing_msg'><div class='sent_msg'><p style='text-align:center;'><strong>전화번호 공유를 거절하였습니다</strong></p>"
 	                +"<span style='float: right;font-size: small; margin-top:5px;'>"
 		            +today.toLocaleTimeString()+"</span></div></div>");

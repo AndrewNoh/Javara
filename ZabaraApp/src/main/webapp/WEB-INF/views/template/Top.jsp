@@ -531,7 +531,6 @@
 
 		});
 		
-		
 		<sec:authentication property="name" var="username" />
 			<c:if test="${username != 'anonymousUser'}" var="isLogin">
 			wsocket = new WebSocket("ws://${pageContext.request.serverName}:${pageContext.request.serverPort}<c:url value='/chat-ws.do/0'/>");//192.168.219.101//192.168.0.129
@@ -564,14 +563,15 @@
 			     console.log(e.data);
 			     
 			     if(e.data.includes('RoomNo')){
-			    	 var start = e.data.indexOf(",");
-			    	 if(e.data.substring(0,start)==='RoomNo:${roomno}'){
+			    	 var start1 = e.data.indexOf(",");
+				     var start2 = e.data.indexOf(":");
+			    	 if(e.data.substring(0,start1)==='RoomNo${roomno},'){
 			    		 //console.log('같은방');
 			    	 }
-			    	 else if(e.data.includes('senduserno:${userno},') || e.data.includes('writeuserno:${userno}')){
+			    	 else if(e.data.includes('senduserno${userno},') || e.data.includes('writeuserno${userno},')){
 			    		 if(!e.data.includes('${username}')){
 				    		 element.innerHTML = '';
-				    		 element.innerHTML += '채팅이 도착했어요';
+				    		 element.innerHTML += e.data.substring(start2+1)+'이(가) 보낸 채팅이 도착했어요';
 				    		 var x = document.getElementById("snackbar");
 							  x.className = "show";
 							  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
@@ -601,6 +601,15 @@
 						  x.className = "show";
 						  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
 				     }
+			 	}else if(e.data.includes('낙찰')){
+			    	 var start = e.data.indexOf(":");
+			    	 if( e.data.includes('upperuserno${userno},')){
+						  element.innerHTML = '';
+			    		 element.innerHTML += e.data.substring(start+1);
+			    		 var x = document.getElementById("snackbar");
+						  x.className = "show";
+						  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+				     }
 			 	}
 			     else if(e.data.includes('동네')){
 			    	 if(e.data.includes('townlist_no:${townlist_no}')){
@@ -615,20 +624,4 @@
 			     }
 			 }
 			 
-			 /* $(document).ready(function(){
-				 $.ajax({
-						url: '<c:url value="/template/top.do"></c:url>',
-						data: {userno:${userno},'${_csrf.parameterName}':'${_csrf.token}'},
-						type: 'get',
-						dataType: 'text',
-						success: function (result) {
-							console.log(result)
-						},
-						error: function () {
-							console.log('error')
-						}
-					});
-				});	 */
-
-		
 	</script>
