@@ -90,13 +90,13 @@ a:hover {
 							<c:if test="${userno ==LIST.userNo }">
 								<a href="<c:url value="/board/update.do">
 					        		<c:param name="townlist_no" value="${LIST.townlist_no }"/></c:url>"id="edit">
-					        		<i class="bx bxs-edit p-2" style="font-size: 20px" title="수정"></i></a>
+					        		<i class="bx bxs-edit p-2" style="font-size: 25px" title="수정"></i></a>
 								<a href="<c:url value="/board/deleteTown.do">
 					        		<c:param name="townlist_no" value="${LIST.townlist_no }"/>
 					        		<c:param name="auction_no" value="0"/>
 					        		<c:param name="product_no" value="0"/>
 					        		</c:url>" id="delete">
-					        		<i class="bx bxs-trash p-2" style="font-size: 20px" title="삭제"></i></a>
+					        		<i class="bx bxs-trash p-2" style="font-size: 25px" title="삭제"></i></a>
 							</c:if>
 							<div style="padding: 10px 15px; text-align: end; "><span class="p-2" style="background: #85adad;border-radius: 20px;">${LIST.category}</span></div>
 						</div>
@@ -198,7 +198,7 @@ a:hover {
 		}).done(function(data){
 			if (data != 1) {
 			 	// console.log('좋아요');
-				like.children().css("color", "#cc0000");
+				like.children().css("color", "#ffc107");
 			} else {
 				// console.log("좋아요 해제");
 				like.children().css("color", '');
@@ -225,7 +225,7 @@ a:hover {
   	$(document).ready(function(){		
 		$.each(${likes}, function(index, value){
 			// console.log("좋아요 : " + value);
-			$('a[data-value="'+value+'"]').children().css('color', '#cc0000');
+			$('a[data-value="'+value+'"]').children().css('color', '#ffc107');
 		});
 		
   	});
