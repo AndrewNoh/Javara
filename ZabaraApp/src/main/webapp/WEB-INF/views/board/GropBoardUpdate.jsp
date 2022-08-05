@@ -52,8 +52,7 @@
 						</div>
 						<div class="text-center col ">
 							<button class="col-4 m-2 btn" style="background-color: #FFC107; color: #fff" type="submit">글쓰기</button>
-							<button class="col-4 m-2 btn btn-dark" id="goList" style="border: 0; padding: 10px 30px; color: #fff; transition: 0.4s; border-radius: 4px;" type="button">목록</button>
-						</div>
+							<button class="col-4 m-2 btn btn-dark" id="goList" style="border: 0; padding: 10px 30px; color: #fff; transition: 0.4s; border-radius: 4px;" type="button" id="goList">목록</button>						</div>
 	          		</div>
 	        	</div>
 	      	</div>
@@ -61,9 +60,13 @@
 	</div>
 </div>
 <!-- End #main -->
-  <script type="text/javascript">
-	
-	
+<script type="text/javascript">
+  // 목록 이동
+  $('#goList').on("click", function(){
+ 	window.location.href = "<c:url value='/board/gropboard.do'/>";
+ 	});
+
+
 	function readMultipleImage(input) {	
 		const previewImage = $('#previewImage');
 		const images = document.getElementById('images');

@@ -1,4 +1,4 @@
-package com.carrot.marketapp.web.user;
+package com.carrot.marketapp.web.board;
 
 import java.util.List;
 import java.util.Map;

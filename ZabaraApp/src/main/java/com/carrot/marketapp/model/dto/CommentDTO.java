@@ -16,10 +16,8 @@ import lombok.Setter;
 public class CommentDTO {
 	
 	private String comment_no;
-	private String comment_ref;
 	private String comment_content;
 	private String comment_userno;
 	private java.sql.Date comment_postdate;
-	private String comment_level;
-	private String comment_step;
+	
 }

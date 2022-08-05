@@ -71,9 +71,8 @@ a:hover {
       정이 넘치는, 서로 존중하는 동네 문화를 함께 만들어가요 :)</h1>
       </div>
 
-      <div class="row mt-2">
-
-      <form action="forms/contact.php" method="post" role="form"
+     <div class="row mt-2">
+      <form action="<c:url value="/board/write.do"><c:param name="board" value="우리동네"/></c:url>" method="post" role="form" enctype="multipart/form-data"
 			class="php-email-form mt-4">
 			<c:forEach var="LIST" items="${LISTS}" varStatus="loop">
 				<div class="contents p-3" style="display: flex; flex-direction: column;">
@@ -91,22 +90,22 @@ a:hover {
 							<c:if test="${userno ==LIST.userNo }">
 								<a href="<c:url value="/board/update.do">
 					        		<c:param name="townlist_no" value="${LIST.townlist_no }"/></c:url>"id="edit">
-					        		<i class="bx bxs-edit p-2" style="font-size: 30px" title="수정"></i></a>
+					        		<i class="bx bxs-edit p-2" style="font-size: 20px" title="수정"></i></a>
 								<a href="<c:url value="/board/deleteTown.do">
 					        		<c:param name="townlist_no" value="${LIST.townlist_no }"/>
 					        		<c:param name="auction_no" value="0"/>
 					        		<c:param name="product_no" value="0"/>
 					        		</c:url>" id="delete">
-					        		<i class="bx bxs-trash p-2" style="font-size: 30px" title="삭제"></i></a>
+					        		<i class="bx bxs-trash p-2" style="font-size: 20px" title="삭제"></i></a>
 							</c:if>
 							<div style="padding: 10px 15px; text-align: end; "><span class="p-2" style="background: #85adad;border-radius: 20px;">${LIST.category}</span></div>
 						</div>
 					</div>
-					<div class="form-group mb-3" style="padding: 10px 15px;">
-						<div style="font-size: 23px;font-weight: bold; color: #85adad">${LIST.title}</div>
+					<div class="form-group " style="padding: 10px 15px;">
+						<div style="font-size: 18px;font-weight: bold; color: #ffc107">${LIST.title}</div>
 					</div>
 					
-					<div class="form-group mt-2" >
+					<div class="form-group" >
 						<div style="padding: 10px 18px;">${LIST.content}</div>
 					</div>
 						<c:forEach var="i" begin="${loop.index}" end="${loop.index}">
@@ -120,7 +119,7 @@ a:hover {
 						</c:forEach>
 						
 						<div class="text-center mt-3" style="display: flex; justify-content:flex-end; align-items:center; border-top:.1px solid #ffffff80;">
-						<i class="bi bi-heart-fill" id="likeval${LIST.townlist_no }" style="color: #cc0000; font-size: 20px; margin-right: 1100px; margin-top: 10px;">${LIST.likes}</i>
+						<i class="bi bi-heart-fill" id="likeval${LIST.townlist_no }" style="color: #ffc107; font-size: 20px; margin-right: 1100px; margin-top: 10px;">${LIST.likes}</i>
 						
 						<div  style="margin-right:30px;margin-top: 10px">
 							<a class="like" style="font-size: 16px" data-value="${LIST.townlist_no}" ><i class="bi bi-heart-fill" style="font-size: 20px; text-align: center; "data-value="${LIST.townlist_no}"></i></a>
@@ -128,27 +127,30 @@ a:hover {
 						</div>	
 					</div>
 					<div class="search row comments" style="display: none;" >
-							<span class="p-2" style="background: #85adad;border-radius: 20px; width: 70px; margin-left: 30px; text-align: center; margin-top: 10px">댓글</span>
+							<span class="p-2" style="background: #85adad;border-radius: 20px; width: 70px; margin-left: 20px; text-align: center; margin-top: 20px">댓글</span>
 						<div class="comment_box">
 									<div class="comment_nick_box mb-4">
-										<img src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${profileimage}"
-											width="30" height="30"> 
-											<a id="" class="comment_nickname">아이디1</a>
+											<a >작성자</a>
+											<span style="margin-left: 10px; font-family:GmarketSansLight">내용</span>
+											<span class="comment_info_date" style="font-size: 13px; ">2022-08-05</span>
+											<br/>
+											<a >작성자2</a>
+											<span style="margin-left: 10px; font-family:GmarketSansLight">내용2</span>
+											<span class="comment_info_date" style="font-size: 13px; ">2022-08-06</span>
+											<br/>
+											<a >작성자3</a>
+											<span style="margin-left: 10px; font-family:GmarketSansLight">내용3</span>
+											<span class="comment_info_date" style="font-size: 13px; ">2022-08-07</span>
 									</div>
-									<div class="comment_text_box m-2" style="display: flex; justify-content: space-between;">
-										<div class="comment_text_view">
-											<span class="text_comment ">댓글 댓글<br></span>
-										</div>
-										<span class="comment_info_date" style="font-size: 13px;">2020.08.03. 20:23</span>
-									</div>
+									
 						</div>
 							<div class="write_cmt" style="text-align: center;">
 		                        <div class="stylish-input-group">
-		                           <input type="text" placeholder="댓글을 입력해보세요" name="title"
+		                           <input type="text" placeholder="댓글을 입력하시오" name="title" 
 		                              class="search-bar" style="border:none"> <span class="input-group-addon">
 		                              <button id="send">
 		                                 <i class="bi bi-check2-circle" aria-hidden="false"
-		                                    style="font-size: 25px; color: white;"></i>
+		                                    style="font-size: 25px; color: #fff;"></i>
 		                              </button>
 		                           </span>
 		                        </div>
@@ -159,8 +161,9 @@ a:hover {
 			</c:forEach>
 		</form>
 	</div>
-  </div>
-  <script>
+ </div>
+ 
+<script>
   // 댓글: 댓글창 오픈
   var comment = $('a[name=comment]');
   $(document).on("click", '.comment', function(e){

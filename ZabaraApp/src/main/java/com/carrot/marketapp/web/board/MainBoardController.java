@@ -68,6 +68,7 @@ public class MainBoardController {
 	@Autowired
 	ObjectMapper objectMapper;
 
+	
 	@RequestMapping("/gropboard.do")
 	public String gropboard(Map map, Model model, Principal principal) {
 		model.addAttribute("board", "우리동네");
@@ -75,10 +76,10 @@ public class MainBoardController {
 		model.addAttribute("email", principal.getName());
 
 		UserDTO user = userService.selectOne(map);
-
 		map.put("userno", user.getUserno());
 		model.addAttribute("userno", user.getUserno());
-
+	    model.addAttribute("profileimage", user.getProfile_img());
+	    
 		AddressDTO address = addressService.selectOne(map);
 
 		String simpleAddr = address.getSimpleAddress();
@@ -102,6 +103,7 @@ public class MainBoardController {
 	
 		List<Integer> likes = boardService.selectLikeList(map);
 		
+		
 		model.addAttribute("likes", likes);
 		model.addAttribute("imageList", imageList);
 		model.addAttribute("address", map.get("simpleAddress"));
@@ -109,6 +111,7 @@ public class MainBoardController {
 
 		return "/board/GropBoardList.market";
 	}
+
 
 	@RequestMapping("/auctionlist.do")
 	public String auction(Map map, Model model, Principal principal) {
