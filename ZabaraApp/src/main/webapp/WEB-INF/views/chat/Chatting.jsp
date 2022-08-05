@@ -69,9 +69,9 @@
       <div class=" m-5"> 
       <div class="container">
      <div class="section-title">
-        <img src="${pageContext.request.contextPath}/resources/assets/img/title_chat.png" style="width: 200px" />
+        <img src="${pageContext.request.contextPath}/resources/assets/img/title_chat.png" style="width: 50px" />
       </div>
-   <div class="messaging ">
+   <div class="messaging " style="margin-top: 10px">
       <div class="inbox_msg">
          <div class="inbox_people">
 	         <div class="css-1r0o66s">
