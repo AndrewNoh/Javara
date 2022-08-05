@@ -238,7 +238,7 @@
                         </div>
                      </div>
                      <div class="col-lg-4 col-md-4 mt-4 mt-md-1">
-                        <div class="icon-box" id="ChatToggle" >
+                        <div class="icon-box" id="KeyToggle" >
                            <i class="bi bi-bell-fill" style="color: #ffbb2c;"></i>
                            <h3>알림</h3>
                         </div>
@@ -260,32 +260,48 @@
          <div class="col mt-3" id="KeyToggleDiv" style="display: none">
             <div class="interests container">
                <div class="section-title">
-                  <h2 style="margin-bottom: 30px;">키워드 자바라</h2>
+                  <h2 style="margin-bottom: 30px;">알림 자바라</h2>
                </div>
                <div class="row">
-                  <div class="col-lg-12 col-md-6 mt-4">
+                  <div class="col-lg-12 col-md-6 mt-4 ">
                      <div class="icon-box">
-                        <i class="ri-store-line" style="color: #ffbb2c;"></i>
-                        <h3>키워드</h3>
-                        <h2>&nbsp;&nbsp;on/off</h2>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-12 col-md-6 mt-4 ">
-                        <div class="icon-box">
-                           <i class="ri-calendar-todo-line" style="color: #ffbb2c;"></i>
-                           <h3>키워드 설정</h3>
-                           <div class="col-10 content">
-                              <ul>
-                                 <li><i class="bi bi-chevron-right"></i> <strong>컴퓨터</strong>
-                                 </li>
-                                 <li><i class="bi bi-chevron-right"></i> <strong>핸드폰</strong>
-                                 </li>
-                                 <li><i class="bi bi-chevron-right"></i> <strong>가방</strong>
-                                 </li>
-                              </ul>
-                              <input placeholder="키워드를 입력하세요">
-                           </div>
+                      <div class="col" style="display: flex; align-items: center;">
+                       <i class="ri-calendar-todo-line" style="color: #ffbb2c;"></i>
+                         	<h3>알림 내역</h3>
+                      </div>
+                        <div class="col-10 content" style="display: flex;">
+                        	<div class="col">
+	                        	<div class="section-title">
+				                  <h2 style="margin-bottom: 30px;">채팅알림</h2>
+				               </div>
+		                     	<c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
+					             <a  href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
+					                 <c:forEach var="unreadcount" items="${unreadcount}" varStatus="loop">
+										<c:if test="${chatlist.roomno eq  unreadcount.roomno}"> 
+											<c:if test="${unreadcount.unreadcount >0}">
+											<h3 class="mb-2"><i class="bi bi-chevron-right" style="color: yellow; font-size: 15px;"></i>
+						                    <c:if test="${nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
+						                    <c:if test="${nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>
+						                        님께 채팅이 왔어요
+							                </h3>
+						                  	</c:if>
+										</c:if> 
+									</c:forEach> 
+					               </a>
+				                </c:forEach>
+			                </div>
+			                <div class="col">
+			                   <div class="section-title">
+				                  <h2 style="margin-bottom: 30px;">낙찰알림</h2>
+				               </div>
+		                     	<c:forEach var="participationList" items="${participationList}" varStatus="loop">
+										<c:if test="${participationList.status eq  'END'}"> 
+											<h3 class="mb-2"><i class="bi bi-chevron-right" style="color: #00d4ff; font-size: 15px;"></i>
+						                       ${participationList.title}이 낙찰되었어요
+							                </h3>
+						                </c:if>
+				                </c:forEach>
+			                </div>
                         </div>
                      </div>
                   </div>

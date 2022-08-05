@@ -226,11 +226,14 @@ public class UserInfoController {
 		model.addAttribute("platform", record.getPlatform());
 		model.addAttribute("latitude",record.getLatitude());
 		model.addAttribute("longitude",record.getLongitude());
+		
 		// 채팅리스
 		map.put("userno", record.getUserno());
 		model.addAttribute("userno", record.getUserno());
 		List<ChatDTO> chatlist = chatService.chatlist(map);
 		model.addAttribute("chatlist", chatlist);
+		List<ChatDTO> unreadcount = chatService.unreadcount(map);
+		model.addAttribute("unreadcount", unreadcount);
 		
 		// 판매/구매내역 & 관심목록 갯수
 		int likeCount = boardService.getLikeCount(map);
@@ -245,7 +248,11 @@ public class UserInfoController {
 		model.addAttribute("likeCount", likeCount);
 		model.addAttribute("sellCount", sellCount);
 		model.addAttribute("buyCount", buyCount);
-				
+		
+		
+		//알림
+		List<BoardDTO> participationList= boardService.participationList(map);
+		model.addAttribute("participationList", participationList);
 		// 뷰정보 반환]
 		return "/user/MyPage.market";
 	}///////////////////////

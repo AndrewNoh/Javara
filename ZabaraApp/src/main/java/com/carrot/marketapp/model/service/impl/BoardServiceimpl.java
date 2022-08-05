@@ -160,4 +160,8 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 	public List<BoardDTO> mypageaccountbook(Map map) {
 		return boardDAO.mypageaccountbook(map);
 	}
+	
+	public List<BoardDTO> participationList(Map map) {
+		return boardDAO.participationList(map);
+	}
 }
