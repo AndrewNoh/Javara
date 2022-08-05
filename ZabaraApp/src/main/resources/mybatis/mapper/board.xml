@@ -496,5 +496,14 @@
 	</delete>
 
 	<!-- SEARCH -->
+	
+	<!--Mypage-->
+	<select id="participationList" parameterType="Map"
+		resultType="com.carrot.marketapp.model.dto.BoardDTO">
+	SELECT al.auction_no,al.title,status,enddate,ap.upper_user_no 
+	FROM AUCTION_PRICE ap JOIN AUCTION_LIST al on al.auction_no = ap.auction_no 
+	where ap.upper_user_no=#{userno}
+	</select>
+	
 
 </mapper>

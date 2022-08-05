@@ -26,7 +26,7 @@ border-radius: 15px;
 	        	<div class="col-lg-8 pb-3">
 	        		<div class="portfolio-details-slider swiper contents" style="text-align: center; ">
 						
-						<div style="height: 400px; line-height: 400px; border-radius: 15px;" id="previewImage" class="contents mb-5">
+						<div style="height: 500px; line-height: 400px; border-radius: 15px;" id="previewImage" class="contents mb-5">
 							<p id="p">사진을 넣어주세요.</p>
 						</div>
 						<div style="height: 200px; line-height: 200px; border-radius: 15px;" id="images" class="contents my-3">

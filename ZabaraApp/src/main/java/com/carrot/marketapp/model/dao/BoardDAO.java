@@ -263,5 +263,9 @@ public class BoardDAO {
 		return sqlSession.selectList("mypageaccountbook", map);
 	}
 	
+	public List<BoardDTO> participationList(Map map) {
+		return sqlSession.selectList("participationList", map);
+	}
+	
 
 }

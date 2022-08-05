@@ -571,7 +571,7 @@
 			    	 else if(e.data.includes('senduserno${userno},') || e.data.includes('writeuserno${userno},')){
 			    		 if(!e.data.includes('${username}')){
 				    		 element.innerHTML = '';
-				    		 element.innerHTML += e.data.substring(start2+1)+'이(가) 보낸 채팅이 도착했어요';
+				    		 element.innerHTML += e.data.substring(start2+1)+'님이 보낸 채팅이 도착했어요';
 				    		 var x = document.getElementById("snackbar");
 							  x.className = "show";
 							  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
