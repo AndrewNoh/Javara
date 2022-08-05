@@ -69,7 +69,7 @@
       <div class=" m-5"> 
       <div class="container">
      <div class="section-title">
-        <h2>채팅</h2>
+        <img src="${pageContext.request.contextPath}/resources/assets/img/title_chat.png" style="width: 200px" />
       </div>
    <div class="messaging ">
       <div class="inbox_msg">

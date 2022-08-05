@@ -387,13 +387,10 @@
 
 	<!-- TOWN -->
 	<update id="updateTownList" parameterType="Map">
-		UPDATE AUCTION_LIST
+		UPDATE TOWN_LIST
 		SET TITLE=#{title}, CONTENT=#{content},
-		CATEGORY=#{category},
-		UPPERPRICE=#{price} ,BASEPRICE=#{price},
-		LIKES=0, POSTDATE=SYSDATE,
-		ENDDATE=SYSDATE+1, ADDRNO=#{addrno}
-		WHERE AUCTION_NO = #{no}
+		CATEGORY=#{category}, ADDRNO=#{addrno}
+		WHERE TOWNLIST_NO = #{no}
 	</update>
 	
 	<update id="updateTownLike" parameterType="map">
@@ -479,7 +476,7 @@
 	
 	<!-- TOWN: comment -->
 	<select id="commentSelectList" parameterType="Map" resultType="commentDto">
-		SELECT * FROM TOWN_COMMENT WHERE TOWNLIST_NO = #{townlist_no} ORDER BY COMMENT_NO
+		SELECT * FROM TOWN_COMMENTS WHERE TOWNLIST_NO = #{townlist_no} ORDER BY COMMENT_NO
 	</select>
 	
 	<insert id="commentInsert" parameterType="Map">

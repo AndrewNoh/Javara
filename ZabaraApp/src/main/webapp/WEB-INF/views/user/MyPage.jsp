@@ -100,7 +100,7 @@
    <div class="about-me container">
 
       <div class="section-title">
-         <h2>나의 자바라</h2>
+         <img src="${pageContext.request.contextPath}/resources/assets/img/title_mypage.png" style="width: 150px" />
       </div>
 
       <div class="row">
@@ -204,17 +204,19 @@
                   <img src="${pageContext.request.contextPath}/resources/assets/img/pay_logo.png" style="height: 60px; margin-right: 10px"/>
                    <span id="myPay" style="color:#fff; font-size: 35px; vertical-align: bottom" ></span>
                    <div style="float: right; margin-top: 20px">
-                      <select class="btn btn-outline-warning btn-s my-2"  
+                      <select class="btn btn-outline-warning btn-s mb-2"  
                               style="font-size: 12px; font-weight: bold; color: #fff; margin-top: 10px" data-toggle="dropdown;" id="pay" >
-                          <option value="5000">5,000 원</option>
-                          <option value="10000">10,000 원</option>
-                          <option value="20000">20,000 원</option>
-                          <option value="30000">30,000 원</option>
-                          <option value="40000">40,000 원</option>
-                          <option value="50000">50,000 원</option>
+                          <option value="5000">충전 금액 5,000 원</option>
+                          <option value="10000">충전 금액 10,000 원</option>
+                          <option value="20000">충전 금액 20,000 원</option>
+                          <option value="30000">충전 금액 30,000 원</option>
+                          <option value="40000">충전 금액 40,000 원</option>
+                          <option value="50000">충전 금액 50,000 원</option>
                       </select>                     
-                      <button onclick="payService()" type="button" class="btn btn-dark my-2" style="width: auto;  margin-left:10px; font-size: 12px">충전하기</button>
-                      <button onclick="payWithdraw()" type="button" class="btn btn-dark my-2" style="width: auto;  margin-left:10px; font-size: 12px">출금하기</button>
+                      <button onclick="payService()" type="button" class="btn btn-dark mb-2" style="width: auto;  margin-top: 10px; margin-left:10px; font-size: 12px">충전하기</button>
+                      <!-- 
+                      <button onclick="payWithdraw()" type="button" class="btn btn-dark mb-2" style="width: auto;  margin-left:10px; font-size: 12px">출금하기</button>
+                  	  -->
                    </div>
                 </div>      
             </div>

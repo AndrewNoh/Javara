@@ -4,7 +4,11 @@
 
 <style>
 .card-header {  
-  background-color: #212529;  
+  background-color: #85adad;  
+}
+
+a:hover{
+  color: #000;
 }
 
 .card {
@@ -24,8 +28,8 @@
     <div class="container">
 
       <div class="section-title">
-        <h2>자주묻는 질문</h2>
-        <p >🙋🏻‍♀️ 사람들이 자주 묻는 질문을 확인해보세요 </p>
+        <img src="${pageContext.request.contextPath}/resources/assets/img/title_qna.png" style="width: 150px" />
+        <p style="margin-top: 10px" >🙋🏻‍♀️ 사람들이 자주 묻는 질문을 확인해보세요 </p>
               
       </div>
 

@@ -43,9 +43,9 @@ width: 30%;
       <div class=" m-5">
       <div class="container">
    <div class="section-title">
-        <h2>채팅</h2>
+        <img src="${pageContext.request.contextPath}/resources/assets/img/title_chat.png" style="width: 50px" />
       </div>
-   <div class="messaging ">
+   <div class="messaging " style="margin-top: 10px">
       <div class="inbox_msg">
          <div class="inbox_people" style=" width: 100%; justify-content: center;">
          <div class="css-1r0o66s" style="justify-content: center;">

@@ -20,9 +20,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 @Controller
 @RequestMapping("/comment")
 public class CommentController {
-	// 댓글 눌렀을 때 데이터 가져오기
-	// div selector
-	// div content 날리기(jquery)
+	// div selector // div content 날리기(jquery)
 	// ajax 반복하여 데이터 뿌려주기 
 	// ajax success/done(javascript for문 이용) // append
 	// 댓글 작성 후 불러오는 ajax 재실행 
@@ -34,6 +32,7 @@ public class CommentController {
 	@Autowired
 	CommentServiceimpl commentService;
 	
+	// 댓글 조회
 	@PostMapping(value="list.do", produces = "text/plain; charset=UTF-8")
 	@ResponseBody
 	public List<CommentDTO> list(@RequestParam Map map) throws JsonProcessingException {
@@ -42,6 +41,7 @@ public class CommentController {
 		return commentList;
 	}
 	
+	// 댓글 작성
 	@PostMapping(value="write.do")
 	@ResponseBody
 	public int write(Authentication auth, @RequestParam Map map) {
@@ -50,12 +50,13 @@ public class CommentController {
 		
 		int newComment = commentService.commentInsert(map);
 		map.put("comment_no", newComment);
-		
+			
 		
 		return 0;
 		
 	}
 
+	// 댓글 삭제
 	@PostMapping(value="delete.do")
 	@ResponseBody
 	public int delete(@RequestParam Map map) {
@@ -63,7 +64,9 @@ public class CommentController {
 		
 		return 0;
 	}
-
+	
+	
+	// 댓글 수정
 	@PostMapping(value="edit.do")
 	@ResponseBody
 	public int edit(@RequestParam Map map) {
@@ -74,12 +77,3 @@ public class CommentController {
 	
 
 }
-
-
-	/*
-	// 서비스 호출
-	ListPagingData<LineCommentDTO> commentPagingData = commentService.selectList(map, null, 0); // 혹은 -1 넘겨주기
-	// ObjectMapper의 writeValueAsString(리스트계열 컬렉션<맵 혹은 DTO>)은
-	// 리스트계열 컬렉션<맵 혹은 DTO>를 JSON형식의 문자열로 변환해준다.
-	String comments = mapper.writeValueAsString(commentPagingData.getLists()); 
-	*/

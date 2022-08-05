@@ -444,7 +444,7 @@ public class MainBoardController {
 		model.addAttribute("townlist_no", map.get("townlist_no"));
 		
 		
-		return "/board/GropBoardUpdate.market";
+		return "redirect:/board/gropboard.do";
 	}
 	
 	// 동네생활: 글 삭제

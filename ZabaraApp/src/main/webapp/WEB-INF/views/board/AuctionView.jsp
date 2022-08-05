@@ -209,8 +209,8 @@ border-radius: 15px;
 							<textarea class="form-control" rows="10" name="content" required="required" placeholder="내용을 입력하세요">${list.content}</textarea>
 						</div>
 						<div class="text-center col ">
-							<button class="col-4 m-2 btn btn-outline" type="button" id="submit">수정</button>
-							<button class="col-4 m-2 btn btn-outline" type="button" id="cancle">취소</button>
+							<button class="col-4 m-2 btn" style="background-color: #ffc107; color: #fff" type="button" id="submit">수정</button>
+							<button class="col-4 m-2 btn btn-dark" type="button" id="cancle">취소</button>
 						</div>
 						<input type="hidden" name="board" value="경매"/>
 						<input type="hidden" name="auction_no" value="${param.no}"/>

@@ -60,8 +60,8 @@ a:hover {
   <div id="board" class="container mt-5">
 
       <div class="section-title">
-        <h2>동네생활</h2>
-        <p>👫🏻 우리가 함께라면, 건강하고 따뜻한 동네생활을 만들 수 있어요 </p>
+        <img src="${pageContext.request.contextPath}/resources/assets/img/title_town.png" style="width: 100px" />
+        <p style="margin-top:10px">👫🏻 우리가 함께라면, 건강하고 따뜻한 동네생활을 만들 수 있어요 </p>
         <h1 style="font-size: 18px">동네생활은 이웃과 함께 정보를 공유하고, 이야기를 나누는 공간이에요.<br/>
 
       이웃에게 물어보면, 이웃들이 친절하게 진짜 정보를 알려줄거에요.<br/>
@@ -120,7 +120,7 @@ a:hover {
 						
 						<div class="text-center mt-3" style="display: flex; justify-content:flex-end; align-items:center; border-top:.1px solid #ffffff80;">
 						<i class="bi bi-heart-fill" id="likeval${LIST.townlist_no }" style="color: #ffc107; font-size: 20px; margin-right: 1100px; margin-top: 10px;">${LIST.likes}</i>
-						
+
 						<div  style="margin-right:30px;margin-top: 10px">
 							<a class="like" style="font-size: 16px" data-value="${LIST.townlist_no}" ><i class="bi bi-heart-fill" style="font-size: 20px; text-align: center; "data-value="${LIST.townlist_no}"></i></a>
 							<a class="comment" style="margin-left: 10px; font-size: 16px"><i class="bi bi-chat-left-dots" style="font-size: 20px; text-align: center;" ></i></a>
@@ -165,6 +165,7 @@ a:hover {
  
 <script>
   // 댓글: 댓글창 오픈
+  // 댓글 데이터 가져오기
   var comment = $('a[name=comment]');
   $(document).on("click", '.comment', function(e){
 	  var comments = document.querySelectorAll('.comments');
@@ -179,8 +180,6 @@ a:hover {
   
   // 댓글: 댓글 달기
   $('#send').click(function(){
-	console.log('클릭이벤트 발생');  
-	
 	
   });
   

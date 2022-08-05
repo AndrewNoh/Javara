@@ -29,8 +29,8 @@
 	    <div class="container" id="container">
 			<!-- 제목 -->
 			<div class="section-title" id="title">
-               <h2>자바라 경매</h2>
-               <p>💰 ${address}의 경매게시판 입니다.</p>
+                 <img src="${pageContext.request.contextPath}/resources/assets/img/title_auction.png" style="width: 150px" />
+               <p style="margin-top: 10px">💰 ${address}의 경매게시판 입니다.</p>
                <h1 style="font-size: 18px">이웃의 상품을 구매하는 구매자, 판매하는 판매자로서 따뜻함을 나눠주세요.<br/>
             </h1>
          </div>
