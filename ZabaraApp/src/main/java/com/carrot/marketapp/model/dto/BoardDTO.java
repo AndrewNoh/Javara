@@ -37,6 +37,8 @@ public class BoardDTO {
 	private String imagename;
 	private double latitude;
 	private double longitude; 
+	private String simpleaddress;
+	private String fulladdress;
 	
 	
 	//조회수

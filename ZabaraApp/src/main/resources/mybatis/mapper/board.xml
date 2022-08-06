@@ -46,22 +46,28 @@
 	<select id="mainPageListNoAddr" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
 		<![CDATA[
-			SELECT * FROM
-				(SELECT * FROM AUCTION_LIST
-					WHERE STATUS='SALE' AND LIKES > 0
-						ORDER BY dbms_random.value DESC) L
-							WHERE ROWNUM <= 4
+			SELECT ITE.*,ai.imagename FROM AUCTION_IMG AI JOIN
+				(SELECT IT.*,adr.simpleaddress,adr.fulladdress FROM ADDRESS_LIST ADR JOIN
+					(SELECT AL.*,p.upper_price,p.base_price FROM AUCTION_PRICE P JOIN
+						(SELECT * FROM
+							(SELECT * FROM AUCTION_LIST
+								WHERE STATUS='SALE' AND LIKES > 0
+									ORDER BY LIKES DESC) L
+										WHERE ROWNUM <= 10) AL ON P.AUCTION_NO = AL.AUCTION_NO) IT ON adr.addrno = IT.addrno) ITE ON AI.AUCTION_NO = ITE.AUCTION_NO
 		]]>
 	</select>
 	
 	<select id="mainPageListYesAddr" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
 		<![CDATA[
-			SELECT * FROM
-				(SELECT * FROM AUCTION_LIST L
-					WHERE STATUS='SALE' AND LIKES > 0 AND (SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) = #{simpleAddress}
-						ORDER BY dbms_random.value DESC) D
-							WHERE ROWNUM <= 4
+			SELECT ITE.*,ai.imagename FROM AUCTION_IMG AI JOIN
+				(SELECT IT.*,adr.simpleaddress,adr.fulladdress FROM ADDRESS_LIST ADR JOIN
+					(SELECT AL.*,p.upper_price,p.base_price FROM AUCTION_PRICE P JOIN
+						(SELECT * FROM
+							(SELECT * FROM AUCTION_LIST L
+								WHERE STATUS='SALE' AND LIKES > 0 AND (SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) = #{simpleAddress}
+									ORDER BY LIKES DESC)
+										WHERE ROWNUM <= 4) AL ON P.AUCTION_NO = AL.AUCTION_NO) IT ON adr.addrno = IT.addrno) ITE ON AI.AUCTION_NO = ITE.AUCTION_NO
 		]]>
 	</select>
 
