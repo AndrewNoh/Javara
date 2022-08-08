@@ -75,12 +75,14 @@ public class BoardDAO {
 		if (Integer.parseInt((String) map.get("townlist_no")) != 0) {
 			sqlSession.delete("deleteGropImg", map);
 			sqlSession.delete("deleteTownLikeNo", map);
-		// 댓글 삭제 추가 예정
+			sqlSession.delete("commentDelete", map);
+			
 			return sqlSession.delete("deleteBoard", map);
 		} else {
 			sqlSession.delete("deleteAuctionImg", map);
 			sqlSession.delete("deleteAuctionPrice", map);
 			sqlSession.delete("deleteAuctionLikeNo", map);
+		
 			return sqlSession.delete("deleteAuction", map);
 		}
 

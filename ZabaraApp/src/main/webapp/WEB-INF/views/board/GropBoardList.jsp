@@ -123,36 +123,23 @@ a:hover {
 
 						<div  style="margin-right:30px;margin-top: 10px">
 							<a class="like" style="font-size: 16px" data-value="${LIST.townlist_no}" ><i class="bi bi-heart-fill" style="font-size: 20px; text-align: center; "data-value="${LIST.townlist_no}"></i></a>
-							<a class="comment" style="margin-left: 10px; font-size: 16px"><i class="bi bi-chat-left-dots" style="font-size: 20px; text-align: center;" ></i></a>
+							<a class="comment" title="${LIST.townlist_no}" style="margin-left: 10px; font-size: 16px"><i class="bi bi-chat-left-dots" style="font-size: 20px; text-align: center;" ></i></a>
 						</div>	
 					</div>
 					<div class="search row comments" style="display: none;" >
-							<span class="p-2" style="background: #85adad;border-radius: 20px; width: 70px; margin-left: 20px; text-align: center; margin-top: 20px">댓글</span>
+
 						<div class="comment_box">
-									<div class="comment_nick_box mb-4">
-											<a >작성자</a>
-											<span style="margin-left: 10px; font-family:GmarketSansLight">내용</span>
-											<span class="comment_info_date" style="font-size: 13px; ">2022-08-05</span>
-											<br/>
-											<a >작성자2</a>
-											<span style="margin-left: 10px; font-family:GmarketSansLight">내용2</span>
-											<span class="comment_info_date" style="font-size: 13px; ">2022-08-06</span>
-											<br/>
-											<a >작성자3</a>
-											<span style="margin-left: 10px; font-family:GmarketSansLight">내용3</span>
-											<span class="comment_info_date" style="font-size: 13px; ">2022-08-07</span>
-									</div>
-									
+							<div id="commentList${LIST.townlist_no}">
+			                </div>											
 						</div>
-							<div class="write_cmt" style="text-align: center;">
-		                        <div class="stylish-input-group">
-		                           <input type="text" placeholder="댓글을 입력하시오" name="title" 
-		                              class="search-bar" style="border:none"> <span class="input-group-addon">
-		                              <button id="send">
-		                                 <i class="bi bi-check2-circle" aria-hidden="false"
-		                                    style="font-size: 25px; color: #fff;"></i>
-		                              </button>
-		                           </span>
+							<div class="write_cmt"  style="text-align: center;">
+		                        <div class="stylish-input-group" > 
+		                           <input type="text" placeholder="댓글을 입력하시오" id="comment_content${LIST.townlist_no}" data-value="ct${LIST.townlist_no }" class="search-bar" style="border:none; width: 1200px">
+		                              <span class="input-group-addon" id="cCnt${LIST.townlist_no}">			                             
+		                           	  </span>
+		                        	  <button type="button" class="send" style="background-color: transparent; border:none" title="${LIST.townlist_no}">
+		                                 <i class="bi bi-check2-circle" aria-hidden="false" style="font-size: 25px; color: #fff;"></i>
+			                          </button>   
 		                        </div>
                     		 </div>
 						</div>
@@ -164,25 +151,86 @@ a:hover {
  </div>
  
 <script>
-  // 댓글: 댓글창 오픈
-  // 댓글 데이터 가져오기
-  var comment = $('a[name=comment]');
-  $(document).on("click", '.comment', function(e){
-	  var comments = document.querySelectorAll('.comments');
-	  var comment = document.querySelectorAll('.comment');
-      for(var i=0; i<comments.length;i++){
-    	  if(this===comment[i]){
-    	 	 // console.log(comment[i]);
-	           $(comments[i]).toggle();
-    	  }
-      }
-  });
-  
-  // 댓글: 댓글 달기
-  $('#send').click(function(){
-	
-  });
-  
+	  // 댓글: 댓글창 오픈
+	  // 댓글 데이터 가져오기
+	  var comment = $('a[name=comment]');
+	  $(document).on("click", '.comment', function(e){
+		  var comments = document.querySelectorAll('.comments');
+		  var comment = document.querySelectorAll('.comment');
+		  var townlistNo = $(this).attr('title');
+		  
+		  for(var i=0; i<comments.length;i++){
+	    	  if(this===comment[i]){
+	    	 	 // console.log(comment[i]);
+		           $(comments[i]).toggle();
+	    	  }
+	      }
+		      $.ajax({
+		    	  type: 'POST',
+		      	  url: '<c:url value="/comment/list.do"/>',
+		      	  dataType: 'json', // 'json',
+		      	  // contentType: "application/json; charset=utf-8",
+		      	  data:{
+		      		'${_csrf.parameterName}':'${_csrf.token}',
+		      		 townlist_no: townlistNo
+		      		// $('#comment_write').serialize()
+		      	  },
+		      		 success: function(data){
+		      			 var html = "";	
+		      			 var cCnt = data.length;
+		      			 if(data.length > 0){
+		      				 for(i=0; i<data.length; i++){
+		      					 var date = new Date(data[i].comment_postdate);
+		      					 html += "<div>";
+		                         html += "<div><table class='table'><h6 style='color:#85ADAD'><strong>"+data[i].comment_userno+"</strong></h6>"+"<span>"+data[i].comment_content +"</span>" + "<tr></tr>" +"<span style='float: right'>"+date.toLocaleString()+"</span>";
+		                         html += "</table></div>";
+		                         html += "</div>";
+		      				 }
+		      			 } else {
+			      				html += "<div>";
+			                    html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
+			                    html += "</table></div>";
+			                    html += "</div>";
+		      			 }
+		      			
+		      			  // $('#cCnt'+townlistNo).html(cCnt);
+		                  $('#commentList'+townlistNo).html(html);
+		      			 
+		      		 },////success
+		      		 error: (error) => {
+		                 console.log(JSON.stringify(error));
+		      		 }////error
+		      	  })
+		      		
+	  	});
+	 
+      // 댓글: 댓글 작성
+	  $(document).on("click", '.send', function(e){
+		  var townlistNo = $(this).attr('title');
+		  var comment_content = $('#comment_content'+townlistNo).val(); // 댓글 내용
+			$.ajax({
+				url: '<c:url value="/comment/write.do"/>',
+				type: 'POST',
+				dataType: 'text',
+				data: {
+					'${_csrf.parameterName}':'${_csrf.token}',
+					townlist_no: townlistNo,
+					comment_content: comment_content
+				},
+					success: function(result){
+						console.log('result',result);
+						if(result == 1){
+							// getCommentList(); // 리스트 호출
+							// comment_content.val("");
+						}
+						// location.reload();
+					},
+					error: (error) => { 
+						console.log(JSON.stringify(error)); 
+					}
+				})	
+		  	});
+		  
   
   // 좋아요
   var like = $('a[name=like]');

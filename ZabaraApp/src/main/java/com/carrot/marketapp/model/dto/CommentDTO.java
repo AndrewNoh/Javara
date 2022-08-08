@@ -1,6 +1,7 @@
 package com.carrot.marketapp.model.dto;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +19,6 @@ public class CommentDTO {
 	private String comment_no;
 	private String comment_content;
 	private String comment_userno;
-	private java.sql.Date comment_postdate;
+	private Timestamp comment_postdate;
 	
 }

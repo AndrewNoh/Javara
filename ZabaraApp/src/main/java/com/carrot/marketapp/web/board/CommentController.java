@@ -1,5 +1,6 @@
 package com.carrot.marketapp.web.board;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -20,11 +21,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 @Controller
 @RequestMapping("/comment")
 public class CommentController {
-	// div selector // div content 날리기(jquery)
-	// ajax 반복하여 데이터 뿌려주기 
-	// ajax success/done(javascript for문 이용) // append
-	// 댓글 작성 후 불러오는 ajax 재실행 
-	// ajax 함수로 빼는 것이 *tip*
 	
 	@Autowired
 	UserServiceimpl userService;
@@ -33,7 +29,7 @@ public class CommentController {
 	CommentServiceimpl commentService;
 	
 	// 댓글 조회
-	@PostMapping(value="list.do", produces = "text/plain; charset=UTF-8")
+	@PostMapping(value="/list.do")
 	@ResponseBody
 	public List<CommentDTO> list(@RequestParam Map map) throws JsonProcessingException {
 		List<CommentDTO> commentList = commentService.commentSelectList(map);
@@ -42,22 +38,25 @@ public class CommentController {
 	}
 	
 	// 댓글 작성
-	@PostMapping(value="write.do")
+	@PostMapping(value="/write.do", produces ="application/json;charset=UTF-8")
 	@ResponseBody
-	public int write(Authentication auth, @RequestParam Map map) {
+	public int write(@RequestParam Map map, Principal principal) {
+		map.put("email", principal.getName());
 		UserDTO userinfo = userService.selectOne(map);
-		map.put("userno", userinfo.getUserno());
-		
-		int newComment = commentService.commentInsert(map);
-		map.put("comment_no", newComment);
+		map.put("comment_userno", userinfo.getUserno());
+		// System.out.println(map.get("comment_userno")); // 유저번호
+		// System.out.println(map.get("townlist_no")); // 글번호
+		// System.out.println(map.get("comment_content")); // 글내용
 			
-		
-		return 0;
-		
+		int newComment = commentService.commentInsert(map);
+		System.out.println("newComment"+newComment);
+			
+		return newComment;
+			
 	}
-
+	
 	// 댓글 삭제
-	@PostMapping(value="delete.do")
+	@PostMapping(value="/delete.do")
 	@ResponseBody
 	public int delete(@RequestParam Map map) {
 		commentService.commentDelete(map);
@@ -67,7 +66,7 @@ public class CommentController {
 	
 	
 	// 댓글 수정
-	@PostMapping(value="edit.do")
+	@PostMapping(value="/edit.do")
 	@ResponseBody
 	public int edit(@RequestParam Map map) {
 		commentService.commentUpdate(map);
