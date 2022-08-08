@@ -67,9 +67,11 @@ border-radius: 15px;
             	<c:if test="${userno == list.userNo}" var="isWriter">
 					<div  style="text-align: right; font-size: 20px;">
 						<a href="javascript:void(0);" id="edit"><i class="bx bxs-edit" style="font-size: 30px" title="수정"></i></a>
-						<a href="javascript:void(0);" id="delete"><i class="bx bxs-trash " style="font-size: 30px" title="삭제"></i></a>
-						<a href="javascript:void(0);" id="report" title="0"><i class="bx bxs-angry" style="font-size: 30px" title="신고"></i></a>
+						<a href="javascript:void(0);" id="delete"><i class="bx bxs-trash " style="font-size: 30px" title="삭제"></i></a>						
 					</div>
+				</c:if>
+				<c:if test="${!isWrite}">
+					<a href="javascript:void(0);" id="report" title="0"><i class="bx bxs-angry" style="font-size: 30px" title="신고"></i></a>
 				</c:if>
 				<c:if test="${isWriter}">
 					<button id="statusChange" style="float: right; font-size: 16px; color: #fff; background-color: #85adad" class="btn" title="${list.status == 'END' ? 'SALE' : 'END'}">${list.status == 'END' ? '낙찰취소' : '낙찰하기'}</button>
@@ -560,12 +562,11 @@ border-radius: 15px;
 
    
    $('#report').on("click", function(){
-	   /*
 	   $.ajax({
 			url : '<c:url value="/board/report.do" />',
 			type:'POST',
 			dataType: "text",
-			data:{'${_csrf.parameterName}':'${_csrf.token}', auction_no:${list.auction_no}},
+			data:{'${_csrf.parameterName}':'${_csrf.token}', auction_no:${list.auction_no}}
 		}).done(function(data){
 			if(data == 1){
 				const Toast = Swal.mixin({
@@ -595,41 +596,5 @@ border-radius: 15px;
 			    });
 			}
 		});
-	   
-	   */
-	   var isreport = $(this).attr("title");
-	   
-	   console.log(isreport)
-	   if(isreport == 0){
-		   const Toast = Swal.mixin({
-		    	toast : true,
-		        position : 'center-center',
-		        showConfirmButton : false,
-		        timer : 1000,
-		        timerProgressBar : true,
-		    })
-
-		    Toast.fire({
-		        icon : 'success',
-		        title : '신고되었습니다.'
-		    });
-		   
-		   $(this).attr("title", 1);
-		   
-	   } else {
-		   const Toast = Swal.mixin({
-		    	toast : true,
-		        position : 'center-center',
-		        showConfirmButton : false,
-		        timer : 1000,
-		        timerProgressBar : true,
-		    })
-
-		    Toast.fire({
-		        icon : 'error',
-		        title : '신고는 1회만 가능합니다.'
-		    });
-	   }
-
    });
 </script>

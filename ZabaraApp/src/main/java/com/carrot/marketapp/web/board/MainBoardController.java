@@ -746,6 +746,18 @@ public class MainBoardController {
 		return "/board/AuctionView.market";
 	}
 
-	
+	@RequestMapping(value="/report.do",produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public int report(@RequestParam Map map,Model model,Principal principal) throws JsonProcessingException {
+		map = getUserInfo(map, model, principal);
+		map.put("category", "테스트용");
+		map.put("content", "신고테스트");
+		int hasReport = boardService.hasReport(map);
+		if(hasReport == 0) {
+			return boardService.doReport(map);
+		}
+		
+		return 0;
+	}
 
 }

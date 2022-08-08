@@ -164,4 +164,14 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 	public List<BoardDTO> participationList(Map map) {
 		return boardDAO.participationList(map);
 	}
+
+	public int hasReport(Map map) {
+		// TODO Auto-generated method stub
+		return boardDAO.hasReport(map);
+	}
+
+	public int doReport(Map map) {
+		// TODO Auto-generated method stub
+		return boardDAO.doReport(map);
+	}
 }

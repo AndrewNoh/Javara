@@ -77,7 +77,7 @@
 		DESC
 	</select>
 
-	<select id="selectAuctionLikeNo" resultType="_int">
+	<select id="selectAuctionLikeNo" resultType="_int" parameterType="Map">
 		SELECT COUNT(*) FROM
 		AUCTION_LIKE WHERE AUCTION_NO = #{no}
 	</select>
@@ -510,6 +510,26 @@
 	FROM AUCTION_PRICE ap JOIN AUCTION_LIST al on al.auction_no = ap.auction_no 
 	where ap.upper_user_no=#{userno}
 	</select>
+	
+	<select id="hasReport" resultType="_int" parameterType="Map">
+		<if test='auction_no != null'>
+			SELECT COUNT(*) FROM AUCTION_REPORT WHERE AUCTION_NO = #{auction_no} AND REPORT_USERNO =#{userno}
+		</if>
+		
+		<if test='townlist_no != null'>
+			SELECT COUNT(*) FROM TOWN_REPORT WHERE TOWNLIST_NO = #{townlist_no} AND REPORT_USERNO =#{userno}
+		</if>
+	</select>
+	
+	<insert id="doReport" parameterType="Map">
+		<if test='auction_no != null'>
+			INSERT INTO AUCTION_REPORT VALUES(SEQ_AUCTION_REPORT_NO.NEXTVAL, #{auction_no}, #{userno}, #{category}, #{content})
+		</if>
+		
+		<if test='townlist_no != null'>
+			INSERT INTO TOWN_REPORT VALUES(SEQ_TOWN_REPORT_NO.NEXTVAL, #{townlist_no}, #{userno}, #{category}, #{content})
+		</if>
+	</insert>
 	
 
 </mapper>

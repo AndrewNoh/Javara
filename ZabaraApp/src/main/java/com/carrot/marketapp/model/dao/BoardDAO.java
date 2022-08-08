@@ -266,6 +266,16 @@ public class BoardDAO {
 	public List<BoardDTO> participationList(Map map) {
 		return sqlSession.selectList("participationList", map);
 	}
+
+	public int hasReport(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("hasReport", map);
+	}
+
+	public int doReport(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("doReport", map);
+	}
 	
 
 }
