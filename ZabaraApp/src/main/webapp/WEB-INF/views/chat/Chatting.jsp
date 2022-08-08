@@ -441,27 +441,6 @@
 </div>
 <script>
 
-//웹소켓 데이터 
-/* $(function() {
-
-   timer = setInterval( function () {
-
-      $.ajax({
-         url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
-         type: 'get',
-         dataType: 'text',
-         success: function (result) {
-            //console.log(result)
-         },
-         error: function () {
-            //console.log('error')
-         }
-      });
-      
-       }, 2000);
-
-   }); */
-
 
 ///사진전송
 document.getElementById("file").onchange = function () {
@@ -613,18 +592,19 @@ function uploadFile(e) {
       
    ////전화번호 공유 요청했을때 메세지
    	else if(e.data.includes('서버로부터받은 전화번호공유 메시지${roomno}:')){
-         //console.log(e.data);
          appendMessage("<div class='outgoing_msg'><div class='incoming_msg_img'><c:if test='${userNickname.nickname eq chatroom.writeusernickname }'><img class='chat-header-image' src='${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatroom.senduserprofileimg}' alt='sunil'></c:if>"
          +"<c:if test='${userNickname.nickname ne chatroom.writeusernickname }'><img class='chat-header-image' src='${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatroom.writeuserprofileimg}' alt='sunil'></c:if>"+nickname+"</div>"
          +"<div class='received_msg'><div class='received_withd_msg'><p style='text-align: center;'><strong>전화번호 공유를 요청하였습니다</strong><br/><button class='btn btn-outline-warning m-3 agreemrnt' id='agreemrnt'>동의</button><button class='btn btn-outline-dark m-3 disagreemrnt' id='disagreemrnt'>비동의</button><input type='hidden' name='sendusrno' value='${userNickname.userno}'/><input type='hidden' name='phonnumber' value='${userNickname.nickname }:${userNickname.phonenumber}'/><br/></p></div><span style='float: left;font-size: small; margin-top:5px;'>"
          +today.toLocaleTimeString()+"</span></div></div>");
       }
+      //전화번호공유 동의시 보내는 메세지
       else if(e.data.includes('서버로부터받은 전화번호 메시지${roomno}:')){
+    	//  
          appendMessage("<div class='outgoing_msg'><div class='incoming_msg_img'><c:if test='${userNickname.nickname eq chatroom.writeusernickname }'><img class='chat-header-image' src='${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatroom.senduserprofileimg}' alt='sunil'></c:if>"
                +"<c:if test='${userNickname.nickname ne chatroom.writeusernickname }'><img class='chat-header-image' src='${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatroom.writeuserprofileimg}' alt='sunil'></c:if>"+nickname+"</div>"
                +"<div class='received_msg'><div class='received_withd_msg'><p style='text-align:center;'>"+e.data.substring(start+1)+" <br/></p></div><span style='float: left;font-size: small; margin-top:5px;'>"
                +today.toLocaleTimeString()+"</span></div></div>"); 
-         
+         //동의시 내번호 전송 ajax
         	 $.ajax({
                  url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
                  data: {chatcontent:'전화번호 공유 ${userNickname.nickname }:${userNickname.phonenumber}',
