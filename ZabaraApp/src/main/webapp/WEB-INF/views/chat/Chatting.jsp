@@ -443,25 +443,6 @@
 <script>
 
 //웹소켓 데이터 
-$(function() {
-
-   timer = setInterval( function () {
-
-      $.ajax({
-         url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
-         type: 'get',
-         dataType: 'text',
-         success: function (result) {
-            //console.log(result)
-         },
-         error: function () {
-            //console.log('error')
-         }
-      });
-      
-       }, 2000);
-
-   });
 
 
 ///사진전송

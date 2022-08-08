@@ -11,7 +11,8 @@ public class MultipartResolverConfig {
 	public CommonsMultipartResolver createMultipartResolver() {
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
 		//최대사이즈 조절
-		//resolver.setMaxUploadSize(10485760);
+		resolver.setMaxUploadSize(-1);
+		resolver.setMaxUploadSizePerFile(-1);
 		resolver.setDefaultEncoding("utf-8");
 		return resolver;
 	}

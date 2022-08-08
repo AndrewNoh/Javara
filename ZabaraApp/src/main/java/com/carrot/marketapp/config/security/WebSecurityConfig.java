@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -38,10 +39,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override // 리소스 보안 부분
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests() // 요청에 의한 보안검사 시작
-				.antMatchers("/board/shareView.do").permitAll()
+				.antMatchers("/board/shareView.do", "/chat/insertimgfromapp.do").permitAll()
 				.antMatchers("/board/**", "/auction/**", "/chat/**").hasAnyRole("USER").antMatchers("/", "/main")
 				.permitAll().anyRequest().permitAll() // 어떤 요청에도 보안검사를 한다.
-
+				
 				.and().formLogin()// 보안 검증은 formLogin방식으로 하겠다.
 				.loginPage("/location/login.do") // 사용자 정의 로그인 페이지
 				.failureUrl("/location/login.do?error=true") // 로그인 실패 후 이동 페이지
@@ -55,8 +56,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and().sessionManagement().maximumSessions(1) // 최대 허용 가능 세션 수 , -1 : 무제한 로그인 세션 허용
 				.maxSessionsPreventsLogin(false) // 동시 로그인 차단함, false : 기존 세션 만료(default)
 				.expiredUrl("/user/Login.market"); // 세션이 만료된 경우 이동 할 페이지
-
+				
 		http.headers().frameOptions().disable();
+		
+		http.csrf().ignoringAntMatchers("/chat/insertimgfromapp.do")//csrf예외처리
+		   .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 
 	}
 
