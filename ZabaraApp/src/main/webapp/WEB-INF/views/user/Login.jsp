@@ -634,8 +634,23 @@ function addMessage(msg, val){
    $(val).nextAll('div').append(newDiv);
 }
 
+//우편번호 팝업창 디자인
+var themeObj = {
+      bgColor: "#AFAFAF", //바탕 배경색
+      searchBgColor: "#212529", //검색창 배경색
+      //contentBgColor: "", //본문 배경색(검색결과,결과없음,첫화면,검색서제스트)
+      //pageBgColor: "", //페이지 배경색
+      //textColor: "", //기본 글자색
+      queryTextColor: "#FFFFFF", //검색창 글자색
+      // postcodeTextColor: "", //우편번호 글자색
+      // emphTextColor: "", //강조 글자색
+      outlineColor: "#FFFFFF" //테두리
+};
+
 //주소입력
 function daumAddress() {
+	var width = 500; // 팝업의 너비
+	var height = 600; // 팝업의 높이
     new daum.Postcode({
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -660,8 +675,16 @@ function daumAddress() {
              });
                document.getElementById("address").value = addr;
             $('#nextBtn').focus();
-        }
-    }).open();
+        },
+       theme: themeObj, // 팝업 테마 적용
+       width: width,  
+       height: height
+    }).open({
+        left: 500, // 팝업 위치 X값
+        top: 500, // 팝업 위치 y값
+        popupTitle: '우리동네 좋은 물건 자바라' // 팝업 타이틀
+        
+    });
 }
 
 //임시 비밀번호 발송
