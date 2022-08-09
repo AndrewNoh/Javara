@@ -1,6 +1,5 @@
 package com.carrot.marketapp.model.dto;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
@@ -15,9 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChatDTO {
-	
-	
-	private int rownum;
+
 	private int roomno;
 	private int auction_no;
 	private int product_no;

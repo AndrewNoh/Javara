@@ -4,9 +4,32 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mybatis.mapper.chat">
-	<select id="userList" parameterType="Map" resultType="ChatDTO">
-		SELECT
-		nickname,profile_img FROM members where
+	<resultMap id="chatDtoResult" type="ChatDTO">
+		<!-- property:자바빈(OneMemoDTO)의 속성명 column:테이블의 컬럼(조회(SELECT)결과의 컬럼명들 의미) -->
+		<result column="userno" property="userno" />
+		<result column="email" property="email" />
+		<result column="phonenumber" property="phonenumber" />
+		<result column="name" property="name" />
+		<result column="password" property="password" />
+		<result column="adress" property="adress" />
+		<result column="nickname" property="nickname" />
+		<result column="writeuserno" property="writeuserno" />
+		<result column="room_no" property="roomno" />
+		<result column="chatcontent" property="chatcontent" />
+		<result column="sendtime" property="sendtime" />
+		<result column="senduserno" property="senduserno" />
+		<result column="unread_count" property="unread_count" />
+		<result column="writeusernickname" property="writeusernickname" />
+		<result column="no" property="no" />
+		<!-- 1:N관계 매핑용 column: 조인조건의 컬럼명 (ON onememo.no = linecomments.no)select: 
+			select태그의 id 속성값(쿼리문은 조인문)javaType : OneMemoDTO의 자식레코드(LineCommentDTO)를 담을 
+			컬렉션 타입 ofType : 자식의 DTO타입아래 collection태그 사용시현재 매퍼파일에서 메모글 하나 가져올때 반드시 resultMap="memoDtoResult"을 
+			사용하지 -->
+	</resultMap>
+
+	<select id="userList" parameterType="Map"
+		resultMap="chatDtoResult">
+		SELECT nickname,profile_img FROM members where
 		userno=#{userno}
 	</select>
 	<insert id="createChatRoomno" parameterType="Map">
@@ -15,15 +38,15 @@
 		#{chatcontent},SYSDATE)
 	</insert>
 	<select id="findChatRoom" parameterType="Map"
-		resultType="ChatDTO">
-		SELECT c.*,m.nickname sendusernickname, mb.nickname
-		writeusernickname,
-		m.profile_img senduserprofileimg, mb.profile_img
-		writeuserprofileimg
-		from CHATROOM c JOIN members m on c.writeuserno =
-		m.userno JOIN
-		members mb on c.userno = mb.userno where
-		(c.userno=#{userno} or
+		resultMap="chatDtoResult">
+		SELECT c.*,m.nickname
+		sendusernickname, mb.nickname writeusernickname,
+		m.profile_img
+		senduserprofileimg, mb.profile_img writeuserprofileimg
+		from CHATROOM c
+		JOIN members m on c.writeuserno = m.userno JOIN
+		members mb on c.userno
+		= mb.userno where (c.userno=#{userno} or
 		writeuserno= #{userno}) and
 		(auction_no=#{auction_no} or townlist_no=#{townlist_no})
 	</select>
@@ -38,19 +61,12 @@
 		VALUES(#{roomno},#{senduserno},#{unread_count},'사진',systimestamp,#{img})
 	</insert>
 	<select id="viewChatMessage" parameterType="Map"
-		resultType="ChatDTO">
-		select
-		rownum, c.*,
-		m.nickname, m.profile_img from
-		chat_message C join members
-		M on
-		c.senduserno = m.userno where room_no =
-		#{room_no} ORDER BY
-		sendtime
-		ASC
+		resultMap="chatDtoResult">
+		SELECT * from CHAT_MESSAGE where room_no=#{roomno} ORDER BY sendtime 
 	</select>
 
-	<select id="chatlist" parameterType="Map" resultType="ChatDTO">
+	<select id="chatlist" parameterType="Map"
+		resultMap="chatDtoResult">
 		SELECT
 		c.*,m.nickname sendusernickname ,mb.nickname
 		writeusernickname,
@@ -68,7 +84,7 @@
 		room_no = #{roomno}
 	</update>
 	<select id="findnickname" parameterType="Map"
-		resultType="ChatDTO">
+		resultMap="chatDtoResult">
 		SELECT m.nickname sendusernickname, mb.nickname
 		writeusernickname from
 		CHATROOM c JOIN members m on c.writeuserno =
@@ -77,7 +93,7 @@
 		room_no=#{roomno}
 	</select>
 	<select id="unreadcount" parameterType="Map"
-		resultType="ChatDTO">
+		resultMap="chatDtoResult">
 		SELECT room_no,count(case when not(senduserno=#{userno})
 		and
 		unread_count=1 then 1 end) unreadcount FROM CHAT_MESSAGE GROUP BY
@@ -95,16 +111,8 @@
 		DELETE FROM CHAT_MESSAGE WHERE room_no =#{roomno}
 	</delete>
 	<update id="updateChatMsg" parameterType="Map">
-		parameterType="Map">
-		UPDATE chat_message
-		SET
-		chatcontent = #{chatcontent}
-		WHERE ROWID IN (
-		SELECT rid from (
-		SELECT
-		ROWID rid, rownum rn from chat_message where
-		room_no = #{roomno} ORDER BY
-		sendtime ASC)
-		where rn = #{rownum})
+		UPDATE CHAT_MESSAGE SET
+		chatcontent=#{chatcontent} WHERE
+		room_no = #{roomno}
 	</update>
 </mapper>
