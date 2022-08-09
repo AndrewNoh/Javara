@@ -116,12 +116,13 @@
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
 		SELECT * FROM TOWN_LIST L 
 		LEFT OUTER JOIN MEMBERS M ON L.USERNO = M.USERNO
-		WHERE (SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) = #{simpleAddress}
+		WHERE (SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) = #{simpleAddress} 
+		ORDER BY L.TOWNLIST_NO DESC
 	</select>
 
 	<select id="getListOne" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		SELECT * FROM TOWN_LIST WHERE townlist_no = #{townlist_no}
+		SELECT * FROM TOWN_LIST WHERE townlist_no = #{townlist_no} 
 	</select>
 
 	<select id="selectTownLikeNo" resultType="_int">
@@ -245,11 +246,8 @@
 		JOIN ADDRESS_LIST A ON A.ADDRNO = T.ADDRNO LEFT OUTER 
 		JOIN AUCTION_IMG I ON I.AUCTION_NO = T.AUCTION_NO WHERE T.STATUS = 'SALE' ORDER BY P.AUCTION_NO DESC)
  	</select>
-	
 	<!-- MYPAGE -->
-	<!-- SELECT문 -->
-
-	<!-- INSERT문 -->
+	
 	
 	<!-- AUCTION -->
 	<insert id="writeAuctionList" parameterType="Map">
@@ -296,9 +294,7 @@
 		VALUES(SEQ_TOWN_IMG_IMAGENO.NEXTVAL,#{profile},#{townNo})
 	</insert>
 	<!-- TOWN -->
-	<!-- INSERT문 -->
-
-	<!-- DELETE문 -->
+	
 	
 	<!-- AUCTION -->
 	<delete id="deleteAuction" parameterType="Map">
@@ -352,9 +348,7 @@
 		WHERE TOWNLIST_NO = #{townlist_no}
 	</delete>
 	<!-- TOWN -->
-	<!-- DELETE문 -->
-
-	<!-- UPDATE문 -->
+	
 	
 	<!-- AUCTION -->
 	<update id="updateAuctionList" parameterType="Map">
@@ -390,6 +384,7 @@
 		AUCTION_LIST SET STATUS=#{status} WHERE AUCTION_NO=#{auction_no}
 	</update>
 	<!-- AUCTION -->
+
 
 	<!-- TOWN -->
 	<update id="updateTownList" parameterType="Map">
@@ -482,7 +477,10 @@
 	
 	<!-- TOWN: comment -->
     <select id="commentSelectList" parameterType="Map" resultType="commentDTO">
-      SELECT * FROM TOWN_COMMENTS WHERE TOWNLIST_NO = #{townlist_no} ORDER BY COMMENT_NO
+      SELECT TC.*, M.NICKNAME FROM TOWN_COMMENTS TC 
+	  LEFT OUTER JOIN MEMBERS M 
+	  ON TC.COMMENT_USERNO = M.USERNO
+	  WHERE TC.TOWNLIST_NO = #{townlist_no} ORDER BY TC.COMMENT_POSTDATE DESC
     </select>
    
     <insert id="commentInsert" parameterType="Map">

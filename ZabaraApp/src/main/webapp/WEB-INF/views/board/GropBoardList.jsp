@@ -88,17 +88,20 @@ a:hover {
 						</c:set>
 						<div class="col-md-5 form-group mb-3" style="display: flex; justify-content: flex-end; align-items: center;">
 							<c:if test="${userno ==LIST.userNo }">
+							<!-- 
 								<a href="<c:url value="/board/update.do">
 					        		<c:param name="townlist_no" value="${LIST.townlist_no }"/></c:url>"id="edit">
 					        		<i class="bx bxs-edit p-2" style="font-size: 25px" title="수정"></i></a>
+					        -->
+							<div style="padding: 10px 10px; text-align: end; "><span class="p-2" style="background: #85adad;border-radius: 20px;">${LIST.category}</span></div>
 								<a href="<c:url value="/board/deleteTown.do">
 					        		<c:param name="townlist_no" value="${LIST.townlist_no }"/>
 					        		<c:param name="auction_no" value="0"/>
 					        		<c:param name="product_no" value="0"/>
 					        		</c:url>" id="delete">
-					        		<i class="bx bxs-trash p-2" style="font-size: 25px" title="삭제"></i></a>
+					        		<i class="bx bxs-trash p-2" style="font-size: 20px" title="삭제"></i></a>
 							</c:if>
-							<div style="padding: 10px 15px; text-align: end; "><span class="p-2" style="background: #85adad;border-radius: 20px;">${LIST.category}</span></div>
+							
 						</div>
 					</div>
 					<div class="form-group " style="padding: 10px 15px;">
@@ -154,6 +157,7 @@ a:hover {
 	  // 댓글: 댓글창 오픈
 	  // 댓글 데이터 가져오기
 	  var comment = $('a[name=comment]');
+	  var nickName = '${LIST.nickName}';
 	  $(document).on("click", '.comment', function(e){
 		  var comments = document.querySelectorAll('.comments');
 		  var comment = document.querySelectorAll('.comment');
@@ -168,12 +172,11 @@ a:hover {
 		      $.ajax({
 		    	  type: 'POST',
 		      	  url: '<c:url value="/comment/list.do"/>',
-		      	  dataType: 'json', // 'json',
-		      	  // contentType: "application/json; charset=utf-8",
+		      	  dataType: 'json', 
 		      	  data:{
 		      		'${_csrf.parameterName}':'${_csrf.token}',
-		      		 townlist_no: townlistNo
-		      		// $('#comment_write').serialize()
+		      		 townlist_no: townlistNo,
+		      		 
 		      	  },
 		      		 success: function(data){
 		      			 var html = "";	
@@ -182,7 +185,7 @@ a:hover {
 		      				 for(i=0; i<data.length; i++){
 		      					 var date = new Date(data[i].comment_postdate);
 		      					 html += "<div>";
-		                         html += "<div><table class='table'><h6 style='color:#85ADAD'><strong>"+data[i].comment_userno+"</strong></h6>"+"<span>"+data[i].comment_content +"</span>" + "<tr></tr>" +"<span style='float: right'>"+date.toLocaleString()+"</span>";
+		                         html += "<div><table class='table'><h6 style='color:#85ADAD'><strong>"+data[i].nickname+"</strong></h6>"+"<span>"+data[i].comment_content +"</span>" + "<tr></tr>" +"<span style='float: right'>"+date.toLocaleString()+"</span>";
 		                         html += "</table></div>";
 		                         html += "</div>";
 		      				 }
@@ -191,18 +194,18 @@ a:hover {
 			                    html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
 			                    html += "</table></div>";
 			                    html += "</div>";
-		      			 }
-		      			
+		      			 }		      			
 		      			  // $('#cCnt'+townlistNo).html(cCnt);
 		                  $('#commentList'+townlistNo).html(html);
-		      			 
+		                 
 		      		 },////success
+		      	     
 		      		 error: (error) => {
 		                 console.log(JSON.stringify(error));
 		      		 }////error
-		      	  })
 		      		
-	  	});
+		      	  })	
+	  		});
 	 
       // 댓글: 댓글 작성
 	  $(document).on("click", '.send', function(e){
@@ -220,16 +223,16 @@ a:hover {
 					success: function(result){
 						console.log('result',result);
 						if(result == 1){
-							// getCommentList(); // 리스트 호출
-							// comment_content.val("");
+							location.reload(); 
 						}
-						// location.reload();
+						
 					},
 					error: (error) => { 
 						console.log(JSON.stringify(error)); 
 					}
 				})	
 		  	});
+	  
 		  
   
   // 좋아요

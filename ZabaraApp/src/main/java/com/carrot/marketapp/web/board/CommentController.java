@@ -44,12 +44,14 @@ public class CommentController {
 		map.put("email", principal.getName());
 		UserDTO userinfo = userService.selectOne(map);
 		map.put("comment_userno", userinfo.getUserno());
+		
+		// System.out.println(map.get("userno")); // 닉네임
 		// System.out.println(map.get("comment_userno")); // 유저번호
 		// System.out.println(map.get("townlist_no")); // 글번호
 		// System.out.println(map.get("comment_content")); // 글내용
 			
 		int newComment = commentService.commentInsert(map);
-		System.out.println("newComment"+newComment);
+		// System.out.println("newComment"+newComment);
 			
 		return newComment;
 			

@@ -20,5 +20,5 @@ public class CommentDTO {
 	private String comment_content;
 	private String comment_userno;
 	private Timestamp comment_postdate;
-	
+	private String nickname;
 }
