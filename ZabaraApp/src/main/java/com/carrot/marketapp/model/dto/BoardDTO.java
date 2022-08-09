@@ -39,6 +39,7 @@ public class BoardDTO {
 	private double longitude; 
 	private String simpleaddress;
 	private String fulladdress;
+	private String profile_img;
 	
 	
 	//조회수

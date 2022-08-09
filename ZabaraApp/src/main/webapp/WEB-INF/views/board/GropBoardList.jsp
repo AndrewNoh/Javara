@@ -80,7 +80,7 @@ a:hover {
 						value="${_csrf.token}" />
 					<div class="row mx-1"style="display: flex; justify-content: space-between; align-items:flex-end; border-bottom: 0.5px solid #ffffff80;">
 						<div class="col-md-5 form-group mb-3" style="display: flex; align-items:center;">
-							<img style="border-radius: 50%; width: 50px; height: 50px;" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${profileimage}"/>
+							<img style="border-radius: 50%; width: 50px; height: 50px;" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${LIST.profile_img}"/>
 							<div style="padding: 10px 15px;" >${LIST.nickName}</div>
 						</div>
 						<c:set var="session_id">
@@ -93,7 +93,7 @@ a:hover {
 					        		<c:param name="townlist_no" value="${LIST.townlist_no }"/></c:url>"id="edit">
 					        		<i class="bx bxs-edit p-2" style="font-size: 25px" title="수정"></i></a>
 					        -->
-							<div style="padding: 10px 10px; text-align: end; "><span class="p-2" style="background: #85adad;border-radius: 20px;">${LIST.category}</span></div>
+							
 								<a href="<c:url value="/board/deleteTown.do">
 					        		<c:param name="townlist_no" value="${LIST.townlist_no }"/>
 					        		<c:param name="auction_no" value="0"/>
@@ -101,7 +101,7 @@ a:hover {
 					        		</c:url>" id="delete">
 					        		<i class="bx bxs-trash p-2" style="font-size: 20px" title="삭제"></i></a>
 							</c:if>
-							
+							<div style="padding: 10px 10px; text-align: end; "><span class="p-2" style="background: #85adad;border-radius: 20px;">${LIST.category}</span></div>
 						</div>
 					</div>
 					<div class="form-group " style="padding: 10px 15px;">
