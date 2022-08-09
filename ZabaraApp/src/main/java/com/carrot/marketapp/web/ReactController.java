@@ -29,33 +29,11 @@ import com.carrot.marketapp.model.service.impl.UserServiceimpl;
 public class ReactController {
 
 	@Autowired
-	BoardServiceimpl boardService;
-	
-	@Autowired
-	ImageServiceimpl imageService;
+	BoardServiceimpl boardService;	
 	
 	@Autowired
 	UserServiceimpl userService;
-	
-	@Autowired
-	AddressServiceimpl addressService;
-	
-	@RequestMapping(value="/hotPost.do")
-	public List<BoardDTO> hotPost(@RequestParam Map userinfo) throws SQLException, Exception {			
-		Map map = new HashMap();
-		List<BoardDTO> Lists = null;
-		String simpleAddr = "";
-			
-		if(userinfo.get("address")!=null) {
-			map.put("simpleAddress", userinfo.get("address").toString().trim());
-			Lists = boardService.mainPageListYesAddr(map);			
-		} else {
-			Lists = boardService.mainPageListNoAddr(map);
-		}
-	
-		return Lists;
-	}
-	
+		
 	
 	@RequestMapping(value="/isLogin.do")
 	public Map isLogin(Authentication auth) {
@@ -73,6 +51,38 @@ public class ReactController {
 		return map;
 	}
 	
+	
+	@RequestMapping(value="/changePost.do")
+	public List<BoardDTO> changePost(@RequestParam Map selectedMenu){
+		Map map = new HashMap();
+		List<BoardDTO> Lists = null;		
+		
+		if(selectedMenu.get("address")!=null) {
+			map.put("simpleAddress", selectedMenu.get("address").toString().trim());
+			if(selectedMenu.get("menu").equals("좋아요")) {
+				Lists = boardService.mainPageListYesAddr(map);
+			}
+			else if(selectedMenu.get("menu").equals("최고가")) {
+				Lists = boardService.postUpperPrice(map);
+			}
+			else if(selectedMenu.get("menu").equals("최저가")) {
+				Lists = boardService.postLowerPrice(map);
+			}
+		}
+		else {
+			if(selectedMenu.get("menu").equals("좋아요")) {
+				Lists = boardService.mainPageListNoAddr(map);
+			}
+			else if(selectedMenu.get("menu").equals("최고가")) {
+				Lists = boardService.postUpperPrice(map);
+			}
+			else if(selectedMenu.get("menu").equals("최저가")) {
+				Lists = boardService.postLowerPrice(map);
+			}
+		}		
+		
+		return Lists;
+	}
 	
 	
 }
