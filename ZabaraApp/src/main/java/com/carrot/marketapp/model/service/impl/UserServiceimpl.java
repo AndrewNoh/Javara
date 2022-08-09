@@ -25,6 +25,11 @@ public class UserServiceimpl implements CommonService<UserDTO>{
 	public UserDTO selectOne(Map map) {
 		return userDAO.selectOne(map);
 	}
+	
+	public int selectList(Map map) {
+		
+		return userDAO.selectList(map);
+	}
 
 
 	@Override
@@ -36,7 +41,7 @@ public class UserServiceimpl implements CommonService<UserDTO>{
 	@Override
 	public int delete(Map map) {
 		
-		return 0;
+		return userDAO.delete(map);
 	}
 
 	@Override
@@ -65,5 +70,7 @@ public class UserServiceimpl implements CommonService<UserDTO>{
 		
 		return userDAO.editselectOne(map);
 	}
+
+	
 	
 }

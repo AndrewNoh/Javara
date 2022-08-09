@@ -168,31 +168,34 @@
 		<ul>
 			<sec:authentication property="name" var="username" />
 			<c:if test="${username == 'anonymousUser'}" var="isLogin">
-				<li><a class="nav-link "
-					href="<c:url value="/location/login.do"/>">로그인</a></li>
-			</c:if>
-			<c:if test="${not isLogin }">
-				<li><a class="nav-link " href="javascript:logout()">로그아웃</a></li>
-				<li><a class="nav-link "
-					href="<c:url value="/userinfo/mypage.do"/>">나의 자바라</a></li>
-			</c:if>
-			<li><a class="nav-link "
-				href="<c:url value="/board/auctionlist.do"/>">자바라경매</a></li>
-			<li class="nav-item dropdown"><a
-				class="nav-link dropdown-toggle" href="#" id="navbardrop"
-				data-toggle="dropdown"> 동네생활 </a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item"
-						href="<c:url value="/board/gropboard.do"/>">동네생활</a> <a
-						class="dropdown-item" href="<c:url value="/board/news.do"/>">실시간뉴스</a>
-				</div></li>
-			<li><a class="nav-link " href="<c:url value="/board/qna.do"/>">자주묻는
-					질문</a></li>
-			<!--<li><a class="nav-link" href="<c:url value="/board/image.do"/>">이미지분석</a></li>-->
-			<li><a class="nav-link"
-				href="<c:url value="/chat/chattingroom.do"/>">채팅</a></li>
-			<li><a class="nav-link"
-				href="<c:url value="/userinfo/category.do"/>">우리동네 카테고리</a></li>
+	                <li><a class="nav-link" href="<c:url value="/location/login.do"/>">로그인</a></li>
+	             </c:if>
+	             <c:if test="${not isLogin }">  
+	                <li><a class="nav-link" href="javascript:logout()">로그아웃</a></li>	                
+	             </c:if>
+	            <sec:authorize access="hasAnyRole('ROLE_ADMIN')" var="isAdmin">
+					<li><a href="<c:url value="/admin/admin.do"/>">관리자</a></li>
+					<li><a href="<c:url value="/admin/adminauction.do"/>">경매글관리</a></li>
+					<li><a href="<c:url value="/admin/admingropboard.do"/>">동네글관리</a></li>
+				</sec:authorize>
+				<c:if test="${not isAdmin }">
+				<li><a class="nav-link" href="<c:url value="/userinfo/mypage.do"/>">나의 자바라</a></li>
+	             <li><a class="nav-link" href="<c:url value="/board/auctionlist.do"/>">자바라경매</a></li>
+	             <li class="nav-item dropdown">
+	             	<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+				        동네생활
+				      </a>
+				      <div class="dropdown-menu">
+				        <a class="dropdown-item" href="<c:url value="/board/gropboard.do"/>">동네생활</a>
+				        <a class="dropdown-item" href="<c:url value="/board/news.do"/>">실시간뉴스</a>
+				      </div>
+				   </li>
+	             <li><a class="nav-link" href="<c:url value="/board/qna.do"/>">자주묻는 질문</a></li>
+	             <!-- <li><a class="nav-link" href="<c:url value="/board/image.do"/>">이미지분석</a></li> -->
+	             <li><a class="nav-link" href="<c:url value="/chat/chattingroom.do"/>">채팅</a></li>
+	             <li><a class="nav-link" href="<c:url value="/userinfo/category.do"/>">우리동네 카테고리</a></li>				
+	             </c:if>
+	             
 			<li><div class="search col mr-3" id="srch" style="float: left;">
 					<div class="srch_bar" style="text-align: center;">
 						<div class="stylish-input-group">

@@ -65,9 +65,15 @@ width: 70%;
 	                <li><a class="nav-link" href="<c:url value="/location/login.do"/>">로그인</a></li>
 	             </c:if>
 	             <c:if test="${not isLogin }">  
-	                <li><a class="nav-link" href="javascript:logout()">로그아웃</a></li>
-	                <li><a class="nav-link" href="<c:url value="/userinfo/mypage.do"/>">나의 자바라</a></li>
+	                <li><a class="nav-link" href="javascript:logout()">로그아웃</a></li>	                
 	             </c:if>
+	            <sec:authorize access="hasAnyRole('ROLE_ADMIN')" var="isAdmin">
+					<li><a href="<c:url value="/admin/admin.do"/>">관리자</a></li>
+					<li><a href="<c:url value="/admin/adminauction.do"/>">경매글관리</a></li>
+					<li><a href="<c:url value="/admin/admingropboard.do"/>">동네글관리</a></li>
+				</sec:authorize>
+				<c:if test="${not isAdmin }">
+				<li><a class="nav-link" href="<c:url value="/userinfo/mypage.do"/>">나의 자바라</a></li>
 	             <li><a class="nav-link" href="<c:url value="/board/auctionlist.do"/>">자바라경매</a></li>
 	             <li class="nav-item dropdown">
 	             	<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -81,14 +87,14 @@ width: 70%;
 	             <li><a class="nav-link" href="<c:url value="/board/qna.do"/>">자주묻는 질문</a></li>
 	             <!-- <li><a class="nav-link" href="<c:url value="/board/image.do"/>">이미지분석</a></li> -->
 	             <li><a class="nav-link" href="<c:url value="/chat/chattingroom.do"/>">채팅</a></li>
+	             </c:if>
 	             <!-- 
 	             <li><a class="nav-link"
 				href="<c:url value="/userinfo/category.do"/>">우리동네 카테고리</a></li>
 				-->
 				<li>
 	           </ul>
-	           <i class="bi bi-list mobile-nav-toggle"></i>
-	           
+	           <i class="bi bi-list mobile-nav-toggle"></i>	           
 	      </nav><!-- .navbar -->
 
       	

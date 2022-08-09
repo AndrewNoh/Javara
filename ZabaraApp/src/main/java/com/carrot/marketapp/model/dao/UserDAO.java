@@ -42,6 +42,30 @@ public class UserDAO {
 			return sqlSession.selectOne("userselectOne", map);// 이메일(아이디)로 selectOne(주소포함)
 		}
 	}
+	
+	public int selectList(Map map) {
+		if(map.get("userno") !=null) {
+			return sqlSession.selectOne("selectUserList",map);
+		}else if(map.get("우리동네") !=null){
+			return sqlSession.selectOne("selectAllGropList",map); 
+		}
+		else {
+			return sqlSession.selectOne("selectAllAuctionList",map); 
+		}
+	}
+	
+	public int delete(Map map) {
+		if (map.get("townlist_no") != null){
+			sqlSession.delete("deleteAdminGropImg", map);
+			return sqlSession.delete("deleteAdminBoard", map);
+		} else {
+			sqlSession.delete("deleteAdminAuctionImg", map);
+			sqlSession.delete("deleteAdminAuctionPrice", map);
+			sqlSession.delete("deleteAdminAuctionLikeNo", map);
+			return sqlSession.delete("deleteAdminAuction", map);
+		}
+
+	}
 
 	public int update(Map map) {
 		int affected = 0;
@@ -65,6 +89,8 @@ public class UserDAO {
 	public Map mypageSelllistselectOne(Map map) {
 		return sqlSession.selectOne("mypageSelllist", map);
 	}
+
+	
 	
 	
 }

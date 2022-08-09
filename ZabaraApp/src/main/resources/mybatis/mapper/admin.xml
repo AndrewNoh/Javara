@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mapper.admin">
+
+	<!-- SELECT문 -->
+	<select id="selectUserList" parameterType="Map" resultType="_int">
+		SELECT count(*) FROM MEMBERS WHERE NOT USERNO =1
+	</select>
+	
+	<select id="selectAllGropList" parameterType="Map" resultType="_int">
+		SELECT count(*) FROM TOWN_LIST
+	</select>
+	
+	<select id="selectAllAuctionList" parameterType="Map" resultType="_int">
+		SELECT COUNT(*) FROM AUCTION_LIST
+	</select>
+	
+	<!-- DELETE문 -->
+	<delete id="deleteAdminAuction" parameterType="Map">
+		DELETE FROM
+		AUCTION_LIST WHERE AUCTION_NO = #{auction_no}
+	</delete>
+
+	<delete id="deleteAdminAuctionImg" parameterType="Map">
+		DELETE FROM
+		AUCTION_IMG WHERE AUCTION_NO = #{auction_no}
+	</delete>
+	
+	<delete id="deleteAdminAuctionLikeNo" parameterType="Map">
+		DELETE FROM
+		AUCTION_LIKE WHERE AUCTION_NO = #{auction_no}
+	</delete>
+
+	<delete id="deleteAdminAuctionPrice" parameterType="Map">
+		DELETE FROM
+		AUCTION_PRICE WHERE AUCTION_NO = #{auction_no}
+	</delete>
+	<!-- AUCTION -->
+
+	<!-- TOWN -->
+
+	<delete id="deleteAdminBoard" parameterType="Map">
+		DELETE TOWN_LIST WHERE
+		TOWNLIST_NO=#{townlist_no}
+	</delete>
+
+	<delete id="deleteAdminGropImg" parameterType="Map">
+		DELETE FROM TOWN_IMG
+		WHERE TOWNLIST_NO = #{townlist_no}
+	</delete>
+	
+	
+</mapper>
