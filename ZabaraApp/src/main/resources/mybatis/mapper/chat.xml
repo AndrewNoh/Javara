@@ -105,6 +105,6 @@
 		ROWID rid, rownum rn from chat_message where
 		room_no = #{roomno} ORDER BY
 		sendtime ASC)
-		where rn = #{rownum});
+		where rn = #{rownum})
 	</update>
 </mapper>
