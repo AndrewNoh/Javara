@@ -16,6 +16,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ChatDTO {
 	
+	
+	private int rownum;
 	private int roomno;
 	private int auction_no;
 	private int product_no;
