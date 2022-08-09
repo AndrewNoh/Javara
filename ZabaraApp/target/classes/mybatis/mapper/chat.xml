@@ -103,7 +103,7 @@
 		SELECT rid from (
 		SELECT
 		ROWID rid, rownum rn from chat_message where
-		room_no = 16 ORDER BY
+		room_no = #{roomno} ORDER BY
 		sendtime ASC)
 		where rn = #{rownum});
 	</update>
