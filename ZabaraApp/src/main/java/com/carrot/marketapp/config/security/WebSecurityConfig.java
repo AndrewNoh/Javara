@@ -59,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				
 		http.headers().frameOptions().disable();
 		
-		http.csrf().ignoringAntMatchers("/chat/insertimgfromapp.do")//csrf예외처리
+		http.csrf().ignoringAntMatchers("/chat/insertimgfromapp.do");//csrf예외처리
 
 	}
 
