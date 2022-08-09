@@ -278,6 +278,21 @@ public class BoardDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("doReport", map);
 	}
+
+	public List<BoardDTO> postUpperPrice(Map map) {
+		if(map.get("simpleAddress")!=null) {
+			return sqlSession.selectList("postUpperPrice", map);
+		}
+		else return sqlSession.selectList("postUpperPriceNoAddr", map);
+	}
+
+	public List<BoardDTO> postLowerPrice(Map map) {		
+		if(map.get("simpleAddress")!=null) {
+			return sqlSession.selectList("postLowerPrice", map);
+		}
+		else return sqlSession.selectList("postLowerPriceNoAddr", map);
+		
+	}
 	
 
 }

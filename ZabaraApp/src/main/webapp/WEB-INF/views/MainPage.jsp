@@ -110,7 +110,7 @@ width: 70%;
 	<br>
 	<br>
 	<img src="${pageContext.request.contextPath}/resources/assets/img/main_scroll_banner.png" style="width: 500px; display: block; margin: 0 auto; "/>
-	<div style="width:90%; height:969px; margin:auto" class="row">
+	<div style="width:90%; height:85%; margin:auto" class="row">
 		<iframe style="border:none;width:100%;height:100%" src="/marketapp/react/index.html"></iframe>
 	</div>
 </div>

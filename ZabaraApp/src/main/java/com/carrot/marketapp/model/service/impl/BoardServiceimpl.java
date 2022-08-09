@@ -174,4 +174,14 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 		// TODO Auto-generated method stub
 		return boardDAO.doReport(map);
 	}
+
+	public List<BoardDTO> postUpperPrice(Map map) {
+		
+		return boardDAO.postUpperPrice(map);
+	}
+
+	public List<BoardDTO> postLowerPrice(Map map) {
+		
+		return boardDAO.postLowerPrice(map);
+	}
 }
