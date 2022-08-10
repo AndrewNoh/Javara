@@ -276,6 +276,7 @@ border-radius: 15px;
 	});
 	
 	$('#bidUI').ready(function() {
+		$('#navbar').hide();
 		$('#chatbot').hide();
 	});
 	
