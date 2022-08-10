@@ -72,7 +72,7 @@ width: 30%;
 			                        class="bx bxs-quote-alt-right quote-icon-right"></i>
 			                  </p>
 			                  <c:forEach var="unreadcount" items="${unreadcount}" varStatus="loop">
-								<c:if test="${chatlist.roomno eq  unreadcount.roomno}"> 
+								<c:if test="${chatlist.room_no eq  unreadcount.room_no}"> 
 								<c:if test="${unreadcount.unreadcount >0}">
 									<span class="badge badge-light" style="float: right; border-radius:20%; background-color: red; text-align: center; margin: 10px 20px;" >${unreadcount.unreadcount}</span></c:if>
 								</c:if> 
@@ -112,7 +112,7 @@ width: 30%;
                            </h5>
                            <p>${chatlist.chatcontent}</p>
                            <c:forEach var="unreadcount" items="${unreadcount}" varStatus="loop">
-								<c:if test="${chatlist.roomno eq  unreadcount.roomno}"> 
+								<c:if test="${chatlist.room_no eq  unreadcount.room_no}"> 
 								<c:if test="${unreadcount.unreadcount >0}">
 									<span class="badge badge-light" style="float: right;">${unreadcount.unreadcount}</span></c:if>
 								</c:if> 

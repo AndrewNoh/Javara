@@ -15,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ChatDTO {
 
-	private int roomno;
+	private int room_no;
 	private int auction_no;
 	private int product_no;
 	private int townlist_no;
@@ -34,7 +34,9 @@ public class ChatDTO {
 	private String profileimage;
 	private String profile_img;
 	private String sendusernickname;
+	private String senduserphonenumber;
 	private String writeusernickname;
+	private String writeuserphonenumber;
 	
 	
 	

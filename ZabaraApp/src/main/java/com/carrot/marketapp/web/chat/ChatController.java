@@ -75,14 +75,14 @@ public class ChatController {
       if (chatroom != null) {
          System.out.println("GET방식 방번호 중복");
 
-         map.put("roomno", chatroom.getRoomno());
+         map.put("room_no", chatroom.getRoom_no());
          map.put("senduserno", chatroom.getSenduserno());
          model.addAttribute("sendusernickname", chatroom.getSendusernickname());
          model.addAttribute("senduserno", chatroom.getUserno());
          model.addAttribute("writeusernickname", chatroom.getWriteusernickname());
          model.addAttribute("writeuserno", chatroom.getWriteuserno());
 
-         model.addAttribute("roomno", chatroom.getRoomno());
+         model.addAttribute("room_no", chatroom.getRoom_no());
          List<ChatDTO> msg = chatService.viewChatMessage(map);
          model.addAttribute("message", msg);
          model.addAttribute("userno", map.get("userno"));
@@ -90,7 +90,7 @@ public class ChatController {
          model.addAttribute("nicknames", nicknames);
          List<ChatDTO> readmsg = chatService.readmsg(map);
       } else {
-         model.addAttribute("roomno", '0');
+         model.addAttribute("room_no", '0');
          System.out.println("GET방식 방생성");
          map.put("userno", map.get("writeuserno"));
          ChatDTO finduser=chatService.userlist(map);
@@ -138,7 +138,7 @@ public class ChatController {
 
       if (chatroom != null) {
          // tem.out.println("방번호 중복");
-         map.put("roomno", chatroom.getRoomno());
+         map.put("room_no", chatroom.getRoom_no());
          map.put("chatcontent", map.get("chatcontent"));
          map.put("senduserno", map.get("userno"));
          map.put("unread_count", '1');
@@ -163,7 +163,7 @@ public class ChatController {
          chatService.createChatRoomno(map);
          
          chatroom = chatService.findChatRoom(map);
-         map.put("roomno",chatroom.getRoomno());
+         map.put("room_no",chatroom.getRoom_no());
          map.put("chatcontent", chatroom.getChatcontent());
          map.put("senduserno", map.get("userno"));
          map.put("unread_count", '1');
@@ -198,7 +198,7 @@ public class ChatController {
          //System.out.println("방번호 중복");
          map.put("chatimg", rename);
          map.put("senduserno", map.get("userno"));
-         map.put("roomno", chatroom.getRoomno());
+         map.put("room_no", chatroom.getRoom_no());
          map.put("chatcontent", "사진");
          map.put("unread_count", "1");
          map.put("img", rename);
@@ -219,7 +219,7 @@ public class ChatController {
          chatroom = chatService.findChatRoom(map);
          map.put("chatimg", rename);
          map.put("senduserno", map.get("userno"));
-         map.put("roomno", chatroom.getRoomno());
+         map.put("room_no", chatroom.getRoom_no());
          map.put("chatcontent", "사진");
          map.put("unread_count", "1");
          map.put("img", rename);
@@ -245,7 +245,7 @@ public class ChatController {
 	      if (chatroom != null) {
 	         //System.out.println("방번호 중복");
 	         map.put("senduserno", map.get("userno"));
-	         map.put("roomno",chatroom.getRoomno());
+	         map.put("room_no",chatroom.getRoom_no());
 	         map.put("unread_count", "1");
 	         map.put("img",  map.get("img"));
 	         var sendimg = chatService.insertChatimg(map);
@@ -264,7 +264,7 @@ public class ChatController {
 	         
 	         chatroom = chatService.findChatRoom(map);
 	         map.put("senduserno", map.get("userno"));
-	         map.put("roomno",chatroom.getRoomno());
+	         map.put("room_no",chatroom.getRoom_no());
 	         map.put("unread_count", "1");
 	         map.put("img",  map.get("img"));
 	         var sendimg = chatService.insertChatimg(map);
@@ -280,7 +280,7 @@ public class ChatController {
    public String deletchtroom(Model model, @RequestParam Map map, Principal principal) {
 	   map.put("email", principal.getName());
 	   map.put("senduserno", map.get("userno"));
-	   map.put("roomno", map.get("roomno"));
+	   map.put("room_no", map.get("roomno"));
 	   chatService.deleteChatMsg(map);
 	   chatService.deleteChatRoom(map);
 	   return "/chat/ChattingRoom.market";

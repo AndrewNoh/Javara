@@ -279,7 +279,7 @@
 		                     	<c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
 					             <a  href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
 					                 <c:forEach var="unreadcount" items="${unreadcount}" varStatus="loop">
-										<c:if test="${chatlist.roomno eq  unreadcount.roomno}"> 
+										<c:if test="${chatlist.room_no eq  unreadcount.room_no}"> 
 											<c:if test="${unreadcount.unreadcount >0}">
 											<h3 class="mb-2"><i class="bi bi-chevron-right" style="color: yellow; font-size: 15px;"></i>
 						                    <c:if test="${nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
