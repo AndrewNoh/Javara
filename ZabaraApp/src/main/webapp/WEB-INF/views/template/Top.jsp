@@ -324,6 +324,7 @@
 	</div><!-- message-box -->
 </div><!-- chat -->
 
+<script src="<c:url value="/js/chatbot.js"/>"></script>
 <div id="snackbar"></div>
 
 <script>
