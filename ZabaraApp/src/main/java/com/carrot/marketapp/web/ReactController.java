@@ -55,7 +55,7 @@ public class ReactController {
 	@RequestMapping(value="/changePost.do")
 	public List<BoardDTO> changePost(@RequestParam Map selectedMenu){
 		Map map = new HashMap();
-		List<BoardDTO> Lists = null;		
+		List<BoardDTO> Lists = null;				
 		
 		if(selectedMenu.get("address")!=null) {
 			map.put("simpleAddress", selectedMenu.get("address").toString().trim());
