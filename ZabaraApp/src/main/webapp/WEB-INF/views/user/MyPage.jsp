@@ -100,7 +100,7 @@
    <div class="about-me container">
 
       <div class="section-title">
-         <img src="${pageContext.request.contextPath}/resources/assets/img/title_mypage.png" style="width: 150px" />
+		<h2>나의 자바라</h2>
       </div>
 
       <div class="row">

@@ -60,7 +60,7 @@ img {
 	<div class="mt-5">
 		<div class="container">
 			<div class="section-title" style="text-align: left;">
-				<img src="${pageContext.request.contextPath}/resources/assets/img/title_weather.png" style="width: 200px; float: left" />
+				<h2>우리동네 날씨</h2>
 			</div>
 			<div class="mt-5"
 				style="display: flex; align-items: center; justify-content: center;">
@@ -80,7 +80,7 @@ img {
 	</div>
 	<div class="container mt-3">
 		<div class="section-title" style="text-align: left;">
-			<img src="${pageContext.request.contextPath}/resources/assets/img/title_news.png" style="width: 200px; float: left" />
+			<h2>우리동네 뉴스</h2>
 		</div>
 		<table class="big">
 			<tr class="title">

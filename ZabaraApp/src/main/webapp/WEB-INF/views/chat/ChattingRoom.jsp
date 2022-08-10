@@ -43,7 +43,7 @@ width: 30%;
       <div class=" m-5">
       <div class="container">
    <div class="section-title">
-        <img src="${pageContext.request.contextPath}/resources/assets/img/title_chat.png" style="width: 50px" />
+        <h2>채팅</h2>
       </div>
    <div class="messaging " style="margin-top: 10px">
       <div class="inbox_msg">

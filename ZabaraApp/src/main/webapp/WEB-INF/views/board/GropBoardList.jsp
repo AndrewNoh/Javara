@@ -60,7 +60,7 @@ a:hover {
   <div id="board" class="container mt-5">
 
       <div class="section-title">
-        <img src="${pageContext.request.contextPath}/resources/assets/img/title_town.png" style="width: 100px" />
+        <h2>동네생활</h2>
         <p style="margin-top:10px">👫🏻 우리가 함께라면, 건강하고 따뜻한 동네생활을 만들 수 있어요 </p>
         <h1 style="font-size: 18px">동네생활은 이웃과 함께 정보를 공유하고, 이야기를 나누는 공간이에요.<br/>
 
