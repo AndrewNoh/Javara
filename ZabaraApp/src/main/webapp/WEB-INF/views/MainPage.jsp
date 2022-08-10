@@ -110,8 +110,8 @@ width: 70%;
 <div style="width:100%; height:800px; background-color:#ffffffde;">
 	<br>
 	<br>
-	<img src="${pageContext.request.contextPath}/resources/assets/img/mainpage_banner01.png" style="width: 500px; display: block; margin-left: 80px; margin-top: 20px "/>
-	<img src="${pageContext.request.contextPath}/resources/assets/img/main_board.PNG" style="width: 800px; position: relative; bottom: 250px; left: 900px"/>
+	<img src="${pageContext.request.contextPath}/resources/assets/img/mainpage_banner01.png" style="width: 500px; display: block; margin-left: 300px; margin-top: 200px "/>
+	<img src="${pageContext.request.contextPath}/resources/assets/img/main_board.PNG" style="width: 700px; position: relative; bottom: 450px; left: 900px"/>
 	
 	
 </div>
@@ -121,7 +121,7 @@ width: 70%;
 	<br>
 	<br>
 	<br>
-	<img src="${pageContext.request.contextPath}/resources/assets/img/mainpage_banner02.png" style="width: 500px; display: block; float: right; margin-right: 100px  "/>
+	<img src="${pageContext.request.contextPath}/resources/assets/img/mainpage_banner02.png" style="width: 500px; display: block; float: right; margin-right: 350px; margin-top:200px  "/>
 	<img src="${pageContext.request.contextPath}/resources/assets/img/main_chatimg.PNG" style="width: 700px; position: relative; bottom: -50px; left: 300px; "/>
 </div>
 
@@ -129,8 +129,8 @@ width: 70%;
 <div style="width:100%; height:800px; background-color:#ffffffde;">
 	<br>
 	<br>
-	<img src="${pageContext.request.contextPath}/resources/assets/img/mainpage_banner03.png" style="width: 500px; display: block; margin-left: 80px; margin-top: 20px "/>
-	<img src="${pageContext.request.contextPath}/resources/assets/img/main_townimg.PNG" style="width: 800px; position: relative; bottom: 250px; left: 950px; "/>
+	<img src="${pageContext.request.contextPath}/resources/assets/img/mainpage_banner03.png" style="width: 500px; display: block; margin-left: 300px; margin-top: 200px "/>
+	<img src="${pageContext.request.contextPath}/resources/assets/img/main_townimg.PNG" style="width: 800px; position: relative; bottom: 450px; left: 950px; "/>
 </div>
 
 <!-- React: 우리동네 인기매물 -->
