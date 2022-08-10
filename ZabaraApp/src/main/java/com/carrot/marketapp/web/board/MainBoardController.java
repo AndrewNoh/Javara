@@ -750,8 +750,8 @@ public class MainBoardController {
 	@ResponseBody
 	public int report(@RequestParam Map map,Model model,Principal principal) throws JsonProcessingException {
 		map = getUserInfo(map, model, principal);
-		map.put("category", "테스트용");
-		map.put("content", "신고테스트");
+		System.out.println(map.get("content"));
+		System.out.println(map.get("category"));
 		int hasReport = boardService.hasReport(map);
 		if(hasReport == 0) {
 			return boardService.doReport(map);

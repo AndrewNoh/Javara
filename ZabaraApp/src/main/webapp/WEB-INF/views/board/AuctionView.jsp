@@ -71,12 +71,7 @@ border-radius: 15px;
 					</div>
 				</c:if>
 				<c:if test="${!isWrite}">
-					<a href="javascript:void(0);" id="report" title="0"><i class="bx bxs-angry" style="font-size: 30px" title="신고"></i></a>
-				</c:if>
-				<c:if test="${isWriter}">
-					<button id="statusChange" style="float: right; font-size: 16px; color: #fff; background-color: #85adad" class="btn" title="${list.status == 'END' ? 'SALE' : 'END'}">${list.status == 'END' ? '낙찰취소' : '낙찰하기'}</button>
-					<br>
-					<br>
+					<button class="btn" style="float: right; color: #fff" data-toggle="modal" data-target="#reportUI"><i class="bx bxs-angry" style="font-size: 30px" title="신고"></i></button>
 				</c:if>
 				
 				<div style="text-align: right;">				
@@ -94,32 +89,42 @@ border-radius: 15px;
 					<p style="font-size: 20px">${fn:replace(list.content, replaceChar, "<br/>")}</p>
 				</div>		
 				
-				<c:if test="${!isWriter}">
-					<c:if test="${userno == 0 }" var="isZero">
-						<div style="text-align: center; font-size: 20px; margin-bottom: 15px;">
-							 <a href="<c:url value="/chat/chatting.do"/>"><button class="btn" style="background-color: #85adad; color: #fff" >로그인하기</button></a>
-						</div>
-					</c:if>	
-					<c:if test="${!isZero}">
-						<div style="text-align: center; font-size: 20px; margin-bottom: 15px;">
-							 <button class="btn" style="background-color: #85adad; color: #fff" data-toggle="modal" data-target="#bidUI">입찰하기</button>
-						</div>
-					</c:if>
+				<c:if test="${isWriter}">
+					<div style="text-align: center; font-size: 20px; margin-bottom: 15px;">
+						<button id="statusChange" style="float: right; font-size: 16px; color: #fff; background-color: #85adad" class="btn" title="${list.status == 'END' ? 'SALE' : 'END'}">${list.status == 'END' ? '낙찰취소' : '낙찰하기'}</button>
+					</div>
 				</c:if>
 				
-				<div style="text-align: center; font-size: 20px; margin-bottom: 20px; ">
-					 <a href="#" ><i class="bx bxs-like ml-3" ></i>${list.likes}</a>
-				</div>
-				
-				<c:if test="${!isWriter}">
+				<c:if test="${list.status eq 'SALE'}" var="isSale">
+					<c:if test="${!isWriter}">
+						<c:if test="${userno == 0}" var="isZero">
+							<div style="text-align: center; font-size: 20px; margin-bottom: 15px;">
+								 <a href="<c:url value="/location/login.do"/>"><button class="btn" style="background-color: #85adad; color: #fff" >로그인하기</button></a>
+							</div>
+						</c:if>	
+						<c:if test="${!isZero}">
+							<div style="text-align: center; font-size: 20px; margin-bottom: 15px;">
+								 <button class="btn" style="background-color: #85adad; color: #fff" data-toggle="modal" data-target="#bidUI">입찰하기</button>
+							</div>
+						</c:if>
+					</c:if>
+				</c:if>
+					
+				<c:if test="${!isSale}">
 					<div class="text-center">
 						<a href="<c:url value="/chat/chatting.do">
 						<c:param value="${list.townlist_no == null ? 0 : list.townlist_no}" name="townlist_no"/>
 						<c:param value="${list.auction_no == null ? 0 : list.auction_no}" name="auction_no"/>
-						<c:param value="${list.userNo}" name="writeuserno"/><c:param value="${list.nickName}" name="wirtenickName"/></c:url>"><i class="bx bxs-chat mx-5" title="채팅" style="font-size: 50px"></i></a>
-						<a href="#"style="font-size: 50px"><i class="bx bxs-book-heart ml-3" ></i></a>
+						<c:param value="${list.userNo}" name="writeuserno"/><c:param value="${list.nickName}" name="wirtenickName"/></c:url>"><button class="btn" style="background-color: #85adad; color: #fff" >채팅하기</button></a>
 					</div>
 				</c:if>
+				<br/>
+				<div style="text-align: center; font-size: 20px; margin-bottom: 20px; ">
+					 <i class="bx bxs-heart ml-3" ></i>
+					 ${list.likes}
+				</div>
+				
+
 				
 			</div>
           </div>
@@ -259,6 +264,35 @@ border-radius: 15px;
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="modal fade" id="reportUI" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="position: fixed; top:25%; color:black">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel" style="color: black; font-size: 20px; font-weight: bold; ">신고</h5>
+			</div>	
+			<div class="modal-body">
+				<div style="margin-bottom: 20px">
+					<h1 style="font-size: 14px; font-weight: bold; text-align:center; ">신고 사유</h1>
+					<select id="reportCategory">
+						<option selected value="기타"></option>
+						<option value="중고차">중고차</option>
+						<option value="디지털기기">디지털기기</option>
+						<option value="생활가전">생활가전</option>
+						<option value="가구인테리어">가구/인테리어</option>
+					</select>
+					<textarea id="reportContent"></textarea>
+				</div>	
+					
+				<div class="modal-footer">
+					<button type="button" class="btn" style="background-color: #85adad; color: #fff; margin-bottom: -30px; margin-left: 10px" id="report">등록</button>
+				</div>
+				<br/>
+			</div>
+		</div>
+	</div>
+</div>
 
 
     
@@ -273,11 +307,6 @@ border-radius: 15px;
 		}).done(function(data){
 			parent.location.reload();
 		});
-	});
-	
-	$('#bidUI').ready(function() {
-		$('#navbar').hide();
-		$('#chatbot').hide();
 	});
 	
 	$(document).ready(function(){
@@ -440,7 +469,7 @@ border-radius: 15px;
 		        title : '입찰 가격은 현재 최고가보다 높아야합니다.'
 		    });
 		} else {
-			wsocket.send('경매 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}의 최고가가 갱신되었어요");
+			//wsocket.send('경매 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}의 최고가가 갱신되었어요");
 			console.log('경매 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}의 최고가가 갱신되었어요");
 			$.ajax({
 				url :'<c:url value="/board/newUpperPrice.do"/>',
@@ -571,7 +600,7 @@ border-radius: 15px;
 			url : '<c:url value="/board/report.do" />',
 			type:'POST',
 			dataType: "text",
-			data:{'${_csrf.parameterName}':'${_csrf.token}', auction_no:${list.auction_no}}
+			data:{'${_csrf.parameterName}':'${_csrf.token}', auction_no:${list.auction_no}, category:$('#reportCategory').val(), content:$('#reportContent').val()}
 		}).done(function(data){
 			if(data == 1){
 				const Toast = Swal.mixin({

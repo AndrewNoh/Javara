@@ -92,7 +92,7 @@
 						            <div class="portfolio-links">
 						            	<a href="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[loop.index][0].imageName}?no=${loop.count}" data-gallery="portfolioGallery" class="portfolio-lightbox" id="img${loop.count}"><i class="bx bxs-photo-album"></i><span style="font-size: 12px; display: block;">사진</span></a>
 						                <a href="<c:url value="/board/auctionview.do"><c:param value="${LIST.auction_no}" name="no"/></c:url>" rel="lyteframe" data-gallery="portfolioDetailsGallery" id="view${loop.count}" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bxs-detail"></i><span style="font-size: 12px; display: block;">상세보기</span></a>
-						                <a href="javascript:void(0);" data-value="${LIST.auction_no}" name="like"><i class="bx bxs-book-heart" name="heartButton"></i><span style="font-size: 12px; display: block;">찜</span></a>
+						                <a href="javascript:void(0);" data-value="${LIST.auction_no}" name="like"><i class="bx bxs-heart" name="heartButton"></i><span style="font-size: 12px; display: block;">${LIST.likes}</span></a>
 						            </div>
 						            <p>종료예정일 ${LIST.endDate}</p>
 						    	</div>
