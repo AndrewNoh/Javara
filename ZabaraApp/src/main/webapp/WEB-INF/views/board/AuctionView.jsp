@@ -7,6 +7,18 @@
   <!-- ======= Portfolio Details ======= -->
   
 <style>
+
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
 .contact .php-email-form{
     background: rgb(255 255 255 / 0%);
 }
@@ -47,8 +59,9 @@ border-radius: 15px;
 
         <div class="row">
 
-          <div class="col-lg-8">
-            <h2 class="portfolio-title" style="font-family: GmarketSansBold">${list.title}</h2>
+         <div class="col-lg-8">
+           <div class="mb-2" style="color: #ffc107; font-size: 20px">${list.category}</div>
+            <h2 class="portfolio-title" >${list.title}</h2>
             <div class="portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center">
               	<c:forEach var="image" items="${images}" varStatus="loop">
@@ -59,39 +72,41 @@ border-radius: 15px;
 
               </div>
             </div>
-
           </div>
 
           <div class="col-lg-4 portfolio-info">
             <div class="content">
             	<c:if test="${userno == list.userNo}" var="isWriter">
-					<div  style="text-align: right; font-size: 20px;">
-						<a href="javascript:void(0);" id="edit"><i class="bx bxs-edit" style="font-size: 30px" title="수정"></i></a>
-						<a href="javascript:void(0);" id="delete"><i class="bx bxs-trash " style="font-size: 30px" title="삭제"></i></a>						
-					</div>
-				</c:if>
-				<c:if test="${!isWrite}">
-					<button class="btn" style="float: right; color: #fff" data-toggle="modal" data-target="#reportUI" id="reportOpen"><i class="bx bxs-angry" style="font-size: 30px" title="신고"></i></button>
-				</c:if>
+                  <div  style="text-align: right; font-size: 20px; font-size: 20px; position: relative; bottom: 40px">
+                     <button href="javascript:void(0);" id="edit" class="btn" style=" color: #fff"><img src="${pageContext.request.contextPath}/resources/assets/img/edit.png" class="bx bxs-edit" style="font-size: 30px" title="수정"></button>
+                     <button href="javascript:void(0);" id="delete" class="btn" style=" color: #fff"><img src="${pageContext.request.contextPath}/resources/assets/img/delete.png" class="bx bxs-trash " style="font-size: 30px" title="삭제"></button>                  
+                  </div>
+               </c:if>
+               <c:if test="${!isWrite}">
+                  <button class="btn" style="float: right; color: #fff" data-toggle="modal" data-target="#reportUI" id="reportOpen"><img src="${pageContext.request.contextPath}/resources/assets/img/alert_sign.png" class="" style="font-size: 30px;" title="신고"/></button>
+               </c:if>
 				
 				<div style="text-align: right;">				
 				
 					<div>${list.nickName}</div>
-						<i class="bi bi-calendar3"></i> ${list.postDate}
+						<!-- <i class="bi bi-calendar-check"></i> -->
+						${list.postDate}
 					</div>
-				<div class="mb-4" style="color: #85adad">${list.category}</div>
-				<div class="mb-5" style="font-size: 20px;">
+				
+				<div class="mb-5">
 			
 					<p id="startPrice" title="${list.base_Price}">시작가 <strong style="font-size: 30px; margin-left: 10px"><fmt:formatNumber value="${list.base_Price}" pattern="#,###" />원</strong></p>
-					<p id="upperPrice" title="${list.upper_Price}">현재 최고가 <strong style="color: #85adad; margin-left: 10px; font-size: 35px;"><fmt:formatNumber value="${list.upper_Price}" pattern="#,###" />원</strong></p>
+					<p id="upperPrice" title="${list.upper_Price}">현재 최고가 <strong style="color: #ffc107; margin-left: 10px; font-size: 35px;"><fmt:formatNumber value="${list.upper_Price}" pattern="#,###" />원</strong></p>
+				
 				</div>
-				<div class="mb-5">
-					<p style="font-size: 20px">${fn:replace(list.content, replaceChar, "<br/>")}</p>
+				<div class="mb-5"  style="background-color: rgb(255 229 207 / 80%); height: 280px; border-radius: 10px 5%; padding: 10px 20px">
+					<p style="font-size: 20px; ">${fn:replace(list.content, replaceChar, "<br/>")}</p>
 				</div>		
 				
+				
 				<c:if test="${isWriter}">
-					<div style="text-align: center; font-size: 20px; margin-bottom: 15px;">
-						<button id="statusChange" style="font-size: 16px; color: #fff; background-color: #85adad" class="btn" title="${list.status == 'END' ? 'SALE' : 'END'}">${list.status == 'END' ? '낙찰취소' : '낙찰하기'}</button>
+					<div style="text-align: center; font-size: 20px; ">
+						<button id="statusChange" style="float: right; font-size: 16px; color: #fff; background-color: #ffc107; width: 120px" class="btn" title="${list.status == 'END' ? 'SALE' : 'END'}">${list.status == 'END' ? '낙찰취소' : '낙찰하기'}</button>
 					</div>
 				</c:if>
 				
@@ -99,12 +114,12 @@ border-radius: 15px;
 					<c:if test="${!isWriter}">
 						<c:if test="${userno == 0}" var="isZero">
 							<div style="text-align: center; font-size: 20px; margin-bottom: 15px;">
-								 <a href="<c:url value="/location/login.do"/>"><button class="btn" style="background-color: #85adad; color: #fff" >로그인하기</button></a>
+								 <a href="<c:url value="/location/login.do"/>"><button class="btn" style="background-color: #ffc107; color: #fff" >로그인하기</button></a>
 							</div>
 						</c:if>	
 						<c:if test="${!isZero}">
 							<div style="text-align: center; font-size: 20px; margin-bottom: 15px;">
-								 <button class="btn" style="background-color: #85adad; color: #fff" data-toggle="modal" data-target="#bidUI">입찰하기</button>
+								 <button class="btn" style="background-color: #ffc107; color: #fff" data-toggle="modal" data-target="#bidUI">입찰하기</button>
 							</div>
 						</c:if>
 					</c:if>
@@ -115,12 +130,12 @@ border-radius: 15px;
 						<a href="<c:url value="/chat/chatting.do">
 						<c:param value="${list.townlist_no == null ? 0 : list.townlist_no}" name="townlist_no"/>
 						<c:param value="${list.auction_no == null ? 0 : list.auction_no}" name="auction_no"/>
-						<c:param value="${list.userNo}" name="writeuserno"/><c:param value="${list.nickName}" name="wirtenickName"/></c:url>"><button class="btn" style="background-color: #85adad; color: #fff" >채팅하기</button></a>
+						<c:param value="${list.userNo}" name="writeuserno"/><c:param value="${list.nickName}" name="wirtenickName"/></c:url>"><button class="btn" style="background-color: #ffc107; color: #fff" >채팅하기</button></a>
 					</div>
 				</c:if>
-				<br/>
-				<div style="text-align: center; font-size: 20px; margin-bottom: 20px; ">
-					 <i class="bx bxs-heart ml-3" ></i>
+				
+				<div style="text-align: center; font-size: 25px; float: left;">
+					 <i class="bx bxs-heart ml-3" style="color: #ffc107" ></i>
 					 ${list.likes}
 				</div>
 				
@@ -167,11 +182,11 @@ border-radius: 15px;
 	            	</div>
 	          	</div>
 	
-	          	<div class="col-lg-4 custom-form " style="margin-bottom: 15px;">
+	          	<div class="col-lg-4 custom-form " style="padding: 5px">
 	            	<div class="content">
 	            		<h6>제품 카테고리</h6>
 						<div class="custom-select form-group mt-0 mt-md-0 mb-3">
-							<select name="category">
+							<select name="category" >
 						   		<option selected value="기타">기타</option>
 						   		<option value="중고차">중고차</option>
 						   		<option value="디지털기기">디지털기기</option>
@@ -243,14 +258,14 @@ border-radius: 15px;
 			</div>	
 			<div class="modal-body">
 			<div class="modal-body">
-				<p style="text-align: center; font-weight: bold; color: #85adad; margin-top: 10px" id="upperPriceBid" title="${list.upper_Price}">현재 최고가는  <fmt:formatNumber value="${list.upper_Price}" pattern="#,###" />원 입니다</p>					
+				<p style="text-align: center; font-weight: bold; color: #ffc107; margin-top: 10px" id="upperPriceBid" title="${list.upper_Price}">현재 최고가는  <fmt:formatNumber value="${list.upper_Price}" pattern="#,###" />원 입니다</p>					
 			</div>				
 			<div style="margin-bottom: 20px">
 				<h1 style="font-size: 14px; font-weight: bold; text-align:center; ">입찰하기
 				<input type="text" id="inputBidPrice" class="input" style="margin-left: 3px"/> 원</h1>
 			</div>		
 			<div class="modal-footer">
-					<button type="button" class="btn" style="background-color: #85adad; color: #fff; margin-bottom: -30px; margin-left: 10px" id="doBid">등록</button>
+					<button type="button" class="btn" style="background-color: #ffc107; color: #fff; margin-bottom: -30px; margin-left: 10px" id="doBid">등록</button>
 				</div>
 				<br/>
 				<div id="dialog-message" title="입찰 확인" style='display:none'>
@@ -265,13 +280,13 @@ border-radius: 15px;
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel" style="color: black; font-size: 20px; font-weight: bold; ">신고</h5>
+				<h5 class="modal-title" id="exampleModalLabel" style="color: black; font-size: 20px; font-weight: bold; font-align: center ">신고</h5>
 			</div>	
 			<div class="modal-body">
-				<div style="margin-bottom: 20px; text-align:center">
-					<h1 style="font-size: 14px; font-weight: bold; text-align:center; ">신고 사유</h1>
+				<div style="margin-bottom: 20px;  ">
+					<h1 style="font-size: 14px; font-weight: bold;">'${list.title}' 게시글을 신고하는 이유를 선택해주세요.</h1>
 					<div>
-						<select id="reportCategory">
+						<select id="reportCategory" style="padding: 5px">
 							<option selected value="기타">기타</option>
 							<option value="부적절한 내용">부적절한 내용</option>
 							<option value="허위 매물">허위 매물</option>
@@ -279,14 +294,14 @@ border-radius: 15px;
 							<option value="중복 판매글">중복 판매글</option>
 						</select>
 					</div>
-					
+					<h1 style="font-size: 14px; font-weight: bold; margin-top: 10px">신고 상세 내용을 정확하게 기재해주세요.</h1>
 					<div>
 						<textarea id="reportContent" ></textarea>
 					</div>
 				</div>
 					
 				<div class="modal-footer">
-					<button type="button" class="btn" style="background-color: #85adad; color: #fff; margin-bottom: -30px; margin-left: 10px" id="report">등록</button>
+					<button type="button" class="btn" style="background-color: #ffc107; color: #fff; margin-bottom: -30px; margin-left: 10px" id="report">등록</button>
 				</div>
 				<br/>
 			</div>
@@ -315,6 +330,7 @@ border-radius: 15px;
 		
 		$('#navbar').hide();
 		$('#chatUi').hide();
+		$('#chatbot').hide();
 		
 		if('${goChat}' == 'Y'){
 			console.log("채팅으로 가")

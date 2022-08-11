@@ -98,6 +98,11 @@
   ======================================================== -->
 </head>
 <style>
+
+.new-corsur {
+    cursor: pointer;
+}
+
 .navbar a[id=top_banner]:before {
 	background-color: rgb(255 255 255/ 0%);
 }
@@ -149,8 +154,8 @@
 <sec:authorize access="hasAnyRole('ROLE_ADMIN')" var="isAdmin">
 </sec:authorize>
 <c:if test="${not isAdmin }">
-	<div style="position: fixed;top: 30px; right: 3%; z-index: 1;" id="chatbot">
-	 <a ><img src="${pageContext.request.contextPath}/resources/assets/img/chatbot_icon.png" 
+	<div style="position: fixed;top: 30px; right: 3%; z-index: 1;" id="chatbot" class="new-corsur">
+	 <a class="nav-link"><img src="${pageContext.request.contextPath}/resources/assets/img/chatbot_icon.png" 
 	       title="챗봇" style="width: 100px; height: 100px;"></a>
 	</div>
 </c:if>
@@ -317,7 +322,7 @@
 	      <img src="${pageContext.request.contextPath}/resources/assets/img/web_banner.png"   /></figure>     
 		<div  class="r-nav"> 
 	     <ul>
-			  <li> <a>X</a></li>	  
+			  <li> <a id="chatbotOff" class="new-corsur">X</a></li>	  
 			  <li> <a><img src="" width="26px" /></a></li>   	
 	     </ul>     
 		</div><!--r-nav -->   
@@ -337,7 +342,6 @@
 <div id="snackbar"></div>
 
 <script>
-
 
 	$("#message").on('keypress',function(e) {
 		if (e.keyCode == 13){
@@ -409,6 +413,9 @@
 				$("#srch").show();
 			});
 			$("#chatbot").click(function() {
+				$(".chat").toggle();
+			});
+			$("#chatbotOff").click(function() {
 				$(".chat").toggle();
 			});
 		});
