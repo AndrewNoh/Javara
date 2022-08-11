@@ -211,6 +211,10 @@ public class UserInfoController {
 
 	@RequestMapping("/mypage.do")
 	public String mypage(@RequestParam Map map, Model model, Authentication auth) {
+		if(auth == null) {
+			return "redirect:/location/login.do";
+		}
+		
 		map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기
 		// 서비스 호출]
 		UserDTO record = userService.selectOne(map);
