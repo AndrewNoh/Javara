@@ -489,8 +489,7 @@ border-radius: 15px;
 			        title : '입찰 가격은 현재 최고가보다 높아야합니다.'
 			    });
 			} else {
-				//wsocket.send('경매 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}의 최고가가 갱신되었어요");
-				console.log('경매 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}의 최고가가 갱신되었어요");
+				wsocket.send('경매 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}의 최고가가 갱신되었어요");
 				$.ajax({
 					url :'<c:url value="/board/newUpperPrice.do"/>',
 					type:'POST',
@@ -554,8 +553,7 @@ border-radius: 15px;
 				        icon : 'success',
 				        title : '낙찰하였습니다.'
 				    });
-					wsocket.send('낙찰 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}가 낙찰되었어요");
-					console.log('낙찰 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}가 낙찰되었어요"); 
+					wsocket.send('낙찰 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}이(가) 낙찰되었어요");
 					 var today = new Date();
 					 if('${roomno}'===""){
 						   $.ajax({

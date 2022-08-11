@@ -11,7 +11,7 @@
 	</page_setting>
 	<category_index>0</category_index>
 	<zoom>0.8</zoom>
-	<x>206</x>
+	<x>165</x>
 	<y>0</y>
 	<default_color>
 		<r>128</r>
@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2022-06-17 18:40:31</creation_date>
-			<updated_date>2022-08-11 14:45:00</updated_date>
+			<updated_date>2022-08-11 19:13:42</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -2430,7 +2430,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>29</word_id>
+					<word_id>28</word_id>
 					<id>24</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3293,7 +3293,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>11</word_id>
+					<word_id>12</word_id>
 					<id>45</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3416,7 +3416,7 @@
 			<connections>
 				<relation>
 					<id>10</id>
-					<source>5</source>
+					<source>11</source>
 					<target>10</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -3438,7 +3438,7 @@
 				</relation>
 				<relation>
 					<id>11</id>
-					<source>11</source>
+					<source>5</source>
 					<target>10</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -3502,7 +3502,7 @@
 				<normal_column>
 					<id>49</id>
 					<referenced_column>55</referenced_column>
-					<relation>11</relation>
+					<relation>10</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -3536,7 +3536,7 @@
 				<normal_column>
 					<id>50</id>
 					<referenced_column>16</referenced_column>
-					<relation>10</relation>
+					<relation>11</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -3634,7 +3634,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>12</word_id>
+					<word_id>11</word_id>
 					<id>53</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3918,7 +3918,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>28</word_id>
+					<word_id>29</word_id>
 					<id>60</id>
 					<description></description>
 					<unique_key_name></unique_key_name>

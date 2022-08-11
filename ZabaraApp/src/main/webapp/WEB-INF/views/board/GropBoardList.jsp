@@ -241,7 +241,6 @@ a:hover {
 						}
 						
 						 wsocket.send('동네:townlist_no,WriteUserNO:'+WriteUserNO.split(/[:]/)[1]+',townlist_title:'+WriteUserNO.split(/[:]/)[0]);
-						 console.log('동네:townlist_no,WriteUserNO:'+WriteUserNO.split(/[:]/)[1]+',townlist_title:'+WriteUserNO.split(/[:]/)[0]);
 						
 					},
 					error: (error) => { 
@@ -267,7 +266,6 @@ a:hover {
 			if (data != 1) {
 			 	// console.log('좋아요');
 				wsocket.send('동네:like,WriteUserNO:'+WriteUserNO.split(/[:]/)[1]+',townlist_title:'+WriteUserNO.split(/[:]/)[0]);
-				 console.log('동네:like,WriteUserNO:'+WriteUserNO.split(/[:]/)[1]+',townlist_title:'+WriteUserNO.split(/[:]/)[0]);
 				like.children().css("color", "#ffc107");
 			} else {
 				// console.log("좋아요 해제");

@@ -139,7 +139,7 @@ width: 70%;
 </div>
 
 <!-- React: 우리동네 인기매물 -->
-<div style="width:100%; height:800px; background-color:#bababade; display: flex; align-items: center; justify-content: center;" id="mainUnder">
+<div style="width:100%; height:1000px; background-color:#bababade; color:black" id="mainUnder">
 	<br>
 	<br>
 	<img src="${pageContext.request.contextPath}/resources/assets/img/main_scroll_banner.png" style="width: 500px; display: block; margin: 0 auto; "/>

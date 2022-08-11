@@ -500,6 +500,15 @@ No license, 100% free to use.
   border-bottom: 24px solid transparent;
   background-clip: padding-box;
 }
+
+
+body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
 </style>
 
 <!-- ======= About Me ======= -->
@@ -634,9 +643,6 @@ No license, 100% free to use.
 							<button onclick="payService()" type="button"
 								class="btn btn-dark my-2"
 								style="width: auto; margin-left: 10px; font-size: 12px">충전하기</button>
-							<button onclick="payWithdraw()" type="button"
-								class="btn btn-dark my-2"
-								style="width: auto; margin-left: 10px; font-size: 12px">출금하기</button>
 						</div>
 					</div>
 				</div>
@@ -741,7 +747,7 @@ No license, 100% free to use.
 										rel="lyteframe" data-gallery="portfolioDetailsGallery" id="view${loop.count}" data-glightbox="type: external" 
 										class="portfolio-details-lightbox" title="Portfolio Details">
 											<h3 class="mb-2"><i class="bi bi-chevron-right" style="color: #00d4ff; font-size: 15px;"></i>
-						                       ${participationList.title}이 낙찰되었어요
+						                       ${participationList.title}이(가) 낙찰되었어요
 							                </h3></a>
 						                </c:if>
 				                </c:forEach>
@@ -813,7 +819,38 @@ No license, 100% free to use.
 					</div>
 				</div>
 			</div>
+<!-- 온도 -->
+			<div class="col mt-3" id="temperatureToggleDiv" style="display: none">
+				<div class="row">
+					<div class="skills container col">
+						<div class="section-title">
+							<h2>나의 별점</h2>
+						</div>
+						<div class="row skills-content">  
+						<div style="padding:10px 0px 20px 0px;">
+							 <div class="col-2"><h3 class="title text-bold">별점</h3></div>      
+			                    <div class="col header">
+				                        <div class="rating col mt-1">
+				                            <label for="rate-5" class="fa fa-star" id="1"></label>
+				                            <label for="rate-4" class="fa fa-star" id="2"></label> 
+				                            <label for="rate-3" class="fa fa-star" id="3"></label> 
+				                            <label for="rate-2" class="fa fa-star" id="4"></label> 
+				                            <label for="rate-1" class="fa fa-star" id="5"></label> 
+				                        </div>
+			                    </div>
+		                   </div>
+								<div>
+									<div class="testimonial-item row" id="reviewContent">
+										<div>
+										<h3 class="title text-bold">후기</h3>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
+				</div>
 
             <div class="col-12 mt-3" id="ChatToggleDiv" style="display: none">
                   <div class="testimonials container mt-3">
@@ -853,38 +890,7 @@ No license, 100% free to use.
   			 </div>
 		</div>
 			
-			<!-- 온도 -->
-			<div class="col mt-3" id="temperatureToggleDiv" style="display: none">
-				<div class="row">
-					<div class="skills container col">
-						<div class="section-title">
-							<h2>나의 별점</h2>
-						</div>
-						<div class="row skills-content">  
-						<div style="padding:10px 0px 20px 0px;">
-							 <div class="col-2"><h3 class="title text-bold">별점</h3></div>      
-			                    <div class="col header">
-				                        <div class="rating col mt-1">
-				                            <label for="rate-5" class="fa fa-star" id="1"></label>
-				                            <label for="rate-4" class="fa fa-star" id="2"></label> 
-				                            <label for="rate-3" class="fa fa-star" id="3"></label> 
-				                            <label for="rate-2" class="fa fa-star" id="4"></label> 
-				                            <label for="rate-1" class="fa fa-star" id="5"></label> 
-				                        </div>
-			                    </div>
-		                   </div>
-								<div>
-									<div class="testimonial-item row" id="reviewContent">
-										<div>
-										<h3 class="title text-bold">후기</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
+			
 				
 			</div>
 		</div>
