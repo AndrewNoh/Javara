@@ -607,36 +607,41 @@ No license, 100% free to use.
 			</div>
 		</div>
 
-		      <!-- End Skills -->
- 	<!-- 자바라 페이 -->
- 	<div class="row">
-         <div class="col-5">
-            <div class="pay container ">
-               <div class="section-title">
-                  <h2>자바라 페이</h2>
-               </div>
-               <div class="mb-5 mt-4">
-                  <img src="${pageContext.request.contextPath}/resources/assets/img/pay_logo.png" style="height: 60px; margin-right: 10px"/>
-                   <span id="myPay" style="color:#fff; font-size: 35px; vertical-align: bottom" ></span>
-                   <div style="float: right; margin-top: 20px">
-                      <select class="btn btn-outline-warning btn-s mb-2"  
-                              style="font-size: 12px; font-weight: bold; color: #fff; margin-top: 10px" data-toggle="dropdown;" id="pay" >
-                          <option value="5000">충전 금액 5,000 원</option>
-                          <option value="10000">충전 금액 10,000 원</option>
-                          <option value="20000">충전 금액 20,000 원</option>
-                          <option value="30000">충전 금액 30,000 원</option>
-                          <option value="40000">충전 금액 40,000 원</option>
-                          <option value="50000">충전 금액 50,000 원</option>
-                      </select>                     
-                      <button onclick="payService()" type="button" class="btn btn-dark mb-2" style="width: auto;  margin-top: 10px; margin-left:10px; font-size: 12px">충전하기</button>
-                      <!-- 
-                      <button onclick="payWithdraw()" type="button" class="btn btn-dark mb-2" style="width: auto;  margin-left:10px; font-size: 12px">출금하기</button>
-                  	  -->
-                   </div>
-                </div>      
-            </div>
-         </div>
-         <!-- 자바라 페이 -->
+		<!-- End Skills -->
+		<!-- 자바라 페이 -->
+		<div class="row">
+			<div class="col-5">
+				<div class="pay container" style="display: flex; flex-direction:column;">
+					<div class="section-title">
+						<h2>자바라 페이</h2>
+					</div>
+					<div class="mt-2">
+						<img
+							src="${pageContext.request.contextPath}/resources/assets/img/pay_logo.png"
+							style="height: 60px; margin-right: 10px" /> <span id="myPay"
+							style="color: #fff; font-size: 35px; vertical-align: bottom"></span>
+						<div style="float: right; margin-top: 20px">
+							<select class="btn btn-outline-warning btn-s my-2"
+								style="font-size: 12px; font-weight: bold; color: #fff; margin-top: 10px"
+								data-toggle="dropdown;" id="pay">
+								<option value="5000">충전 금액 5,000 원</option>
+								<option value="10000">충전 금액 10,000 원</option>
+								<option value="20000">충전 금액 20,000 원</option>
+								<option value="30000">충전 금액 30,000 원</option>
+								<option value="40000">충전 금액 40,000 원</option>
+								<option value="50000">충전 금액 50,000 원</option>
+							</select>
+							<button onclick="payService()" type="button"
+								class="btn btn-dark my-2"
+								style="width: auto; margin-left: 10px; font-size: 12px">충전하기</button>
+							<button onclick="payWithdraw()" type="button"
+								class="btn btn-dark my-2"
+								style="width: auto; margin-left: 10px; font-size: 12px">출금하기</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 자바라 페이 -->
 
 
 
@@ -646,8 +651,7 @@ No license, 100% free to use.
 					<div class="section-title">
 						<h2 style="margin-bottom: 30px;">나의 활동</h2>
 					</div>
-					
-						<div class="row">
+					<div class="row">
 							<div class="col-lg-4 col-md-4 mt-4 mt-md-1">
 								<div class="icon-box" id="MapToggle">
 									<i class="bi bi-map" style="color: #46a111;"></i>
@@ -655,7 +659,7 @@ No license, 100% free to use.
 								</div>
 							</div>
 							<div class="col-lg-4 col-md-4 mt-4 mt-md-1">
-								<div class="icon-box" id="ChatToggle">
+								<div class="icon-box" id="KeyToggle">
 									<i class="bi bi-bell-fill" style="color: #4c85fc;"></i>
 									<h3>  &nbsp;&nbsp;알 림</h3>
 								</div>
@@ -683,7 +687,7 @@ No license, 100% free to use.
 								</div>
 							</div>
 							<div class="col-lg-4 col-md-4">
-								<div class="icon-box" id="chatToggle">
+								<div class="icon-box" id="ChatToggle">
 									<i class="bi bi-chat-left-dots" style="color: #9cbeff;"></i>
 									<h3>  &nbsp;&nbsp;채 팅</h3>
 								</div>
@@ -694,43 +698,60 @@ No license, 100% free to use.
 			</div>
 			<!-- 나의 활동 -->
 
-			<div class="col mt-3" id="KeyToggleDiv" style="display: none">
-				<div class="interests container">
-					<div class="section-title">
-						<h2 style="margin-bottom: 30px;">키워드 자바라</h2>
-					</div>
-					<div class="row">
-						<div class="col-lg-12 col-md-6 mt-4">
-							<div class="icon-box">
-								<i class="ri-store-line" style="color: #ffbb2c;"></i>
-								<h3>키워드</h3>
-								<h2>&nbsp;&nbsp;on/off</h2>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-lg-12 col-md-6 mt-4 ">
-								<div class="icon-box">
-									<i class="ri-calendar-todo-line" style="color: #ffbb2c;"></i>
-									<h3>키워드 설정</h3>
-									<div class="col-10 content">
-										<ul>
-											<li><i class="bi bi-chevron-right"></i> <strong>컴퓨터</strong>
-											</li>
-											<li><i class="bi bi-chevron-right"></i> <strong>핸드폰</strong>
-											</li>
-											<li><i class="bi bi-chevron-right"></i> <strong>가방</strong>
-											</li>
-										</ul>
-										<input placeholder="키워드를 입력하세요">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
+		<div class="col-12 mt-3" id="KeyToggleDiv" style="display: none">
+            <div class="interests container">
+               <div class="section-title">
+                  <h2 style="margin-bottom: 30px;">알림 자바라</h2>
+               </div>
+               <div class="row">
+                  <div class="col-lg-12 col-md-6 mt-4 ">
+                     <div class="icon-box">
+                      <div class="col" style="display: flex; align-items: center;">
+                       <i class="ri-calendar-todo-line" style="color: #ffbb2c;"></i>
+                         	<h3>알림 내역</h3>
+                      </div>
+                        <div class="col-10 content" style="display: flex;">
+                        	<div class="col">
+	                        	<div class="section-title">
+				                  <h2 style="margin-bottom: 30px;">채팅알림</h2>
+				               </div>
+		                     	<c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
+					             <a  href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
+					                 <c:forEach var="unreadcount" items="${unreadcount}" varStatus="loop">
+										<c:if test="${chatlist.room_no eq  unreadcount.room_no}"> 
+											<c:if test="${unreadcount.unreadcount >0}">
+											<h3 class="mb-2"><i class="bi bi-chevron-right" style="color: yellow; font-size: 15px;"></i>
+						                    <c:if test="${nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
+						                    <c:if test="${nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>
+						                        님께 채팅이 왔어요
+							                </h3>
+						                  	</c:if>
+										</c:if> 
+									</c:forEach> 
+					               </a>
+				                </c:forEach>
+			                </div>
+			                <div class="col">
+			                   <div class="section-title">
+				                  <h2 style="margin-bottom: 30px;">낙찰알림</h2>
+				               </div>
+		                     	<c:forEach var="participationList" items="${participationList}" varStatus="loop">
+										<c:if test="${participationList.status eq  'END'}"> 
+										<a href="<c:url value="/board/auctionview.do"><c:param value="${participationList.auction_no}" name="no"/></c:url>" 
+										rel="lyteframe" data-gallery="portfolioDetailsGallery" id="view${loop.count}" data-glightbox="type: external" 
+										class="portfolio-details-lightbox" title="Portfolio Details">
+											<h3 class="mb-2"><i class="bi bi-chevron-right" style="color: #00d4ff; font-size: 15px;"></i>
+						                       ${participationList.title}이 낙찰되었어요
+							                </h3></a>
+						                </c:if>
+				                </c:forEach>
+			                </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
 			<!-- 가계부 시작 -->
 			<div class="col mt-3" id="AccountBookToggleDiv" style="display: none">
 				<div class="interests container">
@@ -794,7 +815,7 @@ No license, 100% free to use.
 			</div>
 
 
-            <div class="col mt-3" id="ChatToggleDiv" style="display: none">
+            <div class="col-12 mt-3" id="ChatToggleDiv" style="display: none">
                   <div class="testimonials container mt-3">
                      <div class="section-title">
                         <h2 style="margin-bottom: 30px;">나의 채팅</h2>
