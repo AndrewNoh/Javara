@@ -44,7 +44,7 @@ public class AdminController {
 	public Map getUserInfo(Map map, Model model, Principal principal) {
 		
 	      int userCount = userService.selectList(map);
-	      System.out.println(map);
+	      System.out.println(userCount);
 	      
 	      map.put("userCount", userCount);
 	      
@@ -53,6 +53,11 @@ public class AdminController {
 
 	@RequestMapping("/admin.do")
 	public String setModel(Map map, Model model, Principal principal) {
+		map.put("email", principal.getName());
+		UserDTO user = userService.selectOne(map);
+		
+		map.put("userno", user.getUserno());
+		
 		map = getUserInfo(map, model, principal);
 		model.addAttribute("userCount",map.get("userCount"));
 		System.out.println(map.get("userCount"));
