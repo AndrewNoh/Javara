@@ -573,7 +573,7 @@
 		VALUES(SEQ_SEARCHLOG_LOG_NO.NEXTVAL,#{title},1)
 	</insert>
 	
-	<select id="selectSearchLog" parameterType="Map" resultType="_int">
+	<select id="selectSearchLog" parameterType="Map" resultType="String">
 		SELECT SEARCH_COUNT FROM SEARCHLOG WHERE SEARCH_WORD = #{title}
 	</select>
 	

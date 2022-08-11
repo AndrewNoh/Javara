@@ -661,7 +661,13 @@ public class MainBoardController {
 		
 		System.out.println(map.get("title"));
 		int log = 0;
-		int havelog = boardService.selectSearchLog(map);
+		int havelog = 0;
+		String search = boardService.selectSearchLog(map);
+		if (search == null) {
+			havelog = 0;
+		} else {
+			havelog = Integer.parseInt(search);
+		}
 		if(havelog > 0) {
 			map.put("count", havelog+1);
 			log = boardService.updateSearchLog(map);

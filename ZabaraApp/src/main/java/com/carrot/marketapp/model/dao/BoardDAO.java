@@ -299,7 +299,7 @@ public class BoardDAO {
 		return sqlSession.insert("insertSearchLog", map);
 	}
 
-	public int selectSearchLog(Map map) {
+	public String selectSearchLog(Map map) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("selectSearchLog", map);
 	}

@@ -190,7 +190,7 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 		return boardDAO.insertSearchLog(map);
 	}
 
-	public int selectSearchLog(Map map) {
+	public String selectSearchLog(Map map) {
 		// TODO Auto-generated method stub
 		return boardDAO.selectSearchLog(map);
 	}
