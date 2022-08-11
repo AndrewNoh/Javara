@@ -125,7 +125,7 @@ a:hover {
 						<i class="bi bi-heart-fill" id="likeval${LIST.townlist_no }" style="color: #ffc107; font-size: 20px; margin-right: 1100px; margin-top: 10px;">${LIST.likes}</i>
 
 						<div  style="margin-right:30px;margin-top: 10px">
-							<a class="like" style="font-size: 16px" data-value="${LIST.townlist_no}" ><i class="bi bi-heart-fill" style="font-size: 20px; text-align: center; "data-value="${LIST.townlist_no}"></i></a>
+							<a class="like" style="font-size: 16px" data-value="${LIST.townlist_no}" name="${LIST.title}:${LIST.userNo }"><i class="bi bi-heart-fill" style="font-size: 20px; text-align: center; "data-value="${LIST.townlist_no}"></i></a>
 							<a class="comment" title="${LIST.townlist_no}" style="margin-left: 10px; font-size: 16px"><i class="bi bi-chat-left-dots" style="font-size: 20px; text-align: center;" ></i></a>
 						</div>	
 					</div>
@@ -140,7 +140,7 @@ a:hover {
 		                           <input type="text" placeholder="댓글을 입력하시오" id="comment_content${LIST.townlist_no}" data-value="ct${LIST.townlist_no }" class="search-bar" style="border:none; width: 1200px">
 		                              <span class="input-group-addon" id="cCnt${LIST.townlist_no}">			                             
 		                           	  </span>
-		                        	  <button type="button" class="send" style="background-color: transparent; border:none" title="${LIST.townlist_no}">
+		                        	  <button type="button" class="send" style="background-color: transparent; border:none" title="${LIST.townlist_no}" name="${LIST.title}:${LIST.userNo }">
 		                                 <i class="bi bi-check2-circle" aria-hidden="false" style="font-size: 25px; color: #fff;"></i>
 			                          </button>   
 		                        </div>
@@ -210,6 +210,7 @@ a:hover {
       // 댓글: 댓글 작성
 	  $(document).on("click", '.send', function(e){
 		  var townlistNo = $(this).attr('title');
+		  var WriteUserNO = $(this).attr('name');
 		  var comment_content = $('#comment_content'+townlistNo).val(); // 댓글 내용
 			$.ajax({
 				url: '<c:url value="/comment/write.do"/>',
@@ -226,6 +227,9 @@ a:hover {
 							location.reload(); 
 						}
 						
+						wsocket.send('동네:townlist_no,WriteUserNO:'+WriteUserNO.split(/[:]/)[1]+',townlist_title:'+WriteUserNO.split(/[:]/)[0]);
+						 console.log('동네:townlist_no,WriteUserNO:'+WriteUserNO.split(/[:]/)[1]+',townlist_title:'+WriteUserNO.split(/[:]/)[0]);
+						
 					},
 					error: (error) => { 
 						console.log(JSON.stringify(error)); 
@@ -238,6 +242,7 @@ a:hover {
   // 좋아요
   var like = $('a[name=like]');
   $(document).on("click", '.like', function(e){
+	  var WriteUserNO = $(this).attr('name');
 	   // console.log('클릭이벤트');
 	   var like = $(this);
 		$.ajax({
@@ -248,6 +253,8 @@ a:hover {
 		}).done(function(data){
 			if (data != 1) {
 			 	// console.log('좋아요');
+				wsocket.send('동네:like,WriteUserNO:'+WriteUserNO.split(/[:]/)[1]+',townlist_title:'+WriteUserNO.split(/[:]/)[0]);
+				 console.log('동네:like,WriteUserNO:'+WriteUserNO.split(/[:]/)[1]+',townlist_title:'+WriteUserNO.split(/[:]/)[0]);
 				like.children().css("color", "#ffc107");
 			} else {
 				// console.log("좋아요 해제");
@@ -280,11 +287,4 @@ a:hover {
 		
   	});
   	
-  	// 동네생활: 알림
-  	/*
-  	$('#send').on('click',function(){
-		 wsocket.send('동네:townlist_no:${LIST.townlist_no},UserNO:${userno}');
-		 console.log('동네:townlist_no:${LIST.townlist_no},UserNO:${userno}');
-	})
-	*/
   </script>

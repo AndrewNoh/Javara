@@ -330,6 +330,8 @@
 <script>
 
 
+
+
 	$("#message").on('keypress',function(e) {
 		if (e.keyCode == 13){
 	        //e.preventDefault();
@@ -535,6 +537,96 @@
 
 		});
 		
-		
+		<sec:authentication property="name" var="username" />
+			<c:if test="${username != 'anonymousUser'}" var="isLogin">
+			wsocket = new WebSocket("ws://${pageContext.request.serverName}:${pageContext.request.serverPort}<c:url value='/chat-ws.do/0'/>");//192.168.219.101//192.168.0.129
+			 //console.log('wsocket:',wsocket);
+			 //서버와 연결된 웹 소켓에 이벤트 등록
+			 if(opener==null){ 
+				 wsocket.onopen;;
+			}else{ 
+				 wsocket.close();
+			}	
+			
+			 wsocket.onclose=function(){
+				 //console.log("연결이 끊어 졌어요");
+			 };
+			 wsocket.onmessage=receive;
+			 wsocket.onerror=function(e){
+			    //console.log('에러발생:',e)
+			 }
+			 
+			//서버에 연결되었을때 호출되는 콜백함수
+			</c:if>
+			 function receive(e){//e는 message이벤트 객체
+			     //서버로부터 받은 데이타는 이벤트객체(e).data속성에 저장되어 있다
+			      const element = document.getElementById('snackbar');
+			     //일반 메세지
+			     
+			     if(e.data.includes('RoomNo')){
+			    	 var start1 = e.data.indexOf(",");
+				     var start2 = e.data.indexOf(":");
+			    	 if(e.data.substring(0,start1)==='RoomNo${roomno},'){
+			    		 //console.log('같은방');
+			    	 }
+			    	 else if(e.data.includes('senduserno${userno},') || e.data.includes('writeuserno${userno},')){
+			    		 if(!e.data.includes('${username}')){
+				    		 element.innerHTML = '';
+				    		 element.innerHTML += e.data.substring(start2+1)+'님이 보낸 채팅이 도착했어요';
+				    		 var x = document.getElementById("snackbar");
+							  x.className = "show";
+							  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+				    	 }
+			    	 }
+			     }
+			     else if(e.data.includes('경매')){
+			     var start1 = e.data.indexOf(",");
+			     var start2 = e.data.indexOf(":");
+			    	 if( e.data.includes('userNo${userno},')){
+						  element.innerHTML = '';
+			    		 element.innerHTML += e.data.substring(start2+1);
+			    		 var x = document.getElementById("snackbar");
+						  x.className = "show";
+						  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+				     }
+			    	 if( e.data.includes('upperuserno${userno},')){
+						  element.innerHTML = '';
+			    		 element.innerHTML += e.data.substring(start2+1);
+			    		 var x = document.getElementById("snackbar");
+						  x.className = "show";
+						  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+				     }
+			 	}else if(e.data.includes('낙찰')){
+			    	 var start = e.data.indexOf(":");
+			    	 if( e.data.includes('upperuserno${userno},')){
+						  element.innerHTML = '';
+			    		 element.innerHTML += e.data.substring(start+1);
+			    		 var x = document.getElementById("snackbar");
+						  x.className = "show";
+						  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+				     }
+			 	}
+			     else if(e.data.includes('동네')){
+			    	 var arr= e.data.split(/[,:]/);
+			    	 if(e.data.includes('townlist_no')){
+				    	 if(e.data.includes('WriteUserNO:${userno}')){
+							  element.innerHTML = '';
+				    		 element.innerHTML += '동네생활'+arr[5]+'에 댓글이 달렸어요';
+				    		 var x = document.getElementById("snackbar");
+							  x.className = "show";
+							  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+				    	 }
+				     }else if(e.data.includes('like')){
+				    	 if(e.data.includes('WriteUserNO:${userno}')){
+							 element.innerHTML = '';
+				    		 element.innerHTML += '동네생활'+arr[5]+'에 좋아요가 눌렸어요';
+				    		 var x = document.getElementById("snackbar");
+							  x.className = "show";
+							  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+				    	 }
+				     }
+			     }
+			 }
+			 
 			 
 	</script>

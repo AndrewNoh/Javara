@@ -285,5 +285,15 @@ public class ChatController {
 	   chatService.deleteChatRoom(map);
 	   return "/chat/ChattingRoom.market";
    }
+   @PostMapping(value = "/clickEvents.do", produces = "application/json;charset=UTF-8")
+   @ResponseBody
+   public String agreement(Model model, @RequestParam Map map, Principal principal) {
+	   System.out.println("옴??");
+	   System.out.println(map.get("rownum"));
+	   map.get("rownum");
+
+	   chatService.updateChatMsg(map);
+	   return "/chat/ChattingRoom.market";
+   }
 
 }

@@ -95,7 +95,6 @@
 		DELETE FROM CHAT_MESSAGE WHERE room_no =#{room_no}
 	</delete>
 	<update id="updateChatMsg" parameterType="Map">
-		parameterType="Map">
 		UPDATE chat_message
 		SET
 		chatcontent = #{chatcontent}
@@ -105,6 +104,6 @@
 		ROWID rid, rownum rn from chat_message where
 		room_no = #{room_no} ORDER BY
 		sendtime ASC)
-		where rn = #{rownum});
+		where rn = #{rownum})
 	</update>
 </mapper>

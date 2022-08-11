@@ -299,7 +299,7 @@
 		                     	<c:forEach var="participationList" items="${participationList}" varStatus="loop">
 										<c:if test="${participationList.status eq  'END'}"> 
 											<h3 class="mb-2"><i class="bi bi-chevron-right" style="color: #00d4ff; font-size: 15px;"></i>
-						                       ${participationList.title}이 낙찰되었어요
+						                       ${participationList.title}이(가) 낙찰되었어요
 							                </h3>
 						                </c:if>
 				                </c:forEach>

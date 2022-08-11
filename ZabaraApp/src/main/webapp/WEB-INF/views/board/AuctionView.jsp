@@ -469,7 +469,7 @@ border-radius: 15px;
 		        title : '입찰 가격은 현재 최고가보다 높아야합니다.'
 		    });
 		} else {
-			//wsocket.send('경매 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}의 최고가가 갱신되었어요");
+			wsocket.send('경매 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}의 최고가가 갱신되었어요");
 			console.log('경매 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}의 최고가가 갱신되었어요");
 			$.ajax({
 				url :'<c:url value="/board/newUpperPrice.do"/>',
@@ -523,7 +523,7 @@ border-radius: 15px;
 					wsocket.send('낙찰 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}가 낙찰되었어요");
 					console.log('낙찰 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}가 낙찰되었어요"); 
 					 var today = new Date();
-					 if('${roomno}'===""){
+					 if('${room_no}'===""){
 						   $.ajax({
 					           url: '<c:url value="/chat/chatting.do"><c:param value="${list.upper_user_no}" name="upperuserno"/><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="0" name="townlist_no"/><c:param value="${list.auction_no}" name="auction_no"/><c:param value="${userno}" name="writeuserno"/></c:url>',
 					           data: {chatcontent:'축하합니다.낙찰되셨습니다.',

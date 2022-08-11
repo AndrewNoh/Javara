@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @Builder
@@ -16,6 +17,7 @@ import lombok.Setter;
 public class ChatDTO {
 
 	private int room_no;
+	private int rownum;
 	private int auction_no;
 	private int product_no;
 	private int townlist_no;
