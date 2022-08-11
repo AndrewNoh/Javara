@@ -281,9 +281,8 @@ a:hover{
             </div>
          </div>
        </div>
-     </div>
-     
-     <div class="card">
+       
+       <div class="card">
        <div class="card-header">
          <a class="collapsed card-link" data-toggle="collapse" href="#collapseSeven">
            Q. 광고비는 어떻게 결정되나요?
@@ -499,6 +498,9 @@ a:hover{
          </div>
        </div>
      </div>
+     </div>
+     
+     
      
      
      
