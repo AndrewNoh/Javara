@@ -15,12 +15,14 @@
       title="위로가기" style="width: 80px; height: 80px"></a>
 </div>
 
+<!-- 
 <button type="button" id="prev" style="position: absolute; font-size: 70px; left: 0px; top:50%; z-index: 5; background-color:transparent; color: white; border: 0px">
 	&lt;
 </button>
 <button type="button" id="next" style="position: absolute;; right: 0px; font-size: 70px; top:50%;  z-index: 5; background-color:transparent; color: white; border: 0px">
 	&gt;
 </button>
+-->
 
 <form action="<c:url value="/board/productlist.do"/>" method="post">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -92,7 +94,7 @@
 						            <div class="portfolio-links">
 						            	<a href="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[loop.index][0].imageName}?no=${loop.count}" data-gallery="portfolioGallery" class="portfolio-lightbox" id="img${loop.count}"><i class="bx bxs-photo-album"></i><span style="font-size: 12px; display: block;">사진</span></a>
 						                <a href="<c:url value="/board/auctionview.do"><c:param value="${LIST.auction_no}" name="no"/></c:url>" rel="lyteframe" data-gallery="portfolioDetailsGallery" id="view${loop.count}" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bxs-detail"></i><span style="font-size: 12px; display: block;">상세보기</span></a>
-						                <a href="javascript:void(0);" data-value="${LIST.auction_no}" name="like"><i class="bx bxs-heart" name="heartButton"></i><span style="font-size: 12px; display: block;">${LIST.likes}</span></a>
+						                <a href="javascript:void(0);" data-value="${LIST.auction_no}" name="like"><i class="bx bxs-heart" name="heartButton"></i><span style="font-size: 12px; display: block;">좋아요</span></a>
 						            </div>
 						            <p>종료예정일 ${LIST.endDate}</p>
 						    	</div>

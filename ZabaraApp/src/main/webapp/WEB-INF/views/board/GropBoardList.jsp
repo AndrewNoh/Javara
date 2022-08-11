@@ -72,7 +72,7 @@ a:hover {
       </div>
 
      <div class="row mt-2">
-      <form action="<c:url value="/board/write.do"><c:param name="board" value="우리동네"/></c:url>" method="post" role="form" enctype="multipart/form-data"
+      <form action="javascript:void(0);" method="post" role="form" enctype="multipart/form-data"
 			class="php-email-form mt-4">
 			<c:forEach var="LIST" items="${LISTS}" varStatus="loop">
 				<div class="contents p-3" style="display: flex; flex-direction: column;">
@@ -137,7 +137,7 @@ a:hover {
 						</div>
 							<div class="write_cmt"  style="text-align: center;">
 		                        <div class="stylish-input-group" > 
-		                           <input type="text" placeholder="댓글을 입력하시오" id="comment_content${LIST.townlist_no}" data-value="ct${LIST.townlist_no }" class="search-bar" style="border:none; width: 1200px">
+		                           <input type="text" onkeyup="enterkey(${LIST.townlist_no})" placeholder="댓글을 입력하시오" id="comment_content${LIST.townlist_no}" data-value="ct${LIST.townlist_no }" class="search-bar" style="border:none; width: 1200px">
 		                              <span class="input-group-addon" id="cCnt${LIST.townlist_no}">			                             
 		                           	  </span>
 		                        	  <button type="button" class="send" style="background-color: transparent; border:none" title="${LIST.townlist_no}" name="${LIST.title}:${LIST.userNo }">
@@ -154,6 +154,19 @@ a:hover {
  </div>
  
 <script>
+
+	function enterkey(value) {
+		if (window.event.keyCode == 13) {
+	    	// 엔터키가 눌렸을 때
+	    	// console.log('엔터키');
+	    	console.log(value);
+	    	// console.log($(this).val()); // undefined
+	    	// console.log($(this).data('no')); // undefined
+	    	$('.send[title='+value+']').trigger('click');
+	    }
+	}
+	
+
 	  // 댓글: 댓글창 오픈
 	  // 댓글 데이터 가져오기
 	  var comment = $('a[name=comment]');
@@ -227,7 +240,7 @@ a:hover {
 							location.reload(); 
 						}
 						
-						wsocket.send('동네:townlist_no,WriteUserNO:'+WriteUserNO.split(/[:]/)[1]+',townlist_title:'+WriteUserNO.split(/[:]/)[0]);
+						 wsocket.send('동네:townlist_no,WriteUserNO:'+WriteUserNO.split(/[:]/)[1]+',townlist_title:'+WriteUserNO.split(/[:]/)[0]);
 						 console.log('동네:townlist_no,WriteUserNO:'+WriteUserNO.split(/[:]/)[1]+',townlist_title:'+WriteUserNO.split(/[:]/)[0]);
 						
 					},
