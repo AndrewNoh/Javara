@@ -117,6 +117,7 @@ a:hover {
 									<img
 										src="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[i][0].imageName}"
 										style="width: 60%; border-radius: 15px;" class="img-fluid" alt="">
+										
 								</div>
 							</c:if>
 						</c:forEach>
@@ -133,7 +134,9 @@ a:hover {
 
 						<div class="comment_box">
 							<div id="commentList${LIST.townlist_no}">
-			                </div>											
+							
+			                </div>			
+			               								
 						</div>
 							<div class="write_cmt"  style="text-align: center;">
 		                        <div class="stylish-input-group" > 
@@ -171,6 +174,7 @@ a:hover {
 	  // 댓글 데이터 가져오기
 	  var comment = $('a[name=comment]');
 	  var nickName = '${LIST.nickName}';
+
 	  $(document).on("click", '.comment', function(e){
 		  var comments = document.querySelectorAll('.comments');
 		  var comment = document.querySelectorAll('.comment');
@@ -197,9 +201,9 @@ a:hover {
 		      			 if(data.length > 0){
 		      				 for(i=0; i<data.length; i++){
 		      					 var date = new Date(data[i].comment_postdate);
-		      					 html += "<div>";
-		                         html += "<div><table class='table'><h6 style='color:#85ADAD'><strong>"+data[i].nickname+"</strong></h6>"+"<span>"+data[i].comment_content +"</span>" + "<tr></tr>" +"<span style='float: right'>"+date.toLocaleString()+"</span>";
-		                         html += "</table></div>";
+		      					 html += "<div style='margin-bottom: 10px'>"; 
+		      					 html += "<img style='border-radius: 50%; width: 40px; height: 40px;' src='${pageContext.request.contextPath}/resources/assets/img/zabaraImg/"+data[i].profile_img+"'/>";
+		                         html += "<strong style='margin-left: 10px; color: #85adad'>"+data[i].nickname+"</strong>"+"<span style='margin-left: 10px'>"+data[i].comment_content +"</span>" + "<tr></tr>" +"<span style='float: right'>"+date.toLocaleString()+"</span>";
 		                         html += "</div>";
 		      				 }
 		      			 } else {
