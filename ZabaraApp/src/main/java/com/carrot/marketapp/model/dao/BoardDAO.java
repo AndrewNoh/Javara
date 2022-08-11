@@ -308,6 +308,10 @@ public class BoardDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.update("updateSearchLog",map);
 	}
+
+	public BoardDTO mypageReview(Map map) {
+		return sqlSession.selectOne("mypageReview", map);
+	}
 	
 
 }

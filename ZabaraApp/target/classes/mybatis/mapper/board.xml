@@ -382,6 +382,12 @@
 	         = addr.auction_no
 	         WHERE addr.simpleaddress = #{simpleAddress} AND list.category = #{category} AND NOT list.userno= #{userno}
  	</select>
+ 	
+	<select id="mypageReview" parameterType="Map"
+		resultType="com.carrot.marketapp.model.dto.BoardDTO">
+		select * from auction_list where auction_no=#{auctionNo}
+	</select>
+	
 	<!-- MYPAGE -->
 	
 	

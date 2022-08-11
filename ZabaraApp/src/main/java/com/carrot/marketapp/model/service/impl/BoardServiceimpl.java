@@ -199,4 +199,9 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 		// TODO Auto-generated method stub
 		return boardDAO.updateSearchLog(map);
 	}
+	public BoardDTO mypageReview(Map map) {
+			
+			return boardDAO.mypageReview(map);
+		}
+
 }

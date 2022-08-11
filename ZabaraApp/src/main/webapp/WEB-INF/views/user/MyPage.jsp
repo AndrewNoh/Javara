@@ -607,41 +607,36 @@ No license, 100% free to use.
 			</div>
 		</div>
 
-		<!-- End Skills -->
-		<!-- 자바라 페이 -->
-		<div class="row">
-			<div class="col-5">
-				<div class="pay container ">
-					<div class="section-title">
-						<h2>자바라 페이</h2>
-					</div>
-					<div class="mb-5 mt-4">
-						<img
-							src="${pageContext.request.contextPath}/resources/assets/img/pay_logo.png"
-							style="height: 60px; margin-right: 10px" /> <span id="myPay"
-							style="color: #fff; font-size: 35px; vertical-align: bottom"></span>
-						<div style="float: right; margin-top: 20px">
-							<select class="btn btn-outline-warning btn-s my-2"
-								style="font-size: 12px; font-weight: bold; color: #fff; margin-top: 10px"
-								data-toggle="dropdown;" id="pay">
-								<option value="5000">5,000 원</option>
-								<option value="10000">10,000 원</option>
-								<option value="20000">20,000 원</option>
-								<option value="30000">30,000 원</option>
-								<option value="40000">40,000 원</option>
-								<option value="50000">50,000 원</option>
-							</select>
-							<button onclick="payService()" type="button"
-								class="btn btn-dark my-2"
-								style="width: auto; margin-left: 10px; font-size: 12px">충전하기</button>
-							<button onclick="payWithdraw()" type="button"
-								class="btn btn-dark my-2"
-								style="width: auto; margin-left: 10px; font-size: 12px">출금하기</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- 자바라 페이 -->
+		      <!-- End Skills -->
+ 	<!-- 자바라 페이 -->
+ 	<div class="row">
+         <div class="col-5">
+            <div class="pay container ">
+               <div class="section-title">
+                  <h2>자바라 페이</h2>
+               </div>
+               <div class="mb-5 mt-4">
+                  <img src="${pageContext.request.contextPath}/resources/assets/img/pay_logo.png" style="height: 60px; margin-right: 10px"/>
+                   <span id="myPay" style="color:#fff; font-size: 35px; vertical-align: bottom" ></span>
+                   <div style="float: right; margin-top: 20px">
+                      <select class="btn btn-outline-warning btn-s mb-2"  
+                              style="font-size: 12px; font-weight: bold; color: #fff; margin-top: 10px" data-toggle="dropdown;" id="pay" >
+                          <option value="5000">충전 금액 5,000 원</option>
+                          <option value="10000">충전 금액 10,000 원</option>
+                          <option value="20000">충전 금액 20,000 원</option>
+                          <option value="30000">충전 금액 30,000 원</option>
+                          <option value="40000">충전 금액 40,000 원</option>
+                          <option value="50000">충전 금액 50,000 원</option>
+                      </select>                     
+                      <button onclick="payService()" type="button" class="btn btn-dark mb-2" style="width: auto;  margin-top: 10px; margin-left:10px; font-size: 12px">충전하기</button>
+                      <!-- 
+                      <button onclick="payWithdraw()" type="button" class="btn btn-dark mb-2" style="width: auto;  margin-left:10px; font-size: 12px">출금하기</button>
+                  	  -->
+                   </div>
+                </div>      
+            </div>
+         </div>
+         <!-- 자바라 페이 -->
 
 
 
@@ -651,25 +646,25 @@ No license, 100% free to use.
 					<div class="section-title">
 						<h2 style="margin-bottom: 30px;">나의 활동</h2>
 					</div>
-					<div class="row">
+					
 						<div class="row">
 							<div class="col-lg-4 col-md-4 mt-4 mt-md-1">
 								<div class="icon-box" id="MapToggle">
 									<i class="bi bi-map" style="color: #46a111;"></i>
-									<h3>동네 설정</h3>
+									<h3> 동네 인증</h3>
 								</div>
 							</div>
 							<div class="col-lg-4 col-md-4 mt-4 mt-md-1">
 								<div class="icon-box" id="ChatToggle">
-									<i class="bi bi-bell-fill" style="color: #ffbb2c;"></i>
-									<h3>알림</h3>
+									<i class="bi bi-bell-fill" style="color: #4c85fc;"></i>
+									<h3>  &nbsp;&nbsp;알 림</h3>
 								</div>
 							</div>
 
 							<div class="col-lg-4 col-md-4 mt-4 mt-md-1">
 								<div class="icon-box" id="AccountBookToggle">
 									<i class="bi bi-calculator-fill" style="color: #de83d3;"></i>
-									<h3>가계부</h3>
+									<h3>  &nbsp;가계부</h3>
 								</div>
 							</div>
 							<span style="margin-bottom: 20px;"></span>
@@ -678,23 +673,23 @@ No license, 100% free to use.
 							<div class="col-lg-4 col-md-4 ">
 								<div class="icon-box" id="categoryToggle">
 									<i class="ri-gradienter-line" style="color: #ffa76e;"></i>
-									<h3>관심 카테고리</h3>
+									<h3> 카테고리</h3>
 								</div>
 							</div>
 							<div class="col-lg-4 col-md-4">
 								<div class="icon-box" id="temperatureToggle">
-									<i class="bi bi-thermometer-half" style="color: #f76767;"></i>
-									<h3>나의 온도</h3>
+									<i class="bi bi-star" style="color: #ffbb2c;"></i>
+									<h3>  &nbsp;&nbsp;별 점</h3>
 								</div>
 							</div>
 							<div class="col-lg-4 col-md-4">
 								<div class="icon-box" id="chatToggle">
 									<i class="bi bi-chat-left-dots" style="color: #9cbeff;"></i>
-									<h3>채팅</h3>
+									<h3>  &nbsp;&nbsp;채 팅</h3>
 								</div>
 							</div>
 						</div>
-					</div>
+					
 				</div>
 			</div>
 			<!-- 나의 활동 -->
