@@ -22,9 +22,11 @@ import com.carrot.marketapp.model.service.impl.ImageServiceimpl;
 import com.carrot.marketapp.model.service.impl.UserServiceimpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 @Controller
 @RequestMapping("/admin")
-
 public class AdminController {
 	
 	
@@ -69,7 +71,7 @@ public class AdminController {
 	
 	@RequestMapping("/admingropboard.do")
 	public String AdminGropBoardList(Map map, Model model, Principal principal) {
-		model.addAttribute("board", "우리동네");
+		model.addAttribute("board", "관리자동네글");
 		map.put("email", principal.getName());
 		model.addAttribute("email", principal.getName());
 		
@@ -87,7 +89,6 @@ public class AdminController {
 		if (map.get("category") == null) {
 			map.put("category", "모두");
 		}
-
 		UserDTO user = userService.selectOne(map);
 
 		map.put("userno", user.getUserno());
@@ -103,19 +104,6 @@ public class AdminController {
 
 		model.addAttribute("address", simpleAddr);
 		model.addAttribute("LISTS", Lists);
-
-		List<List<ImageDTO>> imageList = new Vector<List<ImageDTO>>();
-
-		for (int i = 0; i < Lists.size(); i++) {
-			
-			map.put("townlist_no", Lists.get(i).getTownlist_no());
-			
-
-			List<ImageDTO> images = imageService.selectList(map);
-			imageList.add(images);
-		}
-		
-		model.addAttribute("imageList", imageList);
 		model.addAttribute("address", map.get("simpleAddress"));
 		model.addAttribute("LISTS", Lists);
 		model.addAttribute("nowUser", map.get("userno"));
@@ -125,7 +113,7 @@ public class AdminController {
 	
 	@RequestMapping("/adminauction.do")
 	public String AdminAuctionboard(Map map, Model model, Principal principal) {
-		model.addAttribute("board", "경매");
+		model.addAttribute("board", "관리자경매");
 		map.put("email", principal.getName());
 		model.addAttribute("email", principal.getName());
 		
@@ -159,19 +147,6 @@ public class AdminController {
 
 		model.addAttribute("address", simpleAddr);
 		model.addAttribute("LISTS", Lists);
-
-		List<List<ImageDTO>> imageList = new Vector<List<ImageDTO>>();
-
-		for (int i = 0; i < Lists.size(); i++) {
-			
-			map.put("auction_no", Lists.get(i).getAuction_no());
-			
-
-			List<ImageDTO> images = imageService.selectList(map);
-			imageList.add(images);
-		}
-		
-		model.addAttribute("imageList", imageList);
 		model.addAttribute("address", map.get("simpleAddress"));
 		model.addAttribute("LISTS", Lists);
 		model.addAttribute("nowUser", map.get("userno"));

@@ -10,12 +10,12 @@
 		SELECT count(*) FROM MEMBERS WHERE NOT USERNO =1
 	</select>
 	
-	<select id="selectAllGropList" parameterType="Map" resultType="_int">
-		SELECT count(*) FROM TOWN_LIST
+	<select id="selectAllGropList" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
+		SELECT * FROM TOWN_LIST
 	</select>
 	
-	<select id="selectAllAuctionList" parameterType="Map" resultType="_int">
-		SELECT COUNT(*) FROM AUCTION_LIST
+	<select id="selectAllReportAuctionList" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
+		SELECT al.content,al.title,al.auction_no FROM auction_list al join auction_report ar ON al.auction_no = ar.auction_no
 	</select>
 	
 	<!-- DELETE문 -->

@@ -54,16 +54,18 @@ public class UserDAO {
 		}
 	}
 	
+	
 	public int delete(Map map) {
 		if (map.get("townlist_no") != null){
 			sqlSession.delete("deleteAdminGropImg", map);
 			return sqlSession.delete("deleteAdminBoard", map);
-		} else {
+		} else if(map.get("auction_no")!= null){
 			sqlSession.delete("deleteAdminAuctionImg", map);
 			sqlSession.delete("deleteAdminAuctionPrice", map);
 			sqlSession.delete("deleteAdminAuctionLikeNo", map);
 			return sqlSession.delete("deleteAdminAuction", map);
 		}
+		return 0;
 
 	}
 

@@ -19,7 +19,12 @@ public class BoardDAO {
 	public List<BoardDTO> selectList(Map map) {
 		if (map.get("board").equals("우리동네")) {
 			return sqlSession.selectList("getGropList", map);
-		} else {
+		}else if(map.get("board").equals("관리자동네글")){
+			return sqlSession.selectList("selectAllGropList",map); 
+		}else if(map.get("board").equals("관리자경매")) {
+			return sqlSession.selectList("selectAllReportAuctionList",map);
+		}				
+		else {
 			return sqlSession.selectList("getAuctionList", map);
 		}
 
@@ -293,7 +298,7 @@ public class BoardDAO {
 		else return sqlSession.selectList("postLowerPriceNoAddr", map);
 		
 	}
-
+	
 	public int insertSearchLog(Map map) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("insertSearchLog", map);
@@ -315,3 +320,4 @@ public class BoardDAO {
 	
 
 }
+
