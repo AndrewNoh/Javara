@@ -293,6 +293,21 @@ public class BoardDAO {
 		else return sqlSession.selectList("postLowerPriceNoAddr", map);
 		
 	}
+
+	public int insertSearchLog(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("insertSearchLog", map);
+	}
+
+	public String selectSearchLog(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("selectSearchLog", map);
+	}
+
+	public int updateSearchLog(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("updateSearchLog",map);
+	}
 	
 
 }

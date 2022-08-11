@@ -184,4 +184,19 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 		
 		return boardDAO.postLowerPrice(map);
 	}
+
+	public int insertSearchLog(Map map) {
+		// TODO Auto-generated method stub
+		return boardDAO.insertSearchLog(map);
+	}
+
+	public String selectSearchLog(Map map) {
+		// TODO Auto-generated method stub
+		return boardDAO.selectSearchLog(map);
+	}
+
+	public int updateSearchLog(Map map) {
+		// TODO Auto-generated method stub
+		return boardDAO.updateSearchLog(map);
+	}
 }

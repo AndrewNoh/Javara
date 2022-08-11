@@ -658,6 +658,22 @@ public class MainBoardController {
 	public String search(Model model, @RequestParam Map map, Principal principal) {
 
 		String board = map.get("board").toString();
+		
+		System.out.println(map.get("title"));
+		int log = 0;
+		int havelog = 0;
+		String search = boardService.selectSearchLog(map);
+		if (search == null) {
+			havelog = 0;
+		} else {
+			havelog = Integer.parseInt(search);
+		}
+		if(havelog > 0) {
+			map.put("count", havelog+1);
+			log = boardService.updateSearchLog(map);
+		} else {
+			log = boardService.insertSearchLog(map);
+		}
 
 		List<BoardDTO> searchList = new Vector<BoardDTO>();
 
