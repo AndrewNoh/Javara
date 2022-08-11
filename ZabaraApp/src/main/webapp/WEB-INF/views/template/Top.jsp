@@ -146,11 +146,14 @@
 
 </style>
 <body>
-<div style="position: fixed;top: 30px; right: 3%; z-index: 1;" id="chatbot">
- <a ><img src="${pageContext.request.contextPath}/resources/assets/img/chatbot_icon.png" 
-       title="챗봇" style="width: 100px; height: 100px;"></a>
-</div>
-
+<sec:authorize access="hasAnyRole('ROLE_ADMIN')" var="isAdmin">
+</sec:authorize>
+<c:if test="${not isAdmin }">
+	<div style="position: fixed;top: 30px; right: 3%; z-index: 1;" id="chatbot">
+	 <a ><img src="${pageContext.request.contextPath}/resources/assets/img/chatbot_icon.png" 
+	       title="챗봇" style="width: 100px; height: 100px;"></a>
+	</div>
+</c:if>
 
 	<form id="logoutForm" method="post"
 		action="<c:url value="/security/logout.do"/>">
@@ -173,11 +176,11 @@
 	             <c:if test="${not isLogin }">  
 	                <li><a class="nav-link" href="javascript:logout()">로그아웃</a></li>	                
 	             </c:if>
-	            <sec:authorize access="hasAnyRole('ROLE_ADMIN')" var="isAdmin">
+	            <c:if test="${isAdmin }">
 					<li><a href="<c:url value="/admin/admin.do"/>">관리자</a></li>
 					<li><a href="<c:url value="/admin/adminauction.do"/>">경매글관리</a></li>
 					<li><a href="<c:url value="/admin/admingropboard.do"/>">동네글관리</a></li>
-				</sec:authorize>
+				</c:if>
 				<c:if test="${not isAdmin }">
 				<li><a class="nav-link" href="<c:url value="/userinfo/mypage.do"/>">나의 자바라</a></li>
 	             <li><a class="nav-link" href="<c:url value="/board/auctionlist.do"/>">자바라경매</a></li>
@@ -196,7 +199,9 @@
 	             <li><a class="nav-link" href="<c:url value="/userinfo/category.do"/>">우리동네 카테고리</a></li>				
 	             </c:if>
 	             
-			<li><div class="search col mr-3" id="srch" style="float: left;">
+			<li>
+			<c:if test="${not isAdmin }">
+			<div class="search col mr-3" id="srch" style="float: left;">
 					<div class="srch_bar" style="text-align: center;">
 						<div class="stylish-input-group">
 							<input type="text" placeholder="검색어를 입력해주세요" name="title"
@@ -241,29 +246,32 @@
 						    	<option value="식물">식물</option>
 						  	</select>
 						</div>
-						<div class="search row" id="imgsrchDiv" style="float: right;">
-							<div class="srch_bar" style="text-align: center;">
-								<div class="stylish-input-group">
-									<input type="text" placeholder="검색어를 입력해주세요" name="title"
-										class="search-bar"> <span class="input-group-addon">
-										<button id="modal-open" data-toggle="modal"
-											data-target="#myModal" type="button"
-											style="margin-left: -30px; vertical-align: -0.3em;">
-											<i class="bi bi-images" aria-hidden="false"
-												style="font-size: 20px; color: cornflowerblue;"></i>
-										</button>
-										<button type="submit"
-											style="margin-left: 5px; vertical-align: -0.3em;">
-											<i id="bi-search" class="bi bi-search" aria-hidden="false"
-												style="font-size: 20px;"></i>
-										</button>
-									</span>
+						
+							<div class="search row" id="imgsrchDiv" style="float: right;">
+								<div class="srch_bar" style="text-align: center;">
+									<div class="stylish-input-group">
+										<input type="text" placeholder="검색어를 입력해주세요" name="title"
+											class="search-bar"> <span class="input-group-addon">
+											<button id="modal-open" data-toggle="modal"
+												data-target="#myModal" type="button"
+												style="margin-left: -30px; vertical-align: -0.3em;">
+												<i class="bi bi-images" aria-hidden="false"
+													style="font-size: 20px; color: cornflowerblue;"></i>
+											</button>
+											<button type="submit"
+												style="margin-left: 5px; vertical-align: -0.3em;">
+												<i id="bi-search" class="bi bi-search" aria-hidden="false"
+													style="font-size: 20px;"></i>
+											</button>
+										</span>
+									</div>
+	
 								</div>
-
 							</div>
-						</div>
+						</c:if>
 					</div>
-				</form></li>
+				</form>
+			</li>
 		</ul>
 
 		<div class="modal" id="myModal">
@@ -300,36 +308,35 @@
 		<i class="bi bi-list mobile-nav-toggle"></i>
 	</nav>
 	
-
-<div class="chat" style="display: none;position: flex; y-index: 1;">
-  <div class="chat-title">
-    <h1 style="font-size: 15px; color: black; font-family: GmarketSansBold">자바라 챗봇</h1>
-    
-    <figure class="avatar">
-      <img src="${pageContext.request.contextPath}/resources/assets/img/web_banner.png"   /></figure>     
-	<div  class="r-nav"> 
-     <ul>
-		  <li> <a>X</a></li>	  
-		  <li> <a><img src="" width="26px" /></a></li>   	
-     </ul>     
-	</div><!--r-nav -->   
-	</div><!--chat-title -->
-	<div class="messages">
-	    <div class="messages-content bg-white mt-2">
-	    </div>
-	</div><!-- messages -->
-	<div class="message-box">
-		<!--<textarea type="text" class="message-input mt-2" id="message" placeholder="무엇이 궁금하신가요?"></textarea>-->
-		<input id="message" type="text"><button type="submit" class="btn btn-dark" style="float: right;">전송</button>
-	</div><!-- message-box -->
-</div><!-- chat -->
-
-<script src="<c:url value="/js/chatbot.js"/>"></script>
+<c:if test="${not isAdmin }">
+	<div class="chat" style="display: none;position: flex; y-index: 1;">
+	  <div class="chat-title">
+	    <h1 style="font-size: 15px; color: black; font-family: GmarketSansBold">자바라 챗봇</h1>
+	    
+	    <figure class="avatar">
+	      <img src="${pageContext.request.contextPath}/resources/assets/img/web_banner.png"   /></figure>     
+		<div  class="r-nav"> 
+	     <ul>
+			  <li> <a>X</a></li>	  
+			  <li> <a><img src="" width="26px" /></a></li>   	
+	     </ul>     
+		</div><!--r-nav -->   
+		</div><!--chat-title -->
+		<div class="messages">
+		    <div class="messages-content bg-white mt-2">
+		    </div>
+		</div><!-- messages -->
+		<div class="message-box">
+			<!--<textarea type="text" class="message-input mt-2" id="message" placeholder="무엇이 궁금하신가요?"></textarea>-->
+			<input id="message" type="text"><button type="submit" class="btn btn-dark" style="float: right;">전송</button>
+		</div><!-- message-box -->
+	</div><!-- chat -->
+	
+	<script src="<c:url value="/js/chatbot.js"/>"></script>
+</c:if>
 <div id="snackbar"></div>
 
 <script>
-
-
 
 
 	$("#message").on('keypress',function(e) {
@@ -537,96 +544,6 @@
 
 		});
 		
-		<sec:authentication property="name" var="username" />
-			<c:if test="${username != 'anonymousUser'}" var="isLogin">
-			wsocket = new WebSocket("ws://${pageContext.request.serverName}:${pageContext.request.serverPort}<c:url value='/chat-ws.do/0'/>");//192.168.219.101//192.168.0.129
-			 //console.log('wsocket:',wsocket);
-			 //서버와 연결된 웹 소켓에 이벤트 등록
-			 if(opener==null){ 
-				 wsocket.onopen;;
-			}else{ 
-				 wsocket.close();
-			}	
-			
-			 wsocket.onclose=function(){
-				 //console.log("연결이 끊어 졌어요");
-			 };
-			 wsocket.onmessage=receive;
-			 wsocket.onerror=function(e){
-			    //console.log('에러발생:',e)
-			 }
-			 
-			//서버에 연결되었을때 호출되는 콜백함수
-			</c:if>
-			 function receive(e){//e는 message이벤트 객체
-			     //서버로부터 받은 데이타는 이벤트객체(e).data속성에 저장되어 있다
-			      const element = document.getElementById('snackbar');
-			     //일반 메세지
-			     
-			     if(e.data.includes('RoomNo')){
-			    	 var start1 = e.data.indexOf(",");
-				     var start2 = e.data.indexOf(":");
-			    	 if(e.data.substring(0,start1)==='RoomNo${roomno},'){
-			    		 //console.log('같은방');
-			    	 }
-			    	 else if(e.data.includes('senduserno${userno},') || e.data.includes('writeuserno${userno},')){
-			    		 if(!e.data.includes('${username}')){
-				    		 element.innerHTML = '';
-				    		 element.innerHTML += e.data.substring(start2+1)+'님이 보낸 채팅이 도착했어요';
-				    		 var x = document.getElementById("snackbar");
-							  x.className = "show";
-							  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-				    	 }
-			    	 }
-			     }
-			     else if(e.data.includes('경매')){
-			     var start1 = e.data.indexOf(",");
-			     var start2 = e.data.indexOf(":");
-			    	 if( e.data.includes('userNo${userno},')){
-						  element.innerHTML = '';
-			    		 element.innerHTML += e.data.substring(start2+1);
-			    		 var x = document.getElementById("snackbar");
-						  x.className = "show";
-						  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-				     }
-			    	 if( e.data.includes('upperuserno${userno},')){
-						  element.innerHTML = '';
-			    		 element.innerHTML += e.data.substring(start2+1);
-			    		 var x = document.getElementById("snackbar");
-						  x.className = "show";
-						  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-				     }
-			 	}else if(e.data.includes('낙찰')){
-			    	 var start = e.data.indexOf(":");
-			    	 if( e.data.includes('upperuserno${userno},')){
-						  element.innerHTML = '';
-			    		 element.innerHTML += e.data.substring(start+1);
-			    		 var x = document.getElementById("snackbar");
-						  x.className = "show";
-						  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-				     }
-			 	}
-			     else if(e.data.includes('동네')){
-			    	 var arr= e.data.split(/[,:]/);
-			    	 if(e.data.includes('townlist_no')){
-				    	 if(e.data.includes('WriteUserNO:${userno}')){
-							  element.innerHTML = '';
-				    		 element.innerHTML += '동네생활'+arr[5]+'에 댓글이 달렸어요';
-				    		 var x = document.getElementById("snackbar");
-							  x.className = "show";
-							  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-				    	 }
-				     }else if(e.data.includes('like')){
-				    	 if(e.data.includes('WriteUserNO:${userno}')){
-							 element.innerHTML = '';
-				    		 element.innerHTML += '동네생활'+arr[5]+'에 좋아요가 눌렸어요';
-				    		 var x = document.getElementById("snackbar");
-							  x.className = "show";
-							  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-				    	 }
-				     }
-			     }
-			 }
-			 
+		
 			 
 	</script>
