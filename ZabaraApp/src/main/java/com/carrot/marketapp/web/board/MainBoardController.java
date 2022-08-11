@@ -134,6 +134,7 @@ public class MainBoardController {
 	public String auctionview(Model model, @RequestParam Map map, Principal principal) {
 		map.put("board", "경매");
 
+		System.out.println(map.get("no"));
 		BoardDTO list = boardService.selectOne(map);
 		model.addAttribute("email", principal.getName());
 		int no = Integer.parseInt((String) map.get("no"));

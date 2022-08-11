@@ -71,7 +71,7 @@ border-radius: 15px;
 					</div>
 				</c:if>
 				<c:if test="${!isWrite}">
-					<button class="btn" style="float: right; color: #fff" data-toggle="modal" data-target="#reportUI"><i class="bx bxs-angry" style="font-size: 30px" title="신고"></i></button>
+					<button class="btn" style="float: right; color: #fff" data-toggle="modal" data-target="#reportUI" id="reportOpen"><i class="bx bxs-angry" style="font-size: 30px" title="신고"></i></button>
 				</c:if>
 				
 				<div style="text-align: right;">				
@@ -91,7 +91,7 @@ border-radius: 15px;
 				
 				<c:if test="${isWriter}">
 					<div style="text-align: center; font-size: 20px; margin-bottom: 15px;">
-						<button id="statusChange" style="float: right; font-size: 16px; color: #fff; background-color: #85adad" class="btn" title="${list.status == 'END' ? 'SALE' : 'END'}">${list.status == 'END' ? '낙찰취소' : '낙찰하기'}</button>
+						<button id="statusChange" style="font-size: 16px; color: #fff; background-color: #85adad" class="btn" title="${list.status == 'END' ? 'SALE' : 'END'}">${list.status == 'END' ? '낙찰취소' : '낙찰하기'}</button>
 					</div>
 				</c:if>
 				
@@ -253,14 +253,9 @@ border-radius: 15px;
 					<button type="button" class="btn" style="background-color: #85adad; color: #fff; margin-bottom: -30px; margin-left: 10px" id="doBid">등록</button>
 				</div>
 				<br/>
-				<!--<div>
-					<button type="button" id="minus100">-100</button>
-					<button type="button" id="minus1000">-1000</button>
-					<button type="button" id="minus10000">-10000</button>
-					<button type="button" id="plus10000">+10000</button>
-					<button type="button" id="plus1000">+1000</button>
-					<button type="button" id="plus100">+100</button>					
-				</div> -->
+				<div id="dialog-message" title="입찰 확인" style='display:none'>
+				  	입찰하시겠습니까?<br/>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -273,17 +268,22 @@ border-radius: 15px;
 				<h5 class="modal-title" id="exampleModalLabel" style="color: black; font-size: 20px; font-weight: bold; ">신고</h5>
 			</div>	
 			<div class="modal-body">
-				<div style="margin-bottom: 20px">
+				<div style="margin-bottom: 20px; text-align:center">
 					<h1 style="font-size: 14px; font-weight: bold; text-align:center; ">신고 사유</h1>
-					<select id="reportCategory">
-						<option selected value="기타"></option>
-						<option value="중고차">중고차</option>
-						<option value="디지털기기">디지털기기</option>
-						<option value="생활가전">생활가전</option>
-						<option value="가구인테리어">가구/인테리어</option>
-					</select>
-					<textarea id="reportContent"></textarea>
-				</div>	
+					<div>
+						<select id="reportCategory">
+							<option selected value="기타">기타</option>
+							<option value="부적절한 내용">부적절한 내용</option>
+							<option value="허위 매물">허위 매물</option>
+							<option value="판매 금지물품">판매 금지물품</option>
+							<option value="중복 판매글">중복 판매글</option>
+						</select>
+					</div>
+					
+					<div>
+						<textarea id="reportContent" ></textarea>
+					</div>
+				</div>
 					
 				<div class="modal-footer">
 					<button type="button" class="btn" style="background-color: #85adad; color: #fff; margin-bottom: -30px; margin-left: 10px" id="report">등록</button>
@@ -455,7 +455,39 @@ border-radius: 15px;
 		newprice = $('#inputBidPrice').val();
 		console.log(upperprice - newprice)
 		
-		if(upperprice - newprice >= 0) {
+
+		
+		if(confirm("입찰하려는 가격은 " + newprice + "원 입니다.") == true) {
+			if(upperprice - newprice >= 0) {
+				const Toast = Swal.mixin({
+			    	toast : true,
+			        position : 'center-center',
+			        showConfirmButton : false,
+			        timer : 1000,
+			        timerProgressBar : true,
+			    })
+	
+			    Toast.fire({
+			        icon : 'error',
+			        title : '입찰 가격은 현재 최고가보다 높아야합니다.'
+			    });
+			} else {
+				//wsocket.send('경매 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}의 최고가가 갱신되었어요");
+				console.log('경매 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}의 최고가가 갱신되었어요");
+				$.ajax({
+					url :'<c:url value="/board/newUpperPrice.do"/>',
+					type:'POST',
+					dataType: "text",
+					data:{'${_csrf.parameterName}':'${_csrf.token}', upperprice:upperprice, newprice:newprice, auction_no:${list.auction_no}},
+				}).done(function(data){
+					console.log(data)
+					if(data == 1){
+						window.location.href = '<c:url value="/board/auctionview.do"><c:param value="${param.no}" name="no"/></c:url>';
+					}
+				});
+				
+			}
+		} else {
 			const Toast = Swal.mixin({
 		    	toast : true,
 		        position : 'center-center',
@@ -466,23 +498,8 @@ border-radius: 15px;
 
 		    Toast.fire({
 		        icon : 'error',
-		        title : '입찰 가격은 현재 최고가보다 높아야합니다.'
+		        title : '입찰을 취소했습니다.'
 		    });
-		} else {
-			wsocket.send('경매 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}의 최고가가 갱신되었어요");
-			console.log('경매 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}의 최고가가 갱신되었어요");
-			$.ajax({
-				url :'<c:url value="/board/newUpperPrice.do"/>',
-				type:'POST',
-				dataType: "text",
-				data:{'${_csrf.parameterName}':'${_csrf.token}', upperprice:upperprice, newprice:newprice, auction_no:${list.auction_no}},
-			}).done(function(data){
-				console.log(data)
-				if(data == 1){
-					window.location.href = '<c:url value="/board/auctionview.do"><c:param value="${param.no}" name="no"/></c:url>';
-				}
-			});
-			
 		}
 	});
 	
@@ -523,7 +540,7 @@ border-radius: 15px;
 					wsocket.send('낙찰 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}가 낙찰되었어요");
 					console.log('낙찰 upperuserno${list.upper_user_no},userNo${list.userNo},email${email}:'+"${list.title}가 낙찰되었어요"); 
 					 var today = new Date();
-					 if('${room_no}'===""){
+					 if('${roomno}'===""){
 						   $.ajax({
 					           url: '<c:url value="/chat/chatting.do"><c:param value="${list.upper_user_no}" name="upperuserno"/><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="0" name="townlist_no"/><c:param value="${list.auction_no}" name="auction_no"/><c:param value="${userno}" name="writeuserno"/></c:url>',
 					           data: {chatcontent:'축하합니다.낙찰되셨습니다.',
@@ -629,6 +646,8 @@ border-radius: 15px;
 			        title : '신고는 1회만 가능합니다.'
 			    });
 			}
+			
+			$('#reportOpen').trigger("click");
 		});
    });
 </script>
