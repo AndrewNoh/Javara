@@ -495,7 +495,7 @@ function createListTag(object){
                      '<hr/>'+
                      '<div><h6 style="color: #fff">시작가 '+object["base_Price"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원'+'</h6></div>'+
                      '<div><h6 style="color: #fff">최고가 '+object["upper_Price"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원'+'</h6></div>'+
-                     '<div><h6 style="color: #fff">조회수 '+object["viewCount"]+'회'+'</h6></div>'+
+                     '<div><h6 style="color: #fff">좋아요 '+object["likes"]+'회'+'</h6></div>'+
                      '<div><h6 style="color: #fff">마감일 '+object["endDate"].split(" ")[0]+'</h6></div>'+
                      '<input type="hidden" name="latitude" value="'+object["latitude"]+'"/>'+
                      '<input type="hidden" name="longitude" value="'+object["longitude"]+'"/>'+

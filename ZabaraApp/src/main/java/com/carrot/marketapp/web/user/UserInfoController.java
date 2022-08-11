@@ -121,7 +121,7 @@ public class UserInfoController {
 			
 		}
 
-		return "MainPage.market";
+		return "user/Login.market";
 	}
 
 	public String imageUrlDownload(String path, String url) {

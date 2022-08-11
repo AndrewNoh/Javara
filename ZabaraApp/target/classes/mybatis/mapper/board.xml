@@ -363,15 +363,24 @@
 	</select>
 	
 	<select resultType="com.carrot.marketapp.model.dto.BoardDTO" parameterType="Map" id="getAuctionListAddressItems">
-		SELECT * FROM 
-		(SELECT * FROM
-		(SELECT ADDRNO, AUCTION_NO, USERNO, TITLE, CONTENT, CATEGORY, LIKES,POSTDATE, ENDDATE, STATUS, RNUM FROM
-		(SELECT D.*, ROWNUM AS RNUM FROM
-		(SELECT * FROM AUCTION_LIST L WHERE
-		(SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO)=#{simpleAddress} AND L.CATEGORY=#{category} AND NOT L.USERNO=#{userno}
-		ORDER BY AUCTION_NO DESC) D) O) T LEFT OUTER JOIN AUCTION_PRICE P ON P.AUCTION_NO = T.AUCTION_NO LEFT OUTER 
-		JOIN ADDRESS_LIST A ON A.ADDRNO = T.ADDRNO LEFT OUTER 
-		JOIN AUCTION_IMG I ON I.AUCTION_NO = T.AUCTION_NO WHERE T.STATUS = 'SALE' ORDER BY P.AUCTION_NO DESC)
+		SELECT list.auction_no, list.title, list.likes, list.content,
+	         p.upper_price, p.base_price, img.imagename,
+	          list.enddate, addr.fulladdress,addr.latitude,addr.longitude,list.category FROM
+	         (SELECT IMG.* FROM(SELECT ROW_NUMBER()
+	         OVER(PARTITION BY AUCTION_NO
+	         ORDER BY IMAGENO ASC) AS RNUM,
+	         AUCTION_IMG.* FROM AUCTION_IMG ) IMG
+	         WHERE RNUM = 1) IMG
+	         JOIN
+	         AUCTION_LIST LIST ON
+	         IMG.AUCTION_NO=LIST.AUCTION_NO
+	         JOIN auction_price P
+	         ON
+	         list.auction_no=p.auction_no
+	         JOIN address_list addr ON
+	         list.auction_no
+	         = addr.auction_no
+	         WHERE addr.simpleaddress = #{simpleAddress} AND list.category = #{category} AND NOT list.userno= #{userno}
  	</select>
 	<!-- MYPAGE -->
 	
