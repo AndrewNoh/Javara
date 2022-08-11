@@ -103,7 +103,7 @@ border-radius: 15px;
 					<p style="font-size: 20px; ">${fn:replace(list.content, replaceChar, "<br/>")}</p>
 				</div>		
 				
-				
+				<div style="display: flex; justify-content:space-around; flex-direction: row-reverse;">
 				<c:if test="${isWriter}">
 					<div style="text-align: center; font-size: 20px; ">
 						<button id="statusChange" style="float: right; font-size: 16px; color: #fff; background-color: #ffc107; width: 120px" class="btn" title="${list.status == 'END' ? 'SALE' : 'END'}">${list.status == 'END' ? '낙찰취소' : '낙찰하기'}</button>
@@ -124,6 +124,7 @@ border-radius: 15px;
 						</c:if>
 					</c:if>
 				</c:if>
+				
 					
 				<c:if test="${!isSale}">
 					<div class="text-center">
@@ -133,7 +134,7 @@ border-radius: 15px;
 						<c:param value="${list.userNo}" name="writeuserno"/><c:param value="${list.nickName}" name="wirtenickName"/></c:url>"><button class="btn" style="background-color: #ffc107; color: #fff" >채팅하기</button></a>
 					</div>
 				</c:if>
-				
+				</div>
 				<div style="text-align: center; font-size: 25px; float: left;">
 					 <i class="bx bxs-heart ml-3" style="color: #ffc107" ></i>
 					 ${list.likes}

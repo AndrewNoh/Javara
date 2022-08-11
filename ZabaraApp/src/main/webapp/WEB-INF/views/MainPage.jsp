@@ -107,34 +107,39 @@ width: 70%;
   	</div>
   </header><!-- End Header -->
 <!-- 우리 동네 좋은물건 잡아라 -->
-<div style="width:100%; height:800px; background-color:#ffffffde;">
+<div style="width:100%; height:800px; background-color:#ffffffde; display: flex; align-items: center; justify-content: center;">
 	<br>
 	<br>
-	<img src="${pageContext.request.contextPath}/resources/assets/img/mainpage_banner01.png" style="width: 500px; display: block; margin-left: 300px; margin-top: 200px "/>
-	<img src="${pageContext.request.contextPath}/resources/assets/img/main_board.PNG" style="width: 700px; position: relative; bottom: 450px; left: 900px"/>
-	
+	<div style="display: flex; flex-direction: row; justify-content: space-around; align-items: center;" >
+		<img src="${pageContext.request.contextPath}/resources/assets/img/mainpage_banner01.png" style="max-width: 500px; display: block; "/>
+		<img src="${pageContext.request.contextPath}/resources/assets/img/main_board.PNG" style="max-max-width: 500px; "/>
+	</div>
 	
 </div>
 
 <!-- 우리 동네 경매 -->
-<div style="width:100%; height:800px; background-color:#bababade;">
+<div style="width:100%; height:800px; background-color:#bababade; display: flex; align-items: center; justify-content: center;">
 	<br>
 	<br>
 	<br>
-	<img src="${pageContext.request.contextPath}/resources/assets/img/mainpage_banner02.png" style="width: 500px; display: block; float: right; margin-right: 350px; margin-top:200px  "/>
-	<img src="${pageContext.request.contextPath}/resources/assets/img/main_chatimg.PNG" style="width: 700px; position: relative; bottom: -50px; left: 300px; "/>
+	<div style="display: flex; flex-direction: row; justify-content: space-around; align-items: center;" >
+		<img src="${pageContext.request.contextPath}/resources/assets/img/mainpage_banner02.png" style="max-width: 500px; display: block;"/>
+		<img src="${pageContext.request.contextPath}/resources/assets/img/main_chatimg.PNG" style="max-width: 500px;"/>
+	</div>
 </div>
 
 <!-- 우리 동네 생활 -->
-<div style="width:100%; height:800px; background-color:#ffffffde;">
+<div style="width:100%; height:800px; background-color:#ffffffde; display: flex; align-items: center; justify-content: center;">
 	<br>
 	<br>
-	<img src="${pageContext.request.contextPath}/resources/assets/img/mainpage_banner03.png" style="width: 500px; display: block; margin-left: 300px; margin-top: 200px "/>
-	<img src="${pageContext.request.contextPath}/resources/assets/img/main_townimg.PNG" style="width: 800px; position: relative; bottom: 450px; left: 950px; "/>
+	<div style="display: flex; flex-direction: row; justify-content: space-around; align-items: center;" >
+		<img src="${pageContext.request.contextPath}/resources/assets/img/mainpage_banner03.png" style="max-width: 500px; display: block;"/>
+		<img src="${pageContext.request.contextPath}/resources/assets/img/main_townimg.PNG" style="max-width: 800px;"/>
+	</div>
 </div>
 
 <!-- React: 우리동네 인기매물 -->
-<div style="width:100%; height:1000px; background-color:#bababade; color:black" id="mainUnder">
+<div style="width:100%; height:800px; background-color:#bababade; display: flex; align-items: center; justify-content: center;" id="mainUnder">
 	<br>
 	<br>
 	<img src="${pageContext.request.contextPath}/resources/assets/img/main_scroll_banner.png" style="width: 500px; display: block; margin: 0 auto; "/>
