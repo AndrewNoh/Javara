@@ -145,5 +145,15 @@
    		SELECT * FROM (SELECT * FROM PAYLOG WHERE payno=#{payno} ORDER BY logno DESC) WHERE ROWNUM=1
    </select >
 
+	<!-- 마이페이지 : 후기 -->
+	<insert id="mypagereviewInsert" parameterType="Map">
+		INSERT INTO REVIEW VALUES(SEQ_REVIEW_REVIEW_NO.NEXTVAL,#{text},#{star},#{writeuserno},#{auctionNo})
+	</insert>
+	<select id="mypagereviewSelect" parameterType="Map"
+		resultType="ReviewDTO">
+		<![CDATA[
+		SELECT * FROM (SELECT * FROM REVIEW WHERE USER_NO = #{userno}  ORDER BY review_no DESC) WHERE ROWNUM <=4
+	    ]]>
+	</select>
 
 </mapper>
