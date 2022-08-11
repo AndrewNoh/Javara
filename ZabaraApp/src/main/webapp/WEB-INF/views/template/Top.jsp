@@ -316,7 +316,7 @@
 <c:if test="${not isAdmin }">
 	<div class="chat" style="display: none;position: flex; y-index: 1;">
 	  <div class="chat-title">
-	    <h1 style="font-size: 15px; color: black; font-family: GmarketSansBold">자바라 챗봇</h1>
+	    <h1 style="font-size: 15px; color: black; ">자바라 챗봇</h1>
 	    
 	    <figure class="avatar">
 	      <img src="${pageContext.request.contextPath}/resources/assets/img/web_banner.png"   /></figure>     
@@ -329,11 +329,13 @@
 		</div><!--chat-title -->
 		<div class="messages">
 		    <div class="messages-content bg-white mt-2">
+
 		    </div>
 		</div><!-- messages -->
 		<div class="message-box">
+	
 			<!--<textarea type="text" class="message-input mt-2" id="message" placeholder="무엇이 궁금하신가요?"></textarea>-->
-			<input id="message" type="text"><button type="submit" class="btn btn-dark" style="float: right;">전송</button>
+			<input id="message" type="text"><button type="submit" class="btn btn-dark" style="float: right; width: 100px">문의하기</button>
 		</div><!-- message-box -->
 	</div><!-- chat -->
 	
