@@ -299,7 +299,7 @@
 	<select id="mypagelikelist" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
 		SELECT list.auction_no, list.title, list.likes,
-	      list.status,
+	      list.status, p.base_price,
 	      p.upper_price, img.imagename, addr.simpleaddress,
 	      list.postdate, list.enddate FROM
 	      (SELECT IMG.* FROM(SELECT ROW_NUMBER()
@@ -633,7 +633,7 @@
 	
 	<!-- TOWN: comment -->
     <select id="commentSelectList" parameterType="Map" resultType="commentDTO">
-      SELECT TC.*, M.NICKNAME FROM TOWN_COMMENTS TC 
+      SELECT TC.*, M.NICKNAME,M.PROFILE_IMG FROM TOWN_COMMENTS TC 
 	  LEFT OUTER JOIN MEMBERS M 
 	  ON TC.COMMENT_USERNO = M.USERNO
 	  WHERE TC.TOWNLIST_NO = #{townlist_no} ORDER BY TC.COMMENT_POSTDATE DESC

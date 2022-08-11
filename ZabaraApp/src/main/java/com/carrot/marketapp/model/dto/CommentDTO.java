@@ -21,4 +21,5 @@ public class CommentDTO {
 	private String comment_userno;
 	private Timestamp comment_postdate;
 	private String nickname;
+	private String profile_img;
 }
