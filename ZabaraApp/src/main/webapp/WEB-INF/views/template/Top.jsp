@@ -111,16 +111,18 @@
   visibility: hidden;
   min-width: 250px;
   margin-left: -125px;
-  background-color: #85adad;
-  color: #fff;
+  background-color: #b9dbff;
+  border: 1px solid white;
+  color: #000;
   text-align: center;
-  border-radius: 20px;
-  padding: 16px;
+  border-radius: 3px;
+  padding: 5px;
   position: fixed;
   z-index: 1;
   left: 90%;
   top: 30px;
   font-size: 17px;
+  box-shadow: 12px 12px 2px 1px #00000054;
 }
 
 #snackbar.show {
@@ -628,7 +630,7 @@
 	                  if(e.data.includes('townlist_no')){
 	                     if(e.data.includes('WriteUserNO:${userno}')){
 	                        element.innerHTML = '';
-	                        element.innerHTML += '동네생활'+arr[5]+'에 댓글이 달렸어요';
+	                        element.innerHTML += '동네생활 '+arr[5]+'에 댓글이 달렸어요';
 	                        var x = document.getElementById("snackbar");
 	                        x.className = "show";
 	                        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
@@ -636,7 +638,7 @@
 	                  }else if(e.data.includes('like')){
 	                     if(e.data.includes('WriteUserNO:${userno}')){
 	                       element.innerHTML = '';
-	                        element.innerHTML += '동네생활'+arr[5]+'에 좋아요가 눌렸어요';
+	                        element.innerHTML += '동네생활 '+arr[5]+'에 좋아요가 눌렸어요';
 	                        var x = document.getElementById("snackbar");
 	                        x.className = "show";
 	                        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);

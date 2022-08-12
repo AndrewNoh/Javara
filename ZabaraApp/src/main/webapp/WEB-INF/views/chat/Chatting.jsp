@@ -175,9 +175,9 @@
                               </c:if>
                               
 	                          <c:if test="${!chatimg}" var="chatimg">
-	                              <img style="border-radius: 15px; width: 50%; float:right;" src="${pageContext.request.contextPath}/resources/assets/img/chat_img/<c:if test="${fn:contains(message.chatcontent, '이모티콘')}" var="appointed">emoji/</c:if>${message.img}"/>
+	                              <img style="border-radius: 15px; width: 50%; float:right;" src="${pageContext.request.contextPath}/resources/assets/img/chat_img/${message.img}"/>
 	                          </c:if>
-                              ${loop.count} <span style='float: right;font-size: small; margin-top:5px;'> <fmt:formatDate value="${message.sendtime}" pattern="HH:mm:ss"/></span>
+                              <span style='float: right;font-size: small; margin-top:5px;'> <fmt:formatDate value="${message.sendtime}" pattern="HH:mm:ss"/></span>
                            </div>
                         </div>
                      </c:if>
@@ -217,7 +217,7 @@
 			                              <strong>${nicknames.sendusernickname }</strong></br>${nicknames.senduserphonenumber}
 			                           </c:if></span></p></c:if>
 	                               	  <c:if test="${fn:contains(message.chatcontent, '송금 되었습니다')}" var="transfer"><p style='text-align: center;'><strong>${message.chatcontent }</strong><br/><button class='btn btn-outline-warning m-3 success' id="${loop.count} "  onclick='payCharge()'>받기</button></p></c:if>
-	                               	  <c:if test="${fn:contains(message.chatcontent, '축하합니다.낙찰되셨습니다.')}" var="successful"><img style="border-radius: 15px; width: 50%; float:left;" src="${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/낙찰되셨습니다.gif"/></br><p style='text-align: center;'><strong>${list.title}가 낙찰되었습니다.</strong></p></c:if>
+	                               	  <c:if test="${fn:contains(message.chatcontent, '축하합니다.낙찰되셨습니다.')}" var="successful"><img style="border-radius: 15px; width: 50%; float:left;" src="${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/낙찰되셨습니다.png"/></br><p style='text-align: center;'><strong>${list.title}가 낙찰되었습니다.</strong></p></c:if>
 	                               	  <c:if test="${fn:contains(message.chatcontent, '받으셨습니다.')}" var="payment"><p style='text-align: center;'><strong>${message.chatcontent }</strong></p></c:if>
 	                               	  <c:if test="${fn:contains(message.chatcontent, '약속')}" var="appointed">
 		                               	  <span><p style='text-align: center;'>
@@ -233,10 +233,10 @@
 									  <c:if test="${!phon and !appointed and !transfer and !payment and !successful and !phonOK}"><p style="text-align: center;">${message.chatcontent }</p></span></c:if>	                               	  
 		                           </c:if>
 		                           <c:if test="${!chatimg}" var="chatimg">
-		                              <img style="border-radius: 15px; width: 50%; float:left;" src="${pageContext.request.contextPath}/resources/assets/img/chat_img/<c:if test="${fn:contains(message.chatcontent, '이모티콘')}" var="appointed">emoji/</c:if>${message.img}"/>
+		                              <img style="border-radius: 15px; width: 50%; float:left;" src="${pageContext.request.contextPath}/resources/assets/img/chat_img/${message.img}"/>
 		                            </c:if>
 	                            </div>
-	                           ${loop.count} <span style='float: left;font-size: small; margin-top:5px;'> <fmt:formatDate value="${message.sendtime}" pattern="HH:mm:ss"/></span>
+	                           <span style='float: left;font-size: small; margin-top:5px;'> <fmt:formatDate value="${message.sendtime}" pattern="HH:mm:ss"/></span>
 	                         </div>
 	                      </div>
                       </c:if>
@@ -399,21 +399,21 @@
                 </div> --%>
                 
                 <div id="emoji2toggleDiv" style="display:none ">
-                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/안녕하세요.png" style="width: 90px;" alt="안녕하세요.png" class="emojis"/></a>
-                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/감사합니다.png" style="width: 90px;" alt="감사합니다.png" class="emojis"/></a>
-                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/낙찰되셨습니다.png" style="width: 90px;" alt="낙찰되셨습니다.png" class="emojis"/></a>
-                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/도착하였습니다.png" style="width: 90px;" alt="도착하였습니다.png" class="emojis"/></a>
-                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/물음표네.png" style="width: 90px;" alt="물음표네.png" class="emojis"/></a>
-                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/어디세요.png" style="width: 90px;" alt="어디세요.png" class="emojis"/></a>
-                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/예.png" style="width: 90px;" alt="예.png" class="emojis"/></a>
-                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/으에.png" style="width: 90px;" alt="으에.png" class="emojis"/></a>
-                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/잘쓸게요.png" style="width: 90px;" alt="잘쓸게요.png" class="emojis"/></a>
-                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/저주세요.png" style="width: 90px;" alt="저주세요.png" class="emojis"/></a>
-                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/죄송합니다.png" style="width: 90px;" alt="죄송합니다.png" class="emojis"/></a>
-                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/출발하였습니다.png" style="width: 90px;" alt="출발하였습니다.png" class="emojis"/></a>
-                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/하트하트.png" style="width: 90px;" alt="하트하트.png" class="emojis"/></a>
-                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/허걱.png" style="width: 90px;" alt="허걱.png" class="emojis"/></a>
-                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/화났다.png" style="width: 90px;" alt="화났다.png" class="emojis"/></a>
+                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/jabaraemoticon안녕하세요.png" style="width: 90px;" alt="jabaraemoticon안녕하세요.png" class="emojis"/></a>
+                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/jabaraemoticon감사합니다.png" style="width: 90px;" alt="jabaraemoticon감사합니다.png" class="emojis"/></a>
+                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/jabaraemoticon낙찰되셨습니다.png" style="width: 90px;" alt="jabaraemoticon낙찰되셨습니다.png" class="emojis"/></a>
+                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/jabaraemoticon도착하였습니다.png" style="width: 90px;" alt="jabaraemoticon도착하였습니다.png" class="emojis"/></a>
+                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/jabaraemoticon물음표네.png" style="width: 90px;" alt="jabaraemoticon물음표네.png" class="emojis"/></a>
+                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/jabaraemoticon어디세요.png" style="width: 90px;" alt="jabaraemoticon어디세요.png" class="emojis"/></a>
+                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/jabaraemoticon예.png" style="width: 90px;" alt="jabaraemoticon예.png" class="emojis"/></a>
+                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/jabaraemoticon으에.png" style="width: 90px;" alt="jabaraemoticon으에.png" class="emojis"/></a>
+                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/jabaraemoticon잘쓸게요.png" style="width: 90px;" alt="jabaraemoticon잘쓸게요.png" class="emojis"/></a>
+                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/jabaraemoticon저주세요.png" style="width: 90px;" alt="jabaraemoticon저주세요.png" class="emojis"/></a>
+                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/jabaraemoticon죄송합니다.png" style="width: 90px;" alt="jabaraemoticon죄송합니다.png" class="emojis"/></a>
+                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/jabaraemoticon출발하였습니다.png" style="width: 90px;" alt="jabaraemoticon출발하였습니다.png" class="emojis"/></a>
+                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/jabaraemoticon하트하트.png" style="width: 90px;" alt="jabaraemoticon하트하트.png" class="emojis"/></a>
+                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/jabaraemoticon허걱.png" style="width: 90px;" alt="jabaraemoticon허걱.png" class="emojis"/></a>
+                	<a type="button"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/jabaraemoticon화났다.png" style="width: 90px;" alt="jabaraemoticon화났다.png" class="emojis"/></a>
              	</div>
              </div>
          </div>
@@ -421,7 +421,7 @@
          <!-- 채팅버튼 -->
             <div style="display:none " class="type_msg" id="emojisub" method="post" action="<c:url value="/chat/chatting.do"><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>">
 	       		<%-- <a type="button" id="emoji1"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/개신남.png" style="width: 50px;" /></a> --%>
-               	<a type="button" id="emoji2"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/binemoji.png" style="width: 50px;"/></a>
+               	<a type="button" id="emoji2"><img src="${pageContext.request.contextPath}/resources/assets/img/chat_img/jabaraemoticonbinemoji.png" style="width: 50px;"/></a>
 	        </div>
             <div  class="type_msg" id="form" method="post" action="<c:url value="/chat/chatting.do"><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>">
                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -822,9 +822,9 @@ function uploadFile(e) {
                result=this.alt;
                var today = new Date(); 
                //console.log(result)
-               wsocket.send('서버로부터받은 img 메시지${room_no}:emoji/'+result);
+               wsocket.send('서버로부터받은 img 메시지${room_no}:'+result);
                wsocket.send('RoomNo${room_no},senduserno${senduserno},writeuserno${writeuserno},email${email}: ${userNickname.nickname }');
-                  appendMessage("<div class='outgoing_msg rowNum'><div class='sent_msg'><img  style='border-radius: 15px; width: 50%; float:right;' src='${pageContext.request.contextPath}/resources/assets/img/chat_img/emoji/"+result+"'/>"
+                  appendMessage("<div class='outgoing_msg rowNum'><div class='sent_msg'><img  style='border-radius: 15px; width: 50%; float:right;' src='${pageContext.request.contextPath}/resources/assets/img/chat_img/"+result+"'/>"
                   +"<br/><span style='float: right;font-size: small; margin-top:5px;'>"
                +today.toLocaleTimeString()+"</span></div></div>");
                   
