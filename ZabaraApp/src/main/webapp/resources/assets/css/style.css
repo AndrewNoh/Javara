@@ -352,16 +352,16 @@ section.section-show {
   padding-bottom: 45px;
 }
 /*section*/ .container {
-  background: rgb(20 19 17 / 50%);//background: rgb(97 97 97 / 86%);
+  background: rgb(86 82 75 / 50%);
   padding: 30px;
   border-radius: 20px;
   }
   .main_container {
   background:  #fff transparent ;
-  //margin-left: 600px;
   padding: 30px;
   border-radius: 20px;
   }
+  
   
 @media (max-width: 768px) {
   section {
@@ -1282,7 +1282,7 @@ section.section-show {
   left: 0;
   z-index: 1;
   background: url(../img/bg.png) no-repeat 0 0;
-	 
+    
   -webkit-filter: blur(30px);
           filter: blur(30px);
   -webkit-transform: scale(1.2);
@@ -1309,7 +1309,7 @@ section.section-show {
     padding: 5px 30px;
     margin: 5px 5px 5px 0px;
     border: 1px solid #0070ff;
-	color: #0070ff;;
+   color: #0070ff;;
     border-radius: 10px;
 }
 
@@ -1356,7 +1356,7 @@ input[type="range"]::-webkit-slider-thumb {
   border: 3px solid #0070ff;
   z-index: 3;
   cursor: pointer; 
-	content: counter(3)
+   content: counter(3)
 }
 
 

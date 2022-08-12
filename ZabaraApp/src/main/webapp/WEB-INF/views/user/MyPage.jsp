@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+   uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c555a840bf745a014ceca0ca9d9dd35&libraries=services"></script>
@@ -17,84 +17,93 @@
 
 
 <style>
+
+body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+
 #mapwrap {
-	position: relative;
-	overflow: hidden;
+   position: relative;
+   overflow: hidden;
 }
 
 .category, .category * {
-	margin: 0;
-	padding: 0;
-	color: #000;
+   margin: 0;
+   padding: 0;
+   color: #000;
 }
 
 .category {
-	position: absolute;
-	overflow: hidden;
-	top: 10px;
-	left: 10px;
-	width: auto;
-	height: 50px;
-	z-index: 10;
-	border: none;
-	text-align: center;
+   position: absolute;
+   overflow: hidden;
+   top: 10px;
+   left: 10px;
+   width: auto;
+   height: 50px;
+   z-index: 10;
+   border: none;
+   text-align: center;
 }
 
 .category button {
-	list-style: none;
-	float: left;
-	width: 50px;
-	height: 50px;
-	padding-top: 5px;
-	border-radius: 50%;
-	font-size: 14px;
-	color: #ffffff;
-	cursor: pointer;
+   list-style: none;
+   float: left;
+   width: 50px;
+   height: 50px;
+   padding-top: 5px;
+   border-radius: 50%;
+   font-size: 14px;
+   color: #ffffff;
+   cursor: pointer;
 }
 
 .category button {
-	list-style: none;
-	float: left;
-	width: 50px;
-	height: 50px;
-	padding-top: 5px;
-	border-radius: 50%;
-	font-size: 14px;
-	color: #ffffff;
-	cursor: pointer;
+   list-style: none;
+   float: left;
+   width: 50px;
+   height: 50px;
+   padding-top: 5px;
+   border-radius: 50%;
+   font-size: 14px;
+   color: #ffffff;
+   cursor: pointer;
 }
 
 .nav-link {
-	color: #f9fafb;
+   color: #f9fafb;
 }
 
 .bAddr {
-	color: black;
-	width: 200px;
-	height: 60px;
-	padding: 5px;
+   color: black;
+   width: 200px;
+   height: 60px;
+   padding: 5px;
 }
 
 #myPay {
-	margin-left: 5px;
-	border: none;
-	background: transparent;
+   margin-left: 5px;
+   border: none;
+   background: transparent;
 }
 
 .swal2-popup {
-	font-size: 1.3rem !important;
+   font-size: 1.3rem !important;
 }
 
 .bi::before, [class^="bi-"]::before, [class*=" bi-"]::before {
-	
+   
 }
 
 .col-lg-5 {
-	display: flex;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+   display: flex;
+   flex-wrap: nowrap;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
 }
 .msg-bubble {
   max-width: 450px;
@@ -168,12 +177,11 @@ No license, 100% free to use.
 }
 
 .card {
-  margin-left: 800px;
   position: relative;
   padding: 48px 24px;
   z-index: 4;
-  max-height: 400px;
-  height: 90vh;
+  margin-left: 600px;
+  height: 850px;
   max-width: 500px;
   width: 90%;
   overflow-x: hidden;
@@ -187,7 +195,7 @@ No license, 100% free to use.
   margin-bottom: 32px;
   margin-top: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 .card .header .title {
@@ -501,210 +509,231 @@ No license, 100% free to use.
   background-clip: padding-box;
 }
 
-
-body {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+.profile-pic {
+   width: 360px; 
+   height: 360px;
+   display: flex;
+   
 }
-body::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
+
+.file-upload {
+   display: none;
+}
+
+.modal-backdrop.show{
+   opacity: .4;
 }
 </style>
 
 <!-- ======= About Me ======= -->
 <div class="neonborder m-5">
-	<div class="about-me container">
+   <div class="about-me container">
 
-		<div class="section-title">
-			<h2>나의 자바라</h2>
-		</div>
+      <div class="section-title">
+         <h2>나의 자바라</h2>
+      </div>
 
-		<div class="row">
-			<div class="col-lg-5 box" data-aos="fade-right">
-				<div>
-					<img
-						src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${profileimage}"
-						class="img-fluid profile-photo" alt="이미지"
-						style="object-fit: cover; width: 400px; max-height: 400px; border-radius: 50%">
-					<input class="file-upload" type="file" accept=".jpg, .png, .jpeg"
-						name="profileimg" id="profileimg" style="display: none;" />
-				</div>
-				<div id="changeProfileBtn" class="text-center m-2"
-					style="display: none;">
-					<a class="btn btn-light"
-						style="border-radius: 0.5em; padding: 5px 20px;"
-						saveBtn" onclick="saveChangedProfile()">저장</a> <a
-						class="btn btn-light"
-						style="border-radius: 0.5em; padding: 5px 20px;"
-						reset" id="cancelBtn">취소</a>
-				</div>
-			</div>
-			<div class="col mb-3">
-				<div class="col-lg-12 pt-3 pt-lg-0 content" data-aos="fade-left">
-					<div class="row m-2">
-						<div class="col" style="padding: 0%;">
-							<h3 class="mt-2" style="font-size: 30px;">
-								<strong>${nickname}</strong>
-							</h3>
-						</div>
-						<div class="col-8" style="padding: 0%;">
-							<a href="<c:url value="/userinfo/editmember.do"/>"
-								class="setting"><i class="bi bi-gear"
-								style="font-size: 1.4rem; magrin-right: 40px; color: #ffc107;"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-lg-7">
-						<p style="font-weight: bold;">
-							<i class="bi bi-envelope"
-								style="font-size: 16px; margin-left: 10px; color: #ffc107;"></i>
-							&nbsp; <span>${email}</span>
-						</p>
-						<p>
-							<i class="bi bi-telephone"
-								style="font-size: 16px; margin-left: 10px; color: #ffc107;"></i>
-							&nbsp; <span>${phonenumber}</span>
-						</p>
-						<p>
-							<i class="bi bi-house"
-								style="font-size: 16px; margin-left: 10px; color: #ffc107;"></i>
-							&nbsp; <span id="myAddress">${address}</span>
-						</p>
-					</div>
-				</div>
+      <div class="row">
+         <div class="col-lg-5 box" data-aos="fade-right">
+            <div>
+               <img
+                  src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${profileimage}"
+                  class="img-fluid profile-photo" alt="이미지"
+                  style="object-fit: cover; border-radius: 50%; margin-bottom:30px; width: 380px; height: 380px;">
+               <input class="file-upload" type="file" accept=".jpg, .png, .jpeg"
+                  name="profileimg" id="profileimg" style="display: none;" />
+            </div>
+            <div id="changeProfileBtn" class="text-center m-2"
+               style="display: none;">
+               <a class="btn btn-light"
+                  style="border-radius: 0.5em; padding: 5px 20px;"
+                  saveBtn" onclick="saveChangedProfile()">저장</a> <a
+                  class="btn btn-light"
+                  style="border-radius: 0.5em; padding: 5px 20px;"
+                  reset" id="cancelBtn">취소</a>
+            </div>
+         </div>
+         <div class="col mb-3" style=" display: flex; flex-direction: column; justify-content: flex-end;">
+            <div class="col-lg-12 pt-3 pt-lg-0 content" data-aos="fade-left">
+               <div class="row m-2" style="display: flex;align-items: center;">
+                  <div class="col" style="padding: 0%;margin-top:40px;">
+                     <h3 class="mt-2" style="font-size: 45px; ">
+                        <strong>${nickname}</strong>
+                     </h3>
+                  </div>
+                  <div class="col-8" style="padding: 0%;">
+                     <a href="#" data-target="#editModal" data-toggle="modal" id="modal-open"
+                        class="setting"><img style="width: 25px;margin-top: 30px;"src="${pageContext.request.contextPath}/resources/assets/img/pencil1.png" ></a>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+            </div>
+            <div class="counts container">
+               <div class="row">
+                  <div class="col-lg-4 col-md-1">
+                     <a class="nav-link" href="<c:url value="/userinfo/selllist.do"/>">
+                        <div class="count-box" style="padding: 10px 0;">
+                           <i class="bi bi-emoji-smile" style="color: #ffedb8;"></i> <span
+                              data-purecounter-start="0" data-purecounter-end="${sellCount}"
+                              data-purecounter-duration="1" class="purecounter"></span>
+                           <p>판매내역</p>
+                        </div>
+                     </a>
+                  </div>
 
-				<div class="counts container">
+                  <div class="col-lg-4 col-md-1 ">
+                     <a class="nav-link"
+                        href="<c:url value="/userinfo/purchaselist.do"/>">
+                        <div class="count-box" style="padding: 10px 0;">
+                           <i class="bi bi-journal-richtext" style="color: #86bcf6;"></i>
+                           <span data-purecounter-start="0"
+                              data-purecounter-end="${buyCount}"
+                              data-purecounter-duration="1" class="purecounter"></span>
+                           <p>구매내역</p>
+                        </div>
+                     </a>
+                  </div>
 
-					<div class="row">
-						<div class="col-lg-4 col-md-1">
-							<a class="nav-link" href="<c:url value="/userinfo/selllist.do"/>">
-								<div class="count-box" style="padding: 10px 0;">
-									<i class="bi bi-emoji-smile" style="color: #ffedb8;"></i> <span
-										data-purecounter-start="0" data-purecounter-end="${sellCount}"
-										data-purecounter-duration="1" class="purecounter"></span>
-									<p>판매내역</p>
-								</div>
-							</a>
-						</div>
+                  <div class="col-lg-4 col-md-1">
+                     <a class="nav-link" href="<c:url value="/userinfo/likelist.do"/>">
+                        <div class="count-box" style="padding: 10px 0;">
+                           <i class="bi bi-heart" style="color: #ff4141;"></i> <span
+                              data-purecounter-start="0" data-purecounter-end="${likeCount}"
+                              data-purecounter-duration="1" class="purecounter"></span>
+                           <p>찜목록</p>
+                        </div>
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
 
-						<div class="col-lg-4 col-md-1 ">
-							<a class="nav-link"
-								href="<c:url value="/userinfo/purchaselist.do"/>">
-								<div class="count-box" style="padding: 10px 0;">
-									<i class="bi bi-journal-richtext" style="color: #86bcf6;"></i>
-									<span data-purecounter-start="0"
-										data-purecounter-end="${buyCount}"
-										data-purecounter-duration="1" class="purecounter"></span>
-									<p>구매내역</p>
-								</div>
-							</a>
-						</div>
+   <!-- 회원수정 모달 -->
+   <div id="editModal" class="modal" style="justify-content: center;">
+      <div class="card">
+            <form>
+                <div class="header">
+                    <h1 class="title text-bold">회원수정</h1>
+                </div>
+                <div class="content">
+                      <div class="form-group" style="justify-content:center;">
+                     <img class="profile-pic" 
+                        src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${profileimage}" style="object-fit: cover; width: 300px; height: 300px;border-radius: 50%; margin-left: 80px;">
+                     <input class="file-upload" type="file" accept=".jpg, .png, .jpeg"
+                        name="profileimg" id="profileimg"/>
+                     <div class="mb-4">&nbsp</div>
+                  </div>
+                    <div class="input-group">
+                        <input type="text" name="nickname" id="input-text" class="input-text" value="${nickname}" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" name="password" id="input-text" class="input-text" value="${pwd}" required>
+                    </div>                 
+                    <div class="input-group">
+                        <input type="text" name="email" id="input-text" class="input-text" value="${email}" required readonly>
+                    </div> 
+                    <div class="input-group">
+                        <input type="text" name="fulladdress" id="input-text" class="input-text" value="${address}" required>
+                    </div> 
+                    <div class="input-group upload-submit">
+                        <button type="submit" class="btn-submit"><span class="text-bold">수정</span><span class="fa fa-arrow-right"></span></button>
+                    </div>
+                </div>
+            </form>
+            <div class="line-break"></div>
+        </div>
+   </div>
 
-						<div class="col-lg-4 col-md-1">
-							<a class="nav-link" href="<c:url value="/userinfo/likelist.do"/>">
-								<div class="count-box" style="padding: 10px 0;">
-									<i class="bi bi-heart" style="color: #ff4141;"></i> <span
-										data-purecounter-start="0" data-purecounter-end="${likeCount}"
-										data-purecounter-duration="1" class="purecounter"></span>
-									<p>찜목록</p>
-								</div>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- End Skills -->
-		<!-- 자바라 페이 -->
-		<div class="row">
-			<div class="col-5">
-				<div class="pay container" style="display: flex; flex-direction:column;">
-					<div class="section-title">
-						<h2>자바라 페이</h2>
-					</div>
-					<div class="mt-2">
-						<img
-							src="${pageContext.request.contextPath}/resources/assets/img/pay_logo.png"
-							style="height: 60px; margin-right: 10px" /> <span id="myPay"
-							style="color: #fff; font-size: 35px; vertical-align: bottom"></span>
-						<div style="float: right; margin-top: 20px">
-							<select class="btn btn-outline-warning btn-s my-2"
-								style="font-size: 12px; font-weight: bold; color: #fff; margin-top: 10px"
-								data-toggle="dropdown;" id="pay">
-								<option value="5000">충전 금액 5,000 원</option>
-								<option value="10000">충전 금액 10,000 원</option>
-								<option value="20000">충전 금액 20,000 원</option>
-								<option value="30000">충전 금액 30,000 원</option>
-								<option value="40000">충전 금액 40,000 원</option>
-								<option value="50000">충전 금액 50,000 원</option>
-							</select>
-							<button onclick="payService()" type="button"
-								class="btn btn-dark my-2"
-								style="width: auto; margin-left: 10px; font-size: 12px">충전하기</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- 자바라 페이 -->
+      <!-- End Skills -->
+          <!-- 자바라 페이 -->
+    <div class="row">
+         <div class="col-5">
+            <div class="pay container " style="padding: 30px 30px 58px 30px;">
+               <div class="section-title">
+                  <h2>자바라 페이</h2>
+               </div>
+               <div class="mb-3 mt-5">
+                  <img src="${pageContext.request.contextPath}/resources/assets/img/pay_logo.png" style="height: 60px; margin-right: 10px"/>
+                   <span id="myPay" style="color:#fff; font-size: 35px; vertical-align: bottom; margin-top:50px;" ></span>
+                   <div style="float: right; margin-top: 50px; " >
+                      <select class="btn btn-outline-warning btn-s mb-2"  
+                              style="font-size: 12px; font-weight: bold; color: #fff; margin-top: 10px" data-toggle="dropdown;" id="pay" >
+                          <option value="5000">충전 금액 5,000 원</option>
+                          <option value="10000">충전 금액 10,000 원</option>
+                          <option value="20000">충전 금액 20,000 원</option>
+                          <option value="30000">충전 금액 30,000 원</option>
+                          <option value="40000">충전 금액 40,000 원</option>
+                          <option value="50000">충전 금액 50,000 원</option>
+                      </select>                     
+                      <button onclick="payService()" type="button" class="btn btn-dark mb-2" style="width: auto;  margin-top: 10px; margin-left:10px; font-size: 12px">충전하기</button>
+                      <!-- 
+                      <button onclick="payWithdraw()" type="button" class="btn btn-dark mb-2" style="width: auto;  margin-left:10px; font-size: 12px">출금하기</button>
+                       -->
+                   </div>
+                </div>      
+            </div>
+         </div>
+         <!-- 자바라 페이 -->
 
 
 
-			<!-- 나의 활동 -->
-			<div class="col-7">
-				<div class="interests container">
-					<div class="section-title">
-						<h2 style="margin-bottom: 30px;">나의 활동</h2>
-					</div>
-					<div class="row">
-							<div class="col-lg-4 col-md-4 mt-4 mt-md-1">
-								<div class="icon-box" id="MapToggle">
-									<i class="bi bi-map" style="color: #46a111;"></i>
-									<h3> 동네 인증</h3>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 mt-4 mt-md-1">
-								<div class="icon-box" id="KeyToggle">
-									<i class="bi bi-bell-fill" style="color: #4c85fc;"></i>
-									<h3>  &nbsp;&nbsp;알 림</h3>
-								</div>
-							</div>
+         <!-- 나의 활동 -->
+         <div class="col-7">
+            <div class="interests container">
+               <div class="section-title">
+                  <h2 style="margin-bottom: 30px;">나의 활동</h2>
+               </div>
+               
+                  <div class="row">
+                     <div class="col-lg-4 col-md-4 mt-4 mt-md-1">
+                        <div class="icon-box" id="MapToggle">
+                           <i class="bi bi-map" style="color: #46a111;"></i>
+                           <h3> 동네 인증</h3>
+                        </div>
+                     </div>
+                     <div class="col-lg-4 col-md-4 mt-4 mt-md-1">
+                        <div class="icon-box" id="ChatToggle">
+                           <i class="bi bi-bell" style="color: #5215ff;"></i>
+                           <h3>  &nbsp;&nbsp;알 림</h3>
+                        </div>
+                     </div>
 
-							<div class="col-lg-4 col-md-4 mt-4 mt-md-1">
-								<div class="icon-box" id="AccountBookToggle">
-									<i class="bi bi-calculator-fill" style="color: #de83d3;"></i>
-									<h3>  &nbsp;가계부</h3>
-								</div>
-							</div>
-							<span style="margin-bottom: 20px;"></span>
-						</div>
-						<div class="row">
-							<div class="col-lg-4 col-md-4 ">
-								<div class="icon-box" id="categoryToggle">
-									<i class="ri-gradienter-line" style="color: #ffa76e;"></i>
-									<h3> 카테고리</h3>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-4">
-								<div class="icon-box" id="temperatureToggle">
-									<i class="bi bi-star" style="color: #ffbb2c;"></i>
-									<h3>  &nbsp;&nbsp;별 점</h3>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-4">
-								<div class="icon-box" id="ChatToggle">
-									<i class="bi bi-chat-left-dots" style="color: #9cbeff;"></i>
-									<h3>  &nbsp;&nbsp;채 팅</h3>
-								</div>
-							</div>
-						</div>
-					
-				</div>
-			</div>
-			<!-- 나의 활동 -->
+                     <div class="col-lg-4 col-md-4 mt-4 mt-md-1">
+                        <div class="icon-box" id="AccountBookToggle">
+                           <i class="bi bi-calculator-fill" style="color: #de83d3;"></i>
+                           <h3>  &nbsp;가계부</h3>
+                        </div>
+                     </div>
+                     <span style="margin-bottom: 20px;"></span>
+                  </div>
+                  <div class="row">
+                     <div class="col-lg-4 col-md-4 ">
+                        <div class="icon-box" id="categoryToggle">
+                           <i class="ri-gradienter-line" style="color: #ffa76e;"></i>
+                           <h3> 카테고리</h3>
+                        </div>
+                     </div>
+                     <div class="col-lg-4 col-md-4">
+                        <div class="icon-box" id="temperatureToggle">
+                           <i class="bi bi-star" style="color: #ffbb2c;"></i>
+                           <h3>  &nbsp;&nbsp;별 점</h3>
+                        </div>
+                     </div>
+                     <div class="col-lg-4 col-md-4">
+                        <div class="icon-box" id="chatToggle">
+                           <i class="bi bi-chat-left-dots" style="color: #9cbeff;"></i>
+                           <h3>  &nbsp;&nbsp;채 팅</h3>
+                        </div>
+                     </div>
+                  </div>
+               
+            </div>
+         </div>
+         <!-- 나의 활동 -->
 
-		<div class="col-12 mt-3" id="KeyToggleDiv" style="display: none">
+      <div class="col-12 mt-3" id="KeyToggleDiv" style="display: none">
             <div class="interests container">
                <div class="section-title">
                   <h2 style="margin-bottom: 30px;">알림 자바라</h2>
@@ -714,192 +743,192 @@ body::-webkit-scrollbar {
                      <div class="icon-box">
                       <div class="col" style="display: flex; align-items: center;">
                        <i class="ri-calendar-todo-line" style="color: #ffbb2c;"></i>
-                         	<h3>알림 내역</h3>
+                            <h3>알림 내역</h3>
                       </div>
                         <div class="col-10 content" style="display: flex;">
-                        	<div class="col">
-	                        	<div class="section-title">
-				                  <h2 style="margin-bottom: 30px;">채팅알림</h2>
-				               </div>
-		                     	<c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
-					             <a  href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
-					                 <c:forEach var="unreadcount" items="${unreadcount}" varStatus="loop">
-										<c:if test="${chatlist.room_no eq  unreadcount.room_no}"> 
-											<c:if test="${unreadcount.unreadcount >0}">
-											<h3 class="mb-2"><i class="bi bi-chevron-right" style="color: yellow; font-size: 15px;"></i>
-						                    <c:if test="${nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
-						                    <c:if test="${nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>
-						                        님께 채팅이 왔어요
-							                </h3>
-						                  	</c:if>
-										</c:if> 
-									</c:forEach> 
-					               </a>
-				                </c:forEach>
-			                </div>
-			                <div class="col">
-			                   <div class="section-title">
-				                  <h2 style="margin-bottom: 30px;">낙찰알림</h2>
-				               </div>
-		                     	<c:forEach var="participationList" items="${participationList}" varStatus="loop">
-										<c:if test="${participationList.status eq  'END'}"> 
-										<a href="<c:url value="/board/auctionview.do"><c:param value="${participationList.auction_no}" name="no"/></c:url>" 
-										rel="lyteframe" data-gallery="portfolioDetailsGallery" id="view${loop.count}" data-glightbox="type: external" 
-										class="portfolio-details-lightbox" title="Portfolio Details">
-											<h3 class="mb-2"><i class="bi bi-chevron-right" style="color: #00d4ff; font-size: 15px;"></i>
-						                       ${participationList.title}이(가) 낙찰되었어요
-							                </h3></a>
-						                </c:if>
-				                </c:forEach>
-			                </div>
+                           <div class="col">
+                              <div class="section-title">
+                              <h2 style="margin-bottom: 30px;">채팅알림</h2>
+                           </div>
+                              <c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
+                            <a  href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
+                                <c:forEach var="unreadcount" items="${unreadcount}" varStatus="loop">
+                              <c:if test="${chatlist.room_no eq  unreadcount.room_no}"> 
+                                 <c:if test="${unreadcount.unreadcount >0}">
+                                 <h3 class="mb-2"><i class="bi bi-chevron-right" style="color: yellow; font-size: 15px;"></i>
+                                      <c:if test="${nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
+                                      <c:if test="${nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>
+                                          님께 채팅이 왔어요
+                                     </h3>
+                                       </c:if>
+                              </c:if> 
+                           </c:forEach> 
+                              </a>
+                            </c:forEach>
+                         </div>
+                         <div class="col">
+                            <div class="section-title">
+                              <h2 style="margin-bottom: 30px;">낙찰알림</h2>
+                           </div>
+                              <c:forEach var="participationList" items="${participationList}" varStatus="loop">
+                              <c:if test="${participationList.status eq  'END'}"> 
+                              <a href="<c:url value="/board/auctionview.do"><c:param value="${participationList.auction_no}" name="no"/></c:url>" 
+                              rel="lyteframe" data-gallery="portfolioDetailsGallery" id="view${loop.count}" data-glightbox="type: external" 
+                              class="portfolio-details-lightbox" title="Portfolio Details">
+                                 <h3 class="mb-2"><i class="bi bi-chevron-right" style="color: #00d4ff; font-size: 15px;"></i>
+                                         ${participationList.title}이(가) 낙찰되었어요
+                                     </h3></a>
+                                  </c:if>
+                            </c:forEach>
+                         </div>
                         </div>
                      </div>
                   </div>
                </div>
             </div>
          </div>
-			<!-- 가계부 시작 -->
-			<div class="col mt-3" id="AccountBookToggleDiv" style="display: none">
-				<div class="interests container">
-					<div class="section-title">
-						<h2 style="margin-bottom: 30px;">가계부 자바라</h2>
-					</div>
-					<div class="row">
-						<div class="row">
-							<div class="col-lg-12 col-md-6 mt-4 ">
-								<div class="accountBook"
-									style="display: flex; justify-content: start;">
-									<span><i class="bi bi-graph-up-arrow"
-										style="color: #d77566; font-size: 3rem;"></i></span>&nbsp;&nbsp; <span
-										style="font-size: 25px; margin-top:10px">판매건수</span>&nbsp;&nbsp;&nbsp;
-									<div class="items" style="font-size: 25px;"></div>
-								</div>
-							</div>
-							<div class="col-lg-12 col-md-6 mt-4">
-								<div class="accountBook"
-									style="display: flex; justify-content: start;">
-									<span><i class="bi bi-currency-dollar"
-										style="color: #ffd500; font-size: 3rem;"></i></span>&nbsp;&nbsp; <span
-										style="font-size: 25px;margin-top:10px">판매금액</span>&nbsp;&nbsp;&nbsp;
-									<div class="total" style="font-size: 25px;"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- 가계부 끝 -->
+         <!-- 가계부 시작 -->
+         <div class="col mt-3" id="AccountBookToggleDiv" style="display: none">
+            <div class="interests container">
+               <div class="section-title">
+                  <h2 style="margin-bottom: 30px;">가계부 자바라</h2>
+               </div>
+               <div class="row">
+                  <div class="row">
+                     <div class="col-lg-12 col-md-6 mt-4 ">
+                        <div class="accountBook"
+                           style="display: flex; justify-content: start;">
+                           <span><i class="bi bi-graph-up-arrow"
+                              style="color: #d77566; font-size: 3rem;"></i></span>&nbsp;&nbsp; <span
+                              style="font-size: 25px; margin-top:10px">판매건수</span>&nbsp;&nbsp;&nbsp;
+                           <div class="items" style="font-size: 25px;"></div>
+                        </div>
+                     </div>
+                     <div class="col-lg-12 col-md-6 mt-4">
+                        <div class="accountBook"
+                           style="display: flex; justify-content: start;">
+                           <span><i class="bi bi-currency-dollar"
+                              style="color: #ffd500; font-size: 3rem;"></i></span>&nbsp;&nbsp; <span
+                              style="font-size: 25px;margin-top:10px">판매금액</span>&nbsp;&nbsp;&nbsp;
+                           <div class="total" style="font-size: 25px;"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- 가계부 끝 -->
 
-			<div class="col mt-3" id="MapToggleDiv" style="display: none">
-				<form id="simpleChangeAddr" method="post"
-					action="<c:url value="/userinfo/simpleChangeAddr.do"/>">
-					<sec:csrfInput />
-					<input id="myPageAddr" name="myPageAddr" type="hidden" value="">
-				</form>
-				<div class="interests container">
-					<div class="section-title">
-						<div class="section-title">
-							<h2 style="margin-bottom: 30px;">동네 인증</h2>
-						</div>
-						자바라마켓은 우리 동네 이웃과 교류할 수 있는 서비스입니다. <br /> 자바라마켓 서비스를 이용하려면 동네 이웃임을
-						확인하기 위해 동네인증을 꼭 해주셔야 해요. <br /> <br />
-						<div id="mapwrap">
-							<div id="map" style="width: 1200px; height: 800px;"></div>
-							<div class="category">
-								<ul>
-									<button onclick="search_map()" type="button"
-										class="btn btn-dark" style="margin-right: 10px; width: 80px">검색</button>
-									<button onclick="nowGeo()" type="button" class="btn btn-dark"
-										style="margin-right: 10px; width: 80px">현위치</button>
-									<button onclick="saveMarkerPosition()" type="button"
-										class="btn btn-dark" style="width: 80px">동네 인증</button>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-<!-- 온도 -->
-			<div class="col mt-3" id="temperatureToggleDiv" style="display: none">
-				<div class="row">
-					<div class="skills container col">
-						<div class="section-title">
-							<h2>나의 별점</h2>
-						</div>
-						<div class="row skills-content">  
-						<div style="padding:10px 0px 20px 0px;">
-							 <div class="col-2"><h3 class="title text-bold">별점</h3></div>      
-			                    <div class="col header">
-				                        <div class="rating col mt-1">
-				                            <label for="rate-5" class="fa fa-star" id="1"></label>
-				                            <label for="rate-4" class="fa fa-star" id="2"></label> 
-				                            <label for="rate-3" class="fa fa-star" id="3"></label> 
-				                            <label for="rate-2" class="fa fa-star" id="4"></label> 
-				                            <label for="rate-1" class="fa fa-star" id="5"></label> 
-				                        </div>
-			                    </div>
-		                   </div>
-								<div>
-									<div class="testimonial-item row" id="reviewContent">
-										<div>
-										<h3 class="title text-bold">후기</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+         <div class="col mt-3" id="MapToggleDiv" style="display: none">
+            <form id="simpleChangeAddr" method="post"
+               action="<c:url value="/userinfo/simpleChangeAddr.do"/>">
+               <sec:csrfInput />
+               <input id="myPageAddr" name="myPageAddr" type="hidden" value="">
+            </form>
+            <div class="interests container">
+               <div class="section-title">
+                  <div class="section-title">
+                     <h2 style="margin-bottom: 30px;">동네 인증</h2>
+                  </div>
+                  자바라마켓은 우리 동네 이웃과 교류할 수 있는 서비스입니다. <br /> 자바라마켓 서비스를 이용하려면 동네 이웃임을
+                  확인하기 위해 동네인증을 꼭 해주셔야 해요. <br /> <br />
+                  <div id="mapwrap">
+                     <div id="map" style="width: 1200px; height: 800px;"></div>
+                     <div class="category">
+                        <ul>
+                           <button onclick="search_map()" type="button"
+                              class="btn btn-dark" style="margin-right: 10px; width: 80px">검색</button>
+                           <button onclick="nowGeo()" type="button" class="btn btn-dark"
+                              style="margin-right: 10px; width: 80px">현위치</button>
+                           <button onclick="saveMarkerPosition()" type="button"
+                              class="btn btn-dark" style="width: 80px">동네 인증</button>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+            <!-- 온도 -->
+         <div class="col mt-3" id="temperatureToggleDiv" style="display: none">
+            <div class="row">
+               <div class="skills container col">
+                  <div class="section-title">
+                     <h2>나의 별점</h2>
+                  </div>
+                  <div class="row skills-content">  
+                  <div style="padding:10px 0px 20px 0px;">
+                      <div class="col-2"><h3 class="title text-bold">별점</h3></div>      
+                             <div class="col header">
+                                    <div class="rating col mt-1">
+                                        <label for="rate-5" class="fa fa-star" id="1"></label>
+                                        <label for="rate-4" class="fa fa-star" id="2"></label> 
+                                        <label for="rate-3" class="fa fa-star" id="3"></label> 
+                                        <label for="rate-2" class="fa fa-star" id="4"></label> 
+                                        <label for="rate-1" class="fa fa-star" id="5"></label> 
+                                    </div>
+                             </div>
+                         </div>
+                        <div>
+                           <div class="testimonial-item row" id="reviewContent">
+                              <div>
+                              <h3 class="title text-bold">후기</h3>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
 
-				</div>
+            </div>
 
             <div class="col-12 mt-3" id="ChatToggleDiv" style="display: none">
                   <div class="testimonials container mt-3">
                      <div class="section-title">
                         <h2 style="margin-bottom: 30px;">나의 채팅</h2>
-			         </div>
-			         <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-			           <div class="swiper-wrapper">
-			             <c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
-			             <div class="swiper-slide">
-			             <a href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.product_no}" name="product_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
-			               <div class="testimonial-item">
-			                 <p style="height: 200px;  display: flex; align-items: center; justify-content: center;">
-			                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-			                     ${chatlist.chatcontent} <i
-			                        class="bx bxs-quote-alt-right quote-icon-right"></i>
-			                  </p>
-			                  <c:if test="${nickname eq chatlist.writeusernickname }"><img class="testimonial-img" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.senduserprofileimg}" alt="sunil"></c:if>
-                           	  <c:if test="${nickname ne chatlist.writeusernickname }"><img class="testimonial-img" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.writeuserprofileimg}" alt="sunil"></c:if>
-			                  <h3>
-			                     <c:if
-			                        test="${nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
-			                     <c:if
-			                        test="${nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>
-			                  </h3>
-			                  <h4><fmt:formatDate value="${chatlist.sendtime}" pattern="yyyy년 MM월 dd일"/></h4>
-			               </div>
-			               </a>
-			             </div>
-			               </c:forEach>
-			           </div>
-			           <div class="swiper-pagination"></div>
-			         </div>
-			         <div class="owl-carousel testimonials-carousel"></div>
-			       </div>
-			      </div>
-  			 </div>
-		</div>
-			
-			
-				
-			</div>
-		</div>
-	</div>
+                  </div>
+                  <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+                    <div class="swiper-wrapper">
+                      <c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
+                      <div class="swiper-slide">
+                      <a href="<c:url value="/chat/chatting.do"><c:param value="${chatlist.townlist_no}" name="townlist_no"/><c:param value="${chatlist.product_no}" name="product_no"/><c:param value="${chatlist.auction_no}" name="auction_no"/><c:param value="${chatlist.userno}" name="writeuserno"/><c:param value="${chatlist.nickname}" name="wirtenickName"/></c:url>">
+                        <div class="testimonial-item">
+                          <p style="height: 200px;  display: flex; align-items: center; justify-content: center;">
+                              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                              ${chatlist.chatcontent} <i
+                                 class="bx bxs-quote-alt-right quote-icon-right"></i>
+                           </p>
+                           <c:if test="${nickname eq chatlist.writeusernickname }"><img class="testimonial-img" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.senduserprofileimg}" alt="sunil"></c:if>
+                                <c:if test="${nickname ne chatlist.writeusernickname }"><img class="testimonial-img" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.writeuserprofileimg}" alt="sunil"></c:if>
+                           <h3>
+                              <c:if
+                                 test="${nickname eq chatlist.writeusernickname }"> ${chatlist.sendusernickname} </c:if>
+                              <c:if
+                                 test="${nickname ne chatlist.writeusernickname }"> ${chatlist.writeusernickname} </c:if>
+                           </h3>
+                           <h4><fmt:formatDate value="${chatlist.sendtime}" pattern="yyyy년 MM월 dd일"/></h4>
+                        </div>
+                        </a>
+                      </div>
+                        </c:forEach>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                  </div>
+                  <div class="owl-carousel testimonials-carousel"></div>
+                </div>
+               </div>
+            </div>
+      </div>
+         
+         
+            
+         </div>
+      </div>
+   </div>
 
 
 
-	<!-- 토글 클릭 이벤트 -->
-	<script type="text/javascript">
+   <!-- 토글 클릭 이벤트 -->
+   <script type="text/javascript">
       $(function() {
           $("#AccountBookToggle").click(function() {
              $("#AccountBookToggleDiv").toggle(1000);
@@ -911,11 +940,11 @@ body::-webkit-scrollbar {
                         url: '<c:url value="/userinfo/accountbook.do"/>',
                         data:{'${_csrf.parameterName}' : "${_csrf.token}"},
                         success: function(result){
-                        	var re = JSON.parse(result);
-                        	console.log(re.items);
-                        	console.log(re.total);
-                        		$('.items').html(re.items+"건").css("margin-top", "10px");
-                        		$('.total').html(re.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원").css("margin-top", "10px");
+                           var re = JSON.parse(result);
+                           console.log(re.items);
+                           console.log(re.total);
+                              $('.items').html(re.items+"건").css("margin-top", "10px");
+                              $('.total').html(re.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원").css("margin-top", "10px");
                         }
                      }
                   )
@@ -953,34 +982,35 @@ body::-webkit-scrollbar {
                            type : "POST",
                            url: '<c:url value="/mypage/review_return.do"/>',
                            data:{'${_csrf.parameterName}' : "${_csrf.token}",
-                        		'userno' : ${userno}  
+                              'userno' : ${userno}  
                            },
                            success: function(result){
-                        	   console.log("result",result);
-                        	   var starAvg = 0;
-                        	   //var html = "<div class='row'>";
-                        	   result.forEach(function (el, index) {
-                        		   starAvg += el.review_star;
-                        		   console.log("stars"+ index +" : " + el.review_star);
-                        		   console.log("text : " + el.review_content);
+                              console.log("result",result);
+                              $('.starRe').remove();
+                              var starAvg = 0;
+                              //var html = "<div class='row'>";
+                              result.forEach(function (el, index) {
+                                 starAvg += el.review_star;
+                                 console.log("stars"+ index +" : " + el.review_star);
+                                 console.log("text : " + el.review_content);
 
-                        			html =  '<div class="col" style="background: rgba(255, 255, 255, 0.08);align-items: center; padding: 10px; margin-right:20px;border-radius: 10px;">'+
-	                        			    '<span style="height: 100px; display: flex; align-items: center; justify-content: center;">'+
-	                        			    ' <i class="bx bxs-quote-alt-left quote-icon-left"></i>'
-	                        			       +el.review_content+ '<i class="bx bxs-quote-alt-right quote-icon-right"></i>'+
-	                        			     '</span>'+
-	                        			     '<div>';
-                        			    
-                        			 $("#reviewContent").append(html);
-                        	   });
-                        	   //html += "</div>";
-								starAvg=parseInt(starAvg / result.length);
-								for(var i=starAvg; i> 0; i-- ){
-									$('#'+i).css("color", "#f7bb00").css("opacity", "1").css("filter", "drop-shadow(0 0 10px rgba(247, 255, 0, 0.5))");
-								}
-                        	   console.log(parseInt(starAvg / result.length));
-                        	   
-                        	  
+                                 html =  '<div class="col starRe" style="background: rgba(255, 255, 255, 0.08);align-items: center; padding: 10px; margin-right:20px;border-radius: 10px;">'+
+                                        '<span style="height: 100px; display: flex; align-items: center; justify-content: center;">'+
+                                        ' <i class="bx bxs-quote-alt-left quote-icon-left"></i>'
+                                           +el.review_content+ '<i class="bx bxs-quote-alt-right quote-icon-right"></i>'+
+                                         '</span>'+
+                                         '<div>';
+                                     
+                                  $("#reviewContent").append(html);
+                              });
+                              //html += "</div>";
+                        starAvg=parseInt(starAvg / result.length);
+                        for(var i=starAvg; i> 0; i-- ){
+                           $('#'+i).css("color", "#f7bb00").css("opacity", "1").css("filter", "drop-shadow(0 0 10px rgba(247, 255, 0, 0.5))");
+                        }
+                              console.log(parseInt(starAvg / result.length));
+                              
+                             
                         
                            }
                            
@@ -1088,7 +1118,7 @@ body::-webkit-scrollbar {
 
           }
 
-       	  // 마이페이지 동네인증
+            // 마이페이지 동네인증
           function saveMarkerPosition() {
                    $.ajax({
                       type : 'POST',
@@ -1117,6 +1147,7 @@ body::-webkit-scrollbar {
                             addresslat=markerlat;
                             addresslng=markerlng;
                             $('#myAddress').text(nowAddress);
+                            $('input[name=fulladdress]').val(nowAddress);
                          }
 
                       }
@@ -1141,20 +1172,60 @@ body::-webkit-scrollbar {
               
           var map = new daum.maps.Map(container, options);
           
+          function searchDetailAddrFromCoords(coords, callback) {
+              // 좌표로 법정동 상세 주소 정보를 요청합니다
+              geocoder.coord2Address(coords.getLng(), coords.getLat(),
+                    callback);
+           }
+          
+       // 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
+          daum.maps.event
+                .addListener(
+                      map,
+                      'click',
+                      function(mouseEvent) {
+                         searchDetailAddrFromCoords(
+                               mouseEvent.latLng,
+                               function(result, status) {
+                                  if (status === daum.maps.services.Status.OK) {
+                                     detailAddr = '<div>지번 주소 : '
+                                           + result[0].address.address_name
+                                           + '</div>';
+                                     content = '<div class="bAddr">'
+                                           + detailAddr
+                                           + '</div>';
+
+                                     // 마커를 클릭한 위치에 표시합니다 
+                                     kakaomarker
+                                           .setPosition(mouseEvent.latLng);
+                                     kakaomarker.setMap(map);
+                              panTo(mouseEvent.latLng.getLat(),mouseEvent.latLng.getLng());
+                                     // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+                                     infowindow
+                                           .setContent(content);
+                                     infowindow
+                                           .open(map, kakaomarker);
+                                     console
+                                           .log('click:'
+                                                 + result[0].address.address_name);
+                                     nowAddress = result[0].address.address_name;
+                                     markerlat = mouseEvent.latLng.getLat();
+                                     markerlng = mouseEvent.latLng.getLng();
+                                     // console.log(marketlat);
+                                     // console.log(markerlng);
+                                  }
+                               });
+                        
+                      });
+          
 
           // 내 위치로 이동
-          function nowGeo() {
-             if (navigator.geolocation) { // 브라우저의 Geolocation 지원 여부 판단
-                // 현재 위치 정보를 한 번만 얻기
-                navigator.geolocation
-                      .getCurrentPosition(function(position) {
-                         markerlat=37.478745014709745;
-                         markerlng=126.8787909892446;
-                         setCenter(37.478745014709745, 126.8787909892446);
-                         showKakaoMap(37.478745014709745, 126.8787909892446);
-                         
-                      });
-             }
+          function nowGeo() { 
+                markerlat=37.478745014709745;
+                markerlng=126.8787909892446;
+                setCenter(37.478745014709745, 126.8787909892446);
+                showKakaoMap(37.478745014709745, 126.8787909892446);
+                    
           }
 
           // 마이페이지 내 주소로 지도열기
@@ -1218,51 +1289,9 @@ body::-webkit-scrollbar {
                       }
                    });
 
-             // 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
-             daum.maps.event
-                   .addListener(
-                         map,
-                         'click',
-                         function(mouseEvent) {
-                            searchDetailAddrFromCoords(
-                                  mouseEvent.latLng,
-                                  function(result, status) {
-                                     if (status === daum.maps.services.Status.OK) {
-                                        detailAddr = '<div>지번 주소 : '
-                                              + result[0].address.address_name
-                                              + '</div>';
-                                        content = '<div class="bAddr">'
-                                              + detailAddr
-                                              + '</div>';
+             
 
-                                        // 마커를 클릭한 위치에 표시합니다 
-                                        kakaomarker
-                                              .setPosition(mouseEvent.latLng);
-                                        kakaomarker.setMap(map);
-                                 panTo(mouseEvent.latLng.getLat(),mouseEvent.latLng.getLng());
-                                        // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-                                        infowindow
-                                              .setContent(content);
-                                        infowindow
-                                              .open(map, kakaomarker);
-                                        console
-                                              .log('click:'
-                                                    + result[0].address.address_name);
-                                        nowAddress = result[0].address.address_name;
-                                        markerlat = mouseEvent.latLng.getLat();
-                                        markerlng = mouseEvent.latLng.getLng();
-                                        // console.log(marketlat);
-                                        // console.log(markerlng);
-                                     }
-                                  });
-                           
-                         });
-
-             function searchDetailAddrFromCoords(coords, callback) {
-                // 좌표로 법정동 상세 주소 정보를 요청합니다
-                geocoder.coord2Address(coords.getLng(), coords.getLat(),
-                      callback);
-             }
+             
           }
 
           //지도 이동
@@ -1308,42 +1337,42 @@ body::-webkit-scrollbar {
                // console.log('amount < selected',amount < selected);
                // console.log(typeof amount);
                // console.log(typeof selected);
-	               
-	               if(amount < selected) { // 출금액이 잔액보다 클 경우 출금 정지
-	                  const Toast = Swal.mixin({
-	                        toast : true,
-	                        position : 'center-center',
-	                        showConfirmButton : false,
-	                        timer : 1000,
-	                        timerProgressBar : true,
-	                     })
-	
-	                     Toast.fire({
-	                        icon : 'error',
-	                        title : '출금 금액이 잔액보다 많습니다.'
-	                     })
-	               }
-	               else{
-	                  $.ajax({
-	                         type: 'POST',
-	                         url : '<c:url value="/pay/balance.do"/>',
-	                         data : {
-	                               'deposit' : 0,
-	                               'withdraw' : selected,
-	                             '${_csrf.parameterName}' : '${_csrf.token}'
-	                           },
-	                         dataType : "text",
-	                         success : function(result){
-	                         // console.log(result);
-	                            $('#myPay').text(result
-	                                  .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-	                                +'원')
-	                                $('#myPay').attr('title', result)   
-	                         }
-	                           
-	                        });  
-	               }
-           	}
+                  
+                  if(amount < selected) { // 출금액이 잔액보다 클 경우 출금 정지
+                     const Toast = Swal.mixin({
+                           toast : true,
+                           position : 'center-center',
+                           showConfirmButton : false,
+                           timer : 1000,
+                           timerProgressBar : true,
+                        })
+   
+                        Toast.fire({
+                           icon : 'error',
+                           title : '출금 금액이 잔액보다 많습니다.'
+                        })
+                  }
+                  else{
+                     $.ajax({
+                            type: 'POST',
+                            url : '<c:url value="/pay/balance.do"/>',
+                            data : {
+                                  'deposit' : 0,
+                                  'withdraw' : selected,
+                                '${_csrf.parameterName}' : '${_csrf.token}'
+                              },
+                            dataType : "text",
+                            success : function(result){
+                            // console.log(result);
+                               $('#myPay').text(result
+                                     .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                   +'원')
+                                   $('#myPay').attr('title', result)   
+                            }
+                              
+                           });  
+                  }
+              }
            
            
 
@@ -1425,5 +1454,61 @@ body::-webkit-scrollbar {
                               }
                            })
                      }
-           			
+           
+           var geocoder = new daum.maps.services.Geocoder();
+             function daumAddress() {
+                new daum.Postcode({
+                   oncomplete : function(data) {
+                      // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                      // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                      // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                      var addr = ''; // 주소 변수
+                      var extraAddr = ''; // 참고항목 변수
+
+                      //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                      if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                         addr = data.roadAddress;
+                      } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                         addr = data.jibunAddress;
+                      }
+                      geocoder.addressSearch(addr, function(results, status) {
+                             if (status === daum.maps.services.Status.OK) {
+                                var result = results[0];
+                                $('#latitude').val(result.y);
+                                $('#longitude').val(result.x);                   
+                             }
+                          });
+                      document.getElementById("fulladdress").value = addr;
+                      $('#nextBtn').focus();
+                   }
+                }).open();
+             }
+
+             //프로필사진관련
+             var readURL = function(input) {
+                if (input.files && input.files[0]) {
+                   var reader = new FileReader();
+
+                   reader.onload = function(e) {
+                      $('.profile-pic').attr('src', e.target.result);
+                   }
+                   reader.readAsDataURL(input.files[0]);
+                }
+             }
+
+             $("#profileimg").change(function() {
+                var fileForm = /(.*?)\.(jpg|jpeg|png)$/;
+                if (!$('#profileimg').val().match(fileForm)) {
+                   addMessage('jpg,jpeg,png타입만 선택 가능합니다.', $('#profileimg'));
+                   $('#profileimg').val(null);
+                }
+                readURL(this);
+                   
+             });
+
+             $(".profile-pic").click(function() {
+                $("#profileimg").click();
+             });
+                    
 </script>

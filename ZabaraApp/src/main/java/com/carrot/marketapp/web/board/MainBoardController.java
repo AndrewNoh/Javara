@@ -68,7 +68,6 @@ public class MainBoardController {
 	@Autowired
 	ObjectMapper objectMapper;
 
-	
 	@RequestMapping("/gropboard.do")
 	public String gropboard(Map map, Model model, Principal principal) {
 		model.addAttribute("board", "우리동네");
@@ -78,8 +77,8 @@ public class MainBoardController {
 		UserDTO user = userService.selectOne(map);
 		map.put("userno", user.getUserno());
 		model.addAttribute("userno", user.getUserno());
-	    model.addAttribute("profileimage", user.getProfile_img());
-	    
+		model.addAttribute("profileimage", user.getProfile_img());
+
 		AddressDTO address = addressService.selectOne(map);
 
 		String simpleAddr = address.getSimpleAddress();
@@ -100,10 +99,9 @@ public class MainBoardController {
 			List<ImageDTO> images = imageService.selectList(map);
 			imageList.add(images);
 		}
-	
+
 		List<Integer> likes = boardService.selectLikeList(map);
-		
-		
+
 		model.addAttribute("likes", likes);
 		model.addAttribute("imageList", imageList);
 		model.addAttribute("address", map.get("simpleAddress"));
@@ -111,7 +109,6 @@ public class MainBoardController {
 
 		return "/board/GropBoardList.market";
 	}
-
 
 	@RequestMapping("/auctionlist.do")
 	public String auction(Map map, Model model, Principal principal) {
@@ -170,7 +167,7 @@ public class MainBoardController {
 		String board = (String) map.get("board");
 
 		System.out.println(map.get("content"));
-		
+
 		map = getUserInfo(map, model, principal);
 
 		int a = 0;
@@ -278,12 +275,12 @@ public class MainBoardController {
 	// 글수정
 	@PostMapping("/edit.do")
 	@ResponseBody
-	public int edit(@RequestParam Map map, Model model, Principal principal, MultipartHttpServletRequest req, @RequestParam("filename") MultipartFile[] filename)
-			throws IllegalStateException, IOException {
+	public int edit(@RequestParam Map map, Model model, Principal principal, MultipartHttpServletRequest req,
+			@RequestParam("filename") MultipartFile[] filename) throws IllegalStateException, IOException {
 
 		String board = (String) map.get("board");
 		System.out.println(map.get("auction_no"));
-		
+
 		map = getUserInfo(map, model, principal);
 
 		int a = 0;
@@ -293,23 +290,23 @@ public class MainBoardController {
 			map.put("enddate", Integer.parseInt((String) map.get("enddate")));
 		}
 
-		//경매면 금액 들어가야함
+		// 경매면 금액 들어가야함
 		String price = "0";
 		if (!board.equals("우리동네")) {
 			System.out.println("가격입력");
 			price = map.get("price").toString().trim();
 		}
 
-		//경매가아님 & 사진이 없음
+		// 경매가아님 & 사진이 없음
 		if (board.equals("우리동네") && filename[0].getOriginalFilename().equals("")) {
 			System.out.println("잘 작동하나 테스트해봐야 합니다.");
 			a = boardService.update(map);
 
-		} else if(board.equals("우리동네")){
-			//이미지를 포함해서 동네글 수정해야함
+		} else if (board.equals("우리동네")) {
+			// 이미지를 포함해서 동네글 수정해야함
 			map.put("profile", "have");
 			a = boardService.update(map);
-		} else if(board.equals("경매") && filename[0].getOriginalFilename().equals("")) {
+		} else if (board.equals("경매") && filename[0].getOriginalFilename().equals("")) {
 			System.out.println("글만 수정");
 			a = boardService.update(map);
 		} else {
@@ -317,9 +314,9 @@ public class MainBoardController {
 			map.put("profile", "have");
 			a = boardService.update(map);
 		}
-		
+
 		String path = req.getSession().getServletContext().getRealPath("/resources/assets/img/product_img"); // 경로
-		
+
 		System.out.println("A의 값 : " + a);
 
 		if (a == 1 && !(filename[0].getOriginalFilename().equals(""))) {
@@ -329,11 +326,11 @@ public class MainBoardController {
 				String rename = FileUpDownUtils.getNewFileName(path, filename[i].getOriginalFilename());// 같은 이름일때
 																										// 파일제목변경
 				System.out.println(rename);
-				
+
 				File dest = new File(path + File.separator + rename);
 
 				System.out.println(dest);
-				
+
 				filename[i].transferTo(dest);
 
 				BufferedImage original = ImageIO.read(dest);
@@ -349,14 +346,14 @@ public class MainBoardController {
 
 				map.put("profile", rename);
 				System.out.println(map.get("profile"));
-				
+
 				int aff = boardService.insertImage(map);
 				System.out.println("업로드 성공 : " + aff);
-				a=aff;
-				
+				a = aff;
+
 			}
 		}
-		
+
 		return a;
 
 	}
@@ -387,8 +384,8 @@ public class MainBoardController {
 
 		int page = Integer.parseInt((String) map.get("nowpage"));
 
-		map.put("startnum", (30 * (page - 1)));
-		map.put("endnum", 30 * (page) + 1);
+		map.put("startnum", (100 * (page - 1)));
+		map.put("endnum", 100 * (page) + 1);
 
 		if (map.get("category") == null) {
 			map.put("category", "모두");
@@ -397,7 +394,7 @@ public class MainBoardController {
 		// 리스트 받아오기
 		List<BoardDTO> allLists = boardService.selectListAll(map);
 		model.addAttribute("nowpage", page);
-		model.addAttribute("endpage", allLists.size() / 30 == 0 ? 1 : allLists.size() / 30);
+		model.addAttribute("endpage", allLists.size() / 100 == 0 ? 1 : allLists.size() / 100);
 
 		List<BoardDTO> Lists = boardService.selectList(map);
 
@@ -405,7 +402,9 @@ public class MainBoardController {
 
 		for (int i = 0; i < Lists.size(); i++) {
 			map.put("auction_no", Lists.get(i).getAuction_no());
-
+			if (Lists.get(i).getCategory().contains("/")) {
+				Lists.get(i).setCategory(Lists.get(i).getCategory().replaceAll("/", ""));
+			}
 			List<ImageDTO> images = imageService.selectList(map);
 			imageList.add(images);
 		}
@@ -421,33 +420,31 @@ public class MainBoardController {
 		return model;
 	}
 
-
 	@RequestMapping(value = "/delete.do", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public int delete(@RequestParam Map map, Model model, Principal principal) {
 		return boardService.delete(map);
 
 	}
-	
-	// 동네생활: 글 수정 
+
+	// 동네생활: 글 수정
 	// 링크 이동
-	@GetMapping(value="/update.do", produces = "application/json;charset=UTF-8")
+	@GetMapping(value = "/update.do", produces = "application/json;charset=UTF-8")
 	public String updateTown(@RequestParam Map map, Model model, Principal principal) {
 		model.addAttribute("townlist_no", map.get("townlist_no"));
-		
+
 		return "/board/GropBoardUpdate.market";
 	}
-	
+
 	// 동네생활: 글 수정
 	// 데이터 변경
-	@PostMapping(value="/update.do", produces = "application/json;charset=UTF-8")
+	@PostMapping(value = "/update.do", produces = "application/json;charset=UTF-8")
 	public String updateToTown(@RequestParam Map map, Model model, Principal principal) {
 		model.addAttribute("townlist_no", map.get("townlist_no"));
-		
-		
+
 		return "redirect:/board/gropboard.do";
 	}
-	
+
 	// 동네생활: 글 삭제
 	@RequestMapping("deleteTown.do")
 	public String deleteTown(@RequestParam Map map, Model model, Principal principal) {
@@ -457,7 +454,7 @@ public class MainBoardController {
 
 	}
 
-	// 동네생활: 좋아요 
+	// 동네생활: 좋아요
 	@RequestMapping(value = "/likeUp.do", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public int like(@RequestParam Map map, Model model, Principal principal) {
@@ -483,20 +480,20 @@ public class MainBoardController {
 		return aff;
 
 	}
-	
+
 	// 동네생활: 좋아요 - 실시간 반영
 	@RequestMapping(value = "/liveLikeUp.do", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public int liveLikeUp(@RequestParam Map map, Model model, Principal principal) {
 		map = getUserInfo(map, model, principal);
-		
+
 		int likes = boardService.selectLiveLike(map);
-		model.addAttribute("likes",likes);
+		model.addAttribute("likes", likes);
 		// System.out.println("likes"+likes);
 
 		return likes;
 	}
-	
+
 	@RequestMapping(value = "/newUpperPrice.do", produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public int updateUpperPrice(@RequestParam Map map, Model model, Principal principal) {
@@ -566,7 +563,7 @@ public class MainBoardController {
 				al1.add(realURL);
 				al2.add(realTITLE);
 			}
-			
+
 			int k = 0;
 			for (int i = 0; i < blogOption.size(); i++) {
 				Element thumbnail = imgOption.get(k);
@@ -658,7 +655,7 @@ public class MainBoardController {
 	public String search(Model model, @RequestParam Map map, Principal principal) {
 
 		String board = map.get("board").toString();
-		
+
 		System.out.println(map.get("title"));
 		int log = 0;
 		int havelog = 0;
@@ -668,8 +665,8 @@ public class MainBoardController {
 		} else {
 			havelog = Integer.parseInt(search);
 		}
-		if(havelog > 0) {
-			map.put("count", havelog+1);
+		if (havelog > 0) {
+			map.put("count", havelog + 1);
 			log = boardService.updateSearchLog(map);
 		} else {
 			log = boardService.insertSearchLog(map);
@@ -727,20 +724,21 @@ public class MainBoardController {
 
 	}
 
-	//카테고리아이템용
-	@RequestMapping(value="/myAddressItemList.do",produces = "application/json;charset=UTF-8")
+	// 카테고리아이템용
+	@RequestMapping(value = "/myAddressItemList.do", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String myAddressItemList(@RequestParam Map map,Model model,Principal principal) throws JsonProcessingException {
-			map.put("email", principal.getName());
-			UserDTO record = userService.selectOne(map);
-			map.put("userno", record.getUserno());
-			String[] simpleAddr = map.get("nowAddress").toString().split(" ");
-			map.put("simpleAddress", simpleAddr[1]);
-			map.put("board", "동네아이템가져오기");
-			List<BoardDTO>itemlist = boardService.selectListAll(map);
-			return objectMapper.writeValueAsString(itemlist);
+	public String myAddressItemList(@RequestParam Map map, Model model, Principal principal)
+			throws JsonProcessingException {
+		map.put("email", principal.getName());
+		UserDTO record = userService.selectOne(map);
+		map.put("userno", record.getUserno());
+		String[] simpleAddr = map.get("nowAddress").toString().split(" ");
+		map.put("simpleAddress", simpleAddr[1]);
+		map.put("board", "동네아이템가져오기");
+		List<BoardDTO> itemlist = boardService.selectListAll(map);
+		return objectMapper.writeValueAsString(itemlist);
 	}
-	
+
 	@RequestMapping("/shareView.do")
 	public String auctionviewAndroid(Model model, @RequestParam Map map, Principal principal) {
 		map.put("board", "경매");
@@ -763,17 +761,17 @@ public class MainBoardController {
 		return "/board/AuctionView.market";
 	}
 
-	@RequestMapping(value="/report.do",produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/report.do", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public int report(@RequestParam Map map,Model model,Principal principal) throws JsonProcessingException {
+	public int report(@RequestParam Map map, Model model, Principal principal) throws JsonProcessingException {
 		map = getUserInfo(map, model, principal);
 		System.out.println(map.get("content"));
 		System.out.println(map.get("category"));
 		int hasReport = boardService.hasReport(map);
-		if(hasReport == 0) {
+		if (hasReport == 0) {
 			return boardService.doReport(map);
 		}
-		
+
 		return 0;
 	}
 

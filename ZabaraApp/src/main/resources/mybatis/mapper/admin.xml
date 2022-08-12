@@ -5,52 +5,52 @@
 
 <mapper namespace="mybatis.mapper.admin">
 
-	<!-- SELECT문 -->
-	<select id="selectUserList" parameterType="Map" resultType="_int">
-		SELECT count(*) FROM MEMBERS WHERE NOT USERNO =1
-	</select>
-	
-	<select id="selectAllGropList" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		SELECT * FROM TOWN_LIST
-	</select>
-	
-	<select id="selectAllReportAuctionList" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		SELECT al.content,al.title,al.auction_no FROM auction_list al join auction_report ar ON al.auction_no = ar.auction_no
-	</select>
-	
-	<!-- DELETE문 -->
-	<delete id="deleteAdminAuction" parameterType="Map">
-		DELETE FROM
-		AUCTION_LIST WHERE AUCTION_NO = #{auction_no}
-	</delete>
+   <!-- SELECT문 -->
+   <select id="selectUserList" parameterType="Map" resultType="_int">
+      SELECT count(*) FROM MEMBERS WHERE NOT USERNO =1
+   </select>
+   
+   <select id="selectAllGropList" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
+      SELECT * FROM TOWN_LIST
+   </select>
+   
+   <select id="selectAllAuctionList" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
+      SELECT al.content,al.title,al.auction_no FROM auction_list al join auction_report ar ON al.auction_no = ar.auction_no
+   </select>
+   
+   <!-- DELETE문 -->
+   <delete id="deleteAdminAuction" parameterType="Map">
+      DELETE FROM
+      AUCTION_LIST WHERE AUCTION_NO = #{auction_no}
+   </delete>
 
-	<delete id="deleteAdminAuctionImg" parameterType="Map">
-		DELETE FROM
-		AUCTION_IMG WHERE AUCTION_NO = #{auction_no}
-	</delete>
-	
-	<delete id="deleteAdminAuctionLikeNo" parameterType="Map">
-		DELETE FROM
-		AUCTION_LIKE WHERE AUCTION_NO = #{auction_no}
-	</delete>
+   <delete id="deleteAdminAuctionImg" parameterType="Map">
+      DELETE FROM
+      AUCTION_IMG WHERE AUCTION_NO = #{auction_no}
+   </delete>
+   
+   <delete id="deleteAdminAuctionLikeNo" parameterType="Map">
+      DELETE FROM
+      AUCTION_LIKE WHERE AUCTION_NO = #{auction_no}
+   </delete>
 
-	<delete id="deleteAdminAuctionPrice" parameterType="Map">
-		DELETE FROM
-		AUCTION_PRICE WHERE AUCTION_NO = #{auction_no}
-	</delete>
-	<!-- AUCTION -->
+   <delete id="deleteAdminAuctionPrice" parameterType="Map">
+      DELETE FROM
+      AUCTION_PRICE WHERE AUCTION_NO = #{auction_no}
+   </delete>
+   <!-- AUCTION -->
 
-	<!-- TOWN -->
+   <!-- TOWN -->
 
-	<delete id="deleteAdminBoard" parameterType="Map">
-		DELETE TOWN_LIST WHERE
-		TOWNLIST_NO=#{townlist_no}
-	</delete>
+   <delete id="deleteAdminBoard" parameterType="Map">
+      DELETE TOWN_LIST WHERE
+      TOWNLIST_NO=#{townlist_no}
+   </delete>
 
-	<delete id="deleteAdminGropImg" parameterType="Map">
-		DELETE FROM TOWN_IMG
-		WHERE TOWNLIST_NO = #{townlist_no}
-	</delete>
-	
-	
+   <delete id="deleteAdminGropImg" parameterType="Map">
+      DELETE FROM TOWN_IMG
+      WHERE TOWNLIST_NO = #{townlist_no}
+   </delete>
+   
+   
 </mapper>
