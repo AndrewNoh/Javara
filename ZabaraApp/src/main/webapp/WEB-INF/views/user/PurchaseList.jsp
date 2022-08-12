@@ -450,7 +450,7 @@ No license, 100% free to use.
                               <div class="portfolio-links">
                                  <a href="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[loop.index][0].imageName}" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bxs-photo-album"></i><span style="font-size: 12px; display: block;">사진보기</span></a>
                                   <a href="<c:url value="/board/auctionview.do"><c:param value="${record.auction_no}" name="no"/></c:url>" rel="lyteframe" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bxs-detail"></i><span style="font-size: 12px; display: block;">상세보기</span></a>
-                                  <a href="#" data-toggle="modal" onClick="review(${record.auction_no})"  data-target="#modalReview" ><i class="bi bi-brush" name="reviewWirte"></i><span style="font-size: 18px; display: block;">후기작성</span></a>
+                                  <a href="#" data-toggle="modal" onClick="review(${record.auction_no})"  data-target="#modalReview" ><i class="bi bi-brush" id="reviewWirte"></i><span style="font-size: 18px; display: block;">후기작성</span></a>
                               </div>
                               <p>종료예정일 ${record.endDate}</p>
                          </div>
@@ -463,7 +463,7 @@ No license, 100% free to use.
             <!-- 거래후기 모달 -->
                <div class="modal" id="modalReview">
                         <div class="card">
-                            <form>
+                            <form >
                                 <div class="header">
                                     <h1 class="title text-bold">거래후기</span></h1>
                                     <div class="rating">
@@ -530,7 +530,7 @@ No license, 100% free to use.
    
                         })
    
-                        $('i[name=reviewWirte]').trigger("click");
+                        $('#reviewWirte').trigger("click");
                         $(".modal-backdrop").remove();
                         
                         Toast.fire({

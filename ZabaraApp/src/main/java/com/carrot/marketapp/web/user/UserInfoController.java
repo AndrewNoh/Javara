@@ -139,7 +139,34 @@ public class UserInfoController {
 		return rename;
 	}
 
+	// 회원 수정
+	@GetMapping("/editmember.do")
+	public String edit(@RequestParam Map map, Model model, Authentication auth) {
+		System.out.println("회원 수정");
+		map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기
+		System.out.println(((UserDetails) auth.getPrincipal()).getUsername());// kosmo@naver.com
 
+		// 서비스 호출]
+		UserDTO record = userService.selectOne(map);
+
+		map.put("userno", record.getUserno());
+		Map addr = userService.editselectOne(map);
+		// 어드레스테이블에서 유저넘버로 조회해서 뿌려주고 변수 다르게 저장해서 뿌리기
+
+		// 데이타 저장] -//키와 이엘 명과 일치시키자
+		model.addAttribute("nickname", record.getNickname());
+		model.addAttribute("password", record.getPassword());
+		model.addAttribute("simpleAddress", addr.get("SIMPLEADDRESS"));
+		model.addAttribute("FULLADDRESS", addr.get("FULLADDRESS"));
+		model.addAttribute("email", record.getEmail());
+		model.addAttribute("phonenumber", record.getPhonenumber());
+		model.addAttribute("profileimage", record.getProfile_img());
+		model.addAttribute("latitude",record.getLatitude());
+		model.addAttribute("longitude",record.getLongitude());
+
+		// 뷰정보 반환]
+		return "/user/edit.market";
+	}///////////////////////
 
 	@PostMapping("/editmember.do")
 	public String editOk(@RequestParam MultipartFile profileimg, HttpServletRequest req, @RequestParam Map map,

@@ -55,7 +55,7 @@ i {
 						            <div class="portfolio-links">
 						            	<a href="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[loop.index][0].imageName}" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bxs-photo-album"></i><span style="font-size: 12px; display: block;">사진보기</span></a>
 						                <a href="<c:url value="/board/auctionview.do"><c:param value="${record.auction_no}" name="no"/></c:url>" rel="lyteframe" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bxs-detail"></i><span style="font-size: 12px; display: block;">상세보기</span></a>
-						                <a href="javascript:void(0);" data-value="${LIST.auction_no}" name="like"><i class="bx bxs-heart" name="heartButton"></i><span style="font-size: 12px; display: block;">좋아요</span></a>
+						                <a href="javascript:void(0);" data-value="${record.auction_no}" name="like"><i class="bx bxs-heart" name="heartButton"></i><span style="font-size: 12px; display: block;">좋아요</span></a>
 						            </div>
 						            <p>종료예정일 ${record.endDate}</p>
 						    	</div>

@@ -152,8 +152,8 @@
                                     <div class="form-group" id="fifthSignup" style="display:none;"> 
                                        <div class="form-group">
                                            <div>프로필 사진</div>
-                                              <img class="profile-pic" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/zabaraDefaultProfile.png">
-                                              <input class="file-upload" type="file"  accept=".jpg, .png, .jpeg" name="profileimg" id="profileimg" value="zabaraDefaultProfile.png"/>
+                                              <img class="profile-pic" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/DefaultProfile.png">
+                                              <input class="file-upload" type="file"  accept=".jpg, .png, .jpeg" name="profileimg" id="profileimg" value="DefaultProfile.png"/>
                                               <div>&nbsp</div>
                                               <input type="hidden" id="kakaoProfileUrl" name="kakaoProfileUrl" value="">
                                        </div>

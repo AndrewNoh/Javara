@@ -44,15 +44,11 @@ public class UserDAO {
 	}
 	
 	public int selectList(Map map) {
-		if(map.get("userno") !=null) {
-			return sqlSession.selectOne("selectUserList",map);
-		}else if(map.get("우리동네") !=null){
-			return sqlSession.selectOne("selectAllGropList",map); 
-		}
-		else {
-			return sqlSession.selectOne("selectAllAuctionList",map); 
-		}
-	}
+	      if(map.get("userno") !=null)
+	         return sqlSession.selectOne("selectUserList",map);
+	      return 0;
+	   }
+
 	
 	
 	public int delete(Map map) {

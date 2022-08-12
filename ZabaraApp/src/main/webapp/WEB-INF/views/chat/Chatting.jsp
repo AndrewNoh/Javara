@@ -65,6 +65,11 @@
     border-bottom: 1px solid #ced4da;
     flex-direction: column;
 }
+.mapmodal{
+ position: absolute;
+ top: 0%;
+ height: auto;
+}
 </style>
       <div class=" m-5"> 
       <div class="container">
@@ -244,8 +249,8 @@
                </div>
             </div>
          </div>
-         <!-- 약속잡기모달 -->
-         <div id="modal" class="modal fade">
+<!-- 약속잡기모달 -->
+         <div id="modal" class="modal fade mapmodal">
              <div class="modal-dialog" role="document">
                  <div class="modal-content">
                      <div class="modal-header" style="justify-content: center;">  
@@ -256,7 +261,7 @@
                      
                        <div class="form-group">
                          <img src="${pageContext.request.contextPath}/resources/assets/img/chat_calendar.png"
-                         onlick="modal_map()" style="margin-top:10px; margin-bottom:10px"/>
+                         onClick="modal_map()" style="margin-top:10px; margin-bottom:10px"/>
                          <div class="input-group date" id="datepicker">
                            <input class="form-control" placeholder="YYYY/MM/DD" id="date"/><span class="input-group-append input-group-addon"><span class="input-group-text"><img style="" src="${pageContext.request.contextPath}/resources/assets/img/hand-pointer.png"></span></span>
                          </div>
@@ -1257,7 +1262,11 @@ function uploadFile(e) {
            $("#send").toggle();
         });
       $("#modal_map").click(function (){
-           $("#map").toggle();
+           $("#map").toggle(1000);
+           setTimeout(function() {
+               map.relayout();                 
+               myAddressMap($("#myAddress").text());                  
+            }, 1000);
            $("#plusDiv").toggle();
         });
       $("#emojitoggle").click(function (){
@@ -1323,15 +1332,7 @@ function uploadFile(e) {
    
     
    $('#modal_map').click(function (e) {
-      if(navigator.geolocation){ //브라우저의 Geolocation 지원 여부 판단
-            // 현재 위치 정보를 한 번만 얻기
-            navigator.geolocation.getCurrentPosition(function(position){
-                var lat = position.coords.latitude;
-                var lng = position.coords.longitude;
-                showKakaoMap(lat,lng); 
-                
-            });  
-        }
+                showKakaoMap(37.478745014709745, 126.8787909892446); 
       
         // 현재 위치의 위도/경도를 중심좌표로 지도를 표시하는 함수
         function showKakaoMap(lat,lng){

@@ -17,18 +17,18 @@ public class BoardDAO {
 	private SqlSessionTemplate sqlSession;
 
 	public List<BoardDTO> selectList(Map map) {
-		if (map.get("board").equals("우리동네")) {
-			return sqlSession.selectList("getGropList", map);
-		}else if(map.get("board").equals("관리자동네글")){
-			return sqlSession.selectList("selectAllGropList",map); 
-		}else if(map.get("board").equals("관리자경매")) {
-			return sqlSession.selectList("selectAllReportAuctionList",map);
-		}				
-		else {
-			return sqlSession.selectList("getAuctionList", map);
-		}
+	      if (map.get("board").equals("우리동네")) {
+	         return sqlSession.selectList("getGropList", map);
+	      }else if(map.get("board").equals("관리자동네글")){
+	         return sqlSession.selectList("selectAllGropList",map); 
+	      }else if(map.get("board").equals("관리자경매")) {
+	         return sqlSession.selectList("selectAllReportAuctionList",map);
+	      }            
+	      else {
+	         return sqlSession.selectList("getAuctionList", map);
+	      }
 
-	}
+	   }
 
 	public BoardDTO selectOne(Map map) {
 		if (map.get("board").equals("우리동네")) {
