@@ -14,8 +14,6 @@
 <script
 	src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
 <script
-	src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js'></script>
-<script
 	src='https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js'></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css">
@@ -181,20 +179,19 @@ No license, 100% free to use.
 }
 
 .card {
-	margin-left: 800px;
-	position: relative;
-	padding: 48px 24px;
-	z-index: 4;
-	max-height: 400px;
-	height: 90vh;
-	max-width: 500px;
-	width: 90%;
-	overflow-x: hidden;
-	overflow-y: auto;
-	border-radius: 20px;
-	background: rgba(255, 255, 255, 0.1);
-	box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-	border: 2px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  padding: 48px 24px;
+  z-index: 4;
+  margin-left: 38%;
+  height: auto;
+  max-width: 500px;
+  width: 90%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 20px;
+  background:rgb(255 255 255 / 53%);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .card .header {
@@ -253,7 +250,7 @@ No license, 100% free to use.
 	font-size: 14px;
 	position: relative;
 	width: 100%;
-	background: rgba(15, 17, 23, 0.6);
+	background: rgb(44 46 53 / 60%);
 	border-radius: 8px;
 	border: 2px solid transparent;
 	color: #fff;
@@ -354,7 +351,7 @@ No license, 100% free to use.
 	align-items: center;
 	letter-spacing: 0.4mm;
 	justify-content: space-between;
-	background: #2f5dd7;
+	background: #ffd659;
 	transition: 0.75s ease;
 	border: 2px solid transparent;
 	font-size: 14px;
@@ -622,7 +619,7 @@ body::-webkit-scrollbar {
 		<div class="row">
 			<div class="col-lg-5 box" data-aos="fade-right">
 				<div>
-					<img
+					<img id="profileImgTag"
 						src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${profileimage}"
 						class="img-fluid profile-photo" alt="이미지"
 						style="object-fit: cover; width: 400px; max-height: 400px; border-radius: 50%">
@@ -643,14 +640,13 @@ body::-webkit-scrollbar {
 				<div class="col-lg-12 pt-3 pt-lg-0 content" data-aos="fade-left">
 					<div class="row m-2">
 						<div class="col" style="padding: 0%;">
-							<h3 class="mt-2" style="font-size: 30px;">
+							<h3 class="mt-2" style="font-size: 35px;">
 								<strong>${nickname}</strong>
 							</h3>
 						</div>
 						<div class="col-8" style="padding: 0%;">
-							<a href="<c:url value="/userinfo/editmember.do"/>"
-								class="setting"><i class="bi bi-gear"
-								style="font-size: 1.4rem; magrin-right: 40px; color: #ffc107;"></i></a>
+							<a href=" " data-target="#editModal" data-toggle="modal" id="modal-open"
+								class="setting"><img style="width: 25px; margin-top:10px;"src="${pageContext.request.contextPath}/resources/assets/img/pencil1.png" ></a>
 						</div>
 					</div>
 				</div>
@@ -696,7 +692,7 @@ body::-webkit-scrollbar {
 									<span data-purecounter-start="0"
 										data-purecounter-end="${buyCount}"
 										data-purecounter-duration="1" class="purecounter"></span>
-									<p>구매내역</p>
+									<p>입찰내역</p>
 								</div>
 							</a>
 						</div>
@@ -707,7 +703,7 @@ body::-webkit-scrollbar {
 									<i class="bi bi-heart" style="color: #ff4141;"></i> <span
 										data-purecounter-start="0" data-purecounter-end="${likeCount}"
 										data-purecounter-duration="1" class="purecounter"></span>
-									<p>찜목록</p>
+									<p>좋아요</p>
 								</div>
 							</a>
 						</div>
@@ -715,7 +711,47 @@ body::-webkit-scrollbar {
 				</div>
 			</div>
 		</div>
-
+<!-- 회원수정 모달 -->
+	<div id="editModal" class="modal" style="justify-content: center;">
+		<div class="card">
+           <form action="<c:url value="/userinfo/editmember.do"/>" method="post"
+			role="form" class="" enctype="multipart/form-data">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <div class="loading"></div>
+			<div class="error-message"></div>
+			<div class="sent-message"></div>
+                <div class="header">
+                    <h1 class="title text-bold">회원수정</h1>
+                </div>
+                <div class="content">
+       					<div class="form-group" style="justify-content:center;">
+							<img id="editImgTag" class="profile-photo" 
+								src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${profileimage}" style="object-fit: cover; width: 300px; height: 300px;border-radius: 50%; margin-left: 80px;">
+							<input class="file-upload" type="file" accept=".jpg, .png, .jpeg"
+								name="editprofileimg" id="editprofileimg" style="display:none;"/>
+							<div class="mb-4">&nbsp</div>
+						</div>
+                    <div class="input-group">
+                        <input style="text-align: center;" type="text" name="nickname" id="editnickname" class="input-text" value="${nickname}" required>
+                    </div>
+                    <div class="input-group">
+                        <input style="text-align: center;" type="password" name="password" id="editpassword" class="input-text" value="${pwd}" required>
+                    </div>                 
+                    <div class="input-group">
+                        <input style="text-align: center;" type="text" name="email" id="editemail" class="input-text" value="${email}" required readonly>
+                    </div> 
+                    <div class="input-group">
+                        <input style="text-align: center;" type="text" onclick="daumAddress()" name="fulladdress" id="editfulladdress" class="input-text" value="${address}" required>
+                        <input type="hidden" name="latitude" id="latitude" value="${latitude}">
+						<input type="hidden" name="longitude" id="longitude" value="${longitude}">
+                    </div> 
+                    <div class="input-group upload-submit">
+                        <button style="text-align: center;" type="submit" class="btn-submit"><span class="text-bold">수정</span><span class="fa fa-arrow-right"></span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+	</div>
 		<!-- End Skills -->
 		<!-- 자바라 페이 -->
 		<div class="row">
@@ -1123,23 +1159,12 @@ body::-webkit-scrollbar {
             }
          }
 
-         var readURL = function(input) {
-             if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                   $('.profile-photo').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-             }
-          }
-
           var nowProfile = $(".profile-photo").attr('src');
 
-          $("#profileimg").change(function() {
+          $(".file-upload").change(function() {
              var fileForm = /(.*?)\.(jpg|jpeg|png|JPG|JPEG|PNG])$/;
-             if (!$('#profileimg').val().match(fileForm)) {
-                $('#profileimg').val(null);
+             if (!$('.file-upload').val().match(fileForm)) {
+                $('.file-upload').val(null);
                 const Toast = Swal.mixin({
                    toast : true,
                    position : 'center-center',
@@ -1158,7 +1183,7 @@ body::-webkit-scrollbar {
              readURL(this);
           });
 
-          $(".profile-photo").click(function() {
+          $("#profileImgTag").click(function() {
              $("#profileimg").click();
 
           });
@@ -1208,6 +1233,22 @@ body::-webkit-scrollbar {
              });
 
           }
+          
+      	
+
+        	$("#editprofileimg").change(function() {
+        		var fileForm = /(.*?)\.(jpg|jpeg|png)$/;
+        		if (!$('#editprofileimg').val().match(fileForm)) {
+        			addMessage('jpg,jpeg,png타입만 선택 가능합니다.', $('#editprofileimg'));
+        			$('#editprofileimg').val(null);
+        		}
+        		readURL(this);
+        			
+        	});
+
+        	$("#editImgTag").click(function() {
+        		$("#editprofileimg").click();
+        	});
 
        	  // 마이페이지 동네인증
           function saveMarkerPosition() {
@@ -1535,5 +1576,36 @@ body::-webkit-scrollbar {
                               }
                            })
                      }
-           			
+           
+           var geocoder = new daum.maps.services.Geocoder();
+         	function daumAddress() {
+         		new daum.Postcode({
+         			oncomplete : function(data) {
+         				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+         				// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+         				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+         				var addr = ''; // 주소 변수
+         				var extraAddr = ''; // 참고항목 변수
+
+         				//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+         				if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+         					addr = data.roadAddress;
+         				} else { // 사용자가 지번 주소를 선택했을 경우(J)
+         					addr = data.jibunAddress;
+         				}
+         				geocoder.addressSearch(addr, function(results, status) {
+         	                if (status === daum.maps.services.Status.OK) {
+         	                   var result = results[0];
+         	                   $('#latitude').val(result.y);
+         	                   $('#longitude').val(result.x);                   
+         	                }
+         	             });
+         				document.getElementById("editfulladdress").value = addr;
+         				$('#nextBtn').focus();
+         			}
+         		}).open();
+         	}
+           		
+        
 </script>

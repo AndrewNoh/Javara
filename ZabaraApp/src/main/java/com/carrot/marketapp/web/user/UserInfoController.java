@@ -169,7 +169,7 @@ public class UserInfoController {
 	}///////////////////////
 
 	@PostMapping("/editmember.do")
-	public String editOk(@RequestParam MultipartFile profileimg, HttpServletRequest req, @RequestParam Map map,
+	public String editOk(@RequestParam MultipartFile editprofileimg, HttpServletRequest req, @RequestParam Map map,
 			Authentication auth, Model model) throws IllegalStateException, IOException {
 		String path = req.getSession().getServletContext().getRealPath("/resources/assets/img/zabaraImg"); // 경로
 		// 서비스 호출]
@@ -179,10 +179,10 @@ public class UserInfoController {
 		map.put("latitude", Double.parseDouble((String) map.get("latitude")));
 		map.put("longitude", Double.parseDouble((String) map.get("longitude")));
 		File oldprofile = new File(path + File.separator + record.getProfile_img());
-		if (!profileimg.isEmpty()) {
-			String rename = FileUpDownUtils.getNewFileName(path, profileimg.getOriginalFilename());// 같은 이름일때 파일제목변경
+		if (!editprofileimg.isEmpty()) {
+			String rename = FileUpDownUtils.getNewFileName(path, editprofileimg.getOriginalFilename());// 같은 이름일때 파일제목변경
 			File dest = new File(path + File.separator + rename);
-			profileimg.transferTo(dest);// 파일 업로드
+			editprofileimg.transferTo(dest);// 파일 업로드
 			map.put("profile", rename);// 데이타베이스에 입력될 프로필사진 이름
 		} else
 			map.put("profile", record.getProfile_img());
@@ -192,7 +192,8 @@ public class UserInfoController {
 
 		// 이부분 해주는 이유 : 페이지 나가도 다른 페이지에도 저장됨
 		int affected = userService.update(map);
-		if (affected != 0 && !profileimg.isEmpty()) {
+		System.out.println("수정이  안되욤  :: "+affected);
+		if (affected != 0 && !editprofileimg.isEmpty()) {
 			oldprofile.delete();
 		}
 		record = userService.selectOne(map);
