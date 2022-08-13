@@ -85,4 +85,22 @@ public class ReactController {
 	}
 	
 	
+	@RequestMapping("/getSearchWords.do")
+	   public List<Map> getSearchWords(){
+	      List<Map> words= new Vector<>();
+	      List<Map> result = boardService.searchWords();
+	      System.out.println("result:"+ result);
+	      for(Map word:result) {
+	         Map map = new HashMap<>();
+	         System.out.println("for문:"+word.get("SEARCH_WORD"));
+	         map.put("text", word.get("SEARCH_WORD"));
+	         map.put("value", word.get("SEARCH_COUNT"));
+	         words.add(map);
+	      }
+	      return words;
+	      
+	   }
+	
+	
+	
 }

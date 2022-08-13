@@ -203,5 +203,12 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 			
 			return boardDAO.mypageReview(map);
 		}
+	
+	
+	public List<Map> searchWords() {
+			
+			return boardDAO.searchWords();
+		}
+	
 
 }

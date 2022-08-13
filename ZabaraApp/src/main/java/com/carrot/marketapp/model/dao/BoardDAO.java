@@ -319,6 +319,12 @@ public class BoardDAO {
 		return sqlSession.selectOne("mypageReview", map);
 	}
 	
+	
+	public List<Map> searchWords() {
+		 return sqlSession.selectList("searchWords");
+	}
+	
+	
 
 }
 

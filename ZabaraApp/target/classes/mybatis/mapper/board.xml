@@ -409,6 +409,18 @@
 		select * from auction_list where auction_no=#{auctionNo}
 	</select>
 	
+	<select resultType="Map" id="searchWords">
+      
+         SELECT SEARCH_WORD,SEARCH_COUNT 
+         FROM SEARCHLOG 
+         <![CDATA[
+         WHERE ROWNUM <=20 
+         ]]>
+         ORDER BY SEARCH_COUNT DESC
+      
+   </select>
+	
+	
 	<!-- MYPAGE -->
 	
 	
