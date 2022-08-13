@@ -55,17 +55,10 @@ public class ChatController {
       map.put("userno", userNickname.getUserno());
       model.addAttribute("profileimage", userNickname.getProfile_img());
       Object userno;
-      if(map.get("upperuserno")!=null) {
-    	   userno=map.get("upperuserno");
-    	   map.put("userno", userno);
-      }else {
-    	   userno=model.addAttribute("userno", map.get("userno"));
-      }
       System.out.println(map.get("wirtenickName"));
       System.out.println(map.get("auction_no"));
       System.out.println(map.get("writeuserno"));
       System.out.println(map.get("upperuserno"));
-      System.out.println("userno"+userno);
 
       ChatDTO chatroom = chatService.findChatRoom(map);
       model.addAttribute("auction_no", map.get("auction_no"));

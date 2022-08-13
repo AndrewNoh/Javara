@@ -401,12 +401,12 @@ section.section-show {
   color: #fff;
 }
 
-.dropdown-menu {
+.navdropdown-menu {
     border: 1px solid #f6dac591;
     background: #f6dac591;
  }
  
- .dropdown-item:focus, .dropdown-item:hover{
+ .navdropdown-item:focus, .dropdown-item:hover{
     background: #f6dac591;
  }
 

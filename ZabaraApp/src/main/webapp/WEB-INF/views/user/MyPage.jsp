@@ -21,8 +21,6 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/css/ChatingStyle.css">
-
-
 <style>
 #mapwrap {
 	position: relative;
@@ -761,12 +759,12 @@ body::-webkit-scrollbar {
 					<div class="section-title">
 						<h2>자바라 페이</h2>
 					</div>
-					<div class="mt-2">
+					<div class="mt-4 mb-4">
 						<img
 							src="${pageContext.request.contextPath}/resources/assets/img/pay_logo.png"
 							style="height: 60px; margin-right: 10px" /> <span id="myPay"
 							style="color: #fff; font-size: 35px; vertical-align: bottom"></span>
-						<div style="float: right; margin-top: 20px">
+						<div style="float: right; margin-top: 45px">
 							<select class="btn btn-outline-warning btn-s my-2"
 								style="font-size: 12px; font-weight: bold; color: #fff; margin-top: 10px"
 								data-toggle="dropdown;" id="pay">
@@ -816,13 +814,8 @@ body::-webkit-scrollbar {
 						</div>
 						<span style="margin-bottom: 20px;"></span>
 					</div>
-					<div class="row">
-						<div class="col-lg-4 col-md-4 ">
-							<div class="icon-box" id="categoryToggle">
-								<i class="ri-gradienter-line" style="color: #ffa76e;"></i>
-								<h3>카테고리</h3>
-							</div>
-						</div>
+					<div class="row mb-3">
+						
 						<div class="col-lg-4 col-md-4">
 							<div class="icon-box" id="temperatureToggle">
 								<i class="bi bi-star" style="color: #ffbb2c;"></i>
@@ -833,6 +826,12 @@ body::-webkit-scrollbar {
 							<div class="icon-box" id="ChatToggle">
 								<i class="bi bi-chat-left-dots" style="color: #9cbeff;"></i>
 								<h3>&nbsp;&nbsp;채 팅</h3>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4 ">
+							<div class="icon-box" id="ALlToggle">
+								<i class="ri-gradienter-line" style="color: #ffa76e;"></i>
+								<h3>모두 닫기</h3>
 							</div>
 						</div>
 					</div>
@@ -967,7 +966,7 @@ body::-webkit-scrollbar {
 			</div>
 			<!-- 후기 -->
 			<div class="col mt-3" id="temperatureToggleDiv" style="display: none">
-				<div >
+				<div class="row">
 					<div class="skills container col"  >
 						<div class="section-title" >
 							<h2>나의 후기</h2>
@@ -996,6 +995,7 @@ body::-webkit-scrollbar {
 							</div>
 						</div>
 				</div>
+			</div>
 			</div>
 
 			<div class="col-12 mt-3" id="ChatToggleDiv" style="display: none">
@@ -1098,8 +1098,12 @@ body::-webkit-scrollbar {
             $("#ChatToggle").click(function() {
                $("#ChatToggleDiv").toggle(1000);
             });
-            $('#CategoryToggle').click(function() {
-               $("#CategoryToggleDiv").toggle(1000);
+            $('#ALlToggle').click(function() {
+            	$("#AccountBookToggleDiv").hide(1000);
+            	$("#KeyToggleDiv").hide(1000);
+            	$("#ChatToggleDiv").hide(1000);
+            	$("#MapToggleDiv").hide(1000);
+            	$("#temperatureToggleDiv").hide(1000);
             });
             $('#LikeToggle').click(function() {
                 $("#LikeToggleDiv").toggle(1000);
@@ -1576,7 +1580,7 @@ body::-webkit-scrollbar {
                               }
                            })
                      }
-           
+           			           
            var geocoder = new daum.maps.services.Geocoder();
          	function daumAddress() {
          		new daum.Postcode({
@@ -1606,6 +1610,4 @@ body::-webkit-scrollbar {
          			}
          		}).open();
          	}
-           		
-        
 </script>

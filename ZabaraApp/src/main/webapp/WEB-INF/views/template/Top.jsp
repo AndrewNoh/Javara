@@ -155,12 +155,7 @@
 <body>
 <sec:authorize access="hasAnyRole('ROLE_ADMIN')" var="isAdmin">
 </sec:authorize>
-<c:if test="${not isAdmin }">
-	<div style="position: fixed;top: 30px; right: 3%; z-index: 1;" id="chatbot" class="new-corsur">
-	 <a class="nav-link"><img src="${pageContext.request.contextPath}/resources/assets/img/chatbot_icon.png" 
-	       title="챗봇" style="width: 100px; height: 100px;"></a>
-	</div>
-</c:if>
+
 
 	<form id="logoutForm" method="post"
 		action="<c:url value="/security/logout.do"/>">
@@ -191,19 +186,19 @@
 				<c:if test="${not isAdmin }">
 				<li><a class="nav-link" href="<c:url value="/userinfo/mypage.do"/>">나의 자바라</a></li>
 	             <li><a class="nav-link" href="<c:url value="/board/auctionlist.do"/>">자바라경매</a></li>
+	             <li><a class="nav-link" href="<c:url value="/userinfo/category.do"/>">우리동네 카테고리</a></li>	
 	             <li class="nav-item dropdown">
 	             	<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-				        동네생활
+				        동네방네
 				      </a>
-				      <div class="dropdown-menu">
-				        <a class="dropdown-item" href="<c:url value="/board/gropboard.do"/>">동네생활</a>
-				        <a class="dropdown-item" href="<c:url value="/board/news.do"/>">실시간뉴스</a>
+				      <div class="dropdown-menu navdropdown-menu">
+				        <a class="dropdown-item navdropdown-item" href="<c:url value="/board/gropboard.do"/>">동네생활</a>
+				        <a class="dropdown-item navdropdown-item" href="<c:url value="/board/news.do"/>">실시간뉴스</a>
 				      </div>
 				   </li>
 	             <li><a class="nav-link" href="<c:url value="/board/qna.do"/>">자주묻는 질문</a></li>
 	             <!-- <li><a class="nav-link" href="<c:url value="/board/image.do"/>">이미지분석</a></li> -->
 	             <li><a class="nav-link" href="<c:url value="/chat/chattingroom.do"/>">채팅</a></li>
-	             <li><a class="nav-link" href="<c:url value="/userinfo/category.do"/>">우리동네 카테고리</a></li>				
 	             </c:if>
 	             
 			<li>
@@ -279,6 +274,8 @@
 					</div>
 				</form>
 			</li>
+			<li><a class="nav-link"id="chatbot"><img src="${pageContext.request.contextPath}/resources/assets/img/chatbot_icon.png" 
+			       title="챗봇" style="width: 100px; height: 100px;"></a></li>
 		</ul>
 
 		<div class="modal" id="myModal">

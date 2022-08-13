@@ -66,7 +66,7 @@ border-radius: 15px;
               <div class="swiper-wrapper align-items-center">
                  <c:forEach var="image" items="${images}" varStatus="loop">
                <div class="swiper-slide">
-                  <img src="${pageContext.request.contextPath}/resources/assets/img/product_img/${image.imageName}">
+                  <img src="${pageContext.request.contextPath}/resources/assets/img/product_img/${image.imageName}" style="width: 100%">
                </div>               
             </c:forEach>
 
@@ -557,10 +557,9 @@ border-radius: 15px;
                 var today = new Date();
                 if('${roomno}'===""){
                      $.ajax({
-                          url: '<c:url value="/chat/chatting.do"><c:param value="${list.upper_user_no}" name="upperuserno"/><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="0" name="townlist_no"/><c:param value="${list.auction_no}" name="auction_no"/><c:param value="${userno}" name="writeuserno"/></c:url>',
+                          url: '<c:url value="/chat/chatting.do"><c:param value="${userno}" name="senduserno"/><c:param value="${list.upper_user_no}" name="writeuserno"/><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="0" name="townlist_no"/><c:param value="${list.auction_no}" name="auction_no"/></c:url>',
                           data: {chatcontent:'축하합니다.낙찰되셨습니다.',
                              img:'낙찰되셨습니다.png',
-                                senduserno:'${userno}',
                                 unread_count:'1',
                                 sendtime: today.toLocaleTimeString('en-US'),
                                 '${_csrf.parameterName}':'${_csrf.token}'},
@@ -575,10 +574,9 @@ border-radius: 15px;
                        });
                   }
                 $.ajax({
-                       url: '<c:url value="/chat/chatting.do"><c:param value="${list.upper_user_no}" name="upperuserno"/><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="0" name="townlist_no"/><c:param value="${list.auction_no}" name="auction_no"/><c:param value="${userno}" name="writeuserno"/></c:url>',
+                       url: '<c:url value="/chat/chatting.do"><c:param value="${userno}" name="senduserno"/><c:param value="${list.upper_user_no}" name="writeuserno"/><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="0" name="townlist_no"/><c:param value="${list.auction_no}" name="auction_no"/></c:url>',
                        data: {chatcontent:'축하합니다.낙찰되셨습니다.',
                               img:'낙찰되셨습니다.png',
-                             senduserno:'${userno}',
                              unread_count:'1',
                              sendtime: today.toLocaleTimeString('en-US'),
                              '${_csrf.parameterName}':'${_csrf.token}'},
