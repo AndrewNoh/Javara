@@ -10,7 +10,8 @@ border-radius: 10px;
 }
 
 .contents {
-	background-color: rgb(20 19 17/ 70%);
+	/* background-color: rgb(20 19 17/ 70%); */
+	background-color: rgb(106 99 84 / 74%);
 	border-radius: 15px;
 	width: 100%;
 	margin: auto;
@@ -57,8 +58,8 @@ a:hover {
    <a href="#portfolio"><img src="${pageContext.request.contextPath}/resources/assets/img/scrollbar_btn.png" 
        title="위로가기" style="width: 80px; height: 80px"></a>
 </div>
-  <div id="board" class="container mt-5">
 
+  <div id="portfolio" class="container mt-5">
       <div class="section-title">
         <h2>동네생활</h2>
         <p style="margin-top:10px">👫🏻 우리가 함께라면, 건강하고 따뜻한 동네생활을 만들 수 있어요 </p>
@@ -78,9 +79,14 @@ a:hover {
 				<div class="contents p-3" style="display: flex; flex-direction: column;">
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
+					<!-- 글 제목 -->
+					<div class="form-group " style="padding: 10px 15px;">
+						<div style="font-size: 20px;font-weight: bold; color: #000">${LIST.title}</div>
+					</div>
+					<!-- 글쓴이 프로필/닉네임 -->
 					<div class="row mx-1"style="display: flex; justify-content: space-between; align-items:flex-end; border-bottom: 0.5px solid #ffffff80;">
 						<div class="col-md-5 form-group mb-3" style="display: flex; align-items:center;">
-							<img style="border-radius: 50%; width: 50px; height: 50px;" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${LIST.profile_img}"/>
+							<img style="border-radius: 50%; width: 40px; height: 40px;" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${LIST.profile_img}"/>
 							<div style="padding: 10px 15px;" >${LIST.nickName}</div>
 						</div>
 						<c:set var="session_id">
@@ -93,7 +99,6 @@ a:hover {
 					        		<c:param name="townlist_no" value="${LIST.townlist_no }"/></c:url>"id="edit">
 					        		<i class="bx bxs-edit p-2" style="font-size: 25px" title="수정"></i></a>
 					        -->
-							
 								<a href="<c:url value="/board/deleteTown.do">
 					        		<c:param name="townlist_no" value="${LIST.townlist_no }"/>
 					        		<c:param name="auction_no" value="0"/>
@@ -104,16 +109,14 @@ a:hover {
 							<div style="padding: 10px 10px; text-align: end; "><span class="p-2" style="background: #85adad;border-radius: 20px;">${LIST.category}</span></div>
 						</div>
 					</div>
-					<div class="form-group " style="padding: 10px 15px;">
-						<div style="font-size: 18px;font-weight: bold; color: #ffc107">${LIST.title}</div>
-					</div>
 					
+					<!-- 글 내용 -->
 					<div class="form-group" >
-						<div style="padding: 10px 18px;">${LIST.content}</div>
+						<div style="padding: 10px 18px; font-size: 18px">${LIST.content}</div>
 					</div>
 						<c:forEach var="i" begin="${loop.index}" end="${loop.index}">
 							<c:if test="${!empty imageList[i][0].imageName}" var="haveImage">
-								<div class="mt-3" style="padding: 10px 10px; display: flex; justify-content: center;" >
+								<div class="mt-3" style="padding: 10px 10px; display: flex; float: left;" >
 									<img
 										src="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[i][0].imageName}"
 										style="width: 60%; border-radius: 15px;" class="img-fluid" alt="">
@@ -123,20 +126,20 @@ a:hover {
 						</c:forEach>
 						
 						<div class="text-center mt-3" style="display: flex; justify-content:flex-end; align-items:center; border-top:.1px solid #ffffff80;">
-						<i class="bi bi-heart-fill" id="likeval${LIST.townlist_no }" style="color: #ffc107; font-size: 20px; margin-right: 1100px; margin-top: 10px;">${LIST.likes}</i>
+						<i class="bi bi-heart-fill" id="likeval${LIST.townlist_no }" style="color: #ffc107; font-size: 16px; margin-right: 1100px; margin-top: 10px;">${LIST.likes}</i>
 
+						<!-- likes -->
 						<div  style="margin-right:30px;margin-top: 10px">
 							<a class="like" style="font-size: 16px" data-value="${LIST.townlist_no}" name="${LIST.title}:${LIST.userNo }"><i class="bi bi-heart-fill" style="font-size: 20px; text-align: center; "data-value="${LIST.townlist_no}"></i></a>
 							<a class="comment" title="${LIST.townlist_no}" style="margin-left: 10px; font-size: 16px"><i class="bi bi-chat-left-dots" style="font-size: 20px; text-align: center;" ></i></a>
 						</div>	
 					</div>
+					<!-- comments -->
 					<div class="search row comments" style="display: none;" >
-
 						<div class="comment_box">
 							<div id="commentList${LIST.townlist_no}">
 							
-			                </div>			
-			               								
+			                </div>			       								
 						</div>
 							<div class="write_cmt"  style="text-align: center;">
 		                        <div class="stylish-input-group" > 
@@ -149,6 +152,7 @@ a:hover {
 		                        </div>
                     		 </div>
 						</div>
+						<!-- comments -->
 					</div>
 				<br/>
 			</c:forEach>
@@ -294,12 +298,13 @@ a:hover {
 		  			});//////
 	  			});//////
 	  });
-  	$(document).ready(function(){		
-		$.each(${likes}, function(index, value){
-			// console.log("좋아요 : " + value);
-			$('a[data-value="'+value+'"]').children().css('color', '#ffc107');
-		});
-		
-  	});
+  
+	  	$(document).ready(function(){		
+			$.each(${likes}, function(index, value){
+				// console.log("좋아요 : " + value);
+				$('a[data-value="'+value+'"]').children().css('color', '#ffc107');
+			});
+			
+	  	});
   	
   </script>
