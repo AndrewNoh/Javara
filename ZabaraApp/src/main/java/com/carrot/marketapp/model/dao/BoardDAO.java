@@ -70,7 +70,8 @@ public class BoardDAO {
 		if (map.get("board").equals("우리동네")) {
 			return sqlSession.selectList("getGropListAll", map);
 		}else if(map.get("board").equals("동네아이템가져오기")) {
-			return sqlSession.selectList("getAuctionListAddressItems",map);
+			if(map.get("category").toString().equals("전체매물")) return sqlSession.selectList("getAuctionListAllCategoryItems", map);
+			else return sqlSession.selectList("getAuctionListCategoryItems",map);
 		} else {
 			return sqlSession.selectList("getAuctionListAll", map);
 		}

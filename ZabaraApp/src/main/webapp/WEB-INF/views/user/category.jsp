@@ -37,7 +37,7 @@
    position: relative;
    overflow: hidden;
 }
-#addressitemlist{
+#addressItemListDiv{
    border-radius: 5px;
    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
    background: #fff;
@@ -223,17 +223,16 @@ input.form-text {
 </style>
 <div class="row" style="margin:30px;">  
    <div class="col-3" id="searchTab">
-      
-          <div id="addressItemListDiv" class="row">
-             <ul id="addressitemlist" style="height: 1000px;">
-                 <li id="addressItemListTitle" style="text-align:center; list-style: none;">
-                    <h3 style="font-size: 20px; font-weight: bold; margin-top: 20px;">판매 리스트</h3></li>
-               <hr/>
-             </ul>            
+          <div id="addressItemListDiv" class="row" style="height: 760px;">
+          	<div style="height:65px;">
+	          	<h3 style="font-size: 20px; font-weight: bold; margin-top: 20px;text-align:center;">판매 리스트</h3>          	
+	          	<hr style="margin-bottom:15px;"/>
+          	</div>
+             <ul id="addressitemlist"></ul>            
          </div>
        </div>
     <div id="viewMap" style="" class="col">
-    	<div id="map" style="border-radius: 20px; height: 1000px; display:flex; justify-content:center;" value="${address}">
+    	<div id="map" style="border-radius: 20px; height: 760px; display:flex; justify-content:center;" value="${address}">
 	       <div class="map_category" style="max-width: 850px" id="categorySelector">
 	           <ul>
 	              <li >유아동</li>
@@ -255,7 +254,7 @@ input.form-text {
 	            <li >반려동물용품</li>
 	            <li >식물</li>
 	            <li >스포츠/레저</li>
-	            <li >인기매물</li>   
+	            <li >전체매물</li>   
 	           </ul>
 	        </div>
        </div>
@@ -295,23 +294,11 @@ addressinfowindow.open(map,addressMarker);
 
 
 
-
-$(function(){
-   $( "#slider-range" ).slider({
-     range: true,
-     min: 0,
-     max: 500,
-     values: [ 75, 300 ],
-     slide: function( event, ui ) {
-       $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-     }
-   });
-   $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-     " - $" + $( "#slider-range" ).slider( "values", 1 ) );
-   infoboxcss('#addressbox');
-});
+//인포박스 커스텀css적용
+infoboxcss('#addressbox');
 
 
+//카테고리아이템 불러오기
 function categoryItemList(){
    var categoryimage;
    $.ajax({
@@ -382,7 +369,7 @@ function categoryItemList(){
                           '<span style="font-weight: bold;  font-family: GmarketSansMedium, sans-serif; margin-bottom: 10px; color: #85adad">현재 입찰가 '+result[i].upper_Price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원'+'</span>'+                         
                     '</div>'+
                     '<div class="btn-download">'+                      
-                    '<a href="/marketapp/board/auctionview.do?no='+result[i].auction_no+'" rel="lyteframe" target="_blank" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><span style="font-size: 18px; display: block;"><button class="btn">입찰하러가기</button></span></a>'+
+                    '<a href="/marketapp/board/auctionview.do?no='+result[i].auction_no+'" target="_blank""><span style="font-size: 18px; display: block;"><button class="btn">입찰하러가기</button></span></a>'+
                     '</div>'      
                   '</div>'+
                 '</div>'+
@@ -404,7 +391,7 @@ function categoryItemList(){
                 else{                   
                    var noitem="<h4 id='noitemtext' style='text-align:center;'>검색된 아이템이 없습니다.</h4>";
                    $('#addressitemlist').append(noitem);
-                   $('#addressitemlist').attr('style','overflow-y: scroll; height: 1000px;');
+                   $('#addressitemlist').attr('style','overflow-y: scroll;');
                 }
         }////success
      });
@@ -454,7 +441,7 @@ $('#categorySelector').click(function(e){
             customOverlay.setContent(categoryDetailInfoArray[i]);
             customOverlay.setPosition(overlayLatLng[i]);
             customOverlay.setMap(map);
-            panTo(overlayLatLng[i].getLat(),overlayLatLng[i].getLng());
+            panTo(overlayLatLng[i].getLat(),overlayLatLng[i].getLng());            
           });
       }
    }   
@@ -465,8 +452,10 @@ $('#categorySelector').click(function(e){
 //아이템목록 클릭시 마커위치로 이동
 $(document).on("click",'.addressItem',function(e){   
     var callLatitude =$(this).find('input:eq(0)').val();
-    var callLongitude=$(this).find('input:eq(1)').val();    
+    var callLongitude=$(this).find('input:eq(1)').val(); 
+	map.setLevel(2);
     panTo(callLatitude,callLongitude);
+    
 });
 
 
@@ -495,14 +484,15 @@ function infoboxcss(selector){
 
 
 function createListTag(object){
-      
+   var address= object["fulladdress"].toString().split(" ")[0]+" "+object["fulladdress"].toString().split(" ")[1]+" "+object["fulladdress"].toString().split(" ")[2];
    var ul = $('#addressitemlist');
-   var li = '<li style="border:1px solid transparent; border-radius: 10px;  margin:2px; background-color: #85adad" class="addressItem">'+
+   var li = '<li style="border:1px solid transparent; border-radius: 10px; margin:5px; background-color: #85adad" class="addressItem">'+
                '<div class="row">'+
                   '<div class="col-5">'+
                      '<img style="width:100%;height:100%; border-radius: 7px;" src="${pageContext.request.contextPath}/resources/assets/img/product_img/'+object["imagename"]+'">'+
                   '</div>'+
                   '<div class="col-7">'+
+                  	 '<div class="itemAddress" style="text-align:end; margin-right:10px; margin-top:5px;">'+address+'</div>'+
                      '<div class="title" style="text-align:center; margin-top:15px; width:95%; "><h5 style="font-family: GmarketSansMedium; font-size: 18px; margin-top: 10px; color: #fff">'+object["title"]+'</h5></div>'+
                      '<hr style="width:95%"/>'+
                      '<div><h6 style="color: #fff">시작가 '+object["base_Price"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원'+'</h6></div>'+
@@ -515,7 +505,7 @@ function createListTag(object){
                '</div>'+
          '</li>';
    ul.append(li);   
-   ul.attr('style','overflow-y: scroll;height: 1000px;');
+   ul.attr('style','overflow-y: scroll;height: 680px; list-style: none;');
    }
 
 
