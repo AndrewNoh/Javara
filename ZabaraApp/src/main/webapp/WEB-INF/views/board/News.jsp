@@ -91,7 +91,7 @@ img {
 					<c:forEach var="url" items="${urls}" varStatus="status" begin="0"
 						end="${titles.size()-1}">
 						<tr class="text-center" style="width: 200px">
-							<td style="font-weight: bold;"><a href="${url}">${titles[status.index]}</a></td>
+							<td style="font-weight: bold;"><a href="${url}" target="_blank">${titles[status.index]}</a></td>
 							<c:if test="${img[status.index]!=''}" var="haveImg">
 								<td><img src="${img[status.index]}"
 									style="width: 200px; height: 180px;"></td>

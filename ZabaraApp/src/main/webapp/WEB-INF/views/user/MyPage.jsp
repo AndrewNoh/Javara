@@ -537,19 +537,57 @@ No license, 100% free to use.
 	transform: translateY(-50%);
 }
 
-@keyframes arrow-right { 
-0% {transform: translateX(0);}
-25%{transform: translateX(3px);}
-25%{transform: translateX(5px);}
-75%{transform: translateX(3px);}
+@
+keyframes arrow-right { 0% {
+	transform: translateX(0);
+}
+
+25
+%
+{
+transform
+:
+translateX(
+3px
+);
+}
+25
+%
+{
+transform
+:
+translateX(
+5px
+);
+}
+75
+%
+{
+transform
+:
+translateX(
+3px
+);
+}
 to {
 	transform: translateX(0);
 }
 
 }
-@keyframes scale { 
-0%{transform: scale(0);}
-100%{transform: scale(1);}
+@
+keyframes scale { 0%{
+	transform: scale(0);
+}
+
+100
+%
+{
+transform
+:
+scale(
+1
+);
+}
 }
 ::-webkit-scrollbar {
 	width: 10px;
@@ -752,7 +790,7 @@ body::-webkit-scrollbar {
 						<div class="col-lg-4 col-md-4">
 							<div class="icon-box" id="temperatureToggle">
 								<i class="bi bi-star" style="color: #ffbb2c;"></i>
-								<h3>&nbsp;&nbsp;별 점</h3>
+								<h3>&nbsp;&nbsp;후 기</h3>
 							</div>
 						</div>
 						<div class="col-lg-4 col-md-4">
@@ -891,38 +929,38 @@ body::-webkit-scrollbar {
 					</div>
 				</div>
 			</div>
-			 <!-- 온도 -->
-         <div class="col mt-3" id="temperatureToggleDiv" style="display: none">
-            <div class="row">
-               <div class="skills container col">
-                  <div class="section-title">
-                     <h2>나의 별점</h2>
-                  </div>
-                  <div class="row skills-content">  
-                  <div style="padding:10px 0px 20px 0px;">
-                      <div class="col-2"><h3 class="title text-bold">별점</h3></div>      
-                             <div class="col header">
-                                    <div class="rating col mt-1">
-                                        <label for="rate-5" class="fa fa-star" id="1"></label>
-                                        <label for="rate-4" class="fa fa-star" id="2"></label> 
-                                        <label for="rate-3" class="fa fa-star" id="3"></label> 
-                                        <label for="rate-2" class="fa fa-star" id="4"></label> 
-                                        <label for="rate-1" class="fa fa-star" id="5"></label> 
-                                    </div>
-                             </div>
-                         </div>
-                        <div>
-                           <div class="testimonial-item row" id="reviewContent">
-                              <div>
-                              <h3 class="title text-bold">후기</h3>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-
-            </div>
+			<!-- 후기 -->
+			<div class="col mt-3" id="temperatureToggleDiv" style="display: none">
+				<div >
+					<div class="skills container col"  >
+						<div class="section-title" >
+							<h2>나의 후기</h2>
+						</div>
+						<div style="display: flex">
+							<div class="col starResult" style="padding: 10px 0px 20px 0px; flex:1;text-align: center;">
+								<div>
+									<h4 class="title text-bold" >평 점</h4>
+								</div>
+								<div class="col header" style="margin-top:50px;">
+									<div class="rating col mt-1">
+										<label for="rate-5" class="fa fa-star" id="1" style="font-size: 30px;"></label> <label
+											for="rate-4" class="fa fa-star" id="2" style="font-size: 30px;"></label> <label
+											for="rate-3" class="fa fa-star" id="3" style="font-size: 30px;"></label> <label
+											for="rate-2" class="fa fa-star" id="4" style="font-size: 30px;"></label> <label
+											for="rate-1" class="fa fa-star" id="5" style="font-size: 30px;"></label>
+									</div>
+								</div>
+							</div>
+							<div class="col" style="flex:2; text-align: center;">
+								<div class="testimonial-item row" id="reviewContent" style="margin-top:8px;">
+									<div>
+										<h4 class="title text-bold">후기</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
 
 			<div class="col-12 mt-3" id="ChatToggleDiv" style="display: none">
 				<div class="testimonials container mt-3">
@@ -1051,8 +1089,8 @@ body::-webkit-scrollbar {
 
                                  html =  '<div class="col starRe" style="background: rgba(255, 255, 255, 0.08);align-items: center; padding: 10px; margin-right:20px;border-radius: 10px;">'+
                                         '<span style="height: 100px; display: flex; align-items: center; justify-content: center;">'+
-                                        ' <i class="bx bxs-quote-alt-left quote-icon-left"></i>'
-                                           +el.review_content+ '<i class="bx bxs-quote-alt-right quote-icon-right"></i>'+
+                                        ' <i class="bx bxs-quote-alt-left quote-icon-left" style="font-size:0.5rem;"></i>'
+                                           + '&nbsp;'+ el.review_content +'&nbsp;' +'<i class="bx bxs-quote-alt-right quote-icon-right" style="font-size:0.5rem;"></i>'+
                                          '</span>'+
                                          '<div>';
                                      

@@ -152,7 +152,7 @@
 	<select id="mypagereviewSelect" parameterType="Map"
 		resultType="ReviewDTO">
 		<![CDATA[
-		SELECT * FROM (SELECT * FROM REVIEW WHERE USER_NO = #{userno}  ORDER BY review_no DESC) WHERE ROWNUM <=4
+		SELECT * FROM (SELECT * FROM REVIEW WHERE USER_NO = #{userno}  ORDER BY review_no DESC) WHERE ROWNUM <=3
 	    ]]>
 	</select>
 
