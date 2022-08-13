@@ -75,19 +75,18 @@ No license, 100% free to use.
 }
 
 .card {
-  margin-left: 800px;
   position: relative;
   padding: 48px 24px;
   z-index: 4;
-  max-height: 400px;
-  height: 90vh;
+  margin-left: 36%;
+  height: auto;
   max-width: 500px;
   width: 90%;
   overflow-x: hidden;
   overflow-y: auto;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  background:rgb(125 125 125 / 53%);
+  box-shadow: 0 15px 35px rgb(181 179 179 / 50%);
   border: 2px solid rgba(255, 255, 255, 0.3);
 }
 .card .header {
@@ -134,15 +133,15 @@ No license, 100% free to use.
   width: 100%;
 }
 .card .content .input-group .input-text, .card .content .input-group .textarea {
-  font-size: 14px;
-  position: relative;
-  width: 100%;
-  background: rgba(15, 17, 23, 0.6);
-  border-radius: 8px;
-  border: 2px solid transparent;
-  color: #fff;
-  transition: 0.75s ease;
-  padding: 18px 12px;
+	font-size: 16px;
+	position: relative;
+	width: 100%;
+	background: rgb(11 11 13 / 60%);
+	border-radius: 8px;
+	border: 2px solid transparent;
+	color: #fff;
+	transition: 0.75s ease;
+	padding: 18px 12px;
 }
 .card .content .input-group .input-text:focus, .card .content .input-group .textarea:focus {
   border-color: #2f5dd7;
@@ -221,16 +220,16 @@ No license, 100% free to use.
   align-items: center;
   letter-spacing: 0.4mm;
   justify-content: space-between;
-  background: #2f5dd7;
+  background: #eec341;
   transition: 0.75s ease;
   border: 2px solid transparent;
   font-size: 14px;
-  padding: 14px 22px;
+  padding: 14px 20px;
   cursor: pointer;
-  width: 30%;
+  width: 27%;
   transition: 0.2s ease;
   border-radius: 8px;
-  margin-left: 312px;
+  margin-left: 73%;
   margin-top: 10px;
 }
 .card .content .upload-submit .btn-submit:hover, .card .content .upload-submit .btn-submit:focus {
@@ -450,7 +449,7 @@ No license, 100% free to use.
                               <div class="portfolio-links">
                                  <a href="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[loop.index][0].imageName}" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bxs-photo-album"></i><span style="font-size: 12px; display: block;">사진보기</span></a>
                                   <a href="<c:url value="/board/auctionview.do"><c:param value="${record.auction_no}" name="no"/></c:url>" rel="lyteframe" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bxs-detail"></i><span style="font-size: 12px; display: block;">상세보기</span></a>
-                                  <a href="#" data-toggle="modal" onClick="review(${record.auction_no})"  data-target="#modalReview" ><i class="bi bi-brush" id="reviewWirte"></i><span style="font-size: 18px; display: block;">후기작성</span></a>
+                                  <a href="#" data-toggle="modal" onClick="review(${record.auction_no})"  data-target="#modalReview" ><i class="bi bi-brush" id="reviewWirte"></i><span style="font-size: 12px; display: block;">후기작성</span></a>
                               </div>
                               <p>종료예정일 ${record.endDate}</p>
                          </div>
@@ -468,15 +467,15 @@ No license, 100% free to use.
                                     <h1 class="title text-bold">거래후기</span></h1>
                                     <div class="rating">
                                         <input type="radio" name="stars" id="rate-5"  value="5" class="stars">
-                                        <label for="rate-5" class="fa fa-star"></label>
+                                        <label style="font-size: 24px;" for="rate-5" class="fa fa-star"></label>
                                         <input type="radio" name="stars" id="rate-4"  value="4" class="stars">
-                                        <label for="rate-4" class="fa fa-star"></label> 
+                                        <label style="font-size: 24px;" for="rate-4" class="fa fa-star"></label> 
                                         <input type="radio" name="stars" id="rate-3"  value="3" class="stars">
-                                        <label for="rate-3" class="fa fa-star"></label> 
+                                        <label style="font-size: 24px;" for="rate-3" class="fa fa-star"></label> 
                                         <input type="radio" name="stars" id="rate-2"  value="2" class="stars">
-                                        <label for="rate-2" class="fa fa-star"></label> 
+                                        <label style="font-size: 24px;" for="rate-2" class="fa fa-star"></label> 
                                         <input type="radio" name="stars" id="rate-1"  value="1" class="stars">
-                                        <label for="rate-1" class="fa fa-star"></label> 
+                                        <label style="font-size: 24px;" for="rate-1" class="fa fa-star"></label> 
                                     </div>
                                 </div>
                                 <div class="content">

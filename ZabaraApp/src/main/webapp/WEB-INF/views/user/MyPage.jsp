@@ -180,23 +180,22 @@ No license, 100% free to use.
   position: relative;
   padding: 48px 24px;
   z-index: 4;
-  margin-left: 38%;
+  margin-left: 36%;
   height: auto;
   max-width: 500px;
   width: 90%;
   overflow-x: hidden;
   overflow-y: auto;
   border-radius: 20px;
-  background:rgb(255 255 255 / 53%);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  background:rgb(125 125 125 / 53%);
+  box-shadow: 0 15px 35px rgb(181 179 179 / 50%);
   border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .card .header {
-	margin-bottom: 32px;
-	margin-top: 10px;
+	margin-bottom: 15px;
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
 }
 
@@ -245,10 +244,10 @@ No license, 100% free to use.
 
 .card .content .input-group .input-text, .card .content .input-group .textarea
 	{
-	font-size: 14px;
+	font-size: 16px;
 	position: relative;
 	width: 100%;
-	background: rgb(44 46 53 / 60%);
+	background: rgb(11 11 13 / 60%);
 	border-radius: 8px;
 	border: 2px solid transparent;
 	color: #fff;
@@ -349,16 +348,16 @@ No license, 100% free to use.
 	align-items: center;
 	letter-spacing: 0.4mm;
 	justify-content: space-between;
-	background: #ffd659;
+	background: #eec341;
 	transition: 0.75s ease;
 	border: 2px solid transparent;
-	font-size: 14px;
+	font-size: 15px;
 	padding: 14px 22px;
 	cursor: pointer;
-	width: 30%;
+	width: 24%;
 	transition: 0.2s ease;
 	border-radius: 8px;
-	margin-left: 312px;
+	margin-left: 77%;
 	margin-top: 10px;
 }
 
@@ -532,57 +531,30 @@ No license, 100% free to use.
 	transform: translateY(-50%);
 }
 
-@
-keyframes arrow-right { 0% {
-	transform: translateX(0);
+@keyframes arrow-right {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(3px);
+  }
+  25% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(3px);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
-
-25
-%
-{
-transform
-:
-translateX(
-3px
-);
-}
-25
-%
-{
-transform
-:
-translateX(
-5px
-);
-}
-75
-%
-{
-transform
-:
-translateX(
-3px
-);
-}
-to {
-	transform: translateX(0);
-}
-
-}
-@
-keyframes scale { 0%{
-	transform: scale(0);
-}
-
-100
-%
-{
-transform
-:
-scale(
-1
-);
-}
+@keyframes scale {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 ::-webkit-scrollbar {
 	width: 10px;
@@ -603,6 +575,10 @@ body {
 
 body::-webkit-scrollbar {
 	display: none; /* Chrome, Safari, Opera*/
+}
+
+.modal-backdrop.show{
+    opacity: .8;	
 }
 </style>
 
@@ -644,7 +620,7 @@ body::-webkit-scrollbar {
 						</div>
 						<div class="col-8" style="padding: 0%;">
 							<a href=" " data-target="#editModal" data-toggle="modal" id="modal-open"
-								class="setting"><img style="width: 25px; margin-top:10px;"src="${pageContext.request.contextPath}/resources/assets/img/pencil1.png" ></a>
+								class="setting"><img style="width: 23px; margin-top:14px;"src="${pageContext.request.contextPath}/resources/assets/img/pencil1.png" ></a>
 						</div>
 					</div>
 				</div>
@@ -652,17 +628,17 @@ body::-webkit-scrollbar {
 					<div class="col-lg-7">
 						<p style="font-weight: bold;">
 							<i class="bi bi-envelope"
-								style="font-size: 16px; margin-left: 10px; color: #ffc107;"></i>
+								style="font-size: 18px; margin-left: 10px; color: #ffc107;"></i>
 							&nbsp; <span>${email}</span>
 						</p>
-						<p>
+						<p style="font-weight: bold;">
 							<i class="bi bi-telephone"
-								style="font-size: 16px; margin-left: 10px; color: #ffc107;"></i>
+								style="font-size: 18px; margin-left: 10px; color: #ffc107;"></i>
 							&nbsp; <span>${phonenumber}</span>
 						</p>
-						<p>
+						<p style="font-weight: bold;">
 							<i class="bi bi-house"
-								style="font-size: 16px; margin-left: 10px; color: #ffc107;"></i>
+								style="font-size: 18px; margin-left: 10px; color: #ffc107;"></i>
 							&nbsp; <span id="myAddress">${address}</span>
 						</p>
 					</div>
