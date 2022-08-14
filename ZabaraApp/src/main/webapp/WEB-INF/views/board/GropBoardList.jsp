@@ -85,7 +85,7 @@ a:hover {
 						value="${_csrf.token}" />
 					<!-- 글 제목 -->
 					<div class="form-group " style="padding: 0px 15px; display: flex; justify-content:space-between;align-items:center; border-bottom: 0.5px solid #ffffff80; border-radius: 0px;">
-						<div style="font-size: 25px;font-weight: bold; color: #ffc107">${LIST.title}</div>
+						<div style="font-size: 25px;font-weight: bold; color: #000">${LIST.title}</div>
 						<c:set var="session_id">
 							<sec:authentication property="principal.username" />
 						</c:set>
@@ -109,8 +109,8 @@ a:hover {
 					<!-- 글쓴이 프로필/닉네임 -->
 					<div class="col"style="display: flex; justify-content: flex-end; align-items:flex-end; ">
 						<div class="col-md-5 form-group" style="display: flex; justify-content: flex-end;">
-							<img style="border-radius: 50%; width: 40px; height: 40px;" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${LIST.profile_img}"/>
-							<div style="padding: 10px 15px;" >${LIST.nickName}</div>
+							<img style="border-radius: 50%; width: 40px; height: 40px; margin-top: 10px" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${LIST.profile_img}"/>
+							<div style="padding: 10px 15px; margin-top: 10px" >${LIST.nickName}</div>
 						</div>
 						
 					</div>
@@ -131,7 +131,7 @@ a:hover {
 							<div style="padding: 10px 18px; font-size: 18px">${LIST.content}</div>
 						</div>
 						<div class="text-center mt-3" style="display: flex; justify-content:flex-end; align-items:center; border-top:.1px solid #ffffff80;">
-						<i class="bi bi-heart-fill" id="likeval${LIST.townlist_no }" style="color: #ffc107; font-size: 16px; margin-right: 1100px; margin-top: 10px;">${LIST.likes}</i>
+						<i class="bi bi-heart-fill" id="likeval${LIST.townlist_no }" style="color: #ffc107; font-size: 16px; margin-right: 1130px; margin-top: 10px;">${LIST.likes}</i>
 
 						<!-- likes -->
 						<div  style="margin-right:30px;margin-top: 10px">
@@ -147,7 +147,7 @@ a:hover {
 										<div id="commentList${LIST.townlist_no}">
 											<div style='margin-bottom: 10px'>
 												<img style="border-radius: 50%; width: 40px; height: 40px;" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${commentListd.profile_img}"/>
-													<strong style="margin-left: 10px; color: #85adad">${ commentListd.nickname}</strong>
+													<strong style="margin-left: 10px; color: #000">${ commentListd.nickname}</strong>
 													<span style="margin-left: 45px">${commentListd.comment_content}</span>
 												<span style="float: right"><fmt:formatDate value="${commentListd.comment_postdate}" pattern="MM월 dd일 HH:mm"/></span>
 											</div>
