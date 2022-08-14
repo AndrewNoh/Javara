@@ -14,6 +14,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/ChatingStyle.css">
     <!-- ======= Chat Details ======= -->
 <style>
+.write_msg::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
     .bAddr {
    color: black;
    width: 200px;

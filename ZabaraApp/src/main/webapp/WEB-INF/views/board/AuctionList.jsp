@@ -15,14 +15,14 @@
       title="위로가기" style="width: 80px; height: 80px"></a>
 </div>
 
-<!-- 
+
 <button type="button" id="prev" style="position: absolute; font-size: 70px; left: 0px; top:50%; z-index: 5; background-color:transparent; color: white; border: 0px">
 	&lt;
 </button>
 <button type="button" id="next" style="position: absolute;; right: 0px; font-size: 70px; top:50%;  z-index: 5; background-color:transparent; color: white; border: 0px">
 	&gt;
 </button>
--->
+
 
 <form action="<c:url value="/board/productlist.do"/>" method="post">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

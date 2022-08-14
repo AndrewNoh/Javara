@@ -647,18 +647,18 @@ body::-webkit-scrollbar {
 				<div class="counts container">
 
 					<div class="row">
-						<div class="col-lg-4 col-md-1">
+						<div class="col-lg-4 col-md-1" style="padding: 0px;">
 							<a class="nav-link" href="<c:url value="/userinfo/selllist.do"/>">
 								<div class="count-box" style="padding: 10px 0;">
 									<i class="bi bi-emoji-smile" style="color: #ffedb8;"></i> <span
 										data-purecounter-start="0" data-purecounter-end="${sellCount}"
 										data-purecounter-duration="1" class="purecounter"></span>
-									<p>판매내역</p>
+									<p style="font-size: 15px;">판매내역</p>
 								</div>
 							</a>
 						</div>
 
-						<div class="col-lg-4 col-md-1 ">
+						<div class="col-lg-4 col-md-1 " style="padding: 0px;">
 							<a class="nav-link"
 								href="<c:url value="/userinfo/purchaselist.do"/>">
 								<div class="count-box" style="padding: 10px 0;">
@@ -666,18 +666,18 @@ body::-webkit-scrollbar {
 									<span data-purecounter-start="0"
 										data-purecounter-end="${buyCount}"
 										data-purecounter-duration="1" class="purecounter"></span>
-									<p>입찰내역</p>
+									<p style="font-size: 15px;">입찰내역</p>
 								</div>
 							</a>
 						</div>
 
-						<div class="col-lg-4 col-md-1">
+						<div class="col-lg-4 col-md-1" style="padding: 0px;">
 							<a class="nav-link" href="<c:url value="/userinfo/likelist.do"/>">
 								<div class="count-box" style="padding: 10px 0;">
 									<i class="bi bi-heart" style="color: #ff4141;"></i> <span
 										data-purecounter-start="0" data-purecounter-end="${likeCount}"
 										data-purecounter-duration="1" class="purecounter"></span>
-									<p>좋아요</p>
+									<p style="font-size: 15px;">좋아요</p>
 								</div>
 							</a>
 						</div>
@@ -735,7 +735,7 @@ body::-webkit-scrollbar {
 					<div class="section-title">
 						<h2>자바라 페이</h2>
 					</div>
-					<div class="mt-4 mb-4">
+					<div class="mt-3 mb-3">
 						<img
 							src="${pageContext.request.contextPath}/resources/assets/img/pay_logo.png"
 							style="height: 60px; margin-right: 10px" /> <span id="myPay"
@@ -790,7 +790,7 @@ body::-webkit-scrollbar {
 						</div>
 						<span style="margin-bottom: 20px;"></span>
 					</div>
-					<div class="row mb-3">
+					<div class="row">
 						
 						<div class="col-lg-4 col-md-4">
 							<div class="icon-box" id="temperatureToggle">

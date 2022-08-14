@@ -446,7 +446,7 @@ section.section-show {
 # Counts
 --------------------------------------------------------------*/
 .counts {
-  padding: 70px 0 60px;
+  padding: 40px 10px 20px 10px;
 }
 .counts .count-box {
   padding: 30px 30px 25px 30px;

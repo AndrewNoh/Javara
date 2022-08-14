@@ -4,6 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  <!-- ======= 동내 Section ======= -->
  <style>
+ 
+ .comments::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
 .form-group{
 background:  rgb(0 0 0 / 0%);
 border-radius: 10px;
@@ -80,15 +84,8 @@ a:hover {
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
 					<!-- 글 제목 -->
-					<div class="form-group " style="padding: 10px 15px;">
-						<div style="font-size: 20px;font-weight: bold; color: #000">${LIST.title}</div>
-					</div>
-					<!-- 글쓴이 프로필/닉네임 -->
-					<div class="row mx-1"style="display: flex; justify-content: space-between; align-items:flex-end; border-bottom: 0.5px solid #ffffff80;">
-						<div class="col-md-5 form-group mb-3" style="display: flex; align-items:center;">
-							<img style="border-radius: 50%; width: 40px; height: 40px;" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${LIST.profile_img}"/>
-							<div style="padding: 10px 15px;" >${LIST.nickName}</div>
-						</div>
+					<div class="form-group " style="padding: 0px 15px; display: flex; justify-content:space-between;align-items:center; border-bottom: 0.5px solid #ffffff80; border-radius: 0px;">
+						<div style="font-size: 25px;font-weight: bold; color: #ffc107">${LIST.title}</div>
 						<c:set var="session_id">
 							<sec:authentication property="principal.username" />
 						</c:set>
@@ -109,11 +106,17 @@ a:hover {
 							<div style="padding: 10px 10px; text-align: end; "><span class="p-2" style="background: #85adad;border-radius: 20px;">${LIST.category}</span></div>
 						</div>
 					</div>
+					<!-- 글쓴이 프로필/닉네임 -->
+					<div class="col"style="display: flex; justify-content: flex-end; align-items:flex-end; ">
+						<div class="col-md-5 form-group" style="display: flex; justify-content: flex-end;">
+							<img style="border-radius: 50%; width: 40px; height: 40px;" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${LIST.profile_img}"/>
+							<div style="padding: 10px 15px;" >${LIST.nickName}</div>
+						</div>
+						
+					</div>
 					
 					<!-- 글 내용 -->
-					<div class="form-group" >
-						<div style="padding: 10px 18px; font-size: 18px">${LIST.content}</div>
-					</div>
+					
 						<c:forEach var="i" begin="${loop.index}" end="${loop.index}">
 							<c:if test="${!empty imageList[i][0].imageName}" var="haveImage">
 								<div class="mt-3" style="padding: 10px 10px; display: flex; float: left;" >
@@ -124,26 +127,37 @@ a:hover {
 								</div>
 							</c:if>
 						</c:forEach>
-						
+						<div class="form-group" >
+							<div style="padding: 10px 18px; font-size: 18px">${LIST.content}</div>
+						</div>
 						<div class="text-center mt-3" style="display: flex; justify-content:flex-end; align-items:center; border-top:.1px solid #ffffff80;">
 						<i class="bi bi-heart-fill" id="likeval${LIST.townlist_no }" style="color: #ffc107; font-size: 16px; margin-right: 1100px; margin-top: 10px;">${LIST.likes}</i>
 
 						<!-- likes -->
 						<div  style="margin-right:30px;margin-top: 10px">
 							<a class="like" style="font-size: 16px" data-value="${LIST.townlist_no}" name="${LIST.title}:${LIST.userNo }"><i class="bi bi-heart-fill" style="font-size: 20px; text-align: center; "data-value="${LIST.townlist_no}"></i></a>
-							<a class="comment" title="${LIST.townlist_no}" style="margin-left: 10px; font-size: 16px"><i class="bi bi-chat-left-dots" style="font-size: 20px; text-align: center;" ></i></a>
+							<%-- <a class="comment" title="${LIST.townlist_no}" style="margin-left: 10px; font-size: 16px"><i class="bi bi-chat-left-dots" style="font-size: 20px; text-align: center;" ></i></a> --%>
 						</div>	
 					</div>
 					<!-- comments -->
-					<div class="search row comments" style="display: none;" >
+					<div class="search row comments" style="" >
 						<div class="comment_box">
-							<div id="commentList${LIST.townlist_no}">
-							
-			                </div>			       								
+								<c:forEach var="commentListd" items="${commentListd}" varStatus="loop">
+									<c:if test="${commentListd.townlist_no eq LIST.townlist_no }">
+										<div id="commentList${LIST.townlist_no}">
+											<div style='margin-bottom: 10px'>
+												<img style="border-radius: 50%; width: 40px; height: 40px;" src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${commentListd.profile_img}"/>
+													<strong style="margin-left: 10px; color: #85adad">${ commentListd.nickname}</strong>
+													<span style="margin-left: 45px">${commentListd.comment_content}</span>
+												<span style="float: right"><fmt:formatDate value="${commentListd.comment_postdate}" pattern="MM월 dd일 HH:mm"/></span>
+											</div>
+						                </div>
+					                </c:if>			       								
+							</c:forEach>
 						</div>
 							<div class="write_cmt"  style="text-align: center;">
 		                        <div class="stylish-input-group" > 
-		                           <input type="text" onkeyup="enterkey(${LIST.townlist_no})" placeholder="댓글을 입력하시오" id="comment_content${LIST.townlist_no}" data-value="ct${LIST.townlist_no }" class="search-bar" style="border:none; width: 1200px">
+		                           <input type="text" onkeyup="enterkey(${LIST.townlist_no})" placeholder="댓글을 작성할 수 있어요" id="comment_content${LIST.townlist_no}" data-value="ct${LIST.townlist_no }" class="search-bar comments" style="border:none; width: 95%;">
 		                              <span class="input-group-addon" id="cCnt${LIST.townlist_no}">			                             
 		                           	  </span>
 		                        	  <button type="button" class="send" style="background-color: transparent; border:none" title="${LIST.townlist_no}" name="${LIST.title}:${LIST.userNo }">
@@ -179,6 +193,8 @@ a:hover {
 	  var comment = $('a[name=comment]');
 	  var nickName = '${LIST.nickName}';
 
+	  
+	  
 	  $(document).on("click", '.comment', function(e){
 		  var comments = document.querySelectorAll('.comments');
 		  var comment = document.querySelectorAll('.comment');
@@ -187,7 +203,6 @@ a:hover {
 		  for(var i=0; i<comments.length;i++){
 	    	  if(this===comment[i]){
 	    	 	 // console.log(comment[i]);
-		           $(comments[i]).toggle();
 	    	  }
 	      }
 		      $.ajax({

@@ -36,10 +36,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.carrot.marketapp.model.dto.AddressDTO;
 import com.carrot.marketapp.model.dto.BoardDTO;
+import com.carrot.marketapp.model.dto.CommentDTO;
 import com.carrot.marketapp.model.dto.ImageDTO;
 import com.carrot.marketapp.model.dto.UserDTO;
 import com.carrot.marketapp.model.service.impl.AddressServiceimpl;
 import com.carrot.marketapp.model.service.impl.BoardServiceimpl;
+import com.carrot.marketapp.model.service.impl.CommentServiceimpl;
 import com.carrot.marketapp.model.service.impl.ImageServiceimpl;
 import com.carrot.marketapp.model.service.impl.UserServiceimpl;
 import com.carrot.marketapp.util.FileUpDownUtils;
@@ -67,6 +69,9 @@ public class MainBoardController {
 
 	@Autowired
 	ObjectMapper objectMapper;
+	
+	@Autowired
+	CommentServiceimpl commentService;
 
 	@RequestMapping("/gropboard.do")
 	public String gropboard(Map map, Model model, Principal principal) {
@@ -98,6 +103,7 @@ public class MainBoardController {
 
 			List<ImageDTO> images = imageService.selectList(map);
 			imageList.add(images);
+			
 		}
 
 		List<Integer> likes = boardService.selectLikeList(map);
@@ -106,6 +112,9 @@ public class MainBoardController {
 		model.addAttribute("imageList", imageList);
 		model.addAttribute("address", map.get("simpleAddress"));
 		model.addAttribute("LISTS", Lists);
+		
+		List<CommentDTO> commentListd = commentService.commentSelectList(map);
+		 model.addAttribute("commentListd", commentListd);
 
 		return "/board/GropBoardList.market";
 	}
