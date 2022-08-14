@@ -158,7 +158,10 @@ width: 70%;
 	</div>
 </div>
 
-	
+	<div style="position: absolute;bottom: 5%; right: 3%;">
+   <a href="#header"><img src="${pageContext.request.contextPath}/resources/assets/img/scrollbar_btn.png" 
+      title="위로가기" style="width: 80px; height: 80px"></a>
+</div>
   
 <script>
     function logout(){

@@ -186,7 +186,7 @@
     								  <c:set var = "length" value = "${fn:length(string)}"/>
 	                               	  시간: </strong>${fn:substring(string, 0, length-2)}</br>
 	                               	  <strong>장소</strong></br>
-	                               	  ${fn:split(message.chatcontent,':')[3]}</br><a target='_blank' href='https://map.kakao.com/link/search/${fn:split(message.chatcontent,":")[3]}' id='appointedmap'  rel='lyteframe' data-gallery='portfolioDetailsGallery' data-glightbox='type: external' class='portfolio-details-lightbox' title='Portfolio Details''>지도로 보기</a></p></c:if>
+	                               	  ${fn:split(message.chatcontent,':')[3]}</br><a target='_blank' href='https://map.kakao.com/link/search/${fn:split(message.chatcontent,":")[3]}' id="appointedmap">지도로 보기</a></p></c:if>
 	                              <c:if test="${!phon and !appointed and !transfer and !payment and !successful and !phonOK}"><p style='text-align: center;'>${message.chatcontent }</p></span></c:if>
                               </c:if>
                               
@@ -245,7 +245,7 @@
 	    								  <c:set var = "length" value = "${fn:length(string)}"/>
 		                               	  <strong>시간: </strong>${fn:substring(string, 0, length-2)}</br>
 		                               	  <strong>장소</strong></br>
-		                               	  ${fn:split(message.chatcontent,':')[3]}</br><a target='_blank' href='https://map.kakao.com/link/search/${fn:split(message.chatcontent,":")[3]}' id='appointedmap'  rel='lyteframe' data-gallery='portfolioDetailsGallery' data-glightbox='type: external' class='portfolio-details-lightbox' title='Portfolio Details''>지도로 보기</a></p></c:if>
+		                               	  ${fn:split(message.chatcontent,':')[3]}</br><a target='_blank' href='https://map.kakao.com/link/search/${fn:split(message.chatcontent,":")[3]}' id='appointedmap'  '>지도로 보기</a></p></c:if>
 									  <c:if test="${!phon and !appointed and !transfer and !payment and !successful and !phonOK}"><p style="text-align: center;">${message.chatcontent }</p></c:if>	                               	  
 		                           </c:if>
 		                           <c:if test="${!chatimg}" var="chatimg">
@@ -609,7 +609,7 @@ function uploadFile(e) {
     	  var start2 = arr[4].length;
           appendMessage("<div class='outgoing_msg rowNum'><div class='incoming_msg_img'><c:if test='${userNickname.nickname eq chatroom.writeusernickname }'><img class='chat-header-image' src='${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatroom.senduserprofileimg}' alt='sunil'></c:if>"
           +"<c:if test='${userNickname.nickname ne chatroom.writeusernickname }'><img class='chat-header-image' src='${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatroom.writeuserprofileimg}' alt='sunil'></c:if>"+nickname+"</div>"
-          +"<div class='received_msg'><div class='received_withd_msg'><p style='text-align: center;'><strong>약속</strong></br><strong>날짜: </strong>"+arr[2].substr(0,start1-2)+"<strong></br>시간: </strong>"+arr[3]+":"+arr[4].substr(0,start2-2)+"</br><strong>장소</strong></br>"+arr[5]+"</br><a target='_blank' href='https://map.kakao.com/link/search/"+arr[5]+"' id='appointedmap' rel='lyteframe' data-gallery='portfolioDetailsGallery' data-glightbox='type: external' class='portfolio-details-lightbox' title='Portfolio Details''>지도로 보기</a><br/></p></div><span style='float: left;font-size: small; margin-top:5px;'>"
+          +"<div class='received_msg'><div class='received_withd_msg'><p style='text-align: center;'><strong>약속</strong></br><strong>날짜: </strong>"+arr[2].substr(0,start1-2)+"<strong></br>시간: </strong>"+arr[3]+":"+arr[4].substr(0,start2-2)+"</br><strong>장소</strong></br>"+arr[5]+"</br><a target='_blank' href='https://map.kakao.com/link/search/"+arr[5]+"' id='appointedmap' '>지도로 보기</a><br/></p></div><span style='float: left;font-size: small; margin-top:5px;'>"
           +today.toLocaleTimeString()+"</span></div></div>");
        }
       
@@ -719,10 +719,10 @@ function uploadFile(e) {
       $(document).on("click", '.appointed', function(e){
     	  var today = new Date(); 
     	  var form1 = $("#form").serialize();  
-		
+    	  var time=$('#time').val().test.replace('am', '오전' ||'pm','오후');
 		$.ajax({
 			url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
-			data: {chatcontent:"약속 날짜: "+$('#date').val()+" 시간: "+$('#time').val()+" 장소: "+$("#adrress").text(),
+			data: {chatcontent:"약속 날짜: "+$('#date').val()+" 시간: "+time+" 장소: "+$("#adrress").text(),
 					senduserno:${userno},
 					unread_count:'1',
 					sendtime: today.toLocaleTimeString('en-US'),
@@ -741,7 +741,7 @@ function uploadFile(e) {
 	  		wsocket.send('RoomNo${room_no},senduserno${senduserno},writeuserno${writeuserno},email${email}: ${userNickname.nickname }');
 	     
 	  		appendMessage("<div class='outgoing_msg rowNum'><div class='sent_msg'><p style='text-align:center;'>"
-	  				+"<strong>약속</strong></br><strong>날짜: </strong>"+$('#date').val()+"<strong></br>시간: </strong>"+$('#time').val()+"</br><strong>장소</strong></br>"+$("#adrress").text()+"</br><a target='_blank' href='https://map.kakao.com/link/search/"+$('#adrress').text()+"' id='appointedmap' rel='lyteframe' data-gallery='portfolioDetailsGallery' data-glightbox='type: external' class='portfolio-details-lightbox' title='Portfolio Details''>지도로 보기</a>"+"<br/></p><span style='float: right;font-size: small; margin-top:5px;'>"
+	  				+"<strong>약속</strong></br><strong>날짜: </strong>"+$('#date').val()+"<strong></br>시간: </strong>"+$('#time').val()+"</br><strong>장소</strong></br>"+$("#adrress").text()+"</br><a target='_blank' href='https://map.kakao.com/link/search/"+$('#adrress').text()+"' id='appointedmap' '>지도로 보기</a>"+"<br/></p><span style='float: right;font-size: small; margin-top:5px;'>"
 	  				+today.toLocaleTimeString()+"</span></div></div>");
 		
 		//기존 메시지 클리어		

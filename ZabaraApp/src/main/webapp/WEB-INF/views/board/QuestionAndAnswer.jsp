@@ -56,7 +56,7 @@ a:hover{
    
      <div class="card">
        <div class="card-header">
-         <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+         <a target='_blank' class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
            Q. 커뮤니티 가이드라인
          </a>
        </div>
@@ -85,7 +85,7 @@ a:hover{
    
      <div class="card">
        <div class="card-header">
-         <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+         <a target='_blank' class="collapsed card-link" data-toggle="collapse" href="#collapseThree"  >
            Q. 중고거래 운영정책   
          </a>
        </div>
@@ -111,7 +111,7 @@ a:hover{
      
      <div class="card">
        <div class="card-header">
-         <a class="collapsed card-link" data-toggle="collapse" href="#collapseFore">
+         <a target='_blank' class="collapsed card-link" data-toggle="collapse" href="#collapseFore">
            Q. 판매 금지 물품
          </a>
        </div>
@@ -156,24 +156,24 @@ a:hover{
      
      <div class="card">
        <div class="card-header">
-         <a class="collapsed card-link" data-toggle="collapse" href="#collapseFive">
+         <a target='_blank' class="collapsed card-link" data-toggle="collapse" href="#collapseFive">
            Q. 중고거래 게시판 거래 및 환불 정책
          </a>
        </div>
        <div id=collapseFive class="collapse" data-parent="#accordion">
          <div class="card-body">
-            <a href="https://usr.ecmc.or.kr/main.do"><전자문서·전자거래분쟁조정위원회 안내></a></br>
+            <a target='_blank' href="https://usr.ecmc.or.kr/main.do"><전자문서·전자거래분쟁조정위원회 안내></a></br>
            전자문서·전자거래분쟁조정위원회는 「전자문서 및 전자거래기본법」 제32조에 따라 설립되었으며, 분쟁 조정 신청을 받은 날로부터 45일 이내에 조정안을 작성하여 분쟁 조정 당 사자에게 권고하며, 권고를 받은 당사자는 권고를 받은 날로부터 15일 이내에 조정안에 대한 수락 여부를 위원회에 통지하여야 합니다. 조정안에 대하여 양 당사자가 수락한 경우 조정이 성립되며, 이때의 조정조서는 「민사소송법」에 따른 재판상 화해와 동일한 효력을 갖습니다.
          분쟁 조정 신청은 판매자·구매자 구분 없이 누구나 신청 가능 하지만, 어느 일방이 조정에 불응할 경우 조정은 성립되지 않습니다.
          </br>
-         <a href="https://usr.ecmc.or.kr/mediation/procedure.do"><전자문서·전자거래분쟁조정위원회 분쟁조정 절차></a>         
+         <a target='_blank' href="https://usr.ecmc.or.kr/mediation/procedure.do"><전자문서·전자거래분쟁조정위원회 분쟁조정 절차></a>         
          </div>
        </div>
      </div>
      
      <div class="card">
        <div class="card-header">
-         <a class="collapsed card-link" data-toggle="collapse" href="#collapseSix">
+         <a target='_blank' class="collapsed card-link" data-toggle="collapse" href="#collapseSix">
            Q. 광고 운영 정책
          </a>
        </div>
@@ -284,7 +284,7 @@ a:hover{
        
        <div class="card">
        <div class="card-header">
-         <a class="collapsed card-link" data-toggle="collapse" href="#collapseSeven">
+         <a target='_blank' class="collapsed card-link" data-toggle="collapse" href="#collapseSeven">
            Q. 광고비는 어떻게 결정되나요?
          </a>
        </div>
@@ -303,7 +303,7 @@ a:hover{
      
      <div class="card">
        <div class="card-header">
-         <a class="collapsed card-link" data-toggle="collapse" href="#collapseEight">
+         <a target='_blank' class="collapsed card-link" data-toggle="collapse" href="#collapseEight">
            Q. 자바라에서 지켜야 할 매너
          </a>
        </div>
@@ -326,7 +326,7 @@ a:hover{
      
      <div class="card">
        <div class="card-header">
-         <a class="collapsed card-link" data-toggle="collapse" href="#collapseNine">
+         <a target='_blank' class="collapsed card-link" data-toggle="collapse" href="#collapseNine">
            Q. 자바라의 뜻이 뭔가요?(왜 자바라인가요?)
          </a>
        </div>
@@ -343,7 +343,7 @@ a:hover{
      
      <div class="card">
        <div class="card-header">
-         <a class="collapsed card-link" data-toggle="collapse" href="#collapseTen">
+         <a target='_blank' class="collapsed card-link" data-toggle="collapse" href="#collapseTen">
            Q. 진행중인 게시글을 수정할 수 있나요?
          </a>
        </div>
@@ -370,7 +370,7 @@ a:hover{
      
      <div class="card">
        <div class="card-header">
-         <a class="collapsed card-link" data-toggle="collapse" href="#collapseEleven">
+         <a target='_blank' class="collapsed card-link" data-toggle="collapse" href="#collapseEleven">
            Q. 작성한 게시글이 보이지 않나요?
          </a>
        </div>
@@ -387,7 +387,7 @@ a:hover{
      
      <div class="card">
        <div class="card-header">
-         <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwelve">
+         <a target='_blank' class="collapsed card-link" data-toggle="collapse" href="#collapseTwelve">
            Q. 고객센터 문의 가능 시간은 언제인가요?
          </a>
        </div>
@@ -402,7 +402,7 @@ a:hover{
      
      <div class="card">
        <div class="card-header">
-         <a class="collapsed card-link" data-toggle="collapse" href="#collapseThirteen">
+         <a target='_blank' class="collapsed card-link" data-toggle="collapse" href="#collapseThirteen">
            Q. 제가 만들었던 게시글 정보를 확인하고 싶어요.
          </a>
        </div>
@@ -415,7 +415,7 @@ a:hover{
      
      <div class="card">
        <div class="card-header">
-         <a class="collapsed card-link" data-toggle="collapse" href="#collapseForeteen">
+         <a target='_blank' class="collapsed card-link" data-toggle="collapse" href="#collapseForeteen">
            Q. 자바라 공통 제한사항 안내
          </a>
        </div>
@@ -484,7 +484,7 @@ a:hover{
      
      <div class="card">
        <div class="card-header">
-         <a class="collapsed card-link" data-toggle="collapse" href="#collapseFifthteen">
+         <a target='_blank' class="collapsed card-link" data-toggle="collapse" href="#collapseFifthteen">
            Q. 게시글을 삭제할 수 있나요?
          </a>
        </div>

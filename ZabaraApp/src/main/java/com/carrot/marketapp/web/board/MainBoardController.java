@@ -104,6 +104,8 @@ public class MainBoardController {
 			List<ImageDTO> images = imageService.selectList(map);
 			imageList.add(images);
 			
+			List<CommentDTO> commentListd = commentService.commentSelectList(map);
+			 model.addAttribute("commentListd", commentListd);
 		}
 
 		List<Integer> likes = boardService.selectLikeList(map);
@@ -113,8 +115,7 @@ public class MainBoardController {
 		model.addAttribute("address", map.get("simpleAddress"));
 		model.addAttribute("LISTS", Lists);
 		
-		List<CommentDTO> commentListd = commentService.commentSelectList(map);
-		 model.addAttribute("commentListd", commentListd);
+		
 
 		return "/board/GropBoardList.market";
 	}
