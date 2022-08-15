@@ -50,23 +50,24 @@
                                        </div>
                                        <a href="#" class="btn mt-4" id="loginBtn">OK</a>
                                        <p class="mb-0 mt-4 text-center"><a href="#0" class="link" id="forgotpwd" >비밀번호를 잊으셨습니까?</a></p>
-                                       <div class="row" style="padding: 0%;">
-                                       <div class="col" style="margin-left: 110px; padding: 0%;">
-                                          <a href="javascript:kakaoLogin()"> <img
-                                             style="margin-top: 10px;"
-                                             src="${pageContext.request.contextPath}/resources/assets/img/kakaoButton.png"
-                                             width="40" alt="카카오 버튼" />
-                                          </a>
-                                       </div>
-                                       <div id="naver_id_login" class="col"
-                                          style="margin-right: 110px; padding: 0%;">
-                                          <a id="naverIdLogin_loginButton" href="javascript:void(0)">
-                                             <img style="margin-top: 10px;"
-                                             src="${pageContext.request.contextPath}/resources/assets/img/naverButton.png"
-                                             width="40" alt="네이버 버튼" />
-                                          </a>
-                                       </div>
-                                    </div>
+                                         <div class="row" style="display:flex;">
+	                                       <div style="flex:1;"></div>
+		                                       <div class="col" style="flex:1;">
+		                                          <a href="javascript:kakaoLogin()"> <img
+		                                             style="margin-top: 10px;"
+		                                             src="${pageContext.request.contextPath}/resources/assets/img/kakaoButton.png"
+		                                             width="40" alt="카카오 버튼" />
+		                                          </a>
+		                                       </div>
+		                                       <div id="naver_id_login" class="col" style="flex:1;">
+		                                          <a id="naverIdLogin_loginButton" href="javascript:void(0)">
+		                                             <img style="margin-top: 10px;"
+		                                             src="${pageContext.request.contextPath}/resources/assets/img/naverButton.png"
+		                                             width="40" alt="네이버 버튼" />
+		                                          </a>
+		                                       </div>
+		                                   <div style="flex:1;"></div>
+                                     </div>
                                     </form>
                                  </div>
                                  <div class="form-group" id="secondLogin" style="display:none;">

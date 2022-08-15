@@ -88,21 +88,22 @@ img {
 			</tr>
 			<tbody>
 				<tr>
-					<c:forEach var="url" items="${urls}" varStatus="status" begin="0"
-						end="${titles.size()-1}">
-						<tr class="text-center" style="width: 200px">
-							<td style="font-weight: bold;"><a href="${url}" target="_blank">${titles[status.index]}</a></td>
-							<c:if test="${img[status.index]!=''}" var="haveImg">
-								<td><img src="${img[status.index]}"
-									style="width: 200px; height: 180px;"></td>
-							</c:if>
-							<c:if test="${!haveImg}">
-								<td><img src="${pageContext.request.contextPath}/resources/assets/img/sampleImg.png"
-									style="width: 200px; height: 180px;"></td>
-							</c:if>
-						</tr>
-					</c:forEach>
-				</tr>
+	               <c:forEach var="url" items="${urls}" varStatus="status" begin="0"
+	                  end="${titles.size()-1}">
+	                  <tr class="text-center" style="width: 200px">
+	                     <td style="font-weight: bold;"><a href="${url}" target="_blank">${titles[status.index]}</a></td>
+	                     <c:if test="${img[status.index]=='' or img[status.index]==null}" var="noImg">
+	                        
+	                           <td><img src="${pageContext.request.contextPath}/resources/assets/img/sampleImg.png"
+	                           style="width: 200px; height: 180px;"></td>
+	                     </c:if>
+	                     <c:if test="${!noImg}">
+	                        <td><img src="${img[status.index]}"
+	                           style="width: 200px; height: 180px;"></td>
+	                     </c:if>
+	                  </tr>
+	               </c:forEach>
+	            </tr>
 			</tbody>
 		</table>
 	</div>
@@ -111,19 +112,4 @@ img {
 	var length = $('.text-center').length;
 
 	console.log(length);
-	
-	//관리자페이지 css안먹게하기
-    $("link#admin").prop('disabled', true);
-    $("link#admin1").prop('disabled', true);
-    $("link#admin2").prop('disabled', true);
-    $("link#admin3").prop('disabled', true);
-    $("link#admin4").prop('disabled', true);
-    $("link#admin5").prop('disabled', true);
-    $("link#admin6").prop('disabled', true);
-    $("link#admin7").prop('disabled', true);
-    $("link#admin8").prop('disabled', true);
-    $("link#admin9").prop('disabled', true);
-    $("link#admin10").prop('disabled', true);
-    $("link#admin11").prop('disabled', true);
-    $("link#admin12").prop('disabled', true);   
 </script>

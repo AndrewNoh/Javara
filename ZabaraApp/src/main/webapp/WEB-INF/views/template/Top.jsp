@@ -173,7 +173,24 @@
   from {top: 30px; opacity: 1;}
   to {top: 0; opacity: 0;}
 }
-
+.modal-content{
+  position: relative;
+  padding: 20px 20px;
+  z-index: 4;
+  margin-left: 36%;
+  height: auto;
+  max-width: 500px;
+  width: 90%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 20px;
+  background:rgb(137 137 137 / 53%);
+  box-shadow: 0 15px 35px rgb(181 179 179 / 50%);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+.modal-backdrop.show{
+    opacity: .8;	
+}
 </style>
 <body>
 <sec:authorize access="hasAnyRole('ROLE_ADMIN')" var="isAdmin">
@@ -301,35 +318,33 @@
 			       title="챗봇" style="width: 100px; height: 100px;"></a></li>
 		</ul>
 
-		<div class="modal" id="myModal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<!-- Modal Header -->
-					<div class="modal-header" style="background-color: #efc958;">
-						<h5 style="margin-top: 15px; font-family:"SDSwaggerTTF", sans-serif;">
-							<strong>이미지분석</strong>
-						</h5>
-						<i id="modal-close" data-dismiss="modal" class="close bi bi-x"
-							style="font-size: 1.5rem; color: black; cursor: pointer;"></i>
-					</div>
-					<div class="modal-body">
-						<div class="body-content">
-							<img id="preview_image" style="width: 100%; height: 90%;"/>
-							<div id="label-container" style="color: black; cursor: pointer;"></div>
-						</div>
-					</div>
-					<!-- Modal footer -->
-					<div class="modal-footer">
-						<i id="fakeTag" class="bi bi-card-image"
-							style="cursor: pointer; font-size: 2rem; color: cornflowerblue; "></i> <input
-							type="file" class="ImageAnalysis" id="test_image"
-							accept=".png,.jpg,.jpeg" style="display: none;" /> <i
-							style="cursor: pointer; font-size: 1.5rem; color: black;" class="bi bi-search"
-							onclick="predict()"></i>
-					</div>
-				</div>
-			</div>
-		</div>
+			   <div class="modal" id="myModal">
+			         <div class="modal-content">
+			           <div style="text-align: end;">
+			              <i id="modal-close" data-dismiss="modal" class="close bi bi-x"
+			                  style="font-size: 1.8rem; color: black; cursor: pointer;"></i>
+			            </div>
+			               <h4 style="font-family:"SDSwaggerTTF", sans-serif;">
+			                  <strong>이미지분석</strong>
+			               </h4>
+			               <div class="body-content" style="padding:5px;background-color: rgb(125 125 125 / 70%);border-radius: 10px;">
+			                  <img id="preview_image" style="width: 100%; height: 100%;"/>
+			                  <div id="label-container" style="color: black; cursor: pointer;"></div>
+			               </div>
+			
+						<div class="row">
+						<div class="col"></div>
+						  <div class="col" style="text-align: end;">
+			               <i id="fakeTag" class="bi bi-card-image"
+			                  style="cursor: pointer; font-size: 1.8rem; color: cornflowerblue; "></i> <input
+			                  type="file" class="ImageAnalysis" id="test_image"
+			                  accept=".png,.jpg,.jpeg" style="display: none;" /> <i
+			                  style="margin-left:10px; cursor: pointer; font-size: 1.5rem; color: white;" class="bi bi-search"
+			                  onclick="predict()"></i>
+			              </div>
+			            </div>
+			         </div>
+			   </div>
 		<div class="row"></div>
 
 		<i class="bi bi-list mobile-nav-toggle"></i>
