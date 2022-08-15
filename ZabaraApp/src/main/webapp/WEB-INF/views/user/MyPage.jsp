@@ -760,18 +760,21 @@ body::-webkit-scrollbar {
                              <div class="modal-body">
 								 <h1 style="font-size: 12px; text-align:center; margin-top: 10px; font-weight: bold ">자바라페이는 선불머니를 충전하고 이용할 수 있는 간편 결제/송금 서비스예요. </h1>
                       	         <h1 style="font-size: 12px; text-align:center; margin-top: 10px; font-weight: bold ">중고 및 경매거래 자바라페이로 해보세요! </h1>
-                              <form class="form-horizontal" role="form" method="POST" action="#" style="text-align: center;">
+                              <form class="form-horizontal" role="form" method="POST" action="#" style="text-align: center;">                     
+                                  <sec:csrfInput/>
                                   <select class="btn btn-outline-warning btn-s my-2" style="font-size: 12px; font-weight: bold; color: #000; margin-top: 10px" data-toggle="dropdown;" id="pay" name="pay">
-	                                 <option value="">충전 금액 선택하기</option>
+	                                 <option value="">이용하기</option>
+	                                 <!-- 
 	                                 <option value="5000">충전 금액 5,000 원</option>
 	                                 <option value="10000">충전 금액 10,000 원</option>
 	                                 <option value="20000">충전 금액 20,000 원</option>
 	                                 <option value="30000">충전 금액 30,000 원</option>
 	                                 <option value="40000">충전 금액 40,000 원</option>
 	                                 <option value="50000">충전 금액 50,000 원</option>
-	                                 <option value="direct">직접입력</option>
+	                                 -->
+	                                 <option value="direct">직접 입력</option>
                            		  </select>
-                                   <input type="text" class="input" id="payboxDirect" name="payboxDirect" style="font-size: 14px; margin-left: 10px; border: 0.5px solid gray; border-radius: 30px; padding: 5px; width: 100px; text-align: center;" placeholder="금액 기재"> 
+                                   <input type="text"  class="input" id="payboxDirect" name="payboxDirect" style="font-size: 14px; margin-left: 10px; border: 0.5px solid gray; border-radius: 30px; padding: 5px; width: 100px; text-align: center;" placeholder="금액 기재"> 
                                 
                               </form>
                         </div>
@@ -1045,9 +1048,6 @@ body::-webkit-scrollbar {
 			</div>
 		</div>
 	</div>
-
-
-
 </div>
 </div>
 </div>
@@ -1498,10 +1498,9 @@ body::-webkit-scrollbar {
 	               }
            	}
            
-           // 자바라페이 잔액 충전: 직접 입력
+          // 자바라페이 잔액 충전: 직접 입력
 		  $(function(){
-	             $('#payboxDirect').hide();
-	              
+	             $('#payboxDirect').hide();	              
 	             $('#pay').change(function(){
 	                if($("#pay").val() == "direct") {
 	                   $("#payboxDirect").show();
@@ -1511,14 +1510,17 @@ body::-webkit-scrollbar {
 	                 }                
 	              }) 
 	              })
-
+           	
+          function selectamount(){ }
+          
+          
            // 자바라페이 잔액 충전
            var IMP = window.IMP;
            IMP.init('imp74932749'); 
 
            function payService() {
         	   // 충전액
-               var amount = $('#pay option:selected').val();
+               var amount = $('#payboxDirect').val();
     		   
                // 사용자 정보 얻기
                var email = '${email}';
@@ -1556,7 +1558,9 @@ body::-webkit-scrollbar {
                                       icon : 'success',
                                       title : '충전이 완료되었습니다.'
                                    })
-                                 console.log(amount);
+                                 // console.log(amount);
+                                 $('#payModal').modal('hide');
+                                 
                                  $.ajax({
                                       type: 'POST',
                                      url : '<c:url value="/pay/balance.do"/>',
@@ -1591,9 +1595,12 @@ body::-webkit-scrollbar {
                                    })
                                  
                               }
+                              
                            })
+                           $('#payModal').modal('hide');
                      }
-           			           
+           
+           
            var geocoder = new daum.maps.services.Geocoder();
          	function daumAddress() {
          		new daum.Postcode({
