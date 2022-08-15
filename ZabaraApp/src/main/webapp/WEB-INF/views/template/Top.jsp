@@ -90,6 +90,29 @@
 	rel="stylesheet">
 <link rel='stylesheet'
 	href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+	
+<!-- 관리자페이지 css -->
+
+<!-- Fontfaces CSS-->
+    <link id="admin" href="css/font-face.css" rel="stylesheet" media="all">
+    <link id="admin1" href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link id="admin2" href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link id="admin3" href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link id="admin4" href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link id="admin5" href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link id="admin6" href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link id="admin7" href="${pageContext.request.contextPath}/resources/adminassets/adminvendor/wow/animate.css" rel="stylesheet" media="all">
+    <link id="admin8" href="${pageContext.request.contextPath}/resources/adminassets/adminvendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link id="admin9" href="${pageContext.request.contextPath}/resources/adminassets/adminvendor/slick/slick.css" rel="stylesheet" media="all">
+    <link id="admin10" href="${pageContext.request.contextPath}/resources/adminassets/adminvendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link id="admin11" href="${pageContext.request.contextPath}/resources/adminassets/adminvendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link id="admin12" href="${pageContext.request.contextPath}/resources/adminassets/admincss/adminStyle.css" rel="stylesheet" media="all">
 <!-- =======================================================
   * Template Name: Personal - v4.7.0
   * Template URL: https://bootstrapmade.com/personal-free-resume-bootstrap-template/
@@ -343,7 +366,22 @@
 <div id="snackbar"></div>
 
 <script>
-
+	
+//관리자페이지 css안먹게하기
+$("link#admin").prop('disabled', true);
+$("link#admin1").prop('disabled', true);
+$("link#admin2").prop('disabled', true);
+$("link#admin3").prop('disabled', true);
+$("link#admin4").prop('disabled', true);
+$("link#admin5").prop('disabled', true);
+$("link#admin6").prop('disabled', true);
+$("link#admin7").prop('disabled', true);
+$("link#admin8").prop('disabled', true);
+$("link#admin9").prop('disabled', true);
+$("link#admin10").prop('disabled', true);
+$("link#admin11").prop('disabled', true);
+$("link#admin12").prop('disabled', true);
+	
 	$("#message").on('keypress',function(e) {
 		if (e.keyCode == 13){
 	        //e.preventDefault();
