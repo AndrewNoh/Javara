@@ -126,8 +126,6 @@
 								<i class="bi bi-three-dots-vertical m-1" style="font-size: 35px;"></i>
 							</div>
 							<div class="option-container" id="chatmenuToggleDiv" style="display:none">
-								<div class="option-item common-bg-hover">알림음 끄기</div>
-								<div class="option-item common-bg-hover">대화상대 차단하기</div>
 								<a style="color: black;" href="<c:url value="/chat/chattingroom.do"/>"><div class="option-item common-bg-hover" id="deletchtroom">채팅방 나가기</div></a>
 							</div>
 						</div>
@@ -606,10 +604,9 @@ function uploadFile(e) {
       else if(e.data.includes('서버로부터받은 약속 메시지${room_no}:')){
     	  let arr = e.data.split(/[:,]/);
     	  var start1 = arr[2].length;
-    	  var start2 = arr[4].length;
           appendMessage("<div class='outgoing_msg rowNum'><div class='incoming_msg_img'><c:if test='${userNickname.nickname eq chatroom.writeusernickname }'><img class='chat-header-image' src='${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatroom.senduserprofileimg}' alt='sunil'></c:if>"
           +"<c:if test='${userNickname.nickname ne chatroom.writeusernickname }'><img class='chat-header-image' src='${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatroom.writeuserprofileimg}' alt='sunil'></c:if>"+nickname+"</div>"
-          +"<div class='received_msg'><div class='received_withd_msg'><p style='text-align: center;'><strong>약속</strong></br><strong>날짜: </strong>"+arr[2].substr(0,start1-2)+"<strong></br>시간: </strong>"+arr[3]+":"+arr[4].substr(0,start2-2)+"</br><strong>장소</strong></br>"+arr[5]+"</br><a target='_blank' href='https://map.kakao.com/link/search/"+arr[5]+"' id='appointedmap' '>지도로 보기</a><br/></p></div><span style='float: left;font-size: small; margin-top:5px;'>"
+          +"<div class='received_msg'><div class='received_withd_msg'><p style='text-align: center;'><strong>약속</strong></br><strong>날짜: </strong>"+arr[2].substr(0,start1-2)+"<strong></br>시간: </strong>"+arr[3].substr(0,start1-2)+"</br><strong>장소</strong></br>"+arr[4]+"</br><a target='_blank' href='https://map.kakao.com/link/search/"+arr[4]+"' id='appointedmap' '>지도로 보기</a><br/></p></div><span style='float: left;font-size: small; margin-top:5px;'>"
           +today.toLocaleTimeString()+"</span></div></div>");
        }
       
@@ -719,7 +716,12 @@ function uploadFile(e) {
       $(document).on("click", '.appointed', function(e){
     	  var today = new Date(); 
     	  var form1 = $("#form").serialize();  
-    	  var time=$('#time').val().test.replace('am', '오전' ||'pm','오후');
+    	  var time;
+    	  if($('#time').val().includes('am')){
+    		   time = $('#time').val().replace('am', '오전');
+    	  }else if($('#time').val().includes('pm')){
+    		   time = $('#time').val().replace('pm', '오후');
+    	  }
 		$.ajax({
 			url: '<c:url value="/chat/chatting.do"><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>',
 			data: {chatcontent:"약속 날짜: "+$('#date').val()+" 시간: "+time+" 장소: "+$("#adrress").text(),
@@ -737,11 +739,11 @@ function uploadFile(e) {
 			}
 		});
 		
-	    	wsocket.send('서버로부터받은 약속 메시지${room_no}:'+"약속 날짜: "+$('#date').val()+" 시간: "+$('#time').val()+" 장소: "+$("#adrress").text());//msg:KOSMO>>안녕
+	    	wsocket.send('서버로부터받은 약속 메시지${room_no}:'+"약속 날짜: "+$('#date').val()+" 시간: "+time+" 장소: "+$("#adrress").text());//msg:KOSMO>>안녕
 	  		wsocket.send('RoomNo${room_no},senduserno${senduserno},writeuserno${writeuserno},email${email}: ${userNickname.nickname }');
 	     
 	  		appendMessage("<div class='outgoing_msg rowNum'><div class='sent_msg'><p style='text-align:center;'>"
-	  				+"<strong>약속</strong></br><strong>날짜: </strong>"+$('#date').val()+"<strong></br>시간: </strong>"+$('#time').val()+"</br><strong>장소</strong></br>"+$("#adrress").text()+"</br><a target='_blank' href='https://map.kakao.com/link/search/"+$('#adrress').text()+"' id='appointedmap' '>지도로 보기</a>"+"<br/></p><span style='float: right;font-size: small; margin-top:5px;'>"
+	  				+"<strong>약속</strong></br><strong>날짜: </strong>"+$('#date').val()+"<strong></br>시간: </strong>"+time+"</br><strong>장소</strong></br>"+$("#adrress").text()+"</br><a target='_blank' href='https://map.kakao.com/link/search/"+$('#adrress').text()+"' id='appointedmap' '>지도로 보기</a>"+"<br/></p><span style='float: right;font-size: small; margin-top:5px;'>"
 	  				+today.toLocaleTimeString()+"</span></div></div>");
 		
 		//기존 메시지 클리어		
@@ -1262,7 +1264,7 @@ function uploadFile(e) {
         }
         }
    });
-   
+    
  //관리자페이지 css안먹게하기
    $("link#admin").prop('disabled', true);
    $("link#admin1").prop('disabled', true);

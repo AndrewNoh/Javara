@@ -33,6 +33,7 @@ import com.carrot.marketapp.model.dao.PayDAO;
 import com.carrot.marketapp.model.dto.AddressDTO;
 import com.carrot.marketapp.model.dto.BoardDTO;
 import com.carrot.marketapp.model.dto.ChatDTO;
+import com.carrot.marketapp.model.dto.CommentDTO;
 import com.carrot.marketapp.model.dto.ImageDTO;
 import com.carrot.marketapp.model.dto.PayDTO;
 import com.carrot.marketapp.model.dto.UserDTO;
@@ -40,6 +41,7 @@ import com.carrot.marketapp.model.service.PayService;
 import com.carrot.marketapp.model.service.impl.AddressServiceimpl;
 import com.carrot.marketapp.model.service.impl.BoardServiceimpl;
 import com.carrot.marketapp.model.service.impl.ChatServiceimpl;
+import com.carrot.marketapp.model.service.impl.CommentServiceimpl;
 import com.carrot.marketapp.model.service.impl.ImageServiceimpl;
 import com.carrot.marketapp.model.service.impl.PayServiceimpl;
 import com.carrot.marketapp.model.service.impl.UserServiceimpl;
@@ -71,6 +73,8 @@ public class UserInfoController {
 	@Autowired
 	ObjectMapper objectMapper;
 	
+	@Autowired
+	CommentServiceimpl commentService;
 
 	// 회원가입
 	@RequestMapping("/signup.do")
@@ -256,8 +260,15 @@ public class UserInfoController {
 		
 		
 		//알림
-		List<BoardDTO> participationList= boardService.participationList(map);
-		model.addAttribute("participationList", participationList);
+		List<CommentDTO> commentList = commentService.commentSelectList(map);
+		 model.addAttribute("commentList", commentList);
+		 
+		 List<BoardDTO> comments = boardService.countcomment(map);
+		 model.addAttribute("comments", comments);
+		 List<BoardDTO> mypageAuctionList = boardService.mypageAuctionList(map);
+		 model.addAttribute("mypageAuctionList", mypageAuctionList);
+		 
+		 
 		// 뷰정보 반환]
 		return "/user/MyPage.market";
 	}///////////////////////

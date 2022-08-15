@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.carrot.marketapp.model.dto.AddressDTO;
 import com.carrot.marketapp.model.dto.BoardDTO;
+import com.carrot.marketapp.model.dto.UserDTO;
 
 @Repository("boardDAO")
 public class BoardDAO {
@@ -323,7 +324,14 @@ public class BoardDAO {
 	public List<Map> searchWords() {
 		 return sqlSession.selectList("searchWords");
 	}
-	
+
+	public List<BoardDTO> countcomment(Map map) {
+		return sqlSession.selectList("countcomment",map);
+	}
+
+	public List<BoardDTO> mypageAuctionList(Map map) {
+		return sqlSession.selectList("mypageAuctionList",map);
+	}
 	
 
 }

@@ -605,7 +605,7 @@ $("link#admin12").prop('disabled', true);
 
 		});
 		
-	      <sec:authentication property="name" var="username" />
+		<sec:authentication property="name" var="username" />
 	          <c:if test="${username != 'anonymousUser'}" var="isLogin">
 	          wsocket = new WebSocket("ws://${pageContext.request.serverName}:${pageContext.request.serverPort}<c:url value='/chat-ws.do/0'/>"); 
 	           //192.168.219.101//192.168.0.129
@@ -631,11 +631,11 @@ $("link#admin12").prop('disabled', true);
 	               //서버로부터 받은 데이타는 이벤트객체(e).data속성에 저장되어 있다
 	                const element = document.getElementById('snackbar');
 	               //일반 메세지
-	               
+	               console.log(e.data);
 	               if(e.data.includes('RoomNo')){
 	                  var start1 = e.data.indexOf(",");
 	                  var start2 = e.data.indexOf(":");
-	                  if(e.data.substring(0,start1)==='RoomNo${roomno},'){
+	                  if(e.data.includes('RoomNo${room_no},')){
 	                     //console.log('같은방');
 	                  }
 	                  else if(e.data.includes('senduserno${userno},') || e.data.includes('writeuserno${userno},')){
@@ -657,14 +657,23 @@ $("link#admin12").prop('disabled', true);
 	                     var x = document.getElementById("snackbar");
 	                     x.className = "show";
 	                     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+	                     if( e.data.includes('좋아요,')){
+		                     element.innerHTML = '';
+		                     element.innerHTML += e.data.substring(start2+1);
+		                     var x = document.getElementById("snackbar");
+		                     x.className = "show";
+		                     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+		                  }
 	                  }
 	                  if( e.data.includes('upperuserno${userno},')){
 	                     element.innerHTML = '';
 	                     element.innerHTML += e.data.substring(start2+1);
+	                     console.log(e.data.substring(start2+1));
 	                     var x = document.getElementById("snackbar");
 	                     x.className = "show";
 	                     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 	                  }
+	                  
 	              }else if(e.data.includes('낙찰')){
 	                  var start = e.data.indexOf(":");
 	                  if( e.data.includes('upperuserno${userno},')){

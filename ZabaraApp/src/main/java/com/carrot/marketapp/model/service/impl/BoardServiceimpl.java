@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.carrot.marketapp.model.dao.BoardDAO;
 import com.carrot.marketapp.model.dto.AddressDTO;
 import com.carrot.marketapp.model.dto.BoardDTO;
+import com.carrot.marketapp.model.dto.UserDTO;
 import com.carrot.marketapp.model.service.CommonService;
 
 @Service("boardService")
@@ -209,6 +210,14 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 			
 			return boardDAO.searchWords();
 		}
-	
+
+	public List<BoardDTO> countcomment(Map map) {
+		return boardDAO.countcomment(map);
+	}
+
+	public List<BoardDTO> mypageAuctionList(Map map) {
+		return boardDAO.mypageAuctionList(map);
+	}
+
 
 }

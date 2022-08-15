@@ -849,14 +849,14 @@ body::-webkit-scrollbar {
 					<div class="row">
 						<div class="col-lg-12 col-md-6 mt-4 ">
 							<div class="icon-box">
-								<div class="col" style="display: flex; align-items: center;">
+								<div class="col" style="display: flex; align-items: center; flex-wrap:wrap;">
 									<i class="ri-calendar-todo-line" style="color: #ffbb2c;"></i>
 									<h3>알림 내역</h3>
 								</div>
-								<div class="col-10 content" style="display: flex;">
+								<div class="col-10 content" style="display: flex;flex-direction:column;">
 									<div class="col">
 										<div class="section-title">
-											<h2 style="margin-bottom: 30px;">채팅알림</h2>
+											<h2 style="margin-bottom: 30px;">채팅 알림</h2>
 										</div>
 										<c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
 											<a
@@ -878,9 +878,9 @@ body::-webkit-scrollbar {
 											</a>
 										</c:forEach>
 									</div>
-									<div class="col">
+									<div class="col mt-3">
 										<div class="section-title">
-											<h2 style="margin-bottom: 30px;">낙찰알림</h2>
+											<h2 style="margin-bottom: 30px;">경매 알림</h2>
 										</div>
 										<c:forEach var="participationList"
 											items="${participationList}" varStatus="loop">
@@ -898,6 +898,51 @@ body::-webkit-scrollbar {
 													</h3>
 												</a>
 											</c:if>
+										</c:forEach>
+										<c:forEach var="mypageAuctionList"
+											items="${mypageAuctionList}" varStatus="loop">
+											<c:if test="${mypageAuctionList.status eq  'SALE'}">
+											<c:if test="${(mypageAuctionList.upper_Price - mypageAuctionList.base_Price)>0}">
+													<a
+														href="<c:url value="/board/auctionview.do"><c:param value="${participationList.auction_no}" name="no"/></c:url>"
+														rel="lyteframe" data-gallery="portfolioDetailsGallery"
+														id="view${loop.count}" data-glightbox="type: external"
+														class="portfolio-details-lightbox"
+														title="Portfolio Details">
+														<h3 class="mb-2">
+															<i class="bi bi-chevron-right"
+																style="color: #00d4ff; font-size: 15px;"></i>
+															${mypageAuctionList.title}이의 최고가 ${mypageAuctionList.upper_Price}원으로 갱신되었어요
+														</h3>
+													</a>
+												</c:if>
+												<c:if test="${mypageAuctionList.likes>0}">
+													<a
+														href="<c:url value="/board/auctionview.do"><c:param value="${mypageAuctionList.auction_no}" name="no"/></c:url>"
+														rel="lyteframe" data-gallery="portfolioDetailsGallery"
+														id="view${loop.count}" data-glightbox="type: external"
+														class="portfolio-details-lightbox"
+														title="Portfolio Details">
+														<h3 class="mb-2">
+															<i class="bi bi-chevron-right"
+																style="color: #00d4ff; font-size: 15px;"></i>
+															${mypageAuctionList.title}에 ${mypageAuctionList.likes}개의 좋아요가 눌렸어요
+														</h3>
+													</a>
+												</c:if>
+											</c:if>
+										</c:forEach>
+									</div>
+									<div class="col mt-3">
+										<div class="section-title">
+											<h2 style="margin-bottom: 30px;">동네생활 알림</h2>
+										</div>
+										<c:forEach var="comments" items="${comments}" varStatus="loop">
+												<h3 class="mb-2">
+													<i class="bi bi-chevron-right"
+														style="color: #f27474; font-size: 15px;"></i>
+													${comments.title}에 ${comments.likes }개의 좋아요와 ${comments.count}개의 댓글이 달렸어요
+												</h3>
 										</c:forEach>
 									</div>
 								</div>
