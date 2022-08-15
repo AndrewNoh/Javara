@@ -15,7 +15,7 @@
    </select>
    
    <select id="selectAllReportAuctionList" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
-      SELECT DISTINCT al.content,al.title FROM auction_report areport join auction_list al ON al.auction_no = areport.auction_no
+      SELECT DISTINCT al.content,al.title,al.auction_no FROM auction_report areport join auction_list al ON al.auction_no = areport.auction_no
    </select>
    
    <!-- DELETE문 -->
