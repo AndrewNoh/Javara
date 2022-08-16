@@ -173,6 +173,21 @@
   from {top: 30px; opacity: 1;}
   to {top: 0; opacity: 0;}
 }
+.modalContent{
+  position: relative;
+  padding: 20px 20px;
+  z-index: 4;
+  margin-left: 36%;
+  height: auto;
+  max-width: 500px;
+  width: 90%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 20px;
+  background:rgb(137 137 137 / 53%);
+  box-shadow: 0 15px 35px rgb(181 179 179 / 50%);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
 
 .modal-backdrop.show{
     opacity: .8;	
@@ -262,7 +277,7 @@
 		</ul>
 
 			   <div class="modal" id="myModal">
-			         <div class="modal-content">
+			         <div class="modalContent">
 			           <div style="text-align: end;">
 			              <i id="modal-close" data-dismiss="modal" class="close bi bi-x"
 			                  style="font-size: 1.8rem; color: black; cursor: pointer;"></i>
@@ -428,7 +443,7 @@ $("link#admin12").prop('disabled', true);
 				modalClose();
 			});
 			function modalClose() {
-				$("#modal-content").fadeOut();
+				$("#modalContent").fadeOut();
 			}
 		});
 

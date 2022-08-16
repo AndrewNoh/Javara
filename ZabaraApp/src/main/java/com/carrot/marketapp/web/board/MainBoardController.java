@@ -663,6 +663,7 @@ public class MainBoardController {
 
 	@PostMapping("/search.do")
 	public String search(Model model, @RequestParam Map map, Principal principal) {
+		map.put("board", "경매");
 		System.out.println(map.get("title"));
 		int log = 0;
 		int havelog = 0;
@@ -704,8 +705,7 @@ public class MainBoardController {
 			List<ImageDTO> images = imageService.selectList(map);
 			imageList.add(images);
 		}
-
-		map.put("board", "경매");
+	
 		List<Integer> likes = boardService.selectLikeList(map);
 
 		model.addAttribute("LISTS", searchList);
