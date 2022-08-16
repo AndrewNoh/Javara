@@ -147,6 +147,7 @@
 	</div>
 </form>
 
+
 <script type="text/javascript">
 	$('#portfolio-flters > li').on("click", function(){
 		$('#category').val($(this).text());

@@ -148,21 +148,17 @@ width: 70%;
 	</div>
 </div>
 
-<!-- React: 워드클라우드 -->
-<div style="width:100%; height:800px; background-color:#ffffffde; color:black" id="mainUnder">
-	<br>
-	<br>
-	<img src="${pageContext.request.contextPath}/resources/assets/img/main_scroll_banner.png" style="width: 500px; display: block; margin: 0 auto; "/>
-	<div style="width:90%; height:85%; margin:auto" class="row">
-		<iframe style="border:none;width:100%;height:100%; margin-top:50px;" src="/marketapp/wordcloud/index.html"></iframe>
-	</div>
+	
+  
+<div style="width:100%; height:800px; background-color:#ffffffde; display: flex; align-items: center; justify-content: center;" id="mainUnder">
+   <br>
+   <br>
+   <img src="${pageContext.request.contextPath}/resources/assets/img/main_scroll_banner.png" style="width: 500px; display: block; margin: 0 auto; "/>
+   <div style="width:90%; height:85%; margin:auto" class="row">
+      <iframe style="border:none;width:100%;height:100%" src="/marketapp/wordcloud/index.html"></iframe>
+   </div>
 </div>
 
-	<div style="position: absolute;bottom: 5%; right: 3%;">
-   <a href="#header"><img src="${pageContext.request.contextPath}/resources/assets/img/scrollbar_btn.png" 
-      title="위로가기" style="width: 80px; height: 80px"></a>
-</div>
-  
 <script>
     function logout(){
     	$('#logoutForm').submit();//스프링 씨큐리티 사용- csrf를 활성화 시킬때
@@ -193,18 +189,10 @@ width: 70%;
     function down(){
     	$('html').animate({scrollTop : $('#mainUnder').offset().top}, 200);
     }
-  //관리자페이지 css안먹게하기
-    $("link#admin").prop('disabled', true);
-    $("link#admin1").prop('disabled', true);
-    $("link#admin2").prop('disabled', true);
-    $("link#admin3").prop('disabled', true);
-    $("link#admin4").prop('disabled', true);
-    $("link#admin5").prop('disabled', true);
-    $("link#admin6").prop('disabled', true);
-    $("link#admin7").prop('disabled', true);
-    $("link#admin8").prop('disabled', true);
-    $("link#admin9").prop('disabled', true);
-    $("link#admin10").prop('disabled', true);
-    $("link#admin11").prop('disabled', true);
-    $("link#admin12").prop('disabled', true);   
+   
+    
+    $(document).on("click", "svg", function(){
+    	console.log("클릭");
+    	
+    });
 </script>
