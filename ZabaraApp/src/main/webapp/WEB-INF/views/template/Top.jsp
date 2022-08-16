@@ -190,7 +190,7 @@
 }
 
 .modal-backdrop.show{
-    opacity: .8;	
+    opacity: .7;	
 }
 </style>
 <body>
@@ -287,7 +287,7 @@
 			               </h4>
 			               <div class="body-content" style="padding:5px;background-color: rgb(125 125 125 / 70%);border-radius: 10px;">
 			                  <img id="preview_image" style="width: 100%; height: 100%;"/>
-			                  <div id="label-container" style="color: black; cursor: pointer;"></div>
+			                  <div id="label-container" style="color: white; cursor: pointer;margin-top: 10px;font-size: 18px;"></div>
 			               </div>
 			
 						<div class="row">
