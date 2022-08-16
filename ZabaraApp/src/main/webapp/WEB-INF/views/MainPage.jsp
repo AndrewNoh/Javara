@@ -26,6 +26,30 @@ width: 70%;
   animation: animate-arrows 2s infinite;
 }
 
+ .arrow-up span{
+  display: block;
+  width: 1.5em;
+  height: 1.5em;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  transform: rotate(45deg);
+  margin: -10px;
+  animation: animate-arrowsUp 2s infinite;
+}
+
+@keyframes animate-arrowsUp{
+  0%{
+    opacity: 0;
+    transform: rotate(225deg) translate(-1.5em, -1.5em);
+  }
+  50%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+    transform: rotate(225deg) translate(1.5em, 1.5em);
+  }
+}
 
 @keyframes animate-arrows{
   0%{
@@ -153,6 +177,13 @@ width: 70%;
 <div style="width:100%; height:700px; background-color:#ffffffde; display: flex; align-items: center; justify-content: center;" id="mainUnder">
    <br>
    <br>
+   <div class="arrow-up " style="position:absolute; left:50%; bottom: 12%">
+      <a href="javascript:void(0);" style="display: inline-block;">
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
+   </div>
    <img src="${pageContext.request.contextPath}/resources/assets/img/main_wordcloud.png" style="width: 300px; display: block; margin: 0 auto; position: relative; left: 10%"/>
    <div style="width:90%; height:85%; margin:auto" class="row">
       <iframe style="border:none;width:100%;height:100%" src="/marketapp/wordcloud/index.html"></iframe>
@@ -176,6 +207,14 @@ width: 70%;
     $('.arrow-down').on("click", function(){
     	down();
     });
+    
+    $('.arrow-up').on("click", function(){
+        up();
+     })
+     
+     function up(){
+        $('html').animate({scrollTop : 0}, 200);
+     }
     
 
     $('#header').on("click", function(){
