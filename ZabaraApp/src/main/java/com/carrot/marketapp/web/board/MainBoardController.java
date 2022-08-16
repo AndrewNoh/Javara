@@ -776,5 +776,12 @@ public class MainBoardController {
 
 		return 0;
 	}
+	
+	@RequestMapping(value = "/finish.do", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public int finish(@RequestParam Map map, Model model, Principal principal) throws JsonProcessingException {
+		
+		return boardService.updateStatusFinish(map);
+	}
 
 }

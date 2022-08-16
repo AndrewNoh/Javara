@@ -332,6 +332,11 @@ public class BoardDAO {
 	public List<BoardDTO> mypageAuctionList(Map map) {
 		return sqlSession.selectList("mypageAuctionList",map);
 	}
+
+	public int updateStatusFinish(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("updateStatusFinish",map);
+	}
 	
 
 }

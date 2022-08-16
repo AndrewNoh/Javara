@@ -558,6 +558,11 @@
 		UPDATE
 		AUCTION_LIST SET STATUS=#{status} WHERE AUCTION_NO=#{auction_no}
 	</update>
+	
+	<update id="updateStatusFinish" parameterType="map">
+		UPDATE
+		AUCTION_LIST SET STATUS=#{status} WHERE AUCTION_NO=#{auction_no}
+	</update>
 	<!-- AUCTION -->
 
 

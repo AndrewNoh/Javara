@@ -219,5 +219,10 @@ public class BoardServiceimpl implements CommonService<BoardDTO> {
 		return boardDAO.mypageAuctionList(map);
 	}
 
+	public int updateStatusFinish(Map map) {
+		// TODO Auto-generated method stub
+		return boardDAO.updateStatusFinish(map);
+	}
+
 
 }

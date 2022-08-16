@@ -69,11 +69,12 @@
 }
 
 .map_category {
-	border-radius: 15px;
+   border-radius: 15px;
     position: absolute;
     overflow: hidden;
     top: 10px;
     width: auto;
+    height: 50px;
     z-index: 10;
     border: none;
     font-size: 12px;
@@ -219,58 +220,47 @@ input.form-text {
  .dropdown-item:focus, .dropdown-item:hover{
     background: #f6dac591;
  }
- 
-
 </style>
-<div style="position: fixed;top: 15%; right: 3%;">
-   <a href="#mydiv"><img src="${pageContext.request.contextPath}/resources/assets/img/scrollbar_btn.png" 
-       title="위로가기" style="width: 80px; height: 80px"></a>
-</div>
-<div style="height:100vh; white: " id="mydiv" >
-	<div class="row" style="margin:30px; height: inherit;" onload="onload()">  
-	   <div class="col-3" id="searchTab">
-	          <div id="addressItemListDiv" class="row" style="height:95%">
-	          	<div style="height:65px;">
-		          	<h3 style="font-size: 20px; font-weight: bold; margin-top: 20px;text-align:center;">판매 리스트</h3>          	
-		          	<hr style="margin-bottom:15px;"/>
-	          	</div>
-	             <ul id="addressitemlist"></ul>            
-	         </div>
-	       </div>
-	    <div id="viewMap" style="" class="col">
-	    	<div id="map" style="border-radius: 20px; height:95%; display:flex; justify-content:center;" value="${address}">
-		       <div class="map_category" style="max-width: 850px" id="categorySelector">
-		           <ul>
-		              <li >유아동</li>
-		              <li >유아도서</li>
-		              <li >여성잡화</li>
-		              <li >여성의류</li>
-		              <li >뷰티/미용</li>
-		              <li >도서/티켓/음반</li>
-		              <li >중고차</li>
-		              <li >디지털기기</li>
-		              <li >가구/인테리어</li>
-		           </ul>
-		           <ul>
-		            <li >기타중고물품</li>
-		            <li >게임/취미</li>
-		            <li > 생활가전</li>
-		            <li >생활/가공식품</li>
-		            <li >남성패션/잡화</li>
-		            <li >반려동물용품</li>
-		            <li >식물</li>
-		            <li >스포츠/레저</li>
-		            <li >전체매물</li>   
-		           </ul>
-		        </div>
-	       </div>
-	    </div>
-	 </div>
+<div class="row" style="margin:30px;">  
+   <div class="col-3" id="searchTab">
+          <div id="addressItemListDiv" class="row" style="height: 760px;">
+             <div style="height:65px;">
+                <h3 style="font-size: 20px; font-weight: bold; margin-top: 20px;text-align:center;">판매 리스트</h3>             
+                <hr style="margin-bottom:15px;"/>
+             </div>
+             <ul id="addressitemlist"></ul>            
+         </div>
+       </div>
+    <div id="viewMap" style="" class="col">
+       <div id="map" style="border-radius: 20px; height: 760px; display:flex; justify-content:center;" value="${address}">
+          <div class="map_category" style="max-width: 850px" id="categorySelector">
+              <ul>
+                 <li >유아동</li>
+                 <li >유아도서</li>
+                 <li >여성잡화</li>
+                 <li >여성의류</li>
+                 <li >뷰티/미용</li>
+                 <li >도서/티켓/음반</li>
+                 <li >중고차</li>
+                 <li >디지털기기</li>
+                 <li >가구/인테리어</li>
+              </ul>
+              <ul>
+               <li >기타중고물품</li>
+               <li >게임/취미</li>
+               <li > 생활가전</li>
+               <li >생활/가공식품</li>
+               <li >남성패션/잡화</li>
+               <li >반려동물용품</li>
+               <li >식물</li>
+               <li >스포츠/레저</li>
+               <li >전체매물</li>   
+              </ul>
+           </div>
+       </div>
+    </div>
  </div>
 <script>
-function onload() {
-	$("#mydiv").scrollTop($("#mydiv")[0].scrollHeight); 
-}
 var latitude = ${latitude};
 var longitude = ${longitude};
 var nowAddress = "${address}";
@@ -463,7 +453,7 @@ $('#categorySelector').click(function(e){
 $(document).on("click",'.addressItem',function(e){   
     var callLatitude =$(this).find('input:eq(0)').val();
     var callLongitude=$(this).find('input:eq(1)').val(); 
-	map.setLevel(2);
+   map.setLevel(2);
     panTo(callLatitude,callLongitude);
     
 });
@@ -502,7 +492,7 @@ function createListTag(object){
                      '<img style="width:100%;height:100%; border-radius: 7px;" src="${pageContext.request.contextPath}/resources/assets/img/product_img/'+object["imagename"]+'">'+
                   '</div>'+
                   '<div class="col-7">'+
-                  	 '<div class="itemAddress" style="text-align:end; margin-right:10px; margin-top:5px;">'+address+'</div>'+
+                      '<div class="itemAddress" style="text-align:end; margin-right:10px; margin-top:5px;">'+address+'</div>'+
                      '<div class="title" style="text-align:center; margin-top:15px; width:95%; "><h5 style="font-family: GmarketSansMedium; font-size: 18px; margin-top: 10px; color: #fff">'+object["title"]+'</h5></div>'+
                      '<hr style="width:95%"/>'+
                      '<div><h6 style="color: #fff">시작가 '+object["base_Price"].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원'+'</h6></div>'+
