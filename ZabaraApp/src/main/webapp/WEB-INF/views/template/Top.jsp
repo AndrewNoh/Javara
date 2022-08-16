@@ -173,21 +173,7 @@
   from {top: 30px; opacity: 1;}
   to {top: 0; opacity: 0;}
 }
-.modal-content{
-  position: relative;
-  padding: 20px 20px;
-  z-index: 4;
-  margin-left: 36%;
-  height: auto;
-  max-width: 500px;
-  width: 90%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  border-radius: 20px;
-  background:rgb(137 137 137 / 53%);
-  box-shadow: 0 15px 35px rgb(181 179 179 / 50%);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-}
+
 .modal-backdrop.show{
     opacity: .8;	
 }
