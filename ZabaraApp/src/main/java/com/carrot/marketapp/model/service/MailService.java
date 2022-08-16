@@ -30,17 +30,17 @@ public class MailService {
                                "우리동네 좋은 물건 자바라"+
                            "</div>"+
                            "<div class='transactionDetails' style='margin:0 10px 10px;box-sizing:border-box;font-family:VT323; monospace;color:#1f1f1f;display:flex;justify-content:space-between;'>"+
-                               "<div class='detail' style='margin:0;box-sizing:border-box;font-family:VT323; monospace;color:#1f1f1f;text-transform:uppercase;'>Reg#17</div>"+
-                               "<div class='detail' style='margin:0;box-sizing:border-box;font-family:VT323; monospace;color:#1f1f1f;text-transform:uppercase;'>TRN#1313</div>"+
-                               "<div class='detail' style='margin:0;box-sizing:border-box;font-family:VT323; monospace;color:#1f1f1f;text-transform:uppercase;'>CSHR#00097655</div>"+
-                               "<div class='detail' style='margin:0;box-sizing:border-box;font-family:VT323; monospace;color:#1f1f1f;text-transform:uppercase;'>str#9852</div>"+
+                               "<div class='detail' style='margin:0;box-sizing:border-box;font-family:VT323; monospace;color:#1f1f1f;text-transform:uppercase;'>Hometown</div>"+
+                               "<div class='detail' style='margin:0;box-sizing:border-box;font-family:VT323; monospace;color:#1f1f1f;text-transform:uppercase;'>Auction</div>"+
+                               "<div class='detail' style='margin:0;box-sizing:border-box;font-family:VT323; monospace;color:#1f1f1f;text-transform:uppercase;'>Market</div>"+
+                               "<div class='detail' style='margin:0;box-sizing:border-box;font-family:VT323; monospace;color:#1f1f1f;text-transform:uppercase;'>Community</div>"+
                            "</div>"+
                            "<div class='transactionDetails' style='margin:0 10px 10px;box-sizing:border-box;font-family:VT323; monospace;color:#1f1f1f;display:flex;justify-content:space-between;'>"+
-                               "Helped by: Garrett"+
+                               "Helped by: YOO SUNG SOO"+
                            "</div>"+
                            "<div class='centerItem bold' style='margin:0;box-sizing:border-box;font-family:VT323; monospace;color:#1f1f1f;font-weight:bold;display:flex;justify-content:center;margin-bottom:8px;'>"+
                                "<div class='item' style='margin: 0;"+
-                 "box-sizing: border-box;font-family: VT323; monospace;color: #1f1f1f;'>ExtraCare Card #: *********1875</div>"+
+                 "box-sizing: border-box;font-family: VT323; monospace;color: #1f1f1f;'>Javara Card #: *********1875</div>"+
                        "</div>"+      
                            "<div class='survey bold' style='margin:0;box-sizing:border-box;font-family:VT323; monospace;color:#1f1f1f;font-weight:bold;text-align:center;margin-bottom:30px;margin-top:30px;'>"+
                                "<p style='margin: 0;box-sizing: border-box;font-family: VT323, monospace;color: #1f1f1f;'>인증번호는 </p>"+
@@ -48,19 +48,19 @@ public class MailService {
                            "</div>"+
                            "<div class='paymentDetails bold' style='margin:0 auto;box-sizing:border-box;font-family:VT323; monospace;color:#1f1f1f;font-weight:bold;display:flex;justify-content:space-between;width:150px;'>"+
                                "<div class='detail' style='margin: 0;box-sizing: border-box;font-family: VT323; monospace;color: #1f1f1f;'>TOTAL</div>"+
-                               "<div class='detail' style='margin: 0;box-sizing: border-box;font-family: VT323; monospace;color: #1f1f1f;'>3.99</div>"+
+                               "<div class='detail' style='margin: 0;box-sizing: border-box;font-family: VT323; monospace;color: #1f1f1f;'>8.18</div>"+
                            "</div>"+
                            "<div class='paymentDetails' style='margin:0 auto;box-sizing:border-box;font-family:VT323; monospace;color:#1f1f1f;display:flex;justify-content:space-between;width:150px;'>"+
-                               "<div class='detail' style='margin: 0;box-sizing: border-box;font-family: VT323; monospace;color: #1f1f1f;'>CHARGE</div>"+
-                               "<div class='detail' style='margin: 0;box-sizing: border-box;font-family: VT323; monospace;color: #1f1f1f;'>3.99</div>"+
+                               "<div class='detail' style='margin: 0;box-sizing: border-box;font-family: VT323; monospace;color: #1f1f1f;'>JAVARA PROJECT</div>"+
+                               "<div class='detail' style='margin: 0;box-sizing: border-box;font-family: VT323; monospace;color: #1f1f1f;'>8.18</div>"+
                            "</div>"+
                            "<div class='paymentDetails' style='margin:0 auto;box-sizing:border-box;font-family:VT323; monospace;color:#1f1f1f;display:flex;justify-content:space-between;width:150px;'>"+
-                               "<div class='detail' style='margin: 0;box-sizing: border-box;font-family: VT323; monospace;color: #1f1f1f;'>************4023</div>"+
+                               "<div class='detail' style='margin: 0;box-sizing: border-box;font-family: VT323; monospace;color: #1f1f1f;'>************2022</div>"+
                                "<div class='detail' style='margin: 0;box-sizing: border-box;font-family: VT323; monospace;color: #1f1f1f;'>CH</div>"+
                            "</div>"+
                            "<div class='creditDetails' style='margin:10px auto;box-sizing:border-box;font-family:VT323; monospace;color:#1f1f1f;width:230px;font-size:14px;text-transform:uppercase;'>"+
                                "<p style='margin: 0;box-sizing: border-box;font-family: VT323; monospace;color: #1f1f1f;'>VISA CREDIT &nbsp;&nbsp;&nbsp;&nbsp; ****************</p>"+
-                               "<p style='margin: 0;box-sizing: border-box;font-family: VT323; monospace;color: #1f1f1f;'>approved# 09773B</p>"+
+                               "<p style='margin: 0;box-sizing: border-box;font-family: VT323; monospace;color: #1f1f1f;'>Andrew No #</p>"+
                                "<p style='margin: 0;box-sizing: border-box;font-family: VT323; monospace;color: #1f1f1f;'>ref# 013589</p>"+
                                "<p style='margin: 0;box-sizing: border-box;font-family: VT323; monospace;color: #1f1f1f;'>tran type: SALE</p>"+
                                "<p style='margin: 0;box-sizing: border-box;font-family: VT323; monospace;color: #1f1f1f;'>AID: 30000000090755</p>"+
