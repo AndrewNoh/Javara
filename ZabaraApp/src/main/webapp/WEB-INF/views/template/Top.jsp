@@ -190,7 +190,7 @@
 }
 
 .modal-backdrop.show{
-    opacity: .8;	
+    opacity: .7;	
 }
 </style>
 <body>
@@ -233,8 +233,8 @@
 				        동네방네
 				      </a>
 				      <div class="dropdown-menu navdropdown-menu">
+				      	<a class="dropdown-item navdropdown-item" href="<c:url value="/board/news.do"/>">실시간뉴스</a>
 				        <a class="dropdown-item navdropdown-item" href="<c:url value="/board/gropboard.do"/>">동네생활</a>
-				        <a class="dropdown-item navdropdown-item" href="<c:url value="/board/news.do"/>">실시간뉴스</a>
 				      </div>
 				   </li>
 	             <li><a class="nav-link" href="<c:url value="/board/qna.do"/>">자주묻는 질문</a></li>
@@ -251,7 +251,7 @@
 							<div class="search row" id="imgsrchDiv" style="float: right;">
 								<div class="srch_bar" style="text-align: center;">
 									<div class="stylish-input-group">
-										<input type="text" placeholder="검색어를 입력해주세요" name="title"
+										<input type="text" name="title"
 											class="search-bar"> <span class="input-group-addon">
 											<button id="modal-open" data-toggle="modal"
 												data-target="#myModal" type="button"
@@ -287,7 +287,7 @@
 			               </h4>
 			               <div class="body-content" style="padding:5px;background-color: rgb(125 125 125 / 70%);border-radius: 10px;">
 			                  <img id="preview_image" style="width: 100%; height: 100%;"/>
-			                  <div id="label-container" style="color: black; cursor: pointer;"></div>
+			                  <div id="label-container" style="color: white; cursor: pointer;margin-top: 10px;font-size: 18px;"></div>
 			               </div>
 			
 						<div class="row">

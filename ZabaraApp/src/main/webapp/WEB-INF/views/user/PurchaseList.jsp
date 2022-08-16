@@ -503,6 +503,8 @@ No license, 100% free to use.
    function review(auction_no){
       ano=auction_no;
       console.log(ano);
+      $('textarea[name=review]').val('');
+      $('input[name=stars]:checked').prop('checked',false);
       
    };
    //거래후기
