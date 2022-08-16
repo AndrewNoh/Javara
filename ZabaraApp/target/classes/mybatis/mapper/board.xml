@@ -648,9 +648,6 @@
 				    WHERE T.STATUS = 'SALE'
 				    ORDER BY P.AUCTION_NO DESC)
 				    WHERE
-					<if test='category != "all"'>
-						CATEGORY = #{category} AND
- 					</if>
 					<![CDATA[	    
 				    TITLE LIKE '%'||#{title}||'%'
 					]]>

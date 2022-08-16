@@ -242,53 +242,11 @@
 	             </c:if>
 	             
 			<li>
-			<c:if test="${not isAdmin }">
-			<div class="search col mr-3" id="srch" style="float: left;">
-					<div class="srch_bar" style="text-align: center;">
-						<div class="stylish-input-group">
-							<input type="text" placeholder="검색어를 입력해주세요" name="title"
-								class="search-bar"> <span class="input-group-addon">
-								<button type="submit" style="vertical-align: -0.3em;">
-									<i class="bi bi-search" aria-hidden="true"
-										style="font-size: 20px; color: #ffc107;"></i>
-								</button>
-							</span>
-						</div>
-					</div>
-				</div>
-				<form id="searchForm" action="<c:url value="/board/search.do"/>"
-					method="post">
-					<sec:csrfInput />
-					<div class="search row" id="srchDiv" style="display: none;">
-						<div class="custom-select col mb-2" style="width: 100px;">
-							<select id="searchBoardSelect" name="board">
-								<option selected value="경매">경매</option>
-								<option value="경매">경매</option>
-								<option value="우리동네">동네생활</option>
-							</select>
-						</div>
-						<div class="custom-select col mb-2" style="width: 100px;">
-							<select id="searchCategorySelect" name="category">
-								<option selected value="기타">기타</option>
-						    	<option value="중고차">중고차</option>
-						    	<option value="디지털기기">디지털기기</option>
-						    	<option value="생활가전">생활가전</option>
-						    	<option value="가구/인테리어">가구/인테리어</option>
-						    	<option value="유아동">유아동</option>
-						    	<option value="유아도서">유아도서</option>
-						    	<option value="생활/가공식품">생활/가공식품</option>
-						    	<option value="스포츠/레저">스포츠/레저</option>
-						    	<option value="여성잡화">여성잡화</option>
-						    	<option value="여성의류">여성의류</option>
-						    	<option value="남성패션/잡화">남성패션/잡화</option>
-						    	<option value="게임/취미">게임/취미</option>
-						    	<option value="뷰티/미용">뷰티/미용</option>
-						    	<option value="반려동물용품">반려동물용품</option>
-						    	<option value="도서/티켓/음반">도서티켓음반</option>
-						    	<option value="식물">식물</option>
-						  	</select>
-						</div>
-						
+				<c:if test="${not isAdmin }">
+					<form id="searchForm" action="<c:url value="/board/search.do"/>"
+						method="post">
+						<sec:csrfInput />
+						<div class="search row" id="srchDiv">						
 							<div class="search row" id="imgsrchDiv" style="float: right;">
 								<div class="srch_bar" style="text-align: center;">
 									<div class="stylish-input-group">
@@ -307,12 +265,11 @@
 											</button>
 										</span>
 									</div>
-	
 								</div>
-							</div>
-						</c:if>
-					</div>
-				</form>
+							</div>					
+						</div>
+					</form>
+				</c:if>
 			</li>
 			<li><a class="nav-link"id="chatbot"><img src="${pageContext.request.contextPath}/resources/assets/img/chatbot_icon.png" 
 			       title="챗봇" style="width: 100px; height: 100px;"></a></li>

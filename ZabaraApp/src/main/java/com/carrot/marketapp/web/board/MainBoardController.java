@@ -663,9 +663,6 @@ public class MainBoardController {
 
 	@PostMapping("/search.do")
 	public String search(Model model, @RequestParam Map map, Principal principal) {
-
-		String board = map.get("board").toString();
-
 		System.out.println(map.get("title"));
 		int log = 0;
 		int havelog = 0;
@@ -696,15 +693,8 @@ public class MainBoardController {
 
 		map.put("addrno", address.getAddrNo());
 		map.put("simpleAddress", simpleAddr);
-
-		switch (board) {
-		case "경매":
-			searchList = boardService.searchAuction(map);
-			break;
-		case "우리동네":
-			searchList = boardService.searchGropBoard(map);
-			break;
-		}
+		
+		searchList = boardService.searchAuction(map);
 
 		List<List<ImageDTO>> imageList = new Vector<List<ImageDTO>>();
 
@@ -715,6 +705,7 @@ public class MainBoardController {
 			imageList.add(images);
 		}
 
+		map.put("board", "경매");
 		List<Integer> likes = boardService.selectLikeList(map);
 
 		model.addAttribute("LISTS", searchList);
@@ -722,6 +713,7 @@ public class MainBoardController {
 		model.addAttribute("imageList", imageList);
 		model.addAttribute("address", map.get("simpleAddress"));
 		model.addAttribute("nowUser", map.get("userno"));
+		model.addAttribute("title", map.get("title"));
 
 		return "/board/SearchList.market";
 	}

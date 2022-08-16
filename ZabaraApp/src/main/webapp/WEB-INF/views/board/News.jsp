@@ -92,8 +92,7 @@ img {
 	                  end="${titles.size()-1}">
 	                  <tr class="text-center" style="width: 200px">
 	                     <td style="font-weight: bold;"><a href="${url}" target="_blank">${titles[status.index]}</a></td>
-	                     <c:if test="${img[status.index]=='' or img[status.index]==null}" var="noImg">
-	                        
+	                     <c:if test="${img[status.index]=='' or img[status.index]==null}" var="noImg">	                        
 	                           <td><img src="${pageContext.request.contextPath}/resources/assets/img/sampleImg.png"
 	                           style="width: 200px; height: 180px;"></td>
 	                     </c:if>
