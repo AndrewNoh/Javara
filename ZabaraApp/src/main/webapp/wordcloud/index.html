@@ -30,5 +30,41 @@
 	style="background-color: transparent; display: flex; align-items: center; justify-content: center">
 	<noscript>You need to enable JavaScript to run this app.</noscript>
 	<div id="root"></div>
+	
+	<form id="searchForm" action="/marketapp/board/search.do" method="post" target="_blank" style="display:none">
+		<div class="search row" id="srchDiv">						
+			<div class="search row" id="imgsrchDiv" style="float: right;">
+				<div class="srch_bar" style="text-align: center;">
+					<div class="stylish-input-group">
+						<input type="text" placeholder="검색어를 입력해주세요" name="title"
+							class="search-bar"> <span class="input-group-addon">
+							<button id="modal-open" data-toggle="modal"
+								data-target="#myModal" type="button"
+								style="margin-left: -30px; vertical-align: -0.3em;">
+								<i class="bi bi-images" aria-hidden="false"
+								style="font-size: 20px; color: cornflowerblue;"></i>
+							</button>
+							<button type="submit"
+								style="margin-left: 5px; vertical-align: -0.3em;">
+								<i id="bi-search" class="bi bi-search" aria-hidden="false"
+									style="font-size: 20px;"></i>
+							</button>
+						</span>
+					</div>
+				</div>
+			</div>					
+		</div>
+	</form>
 </body>
 </html>
+
+<script type="text/javascript">
+
+	$(document).on("click", "text", function(){
+		var text = $(this).text();		
+		$(".search-bar").val(text);
+		
+		$('button[type=submit]').trigger("click");
+	});
+
+</script>

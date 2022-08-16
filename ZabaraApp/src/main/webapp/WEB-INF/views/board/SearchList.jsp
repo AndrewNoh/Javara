@@ -31,7 +31,7 @@
 			<!-- 제목 -->
 			<div class="section-title" id="title">
 			   	<h2>검색 목록</h2>
-			   	<p>${address}의 검색결과 입니다.</p>
+			   	<p><span style="color:#ffc107">${title}</span>의 검색결과 입니다.</p>
 			</div>
 		
 			<c:if test="${empty LISTS}" var="LIST">
@@ -146,6 +146,7 @@
 		      
 	</div>
 </form>
+
 
 <script type="text/javascript">
 	$('#portfolio-flters > li').on("click", function(){

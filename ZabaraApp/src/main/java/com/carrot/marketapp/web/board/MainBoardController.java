@@ -663,9 +663,7 @@ public class MainBoardController {
 
 	@PostMapping("/search.do")
 	public String search(Model model, @RequestParam Map map, Principal principal) {
-
-		String board = map.get("board").toString();
-
+		map.put("board", "경매");
 		System.out.println(map.get("title"));
 		int log = 0;
 		int havelog = 0;
@@ -696,15 +694,8 @@ public class MainBoardController {
 
 		map.put("addrno", address.getAddrNo());
 		map.put("simpleAddress", simpleAddr);
-
-		switch (board) {
-		case "경매":
-			searchList = boardService.searchAuction(map);
-			break;
-		case "우리동네":
-			searchList = boardService.searchGropBoard(map);
-			break;
-		}
+		
+		searchList = boardService.searchAuction(map);
 
 		List<List<ImageDTO>> imageList = new Vector<List<ImageDTO>>();
 
@@ -714,7 +705,7 @@ public class MainBoardController {
 			List<ImageDTO> images = imageService.selectList(map);
 			imageList.add(images);
 		}
-
+	
 		List<Integer> likes = boardService.selectLikeList(map);
 
 		model.addAttribute("LISTS", searchList);
@@ -722,6 +713,7 @@ public class MainBoardController {
 		model.addAttribute("imageList", imageList);
 		model.addAttribute("address", map.get("simpleAddress"));
 		model.addAttribute("nowUser", map.get("userno"));
+		model.addAttribute("title", map.get("title"));
 
 		return "/board/SearchList.market";
 	}
@@ -783,6 +775,13 @@ public class MainBoardController {
 		}
 
 		return 0;
+	}
+	
+	@RequestMapping(value = "/finish.do", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public int finish(@RequestParam Map map, Model model, Principal principal) throws JsonProcessingException {
+		
+		return boardService.updateStatusFinish(map);
 	}
 
 }

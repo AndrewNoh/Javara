@@ -34,7 +34,7 @@ public class ChatRestApiController {
 	public @ResponseBody Map insertImgFromApp(@RequestPart MultipartFile chatimg, HttpServletRequest req)
 			throws IllegalStateException, IOException {
         Map map = new HashMap();
-        map.put("roomno",req.getParameter("roomno"));
+        map.put("room_no",req.getParameter("roomno"));
         map.put("senduserno", req.getParameter("senduserno"));
         map.put("unread_count", req.getParameter("unread_count"));
         map.put("chatcontent", req.getParameter("chatcontent"));

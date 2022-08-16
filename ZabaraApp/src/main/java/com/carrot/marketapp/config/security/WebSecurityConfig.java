@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override // 리소스 보안 부분
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests() // 요청에 의한 보안검사 시작
-				.antMatchers("/board/shareView.do", "/chat/insertimgfromapp.do").permitAll()
+				.antMatchers("/board/shareView.do", "/chat/insertimgfromapp.do", "/board/search.do").permitAll()
 				.antMatchers("/board/**", "/auction/**", "/chat/**").hasAnyRole("USER").antMatchers("/", "/main")
 				.permitAll().anyRequest().permitAll() // 어떤 요청에도 보안검사를 한다.
 				
@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.headers().frameOptions().disable();
 		
 		http.csrf().ignoringAntMatchers("/chat/insertimgfromapp.do");//csrf예외처리
+		http.csrf().ignoringAntMatchers("/board/search.do");//csrf예외처리
 
 	}
-
 }

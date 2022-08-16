@@ -94,7 +94,7 @@
 						            <div class="portfolio-links">
 						            	<a href="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[loop.index][0].imageName}?no=${loop.count}" data-gallery="portfolioGallery" class="portfolio-lightbox" id="img${loop.count}"><i class="bx bxs-photo-album"></i><span style="font-size: 12px; display: block;">사진</span></a>
 						                <a href="<c:url value="/board/auctionview.do"><c:param value="${LIST.auction_no}" name="no"/></c:url>" rel="lyteframe" data-gallery="portfolioDetailsGallery" id="view${loop.count}" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bxs-detail"></i><span style="font-size: 12px; display: block;">상세보기</span></a>
-						                <a href="javascript:void(0);" data-value="${LIST.auction_no}" name="like"><i class="bx bxs-heart" name="heartButton"></i><span style="font-size: 12px; display: block;">좋아요</span></a>
+						                <a href="javascript:void(0);" data-value="${LIST.auction_no}" name="like" title="${LIST.userNo}:${LIST.title}"><i class="bx bxs-heart" name="heartButton"></i><span style="font-size: 12px; display: block;">좋아요</span></a>
 						            </div>
 						            <p>종료예정일 ${LIST.endDate}</p>
 						    	</div>
@@ -149,6 +149,7 @@
 	
 	$('[name=like]').on("click", function(){
 		var like = $(this);
+		var title = $(this).attr('title');
 		$.ajax({
 			url :'<c:url value="/board/likeUp.do"/>',
 			type:'POST',
@@ -157,6 +158,8 @@
 		}).done(function(data){
 			if (data != 1) {
 				like.children().css("color", "#FFC107");
+				wsocket.send('경매 좋아요,userNo'+title.split(/[:]/)[0]+",title:"+title.split(/[:]/)[1]+"에 좋아요가 눌렸어요");
+				console.log('경매 좋아요,userNo'+title.split(/[:]/)[0]+",title:"+title.split(/[:]/)[1]+"에 좋아요가 눌렸어요");
 			} else {
 				console.log("좋아요 해제")
 				like.children().css("color", '');
@@ -164,6 +167,8 @@
 		});
 		
 	});
+
+
 	
 	$(document).ready(function(){		
 		$.each(${likes}, function(index, value){

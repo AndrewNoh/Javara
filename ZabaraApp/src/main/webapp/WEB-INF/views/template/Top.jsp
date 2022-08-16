@@ -173,7 +173,25 @@
   from {top: 30px; opacity: 1;}
   to {top: 0; opacity: 0;}
 }
+.modalContent{
+  position: relative;
+  padding: 20px 20px;
+  z-index: 4;
+  margin-left: 36%;
+  height: auto;
+  max-width: 500px;
+  width: 90%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 20px;
+  background:rgb(137 137 137 / 53%);
+  box-shadow: 0 15px 35px rgb(181 179 179 / 50%);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
 
+.modal-backdrop.show{
+    opacity: .7;	
+}
 </style>
 <body>
 <sec:authorize access="hasAnyRole('ROLE_ADMIN')" var="isAdmin">
@@ -225,57 +243,15 @@
 	             </c:if>
 	             
 			<li>
-			<c:if test="${not isAdmin }">
-			<div class="search col mr-3" id="srch" style="float: left;">
-					<div class="srch_bar" style="text-align: center;">
-						<div class="stylish-input-group">
-							<input type="text" placeholder="검색어를 입력해주세요" name="title"
-								class="search-bar"> <span class="input-group-addon">
-								<button type="submit" style="vertical-align: -0.3em;">
-									<i class="bi bi-search" aria-hidden="true"
-										style="font-size: 20px; color: #ffc107;"></i>
-								</button>
-							</span>
-						</div>
-					</div>
-				</div>
-				<form id="searchForm" action="<c:url value="/board/search.do"/>"
-					method="post">
-					<sec:csrfInput />
-					<div class="search row" id="srchDiv" style="display: none;">
-						<div class="custom-select col mb-2" style="width: 100px;">
-							<select id="searchBoardSelect" name="board">
-								<option selected value="경매">경매</option>
-								<option value="경매">경매</option>
-								<option value="우리동네">동네생활</option>
-							</select>
-						</div>
-						<div class="custom-select col mb-2" style="width: 100px;">
-							<select id="searchCategorySelect" name="category">
-								<option selected value="기타">기타</option>
-						    	<option value="중고차">중고차</option>
-						    	<option value="디지털기기">디지털기기</option>
-						    	<option value="생활가전">생활가전</option>
-						    	<option value="가구/인테리어">가구/인테리어</option>
-						    	<option value="유아동">유아동</option>
-						    	<option value="유아도서">유아도서</option>
-						    	<option value="생활/가공식품">생활/가공식품</option>
-						    	<option value="스포츠/레저">스포츠/레저</option>
-						    	<option value="여성잡화">여성잡화</option>
-						    	<option value="여성의류">여성의류</option>
-						    	<option value="남성패션/잡화">남성패션/잡화</option>
-						    	<option value="게임/취미">게임/취미</option>
-						    	<option value="뷰티/미용">뷰티/미용</option>
-						    	<option value="반려동물용품">반려동물용품</option>
-						    	<option value="도서/티켓/음반">도서티켓음반</option>
-						    	<option value="식물">식물</option>
-						  	</select>
-						</div>
-						
+				<c:if test="${not isAdmin }">
+					<form id="searchForm" action="<c:url value="/board/search.do"/>"
+						method="post">
+						<sec:csrfInput />
+						<div class="search row" id="srchDiv">						
 							<div class="search row" id="imgsrchDiv" style="float: right;">
 								<div class="srch_bar" style="text-align: center;">
 									<div class="stylish-input-group">
-										<input type="text" placeholder="검색어를 입력해주세요" name="title"
+										<input type="text" name="title"
 											class="search-bar"> <span class="input-group-addon">
 											<button id="modal-open" data-toggle="modal"
 												data-target="#myModal" type="button"
@@ -290,46 +266,43 @@
 											</button>
 										</span>
 									</div>
-	
 								</div>
-							</div>
-						</c:if>
-					</div>
-				</form>
+							</div>					
+						</div>
+					</form>
+				</c:if>
 			</li>
 			<li><a class="nav-link"id="chatbot"><img src="${pageContext.request.contextPath}/resources/assets/img/chatbot_icon.png" 
 			       title="챗봇" style="width: 100px; height: 100px;"></a></li>
 		</ul>
 
-		<div class="modal" id="myModal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<!-- Modal Header -->
-					<div class="modal-header" style="background-color: #efc958;">
-						<h5 style="margin-top: 15px; font-family:"SDSwaggerTTF", sans-serif;">
-							<strong>이미지분석</strong>
-						</h5>
-						<i id="modal-close" data-dismiss="modal" class="close bi bi-x"
-							style="font-size: 1.5rem; color: black; cursor: pointer;"></i>
-					</div>
-					<div class="modal-body">
-						<div class="body-content">
-							<img id="preview_image" style="width: 100%; height: 90%;"/>
-							<div id="label-container" style="color: black; cursor: pointer;"></div>
-						</div>
-					</div>
-					<!-- Modal footer -->
-					<div class="modal-footer">
-						<i id="fakeTag" class="bi bi-card-image"
-							style="cursor: pointer; font-size: 2rem; color: cornflowerblue; "></i> <input
-							type="file" class="ImageAnalysis" id="test_image"
-							accept=".png,.jpg,.jpeg" style="display: none;" /> <i
-							style="cursor: pointer; font-size: 1.5rem; color: black;" class="bi bi-search"
-							onclick="predict()"></i>
-					</div>
-				</div>
-			</div>
-		</div>
+			   <div class="modal" id="myModal">
+			         <div class="modalContent">
+			           <div style="text-align: end;">
+			              <i id="modal-close" data-dismiss="modal" class="close bi bi-x"
+			                  style="font-size: 1.8rem; color: black; cursor: pointer;"></i>
+			            </div>
+			               <h4 style="font-family:"SDSwaggerTTF", sans-serif;">
+			                  <strong>이미지분석</strong>
+			               </h4>
+			               <div class="body-content" style="padding:5px;background-color: rgb(125 125 125 / 70%);border-radius: 10px;">
+			                  <img id="preview_image" style="width: 100%; height: 100%;"/>
+			                  <div id="label-container" style="color: white; cursor: pointer;margin-top: 10px;font-size: 18px;"></div>
+			               </div>
+			
+						<div class="row">
+						<div class="col"></div>
+						  <div class="col" style="text-align: end;">
+			               <i id="fakeTag" class="bi bi-card-image"
+			                  style="cursor: pointer; font-size: 1.8rem; color: cornflowerblue; "></i> <input
+			                  type="file" class="ImageAnalysis" id="test_image"
+			                  accept=".png,.jpg,.jpeg" style="display: none;" /> <i
+			                  style="margin-left:10px; cursor: pointer; font-size: 1.5rem; color: white;" class="bi bi-search"
+			                  onclick="predict()"></i>
+			              </div>
+			            </div>
+			         </div>
+			   </div>
 		<div class="row"></div>
 
 		<i class="bi bi-list mobile-nav-toggle"></i>
@@ -470,7 +443,7 @@ $("link#admin12").prop('disabled', true);
 				modalClose();
 			});
 			function modalClose() {
-				$("#modal-content").fadeOut();
+				$("#modalContent").fadeOut();
 			}
 		});
 
@@ -590,7 +563,7 @@ $("link#admin12").prop('disabled', true);
 
 		});
 		
-	      <sec:authentication property="name" var="username" />
+		<sec:authentication property="name" var="username" />
 	          <c:if test="${username != 'anonymousUser'}" var="isLogin">
 	          wsocket = new WebSocket("ws://${pageContext.request.serverName}:${pageContext.request.serverPort}<c:url value='/chat-ws.do/0'/>"); 
 	           //192.168.219.101//192.168.0.129
@@ -616,11 +589,11 @@ $("link#admin12").prop('disabled', true);
 	               //서버로부터 받은 데이타는 이벤트객체(e).data속성에 저장되어 있다
 	                const element = document.getElementById('snackbar');
 	               //일반 메세지
-	               
+	               console.log(e.data);
 	               if(e.data.includes('RoomNo')){
 	                  var start1 = e.data.indexOf(",");
 	                  var start2 = e.data.indexOf(":");
-	                  if(e.data.substring(0,start1)==='RoomNo${roomno},'){
+	                  if(e.data.includes('RoomNo${room_no},')){
 	                     //console.log('같은방');
 	                  }
 	                  else if(e.data.includes('senduserno${userno},') || e.data.includes('writeuserno${userno},')){
@@ -642,14 +615,23 @@ $("link#admin12").prop('disabled', true);
 	                     var x = document.getElementById("snackbar");
 	                     x.className = "show";
 	                     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+	                     if( e.data.includes('좋아요,')){
+		                     element.innerHTML = '';
+		                     element.innerHTML += e.data.substring(start2+1);
+		                     var x = document.getElementById("snackbar");
+		                     x.className = "show";
+		                     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+		                  }
 	                  }
 	                  if( e.data.includes('upperuserno${userno},')){
 	                     element.innerHTML = '';
 	                     element.innerHTML += e.data.substring(start2+1);
+	                     console.log(e.data.substring(start2+1));
 	                     var x = document.getElementById("snackbar");
 	                     x.className = "show";
 	                     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 	                  }
+	                  
 	              }else if(e.data.includes('낙찰')){
 	                  var start = e.data.indexOf(":");
 	                  if( e.data.includes('upperuserno${userno},')){

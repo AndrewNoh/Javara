@@ -414,7 +414,7 @@
          SELECT SEARCH_WORD,SEARCH_COUNT 
          FROM SEARCHLOG 
          <![CDATA[
-         WHERE ROWNUM <=20 
+         WHERE ROWNUM <=100 
          ]]>
          ORDER BY SEARCH_COUNT DESC
       
@@ -558,6 +558,11 @@
 		UPDATE
 		AUCTION_LIST SET STATUS=#{status} WHERE AUCTION_NO=#{auction_no}
 	</update>
+	
+	<update id="updateStatusFinish" parameterType="map">
+		UPDATE
+		AUCTION_LIST SET STATUS=#{status} WHERE AUCTION_NO=#{auction_no}
+	</update>
 	<!-- AUCTION -->
 
 
@@ -648,9 +653,6 @@
 				    WHERE T.STATUS = 'SALE'
 				    ORDER BY P.AUCTION_NO DESC)
 				    WHERE
-					<if test='category != "all"'>
-						CATEGORY = #{category} AND
- 					</if>
 					<![CDATA[	    
 				    TITLE LIKE '%'||#{title}||'%'
 					]]>
@@ -717,5 +719,13 @@
 		</if>
 	</insert>
 	
+	<select id="countcomment" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
+		select tl.title,tl.likes,count(tc.townlist_no) count from TOWN_COMMENTS tc JOIN TOWN_LIST tl on tc.townlist_no=tl.townlist_no
+		where tl.userno=${userno} GROUP BY  tl.title,tl.likes,tc.townlist_no HAVING COUNT(*) > 1
+	</select>
+	<select id="mypageAuctionList" parameterType="Map"
+		resultType="com.carrot.marketapp.model.dto.BoardDTO">
+		select * from auction_list al join AUCTION_PRICE ar on al.AUCTION_NO=ar.AUCTION_NO where userno=#{userno}
+	</select>
 
 </mapper>

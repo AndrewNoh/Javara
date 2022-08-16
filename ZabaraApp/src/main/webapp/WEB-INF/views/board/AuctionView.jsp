@@ -105,8 +105,11 @@ border-radius: 15px;
             
             <div style="display: flex; justify-content:space-around; flex-direction: row-reverse;">
             <c:if test="${isWriter}">
-               <div style="text-align: center; font-size: 20px; ">
+               <div style="text-align: center; font-size: 20px; display:none" id="endDiv">
                   <button id="statusChange" style="float: right; font-size: 16px; color: #fff; background-color: #ffc107; width: 120px" class="btn" title="${list.status == 'END' ? 'SALE' : 'END'}">${list.status == 'END' ? '낙찰취소' : '낙찰하기'}</button>
+               </div>
+               <div style="text-align: center; font-size: 20px; display:none" id="finishDiv">
+               		<button id="statusFinish" style="float: right; font-size: 16px; color: #fff; background-color: #ffc107; width: 120px;" class="btn" title="FINISH">거래완료</button>
                </div>
             </c:if>
             
@@ -126,14 +129,12 @@ border-radius: 15px;
             </c:if>
             
                
-            <c:if test="${!isSale}">
-               <div class="text-center">
-                  <a href="<c:url value="/chat/chatting.do">
-                  <c:param value="${list.townlist_no == null ? 0 : list.townlist_no}" name="townlist_no"/>
-                  <c:param value="${list.auction_no == null ? 0 : list.auction_no}" name="auction_no"/>
-                  <c:param value="${list.userNo}" name="writeuserno"/><c:param value="${list.nickName}" name="wirtenickName"/></c:url>"><button class="btn" style="background-color: #ffc107; color: #fff" >채팅하기</button></a>
-               </div>
-            </c:if>
+            <div class="text-center" style="display:none" id="chattingDiv">
+               <a href="<c:url value="/chat/chatting.do">
+               <c:param value="${list.townlist_no == null ? 0 : list.townlist_no}" name="townlist_no"/>
+               <c:param value="${list.auction_no == null ? 0 : list.auction_no}" name="auction_no"/>
+               <c:param value="${list.userNo}" name="writeuserno"/><c:param value="${list.nickName}" name="wirtenickName"/></c:url>"><button class="btn" style="background-color: #ffc107; color: #fff" >채팅하기</button></a>
+            </div>
             </div>
             <div style="text-align: center; font-size: 25px; float: left;">
                 <i class="bx bxs-heart ml-3" style="color: #ffc107" ></i>
@@ -203,7 +204,7 @@ border-radius: 15px;
                            <option value="게임취미">게임/취미</option>
                            <option value="뷰티미용">뷰티/미용</option>
                            <option value="반려동물용품">반려동물용품</option>
-                           <option value="도서티켓음반">도서티켓음반</option>
+                           <option value="도서티켓음반">도서/티켓/음반</option>
                            <option value="식물">식물</option>
                      </select>
                   </div>
@@ -332,6 +333,11 @@ border-radius: 15px;
       $('#navbar').hide();
       $('#chatUi').hide();
       $('#chatbot').hide();
+      
+      var status="${list.status}";
+      if(status != "FINISH"){
+    	  $("#endDiv").show();
+      }
       
       if('${goChat}' == 'Y'){
          console.log("채팅으로 가")
@@ -538,9 +544,15 @@ border-radius: 15px;
             console.log(data + " : " + value)
             var text = value == 'END' ? '낙찰취소' : '낙찰하기';
             $('#statusChange').text(text);
-            $('#statusChange').attr("title", "SALE");
+            
+            var setTitle = value == 'END' ? 'SALE' : 'END';
+            $('#statusChange').attr("title", setTitle);
+            
+            
 
             if(value == 'END'){
+            	$('#finishDiv').show();
+            	$('#chattingDiv').show();
                const Toast = Swal.mixin({
                    toast : true,
                     position : 'center-center',
@@ -593,6 +605,8 @@ border-radius: 15px;
                   
                
             } else {
+            	$('#finishDiv').hide();
+            	$('#chattingDiv').hide();
                const Toast = Swal.mixin({
                    toast : true,
                     position : 'center-center',
@@ -663,6 +677,37 @@ border-radius: 15px;
          $('#reportOpen').trigger("click");
       });
    });
+   
+   
+   $('#statusFinish').on("click", function(){
+	   $.ajax({
+	         url : '<c:url value="/board/finish.do" />',
+	         type:'POST',
+	         dataType: "text",
+	         data:{'${_csrf.parameterName}':'${_csrf.token}', auction_no:${list.auction_no}, status:"FINISH"}
+	      }).done(function(data){
+	    	  const Toast = Swal.mixin({
+	                toast : true,
+	                 position : 'center-center',
+	                 showConfirmButton : false,
+	                 timer : 1000,
+	                 timerProgressBar : true,
+	             })
+
+	             Toast.fire({
+	                 icon : 'success',
+	                 title : '거래가 완료되었습니다.'
+	             });
+	    	  
+	    	  
+	    	  $('#finishDiv').hide();
+	    	  $("#chattingDiv").hide();
+	    	  $("#endDiv").hide();
+	    	  
+	      })
+   });
+   
+   
    
  //관리자페이지 css안먹게하기
    $("link#admin").prop('disabled', true);

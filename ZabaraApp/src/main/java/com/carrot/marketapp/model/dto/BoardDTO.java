@@ -46,6 +46,7 @@ public class BoardDTO {
 	private int viewCount;
 	
 	private String soldout;
+	private String count;
 	
 	//최고 입찰자
 	private String upper_user_no;

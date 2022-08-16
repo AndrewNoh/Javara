@@ -760,18 +760,21 @@ body::-webkit-scrollbar {
                              <div class="modal-body">
 								 <h1 style="font-size: 12px; text-align:center; margin-top: 10px; font-weight: bold ">자바라페이는 선불머니를 충전하고 이용할 수 있는 간편 결제/송금 서비스예요. </h1>
                       	         <h1 style="font-size: 12px; text-align:center; margin-top: 10px; font-weight: bold ">중고 및 경매거래 자바라페이로 해보세요! </h1>
-                              <form class="form-horizontal" role="form" method="POST" action="#" style="text-align: center;">
+                              <form class="form-horizontal" role="form" method="POST" action="#" style="text-align: center;">                     
+                                  <sec:csrfInput/>
                                   <select class="btn btn-outline-warning btn-s my-2" style="font-size: 12px; font-weight: bold; color: #000; margin-top: 10px" data-toggle="dropdown;" id="pay" name="pay">
-	                                 <option value="">충전 금액 선택하기</option>
+	                                 <option value="" >이용하기</option>
+	                                 <!-- 
 	                                 <option value="5000">충전 금액 5,000 원</option>
 	                                 <option value="10000">충전 금액 10,000 원</option>
 	                                 <option value="20000">충전 금액 20,000 원</option>
 	                                 <option value="30000">충전 금액 30,000 원</option>
 	                                 <option value="40000">충전 금액 40,000 원</option>
 	                                 <option value="50000">충전 금액 50,000 원</option>
-	                                 <option value="direct">직접입력</option>
+	                                 -->
+	                                 <option value="direct">금액입력</option>
                            		  </select>
-                                   <input type="text" class="input" id="payboxDirect" name="payboxDirect" style="font-size: 14px; margin-left: 10px; border: 0.5px solid gray; border-radius: 30px; padding: 5px; width: 100px; text-align: center;" placeholder="금액 기재"> 
+                                   <input type="text"  class="input" id="payboxDirect" name="payboxDirect" style="font-size: 14px; margin-left: 10px; border: 0.5px solid gray; border-radius: 30px; padding: 5px; width: 100px; text-align: center;" placeholder="원"> 
                                 
                               </form>
                         </div>
@@ -846,14 +849,14 @@ body::-webkit-scrollbar {
 					<div class="row">
 						<div class="col-lg-12 col-md-6 mt-4 ">
 							<div class="icon-box">
-								<div class="col" style="display: flex; align-items: center;">
+								<div class="col" style="display: flex; align-items: center; flex-wrap:wrap;">
 									<i class="ri-calendar-todo-line" style="color: #ffbb2c;"></i>
 									<h3>알림 내역</h3>
 								</div>
-								<div class="col-10 content" style="display: flex;">
+								<div class="col-10 content" style="display: flex;flex-direction:column;">
 									<div class="col">
 										<div class="section-title">
-											<h2 style="margin-bottom: 30px;">채팅알림</h2>
+											<h2 style="margin-bottom: 30px;">채팅 알림</h2>
 										</div>
 										<c:forEach var="chatlist" items="${chatlist}" varStatus="loop">
 											<a
@@ -875,9 +878,9 @@ body::-webkit-scrollbar {
 											</a>
 										</c:forEach>
 									</div>
-									<div class="col">
+									<div class="col mt-3">
 										<div class="section-title">
-											<h2 style="margin-bottom: 30px;">낙찰알림</h2>
+											<h2 style="margin-bottom: 30px;">경매 알림</h2>
 										</div>
 										<c:forEach var="participationList"
 											items="${participationList}" varStatus="loop">
@@ -895,6 +898,51 @@ body::-webkit-scrollbar {
 													</h3>
 												</a>
 											</c:if>
+										</c:forEach>
+										<c:forEach var="mypageAuctionList"
+											items="${mypageAuctionList}" varStatus="loop">
+											<c:if test="${mypageAuctionList.status eq  'SALE'}">
+											<c:if test="${(mypageAuctionList.upper_Price - mypageAuctionList.base_Price)>0}">
+													<a
+														href="<c:url value="/board/auctionview.do"><c:param value="${participationList.auction_no}" name="no"/></c:url>"
+														rel="lyteframe" data-gallery="portfolioDetailsGallery"
+														id="view${loop.count}" data-glightbox="type: external"
+														class="portfolio-details-lightbox"
+														title="Portfolio Details">
+														<h3 class="mb-2">
+															<i class="bi bi-chevron-right"
+																style="color: #00d4ff; font-size: 15px;"></i>
+															${mypageAuctionList.title}이의 최고가 ${mypageAuctionList.upper_Price}원으로 갱신되었어요
+														</h3>
+													</a>
+												</c:if>
+												<c:if test="${mypageAuctionList.likes>0}">
+													<a
+														href="<c:url value="/board/auctionview.do"><c:param value="${mypageAuctionList.auction_no}" name="no"/></c:url>"
+														rel="lyteframe" data-gallery="portfolioDetailsGallery"
+														id="view${loop.count}" data-glightbox="type: external"
+														class="portfolio-details-lightbox"
+														title="Portfolio Details">
+														<h3 class="mb-2">
+															<i class="bi bi-chevron-right"
+																style="color: #00d4ff; font-size: 15px;"></i>
+															${mypageAuctionList.title}에 ${mypageAuctionList.likes}개의 좋아요가 눌렸어요
+														</h3>
+													</a>
+												</c:if>
+											</c:if>
+										</c:forEach>
+									</div>
+									<div class="col mt-3">
+										<div class="section-title">
+											<h2 style="margin-bottom: 30px;">동네생활 알림</h2>
+										</div>
+										<c:forEach var="comments" items="${comments}" varStatus="loop">
+												<h3 class="mb-2">
+													<i class="bi bi-chevron-right"
+														style="color: #f27474; font-size: 15px;"></i>
+													${comments.title}에 ${comments.likes }개의 좋아요와 ${comments.count}개의 댓글이 달렸어요
+												</h3>
 										</c:forEach>
 									</div>
 								</div>
@@ -1045,9 +1093,6 @@ body::-webkit-scrollbar {
 			</div>
 		</div>
 	</div>
-
-
-
 </div>
 </div>
 </div>
@@ -1498,10 +1543,9 @@ body::-webkit-scrollbar {
 	               }
            	}
            
-           // 자바라페이 잔액 충전: 직접 입력
+          // 자바라페이 잔액 충전: 직접 입력
 		  $(function(){
-	             $('#payboxDirect').hide();
-	              
+	             $('#payboxDirect').hide();	              
 	             $('#pay').change(function(){
 	                if($("#pay").val() == "direct") {
 	                   $("#payboxDirect").show();
@@ -1511,14 +1555,17 @@ body::-webkit-scrollbar {
 	                 }                
 	              }) 
 	              })
-
+           	
+          function selectamount(){ }
+          
+          
            // 자바라페이 잔액 충전
            var IMP = window.IMP;
            IMP.init('imp74932749'); 
 
            function payService() {
         	   // 충전액
-               var amount = $('#pay option:selected').val();
+               var amount = $('#payboxDirect').val();
     		   
                // 사용자 정보 얻기
                var email = '${email}';
@@ -1556,7 +1603,9 @@ body::-webkit-scrollbar {
                                       icon : 'success',
                                       title : '충전이 완료되었습니다.'
                                    })
-                                 console.log(amount);
+                                 // console.log(amount);
+                                 $('#payModal').modal('hide');
+                                 
                                  $.ajax({
                                       type: 'POST',
                                      url : '<c:url value="/pay/balance.do"/>',
@@ -1591,9 +1640,12 @@ body::-webkit-scrollbar {
                                    })
                                  
                               }
+                              
                            })
+                           $('#payModal').modal('hide');
                      }
-           			           
+           
+           
            var geocoder = new daum.maps.services.Geocoder();
          	function daumAddress() {
          		new daum.Postcode({
