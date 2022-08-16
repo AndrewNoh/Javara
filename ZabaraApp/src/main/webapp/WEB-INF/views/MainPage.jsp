@@ -26,6 +26,7 @@ width: 70%;
   animation: animate-arrows 2s infinite;
 }
 
+
 @keyframes animate-arrows{
   0%{
     opacity: 0;
@@ -139,7 +140,7 @@ width: 70%;
 </div>
 
 <!-- React: 우리동네 인기매물 -->
-<div style="width:100%; height:1000px; background-color:#bababade; color:black" id="mainUnder">
+<div style="width:100%; height:800px; background-color:#bababade; color:black" id="mainUnder">
 	<br>
 	<br>
 	<img src="${pageContext.request.contextPath}/resources/assets/img/main_scroll_banner.png" style="width: 500px; display: block; margin: 0 auto; "/>
@@ -148,16 +149,16 @@ width: 70%;
 	</div>
 </div>
 
-	
-  
-<div style="width:100%; height:800px; background-color:#ffffffde; display: flex; align-items: center; justify-content: center;" id="mainUnder">
+<!-- React: 인기검색어 -->
+<div style="width:100%; height:700px; background-color:#ffffffde; display: flex; align-items: center; justify-content: center;" id="mainUnder">
    <br>
    <br>
-   <img src="${pageContext.request.contextPath}/resources/assets/img/main_scroll_banner.png" style="width: 500px; display: block; margin: 0 auto; "/>
+   <img src="${pageContext.request.contextPath}/resources/assets/img/main_wordcloud.png" style="width: 300px; display: block; margin: 0 auto; position: relative; left: 10%"/>
    <div style="width:90%; height:85%; margin:auto" class="row">
       <iframe style="border:none;width:100%;height:100%" src="/marketapp/wordcloud/index.html"></iframe>
    </div>
 </div>
+
 
 <script>
     function logout(){
@@ -175,7 +176,8 @@ width: 70%;
     $('.arrow-down').on("click", function(){
     	down();
     });
-   
+    
+
     $('#header').on("click", function(){
     	var y = event.pageY;
     	
