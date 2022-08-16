@@ -251,7 +251,7 @@
 							<div class="search row" id="imgsrchDiv" style="float: right;">
 								<div class="srch_bar" style="text-align: center;">
 									<div class="stylish-input-group">
-										<input type="text" placeholder="검색어를 입력해주세요" name="title"
+										<input type="text" name="title"
 											class="search-bar"> <span class="input-group-addon">
 											<button id="modal-open" data-toggle="modal"
 												data-target="#myModal" type="button"
