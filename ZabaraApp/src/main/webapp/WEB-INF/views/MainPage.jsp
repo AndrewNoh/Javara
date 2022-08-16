@@ -14,6 +14,11 @@ width: 70%;
   transform: translate(-50%, -50%);
 
  }
+ .dropdown-menu.show {
+    border: 1px solid #f6dac591;
+    background: #f6dac591;
+    display: block;
+}
  
  .arrow-down span{
   display: block;

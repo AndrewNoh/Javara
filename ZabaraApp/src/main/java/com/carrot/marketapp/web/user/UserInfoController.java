@@ -478,6 +478,10 @@ public class UserInfoController {
 	@RequestMapping("/category.do")
 	public String category(Model model, Principal principal) {
 		Map map = new HashMap<>();
+		if(principal==null) {
+			return "redirect:/location/login.do";
+		}
+		
 		map.put("email", principal.getName());
 		UserDTO userinfo = userService.selectOne(map);
 	    model.addAttribute("userno", userinfo.getUserno());
@@ -485,6 +489,8 @@ public class UserInfoController {
 		model.addAttribute("latitude",record.getLatitude());
 		model.addAttribute("longitude",record.getLongitude());
 		model.addAttribute("address",record.getFulladdress());		
+		
+		
 		
 		return "user/category.market";
 	}
