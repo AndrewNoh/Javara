@@ -28,7 +28,7 @@ public class WebSocketChatHandler extends TextWebSocketHandler {
 	// 여기서 클라이언트로 메시지도 보냄
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		System.out.println(session.getId() + "로부터 받은 메시지:" + message.getPayload());
+//		System.out.println(session.getId() + "로부터 받은 메시지:" + message.getPayload());
 		// 접속한 모든 클라이언트에게 session.getId()가 보낸 메시지 뿌려주기]
 		for (WebSocketSession client : clients.values()) {
 			if (!session.getId().equals(client.getId())) {// 자기가 보낸 메시지를 다시 받지 않도록
@@ -40,7 +40,7 @@ public class WebSocketChatHandler extends TextWebSocketHandler {
 	// 클라이언트와 통신장애시 자동으로 호출되는 메소드]
 	@Override
 	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-		System.out.println(session.getId() + "와 통신장애 발생:" + exception.getMessage());
+//		System.out.println(session.getId() + "와 통신장애 발생:" + exception.getMessage());
 	}
 
 	// 클라이언트와 연결이 끊어졌을때 호출되는 콜백 메소드]
@@ -48,7 +48,7 @@ public class WebSocketChatHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		clients.remove(session.getId());
-		System.out.println(session.getId() + "연결이 끊어졌어요");
+//		System.out.println(session.getId() + "연결이 끊어졌어요");
 	}
 
 	@Override

@@ -359,7 +359,7 @@
 	<select id="getBuyCount" resultType="_int">
 		SELECT COUNT(*) FROM AUCTION_PRICE P
 		LEFT OUTER JOIN AUCTION_LIST L ON L.AUCTION_NO = P.AUCTION_NO
-		WHERE L.USERNO != #{userno} AND UPPER_USER_NO = #{userno} AND STATUS='END'
+		WHERE L.USERNO != #{userno} AND UPPER_USER_NO = #{userno}
 	</select>
 	
 	<select resultType="com.carrot.marketapp.model.dto.BoardDTO" parameterType="Map" id="getAuctionListCategoryItems">

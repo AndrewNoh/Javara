@@ -637,6 +637,10 @@ public class MainBoardController {
 
 	@PostMapping("/search.do")
 	public String search(Model model, @RequestParam Map map, Principal principal) {
+		if(principal == null) {
+			return "redirect:/location/login.do";
+		}
+		
 		map.put("board", "경매");
 		int log = 0;
 		int havelog = 0;

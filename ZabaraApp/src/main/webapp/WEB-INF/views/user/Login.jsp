@@ -701,7 +701,21 @@ $('#sendPassword').click(function(){
 	         
 	      }).done(function(data){
 	         if(data =="notMember") addMessage('존재하지 않는 아이디입니다.',$('#searchid'));
-	         else addMessage('해당 이메일로 발송된 임시 비밀번호로 로그인 후 비밀번호를 변경해주세요.',$('#searchid'));
+	         else {
+	        	 $('#backToLogin').get(0).click();
+	        	 const Toast = Swal.mixin({
+	                   toast: true,
+	                   position: 'center-center',
+	                   showConfirmButton: false,
+	                   timer: 1800,
+	                   timerProgressBar: true,
+	               })
+	                
+	               Toast.fire({
+	                   icon: 'success',
+	                   title: '해당 이메일로 임시 비밀번호가 발급되었습니다.'
+	               })
+	         }
 	      });
 	   }else{
 	      addMessage('이메일 형식에 알맞게 입력해주세요 xxx@xxx.xxx',$('#searchid'));
@@ -849,7 +863,7 @@ function kakaoLogin() {
 
    var naverLogin = new naver.LoginWithNaverId({
       clientId : "aD0UrmApSUn6FDTwgeL4", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
-      callbackUrl : "http://localhost:8080/marketapp/location/login.do", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+      callbackUrl : "http://192.168.0.38:8080/marketapp/location/login.do", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
       isPopup : false,
       callbackHandle : true
    });
