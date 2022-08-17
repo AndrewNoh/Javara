@@ -146,10 +146,7 @@ public class UserInfoController {
 	// 회원 수정
 	@GetMapping("/editmember.do")
 	public String edit(@RequestParam Map map, Model model, Authentication auth) {
-		System.out.println("회원 수정");
 		map.put("email", ((UserDetails) auth.getPrincipal()).getUsername());// 이메일 가져오기
-		System.out.println(((UserDetails) auth.getPrincipal()).getUsername());// kosmo@naver.com
-
 		// 서비스 호출]
 		UserDTO record = userService.selectOne(map);
 
@@ -196,7 +193,6 @@ public class UserInfoController {
 
 		// 이부분 해주는 이유 : 페이지 나가도 다른 페이지에도 저장됨
 		int affected = userService.update(map);
-		System.out.println("수정이  안되욤  :: "+affected);
 		if (affected != 0 && !editprofileimg.isEmpty()) {
 			oldprofile.delete();
 		}
@@ -210,7 +206,6 @@ public class UserInfoController {
 		model.addAttribute("phonenumber", record.getPhonenumber());
 		model.addAttribute("profileimage", record.getProfile_img());
 
-		System.out.println("업데이트 성공!");
 		return "forward:/userinfo/mypage.do";
 	}/////////////////////////
 
@@ -246,14 +241,11 @@ public class UserInfoController {
 		
 		// 판매/구매내역 & 관심목록 갯수
 		int likeCount = boardService.getLikeCount(map);
-		System.out.println("조아용"+likeCount);
-		
+
 		int sellCount = boardService.getSellCount(map);
-		System.out.println("판매용"+sellCount);
-			
+
 		int buyCount = boardService.getBuyCount(map);
-		System.out.println("구매용"+buyCount);
-				
+	
 		model.addAttribute("likeCount", likeCount);
 		model.addAttribute("sellCount", sellCount);
 		model.addAttribute("buyCount", buyCount);
@@ -336,9 +328,7 @@ public class UserInfoController {
 	      // 서비스 호출]
 	      // 그 형식에 맞는 dto만들어서 넣는 방법이 있음
 	      List<BoardDTO> record = boardService.mypageSelllist(map);
-	      
-	      System.out.println(map);
-	      System.out.println("레코드" + record);
+
 	      model.addAttribute("record", record);
 	      model.addAttribute("email", map.get("email"));
 	      model.addAttribute("board", "경매");
@@ -346,8 +336,6 @@ public class UserInfoController {
 	      map.put("where", "sell");
 	      model = setModel(map, model, principal);
 	      model.addAttribute("category", map.get("category"));
-	      System.out.println(model);
-	      System.out.println(map.get("email"));
 
 	      return "user/SellList.market";
 	   }///////////////////////
@@ -360,9 +348,7 @@ public class UserInfoController {
 	      // 서비스 호출]
 	      // 그 형식에 맞는 dto만들어서 넣는 방법이 있음
 	      List<BoardDTO> record = boardService.mypagepurchaselist(map);
-	      
-	      System.out.println("map =="+map);
-	      System.out.println("레코드 ==" + record);
+
 	      model.addAttribute("record", record);
 	      model.addAttribute("email", map.get("email"));
 	      model.addAttribute("board", "경매");
@@ -370,7 +356,6 @@ public class UserInfoController {
 	      map.put("where", "purchase");
 	      model = setModel(map, model, principal);
 	      model.addAttribute("category", map.get("category"));
-	      System.out.println(model);
 	      return "user/PurchaseList.market";
 	   }///////////////////////
 
@@ -386,9 +371,6 @@ public class UserInfoController {
 	      // 그 형식에 맞는 dto만들어서 넣는 방법이 있음
 	      List<BoardDTO> record = boardService.mypagelikelist(map);
 
-	      System.out.println(map);
-	      System.out.println("레코드" + record);
-	      System.out.println("레코드" + record.size());
 	      model.addAttribute("record", record);
 	      model.addAttribute("email", map.get("email"));
 	      model.addAttribute("board", "경매");
@@ -396,8 +378,6 @@ public class UserInfoController {
 	      map.put("where", "like");
 	      model = setModel(map, model, principal);
 	      model.addAttribute("category", map.get("category"));
-	      System.out.println(model);
-	      System.out.println(map.get("email"));
 	      return "user/LikeList.market";
 	   }///////////////////////
 
@@ -450,14 +430,12 @@ public class UserInfoController {
 	      model.addAttribute("imageList", imageList);
 	      model.addAttribute("address", map.get("simpleAddress"));
 	      model.addAttribute("LISTS", Lists);
-	      System.out.println("리스트," + Lists);
 
 	      return model;
 	   }
 
 	   public Map getUserInfo(Map map, Model model, Principal principal) {
-	      
-	      System.out.println("getUserInfo들어옴");
+
 	      map.put("email", principal.getName());
 
 	      UserDTO user = userService.selectOne(map);

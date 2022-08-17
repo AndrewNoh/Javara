@@ -140,8 +140,6 @@ public class MainBoardController {
 	@RequestMapping("/auctionview.do")
 	public String auctionview(Model model, @RequestParam Map map, Principal principal) {
 		map.put("board", "경매");
-
-		System.out.println(map.get("no"));
 		BoardDTO list = boardService.selectOne(map);
 		model.addAttribute("email", principal.getName());
 		int no = Integer.parseInt((String) map.get("no"));
@@ -176,8 +174,6 @@ public class MainBoardController {
 
 		String board = (String) map.get("board");
 
-		System.out.println(map.get("content"));
-
 		map = getUserInfo(map, model, principal);
 
 		int a = 0;
@@ -193,7 +189,6 @@ public class MainBoardController {
 			price = map.get("price").toString().trim();
 
 		if (board.equals("우리동네") && filename[0].getOriginalFilename().equals("")) {
-			System.out.println("잘 작동하나 테스트해봐야 합니다.");
 			a = boardService.insert(map);
 
 		} else if (title.equals("") || content.equals("") || price.equals("")
@@ -289,27 +284,22 @@ public class MainBoardController {
 			@RequestParam("filename") MultipartFile[] filename) throws IllegalStateException, IOException {
 
 		String board = (String) map.get("board");
-		System.out.println(map.get("auction_no"));
-
 		map = getUserInfo(map, model, principal);
 
 		int a = 0;
 
 		if (board.equals("경매")) {
-			System.out.println("종료일");
 			map.put("enddate", Integer.parseInt((String) map.get("enddate")));
 		}
 
 		// 경매면 금액 들어가야함
 		String price = "0";
 		if (!board.equals("우리동네")) {
-			System.out.println("가격입력");
 			price = map.get("price").toString().trim();
 		}
 
 		// 경매가아님 & 사진이 없음
 		if (board.equals("우리동네") && filename[0].getOriginalFilename().equals("")) {
-			System.out.println("잘 작동하나 테스트해봐야 합니다.");
 			a = boardService.update(map);
 
 		} else if (board.equals("우리동네")) {
@@ -317,29 +307,20 @@ public class MainBoardController {
 			map.put("profile", "have");
 			a = boardService.update(map);
 		} else if (board.equals("경매") && filename[0].getOriginalFilename().equals("")) {
-			System.out.println("글만 수정");
 			a = boardService.update(map);
 		} else {
-			System.out.println("사진도 수정");
 			map.put("profile", "have");
 			a = boardService.update(map);
 		}
 
 		String path = req.getSession().getServletContext().getRealPath("/resources/assets/img/product_img"); // 경로
 
-		System.out.println("A의 값 : " + a);
-
 		if (a == 1 && !(filename[0].getOriginalFilename().equals(""))) {
-			System.out.println("그럼 이프문 들어온거잖아");
 			for (int i = 0; i < filename.length; i++) {
 
 				String rename = FileUpDownUtils.getNewFileName(path, filename[i].getOriginalFilename());// 같은 이름일때
-																										// 파일제목변경
-				System.out.println(rename);
 
 				File dest = new File(path + File.separator + rename);
-
-				System.out.println(dest);
 
 				filename[i].transferTo(dest);
 
@@ -355,10 +336,8 @@ public class MainBoardController {
 				filename[i].transferTo(resize);
 
 				map.put("profile", rename);
-				System.out.println(map.get("profile"));
 
 				int aff = boardService.insertImage(map);
-				System.out.println("업로드 성공 : " + aff);
 				a = aff;
 
 			}
@@ -499,7 +478,6 @@ public class MainBoardController {
 
 		int likes = boardService.selectLiveLike(map);
 		model.addAttribute("likes", likes);
-		// System.out.println("likes"+likes);
 
 		return likes;
 	}
@@ -528,7 +506,6 @@ public class MainBoardController {
 
 	@GetMapping("/news.do")
 	public String startCrawl(Authentication auth, Model model) throws IOException {
-		System.out.println("****크롤링 컨트롤러 입니다****");
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd", Locale.KOREA);//
 		Date currentTime = new Date();
 		Map map = new HashMap();
@@ -597,9 +574,6 @@ public class MainBoardController {
 			}
 
 			page += 20;
-			System.out.println("사이즈1 : " + al1.size());
-			System.out.println("사이즈2 : " + al2.size());
-			System.out.println("사이즈3 : " + al3.size());
 		}
 
 		model.addAttribute("urls", al1);
@@ -664,7 +638,6 @@ public class MainBoardController {
 	@PostMapping("/search.do")
 	public String search(Model model, @RequestParam Map map, Principal principal) {
 		map.put("board", "경매");
-		System.out.println(map.get("title"));
 		int log = 0;
 		int havelog = 0;
 		String search = boardService.selectSearchLog(map);
@@ -767,8 +740,6 @@ public class MainBoardController {
 	@ResponseBody
 	public int report(@RequestParam Map map, Model model, Principal principal) throws JsonProcessingException {
 		map = getUserInfo(map, model, principal);
-		System.out.println(map.get("content"));
-		System.out.println(map.get("category"));
 		int hasReport = boardService.hasReport(map);
 		if (hasReport == 0) {
 			return boardService.doReport(map);

@@ -190,7 +190,7 @@
 }
 
 .modal-backdrop.show{
-    opacity: .7;	
+    opacity: .5;	
 }
 </style>
 <body>
@@ -645,7 +645,7 @@ $("link#admin12").prop('disabled', true);
 	               else if(e.data.includes('동네')){
 	                  var arr= e.data.split(/[,:]/);
 	                  if(e.data.includes('townlist_no')){
-	                     if(e.data.includes('WriteUserNO:${userno}')){
+	                     if(e.data.includes('WriteUserNO:${userno},')){
 	                        element.innerHTML = '';
 	                        element.innerHTML += '동네생활 '+arr[5]+'에 댓글이 달렸어요';
 	                        var x = document.getElementById("snackbar");
@@ -653,7 +653,7 @@ $("link#admin12").prop('disabled', true);
 	                        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 	                     }
 	                  }else if(e.data.includes('like')){
-	                     if(e.data.includes('WriteUserNO:${userno}')){
+	                     if(e.data.includes('WriteUserNO:${userno},')){
 	                       element.innerHTML = '';
 	                        element.innerHTML += '동네생활 '+arr[5]+'에 좋아요가 눌렸어요';
 	                        var x = document.getElementById("snackbar");

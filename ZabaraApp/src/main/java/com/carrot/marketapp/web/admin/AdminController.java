@@ -44,10 +44,7 @@ public class AdminController {
 	
 	
 	public Map getUserInfo(Map map, Model model, Principal principal) {
-		
 	      int userCount = userService.selectList(map);
-	      System.out.println(userCount);
-	      
 	      map.put("userCount", userCount);
 	      
 	      return map;
@@ -62,8 +59,6 @@ public class AdminController {
 		
 		map = getUserInfo(map, model, principal);
 		model.addAttribute("userCount",map.get("userCount"));
-		System.out.println(map.get("userCount"));
-
 		return "/admin/Admin.market";
 	}
 	
@@ -164,8 +159,6 @@ public class AdminController {
 	@RequestMapping("/deleteAdminTown.do")
 	public String deleteAdminTown(@RequestParam Map map, Model model, Principal principal) {
 		userService.delete(map);
-		System.out.println("map:"+map);
-		
 		return "forward:/admin/admingropboard.do";
 
 	}
@@ -173,8 +166,6 @@ public class AdminController {
 	@RequestMapping("/deleteAdminAuction.do")
 	public String deleteAdminAuction(@RequestParam Map map, Model model, Principal principal) {
 		userService.delete(map);
-		System.out.println("map:"+map);
-		
 		return "forward:/admin/adminauction.do";
 
 	}

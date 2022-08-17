@@ -22,7 +22,6 @@ public class WebSocketChatHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		// -컬렉션에 연결된 클라이언트 추가
 		clients.put(session.getId(), session);
-		System.out.println(session.getId() + "연결 되었습니다");
 	}
 
 	// 클라이언트로 부터 메시지를 받았을때 자동 호출되는 콜백 메소드]

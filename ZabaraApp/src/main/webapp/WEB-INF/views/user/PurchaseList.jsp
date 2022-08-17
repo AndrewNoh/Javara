@@ -406,6 +406,9 @@ No license, 100% free to use.
   border-bottom: 24px solid transparent;
   background-clip: padding-box;
 }
+.modal-backdrop.show{
+	opacity: .5;
+}
 </style>
 <div id="services" class="services neonborder m-5">
    <div class="container">

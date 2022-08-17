@@ -55,10 +55,6 @@ public class ChatController {
       map.put("userno", userNickname.getUserno());
       model.addAttribute("profileimage", userNickname.getProfile_img());
       Object userno;
-      System.out.println(map.get("wirtenickName"));
-      System.out.println(map.get("auction_no"));
-      System.out.println(map.get("writeuserno"));
-      System.out.println(map.get("upperuserno"));
 
       ChatDTO chatroom = chatService.findChatRoom(map);
       model.addAttribute("auction_no", map.get("auction_no"));
@@ -66,8 +62,6 @@ public class ChatController {
       model.addAttribute("chatroom", chatroom);
 
       if (chatroom != null) {
-         System.out.println("GET방식 방번호 중복");
-
          map.put("room_no", chatroom.getRoom_no());
          map.put("senduserno", chatroom.getSenduserno());
          model.addAttribute("sendusernickname", chatroom.getSendusernickname());
@@ -84,7 +78,6 @@ public class ChatController {
          List<ChatDTO> readmsg = chatService.readmsg(map);
       } else {
          model.addAttribute("room_no", '0');
-         System.out.println("GET방식 방생성");
          map.put("userno", map.get("writeuserno"));
          ChatDTO finduser=chatService.userlist(map);
          model.addAttribute("finduser", finduser);
@@ -173,7 +166,6 @@ public class ChatController {
    @ResponseBody
    public String sendimg(@RequestParam MultipartFile chatimg, HttpServletRequest req, Model model, Principal principal,
          @RequestParam Map map) throws IllegalStateException, IOException {
-      //System.out.println("사진");
       String path = req.getSession().getServletContext().getRealPath("/resources/assets/img/chat_img");
       String rename = FileUpDownUtils.getNewFileName(path, chatimg.getOriginalFilename());
       File dest = new File(path + File.separator + rename);
@@ -188,7 +180,6 @@ public class ChatController {
       ChatDTO chatroom = chatService.findChatRoom(map);
 
       if (chatroom != null) {
-         //System.out.println("방번호 중복");
          map.put("chatimg", rename);
          map.put("senduserno", map.get("userno"));
          map.put("room_no", chatroom.getRoom_no());
@@ -236,7 +227,6 @@ public class ChatController {
 	      ChatDTO chatroom = chatService.findChatRoom(map);
 
 	      if (chatroom != null) {
-	         //System.out.println("방번호 중복");
 	         map.put("senduserno", map.get("userno"));
 	         map.put("room_no",chatroom.getRoom_no());
 	         map.put("unread_count", "1");
@@ -281,8 +271,6 @@ public class ChatController {
    @PostMapping(value = "/clickEvents.do", produces = "application/json;charset=UTF-8")
    @ResponseBody
    public String agreement(Model model, @RequestParam Map map, Principal principal) {
-	   System.out.println("옴??");
-	   System.out.println(map.get("rownum"));
 	   map.get("rownum");
 
 	   chatService.updateChatMsg(map);

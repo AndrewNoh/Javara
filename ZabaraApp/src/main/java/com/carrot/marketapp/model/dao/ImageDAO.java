@@ -17,7 +17,6 @@ public class ImageDAO {
 
 	public List<ImageDTO> selectList(Map map) {
 		if(map.get("board").equals("우리동네")) {		
-			System.out.println(map.get("townlist_no"));
 			return sqlSession.selectList("getTownImage", map);
 		} else {			
 			return sqlSession.selectList("getAuctionImage", map);

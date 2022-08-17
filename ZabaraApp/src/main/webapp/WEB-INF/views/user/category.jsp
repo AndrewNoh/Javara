@@ -16,11 +16,8 @@ body {
   -ms-user-select:none;
   user-select:none
 }
-<<<<<<< HEAD
-=======
 
 
->>>>>>> branch 'main' of https://github.com/AndrewNoh/Javara.git
 .bAddr {
    color: #fff;
    background: #85adad;
@@ -272,7 +269,7 @@ input.form-text {
     </div>
  </div>
 <script>
-
+var category="전체매물";
 var latitude = ${latitude};
 var longitude = ${longitude};
 var nowAddress = "${address}";
@@ -294,7 +291,7 @@ var options = {
    
 var customOverlay = new kakao.maps.CustomOverlay({    
     xAnchor: 0.3,
-    yAnchor: 0.91
+    yAnchor: 0.5
 });
 var map = new daum.maps.Map(container, options);
 var addressMarker = new daum.maps.Marker(),addressinfowindow = new daum.maps.InfoWindow({zindex : 1});
@@ -308,6 +305,7 @@ addressinfowindow.open(map,addressMarker);
 
 //인포박스 커스텀css적용
 infoboxcss('#addressbox');
+categoryItemList();
 
 
 //카테고리아이템 불러오기

@@ -159,7 +159,6 @@
 			if (data != 1) {
 				like.children().css("color", "#FFC107");
 				wsocket.send('경매 좋아요,userNo'+title.split(/[:]/)[0]+",title:"+title.split(/[:]/)[1]+"에 좋아요가 눌렸어요");
-				console.log('경매 좋아요,userNo'+title.split(/[:]/)[0]+",title:"+title.split(/[:]/)[1]+"에 좋아요가 눌렸어요");
 			} else {
 				console.log("좋아요 해제")
 				like.children().css("color", '');
