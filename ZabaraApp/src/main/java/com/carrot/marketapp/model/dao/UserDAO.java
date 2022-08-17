@@ -46,6 +46,7 @@ public class UserDAO {
 	public int selectList(Map map) {
 	      if(map.get("userno") !=null)
 	         return sqlSession.selectOne("selectUserList",map);
+	    	 
 	      return 0;
 	   }
 

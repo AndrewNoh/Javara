@@ -8,6 +8,7 @@ import java.util.Vector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,26 +44,14 @@ public class AdminController {
 	ImageServiceimpl imageService;
 	
 	
+	
 	public Map getUserInfo(Map map, Model model, Principal principal) {
 	      int userCount = userService.selectList(map);
+	      
 	      map.put("userCount", userCount);
 	      
 	      return map;
 	}
-
-	@RequestMapping("/admin.do")
-	public String setModel(Map map, Model model, Principal principal) {
-		map.put("email", principal.getName());
-		UserDTO user = userService.selectOne(map);
-		
-		map.put("userno", user.getUserno());
-		
-		map = getUserInfo(map, model, principal);
-		model.addAttribute("userCount",map.get("userCount"));
-		return "/admin/Admin.market";
-	}
-	
-	
 	
 	@RequestMapping("/admingropboard.do")
 	public String AdminGropBoardList(Map map, Model model, Principal principal) {
@@ -102,12 +91,13 @@ public class AdminController {
 		model.addAttribute("address", map.get("simpleAddress"));
 		model.addAttribute("LISTS", Lists);
 		model.addAttribute("nowUser", map.get("userno"));
+		
+		model.addAttribute("nickName",user.getNickname());
 
-		return "/admin/AdminGropBoardList.market";
+		return "/admin/AdminGropBoardList";
 	}
 	
-	@RequestMapping("/adminauction.do")
-	public String AdminAuctionboard(Map map, Model model, Principal principal) {
+	public Map AdminAuctionboard(Map map, Model model, Principal principal) {
 		model.addAttribute("board", "관리자경매");
 		map.put("email", principal.getName());
 		model.addAttribute("email", principal.getName());
@@ -146,8 +136,37 @@ public class AdminController {
 		model.addAttribute("LISTS", Lists);
 		model.addAttribute("nowUser", map.get("userno"));
 
-		return "/admin/AdminAuctionList.market";
+		return map;
 	}
+	
+	@RequestMapping("/admin.do")
+	public String main(Map map, Model model, Principal principal) {
+		map.put("email", principal.getName());
+		UserDTO user = userService.selectOne(map);
+		
+		map.put("userno", user.getUserno());
+		
+		map = getUserInfo(map, model, principal);
+		
+		Map map3 = AdminAuctionboard(map, model, principal);
+		
+		model.addAttribute("userCount",map.get("userCount"));
+		model.addAttribute("nickName",user.getNickname());
+		
+		return "/admin/Admin.market";
+	};
+
+	/*
+	public String setModel(Map map, Model model, Principal principal) {
+		map.put("email", principal.getName());
+		UserDTO user = userService.selectOne(map);
+		
+		map.put("userno", user.getUserno());
+		
+		map = getUserInfo(map, model, principal);
+		model.addAttribute("userCount",map.get("userCount"));
+		return "/admin/Admin.market";
+	}*/
 	
 	@RequestMapping(value = "/delete.do", produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -166,7 +185,7 @@ public class AdminController {
 	@RequestMapping("/deleteAdminAuction.do")
 	public String deleteAdminAuction(@RequestParam Map map, Model model, Principal principal) {
 		userService.delete(map);
-		return "forward:/admin/adminauction.do";
+		return "forward:/admin/admin.do";
 
 	}
 	

@@ -14,8 +14,16 @@
       SELECT * FROM TOWN_LIST
    </select>
    
+   <select id="selectAllGropListCount" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
+      SELECT count(*) FROM TOWN_LIST
+   </select>
+   
    <select id="selectAllReportAuctionList" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
       SELECT DISTINCT al.content,al.title,al.auction_no FROM auction_report areport join auction_list al ON al.auction_no = areport.auction_no
+   </select>
+   
+   <select id="selectAllReportAuctionListCount" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
+      SELECT DISTINCT count(*)FROM auction_report areport join auction_list al ON al.auction_no = areport.auction_no;
    </select>
    
    <!-- DELETE문 -->
