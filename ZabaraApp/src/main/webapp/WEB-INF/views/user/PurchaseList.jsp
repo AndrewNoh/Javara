@@ -406,9 +406,14 @@ No license, 100% free to use.
   border-bottom: 24px solid transparent;
   background-clip: padding-box;
 }
+<<<<<<< HEAD
 
 .modal-backdrop.show{
 	opacity: .7;
+=======
+.modal-backdrop.show{
+	opacity: .5;
+>>>>>>> branch 'main' of https://github.com/AndrewNoh/Javara.git
 }
 </style>
 <div id="services" class="services neonborder m-5">

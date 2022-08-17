@@ -867,19 +867,22 @@ function kakaoLogin() {
       isPopup : false,
       callbackHandle : true
    });
-   naverLogin.init();
-   window.addEventListener('load', function() {
-      naverLogin.getLoginStatus(function(status) {
-         if (status) {
-            var Naverdata = JSON.stringify({
-               pwd : naverLogin.user.getId(),
-               nickname : naverLogin.user.getName(),
-               email : naverLogin.user.getEmail(),
-               "${_csrf.parameterName}" : "${_csrf.token}"
-            });
-            snsLoginProgress(Naverdata);
-         }
-      });
+   
+   $('#naverIdLogin_loginButton').click(function(){
+	   naverLogin.init();
+
+	      naverLogin.getLoginStatus(function(status) {
+	         if (status) {
+	            var Naverdata = JSON.stringify({
+	               pwd : naverLogin.user.getId(),
+	               nickname : naverLogin.user.getName(),
+	               email : naverLogin.user.getEmail(),
+	               "${_csrf.parameterName}" : "${_csrf.token}"
+	            });
+	            snsLoginProgress(Naverdata);
+	         }
+	      });
+
    });
 
    

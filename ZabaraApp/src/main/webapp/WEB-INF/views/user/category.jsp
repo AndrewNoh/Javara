@@ -291,7 +291,7 @@ var options = {
    
 var customOverlay = new kakao.maps.CustomOverlay({    
     xAnchor: 0.3,
-    yAnchor: 0.91
+    yAnchor: 0.5
 });
 var map = new daum.maps.Map(container, options);
 var addressMarker = new daum.maps.Marker(),addressinfowindow = new daum.maps.InfoWindow({zindex : 1});
