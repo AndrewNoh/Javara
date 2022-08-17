@@ -12,7 +12,7 @@ function sendMessage(message,session_id) {
             success:receiveResponse
             })
 		
-        //flask서버로부터 응답을 받으면 receiveResponse콜백함수가 호출됨
+        //flask서버로부터 응답을 받으면 receiveResponse콜백함수가 호출
         function receiveResponse(data) {//data는 flask로부터 받은 응답 {'message':'다이얼로그플로우가 보내준값'}
           //chat-container에 bot의 응답 추가
           var message = data.message.split(';');
