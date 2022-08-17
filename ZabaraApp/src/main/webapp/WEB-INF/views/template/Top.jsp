@@ -368,7 +368,7 @@ $("link#admin12").prop('disabled', true);
 	        // 입력창 클리어
 	        $('#message').val('')
 	        //스크롤바 아래로
-	        $(".messages").scrollTop($(".messages")[0].scrollHeight);
+	        $(".messages-content").scrollTop($(".messages-content")[0].scrollHeight);
 	        $('.messages-content').focus();
 	        //메시지 전송
 	        sendMessage(message,'<%=session.getId()%>');
