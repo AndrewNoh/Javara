@@ -60,13 +60,11 @@ public class SNSLoginController {
 		map.add("redirect_uri", redirect_url.trim());
 		map.add("grant_type", "authorization_code");
 		map.add("code", dto.get("code").toString());
-		System.out.println(map);
 		HttpEntity<LinkedMultiValueMap<String, String>> request2 = new HttpEntity<LinkedMultiValueMap<String, String>>(
 				map, headers);
 		Map response2 = restTemplate.postForObject(url, request2, HashMap.class);
 		map.clear();
 		model.addAttribute("access_token", response2.get("access_token"));
-		System.out.println(response2);
 		return "/user/kakaoLoging.market";
 	}
 
@@ -74,21 +72,11 @@ public class SNSLoginController {
 	@ResponseBody
 	public String userid_duplicate_check(HttpServletRequest request, HttpServletResponse response, @RequestBody Map map,
 			Model model) throws Exception {
-		System.out.println("체크컨트롤러");
 
 		model.addAttribute("email", map.get("email"));
-
-		System.out.println(map.get("email"));// hezi98@naver.com
-		System.out.println(map.get("pwd"));// 2307928395
-		System.out.println(map.get("nickname"));// 조혜지
-		System.out.println(map);// {pwd=2307928395, name=조혜지, email=hezi98@naver.com, join_pass=KAKAO,
-								// nickname=조혜지, _csrf=72190f79-93df-4092-b00e-360efa95afea}
-
 		Map result = new HashMap<>();
 
 		UserDTO record = userService.selectOne(map);
-
-		System.out.println(record);// null
 
 		if (record != null) {// 가입이력이 있음
 			result.put("result", "YES");
@@ -104,7 +92,6 @@ public class SNSLoginController {
 		result.put("pwd", map.get("pwd"));
 		result.put("nickname", map.get("nickname"));
 		result.put("profile", map.get("profile"));
-		System.out.println("가입이력없음");
 		// 아이디 비밀번호 저장
 
 		return objectMapper.writeValueAsString(result);

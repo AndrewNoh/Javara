@@ -49,7 +49,6 @@ public class MailController {
 		map.put("random", random);
 		if (map.get("type") != null) {// 임시비밀번호 발급용
 			UserDTO user = userService.selectOne(map);
-			System.out.println(user);
 			if (user == null)
 				return "notMember";
 			map.put("temporaryPassword", random);

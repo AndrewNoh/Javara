@@ -82,9 +82,7 @@ public class MyPageController {
    public int review(@RequestParam Map map, Model model, Authentication auth,Principal principal) throws Exception {
     
     BoardDTO userno = boardService.mypageReview(map);
-    System.out.println("판매자번호 : "+userno.getUserNo()); 
     map.put("writeuserno", userno.getUserNo());
-	System.out.println("auctionNo :: "+map.get("auctionNo"));
 	int record = reviewService.mypagereviewInsert(map);
 	
 	//map.get("writeuserno");
@@ -98,12 +96,8 @@ public class MyPageController {
    @RequestMapping(value = "/review_return.do")
    @ResponseBody
    public List reviewreturn(@RequestParam Map map, Model model, Authentication auth,Principal principal) throws Exception {
-
-	System.out.println("userno임 1번나와라"+map.get("userno"));
-    
 	List<ReviewDTO> result = reviewService.mypagereviewSelect(map);
-	System.out.println("result :: "+result);
-	
+
 	  return result;
    }
 

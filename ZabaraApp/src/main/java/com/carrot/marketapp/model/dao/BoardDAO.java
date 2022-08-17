@@ -113,22 +113,15 @@ public class BoardDAO {
 
 		} else {
 			int aff = 1;
-			System.out.println("aff : "+aff);
 			if(map.get("profile") != null) {
-				System.out.println("이미지 삭제 할거야 : true");
 				aff = sqlSession.delete("deleteAuctionImg", map);
-				System.out.println(aff);
 			}
 			
-			System.out.println("좋아요 삭제할그양");
 			sqlSession.delete("deleteAuctionLikeNo", map);
 			if (aff == 1) {
-				System.out.println("가격 재설정");
 				aff = sqlSession.update("updateAuctionPrice", map);
-				System.out.println(aff);
 			}
 			if (aff == 1) {
-				System.out.println("글 재설정");
 				return sqlSession.update("updateAuctionList", map);
 			}
 
