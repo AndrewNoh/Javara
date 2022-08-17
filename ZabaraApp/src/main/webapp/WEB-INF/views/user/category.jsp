@@ -16,11 +16,8 @@ body {
   -ms-user-select:none;
   user-select:none
 }
-<<<<<<< HEAD
-=======
 
 
->>>>>>> branch 'main' of https://github.com/AndrewNoh/Javara.git
 .bAddr {
    color: #fff;
    background: #85adad;
