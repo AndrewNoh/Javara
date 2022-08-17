@@ -335,7 +335,16 @@ border-radius: 15px;
       $('#chatbot').hide();
       
       var status="${list.status}";
-      if(status != "FINISH"){
+      
+      if(status == "END"){
+    	  $("#endDiv").show();
+    	  $("#finishDiv").show();
+          $("#chattingDiv").show();
+      } else if(status == "FINISH") {
+    	  $("#endDiv").hide();
+    	  $("#finishDiv").hide();
+          $("#chattingDiv").hide();
+      } else {
     	  $("#endDiv").show();
       }
       
@@ -347,9 +356,6 @@ border-radius: 15px;
       }
    });
    
-   $(document).on("load", function(){
-      
-   });
    
    $('#edit').on("click", function(){
       $('#portfolio-details').hide();

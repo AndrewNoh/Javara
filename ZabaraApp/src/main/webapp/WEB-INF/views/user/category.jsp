@@ -269,7 +269,7 @@ input.form-text {
     </div>
  </div>
 <script>
-
+var category="전체매물";
 var latitude = ${latitude};
 var longitude = ${longitude};
 var nowAddress = "${address}";
@@ -305,6 +305,7 @@ addressinfowindow.open(map,addressMarker);
 
 //인포박스 커스텀css적용
 infoboxcss('#addressbox');
+categoryItemList();
 
 
 //카테고리아이템 불러오기
