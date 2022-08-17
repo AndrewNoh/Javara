@@ -10,6 +10,14 @@
 <script src="<c:url value="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"/>"></script>
 
 <style>
+body {
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
+}
+
+
 .bAddr {
    color: #fff;
    background: #85adad;
@@ -246,9 +254,9 @@ input.form-text {
                  <li >가구/인테리어</li>
               </ul>
               <ul>
-               <li >기타중고물품</li>
+               <li >기타</li>
                <li >게임/취미</li>
-               <li > 생활가전</li>
+               <li >생활가전</li>
                <li >생활/가공식품</li>
                <li >남성패션/잡화</li>
                <li >반려동물용품</li>
@@ -261,6 +269,7 @@ input.form-text {
     </div>
  </div>
 <script>
+var category="전체매물";
 var latitude = ${latitude};
 var longitude = ${longitude};
 var nowAddress = "${address}";
@@ -282,7 +291,7 @@ var options = {
    
 var customOverlay = new kakao.maps.CustomOverlay({    
     xAnchor: 0.3,
-    yAnchor: 0.91
+    yAnchor: 0.5
 });
 var map = new daum.maps.Map(container, options);
 var addressMarker = new daum.maps.Marker(),addressinfowindow = new daum.maps.InfoWindow({zindex : 1});
@@ -296,6 +305,7 @@ addressinfowindow.open(map,addressMarker);
 
 //인포박스 커스텀css적용
 infoboxcss('#addressbox');
+categoryItemList();
 
 
 //카테고리아이템 불러오기

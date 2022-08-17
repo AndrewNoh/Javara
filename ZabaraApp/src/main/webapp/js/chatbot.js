@@ -15,16 +15,23 @@ function sendMessage(message,session_id) {
         //flask서버로부터 응답을 받으면 receiveResponse콜백함수가 호출됨
         function receiveResponse(data) {//data는 flask로부터 받은 응답 {'message':'다이얼로그플로우가 보내준값'}
           //chat-container에 bot의 응답 추가
-           console.log('받은 메시지:',data)
-          $('.messages-content').append(`
-          	<div class="bot-message">
-                <div class="bot-message">
-                	<span style="border-radius:10px; padding:5px; background-color:black; text-color:white;" >
-                    	${data.message}
-                    </span>
-                </div>
-            </div>                
-          `)
+          var message = data.message.split(';');
+          var link = '';
+          
+          console.log('받은 메시지:',message)
+           var html = '<div class="bot-message"> <div class="bot-message"> <span style="border-radius:10px; padding:5px; background-color:black; text-color:black;" >'
+           html += message[0];
+           
+           html += '<span></div></div>'
+          $('.messages-content').append(html);
+
+		for(var i=1; i < message.length; i++){
+			link = message[i];
+				html = '<div class="bot-message"> <div class="bot-message"> <span style="border-radius:10px; padding:5px; background-color:black; text-color:black;" >'
+	          html += link;
+	          html += '<span></div></div>'
+	          $('.messages-content').append(html);
+			}	          
           //스크롤바 아래로
           $('.messages-content').scrollTop($('.messages-content')[0].scrollHeight);
           $('.messages-content').focus();

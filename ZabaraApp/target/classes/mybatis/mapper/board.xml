@@ -414,7 +414,7 @@
          SELECT SEARCH_WORD,SEARCH_COUNT 
          FROM SEARCHLOG 
          <![CDATA[
-         WHERE ROWNUM <=20 
+         WHERE ROWNUM <=100 
          ]]>
          ORDER BY SEARCH_COUNT DESC
       

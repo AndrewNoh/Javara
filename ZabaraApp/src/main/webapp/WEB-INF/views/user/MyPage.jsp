@@ -904,7 +904,7 @@ body::-webkit-scrollbar {
 											<c:if test="${mypageAuctionList.status eq  'SALE'}">
 											<c:if test="${(mypageAuctionList.upper_Price - mypageAuctionList.base_Price)>0}">
 													<a
-														href="<c:url value="/board/auctionview.do"><c:param value="${participationList.auction_no}" name="no"/></c:url>"
+														href="<c:url value="/board/auctionview.do"><c:param value="${mypageAuctionList.auction_no}" name="no"/></c:url>"
 														rel="lyteframe" data-gallery="portfolioDetailsGallery"
 														id="view${loop.count}" data-glightbox="type: external"
 														class="portfolio-details-lightbox"

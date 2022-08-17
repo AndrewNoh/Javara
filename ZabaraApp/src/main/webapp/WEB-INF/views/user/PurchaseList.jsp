@@ -406,6 +406,9 @@ No license, 100% free to use.
   border-bottom: 24px solid transparent;
   background-clip: padding-box;
 }
+.modal-backdrop.show{
+	opacity: .5;
+}
 </style>
 <div id="services" class="services neonborder m-5">
    <div class="container">
@@ -503,6 +506,8 @@ No license, 100% free to use.
    function review(auction_no){
       ano=auction_no;
       console.log(ano);
+      $('textarea[name=review]').val('');
+      $('input[name=stars]:checked').prop('checked',false);
       
    };
    //거래후기

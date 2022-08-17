@@ -173,7 +173,7 @@
   from {top: 30px; opacity: 1;}
   to {top: 0; opacity: 0;}
 }
-.modal-content{
+.modalContent{
   position: relative;
   padding: 20px 20px;
   z-index: 4;
@@ -188,8 +188,9 @@
   box-shadow: 0 15px 35px rgb(181 179 179 / 50%);
   border: 2px solid rgba(255, 255, 255, 0.3);
 }
+
 .modal-backdrop.show{
-    opacity: .8;	
+    opacity: .5;	
 }
 </style>
 <body>
@@ -232,8 +233,8 @@
 				        동네방네
 				      </a>
 				      <div class="dropdown-menu navdropdown-menu">
+				      	<a class="dropdown-item navdropdown-item" href="<c:url value="/board/news.do"/>">실시간뉴스</a>
 				        <a class="dropdown-item navdropdown-item" href="<c:url value="/board/gropboard.do"/>">동네생활</a>
-				        <a class="dropdown-item navdropdown-item" href="<c:url value="/board/news.do"/>">실시간뉴스</a>
 				      </div>
 				   </li>
 	             <li><a class="nav-link" href="<c:url value="/board/qna.do"/>">자주묻는 질문</a></li>
@@ -250,7 +251,7 @@
 							<div class="search row" id="imgsrchDiv" style="float: right;">
 								<div class="srch_bar" style="text-align: center;">
 									<div class="stylish-input-group">
-										<input type="text" placeholder="검색어를 입력해주세요" name="title"
+										<input type="text" name="title"
 											class="search-bar"> <span class="input-group-addon">
 											<button id="modal-open" data-toggle="modal"
 												data-target="#myModal" type="button"
@@ -276,7 +277,7 @@
 		</ul>
 
 			   <div class="modal" id="myModal">
-			         <div class="modal-content">
+			         <div class="modalContent">
 			           <div style="text-align: end;">
 			              <i id="modal-close" data-dismiss="modal" class="close bi bi-x"
 			                  style="font-size: 1.8rem; color: black; cursor: pointer;"></i>
@@ -286,7 +287,7 @@
 			               </h4>
 			               <div class="body-content" style="padding:5px;background-color: rgb(125 125 125 / 70%);border-radius: 10px;">
 			                  <img id="preview_image" style="width: 100%; height: 100%;"/>
-			                  <div id="label-container" style="color: black; cursor: pointer;"></div>
+			                  <div id="label-container" style="color: white; cursor: pointer;margin-top: 10px;font-size: 18px;"></div>
 			               </div>
 			
 						<div class="row">
@@ -442,7 +443,7 @@ $("link#admin12").prop('disabled', true);
 				modalClose();
 			});
 			function modalClose() {
-				$("#modal-content").fadeOut();
+				$("#modalContent").fadeOut();
 			}
 		});
 
@@ -644,7 +645,7 @@ $("link#admin12").prop('disabled', true);
 	               else if(e.data.includes('동네')){
 	                  var arr= e.data.split(/[,:]/);
 	                  if(e.data.includes('townlist_no')){
-	                     if(e.data.includes('WriteUserNO:${userno}')){
+	                     if(e.data.includes('WriteUserNO:${userno},')){
 	                        element.innerHTML = '';
 	                        element.innerHTML += '동네생활 '+arr[5]+'에 댓글이 달렸어요';
 	                        var x = document.getElementById("snackbar");
@@ -652,7 +653,7 @@ $("link#admin12").prop('disabled', true);
 	                        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 	                     }
 	                  }else if(e.data.includes('like')){
-	                     if(e.data.includes('WriteUserNO:${userno}')){
+	                     if(e.data.includes('WriteUserNO:${userno},')){
 	                       element.innerHTML = '';
 	                        element.innerHTML += '동네생활 '+arr[5]+'에 좋아요가 눌렸어요';
 	                        var x = document.getElementById("snackbar");

@@ -73,12 +73,9 @@ public class PayController {
 		
 		// 송금 받기
 		int charge = Integer.parseInt((String) map.get("deposit"));
-		// System.out.println(charge);
 		if(!(charge == 0)) {
 			int chargeBalance = Integer.parseInt(balance.getBalance())+charge;
 			map.put("balance", chargeBalance);
-			// System.out.println(chargeBalance);
-			
 			balance = payService.payBalance(map);	
 		}
 		
