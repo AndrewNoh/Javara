@@ -30,71 +30,78 @@
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
 		SELECT * FROM (
 		SELECT * FROM
-		(SELECT ADDRNO, AUCTION_NO, USERNO, TITLE, CONTENT, CATEGORY, LIKES,
-		POSTDATE, ENDDATE, STATUS, RNUM FROM
+		(SELECT ADDRNO, AUCTION_NO,
+		USERNO, TITLE, CONTENT, CATEGORY, LIKES,
+		POSTDATE, ENDDATE, STATUS,
+		RNUM FROM
 		(SELECT D.*, ROWNUM AS RNUM FROM
-		(SELECT * FROM AUCTION_LIST L WHERE
-		(SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) =
+		(SELECT * FROM AUCTION_LIST L
+		WHERE
+		(SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO =
+		A.ADDRNO) =
 		#{simpleAddress}
 		ORDER BY AUCTION_NO DESC) D) O) T
-		INNER JOIN AUCTION_PRICE P ON P.AUCTION_NO = T.AUCTION_NO
-		LEFT OUTER JOIN ADDRESS_LIST A ON A.ADDRNO = T.ADDRNO
+		INNER JOIN
+		AUCTION_PRICE P ON P.AUCTION_NO = T.AUCTION_NO
+		LEFT OUTER JOIN
+		ADDRESS_LIST A ON A.ADDRNO = T.ADDRNO
 		WHERE T.STATUS = 'SALE'
-		ORDER BY P.AUCTION_NO DESC)
+		ORDER BY
+		P.AUCTION_NO DESC)
 	</select>
-		
+
 	<select id="mainPageListNoAddr" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		<![CDATA[
-			SELECT * FROM (SELECT list.auction_no, list.title, list.likes, list.content,
-	         p.upper_price, p.base_price, img.imagename,
-	          list.enddate, addr.fulladdress FROM
-	         (SELECT IMG.* FROM(SELECT ROW_NUMBER()
-	         OVER(PARTITION BY AUCTION_NO
-	         ORDER BY IMAGENO ASC) AS RNUM,
-	         AUCTION_IMG.* FROM AUCTION_IMG ) IMG
-	         WHERE RNUM = 1) IMG
-	         JOIN
-	         AUCTION_LIST LIST ON
-	         IMG.AUCTION_NO=LIST.AUCTION_NO
-	         JOIN auction_price P
-	         ON
-	         list.auction_no=p.auction_no
-	         JOIN address_list addr ON
-	         list.auction_no
-	         = addr.auction_no
-	         WHERE list.likes >0
-	         ORDER BY
-	         list.likes DESC) WHERE ROWNUM <=10
-		]]>
-	</select>
-	
+<![CDATA[
+		SELECT list.auction_no, list.title, list.likes, list.content,
+		p.upper_price, p.base_price, img.imagename,
+		list.enddate, addr.fulladdress FROM
+		(SELECT IMG.* FROM(SELECT ROW_NUMBER()
+		OVER(PARTITION BY AUCTION_NO
+		ORDER BY IMAGENO ASC) AS RNUM,
+		AUCTION_IMG.* FROM AUCTION_IMG ) IMG
+		WHERE RNUM = 1) IMG
+		JOIN
+		AUCTION_LIST LIST ON
+		IMG.AUCTION_NO=LIST.AUCTION_NO
+		JOIN auction_price P
+		ON
+		list.auction_no=p.auction_no
+		JOIN address_list addr ON
+		list.auction_no
+		= addr.auction_no
+		WHERE list.likes >0 AND ROWNUM <= 10
+		ORDER BY
+		list.likes DESC
+]]>
+	</select> 
+
 	<select id="mainPageListYesAddr" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
 		<![CDATA[
-			SELECT * FROM (SELECT list.auction_no, list.title, list.likes, list.content,
-	         p.upper_price, p.base_price, img.imagename,
-	          list.enddate, addr.fulladdress FROM
-	         (SELECT IMG.* FROM(SELECT ROW_NUMBER()
-	         OVER(PARTITION BY AUCTION_NO
-	         ORDER BY IMAGENO ASC) AS RNUM,
-	         AUCTION_IMG.* FROM AUCTION_IMG ) IMG
-	         WHERE RNUM = 1) IMG
-	         JOIN
-	         AUCTION_LIST LIST ON
-	         IMG.AUCTION_NO=LIST.AUCTION_NO
-	         JOIN auction_price P
-	         ON
-	         list.auction_no=p.auction_no
-	         JOIN address_list addr ON
-	         list.auction_no
-	         = addr.auction_no
-	         WHERE addr.simpleaddress = #{simpleAddress} AND list.likes >0
-	         ORDER BY
-	         list.likes DESC) WHERE ROWNUM <=10
+			SELECT list.auction_no, list.title, list.likes, list.content,
+		p.upper_price, p.base_price, img.imagename,
+		list.enddate, addr.fulladdress FROM
+		(SELECT IMG.* FROM(SELECT ROW_NUMBER()
+		OVER(PARTITION BY AUCTION_NO
+		ORDER BY IMAGENO ASC) AS RNUM,
+		AUCTION_IMG.* FROM AUCTION_IMG ) IMG
+		WHERE RNUM = 1) IMG
+		JOIN
+		AUCTION_LIST LIST ON
+		IMG.AUCTION_NO=LIST.AUCTION_NO
+		JOIN auction_price P
+		ON
+		list.auction_no=p.auction_no
+		JOIN address_list addr ON
+		list.auction_no
+		= addr.auction_no
+		WHERE list.likes >0 AND ROWNUM <= 10 AND addr.simpleaddress = #{simpleAddress}
+		ORDER BY
+		list.likes DESC
 		]]>
 	</select>
-	
+
 	<select id="postUpperPrice" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
 		<![CDATA[
@@ -120,7 +127,7 @@
 	         p.upper_price DESC) WHERE ROWNUM <=10
 		]]>
 	</select>
-	
+
 	<select id="postLowerPrice" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
 		<![CDATA[
@@ -146,7 +153,7 @@
 	         p.upper_price) WHERE ROWNUM <=10
 		]]>
 	</select>
-	
+
 	<select id="postUpperPriceNoAddr" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
 		<![CDATA[
@@ -171,8 +178,8 @@
 	         p.upper_price DESC) WHERE ROWNUM <=10
 		]]>
 	</select>
-	
-	
+
+
 	<select id="postLowerPriceNoAddr" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
 		<![CDATA[
@@ -204,9 +211,11 @@
 		DESC
 	</select>
 
-	<select id="selectAuctionLikeNo" resultType="_int" parameterType="Map">
+	<select id="selectAuctionLikeNo" resultType="_int"
+		parameterType="Map">
 		SELECT COUNT(*) FROM
-		AUCTION_LIKE WHERE AUCTION_NO = #{no}
+		AUCTION_LIKE WHERE AUCTION_NO =
+		#{no}
 	</select>
 
 	<select id="getAuctionListOne" parameterType="Map"
@@ -241,15 +250,17 @@
 	<!-- TOWN -->
 	<select id="getGropList" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		SELECT * FROM TOWN_LIST L 
+		SELECT * FROM TOWN_LIST L
 		LEFT OUTER JOIN MEMBERS M ON L.USERNO = M.USERNO
-		WHERE (SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) = #{simpleAddress} 
+		WHERE (SELECT
+		SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) =
+		#{simpleAddress}
 		ORDER BY L.TOWNLIST_NO DESC
 	</select>
 
 	<select id="getListOne" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		SELECT * FROM TOWN_LIST WHERE townlist_no = #{townlist_no} 
+		SELECT * FROM TOWN_LIST WHERE townlist_no = #{townlist_no}
 	</select>
 
 	<select id="selectTownLikeNo" resultType="_int">
@@ -259,23 +270,26 @@
 
 	<select id="selectTownLike" resultType="_int"
 		parameterType="Map">
-		SELECT COUNT(*)FROM TOWN_LIKE WHERE TOWNLIST_NO = #{no} AND
+		SELECT COUNT(*)FROM TOWN_LIKE WHERE TOWNLIST_NO = #{no}
+		AND
 		USERNO = #{userno}
 	</select>
 
 	<select id="selectTownLikeList" parameterType="Map"
 		resultType="Integer">
 		SELECT TOWNLIST_NO FROM TOWN_LIKE WHERE USERNO =
-		${userno} ORDER BY
+		${userno}
+		ORDER BY
 		TOWNLIST_NO DESC
 	</select>
 
-	
-	<!--좋아요 실시간 반영-->
-	<select id="selectLiveLike" resultType="_int" parameterType="Map">
-		SELECT LIKES FROM TOWN_LIST WHERE TOWNLIST_NO = #{no} 
+
+	<!--좋아요 실시간 반영 -->
+	<select id="selectLiveLike" resultType="_int"
+		parameterType="Map">
+		SELECT LIKES FROM TOWN_LIST WHERE TOWNLIST_NO = #{no}
 	</select>
-		
+
 
 	<select id="getTownImage" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.ImageDTO">
@@ -287,143 +301,160 @@
 		SEQ_TOWN_LIST_TOWNLIST_NO.CURRVAL FROM DUAL
 	</select>
 	<!-- TOWN -->
-	
+
 	<!-- MYPAGE -->
 	<select id="mypageSelllist" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		SELECT * FROM (SELECT AL.AUCTION_NO, AL.TITLE, AP.UPPER_PRICE, AP.BASE_PRICE, I.IMAGENAME, AL.USERNO, AL.ENDDATE FROM
-			(SELECT IMG.* FROM (SELECT ROW_NUMBER() OVER(PARTITION BY AUCTION_NO ORDER BY IMAGENO ASC) AS RNUM, AUCTION_IMG.* FROM AUCTION_IMG ) IMG WHERE RNUM = 1) I
-			LEFT OUTER JOIN AUCTION_LIST AL ON AL.AUCTION_NO = I.AUCTION_NO
-			LEFT OUTER JOIN AUCTION_PRICE AP ON AP.AUCTION_NO = AL.AUCTION_NO ORDER BY AL.POSTDATE DESC) WHERE USERNO = #{userno}
+		SELECT * FROM (SELECT AL.AUCTION_NO, AL.TITLE,
+		AP.UPPER_PRICE, AP.BASE_PRICE, I.IMAGENAME, AL.USERNO, AL.ENDDATE FROM
+		(SELECT IMG.* FROM (SELECT ROW_NUMBER() OVER(PARTITION BY AUCTION_NO
+		ORDER BY IMAGENO ASC) AS RNUM, AUCTION_IMG.* FROM AUCTION_IMG ) IMG
+		WHERE RNUM = 1) I
+		LEFT OUTER JOIN AUCTION_LIST AL ON AL.AUCTION_NO = I.AUCTION_NO
+		LEFT OUTER JOIN AUCTION_PRICE AP ON AP.AUCTION_NO = AL.AUCTION_NO ORDER BY
+		AL.POSTDATE DESC) WHERE USERNO = #{userno}
 	</select>
 	<select id="mypagelikelist" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
 		SELECT list.auction_no, list.title, list.likes,
-	      list.status, p.base_price,
-	      p.upper_price, img.imagename, addr.simpleaddress,
-	      list.postdate, list.enddate FROM
-	      (SELECT IMG.* FROM(SELECT ROW_NUMBER()
-	      OVER(PARTITION BY AUCTION_NO
-	      ORDER BY IMAGENO ASC) AS RNUM,
-	      AUCTION_IMG.* FROM AUCTION_IMG ) IMG
-	      WHERE RNUM = 1) IMG
-	      JOIN
-	      AUCTION_LIST LIST ON
-	      IMG.AUCTION_NO=LIST.AUCTION_NO
-	      JOIN auction_price P
-	      ON
-	      list.auction_no=p.auction_no
-	      JOIN address_list addr ON
-	      list.auction_no
-	      = addr.auction_no
-	      JOIN auction_like ALS ON
-	      ALS.auction_no =
-	      list.auction_no
-	      WHERE als.userno = #{userno}
-	      ORDER BY
-	      LIST.POSTDATE DESC
+		list.status, p.base_price,
+		p.upper_price, img.imagename, addr.simpleaddress,
+		list.postdate, list.enddate FROM
+		(SELECT IMG.* FROM(SELECT ROW_NUMBER()
+		OVER(PARTITION BY AUCTION_NO
+		ORDER BY IMAGENO ASC) AS RNUM,
+		AUCTION_IMG.* FROM AUCTION_IMG ) IMG
+		WHERE RNUM = 1) IMG
+		JOIN
+		AUCTION_LIST LIST ON
+		IMG.AUCTION_NO=LIST.AUCTION_NO
+		JOIN auction_price P
+		ON
+		list.auction_no=p.auction_no
+		JOIN address_list addr ON
+		list.auction_no
+		= addr.auction_no
+		JOIN auction_like ALS ON
+		ALS.auction_no =
+		list.auction_no
+		WHERE als.userno = #{userno}
+		ORDER BY
+		LIST.POSTDATE DESC
 
 	</select>
 	<select id="mypagepurchaselist" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		   SELECT L.auction_no, L.title,
-	      p.base_price, p.upper_price, img.imagename,  L.postdate, L.enddate FROM
-	      AUCTION_LIST L
-	      LEFT OUTER JOIN AUCTION_PRICE
-	      P ON L.AUCTION_NO =
-	      P.AUCTION_NO join
-	      (SELECT IMG.* FROM(SELECT ROW_NUMBER() OVER(PARTITION
-	      BY AUCTION_NO
-	      ORDER BY IMAGENO ASC) AS RNUM, AUCTION_IMG.* FROM
-	      AUCTION_IMG ) IMG
-	      WHERE RNUM = 1) IMG on
-	      L.AUCTION_NO=IMG.AUCTION_NO
-	      WHERE
-	      P.UPPER_USER_NO = #{userno} AND L.USERNO != #{userno}
-	      ORDER BY
-	      L.POSTDATE DESC
+		SELECT L.auction_no, L.title,
+		p.base_price, p.upper_price, img.imagename, L.postdate, L.enddate FROM
+		AUCTION_LIST L
+		LEFT OUTER JOIN AUCTION_PRICE
+		P ON L.AUCTION_NO =
+		P.AUCTION_NO join
+		(SELECT IMG.* FROM(SELECT ROW_NUMBER() OVER(PARTITION
+		BY AUCTION_NO
+		ORDER BY IMAGENO ASC) AS RNUM, AUCTION_IMG.* FROM
+		AUCTION_IMG ) IMG
+		WHERE RNUM = 1) IMG on
+		L.AUCTION_NO=IMG.AUCTION_NO
+		WHERE
+		P.UPPER_USER_NO = #{userno} AND L.USERNO != #{userno}
+		ORDER BY
+		L.POSTDATE DESC
 	</select>
 	<select id="mypageaccountbook" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		SELECT L.*,P.* FROM AUCTION_LIST L JOIN AUCTION_PRICE P ON L.AUCTION_NO =
+		SELECT L.*,P.* FROM AUCTION_LIST L JOIN AUCTION_PRICE P ON
+		L.AUCTION_NO =
 		P.AUCTION_NO WHERE STATUS = 'END' AND L.userno=#{userno}
 	</select>
 	<select id="getLikeCount" resultType="_int">
-		SELECT COUNT(*) FROM AUCTION_LIKE WHERE USERNO = #{userno}
-	</select>	
-	
+		SELECT COUNT(*) FROM
+		AUCTION_LIKE WHERE USERNO = #{userno}
+	</select>
+
 	<select id="getSellCount" resultType="_int">
-		SELECT COUNT(*) FROM AUCTION_LIST WHERE USERNO = #{userno}
-	</select>	
-	
+		SELECT COUNT(*) FROM
+		AUCTION_LIST WHERE USERNO = #{userno}
+	</select>
+
 	<select id="getBuyCount" resultType="_int">
-		SELECT COUNT(*) FROM AUCTION_PRICE P
-		LEFT OUTER JOIN AUCTION_LIST L ON L.AUCTION_NO = P.AUCTION_NO
+		SELECT COUNT(*) FROM
+		AUCTION_PRICE P
+		LEFT OUTER JOIN AUCTION_LIST L ON L.AUCTION_NO =
+		P.AUCTION_NO
 		WHERE L.USERNO != #{userno} AND UPPER_USER_NO = #{userno}
 	</select>
-	
-	<select resultType="com.carrot.marketapp.model.dto.BoardDTO" parameterType="Map" id="getAuctionListCategoryItems">
-		SELECT list.auction_no, list.title, list.likes, list.content,
-	         p.upper_price, p.base_price, img.imagename,
-	          list.enddate, addr.fulladdress,addr.simpleaddress,addr.latitude,addr.longitude,list.category FROM
-	         (SELECT IMG.* FROM(SELECT ROW_NUMBER()
-	         OVER(PARTITION BY AUCTION_NO
-	         ORDER BY IMAGENO ASC) AS RNUM,
-	         AUCTION_IMG.* FROM AUCTION_IMG ) IMG
-	         WHERE RNUM = 1) IMG
-	         JOIN
-	         AUCTION_LIST LIST ON
-	         IMG.AUCTION_NO=LIST.AUCTION_NO
-	         JOIN auction_price P
-	         ON
-	         list.auction_no=p.auction_no
-	         JOIN address_list addr ON
-	         list.auction_no
-	         = addr.auction_no
-	         WHERE list.category = #{category} AND NOT list.userno= #{userno}
- 	</select>
- 	
- 	<select resultType="com.carrot.marketapp.model.dto.BoardDTO" parameterType="Map" id="getAuctionListAllCategoryItems">
-		SELECT list.auction_no, list.title, list.likes, list.content,
-	         p.upper_price, p.base_price, img.imagename,
-	          list.enddate, addr.fulladdress,addr.simpleaddress,addr.latitude,addr.longitude,list.category FROM
-	         (SELECT IMG.* FROM(SELECT ROW_NUMBER()
-	         OVER(PARTITION BY AUCTION_NO
-	         ORDER BY IMAGENO ASC) AS RNUM,
-	         AUCTION_IMG.* FROM AUCTION_IMG ) IMG
-	         WHERE RNUM = 1) IMG
-	         JOIN
-	         AUCTION_LIST LIST ON
-	         IMG.AUCTION_NO=LIST.AUCTION_NO
-	         JOIN auction_price P
-	         ON
-	         list.auction_no=p.auction_no
-	         JOIN address_list addr ON
-	         list.auction_no
-	         = addr.auction_no
-	         WHERE NOT list.userno= #{userno}
- 	</select>
- 	
+
+	<select resultType="com.carrot.marketapp.model.dto.BoardDTO"
+		parameterType="Map" id="getAuctionListCategoryItems">
+		SELECT list.auction_no, list.title, list.likes,
+		list.content,
+		p.upper_price, p.base_price, img.imagename,
+		list.enddate,
+		addr.fulladdress,addr.simpleaddress,addr.latitude,addr.longitude,list.category
+		FROM
+		(SELECT IMG.* FROM(SELECT ROW_NUMBER()
+		OVER(PARTITION BY AUCTION_NO
+		ORDER BY IMAGENO ASC) AS RNUM,
+		AUCTION_IMG.* FROM AUCTION_IMG ) IMG
+		WHERE RNUM = 1) IMG
+		JOIN
+		AUCTION_LIST LIST ON
+		IMG.AUCTION_NO=LIST.AUCTION_NO
+		JOIN auction_price P
+		ON
+		list.auction_no=p.auction_no
+		JOIN address_list addr ON
+		list.auction_no
+		= addr.auction_no
+		WHERE list.category = #{category} AND NOT list.userno= #{userno}
+	</select>
+
+	<select resultType="com.carrot.marketapp.model.dto.BoardDTO"
+		parameterType="Map" id="getAuctionListAllCategoryItems">
+		SELECT list.auction_no, list.title, list.likes,
+		list.content,
+		p.upper_price, p.base_price, img.imagename,
+		list.enddate,
+		addr.fulladdress,addr.simpleaddress,addr.latitude,addr.longitude,list.category
+		FROM
+		(SELECT IMG.* FROM(SELECT ROW_NUMBER()
+		OVER(PARTITION BY AUCTION_NO
+		ORDER BY IMAGENO ASC) AS RNUM,
+		AUCTION_IMG.* FROM AUCTION_IMG ) IMG
+		WHERE RNUM = 1) IMG
+		JOIN
+		AUCTION_LIST LIST ON
+		IMG.AUCTION_NO=LIST.AUCTION_NO
+		JOIN auction_price P
+		ON
+		list.auction_no=p.auction_no
+		JOIN address_list addr ON
+		list.auction_no
+		= addr.auction_no
+		WHERE NOT list.userno= #{userno}
+	</select>
+
 	<select id="mypageReview" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
 		select * from auction_list where auction_no=#{auctionNo}
 	</select>
-	
+
 	<select resultType="Map" id="searchWords">
-      
-         SELECT SEARCH_WORD,SEARCH_COUNT 
-         FROM SEARCHLOG 
+
+		SELECT SEARCH_WORD,SEARCH_COUNT
+		FROM SEARCHLOG 
          <![CDATA[
          WHERE ROWNUM <=100 
          ]]>
-         ORDER BY SEARCH_COUNT DESC
-      
-   </select>
-	
-	
+		ORDER BY SEARCH_COUNT DESC
+
+	</select>
+
+
 	<!-- MYPAGE -->
-	
-	
+
+
 	<!-- AUCTION -->
 	<insert id="writeAuctionList" parameterType="Map">
 		INSERT INTO
@@ -469,8 +500,8 @@
 		VALUES(SEQ_TOWN_IMG_IMAGENO.NEXTVAL,#{profile},#{townNo})
 	</insert>
 	<!-- TOWN -->
-	
-	
+
+
 	<!-- AUCTION -->
 	<delete id="deleteAuction" parameterType="Map">
 		DELETE FROM
@@ -510,8 +541,9 @@
 	</delete>
 
 	<delete id="deleteTownLikeNo" parameterType="Map">
-		DELETE FROM TOWN_LIKE WHERE TOWNLIST_NO=#{townlist_no}
-	</delete>	
+		DELETE FROM
+		TOWN_LIKE WHERE TOWNLIST_NO=#{townlist_no}
+	</delete>
 
 	<delete id="deleteBoard" parameterType="Map">
 		DELETE TOWN_LIST WHERE
@@ -523,8 +555,8 @@
 		WHERE TOWNLIST_NO = #{townlist_no}
 	</delete>
 	<!-- TOWN -->
-	
-	
+
+
 	<!-- AUCTION -->
 	<update id="updateAuctionList" parameterType="Map">
 		UPDATE AUCTION_LIST
@@ -532,7 +564,8 @@
 		CATEGORY=#{category}, LIKES=0,
 		POSTDATE=SYSDATE, ADDRNO=#{addrno},
 		ENDDATE=SYSDATE+#{enddate}
-		WHERE AUCTION_NO = #{auction_no}
+		WHERE
+		AUCTION_NO = #{auction_no}
 	</update>
 
 	<update id="updateAuctionLike" parameterType="map">
@@ -558,7 +591,7 @@
 		UPDATE
 		AUCTION_LIST SET STATUS=#{status} WHERE AUCTION_NO=#{auction_no}
 	</update>
-	
+
 	<update id="updateStatusFinish" parameterType="map">
 		UPDATE
 		AUCTION_LIST SET STATUS=#{status} WHERE AUCTION_NO=#{auction_no}
@@ -569,14 +602,17 @@
 	<!-- TOWN -->
 	<update id="updateTownList" parameterType="Map">
 		UPDATE TOWN_LIST
-		SET TITLE=#{title}, CONTENT=#{content},
-		CATEGORY=#{category}, ADDRNO=#{addrno}
+		SET
+		TITLE=#{title}, CONTENT=#{content},
+		CATEGORY=#{category},
+		ADDRNO=#{addrno}
 		WHERE TOWNLIST_NO = #{no}
 	</update>
-	
+
 	<update id="updateTownLike" parameterType="map">
 		UPDATE TOWN_LIST
-		SET LIKES=#{noLike} WHERE TOWNLIST_NO=#{no}
+		SET
+		LIKES=#{noLike} WHERE TOWNLIST_NO=#{no}
 	</update>
 
 	<update id="updateTownListImage" parameterType="Map">
@@ -596,7 +632,8 @@
 	<select id="getSimpleAddress" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.AddressDTO">
 		SELECT L.*, ROWNUM FROM ADDRESS_LIST L
-		WHERE USERNO = #{userno}
+		WHERE USERNO =
+		#{userno}
 		ORDER BY ADDRNO ASC
 	</select>
 
@@ -605,19 +642,22 @@
 		ADDRESS_LIST
 		VALUES(SEQ_ADDRESS_LIST_ADDRNO.NEXTVAL,0,#{simpleAddress},#{address},#{latitude},#{longitude},#{auction_no})
 	</insert>
-	
+
 	<select id="getWriteAuctionView" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		SELECT * FROM (SELECT * FROM AUCTION_LIST WHERE USERNO = #{userno} ORDER BY AUCTION_NO DESC) WHERE ROWNUM = 1
+		SELECT * FROM (SELECT * FROM AUCTION_LIST WHERE USERNO =
+		#{userno} ORDER BY AUCTION_NO DESC) WHERE ROWNUM = 1
 	</select>
-	
-	<select id="getUpdateAddress" parameterType="Map" resultType="com.carrot.marketapp.model.dto.AddressDTO">
+
+	<select id="getUpdateAddress" parameterType="Map"
+		resultType="com.carrot.marketapp.model.dto.AddressDTO">
 		SELECT * FROM ADDRESS_LIST
 		WHERE AUCTION_NO = #{auction_no}
 	</select>
-	
+
 	<update id="updateAddress" parameterType="Map">
-		UPDATE AUCTION_LIST SET ADDRNO = #{addrno} WHERE AUCTION_NO = #{auction_no}
+		UPDATE AUCTION_LIST SET
+		ADDRNO = #{addrno} WHERE AUCTION_NO = #{auction_no}
 	</update>
 
 	<insert id="insertSearchLog" parameterType="Map">
@@ -625,34 +665,39 @@
 		SEARCHLOG
 		VALUES(SEQ_SEARCHLOG_LOG_NO.NEXTVAL,#{title},1)
 	</insert>
-	
-	<select id="selectSearchLog" parameterType="Map" resultType="String">
-		SELECT SEARCH_COUNT FROM SEARCHLOG WHERE SEARCH_WORD = #{title}
+
+	<select id="selectSearchLog" parameterType="Map"
+		resultType="String">
+		SELECT SEARCH_COUNT FROM SEARCHLOG WHERE SEARCH_WORD =
+		#{title}
 	</select>
-	
+
 	<update id="updateSearchLog" parameterType="Map">
-		UPDATE SEARCHLOG SET SEARCH_COUNT = #{count} WHERE SEARCH_WORD = #{title}
+		UPDATE SEARCHLOG SET
+		SEARCH_COUNT = #{count} WHERE SEARCH_WORD = #{title}
 	</update>
-	
+
 	<!-- SEARCH -->
 
 	<!-- AUCTION -->
 	<select id="searchAuction" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		
-			
-			SELECT * FROM (
-				    SELECT * FROM
-				    (SELECT ADDRNO, AUCTION_NO, USERNO, TITLE, CONTENT, CATEGORY, LIKES, POSTDATE,   ENDDATE, STATUS, RNUM FROM
-				    (SELECT D.*, ROWNUM AS RNUM FROM
-				    (SELECT * FROM AUCTION_LIST L WHERE
-				    (SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) =  #{simpleAddress}
-				    ORDER BY AUCTION_NO DESC) D) O) T 
-				    INNER JOIN AUCTION_PRICE P ON P.AUCTION_NO = T.AUCTION_NO
-				    LEFT OUTER JOIN ADDRESS_LIST A ON A.ADDRNO = T.ADDRNO
-				    WHERE T.STATUS = 'SALE'
-				    ORDER BY P.AUCTION_NO DESC)
-				    WHERE
+
+
+		SELECT * FROM (
+		SELECT * FROM
+		(SELECT ADDRNO, AUCTION_NO, USERNO, TITLE, CONTENT, CATEGORY, LIKES,
+		POSTDATE, ENDDATE, STATUS, RNUM FROM
+		(SELECT D.*, ROWNUM AS RNUM FROM
+		(SELECT * FROM AUCTION_LIST L WHERE
+		(SELECT SIMPLEADDRESS FROM ADDRESS_LIST A WHERE L.ADDRNO = A.ADDRNO) =
+		#{simpleAddress}
+		ORDER BY AUCTION_NO DESC) D) O) T
+		INNER JOIN AUCTION_PRICE P ON P.AUCTION_NO = T.AUCTION_NO
+		LEFT OUTER JOIN ADDRESS_LIST A ON A.ADDRNO = T.ADDRNO
+		WHERE T.STATUS = 'SALE'
+		ORDER BY P.AUCTION_NO DESC)
+		WHERE
 					<![CDATA[	    
 				    TITLE LIKE '%'||#{title}||'%'
 					]]>
@@ -665,67 +710,79 @@
 		<!-- 호담아 시간 남으면 구현해 -->
 	</select>
 	<!-- TOWN -->
-	
+
 	<!-- TOWN: comment -->
-    <select id="commentSelectList" parameterType="Map" resultType="commentDTO">
-      SELECT TC.*, M.NICKNAME,M.PROFILE_IMG FROM TOWN_COMMENTS TC 
-	  LEFT OUTER JOIN MEMBERS M 
-	  ON TC.COMMENT_USERNO = M.USERNO
-	  ORDER BY TC.COMMENT_POSTDATE DESC
-    </select>
-   
-    <insert id="commentInsert" parameterType="Map">
-      INSERT INTO TOWN_COMMENTS VALUES(
-      SEQ_TOWN_COMMENTS_COMMENT_NO.NEXTVAL,#{townlist_no},#{comment_content},#{comment_userno},SYSDATE)
-    </insert>
-   
-    <update id="commentUpdate" parameterType="Map">
-      UPDATE TOWN_COMMENTS SET COMMENT_CONTENT = #{comment_content},COMMENT_POSTDATE=SYSDATE
-      WHERE TOWNLIST_NO=#{townlist_no}
-    </update>
-      
-    <delete id="commentDelete" parameterType="Map">
-      DELETE TOWN_COMMENTS WHERE TOWNLIST_NO = #{townlist_no}
-    </delete>
+	<select id="commentSelectList" parameterType="Map"
+		resultType="commentDTO">
+		SELECT TC.*, M.NICKNAME,M.PROFILE_IMG FROM TOWN_COMMENTS TC
+		LEFT OUTER JOIN MEMBERS M
+		ON TC.COMMENT_USERNO = M.USERNO
+		ORDER BY TC.COMMENT_POSTDATE DESC
+	</select>
+
+	<insert id="commentInsert" parameterType="Map">
+		INSERT INTO TOWN_COMMENTS VALUES(
+		SEQ_TOWN_COMMENTS_COMMENT_NO.NEXTVAL,#{townlist_no},#{comment_content},#{comment_userno},SYSDATE)
+	</insert>
+
+	<update id="commentUpdate" parameterType="Map">
+		UPDATE TOWN_COMMENTS SET COMMENT_CONTENT =
+		#{comment_content},COMMENT_POSTDATE=SYSDATE
+		WHERE TOWNLIST_NO=#{townlist_no}
+	</update>
+
+	<delete id="commentDelete" parameterType="Map">
+		DELETE TOWN_COMMENTS WHERE TOWNLIST_NO = #{townlist_no}
+	</delete>
 	<!-- TOWN: comment -->
 
 
-	
-	<!--Mypage-->
+
+	<!--Mypage -->
 	<select id="participationList" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-	SELECT al.auction_no,al.title,status,enddate,ap.upper_user_no 
-	FROM AUCTION_PRICE ap JOIN AUCTION_LIST al on al.auction_no = ap.auction_no 
-	where ap.upper_user_no=#{userno}
+		SELECT al.auction_no,al.title,status,enddate,ap.upper_user_no
+		FROM AUCTION_PRICE ap JOIN AUCTION_LIST al on al.auction_no =
+		ap.auction_no
+		where ap.upper_user_no=#{userno}
 	</select>
-	
+
 	<select id="hasReport" resultType="_int" parameterType="Map">
 		<if test='auction_no != null'>
-			SELECT COUNT(*) FROM AUCTION_REPORT WHERE AUCTION_NO = #{auction_no} AND REPORT_USERNO =#{userno}
+			SELECT COUNT(*) FROM AUCTION_REPORT WHERE AUCTION_NO =
+			#{auction_no} AND REPORT_USERNO =#{userno}
 		</if>
-		
+
 		<if test='townlist_no != null'>
-			SELECT COUNT(*) FROM TOWN_REPORT WHERE TOWNLIST_NO = #{townlist_no} AND REPORT_USERNO =#{userno}
+			SELECT COUNT(*) FROM TOWN_REPORT WHERE TOWNLIST_NO =
+			#{townlist_no} AND REPORT_USERNO =#{userno}
 		</if>
 	</select>
-	
+
 	<insert id="doReport" parameterType="Map">
 		<if test='auction_no != null'>
-			INSERT INTO AUCTION_REPORT VALUES(SEQ_AUCTION_REPORT_NO.NEXTVAL, #{auction_no}, #{userno}, #{category}, #{content})
+			INSERT INTO AUCTION_REPORT
+			VALUES(SEQ_AUCTION_REPORT_NO.NEXTVAL, #{auction_no}, #{userno},
+			#{category}, #{content})
 		</if>
-		
+
 		<if test='townlist_no != null'>
-			INSERT INTO TOWN_REPORT VALUES(SEQ_TOWN_REPORT_NO.NEXTVAL, #{townlist_no}, #{userno}, #{category}, #{content})
+			INSERT INTO TOWN_REPORT VALUES(SEQ_TOWN_REPORT_NO.NEXTVAL,
+			#{townlist_no}, #{userno}, #{category}, #{content})
 		</if>
 	</insert>
-	
-	<select id="countcomment" parameterType="Map" resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		select tl.title,tl.likes,count(tc.townlist_no) count from TOWN_COMMENTS tc JOIN TOWN_LIST tl on tc.townlist_no=tl.townlist_no
-		where tl.userno=${userno} GROUP BY  tl.title,tl.likes,tc.townlist_no HAVING COUNT(*) > 1
+
+	<select id="countcomment" parameterType="Map"
+		resultType="com.carrot.marketapp.model.dto.BoardDTO">
+		select tl.title,tl.likes,count(tc.townlist_no) count from
+		TOWN_COMMENTS tc JOIN TOWN_LIST tl on tc.townlist_no=tl.townlist_no
+		where tl.userno=${userno} GROUP BY tl.title,tl.likes,tc.townlist_no
+		HAVING COUNT(*) > 1
 	</select>
 	<select id="mypageAuctionList" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		select * from auction_list al join AUCTION_PRICE ar on al.AUCTION_NO=ar.AUCTION_NO where userno=#{userno}
+		select * from auction_list al join AUCTION_PRICE ar on
+		al.AUCTION_NO=ar.AUCTION_NO where userno=#{userno}
 	</select>
 
 </mapper>
