@@ -363,12 +363,12 @@ $("link#admin12").prop('disabled', true);
 	        if (!message) {//텍스트를 입력하지 않는 경우
 	          return
 	        }
-	        //messages-content에 사용자의 응답 추가
+	        //messages-content에 사용자의 응답 추가됨
 	        $('.messages-content').append('<div style="color:white; padding:7px; display: flex;justify-content: flex-end;" class="human-message"><span style="border-radius:10px; padding:5px; background-color:black; ">'+message+'</span></div>')
 	        // 입력창 클리어
 	        $('#message').val('')
 	        //스크롤바 아래로
-	        $(".messages").scrollTop($(".messages")[0].scrollHeight);
+	        $(".messages-content").scrollTop($(".messages-content")[0].scrollHeight);
 	        $('.messages-content').focus();
 	        //메시지 전송
 	        sendMessage(message,'<%=session.getId()%>');
