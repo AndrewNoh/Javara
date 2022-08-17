@@ -96,7 +96,6 @@
 		            <div class="main-title" >
 			            <input type="hidden" id="nickname" name="nickname" value="${userNickname.nickname }"/>
 			                    ${userNickname.nickname }
-			            <span class="temperature">37.6°C</span>
 		            </div>
 	            </div>
 	         </div>
@@ -118,7 +117,6 @@
                            <c:if test="${!nickname }">
                               <span>${nicknames.sendusernickname }</span>
                            </c:if>
-                           <span class="temperature">37.6°C</span>
                            </div>
                         </div>
                         <div class="css-1idbtsb" >
@@ -439,9 +437,9 @@
             <div  class="type_msg" id="form" method="post" action="<c:url value="/chat/chatting.do"><c:param value="${townlist_no}" name="townlist_no"/><c:param value="${auction_no}" name="auction_no"/><c:param value="${list.nickName}" name="wirtenickName"/><c:param value="${writeuserno}" name="writeuserno"/></c:url>">
                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                <div class="css-1r0o66s" id="plusDiv" style="display: none; top:100px; left:100px;">
-	         		<a href="#"  data-toggle="modal" data-target="#modal" class="title m-b-md"><i class="bi bi-clock m-1" style="float: left; font-size: 35px;"></i></a>
-	                <a type="button" id="imgbutton" data-toggle="modal" data-target="#modalImg" class="title m-b-md"><i class="bi bi bi-card-image m-1" style="float: left; font-size: 35px;"></i></a> 
 	                <a type="button" id="emojitoggle" ><i class="bi bi bi-emoji-smile m-1" style="float: left; font-size: 35px;"></i></a> 
+	                <a type="button" id="imgbutton" data-toggle="modal" data-target="#modalImg" class="title m-b-md"><i class="bi bi bi-card-image m-1" style="float: left; font-size: 35px;"></i></a> 
+	         		<a href="#"  data-toggle="modal" data-target="#modal" class="title m-b-md"><i class="bi bi-clock m-1" style="float: left; font-size: 35px;"></i></a>
 	                <a type="button" id="phone" data-toggle="modal" data-target="#modalPhon" class="title m-b-md"><i class="bi bi bi bi-telephone-fill m-1" style="float: left; font-size: 35px;"></i></a> 
 	                <c:if test="${userno ne writeuserno}">
 	                <!--<a type="button" id="jpays" data-toggle="modal" data-target="#modalJpay" class="title m-b-md"><i class="bi bi-credit-card-2-back m-1" style="float: left; font-size: 35px;"></i></a> --></c:if>
