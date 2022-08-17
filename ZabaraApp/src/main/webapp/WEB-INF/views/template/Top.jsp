@@ -190,7 +190,7 @@
 }
 
 .modal-backdrop.show{
-    opacity: .7;	
+    opacity: .5;	
 }
 </style>
 <body>
