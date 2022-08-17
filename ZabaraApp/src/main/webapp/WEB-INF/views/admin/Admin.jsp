@@ -69,11 +69,14 @@
                                         </thead>
                                     </table>
                                 </div>
+                                <div id="chart_div1"  style="margin-left: 22px; padding-left: 22px;"></div>
+                                <hr/>
+                                <div id="chart_div2"  style="margin-left: 22px; padding-left: 22px;"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="chart_div" style="margin-left: 25px; padding-left: 25px;"></div>
+                
             </div>
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
@@ -110,9 +113,6 @@
 	});
 	
 	
-    
-
-      // Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});
 
       // Set a callback to run when the Google Visualization API is loaded.
@@ -128,19 +128,39 @@
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         data.addRows([
-          ['히히히', 3],
-          ['안나누나', 1],
-          ['바보', 1]
+          ['ㅎㅎㅎ', ${userCount }],
+          ['ㅎㅎㅎ', 3],
+          ['ㅎㅎㅎ', 3]
         ]);
 
         // Set chart options
-        var options = {'title':'히히바보',
-                       'width':700,
+        var options = {'title':'전체글 갯수',
+                       'width':1500,
                        'height':700};       
         
-
+		
         // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div1'));
+        chart.draw(data, options);
+        
+     	// Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['ㅎㅎㅎ', 3],
+          ['ㅎㅎㅎ', 3],
+          ['ㅎㅎㅎ', 3]
+        ]);
+
+        // Set chart options
+        var options = {'title':'전체글 갯수',
+                       'width':1500,
+                       'height':700};       
+        
+		
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div2'));
         chart.draw(data, options);
       }
       
