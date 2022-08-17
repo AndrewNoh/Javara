@@ -356,6 +356,7 @@ border-radius: 15px;
       }
    });
    
+   
    $('#edit').on("click", function(){
       $('#portfolio-details').hide();
       $('#chatUi').hide();
