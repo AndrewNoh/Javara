@@ -3,7 +3,7 @@ function sendMessage(message,session_id) {
         
         $.ajax(
         {
-            url:"http://192.168.0.38:9999/message",// http옆에있는곳(192.168.0.223)에 자기 ip를 넣어야해요
+            url:"http://192.168.0.10:9999/message",// http옆에있는곳(192.168.0.223)에 자기 ip를 넣어야해요
             //json으로 보낼때
             data:JSON.stringify({"message": message,"session_id":session_id}),
             contentType:'application/json',            
@@ -19,7 +19,7 @@ function sendMessage(message,session_id) {
           var link = '';
           
           console.log('받은 메시지:',message)
-           var html ='<div class="bot-message"> <div class="bot-message"> <div style="border-radius:10px;  width:65%; margin:10px; padding:5px; background-color:black; color:white" >'
+           var html ='<div class="bot-message"> <div class="bot-message"> <div style="border-radius:10px;  width:65%; margin-left:10px; padding:5px; background-color:black; color:white;" >'
            html += message[0];
            
            html += '<div id="chatbotDiv"></div></div>'
@@ -27,7 +27,7 @@ function sendMessage(message,session_id) {
 
 		for(var i=1; i < message.length; i++){
 			link = message[i];
-				html = '<div class="bot-message"> <div class="bot-message"> <span style="border-radius:10px; margin:10px; width:65%; padding:5px; background-color:black; text-color:black;" >'
+				html = '<div class="bot-message" style="margin-bottom:15px;"> <div class="bot-message"> <span style="border-radius:10px; margin-left:10px; width:65%; padding:5px; background-color:black; text-color:black;" >'
 	          html += link;
 	          html += '</span></div></div>'
 	          $('.messages-content').append(html);

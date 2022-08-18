@@ -111,7 +111,7 @@ a:hover{
      
      <div class="card">
        <div class="card-header">
-         <a target='_blank' class="collapsed card-link" data-toggle="collapse" href="#collapseFore">
+         <a target='_blank' class="collapsed card-link " data-toggle="collapse" href="#collapseFore">
            Q. 판매 금지 물품
          </a>
        </div>

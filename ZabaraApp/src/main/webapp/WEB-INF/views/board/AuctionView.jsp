@@ -99,17 +99,17 @@ border-radius: 15px;
                <p id="upperPrice" title="${list.upper_Price}">현재 최고가 <strong style="color: #ffc107; margin-left: 10px; font-size: 35px;"><fmt:formatNumber value="${list.upper_Price}" pattern="#,###" />원</strong></p>
             
             </div>
-            <div class="mb-5"  style="background-color: rgb(255 229 207 / 80%); height: 280px; border-radius: 10px 5%; padding: 10px 20px">
+            <div class="mb-5"  style="background-color: rgb(255 229 207 / 80%); height: 280px; border-radius: 10px 5%; padding: 10px 20px; color: #000;">
                <p style="font-size: 20px; ">${fn:replace(list.content, replaceChar, "<br/>")}</p>
             </div>      
             
             <div style="display: flex; justify-content:space-around; flex-direction: row-reverse;">
             <c:if test="${isWriter}">
                <div style="text-align: center; font-size: 20px; display:none" id="endDiv">
-                  <button id="statusChange" style="float: right; font-size: 16px; color: #fff; background-color: #ffc107; width: 120px" class="btn" title="${list.status == 'END' ? 'SALE' : 'END'}">${list.status == 'END' ? '낙찰취소' : '낙찰하기'}</button>
+                  <button id="statusChange" style="float: right; font-size: 16px; color: #000; background-color: #ffc107; width: 120px" class="btn" title="${list.status == 'END' ? 'SALE' : 'END'}">${list.status == 'END' ? '낙찰취소' : '낙찰하기'}</button>
                </div>
                <div style="text-align: center; font-size: 20px; display:none" id="finishDiv">
-               		<button id="statusFinish" style="float: right; font-size: 16px; color: #fff; background-color: #ffc107; width: 120px;" class="btn" title="FINISH">거래완료</button>
+               		<button id="statusFinish" style="float: right; font-size: 16px; color: #000; background-color: #ffc107; width: 120px;" class="btn" title="FINISH">거래완료</button>
                </div>
             </c:if>
             
@@ -129,14 +129,14 @@ border-radius: 15px;
             </c:if>
             
                
-            <div class="text-center" style="display:none" id="chattingDiv">
+<%--             <div class="text-center" style="display:none" id="chattingDiv">
                <a href="<c:url value="/chat/chatting.do">
                <c:param value="${list.townlist_no == null ? 0 : list.townlist_no}" name="townlist_no"/>
                <c:param value="${list.auction_no == null ? 0 : list.auction_no}" name="auction_no"/>
-               <c:param value="${list.userNo}" name="writeuserno"/><c:param value="${list.nickName}" name="wirtenickName"/></c:url>"><button class="btn" style="background-color: #ffc107; color: #fff" >채팅하기</button></a>
+               <c:param value="${list.userNo}" name="writeuserno"/><c:param value="${list.nickName}" name="wirtenickName"/></c:url>"><button class="btn" style="background-color: #ffc107; color: #000" >채팅하기</button></a>
+            </div> --%>
             </div>
-            </div>
-            <div style="text-align: center; font-size: 25px; float: left;">
+            <div style="text-align: center; font-size: 25px; float: left; margin-top: 15px">
                 <i class="bx bxs-heart ml-3" style="color: #ffc107" ></i>
                 ${list.likes}
             </div>

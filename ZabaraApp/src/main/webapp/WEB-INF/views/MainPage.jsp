@@ -99,8 +99,6 @@ width: 70%;
 	             </c:if>
 	            <sec:authorize access="hasAnyRole('ROLE_ADMIN')" var="isAdmin">
 					<li><a href="<c:url value="/admin/admin.do"/>">관리자</a></li>
-					<li><a href="<c:url value="/admin/adminauction.do"/>">경매글관리</a></li>
-					<li><a href="<c:url value="/admin/admingropboard.do"/>">동네글관리</a></li>
 				</sec:authorize>
 				<c:if test="${not isAdmin }">
 				<li><a class="nav-link" href="<c:url value="/userinfo/mypage.do"/>">나의 자바라</a></li>

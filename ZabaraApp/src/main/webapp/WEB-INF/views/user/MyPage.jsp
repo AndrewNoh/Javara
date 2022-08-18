@@ -1063,6 +1063,12 @@ body::-webkit-scrollbar {
 												${chatlist.chatcontent} <i
 													class="bx bxs-quote-alt-right quote-icon-right"></i>
 											</p>
+											<c:forEach var="unreadcount" items="${unreadcount}" varStatus="loop">
+												<c:if test="${chatlist.room_no eq  unreadcount.room_no}"> 
+												<c:if test="${unreadcount.unreadcount >0}">
+													<span class="badge badge-light" style="float: right; border-radius:20%; background-color: red; text-align: center; margin: 10px 20px;" >${unreadcount.unreadcount}</span></c:if>
+												</c:if> 
+											</c:forEach>
 											<c:if test="${nickname eq chatlist.writeusernickname }">
 												<img class="testimonial-img"
 													src="${pageContext.request.contextPath}/resources/assets/img/zabaraImg/${chatlist.senduserprofileimg}"

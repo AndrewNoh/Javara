@@ -112,6 +112,7 @@
 
     <!-- Main CSS-->
     <link id="admin12" href="${pageContext.request.contextPath}/resources/adminassets/admincss/adminStyle.css" rel="stylesheet" media="all">
+</head>
 <!-- =======================================================
   * Template Name: Personal - v4.7.0
   * Template URL: https://bootstrapmade.com/personal-free-resume-bootstrap-template/
@@ -221,8 +222,6 @@
 	             </c:if>
 	            <c:if test="${isAdmin }">
 					<li><a href="<c:url value="/admin/admin.do"/>">관리자</a></li>
-					<li><a href="<c:url value="/admin/adminauction.do"/>">경매글관리</a></li>
-					<li><a href="<c:url value="/admin/admingropboard.do"/>">동네글관리</a></li>
 				</c:if>
 				<c:if test="${not isAdmin }">
 				<li><a class="nav-link" href="<c:url value="/userinfo/mypage.do"/>">나의 자바라</a></li>
