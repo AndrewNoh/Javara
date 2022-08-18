@@ -111,11 +111,11 @@ a:hover{
      
      <div class="card">
        <div class="card-header">
-         <a target='_blank' class="collapsed card-link" data-toggle="collapse" href="#collapseFore">
+         <a target='_blank' class="collapsed card-link " data-toggle="collapse" href="#collapseFore">
            Q. 판매 금지 물품
          </a>
        </div>
-       <div id=collapseFore class="collapse" data-parent="#accordion">
+       <div id=collapseFore class="collapse show" data-parent="#accordion">
          <div class="card-body">
            <h4>판매 금지 물품</h4>
             <li>가품∙이미테이션 (상표권, 저작권 침해 물품, 특정 브랜드의 스타일을 모방한 물품)</li>
