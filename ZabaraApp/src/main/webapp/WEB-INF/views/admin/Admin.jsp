@@ -215,7 +215,7 @@
 						                          <a href="<c:url value="/admin/deleteAdminAuction.do">
 						                         <c:param name="auction_no" value="${LIST.auction_no }"/>
 						                         </c:url>" id="delete">
-						                        <i class="bx bxs-trash p-2 d-flex justify-content-end" style="font-size: 30px" title="삭제"></i></a>
+						                        <i class="bx bxs-trash p-2 d-flex justify-content-end" style="font-size: 30px" title="삭제">삭제하기</i></a>
 						                        <div class="form-group" style="padding: 8px 8px; background-color: white;">
 						                           <div style="font-size: 23px;font-weight: bold; color: black">${LIST.title}</div>
 						                        </div>						                        
