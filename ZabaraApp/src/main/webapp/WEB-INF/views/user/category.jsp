@@ -352,7 +352,7 @@ function categoryItemList(){
                              break;
                           case "식물": categoryimage="category_plant.png";
                              break;
-                          case "기타중고물품": categoryimage="category_etc.png";
+                          case "기타": categoryimage="category_etc.png";
                              break;                      
                    }////switch                   
                    var categorymarker = new kakao.maps.Marker({                                  

@@ -37,7 +37,7 @@ public class MailController {
 	public String sendSMS(@RequestParam Map map) { // 휴대폰 문자보내기
 		String userPhoneNumber = (String) map.get("phone");
 		int randomNumber = (int) ((Math.random() * (9999 - 1000 + 1)) + 1000);// 난수 생성
-		// smsService.certifiedPhoneNumber(userPhoneNumber,randomNumber);
+		smsService.certifiedPhoneNumber(userPhoneNumber,randomNumber);
 		return Integer.toString(randomNumber);
 	}
 

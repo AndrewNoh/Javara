@@ -96,7 +96,6 @@
 		            <div class="main-title" >
 			            <input type="hidden" id="nickname" name="nickname" value="${userNickname.nickname }"/>
 			                    ${userNickname.nickname }
-			            <span class="temperature">37.6°C</span>
 		            </div>
 	            </div>
 	         </div>

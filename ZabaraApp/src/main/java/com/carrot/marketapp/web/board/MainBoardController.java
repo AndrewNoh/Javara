@@ -373,8 +373,8 @@ public class MainBoardController {
 
 		int page = Integer.parseInt((String) map.get("nowpage"));
 
-		map.put("startnum", (100 * (page - 1)));
-		map.put("endnum", 100 * (page) + 1);
+		map.put("startnum", (200 * (page - 1)));
+		map.put("endnum", 200 * (page) + 1);
 
 		if (map.get("category") == null) {
 			map.put("category", "모두");
@@ -383,7 +383,7 @@ public class MainBoardController {
 		// 리스트 받아오기
 		List<BoardDTO> allLists = boardService.selectListAll(map);
 		model.addAttribute("nowpage", page);
-		model.addAttribute("endpage", allLists.size() / 100 == 0 ? 1 : allLists.size() / 100);
+		model.addAttribute("endpage", allLists.size() / 100 == 0 ? 1 : allLists.size() / 200);
 
 		List<BoardDTO> Lists = boardService.selectList(map);
 

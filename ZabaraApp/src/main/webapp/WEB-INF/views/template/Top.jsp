@@ -14,7 +14,6 @@
 <meta content="" name="description">
 <meta content="" name="keywords">
 
-
 <!-- Favicons -->
 <link
 	href="${pageContext.request.contextPath}/resources/assets/img/web_banner.png"
@@ -119,6 +118,7 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
 </head>
 <style>
 
@@ -233,8 +233,8 @@
 				        동네방네
 				      </a>
 				      <div class="dropdown-menu navdropdown-menu">
-				      	<a class="dropdown-item navdropdown-item" href="<c:url value="/board/news.do"/>">실시간뉴스</a>
 				        <a class="dropdown-item navdropdown-item" href="<c:url value="/board/gropboard.do"/>">동네생활</a>
+				      	<a class="dropdown-item navdropdown-item" href="<c:url value="/board/news.do"/>">실시간뉴스</a>
 				      </div>
 				   </li>
 	             <li><a class="nav-link" href="<c:url value="/board/qna.do"/>">자주묻는 질문</a></li>

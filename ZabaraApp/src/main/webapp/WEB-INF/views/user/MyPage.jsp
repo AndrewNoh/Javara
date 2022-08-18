@@ -1209,7 +1209,7 @@ body::-webkit-scrollbar {
           var nowProfile = $(".profile-photo").attr('src');
 
           $(".file-upload").change(function() {
-             var fileForm = /(.*?)\.(jpg|jpeg|png|JPG|JPEG|PNG])$/;
+             var fileForm = /(.*?)\.(jpg|jpeg|png|JPG|JPEG|PNG)$/;
              if (!$('.file-upload').val().match(fileForm)) {
                 $('.file-upload').val(null);
                 const Toast = Swal.mixin({

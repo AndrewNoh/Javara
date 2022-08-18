@@ -190,7 +190,7 @@ width: 70%;
         </a>
    </div>
    <img src="${pageContext.request.contextPath}/resources/assets/img/main_wordcloud.png" style="width: 300px; display: block; margin: 0 auto; position: relative; left: 10%"/>
-   <div style="width:90%; height:90%; margin:auto;margin-top:10%;" class="row">
+   <div style="width:90%; height:100%; margin:auto;margin-top:10%;" class="row">
       <iframe style="border:none;width:100%;height:100%" src="/marketapp/wordcloud/index.html"></iframe>
    </div>
 </div>

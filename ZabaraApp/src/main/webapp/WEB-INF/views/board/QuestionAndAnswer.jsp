@@ -115,9 +115,10 @@ a:hover{
            Q. 판매 금지 물품
          </a>
        </div>
-       <div id=collapseFore class="collapse" data-parent="#accordion">
+       <div id=collapseFore class="collapse show" data-parent="#accordion">
          <div class="card-body">
            <h4>판매 금지 물품</h4>
+           <ul>
             <li>가품∙이미테이션 (상표권, 저작권 침해 물품, 특정 브랜드의 스타일을 모방한 물품)</li>
             <li>주류(무알콜 주류 포함), 담배, 전자담배, 모의총포 및 그 부속품 일체 (ex. 라이터, 비비탄 총알 등 청소년 유해물건)</li>
             <li>경유, LPG, 휘발유 등의 유류 거래</li>
@@ -150,6 +151,7 @@ a:hover{
             <li>100만 원 이상 금 제품 (골드바, 금괴, 금으로 제작된 목걸이, 팔찌, 귀걸이 등)</li>
             <li>이외 법률을 위반하는 모든 물품</li>
             <li>자바라에 등록되지 않은 모든 홍보/광고</li>
+            </ul>
          </div>
        </div>
      </div>
