@@ -421,7 +421,7 @@ No license, 100% free to use.
 
       <div class="section-title">
          <h2>나의 활동</h2>
-         <p>구매내역</p>
+         <p>입찰내역</p>
       </div>
 
    
@@ -457,8 +457,10 @@ No license, 100% free to use.
                               <p style="color:#FFC107">현재가 <fmt:formatNumber value="${record.upper_Price}" pattern="#,###"/>원</p>                                                                                 
                               <div class="portfolio-links">
                                  <a href="${pageContext.request.contextPath}/resources/assets/img/product_img/${imageList[loop.index][0].imageName}" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bxs-photo-album"></i><span style="font-size: 12px; display: block;">사진보기</span></a>
-                                  <a href="<c:url value="/board/auctionview.do"><c:param value="${record.auction_no}" name="no"/></c:url>" rel="lyteframe" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bxs-detail"></i><span style="font-size: 12px; display: block;">상세보기</span></a>
+                                  <a href="<c:url value="/board/auctionview.do"><c:param value="${record.auction_no}" name="no"/></c:url>" rel="lyteframe" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bxs-detail"></i><span style="font-size: 12px; display: block;">상세보기</span></a>            
+                                  <c:if test = "${record.status == 'END'}">
                                   <a href="#" data-toggle="modal" onClick="review(${record.auction_no})"  data-target="#modalReview" ><i class="bi bi-brush" id="reviewWirte"></i><span style="font-size: 12px; display: block;">후기작성</span></a>
+                            	 </c:if>
                               </div>
                               <p>종료예정일 ${record.endDate}</p>
                          </div>

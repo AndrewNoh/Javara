@@ -344,7 +344,7 @@
 	</select>
 	<select id="mypagepurchaselist" parameterType="Map"
 		resultType="com.carrot.marketapp.model.dto.BoardDTO">
-		SELECT L.auction_no, L.title,
+		SELECT L.auction_no, L.title, L.status,
 		p.base_price, p.upper_price, img.imagename, L.postdate, L.enddate FROM
 		AUCTION_LIST L
 		LEFT OUTER JOIN AUCTION_PRICE

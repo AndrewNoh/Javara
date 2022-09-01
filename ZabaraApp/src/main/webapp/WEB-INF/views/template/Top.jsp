@@ -226,7 +226,7 @@
 				<c:if test="${not isAdmin }">
 				<li><a class="nav-link" href="<c:url value="/userinfo/mypage.do"/>">나의 자바라</a></li>
 	             <li><a class="nav-link" href="<c:url value="/board/auctionlist.do"/>">자바라경매</a></li>
-	             <li><a class="nav-link" href="<c:url value="/userinfo/category.do"/>">우리동네 카테고리</a></li>	
+	             <li><a class="nav-link" href="<c:url value="/userinfo/category.do"/>">카테고리</a></li>	
 	             <li class="nav-item dropdown">
 	             	<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 				        동네방네
